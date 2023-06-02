@@ -1,4 +1,4 @@
-package com.mkp.app.mkp_line_web;
+package com.mkp.app.marketplace_line_oa;
 
 import io.flutter.embedding.android.FlutterActivity;
 

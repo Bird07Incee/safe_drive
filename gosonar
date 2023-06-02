@@ -1,0 +1,121 @@
+#!/bin/bash
+
+SONARSCANNER_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:4"
+SONARSCANNER_WORKING_DIR="/usr/src"
+DEFAULT_SONAR_HOST_URL="https://sonarqube.tools.buk0.com"
+
+# Utility functions
+log() {
+  echo "[$(date "+%Y-%m-%d %H:%M:%S")] - ${@}"
+}
+
+die() {
+  log $@
+  exit 1
+}
+
+# SonarQube functions
+get_sonar_host_url() {
+  [ -z $SONAR_HOST_URL ] && echo $DEFAULT_SONAR_HOST_URL || echo $SONAR_HOST_URL
+}
+
+check_sonar_login() {
+  [ -z $SONAR_LOGIN ] && die "Needs SonarQube login auth token" || return 0
+}
+
+check_sonar_host_url() {
+  [ -z $SONAR_HOST_URL ] && export SONAR_HOST_URL=$(get_sonar_host_url)
+  log "Running sonar scan to ${SONAR_HOST_URL}"
+}
+
+# Example Task status output
+# {
+#   "task": {
+#     "id": "AX75UEIVyljolTAU7yKJ",
+#     "ids": "",
+#     "type": "REPORT",
+#     "componentId": "AX74IJjpyljolTAU7yJu",
+#     "componentKey": "usermanagement-infra",
+#     "componentName": "usermanagement-infra",
+#     "componentQualifier": "TRK",
+#     "analysisId": "AX75UEw0hFLXYrXkeJwy",
+#     "status": "SUCCESS",
+#     "submittedAt": "2022-02-14T17:38:13+0000",
+#     "submitterLogin": "sonar-generalservices",
+#     "startedAt": "2022-02-14T17:38:15+0000",
+#     "executedAt": "2022-02-14T17:38:20+0000",
+#     "executionTimeMs": 5496,
+#     "hasScannerContext": true,
+#     "warningCount": 0,
+#     "warnings": []
+#   }
+# }
+get_task_info() {
+  local task_url=$1
+  curl -su $SONAR_LOGIN: "${task_url}"
+}
+
+# Example output
+# {
+#   "projectStatus": {
+#     "status": "OK",
+#     "conditions": [],
+#     "periods": [],
+#     "ignoredConditions": false
+#   }
+# }
+get_quality_gate_status() {
+  local quality_url=$1
+  curl -su $SONAR_LOGIN: "${quality_url}"
+}
+
+# SonarQube tasks
+help__sonarScan="Run SonarQube scan"
+task_sonarScan() {
+  check_sonar_host_url
+  check_sonar_login
+
+  CONTAINER_ID=$(docker create \
+    --hostname $(hostname) \
+    --env-file <(env | grep SONAR_) \
+    ${SONARSCANNER_DOCKER_IMAGE} "$@")
+  docker cp $(pwd)/. $CONTAINER_ID:${SONARSCANNER_WORKING_DIR}
+  docker start -a -i $CONTAINER_ID
+
+  docker cp $CONTAINER_ID:${SONARSCANNER_WORKING_DIR}/.scannerwork .
+}
+
+# Example output
+# INFO: More about the report processing at https://sonarqube.tools.buk0.com/api/ce/task?id=AX75UEIVyljolTAU7yKJ
+# https://sonarqube.tools.buk0.com/api/ce/task?id=AX75UEIVyljolTAU7yKJ
+help__readSonarTask="Read SonarQube compute task from report task output file"
+task_readSonarTask() {
+  local report_task_file=$1
+  [ -z $report_task_file ] && die "Needs SonarQube log output file"
+  [ ! -f $report_task_file ] && die "The specified log output file does not exist or not file"
+
+  local task_url=$(awk -F "=" '/ceTaskUrl/ {print $2"="$3}' $report_task_file)
+  echo $task_url
+}
+
+help__isSonarProjectOk="Validate the project status is OK or ERROR from report-task output file"
+task_isSonarProjectOK() {
+  local task_url=$(task_readSonarTask $1)
+
+  check_sonar_login
+
+  local task_info=$(get_task_info $task_url)
+  local task_status=$(echo $task_info | jq -r .task.status)
+  [ "${task_status}" != "SUCCESS" ] && die "The task status is failed"
+
+  local task_analysis_id=$(echo $task_info | jq -r .task.analysisId)
+  local sonar_url=$(get_sonar_host_url)
+  local quality_url="${sonar_url}/api/qualitygates/project_status?analysisId=${task_analysis_id}"
+  local project_status_info=$(get_quality_gate_status $quality_url)
+  local project_status=$(echo $project_status_info | jq -r .projectStatus.status)
+
+  log "The project status is ${project_status}"
+  echo $project_status_info | jq
+
+  test "${project_status}" == "OK"
+}

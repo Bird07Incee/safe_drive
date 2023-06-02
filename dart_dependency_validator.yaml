@@ -1,0 +1,8 @@
+# Allow pinned packages in your project.
+allow_pins: true
+# Ignore one or more packages.
+ignore:
+  - bloc
+  - http
+  - meta
+  - provider

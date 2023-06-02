@@ -1,4 +1,4 @@
-name: mkp_line_web
+name: marketplace_line_oa
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -36,24 +36,18 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  # This package contains a set of high-level functions and classes that make it easy to consume HTTP resources.
-  #It's multi-platform, and supports mobile, desktop, and the browser.
-  http: ^0.13.6
-  # Use this package when you want to call JavaScript APIs from Dart code, or vice versa.
-  js: ^0.6.7
+  dio: ^5.0.3
+  intl: ^0.18.0
   # If you want to remove the leading hash (#) from the URL of your Flutter web app,
   # you can simply call setPathUrlStrategy in the main function of your app
   url_strategy: ^0.2.0
-  # A dart implementation of the famous javascript library jsonwebtoken.
-  # JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
-  # https://jwt.io allows you to decode, verify and generate JWT.
-  dart_jsonwebtoken: ^2.7.1
   # This Flutter plugin is developed for Flutter Web to provide ability to use LINE LIFF SDK.
   # Only Support Web Platform
   flutter_line_liff: ^0.0.3
-
-  url_launcher: ^6.1.11
-  provider: ^6.0.5
+  get: ^4.6.5
+  get_storage: ^2.1.1
+  equatable: ^2.0.3
+  photo_view: ^0.14.0
 
 dev_dependencies:
   flutter_test:
@@ -130,3 +124,14 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - env-local
+    - env/
+    - assets/images/
+    - assets/icons/
+    - assets/icons/car_type_icon/
+    - assets/icons/search_history/
+    - assets/homepage/
+    - assets/button/
+    - assets/bg/
+    - assets/raw/

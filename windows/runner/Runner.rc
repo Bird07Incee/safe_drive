@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.mkp.app" "\0"
-            VALUE "FileDescription", "mkp_line_web" "\0"
+            VALUE "FileDescription", "marketplace_line_oa" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "mkp_line_web" "\0"
+            VALUE "InternalName", "marketplace_line_oa" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.mkp.app. All rights reserved." "\0"
-            VALUE "OriginalFilename", "mkp_line_web.exe" "\0"
-            VALUE "ProductName", "mkp_line_web" "\0"
+            VALUE "OriginalFilename", "marketplace_line_oa.exe" "\0"
+            VALUE "ProductName", "marketplace_line_oa" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

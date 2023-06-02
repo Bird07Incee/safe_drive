@@ -1,0 +1,14 @@
+ENVIRONMENT_NAME=prod
+BFF_BASE_URL=https://api.marketplace.digitso.be
+BFF_INVENTORY_BASE_URL=/mercury-inventory-manager-prod
+BFF_CAR_FAVORITE_BASE_URL=/mercury-favorite-manager-prod
+BFF_LOAN_CAL_BASE_URL=/mercury-loan-calculator-manager-prod
+GOOGLE_MAP_API_KEY=AIzaSyDYhNIblB1E2FInW0r8CJsv1vC34znaptc
+AMPLITUDE_KEY=2a78e9b6e5c35d6180088d80f3dfdd1d
+UM_APP_ID=523899a0-9a17-47ef-a6ee-77f242254f2d
+UM_GATEWAY_BASE_URL=https://gateway.prod.generalservices.buk0.com/token
+UM_GATEWAY_CLIENT_ID=36h5mpkcqt3q3le6pr8betkolq
+UM_GATEWAY_CLIENT_SECRET=1h8h1jklunnhb2imkrhnp2p1g7h6sc4vekm5575r90o5d5ts1ofc
+UM_GATEWAY_SCOPE=generalservices-api-prod/usermanagement-external-service
+UM_BASE_URL=https://gateway.prod.generalservices.buk0.com/usermanagement-external
+UM_BASE_REFRESH_TOKEN_URL=https://backend-usermanagement.prod.superapp.buk0.com/v2/auth/token/refresh
