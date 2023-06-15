@@ -4,4 +4,5 @@ class RouteName {
   static String root = "/";
   static String landing = "/landing";
   static String detail = "/product";
+  static String payment = "/payment";
 }

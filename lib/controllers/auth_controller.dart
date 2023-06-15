@@ -1,20 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
-import 'dart:async';
 import 'package:get/get.dart';
 import 'package:marketplace_line_oa/constants/router/route_config.dart';
 import 'package:marketplace_line_oa/models/user.dart';
 
-class AuthController extends GetxController {
-  static AuthController to = Get.find();
+class UserAuthController extends GetxController {
+  static UserAuthController to = Get.find();
+  final liff = FlutterLineLiff();
   final RxBool isAuth = false.obs;
   final Rxn<User> user = Rxn<User>();
+  final Rxn<Profile> useLineProfile = Rxn<Profile>();
 
 
   @override
   void onInit() async {
-    lineAuth();
+    //lineAuth();
   }
 
   @override
@@ -33,46 +32,67 @@ class AuthController extends GetxController {
   }
 
   lineAuth() async {
-    FlutterLineLiff().ready.then((_) {
-      print('Default >>>> Line Ready');
-      if (!FlutterLineLiff().isLoggedIn) {
-        FlutterLineLiff().login();
-        print('Default >>>> login');
+    await liff.ready.then((_) async{
+      print('Line Ready');
+      if (!liff.isLoggedIn) {
+        print('login');
+        liff.login();
       } else {
-        print('Default >>>> Redirect to Landing');
-        Get.toNamed(RouteName.landing);
-        setLineAuth();
+        bool profileSuccess = await setLineAuth();
+        if(profileSuccess) {
+          print('is Logged in and profile success >>>> Redirect to Landing');
+          useLineProfile.value = await FlutterLineLiff().profile;
+          update();
+          Get.toNamed(RouteName.landing);
+        } else {
+          print('profile err');
+        }
+
       }
     });
   }
 
-  setLineAuth() {
+  Future<bool> setLineAuth() async {
     try {
+      isAuth.value = true;
       user.update((u) {
         u?.lineAuth!.code = Get.arguments["code"] ?? "";
         u?.lineAuth!.state = Get.arguments["state"] ?? "";
-        u?.lineAuth!.liffClientId = Get.arguments["liffClientId"] ?? "";
+        u?.lineAuth!.liffClientId = liff.id ?? "";
         u?.lineAuth!.liffRedirectUri = Get.arguments["liffRedirectUri"] != null ? Uri.parse(Get.arguments["liffRedirectUri"].toString()): Uri();
+        u?.lineAuth!.accessToken = liff.id ?? "";
       });
+      useLineProfile.value = await liff.profile;
+      update();
+      return true;
     } catch (e) {
       print("set line auth err : =====> $e");
+      return false;
     }
   }
 
-  handleAuthChanged(user) async {
-    //get user data from firestore
-    // if (_firebaseUser?.uid != null) {
-    //   firestoreUser.bindStream(streamFirestoreUser());
-    //   await isAdmin();
-    // }
-    //
-    // if (_firebaseUser == null) {
-    //   print('Send to signin');
-    //   Get.offAll(SignInUI());
-    // } else {
-    //   Get.offAll(HomeUI());
-    // }
+  Future<void> logoutLine() async {
+    try {
+      liff.logout();
+    } catch (e) {
+      print("logout err : =====> $e");
+    }
   }
+
+  // handleAuthChanged(user) async {
+  //   get user data from firestore
+  //   if (_firebaseUser?.uid != null) {
+  //     firestoreUser.bindStream(streamFirestoreUser());
+  //     await isAdmin();
+  //   }
+  //
+  //   if (_firebaseUser == null) {
+  //     print('Send to signin');
+  //     Get.offAll(SignInUI());
+  //   } else {
+  //     Get.offAll(HomeUI());
+  //   }
+  // }
 
   // Firebase user one-time fetch
   // Future<User> get getUser async => _auth.currentUser!;

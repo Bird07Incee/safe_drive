@@ -5,8 +5,9 @@ class LineAuth {
   String liffClientId;
   String state;
   Uri? liffRedirectUri;
+  String accessToken;
 
-  LineAuth({this.code = "", this.liffClientId = "", this.state = "", this.liffRedirectUri});
+  LineAuth({this.code = "", this.liffClientId = "", this.state = "", this.liffRedirectUri, this.accessToken = ""});
 
   factory LineAuth.fromJson(Map<String, dynamic> json) {
     return LineAuth(
@@ -14,6 +15,7 @@ class LineAuth {
       liffClientId: json["liffClientId"],
       state: json["state"],
       liffRedirectUri: json["liffRedirectUri"],
+      accessToken: json["accessToken"]
     );
   }
 }

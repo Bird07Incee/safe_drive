@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:marketplace_line_oa/views/widgets/shared/mkp_styles.dart';
+import 'package:marketplace_line_oa/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/helpers/extensions.dart';
 import 'package:marketplace_line_oa/models/product_list.dart';
 import 'package:marketplace_line_oa/views/widgets/shared/mkp_static_image.dart';
@@ -142,7 +142,7 @@ class ProductListWidget extends StatelessWidget {
                             decoration: const BoxDecoration(
                                 border: Border(bottom: BorderSide(width: 0.5, color: BN_COLOR_GREYSCALE_200))),
                             child: SizedBox(
-                              height: 16,
+                              height: 19,
                               width: ((maxWidth - 32.0) / 2).floorToDouble(),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -150,12 +150,9 @@ class ProductListWidget extends StatelessWidget {
                                   mile == 0
                                       ? const SizedBox()
                                       : Text(
-                                          "${mile.toDecimalFormat()} กม.",
+                                          "${(mile/1000).floor().toDecimalFormat()} Kw.",
                                           key: Key("car_card_mileage_i_$i"),
-                                          style: const TextTheme().bodySmall?.copyWith(
-                                            color: const Color(0xFF2C2626),
-                                            fontSize: 10,
-                                          ),
+                                          style: TextStyle(color: Color(0xFF2C2626), fontSize: 12),
                                         ),
                                   mile != 0 && sellerType != ""
                                       ? Row(
@@ -177,9 +174,26 @@ class ProductListWidget extends StatelessWidget {
                                       ? const SizedBox()
                                       : Text(
                                           sellerType,
-                                          style: const TextTheme().bodySmall
-                                              ?.copyWith(color: const Color(0xFF2C2626), fontSize: 10),
+                                          style: TextStyle(color: Color(0xFF2C2626), fontSize: 12),
                                         ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 4,
+                                        height: 12,
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                right: BorderSide(width: 1, color: BN_COLOR_GREYSCALE_200))),
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      )
+                                    ],
+                                  ),
+                                  Text(
+                                    "ติดตั้งฟรี",
+                                    style: TextStyle(color: Color(0xFF2C2626), fontSize: 12),
+                                  )
                                 ],
                               ),
                             ),
