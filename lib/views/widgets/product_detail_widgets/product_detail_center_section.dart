@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:marketplace_line_oa/controllers/product_controller.dart';
 import 'package:marketplace_line_oa/helpers/extensions.dart';
 import 'package:marketplace_line_oa/models/product_list.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailCenterSection extends StatelessWidget {
   const ProductDetailCenterSection({Key? key}) : super(key: key);
@@ -153,16 +154,32 @@ class ProductDetailCenterSection extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print("tab capture");
-                      pc.captureImage(buildDealerDetail(pc.selectedProduct.value!),
-                          callback: (_) {
-                            if(_){
-                              print("call back!!");
-                            }
-
-                          }
-                      );
+                      pc.sendImageMessage(callback: (res){
+                        if(res) {
+                          final snackBar = SnackBar(
+                            content: const Text('โปรดดูข้อมูลการชำระเงินที่หน้าแชท'),
+                            action: SnackBarAction(
+                              label: 'ดู',
+                              onPressed: () {
+                                pc.closeLiff();
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      });
                     },
+                    // onDoubleTap: () {
+                    //   pc.captureImage(buildDealerDetail(pc.selectedProduct.value!),
+                    //       type: false,
+                    //       callback: (_) {
+                    //         if(_){
+                    //           print("image saved by url launcher");
+                    //         }
+                    //
+                    //       }
+                    //   );
+                    // },
                     child: Padding(
                         padding: const EdgeInsets.only(right: 32),
                         child: Icon(Icons.save_alt_rounded, color: Colors.grey.shade900,)

@@ -10,12 +10,12 @@ class PageNotFound extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/404_error.png',
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height - 40,
-            width: MediaQuery.of(context).size.width,
-          ),
+          // Image.asset(
+          //   'assets/images/404_error.png',
+          //   fit: BoxFit.cover,
+          //   height: MediaQuery.of(context).size.height - 40,
+          //   width: MediaQuery.of(context).size.width,
+          // ),
           const Positioned(
             bottom: 230,
             left: 30,

@@ -128,7 +128,7 @@ class MyApp extends StatelessWidget {
               // Detail Body
             ),
           ),
-          initialRoute: "/landing",
+          // initialRoute: "/landing",
           // getPages: AppRoutes.routes,
           onGenerateRoute: router.generateRoute,
           // onUnknownRoute: (settings) {

@@ -1,9 +1,14 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:html';
+import 'dart:js' as js;
 import 'dart:typed_data';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:get/get.dart';
 import 'package:flutter/painting.dart';
 import 'package:marketplace_line_oa/models/file_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum ImageType {
   /// Animated Portable Network Graphics (APNG)
@@ -80,21 +85,71 @@ class ImageController extends GetxController {
     bool success = false;
 
     try {
-      String url = Url.createObjectUrlFromBlob(
-          Blob([fileModel.bytes], fileModel.mimeType));
-
-      HtmlDocument htmlDocument = document;
-      AnchorElement anchor = htmlDocument.createElement('a') as AnchorElement;
-      anchor.href = url;
-      anchor.style.display = fileModel.name + fileModel.ext;
-      anchor.download = fileModel.name;
-      document.body!.children.add(anchor);
-      anchor.click();
-      document.body!.children.remove(anchor);
+      final base64 = base64Encode(fileModel.bytes);
+      final anchor = AnchorElement(
+          href: "data:application/octet-stream;charset=utf-16le;base64,$base64")
+        ..setAttribute("download", "${fileModel.name}.${fileModel.ext}")
+        ..click();
       success = true;
     } catch (e) {
       log(e.toString());
     }
     return success;
   }
+
+  Future<bool> downloadFileUrlLauncher(FileModel fileModel) async {
+    bool success = false;
+
+    try {
+      final base64 = base64Encode(fileModel.bytes);
+      launch("https://img.freepik.com/premium-photo/image-colorful-galaxy-sky-generative-ai_791316-9864.jpg?w=1060");
+      //launch("data:application/octet-stream;base64,$base64");
+      // final Uri url = Uri.parse("data:application/octet-stream;base64,$base64");
+      // final canlaunch = await canLaunchUrl(url);
+      // print(canlaunch);
+      // if(canlaunch) {
+      //   launchUrl(url);
+      // }
+      success = true;
+    } catch (e) {
+      log(e.toString());
+    }
+    return success;
+  }
+
+  closeLiff() {
+    FlutterLineLiff().closeWindow();
+  }
+
+  Future<bool> sendImageToLiff() async {
+    try {
+      String url = "https://st2.depositphotos.com/44162236/43268/v/600/depositphotos_432688360-stock-illustration-receipt-icon-in-a-flat.jpg";
+
+      await FlutterLineLiff().sendMessages(
+          messages: [
+            const TextMessage(text: "ข้อมูลการชำระเงินของคุณ"),
+            ImageMessage(
+              originalContentUrl: url,
+              previewImageUrl: url
+          )
+          ]
+      );
+      return true;
+    } catch (e) {
+      print("something went wrong liff with error: $e");
+      return false;
+    }
+  }
+
+  // Future<void> captureScreen(Uint8List bytes) async {
+  //   // RenderRepaintBoundary boundary = rootWidgetKey.currentContext.findRenderObject() as RenderRepaintBoundary;
+  //   // ui.Image image = await boundary.toImage(pixelRatio: 1.0);
+  //   // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+  //   Uint8List pngBytes = bytes.buffer.asUint8List();
+  //
+  //   html.Blob blob = html.Blob([pngBytes], 'image/png');
+  //   String url = html.Url.createObjectUrlFromBlob(blob);
+  //   js.context.callMethod('open', [url, '_blank']);
+  //   html.Url.revokeObjectUrl(url);
+  // }
 }

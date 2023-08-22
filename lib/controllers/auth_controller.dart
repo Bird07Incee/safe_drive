@@ -13,7 +13,7 @@ class UserAuthController extends GetxController {
 
   @override
   void onInit() async {
-    //lineAuth();
+    lineAuth();
   }
 
   @override

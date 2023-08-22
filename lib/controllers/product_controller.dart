@@ -6,7 +6,7 @@ import 'package:marketplace_line_oa/controllers/landing_controller.dart';
 import 'package:marketplace_line_oa/helpers/mime_types.dart';
 import 'package:marketplace_line_oa/models/file_model.dart';
 import 'package:marketplace_line_oa/models/product_list.dart';
-import 'dart:html' as html;
+import 'dart:html';
 
 import 'package:screenshot/screenshot.dart';
 
@@ -72,10 +72,10 @@ class ProductController extends GetxController with GetSingleTickerProviderState
       update();
       String url = "/product?id=${selectedProduct.value!.carRefId}";
       print('url : $url');
-      html.window.history.pushState(null, 'Product', url);
+      window.history.pushState(null, 'Product', url);
     } else {
       print('controller is null');
-      print(html.window.location);
+      print(window.location);
 
     }
   }
@@ -95,17 +95,32 @@ class ProductController extends GetxController with GetSingleTickerProviderState
     selectedTab(s);
   }
 
-  captureImage(Widget w, {required Function(bool) callback}) {
-    //Widget w = Text("Test");
+  captureImage(Widget w, {required Function(bool) callback, required bool type}) {
     screenshotController.captureFromWidget(w).then((value) async {
       try {
-        String fileName = "mkpp_${DateTime.now().millisecondsSinceEpoch}";
-        FileModel fileModel = FileModel(name: fileName, bytes: value, ext: 'png', mimeType: MimeType.png.type);
-        imageController!.downloadFile(fileModel);
+        // String fileName = "mkpp_${DateTime.now().millisecondsSinceEpoch}";
+        // FileModel fileModel = FileModel(name: fileName, bytes: value, ext: 'png', mimeType: MimeType.png.type);
+        // imageController!.captureScreen(value);
+        // imageController!.downloadImageFromUInt8List(uInt8List: value, name: "$fileName.png");
+        // imageController!.downloadFileUrlLauncher(fileModel);
+        //type ? imageController!.downloadFile(fileModel) : imageController!.downloadFileUrlLauncher(fileModel);
         callback(true);
       } catch (e) {
         callback(false);
       }
     });
+  }
+
+  sendImageMessage({required Function(bool) callback}){
+    try {
+      imageController!.sendImageToLiff();
+      callback(true);
+    } catch (e) {
+      callback(false);
+    }
+  }
+
+  closeLiff(){
+    imageController!.closeLiff();
   }
 }

@@ -16,6 +16,7 @@ VERSION=1.0
 
 TASK=$1
 ARGS=${@:2}
+PROJECT_NAME="mkp-line-mini"
 
 runs_inside_gocd() {
   test -n "${GO_JOB_NAME}"
@@ -81,6 +82,39 @@ flutter_app() {
   echo "${DOCKER_ARGS}"
 
   docker_run $@
+}
+
+help__build_web="Run build web"
+task_build_web() {
+  if runs_inside_gocd; then
+    flutter_app flutter clean
+    flutter_app flutter pub get
+    flutter_app flutter build web
+  else
+    flutter clean
+    flutter pub get
+    flutter build web
+  fi
+}
+
+account_for_env() {
+  case $1 in
+      'dev') echo "dev2";;
+      'qa') echo "qa";;
+      'int') echo "int";;
+      'uat') echo "uat";;
+      'prod') echo "prod";;
+  esac
+}
+
+help__webDeploy="deploy web to s3"
+task_webDeploy(){
+  local environment=$1
+  local distribution_secrets=$(fetchSecret "$(account_for_env $environment)" "$(account_for_env $environment)/distribution")
+
+  assume_role $(account_id_for_name "${environment}") "deploy-app"
+  aws s3 sync build/web s3://marketplace-dev-mkp-line-mini --delete
+  aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
 }
 
 
@@ -192,25 +226,6 @@ task_publish() {
 }
 
 
-help__assembleDebug="build debug apk"
-task_assembleDebug() {
-  echo "ENV: $1"
-  echo "Version: $VERSION"
-  local TAG_NAME=$VERSION.$GO_PIPELINE_COUNTER
-  flutter pub get
-  assume_role $(account_id_for_name "tools") "pull-artifacts"
-  flutter build apk --debug --build-name=$TAG_NAME --build-number=$GO_STAGE_COUNTER --dart-define=SET_ENV=$1
-}
-
-help__assembleIPA="build debug IPA"
-task_assembleIPA() {
-  echo "ENV: $1"
-  echo "Version: $VERSION"
-  local TAG_NAME=$VERSION.$GO_PIPELINE_COUNTER
-  flutter pub get
-  flutter build ipa --build-name=$TAG_NAME --build-number=$GO_STAGE_COUNTER --export-options-plist=ios/ExportOptions.plist --dart-define=SET_ENV=$1
-}
-
 sonar_app() {
   DOCKER_IMAGE="${SONAR_SCANNER_CLI_DOCKER_IMAGE}"
 
@@ -250,17 +265,13 @@ task_assumeAgentRole() {
   echo "create aws cache at $cache_file"
 }
 
-help__flutterRun="flutter run with aws assume for building android"
-task_flutterRun() {
-  task_assumeAgentRole
-  flutter run
-}
 
 # ===== util ======
 fetchSecret() {
   (
   account_name="$1"
   secret_name="$2"
+  echo $secret_name
   assume_role $(account_id_for_name ${account_name}) "deploy-app"
   echo `aws secretsmanager get-secret-value --secret-id ${secret_name} --query SecretString --output text --region ap-southeast-1`
   )

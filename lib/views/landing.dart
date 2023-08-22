@@ -83,23 +83,23 @@ class Landing extends GetView<LandingController> {
                   width: maxWidth,
                   child: CarouselSlider(
                     options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      pauseAutoPlayOnManualNavigate: true,
-                      autoPlay: true,
-                      viewportFraction: 1,
-                      autoPlayInterval: const Duration(seconds: 10),
-                      autoPlayAnimationDuration:
-                      const Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.linear,
-                      enlargeFactor: 0
+                        enlargeCenterPage: true,
+                        pauseAutoPlayOnManualNavigate: true,
+                        autoPlay: true,
+                        viewportFraction: 1,
+                        autoPlayInterval: const Duration(seconds: 10),
+                        autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
+                        autoPlayCurve: Curves.linear,
+                        enlargeFactor: 0
                     ),
                     items: [
                       Container(
                         decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/fuel-retailers.png"),
-                            fit: BoxFit.fill,
-                          )
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/fuel-retailers.png"),
+                              fit: BoxFit.fill,
+                            )
                         ),
                         child: Align(
                           alignment: Alignment.bottomLeft,
@@ -304,25 +304,27 @@ class Landing extends GetView<LandingController> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: bodyHeight * .8 - 98,
-                  width: maxWidth - 32,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: GetBuilder<LandingController>(
-                        tag: 'landing',
-                        init: LandingController(),
-                        builder: (l) {
-                          return ProductListWidget(
-                              key: const Key("car_list_widget"),
-                              cars: l.products.value!.items!,
-                              onTap: (i, val) {
-                                l.setSelectedProduct(val);
-                                Get.toNamed(RouteName.detail, arguments: {"id": "1234"});
-                              });
-                        }
-                    ),
-                  ),
+                GetBuilder<LandingController>(
+                  tag: 'landing',
+                  init: LandingController(),
+                  builder: (l) {
+                    return SizedBox(
+                        height: bodyHeight * .8 - 98,
+                        width: maxWidth - 32,
+                        child: ListView(
+                          physics: const ClampingScrollPhysics(),
+                          children: [
+                            ProductListWidget(
+                                key: const Key("car_list_widget"),
+                                cars: l.products.value!.items!,
+                                onTap: (i, val) {
+                                  l.setSelectedProduct(val);
+                                  Get.toNamed(RouteName.detail, arguments: {"id": "1234"});
+                                })
+                          ],
+                        )
+                    );
+                  },
                 ),
               ],
             ),

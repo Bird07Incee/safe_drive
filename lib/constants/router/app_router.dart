@@ -47,16 +47,16 @@ class AppRouter {
     // }
 
     switch (routingData?.route) {
-      // case '/':
-      //   print("1 >>> ${routingData?.route}");
-      //   return MaterialPageRoute(builder: (_) => Default(), settings: settings);
+      case '/':
+        print("1 >>> ${routingData?.route}");
+        return MaterialPageRoute(builder: (_) => const Landing(), settings: settings);
       case '/product':
         int id = (routingData?["id"] == null) ? 0 : int.parse(routingData?["id"]);
         print("2 >>> ${routingData?.route}");
         return MaterialPageRoute(builder: (_) => Product(), settings: settings);
       case '/landing':
         print("2 >>> ${routingData?.route}");
-        return MaterialPageRoute(builder: (_) => Landing(), settings: settings);
+        return MaterialPageRoute(builder: (_) => const Landing(), settings: settings);
       default:
         print("0 >>> ${routingData?.route}");
         return MaterialPageRoute(builder: (_) => const PageNotFound(), settings: settings);
