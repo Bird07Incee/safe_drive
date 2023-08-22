@@ -60,7 +60,7 @@ class DrawerComponent extends GetView<DrawerWidgetController> {
                           ),
                           Container(
                             padding: const EdgeInsets.all(15),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(Icons.favorite),
@@ -77,7 +77,7 @@ class DrawerComponent extends GetView<DrawerWidgetController> {
                           ),
                           Container(
                             padding: const EdgeInsets.all(15),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(Icons.person),
@@ -97,7 +97,7 @@ class DrawerComponent extends GetView<DrawerWidgetController> {
                           ),
                           Container(
                             padding: const EdgeInsets.all(15),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(Icons.settings),
@@ -114,7 +114,7 @@ class DrawerComponent extends GetView<DrawerWidgetController> {
                           ),
                           Container(
                             padding: const EdgeInsets.all(15),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(Icons.shopping_cart),
@@ -131,7 +131,7 @@ class DrawerComponent extends GetView<DrawerWidgetController> {
                           ),
                           Container(
                             padding: const EdgeInsets.all(15),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(Icons.help),
