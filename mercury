@@ -91,7 +91,6 @@ task_build_web() {
     flutter_app flutter pub get
     flutter_app flutter build web
   else
-    flutter clean
     flutter pub get
     flutter build web
   fi
