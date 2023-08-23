@@ -111,7 +111,7 @@ task_webDeploy(){
   local environment=$1
   local distribution_secrets=$(fetchSecret "$(account_for_env $environment)" "$(account_for_env $environment)/distribution")
 
-  assume_role $(account_id_for_name "${environment}") "deploy-app"
+  assume_role $(account_id_for_name "${environment}") "DeployApp"
   aws s3 sync build/web s3://marketplace-dev-mkp-line-mini --delete
   aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
 }
@@ -271,7 +271,7 @@ fetchSecret() {
   account_name="$1"
   secret_name="$2"
   echo $secret_name
-  assume_role $(account_id_for_name ${account_name}) "deploy-app"
+  assume_role $(account_id_for_name ${account_name}) "DeployApp"
   echo `aws secretsmanager get-secret-value --secret-id ${secret_name} --query SecretString --output text --region ap-southeast-1`
   )
 }
