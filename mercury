@@ -86,14 +86,9 @@ flutter_app() {
 
 help__build_web="Run build web"
 task_build_web() {
-  if runs_inside_gocd; then
-    flutter_app flutter doctor
-    flutter_app flutter pub get
-    flutter_app flutter build web
-  else
-    flutter pub get
-    flutter build web
-  fi
+  flutter doctor
+  flutter pub get
+  flutter build web
 }
 
 account_for_env() {
