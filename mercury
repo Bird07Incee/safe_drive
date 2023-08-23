@@ -67,6 +67,7 @@ docker_run() {
 }
 
 flutter_app() {
+  pushd web/
   DOCKER_IMAGE="${FLUTTER_IMAGE}"
 
   docker_ensure_volume superapp-gradle-cache
@@ -82,13 +83,25 @@ flutter_app() {
   echo "${DOCKER_ARGS}"
 
   docker_run $@
+
+  local exit=$?
+  popd
+  return $exit
 }
 
 help__build_web="Run build web"
 task_build_web() {
-  flutter doctor
-  flutter pub get
-  flutter build web
+  if runs_inside_gocd; then
+    if [[ ! -d "build/web/" ]]; then
+      mkdir build/web/
+    fi
+    flutter_app flutter pub get
+    flutter_app flutter build web
+    cp -R web/buid/web/ build/web/$(account_for_env $environment)/
+  else
+    flutter pub get
+    flutter build web
+  fi
 }
 
 account_for_env() {
