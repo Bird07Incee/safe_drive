@@ -96,6 +96,7 @@ task_build_web() {
       mkdir build
       cd build
       mkdir web
+      cd ..
     fi
     flutter_app flutter pub get
     flutter_app flutter build web
