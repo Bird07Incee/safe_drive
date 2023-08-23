@@ -92,6 +92,8 @@ flutter_app() {
 help__build_web="Run build web"
 task_build_web() {
   if runs_inside_gocd; then
+    ls
+    pwd
     if [[ ! -d "build/web/" ]]; then
       mkdir -p build/web
     fi
