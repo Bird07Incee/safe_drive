@@ -98,7 +98,7 @@ task_build_web() {
 
 account_for_env() {
   case $1 in
-      'dev') echo "dev2";;
+      'dev') echo "dev";;
       'qa') echo "qa";;
       'int') echo "int";;
       'uat') echo "uat";;
@@ -278,12 +278,12 @@ fetchSecret() {
 
 account_id_for_name() {
   case $1 in
-    'dev') echo "162113545119";;
-    'qa') echo "162113545119";;
-    'uat') echo "162113545119";;
-    'int') echo "162113545119";;
-    'prod') echo "605695755270";;
-    'tools') echo "688318228301";;
+    tools) echo "688318228301";;
+    dev) echo "246477751131";;
+    qa) echo "246477751131";;
+    int) echo "246477751131";;
+    uat) echo "246477751131";;
+    prod) echo "315858814413";;
   esac
 }
 
