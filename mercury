@@ -95,6 +95,7 @@ task_build_web() {
     if [[ ! -d "build/web/" ]]; then
       mkdir -p build/web/
     fi
+    local environment=$1
     flutter_app flutter pub get
     flutter_app flutter build web
     flutter_app ls
