@@ -92,11 +92,11 @@ flutter_app() {
 help__build_web="Run build web"
 task_build_web() {
   if runs_inside_gocd; then
-    ls
-    pwd
     if [[ ! -d "build/web/" ]]; then
       mkdir -p build/web
     fi
+    ls
+    pwd
     flutter_app flutter pub get
     flutter_app flutter build web
     cp -R web/buid/web/ build/web/$(account_for_env $environment)/
