@@ -67,7 +67,6 @@ docker_run() {
 }
 
 flutter_app() {
-  pushd web/
   DOCKER_IMAGE="${FLUTTER_IMAGE}"
 
   docker_ensure_volume superapp-gradle-cache
@@ -87,7 +86,6 @@ flutter_app() {
   local exit=$?
   echo $exit
   ls
-  popd
   return $exit
 }
 
@@ -99,7 +97,8 @@ task_build_web() {
     fi
     flutter_app flutter pub get
     flutter_app flutter build web
-    cp -R web/build/web web/build/web/$(account_for_env $environment)/
+    flutter_app ls
+    flutter_app cp -R build/web build_web/web/$(account_for_env $environment)/
   else
     flutter pub get
     flutter build web
