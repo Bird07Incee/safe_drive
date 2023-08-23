@@ -116,6 +116,12 @@ task_webDeploy(){
   aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
 }
 
+help__check_path="Check working directory path"
+task_check_path() {
+  pwd
+  ls
+}
+
 
 help__check="Run analytics of source code"
 task_check() {
