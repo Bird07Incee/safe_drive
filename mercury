@@ -115,11 +115,11 @@ account_for_env() {
 help__webDeploy="deploy web to s3"
 task_webDeploy(){
   local environment=$1
-  local distribution_secrets=$(fetchSecret "$(account_for_env $environment)" "$(account_for_env $environment)/distribution")
+#  local distribution_secrets=$(fetchSecret "$(account_for_env $environment)" "$(account_for_env $environment)/distribution")
 
   assume_role $(account_id_for_name "${environment}") "DeployApp"
   aws s3 sync web s3://marketplace-dev-mkp-line-mini --delete
-  aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
+#  aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
 }
 
 help__check_path="Check working directory path"
