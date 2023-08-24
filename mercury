@@ -9,7 +9,7 @@ set -o pipefail
 SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:4.7.0"
 
 ECR_URL="688318228301.dkr.ecr.ap-southeast-1.amazonaws.com"
-FLUTTER_IMAGE="${ECR_URL}/superapp-apollo/apl-flutter"
+FLUTTER_IMAGE="${ECR_URL}/dev/flutter"
 
 COVERAGE_TARGET=0
 VERSION=1.0
@@ -87,18 +87,12 @@ flutter_app() {
 help__build_web="Run build web"
 task_build_web() {
   if runs_inside_gocd; then
-#    if [[ ! -d "output/web/" ]]; then
-#      mkdir -p output/web/
-#    fi
     local environment=$1
     flutter_app flutter pub get
-    flutter_app flutter build web
-    pwd
-    ls
-#    flutter_app cp -r build/web output/web/$(account_for_env $environment)/
+    flutter_app flutter build web --dart-define=SET_ENV=$1
   else
     flutter pub get
-    flutter build web
+    flutter build web --dart-define=SET_ENV=$1
   fi
 }
 
@@ -116,9 +110,10 @@ help__webDeploy="deploy web to s3"
 task_webDeploy(){
   local environment=$1
 #  local distribution_secrets=$(fetchSecret "$(account_for_env $environment)" "$(account_for_env $environment)/distribution")
-
+  pwd
+  ls
   assume_role $(account_id_for_name "${environment}") "DeployApp"
-  aws s3 sync web s3://marketplace-dev-mkp-line-mini --delete
+  aws s3 sync build/web s3://marketplace-dev-mkp-line-mini --delete
 #  aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
 }
 
