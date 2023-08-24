@@ -111,10 +111,11 @@ task_webDeploy(){
   local environment=$1
 #  local distribution_secrets=$(fetchSecret "$(account_for_env $environment)" "$(account_for_env $environment)/distribution")
   pwd
+  ls
   ls ./web/
-  ls ./build/
+  ls ../build/
   assume_role $(account_id_for_name "${environment}") "DeployApp"
-  aws s3 sync build/web s3://marketplace-dev-mkp-line-mini --delete
+  aws s3 sync ../build s3://marketplace-dev-mkp-line-mini --delete
 #  aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
 }
 
