@@ -106,15 +106,33 @@ account_for_env() {
   esac
 }
 
+distribution_secret_env() {
+  case $1 in
+      'dev') echo "EQ3OEEMS01F45";;
+      'qa') echo "xxxxx";;
+      'uat') echo "xxxxxx";;
+  esac
+}
+
+portal_account_id_for_name() {
+  case $1 in
+      'dev') echo "308631386256";;
+      'qa') echo "308631386256";;
+      'uat') echo "308631386256";;
+      'prod') echo "308565014163";;
+  esac
+}
+
 help__webDeploy="deploy web to s3"
 task_webDeploy(){
   local environment=$1
-#  local distribution_secrets=$(fetchSecret "$(account_for_env $environment)" "$(account_for_env $environment)/distribution")
-  pwd
-  ls ../build/marketplace/
+  local distribution_secret=$(distribution_secret_env $environment)
   assume_role $(account_id_for_name "${environment}") "DeployApp"
   aws s3 sync ../build/marketplace s3://marketplace-dev-mkp-line-mini --delete
-#  aws cloudfront create-invalidation --distribution-id $distribution_secrets --paths /*
+
+  echo "Cloudfront distribution ID is ${distribution_secret}. Doing Invalidation now..."
+  assume_role $(portal_account_id_for_name "$environment") "Marketplace-SelfService"
+  aws cloudfront create-invalidation --distribution-id $distribution_secret --paths "/*"
 }
 
 help__check_path="Check working directory path"
