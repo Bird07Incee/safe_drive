@@ -14,15 +14,16 @@ import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterLineLiff().init(
-      config: Config(liffId: '1661164508-Kn9nO7oB'),
-      successCallback: (){
-        print('successCallback');
-      },
-      errorCallback: (error){
-        print('init error: ${error.name}, ${error.message}, ${error.stack}');
-      }
-  );
+  _loadENV();
+  // FlutterLineLiff().init(
+  //     config: Config(liffId: '1661164508-Kn9nO7oB'),
+  //     successCallback: (){
+  //       print('successCallback');
+  //     },
+  //     errorCallback: (error){
+  //       print('init error: ${error.name}, ${error.message}, ${error.stack}');
+  //     }
+  // );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -31,6 +32,12 @@ void main() {
     initialDependencies();
     runApp(MyApp());
   });
+}
+
+_loadENV() {
+  const setEnv = String.fromEnvironment('SET_ENV', defaultValue: 'dev');
+  String? env = setEnv;
+  print('env : $env');
 }
 
 initialDependencies() async{
