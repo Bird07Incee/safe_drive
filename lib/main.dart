@@ -15,15 +15,15 @@ import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   _loadENV();
-  // FlutterLineLiff().init(
-  //     config: Config(liffId: '1661164508-Kn9nO7oB'),
-  //     successCallback: (){
-  //       print('successCallback');
-  //     },
-  //     errorCallback: (error){
-  //       print('init error: ${error.name}, ${error.message}, ${error.stack}');
-  //     }
-  // );
+  FlutterLineLiff().init(
+      config: Config(liffId: '1661164508-Kn9nO7oB'),
+      successCallback: (){
+        print('successCallback');
+      },
+      errorCallback: (error){
+        print('init error: ${error.name}, ${error.message}, ${error.stack}');
+      }
+  );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
