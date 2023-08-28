@@ -8,7 +8,7 @@ import 'package:marketplace_line_oa/models/file_model.dart';
 import 'package:marketplace_line_oa/models/product_list.dart';
 import 'dart:html';
 
-import 'package:screenshot/screenshot.dart';
+//import 'package:screenshot/screenshot.dart';
 
 class ProductBinding implements Bindings {
   final String tag;
@@ -17,7 +17,7 @@ class ProductBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ProductController(), tag: tag);
-    Get.lazyPut(() => ScreenshotController(), tag: tag);
+    //Get.lazyPut(() => ScreenshotController(), tag: tag);
     Get.lazyPut(() => ImageController(), tag: tag);
   }
 }
@@ -30,7 +30,7 @@ class ProductController extends GetxController with GetSingleTickerProviderState
   final RxInt selectedTab = 0.obs;
 
   //Create an instance of ScreenshotController
-  ScreenshotController screenshotController = ScreenshotController();
+  //ScreenshotController screenshotController = ScreenshotController();
 
   //mock
   final Rxn<ProductListModel> products = Rxn<ProductListModel>();
@@ -95,21 +95,21 @@ class ProductController extends GetxController with GetSingleTickerProviderState
     selectedTab(s);
   }
 
-  captureImage(Widget w, {required Function(bool) callback, required bool type}) {
-    screenshotController.captureFromWidget(w).then((value) async {
-      try {
-        // String fileName = "mkpp_${DateTime.now().millisecondsSinceEpoch}";
-        // FileModel fileModel = FileModel(name: fileName, bytes: value, ext: 'png', mimeType: MimeType.png.type);
-        // imageController!.captureScreen(value);
-        // imageController!.downloadImageFromUInt8List(uInt8List: value, name: "$fileName.png");
-        // imageController!.downloadFileUrlLauncher(fileModel);
-        //type ? imageController!.downloadFile(fileModel) : imageController!.downloadFileUrlLauncher(fileModel);
-        callback(true);
-      } catch (e) {
-        callback(false);
-      }
-    });
-  }
+  // captureImage(Widget w, {required Function(bool) callback, required bool type}) {
+  //   screenshotController.captureFromWidget(w).then((value) async {
+  //     try {
+  //       // String fileName = "mkpp_${DateTime.now().millisecondsSinceEpoch}";
+  //       // FileModel fileModel = FileModel(name: fileName, bytes: value, ext: 'png', mimeType: MimeType.png.type);
+  //       // imageController!.captureScreen(value);
+  //       // imageController!.downloadImageFromUInt8List(uInt8List: value, name: "$fileName.png");
+  //       // imageController!.downloadFileUrlLauncher(fileModel);
+  //       //type ? imageController!.downloadFile(fileModel) : imageController!.downloadFileUrlLauncher(fileModel);
+  //       callback(true);
+  //     } catch (e) {
+  //       callback(false);
+  //     }
+  //   });
+  // }
 
   sendImageMessage({required Function(bool) callback}){
     try {

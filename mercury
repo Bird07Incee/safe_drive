@@ -9,7 +9,7 @@ set -o pipefail
 SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:4.7.0"
 
 ECR_URL="688318228301.dkr.ecr.ap-southeast-1.amazonaws.com"
-FLUTTER_IMAGE="${ECR_URL}/dev/flutter"
+FLUTTER_IMAGE="${ECR_URL}/superapp-apollo/apl-flutter"
 
 COVERAGE_TARGET=0
 VERSION=1.0
@@ -88,7 +88,6 @@ help__build_web="Run build web"
 task_build_web() {
   if runs_inside_gocd; then
     local environment=$1
-    flutter_app flutter doctor
     flutter_app flutter pub get
     flutter_app flutter build web --dart-define=SET_ENV=$1
   else
