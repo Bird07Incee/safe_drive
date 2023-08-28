@@ -128,7 +128,8 @@ task_webDeploy(){
   local environment=$1
   local distribution_secret=$(distribution_secret_env $environment)
   assume_role $(account_id_for_name "${environment}") "DeployApp"
-  aws s3 sync ../build/marketplace s3://marketplace-dev-mkp-line-mini --delete
+  ls ../build/
+  aws s3 sync ../build s3://marketplace-dev-mkp-line-mini --delete
 
   echo "Cloudfront distribution ID is ${distribution_secret}. Doing Invalidation now..."
   assume_role $(portal_account_id_for_name "$environment") "Marketplace-SelfService"
