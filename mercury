@@ -89,10 +89,10 @@ task_build_web() {
   if runs_inside_gocd; then
     local environment=$1
     flutter_app flutter pub get
-    flutter_app flutter build web --dart-define=SET_ENV=$1
+    flutter_app flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
   else
     flutter pub get
-    flutter build web --dart-define=SET_ENV=$1
+    flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
   fi
 }
 
@@ -109,8 +109,10 @@ account_for_env() {
 distribution_secret_env() {
   case $1 in
       'dev') echo "EQ3OEEMS01F45";;
-      'qa') echo "xxxxx";;
-      'uat') echo "xxxxxx";;
+      'qa') echo "E3KVG3XULGA6Y9";;
+      'int') echo "E6L8FC8PW270F";;
+      'uat') echo "E3UDP8G3QMPITE";;
+      'prod') echo "";;
   esac
 }
 
