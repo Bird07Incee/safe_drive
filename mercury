@@ -18,6 +18,7 @@ docker_ensure_volume() {
 
 docker_build() {
   # docker build -t go-mini-web-builder -f Dockerfile.${@} .
+  echo "docker build ...."
 
   docker build \
     --pull \
@@ -28,13 +29,17 @@ docker_build() {
 
 docker_run() {
   (
-    echo -n "Running the task in the docker ${DOCKER_IMAGE}"
+    echo "Running the task in the docker ${DOCKER_IMAGE}"
+
     if runs_inside_gocd; then
       DOCKER_ARGS="${DOCKER_ARGS} -v godata:/godata -w $(pwd)"
     else
       DOCKER_ARGS="${DOCKER_ARGS} -it -v $(pwd):/workspace:cached -w /workspace"
     fi
     
+    local currentdir=$(pwd)
+    echo "Current directory is: $currentdir"
+
     # docker run -it --rm -v $(pwd):/app flutter-web-builder flutter pub get && flutter build web
     docker run --rm \
                 --env-file <(env | grep AWS_) \
@@ -81,6 +86,7 @@ else
   echo "$HELPS" | column -t -s "|"
   exit 1
 fi
+
 
 
 # #!/usr/bin/env bash
