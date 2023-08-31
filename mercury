@@ -86,12 +86,10 @@ flutter_app() {
 
 help__build_web="Run build web"
 task_build_web() {
+  local environment=$1
   if runs_inside_gocd; then
-    local environment=$1
-    DOCKER_BUILD_ARGS="-f ${SCRIPT_DIR}/dockerfile.web"
-    docker_run_local flutter pub get && flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
-#    flutter_app flutter pub get
-#    flutter_app flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
+    flutter_app flutter pub get
+    flutter_app flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
   else
     flutter pub get
     flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
@@ -140,32 +138,6 @@ task_webDeploy(){
   assume_role $(portal_account_id_for_name "$environment") "Marketplace-SelfService"
   aws cloudfront create-invalidation --distribution-id $distribution_secret --paths "/*"
 }
-
-docker_run_local() {
-  local image_id
-  if [ -z "${DOCKER_IMAGE}" ]; then
-    echo -n "Building toolchain container; this might take a while..."
-    image_id=$(docker build ${DOCKER_BUILD_ARGS} . -q)
-    echo " Done."
-  else
-    image_id=$DOCKER_IMAGE
-  fi
-
-  if runs_inside_gocd; then
-    local args="-v godata:/godata -w $(pwd)"
-  else
-    local args="-it -v $(pwd):/workspace:cached -w /workspace"
-  fi
-
-  DOCKER_ARGS="${DOCKER_ARGS} -v ${HOME}/.aws:/root/.aws"
-  docker run --rm \
-             --hostname $(hostname) \
-             --env-file <(env | grep JET_) \
-             --env-file <(env | grep AWS_) \
-             --env-file <(env | grep TF_) \
-              ${args} ${DOCKER_ARGS} ${image_id}  "$@"
-}
-
 
 help__check="Run analytics of source code"
 task_check() {
