@@ -120,6 +120,7 @@ portal_account_id_for_name() {
   case $1 in
       'dev') echo "308631386256";;
       'qa') echo "308631386256";;
+      'int') echo "308631386256";;
       'uat') echo "308631386256";;
       'prod') echo "308565014163";;
   esac
