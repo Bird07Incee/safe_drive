@@ -39,11 +39,12 @@ class UserAuthController extends GetxController {
         liff.login();
       } else {
         bool profileSuccess = await setLineAuth();
+        print("arguments :${Get.arguments}");
         if(profileSuccess) {
           print('is Logged in and profile success >>>> Redirect to Landing');
           useLineProfile.value = await FlutterLineLiff().profile;
           update();
-          Get.toNamed(RouteName.landing);
+          //Get.toNamed(RouteName.landing);
         } else {
           print('profile err');
         }
@@ -55,8 +56,6 @@ class UserAuthController extends GetxController {
   Future<bool> setLineAuth() async {
     try {
       isAuth.value = true;
-      print("get code: ${Get.arguments["code"]}");
-      print("get state: ${Get.arguments["state"]}");
       user.update((u) {
         u?.lineAuth!.code = Get.arguments["code"] ?? "";
         u?.lineAuth!.state = Get.arguments["state"] ?? "";
