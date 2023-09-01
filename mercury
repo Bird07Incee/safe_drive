@@ -86,13 +86,13 @@ flutter_app() {
 
 help__build_web="Run build web"
 task_build_web() {
+  local environment=$1
   if runs_inside_gocd; then
-    local environment=$1
     flutter_app flutter pub get
-    flutter_app flutter build web --dart-define=SET_ENV=$1
+    flutter_app flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
   else
     flutter pub get
-    flutter build web --dart-define=SET_ENV=$1
+    flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
   fi
 }
 
@@ -109,8 +109,10 @@ account_for_env() {
 distribution_secret_env() {
   case $1 in
       'dev') echo "EQ3OEEMS01F45";;
-      'qa') echo "xxxxx";;
-      'uat') echo "xxxxxx";;
+      'qa') echo "E3KVG3XULGA6Y9";;
+      'int') echo "E6L8FC8PW270F";;
+      'uat') echo "E3UDP8G3QMPITE";;
+      'prod') echo "";;
   esac
 }
 
@@ -118,6 +120,7 @@ portal_account_id_for_name() {
   case $1 in
       'dev') echo "308631386256";;
       'qa') echo "308631386256";;
+      'int') echo "308631386256";;
       'uat') echo "308631386256";;
       'prod') echo "308565014163";;
   esac
@@ -128,20 +131,13 @@ task_webDeploy(){
   local environment=$1
   local distribution_secret=$(distribution_secret_env $environment)
   assume_role $(account_id_for_name "${environment}") "DeployApp"
-  ls ../build/dev/
-  aws s3 sync ../build/$environment s3://marketplace-dev-mkp-line-mini --delete
+  aws s3 sync ../build/$environment s3://marketplace-$environment-mkp-line-mini --delete
 
+  # Clear cache cloudfront
   echo "Cloudfront distribution ID is ${distribution_secret}. Doing Invalidation now..."
   assume_role $(portal_account_id_for_name "$environment") "Marketplace-SelfService"
   aws cloudfront create-invalidation --distribution-id $distribution_secret --paths "/*"
 }
-
-help__check_path="Check working directory path"
-task_check_path() {
-  pwd
-  ls
-}
-
 
 help__check="Run analytics of source code"
 task_check() {

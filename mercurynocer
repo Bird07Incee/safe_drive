@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+
+set -e
+set -o pipefail
+
+TASK=$1
+ARGS=${@:2}
+PROJECT_NAME="mkp-line-mini"
+
+runs_inside_gocd() {
+  test -n "${GO_JOB_NAME}"
+}
+
+docker_ensure_volume() {
+  docker volume inspect $1 >/dev/null 2>&1 || docker volume create $1 >/dev/null 2>&1
+}
+
+docker_build() {
+  # docker build -t go-mini-web-builder -f Dockerfile.${@} .
+
+  docker build \
+    --pull \
+    --quiet \
+    -f Dockerfile.${@} \
+    -t ${@} .
+}
+
+docker_run() {
+  (
+    echo -n "Running the task in the docker ${DOCKER_IMAGE}"
+    if runs_inside_gocd; then
+      DOCKER_ARGS="${DOCKER_ARGS} -v godata:/godata -w $(pwd)"
+    else
+      DOCKER_ARGS="${DOCKER_ARGS} -it -v $(pwd):/workspace:cached -w /workspace"
+    fi
+    
+    # docker run -it --rm -v $(pwd):/app flutter-web-builder flutter pub get && flutter build web
+    docker run --rm \
+                --env-file <(env | grep AWS_) \
+                --env-file <(env | grep TF_) \
+              ${DOCKER_ARGS} ${DOCKER_IMAGE} "$@"
+  )
+}
+
+gominiweb() {
+  DOCKER_IMAGE="go-mini-web"
+  docker_run "$@"
+}
+
+help__gominiweb_app="Run build web"
+task_gominiweb_app(){
+  echo "run task_gominiweb_app"
+  local environment=$1
+  docker_build go-mini-web
+
+  gominiweb "flutter pub get && flutter build web"
+  local exit=$?
+  return $exit 
+}
+
+# ===== main ======
+list_all_helps() {
+  compgen -v | egrep "^help__.*"
+}
+
+NEW_LINE=$'\n'
+if type -t "task_$TASK" &>/dev/null; then
+  task_${TASK} ${ARGS}
+else
+  echo "usage: $0 <task> [<..args>]"
+  echo "task:"
+
+  HELPS=""
+  for help in $(list_all_helps)
+  do
+
+    HELPS="$HELPS    ${help/help__/} |-- ${!help}$NEW_LINE"
+  done
+
+  echo "$HELPS" | column -t -s "|"
+  exit 1
+fi
+
+
