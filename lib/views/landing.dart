@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_line_liff/flutter_line_liff.dart' as flutter_line_liff;
 import 'package:get/get.dart';
 import 'package:marketplace_line_oa/constants/router/route_config.dart';
 import 'package:marketplace_line_oa/controllers/landing_controller.dart';
@@ -29,6 +30,7 @@ class Landing extends GetView<LandingController> {
         GestureDetector(
           key: const Key("favorite_appbar_section_button"),
           onTap: () {
+            flutter_line_liff.FlutterLineLiff().closeWindow();
           },
           child: Container(
             width: 32.0,
