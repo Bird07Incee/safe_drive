@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/homepage/cookie_accept_ui.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_banner.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';

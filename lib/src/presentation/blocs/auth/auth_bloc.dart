@@ -2,36 +2,28 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
-import 'package:marketplace_line_oa/src/model/user.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
   final liff = FlutterLineLiff();
+  Storage localStorage = window.localStorage;
 
   AuthBloc() : super(UserAuthInitial()) {
     on<UserAuthEventLogin>((event, emit) async {
-      List<User> user;
       await liff.ready.then((_) async {
         print('Line Ready');
         if (!liff.isLoggedIn) {
-          print('login');
+          print('login liff');
           liff.login();
         } else {
-          // bool profileSuccess = await setLineAuth();
-          // if(profileSuccess) {
-          //   print('is Logged in and profile success >>>> Redirect to Landing');
-          //   useLineProfile.value = await FlutterLineLiff().profile;
-          //   update();
-          //   Get.toNamed(RouteName.landing);
-          // } else {
-          //   print('profile err');
-          // }
           Navigator.pushNamed(event.context, "termAndCon");
         }
       });
-      // liff.login();
+
       emit(UserAuthLoading());
       await liff.profile;
 
@@ -41,8 +33,6 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
       String state = uri.queryParameters["state"]!;
       String liffClientId = uri.queryParameters["liffClientId"]!;
       String liffRedirectUri = uri.queryParameters["liffRedirectUri"]!;
-
-      print("code : $code");
 
       emit(UserAuthAuthenticated(
           code: code,

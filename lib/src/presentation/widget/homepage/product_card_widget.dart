@@ -88,7 +88,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       child: SizedBox(
                                           width: widget.maxWidth,
                                           height: 576,
-                                          child: Image.network('assets/mockimg/product.png', fit: BoxFit.fitWidth)),
+                                          child: Image.asset('assets/mockimg/product.png', fit: BoxFit.fitWidth)),
                                     ),
                                   ),
                                 ],
@@ -119,7 +119,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         child: Align(
                       alignment: Alignment.bottomRight,
                       child: Image.asset(
-                        "assets/homepage/barnd.png",
+                        "assets/homepage/brand.png",
                         height: 32,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) => const SizedBox(),
