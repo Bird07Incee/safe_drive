@@ -118,7 +118,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     Positioned.fill(
                         child: Align(
                       alignment: Alignment.bottomRight,
-                      child: Image.network(
+                      child: Image.asset(
                         "assets/homepage/barnd.png",
                         height: 32,
                         fit: BoxFit.cover,
