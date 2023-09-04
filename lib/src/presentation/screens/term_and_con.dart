@@ -180,7 +180,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       onTap: () {
                         if (scrollFinished) {
                           print("accept click");
-                          Navigator.pushNamed(context, "home");
+                          Navigator.of(context).pop();
                         }
                       },
                       child: Container(
