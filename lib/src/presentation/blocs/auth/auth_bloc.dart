@@ -42,7 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
       String liffClientId = uri.queryParameters["liffClientId"]!;
       String liffRedirectUri = uri.queryParameters["liffRedirectUri"]!;
 
-      print(code);
+      print("code : $code");
 
       emit(UserAuthAuthenticated(
           code: code,

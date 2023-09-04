@@ -84,13 +84,9 @@ flutter:
     - assets/images/stocks/
     - assets/images/fiction/
     - assets/images/wall_charges/
-    - assets/icons/
-    - assets/icons/car_type_icon/
-    - assets/icons/search_history/
     - assets/homepage/
-    - assets/button/
-    - assets/bg/
     - assets/raw/
+    - assets/mockimg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
