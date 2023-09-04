@@ -31,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
           Navigator.pushNamed(event.context, "termAndCon");
         }
       });
-      liff.login();
+      // liff.login();
       emit(UserAuthLoading());
       await liff.profile;
 
