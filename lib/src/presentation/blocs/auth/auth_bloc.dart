@@ -2,15 +2,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
+import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
+import 'package:marketplace_line_oa/src/js/js_manager.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
   final liff = FlutterLineLiff();
-  Storage localStorage = window.localStorage;
+  TermAndConHelper termAndConHelper = TermAndConHelper();
 
   AuthBloc() : super(UserAuthInitial()) {
     on<UserAuthEventLogin>((event, emit) async {
@@ -20,26 +20,29 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
           print('login liff');
           liff.login();
         } else {
-          Navigator.pushNamed(event.context, "termAndCon");
+          if (termAndConHelper.isTermAndConAccepted()) {
+            await Navigator.pushNamed(event.context, "termAndCon");
+          }
+          loadOneTrustCookieScript();
         }
       });
 
-      emit(UserAuthLoading());
-      await liff.profile;
+      // emit(UserAuthLoading());
+      // await liff.profile;
 
-      String url = Uri.base.path;
-      Uri uri = Uri.parse(url);
-      String code = uri.queryParameters["code"]!;
-      String state = uri.queryParameters["state"]!;
-      String liffClientId = uri.queryParameters["liffClientId"]!;
-      String liffRedirectUri = uri.queryParameters["liffRedirectUri"]!;
+      // String url = Uri.base.path;
+      // Uri uri = Uri.parse(url);
+      // String code = uri.queryParameters["code"]!;
+      // String state = uri.queryParameters["state"]!;
+      // String liffClientId = uri.queryParameters["liffClientId"]!;
+      // String liffRedirectUri = uri.queryParameters["liffRedirectUri"]!;
 
-      emit(UserAuthAuthenticated(
-          code: code,
-          state: state,
-          liffClientId: liffClientId,
-          liffRedirectUri: Uri.parse(liffRedirectUri),
-          accessToken: liff.id!));
+      // emit(UserAuthAuthenticated(
+      //     code: code,
+      //     state: state,
+      //     liffClientId: liffClientId,
+      //     liffRedirectUri: Uri.parse(liffRedirectUri),
+      //     accessToken: liff.id!));
     });
 
     on<UserAuthEventLogout>((event, emit) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
 class TermAndConScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class TermAndConScreen extends StatefulWidget {
 class _TermAndConScreenState extends State<TermAndConScreen> {
   final _controller = ScrollController();
   bool scrollFinished = false;
+  TermAndConHelper termAndConHelper = TermAndConHelper();
 
   @override
   void initState() {
@@ -39,7 +41,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         "ข้อมูลที่เกี่ยวข้องกับตัวลูกค้าหรือบุคคลใดนั้น จะถูกนำไปใช้เพื่อ วัตถุประสงค์ในการดำเนินงานของกรุงศรี ออโต้และบริษัทในเครืออย่าง ถูกต้องตามกฎหมายเท่านั้น และนำไปใช้เพื่อการออกแบบผลิตภัณฑ์และบริการของกรุงศรี ออโต้ และข้อเสนอพิเศษต่างๆ ที่ดีขึ้นกว่า เดิม เพื่อให้เป็นไปตามความต้องการของลูกค้าและการให้บริการที่ดีที่สุด ข้อมูลของลูกค้าจะไม่ถูกนำไปใช้ เก็บรวบรวม หรือสงวนไว้ หากกรุงศรี ออโต้ไม่มีวัตถุประสงค์ในการดำเนินการดังกล่าว ทั้งนี้กรุงศรี ออโต้จะเก็บรวบรวมข้อมูลส่วนบุคคลของท่านต่อเมื่อกรุงศรี ออโต้ได้รับข้อมูลจากท่านโดยตรง โดยการสมัครหรือลงทะเบียนผ่าน เว็บไซต์สำหรับให้กรุงศรี ออโต้ใช้ในการติดต่อกับท่าน หากท่าน เลือกที่จะให้ข้อมูลส่วนบุคคล เช่น ชื่อ นามสกุล วันเดือนปีเกิด เลขบัตรประจำตัวประชาชน ที่อยู่ ไปรษณีย์อิเล็กทรอนิกส์ เบอร์โทรศัพท์ หรือเบอร์โทรสาร ภาพถ่ายใบหน้า ลายนิ้วมือ ม่านตา เป็นต้น แก่กรุงศรี ออโต้ ตลอดจนกิจกรรมทางธุรกิจหรือการดำเนิน ธุรกรรมใดๆ ของท่านแก่กรุงศรี ออโต้แล้ว กรุงศรีออโต้จะรักษาข้อมูล เหล่านั้นไว้เป็นความลับตามเกณฑ์มาตรฐานความปลอดภัยชั้นสูงของกรุงศรี ออโต้";
 
     return RootWidget(
-        titlePage: "term",
+        titlePage: "Marketplace LINE OA mini",
         child: Column(
           children: [
             Container(
@@ -73,6 +75,26 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       child: Text(
                         "การรับรองความถูกต้องของข้อมูล",
+                        style: AlvaStyles().heading2(Color(0xff5a5a5a)),
+                      )),
+                ),
+                Container(
+                  width: maxWidth,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Text(
+                      mockText,
+                      style: AlvaStyles().body1(),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      child: Text(
+                        "การยินยอมให้เปิดเผยข้อมูลส่วนตัว",
                         style: AlvaStyles().heading2(Color(0xff5a5a5a)),
                       )),
                 ),
@@ -180,6 +202,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       onTap: () {
                         if (scrollFinished) {
                           print("accept click");
+                          termAndConHelper.setTermAndConToAccept();
                           Navigator.of(context).pop();
                         }
                       },
