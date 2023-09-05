@@ -30,6 +30,7 @@ class Assets {
   static const String imagesFleetCharging = 'assets/images/fleet-charging.png';
   static const String imagesFuelRetailers = 'assets/images/fuel-retailers.png';
   static const String imagesHeroBanner = 'assets/images/HeroBanner.png';
+  static const String imagesIconLoading2x = 'assets/images/icon_loading@2x.png';
   static const String imagesWarning = 'assets/images/warning.png';
   static const String logoLogo = 'assets/images/logo/logo.png';
   static const String logoUser = 'assets/images/logo/user.png';

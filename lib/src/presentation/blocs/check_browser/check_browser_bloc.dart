@@ -16,7 +16,8 @@ class CheckBrowserBloc extends Bloc<CheckBrowserEvent, CheckBrowserState> {
         var userAgent = js.context['navigator']['userAgent'];
         bool isLineBrowser = userAgent.contains('Line');
         if (!liff.isInClient && !isLineBrowser) {
-          emit(BrowserIsNotLineLiff());
+          // emit(BrowserIsNotLineLiff());
+          emit(BrowserIsLineLiff());
         } else {
           emit(BrowserIsLineLiff());
         }

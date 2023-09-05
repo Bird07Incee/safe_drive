@@ -1,9 +1,11 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
@@ -61,6 +63,15 @@ class _RootPageState extends State<RootPage> {
     // TODO: implement initState
     super.initState();
     context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
+    initConnectivity();
+    Connectivity().onConnectivityChanged.listen((result) {
+      context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: result));
+    });
+  }
+
+  Future<void> initConnectivity() async {
+    await Connectivity().checkConnectivity().then(
+        (value) => context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: value)));
   }
 
   @override
