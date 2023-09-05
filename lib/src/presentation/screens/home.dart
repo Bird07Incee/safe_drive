@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
@@ -79,9 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        AlvaText(
-                          title: 'ข้อกำหนดและเงื่อนไข',
-                          textStyle: AlvaStyles().headingSize10(),
+                        GestureDetector(
+                          onTap: () {
+                            window.location.assign("https://sandbox-pgw-ui.2c2p.com/payment/4.1/#/token/kSAops9Zwhos8hSTSeLTUdDbThZyD5RcM4qT2PtN1J9f85yRNXAMp2CA1P6L7qaEcval5%2fxK30OHXGWNIbZtCTh4LHI4kbWmPAfzcZyIzxczFBG4TvVmOCcr2cHpZnFd");
+                          },
+                          child: AlvaText(
+                            title: 'ข้อกำหนดและเงื่อนไข',
+                            textStyle: AlvaStyles().headingSize10(),
+                          ),
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 8),
