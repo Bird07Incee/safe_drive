@@ -34,10 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // TODO: implement initState
-    final checkBrowserState = context.read<CheckBrowserBloc>().state;
-    if (checkBrowserState is BrowserIsLineLiff) {
-      context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
-    }
+
+    // final checkBrowserState = context.read<CheckBrowserBloc>().state;
+    // if (checkBrowserState is BrowserIsLineLiff) {
+    //   context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+    // }
+
+    context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+
     // Future.delayed(const Duration(seconds: 0)).then((_) {
     //   webCookiePolicyBTS();
     // });
