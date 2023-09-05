@@ -18,10 +18,15 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
         if (!liff.isLoggedIn) {
           liff.login();
         } else {
+          print("termandcon value ${termAndConHelper.isTermAndConAccepted().toString()}");
           if (termAndConHelper.isTermAndConAccepted()) {
+            print("term and con already accept");
+            loadOneTrustCookieScript();
+          } else {
+            print("term and con not accept");
             await Navigator.pushNamed(event.context, "termAndCon");
+            loadOneTrustCookieScript();
           }
-          loadOneTrustCookieScript();
         }
       });
 
