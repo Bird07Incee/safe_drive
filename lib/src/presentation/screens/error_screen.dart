@@ -23,7 +23,7 @@ class ErrorScreen extends StatelessWidget {
     return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(
       builder: (context, state) {
         return AlvaRootWidget(
-            titlePage: "Error",
+            titlePage: "Marketplace LINE OA mini",
             child: Container(
               color: Colors.white,
               height: maxHeight,

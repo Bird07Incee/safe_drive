@@ -34,7 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // TODO: implement initState
-    context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+    final checkBrowserState = context.read<CheckBrowserBloc>().state;
+    if (checkBrowserState is BrowserIsLineLiff) {
+      context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+    }
     // Future.delayed(const Duration(seconds: 0)).then((_) {
     //   webCookiePolicyBTS();
     // });
@@ -45,9 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
     var maxWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(
       builder: (context, checkBrowserState) {
-        if (checkBrowserState is CheckBrowserLoading == true) {
+        if (checkBrowserState is CheckBrowserLoading) {
           return const LoadingScreen();
-        } else if (checkBrowserState is BrowserIsLineLiff == true) {
+        } else if (checkBrowserState is BrowserIsLineLiff) {
           return AlvaRootWidget(
               titlePage: "HomeScreen",
               child: Container(
