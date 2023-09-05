@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            window.location.assign("https://sandbox-pgw-ui.2c2p.com/payment/4.1/#/token/kSAops9Zwhos8hSTSeLTUdDbThZyD5RcM4qT2PtN1J9f85yRNXAMp2CA1P6L7qaEcval5%2fxK30OHXGWNIbZtCTh4LHI4kbWmPAfzcZyIzxczFBG4TvVmOCcr2cHpZnFd");
+                            window.location.assign("https://sandbox-pgw-ui.2c2p.com/payment/4.1/#/token/kSAops9Zwhos8hSTSeLTUcp7apFvO3Sxaj6ugSoUgMu[…]im9OmovvbjsmrRKV0l8GTeDONlZ5SeGAX7j59D3243yVCsg%2f");
                           },
                           child: AlvaText(
                             title: 'ข้อกำหนดและเงื่อนไข',
