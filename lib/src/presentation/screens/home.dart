@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_banner.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
@@ -40,98 +43,107 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
-
-    return RootWidget(
-        titlePage: "HomeScreen",
-        child: Container(
-          color: const Color(0xffF3F3F3),
-          child: ListView(
-            children: [
-              HomepageTopSection(maxWidth: maxWidth),
-              HomePageBanner(maxWidth: maxWidth),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: maxWidth - 32,
-                    child: ProductCardWidget(maxWidth: maxWidth),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    color: Color(0xffE2DFDF),
-                    height: 32,
-                    child: Row(
+    return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(
+      builder: (context, checkBrowserState) {
+        if (checkBrowserState is CheckBrowserLoading == true) {
+          return const LoadingScreen();
+        } else if (checkBrowserState is BrowserIsLineLiff == true) {
+          return AlvaRootWidget(
+              titlePage: "HomeScreen",
+              child: Container(
+                color: const Color(0xffF3F3F3),
+                child: ListView(
+                  children: [
+                    HomepageTopSection(maxWidth: maxWidth),
+                    HomePageBanner(maxWidth: maxWidth),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        AlvaText(
-                          title: 'ข้อกำหนดและเงื่อนไข',
-                          textStyle: AlvaStyles().headingSize10(),
+                        SizedBox(
+                          width: maxWidth - 32,
+                          child: ProductCardWidget(maxWidth: maxWidth),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          color: Color(0xffE2DFDF),
+                          height: 32,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              AlvaText(
+                                title: 'ข้อกำหนดและเงื่อนไข',
+                                textStyle: AlvaStyles().headingSize10(),
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 8),
+                                width: 1,
+                                height: 16,
+                                color: Color(0xffDEDEDE),
+                              ),
+                              AlvaText(
+                                title: 'นโยบายความเป็นส่วนตัว',
+                                textStyle: AlvaStyles().headingSize10(),
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 8),
-                          width: 1,
-                          height: 16,
-                          color: Color(0xffDEDEDE),
+                          color: Color(0xffE2DFDF),
+                          height: 72,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AlvaText(
+                                    title: 'สอบถามข้อมูลอื่นๆ เกี่ยวกับสินค้า หรือ ติดตามสถานะการจัดส่งสินค้า',
+                                    textStyle: AlvaStyles().headingSize10(),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AlvaText(
+                                    title: 'กรุณาติดต่อ  081-123-4567',
+                                    textStyle: AlvaStyles().headingSize12w700(Color(0xff6F5F5E)),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                        AlvaText(
-                          title: 'นโยบายความเป็นส่วนตัว',
-                          textStyle: AlvaStyles().headingSize10(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Color(0xffE2DFDF),
-                    height: 72,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AlvaText(
-                              title: 'สอบถามข้อมูลอื่นๆ เกี่ยวกับสินค้า หรือ ติดตามสถานะการจัดส่งสินค้า',
-                              textStyle: AlvaStyles().headingSize10(),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AlvaText(
-                              title: 'กรุณาติดต่อ  081-123-4567',
-                              textStyle: AlvaStyles().headingSize12w700(Color(0xff6F5F5E)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Color(0xff5A5A5A),
-                    height: 40,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        AlvaText(
-                          title: 'ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา',
-                          textStyle: AlvaStyles().headingSize10w400(Color(0xffFAFCFF)),
+                        Container(
+                          color: Color(0xff5A5A5A),
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              AlvaText(
+                                title: 'ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา',
+                                textStyle: AlvaStyles().headingSize10w400(Color(0xffFAFCFF)),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ));
+                  ],
+                ),
+              ));
+        } else {
+          return const ErrorScreen();
+        }
+      },
+    );
   }
 }

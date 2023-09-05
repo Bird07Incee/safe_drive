@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RootWidget extends StatelessWidget {
+class AlvaRootWidget extends StatelessWidget {
   final Widget child;
   final String titlePage;
 
-  const RootWidget({super.key, required this.child, required this.titlePage});
+  const AlvaRootWidget({super.key, required this.child, required this.titlePage});
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
@@ -40,17 +41,40 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: blocs,
-      child: MaterialApp(
-        title: 'Marketplace LINE OA mini',
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.system,
-        initialRoute: "/",
-        routes: routes,
-        theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 172, 204, 229),
-          scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
-        ),
+      child: const RootPage(),
+    );
+  }
+}
+
+class RootPage extends StatefulWidget {
+  const RootPage({
+    super.key,
+  });
+
+  @override
+  State<RootPage> createState() => _RootPageState();
+}
+
+class _RootPageState extends State<RootPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Marketplace LINE OA mini',
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      initialRoute: "/",
+      routes: routes,
+      theme: ThemeData(
+        primaryColor: const Color.fromARGB(255, 172, 204, 229),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
       ),
     );
   }

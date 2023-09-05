@@ -221,7 +221,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           ),
                           AlvaText(
                             title: 'เล็ก ทรงพลัง',
-                            textStyle: AlvaStyles().headingSize16w600(),
+                            textStyle: AlvaStyles().headingSize16w600(Color(0xff2C2626)),
                           ),
                           const SizedBox(
                             height: 16,

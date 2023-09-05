@@ -15,9 +15,7 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
   AuthBloc() : super(UserAuthInitial()) {
     on<UserAuthEventLogin>((event, emit) async {
       await liff.ready.then((_) async {
-        print('Line Ready');
         if (!liff.isLoggedIn) {
-          print('login liff');
           liff.login();
         } else {
           if (termAndConHelper.isTermAndConAccepted()) {

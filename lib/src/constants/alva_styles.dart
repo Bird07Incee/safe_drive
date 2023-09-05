@@ -34,11 +34,8 @@ class AlvaStyles {
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle headingSize16w600() => const TextStyle(
-        fontFamily: "Krungsri Condensed",
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-      );
+  TextStyle headingSize16w600(Color color) =>
+      TextStyle(fontFamily: "Krungsri Condensed", fontSize: 16, fontWeight: FontWeight.w600, color: color);
 
   TextStyle headingSize12w700(Color color) =>
       TextStyle(fontFamily: "Krungsri Condensed", fontSize: 12, fontWeight: FontWeight.bold, color: color);
@@ -53,6 +50,7 @@ class AlvaStyles {
           borderRadius: BorderRadius.circular(borderRadius),
         )),
       );
+
   ButtonStyle outlineNoneBorderButtonStyle(Color backgroundColor, Color foregroundColor) => OutlinedButton.styleFrom(
         side: BorderSide.none,
         backgroundColor: backgroundColor,
