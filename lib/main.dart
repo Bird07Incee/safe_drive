@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
@@ -12,11 +13,13 @@ import 'package:marketplace_line_oa/src/routes/routes.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   _loadENV();
+  LineDataHelper lineDataHelper = LineDataHelper();
 
   if (Uri.base.queryParameters.isNotEmpty) {
     print("params:");
     Uri.base.queryParameters.forEach((key, value) {
       print("$key=$value");
+      lineDataHelper.lineDataGrabber(key, value);
     });
   }
 

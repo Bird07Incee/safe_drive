@@ -19,4 +19,8 @@ class TermAndConHelper {
   void setTermAndConToAccept() {
     localStorage.addAll({"termAndConAccepted": "true"});
   }
+
+  void removeTermAndconAccepted() {
+    localStorage.remove("termAndConAccepted");
+  }
 }
