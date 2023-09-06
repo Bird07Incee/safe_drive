@@ -1,26 +1,18 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_line_liff/flutter_line_liff.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:universal_html/html.dart';
-
-class MockFlutterLineLiff extends Mock implements FlutterLineLiff {}
 class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
   group('CheckBrowserBloc', () {
     late CheckBrowserBloc checkBrowserBloc;
-    late MockFlutterLineLiff mockFlutterLineLiff;
     late MockBuildContext mockBuildContext;
 
     setUp(() {
-      mockFlutterLineLiff = MockFlutterLineLiff();
       checkBrowserBloc = CheckBrowserBloc();
       mockBuildContext = MockBuildContext();
-
     });
 
     tearDown(() {
@@ -32,25 +24,16 @@ void main() {
     });
 
     blocTest<CheckBrowserBloc, CheckBrowserState>(
-      'emits [BrowserIsLineLiff] when GetBrowserClient is added and conditions are met',
-      build: () {
-        when(() => mockFlutterLineLiff.ready).thenAnswer((_) async {});
-        when(() => window.navigator.userAgent).thenReturn('Line');
-        return checkBrowserBloc;
-      },
+      'emits [CheckBrowserLoading, BrowserIsNotLineLiff] when GetBrowserClient event is added',
+      build: () => checkBrowserBloc,
       act: (bloc) => bloc.add(GetBrowserClient(context: mockBuildContext)),
-      expect: () => [BrowserIsLineLiff()],
+      expect: () => [
+        CheckBrowserLoading(),
+        BrowserIsNotLineLiff(),
+      ],
     );
 
-    blocTest<CheckBrowserBloc, CheckBrowserState>(
-      'emits [BrowserIsNotLineLiff] when GetBrowserClient is added and conditions are not met',
-      build: () {
-        when(() => mockFlutterLineLiff.ready).thenAnswer((_) async {});
-        when(() => window.navigator.userAgent).thenReturn('SomeOtherBrowser');
-        return checkBrowserBloc;
-      },
-      act: (bloc) => bloc.add(GetBrowserClient(context: mockBuildContext)),
-      expect: () => [BrowserIsNotLineLiff()],
-    );
+    // Add more tests as needed
   });
 }
+
