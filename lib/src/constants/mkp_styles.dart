@@ -15,3 +15,24 @@ const BG_COLOR1 = Color(0xffF1F2F3);
 const BG_COLOR2 = Color(0xffEFF1F3);
 
 const BTN_SELECTED_TEXT_COLOR_NEW = Color(0xFF2C2626);
+
+const whitePure = Color(0xffffffff);
+const blackInBlack = Color(0xff000000);
+
+const smockGrey = Color(0xffbdbdbd);
+
+const sugarRed = Color(0xff6F5F5E);
+
+const spaceGrey = Color(0xff5A5A5A);
+
+const spaceGrey123 = Color(0xff7b7b7b);
+
+const whiteFalse = Color(0xffFAFCFF);
+
+const cloudyWhite = Color(0xffF3F3F3);
+
+const cloudDeepWhite = Color(0xffE2DFDF);
+
+const cloudSoftDeepWhite = Color(0xffDEDEDE);
+
+const whiteSoftGreen = Color(0xffE8F7EE);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
 class CookieAcceptUI extends StatelessWidget {
@@ -14,11 +15,11 @@ class CookieAcceptUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 280,
-        color: Color(0xffffffff),
+        color: whitePure,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: maxWidth - 32,
               child: Column(
                 children: [
@@ -32,11 +33,11 @@ class CookieAcceptUI extends StatelessWidget {
                           " ยินยอมให้ กรุงศรี ออโต้ บันทึก และใช้คุกกี้จากอุปกรณ์ที่ท่านใช้"
                           "ในการเข้าใช้งานเว็บไซต์ กรุงศรี ออโต้",
                       textStyle: AlvaStyles().headingSize12w400(
-                        const Color(0xff2C2626),
+                        BTN_SELECTED_TEXT_COLOR_NEW,
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: maxWidth - 32,
                     height: 40,
                     child: OutlinedButton(
@@ -44,8 +45,9 @@ class CookieAcceptUI extends StatelessWidget {
                         Navigator.pop(context);
                         // Navigator.pushNamed(context, "cookieSetting");
                       },
-                      style: AlvaStyles().outlineButtonStyle(Colors.transparent, Color(0xff6F5F5E), 0),
-                      child: AlvaText(title: "การตั้งค่าคุกกี้", textStyle: AlvaStyles().heading2(Color(0xff2C2626))),
+                      style: AlvaStyles().outlineButtonStyle(Colors.transparent, sugarRed, 0),
+                      child: AlvaText(
+                          title: "การตั้งค่าคุกกี้", textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                     ),
                   ),
                   const SizedBox(
@@ -58,8 +60,8 @@ class CookieAcceptUI extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: AlvaText(title: "ยอมรับ", textStyle: AlvaStyles().heading2(Color(0xff2C2626))),
                       style: AlvaStyles().outlineNoneBorderButtonStyle(Color(0xffFFD400), Colors.transparent),
+                      child: AlvaText(title: "ยอมรับ", textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                     ),
                   ),
                 ],

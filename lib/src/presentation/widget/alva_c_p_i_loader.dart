@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 
 class AlvaCPILoader extends StatefulWidget {
   // circular progress indicator
@@ -27,7 +28,7 @@ class _AlvaCPILoaderState extends State<AlvaCPILoader> with SingleTickerProvider
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      child: Image.asset('assets/images/icon_loading.png', width: 64, height: 64),
+      child: Image.asset(LoaderConst().iconLoading, width: 64, height: 64),
       builder: (BuildContext context, Widget? child) => Transform.rotate(
         angle: _controller.value * 6.3,
         child: child,

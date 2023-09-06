@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
@@ -16,33 +18,37 @@ class ErrorScreen extends StatelessWidget {
     var maxHeight = MediaQuery.of(context).size.height;
 
     return AlvaRootWidget(
-        titlePage: "Marketplace LINE OA mini",
+        titlePage: titleWebPage,
         child: Container(
-          color: Colors.white,
+          color: whitePure,
           height: maxHeight,
           width: maxWidth,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 256,
+                height: 356,
                 width: maxWidth - 30,
                 child: Column(
-                  // crossAxisAlignment: ,
                   children: [
-                    Image.asset(
-                      "assets/images/warning.png",
-                      width: 96,
-                      height: 96,
+                    // Image.asset(
+                    //   ErrorConst().imagePath,
+                    //   width: 96,
+                    //   height: 96,
+                    // ),
+                    const Icon(
+                      Icons.warning_amber_rounded,
+                      color: cloudSoftDeepWhite,
+                      size: 125,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    AlvaText(title: title!, textStyle: AlvaStyles().headingSize16w600(const Color(0xff2C2626))),
+                    AlvaText(title: title!, textStyle: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
                     const SizedBox(
                       height: 8,
                     ),
-                    AlvaText(title: subTitle!, textStyle: AlvaStyles().headingSize12w400(const Color(0xff2C2626))),
+                    AlvaText(title: subTitle!, textStyle: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
                     const SizedBox(
                       height: 32,
                     ),
@@ -53,8 +59,9 @@ class ErrorScreen extends StatelessWidget {
                         onPressed: () {
                           onTap!();
                         },
-                        style: AlvaStyles().outlineButtonStyle(Colors.transparent, const Color(0xff6F5F5E), 8),
-                        child: AlvaText(title: titleBtn!, textStyle: AlvaStyles().heading2(const Color(0xff2C2626))),
+                        style: AlvaStyles().outlineButtonStyle(Colors.transparent, sugarRed, 8),
+                        child:
+                            AlvaText(title: titleBtn!, textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                       ),
                     ),
                   ],

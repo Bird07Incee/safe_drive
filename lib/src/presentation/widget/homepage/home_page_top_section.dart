@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
 class HomepageTopSection extends StatelessWidget {
@@ -22,7 +23,7 @@ class HomepageTopSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                "assets/homepage/krungsri-auto-logo-2.20f3516 1.png",
+                HomeConst().imageTopSecPath,
                 width: 86,
                 height: 40,
               ),
@@ -30,7 +31,7 @@ class HomepageTopSection extends StatelessWidget {
                 height: 16,
               ),
               AlvaText(
-                title: 'วอลชาร์จรถไฟฟ้า',
+                title: HomeConst().titleTopSec,
                 textStyle: AlvaStyles().heading1(),
               )
             ],

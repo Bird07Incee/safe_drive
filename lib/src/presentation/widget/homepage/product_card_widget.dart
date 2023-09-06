@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -36,7 +37,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
           return Container(
             margin: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: whitePure,
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
@@ -44,7 +45,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   bottomRight: Radius.circular(12)),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xffFFFFFF).withOpacity(0.5),
+                  color: whitePure.withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 8,
                   offset: const Offset(0, 2), // changes position of shadow
@@ -105,12 +106,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         height: 24,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: const Color(0xffF3F3F3).withOpacity(0.5),
+                          color: cloudyWhite.withOpacity(0.5),
                         ),
                         child: Center(
                           child: Text(
                             "${indicator[index]}/ 5",
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: whitePure),
                           ),
                         ),
                       ),
@@ -128,7 +129,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   ],
                 ),
                 Container(
-                  color: Colors.white,
+                  color: whitePure,
                   width: widget.maxWidth,
                   padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
                   child: Row(
@@ -143,8 +144,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               expansionFactor: 2,
                               dotHeight: 6,
                               dotWidth: 6,
-                              activeDotColor: Color(0xff7b7b7b),
-                              dotColor: Color(0xffdedede),
+                              activeDotColor: spaceGrey123,
+                              dotColor: cloudSoftDeepWhite,
                             )),
                       ),
                     ],
@@ -166,8 +167,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             children: [
                               Container(
                                 margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xffE8F7EE), borderRadius: BorderRadius.circular(4)),
+                                decoration:
+                                    BoxDecoration(color: whiteSoftGreen, borderRadius: BorderRadius.circular(4)),
                                 child: Container(
                                   margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                                   child: AlvaText(
@@ -179,7 +180,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               Container(
                                 width: 1,
                                 height: 16,
-                                color: Color(0xffDEDEDE),
+                                color: cloudSoftDeepWhite,
                               ),
                               Container(
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
@@ -194,7 +195,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               Container(
                                 width: 1,
                                 height: 16,
-                                color: Color(0xffDEDEDE),
+                                color: cloudSoftDeepWhite,
                               ),
                               Container(
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
@@ -214,14 +215,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           Container(
                             width: widget.maxWidth - 64,
                             height: 1,
-                            color: Color(0xffDEDEDE),
+                            color: cloudSoftDeepWhite,
                           ),
                           const SizedBox(
                             height: 16,
                           ),
                           AlvaText(
                             title: 'เล็ก ทรงพลัง',
-                            textStyle: AlvaStyles().headingSize16w600(Color(0xff2C2626)),
+                            textStyle: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW),
                           ),
                           const SizedBox(
                             height: 16,
@@ -229,7 +230,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           AlvaText(
                             title:
                                 'เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application',
-                            textStyle: AlvaStyles().headingSize10w400(Color(0xff000000)),
+                            textStyle: AlvaStyles().headingSize10w400(blackInBlack),
                           ),
                           const SizedBox(
                             height: 32,
