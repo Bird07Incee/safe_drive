@@ -12,14 +12,14 @@ import 'package:marketplace_line_oa/src/routes/routes.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   _loadENV();
-  FlutterLineLiff().init(
-      config: Config(liffId: '1661164508-Kn9nO7oB'),
-      successCallback: () {
-        print('successCallback');
-      },
-      errorCallback: (error) {
-        print('init error: ${error.name}, ${error.message}, ${error.stack}');
-      });
+  // FlutterLineLiff().init(
+  //     config: Config(liffId: '1661164508-Kn9nO7oB'),
+  //     successCallback: () {
+  //       print('successCallback');
+  //     },
+  //     errorCallback: (error) {
+  //       print('init error: ${error.name}, ${error.message}, ${error.stack}');
+  //     });
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -80,8 +80,9 @@ class _RootPageState extends State<RootPage> {
       title: 'Marketplace LINE OA mini',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      initialRoute: "/",
-      routes: routes,
+      // initialRoute: "/",
+      // routes: routes,
+      onGenerateRoute: (settings) => generateRoute(settings),
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 172, 204, 229),
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
