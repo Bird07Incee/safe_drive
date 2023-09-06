@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
+import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 class TermAndConScreen extends StatefulWidget {
   const TermAndConScreen({super.key});
@@ -14,6 +18,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   final _controller = ScrollController();
   bool scrollFinished = false;
   TermAndConHelper termAndConHelper = TermAndConHelper();
+  DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
+  LineDataHelper lineDataHelper = LineDataHelper();
 
   @override
   void initState() {
@@ -199,10 +205,18 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       width: 8,
                     ),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (scrollFinished) {
                           print("accept click");
                           termAndConHelper.setTermAndConToAccept();
+
+                          String code = lineDataHelper.getLineCode();
+                          Response response = await dioUtilityRepository.postByURL(
+                              "https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"code": code});
+                          if (response.statusCode == 200) {
+                            lineDataHelper.saveSocialDataToLocalStorage(response.data);
+                          }
+
                           Navigator.of(context).pop();
                         }
                       },

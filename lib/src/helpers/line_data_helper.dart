@@ -23,6 +23,18 @@ class LineDataHelper {
     }
   }
 
+  String getLineCode() {
+    String code = "";
+
+    localStorage.forEach((key, value) {
+      if (key == "code" && value.isNotEmpty) {
+        code = value;
+      }
+    });
+
+    return code;
+  }
+
   bool isLineCodeExist() {
     bool exist = false;
 
@@ -33,5 +45,9 @@ class LineDataHelper {
     });
 
     return exist;
+  }
+
+  void saveSocialDataToLocalStorage(dynamic data) {
+    localStorage.addAll({"socialData": data});
   }
 }

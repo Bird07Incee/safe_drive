@@ -1,3 +1,1 @@
-class HeaderUtil {
-  
-}
+class HeaderUtil {}

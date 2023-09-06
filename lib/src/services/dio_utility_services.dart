@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
-class DioUtilityService with HeaderUtil{
-  DioUtilityService({Dio? dio})
-      : _dioClient = dio ?? Dio();
+class DioUtilityService with HeaderUtil {
+  DioUtilityService({Dio? dio}) : _dioClient = dio ?? Dio();
   final Dio _dioClient;
 
   Future<Response> getByURL(String path, Map<String, Object> params, {bool isRecursion = false}) async {

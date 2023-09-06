@@ -2,9 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 class DioUtilityRepository {
-  const DioUtilityRepository ({
-    required this.service
-  });
+  const DioUtilityRepository({required this.service});
   final DioUtilityService service;
 
   Future<Response> getByURL(path, params) async => service.getByURL(path, params);
