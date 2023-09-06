@@ -153,10 +153,10 @@ help__unit_test="Run a unit test"
 task_unit_test() {
   if runs_inside_gocd; then
     flutter_app flutter pub get
-    flutter_app flutter test test/unit_test
+    flutter_app flutter test test/bloc/*.dart
   else
     flutter pub get
-    flutter test test/unit_test
+    flutter test test/bloc/*.dart
   fi
 }
 
