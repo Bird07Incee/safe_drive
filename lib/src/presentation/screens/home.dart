@@ -44,10 +44,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // TODO: implement initState
-    final checkBrowserState = context.read<CheckBrowserBloc>().state;
-    if (checkBrowserState is BrowserIsLineLiff) {
-      context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
-    }
+    // final checkBrowserState = context.read<CheckBrowserBloc>().state;
+// -------------------------bypass-------------------------------------------------------
+    // if (checkBrowserState is BrowserIsLineLiff) {
+    //   context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+    // }
+// -------------------------bypass-------------------------------------------------------
+    context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
 
     // Future.delayed(const Duration(seconds: 0)).then((_) {
     //   webCookiePolicyBTS();
@@ -67,6 +70,99 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {},
           );
         } else {
+          return AlvaRootWidget(
+              titlePage: titleWebPage,
+              child: Container(
+                color: cloudyWhite,
+                child: ListView(
+                  children: [
+                    HomepageTopSection(maxWidth: maxWidth),
+                    HomePageBanner(maxWidth: maxWidth),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: maxWidth - 32,
+                          child: ProductCardWidget(maxWidth: maxWidth),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          color: cloudDeepWhite,
+                          height: 32,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              AlvaText(
+                                title: HomeConst().termsAndConditions,
+                                textStyle: AlvaStyles().headingSize10(),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 8),
+                                width: 1,
+                                height: 16,
+                                color: cloudSoftDeepWhite,
+                              ),
+                              AlvaText(
+                                title: HomeConst().privacyPolicy,
+                                textStyle: AlvaStyles().headingSize10(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          color: cloudDeepWhite,
+                          height: 72,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AlvaText(
+                                    title: HomeConst().askInformation,
+                                    textStyle: AlvaStyles().headingSize10(),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AlvaText(
+                                    title: HomeConst().pleaseContact,
+                                    textStyle: AlvaStyles().headingSize12w700(sugarRed),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          color: spaceGrey,
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              AlvaText(
+                                title: HomeConst().warningWord,
+                                textStyle: AlvaStyles().headingSize10w400(whiteFalse),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ));
+          // -------------------------bypass-------------------------------------------------------
           return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(
             builder: (context, checkBrowserState) {
               if (checkBrowserState is CheckBrowserLoading) {
@@ -176,6 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
           );
+          // -------------------------bypass-------------------------------------------------------
         }
       },
     );
