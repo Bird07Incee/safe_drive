@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // if (checkBrowserState is BrowserIsLineLiff) {
     //   context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
     // }
-    // context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+    context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
     // Future.delayed(const Duration(seconds: 0)).then((_) {
     //   webCookiePolicyBTS();
     // });
@@ -84,14 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, "auth");
-                          },
-                          child: AlvaText(
-                            title: 'ข้อกำหนดและเงื่อนไข',
-                            textStyle: AlvaStyles().headingSize10(),
-                          ),
+                        AlvaText(
+                          title: 'ข้อกำหนดและเงื่อนไข',
+                          textStyle: AlvaStyles().headingSize10(),
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 8),
