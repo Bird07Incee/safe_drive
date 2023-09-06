@@ -45,7 +45,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   String liffClientId = "empty";
   Uri liffRedirectUri = Uri();
 
-  if (routingData?.route == "auth") {
+  if (routingData?.route == "/auths") {
     code = (routingData?["code"] == null) ? "" : routingData?["code"];
     state = (routingData?["state"] == null) ? "" : routingData?["state"];
     liffClientId = (routingData?["liffClientId"] == null) ? "" : routingData?["liffClientId"];
