@@ -6,17 +6,10 @@ class LineDataHelper {
 
   void lineDataGrabber(String key, String value) {
     switch (key) {
-      case "code":
-        localStorage.addAll({"code": value});
-        break;
-      case "state":
-        localStorage.addAll({"state": value});
-        break;
-      case "liffClientId":
-        localStorage.addAll({"liffClientId": value});
-        break;
-      case "liffRedirectUri":
-        localStorage.addAll({"liffRedirectUri": value});
+      case "liff.state":
+        String code = value.split("&")[0].replaceAll("?code=", "");
+
+        localStorage.addAll({"code": code});
         break;
       default:
         break;
