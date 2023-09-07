@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,15 +13,26 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
   final liff = FlutterLineLiff();
+  bool isLogin = false;
   TermAndConHelper termAndConHelper = TermAndConHelper();
 
   AuthBloc() : super(UserAuthInitial()) {
     on<UserAuthEventLogin>((event, emit) async {
       await liff.ready.then((_) async {
-        if (!liff.isLoggedIn) {
+        // waiting for change
+
+        Storage localStorage = window.localStorage;
+        localStorage.forEach((key, value) {
+          if (key == "LineLogin") {
+            isLogin = true;
+          }
+        });
+
+        if (!isLogin) {
           // liff.login();
           const url =
               'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz';
+
           if (await canLaunch(url)) {
             await launch(url);
           }

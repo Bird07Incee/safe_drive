@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +23,10 @@ void main() {
       print("$key=$value");
       lineDataHelper.lineDataGrabber(key, value);
     });
+
+    // waiting for change
+    Storage localStorage = window.localStorage;
+    localStorage.addAll({"LineLogin": 'true'});
   }
 
   FlutterLineLiff().init(
@@ -76,13 +82,16 @@ class _RootPageState extends State<RootPage> {
     context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
     initConnectivity();
     Connectivity().onConnectivityChanged.listen((result) {
-      context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: result));
+      context
+          .read<ConnectivityStatusBloc>()
+          .add(ConnectivityStatusEvent(connectivityResult: result));
     });
   }
 
   Future<void> initConnectivity() async {
-    await Connectivity().checkConnectivity().then(
-        (value) => context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: value)));
+    await Connectivity().checkConnectivity().then((value) => context
+        .read<ConnectivityStatusBloc>()
+        .add(ConnectivityStatusEvent(connectivityResult: value)));
   }
 
   @override
@@ -97,7 +106,8 @@ class _RootPageState extends State<RootPage> {
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 172, 204, 229),
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
+        appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
       ),
     );
   }
