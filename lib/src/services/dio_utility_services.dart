@@ -6,6 +6,8 @@ class DioUtilityService with HeaderUtil {
   final Dio _dioClient;
 
   Future<Response> getByURL(String path, Map<String, Object> params, {bool isRecursion = false}) async {
+    _dioClient.options.headers["Access-Control-Allow-Origin"] = "*";
+
     try {
       final response = await _dioClient.get(
         path,
@@ -31,6 +33,8 @@ class DioUtilityService with HeaderUtil {
   }
 
   Future<Response> postByURL(String path, Map<String, Object?> body, {bool isRecursion = false}) async {
+    _dioClient.options.headers["Access-Control-Allow-Origin"] = "*";
+
     try {
       final response = await _dioClient.post(
         path,
