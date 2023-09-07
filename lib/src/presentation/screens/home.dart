@@ -9,6 +9,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_b
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_banner.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
@@ -41,6 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!await launchUrl(deepLink)) {
       throw Exception('Could not launch $deepLink');
     }
+  }
+
+  showLoading(BuildContext context) {
+    GeneralDialog().showLoadingDialog(context: context);
+    Future.delayed(const Duration(seconds: 10)).then((value) => Navigator.pop(context));
   }
 
   @override
@@ -80,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   children: [
                     HomepageTopSection(maxWidth: maxWidth),
-                    HomePageBanner(maxWidth: maxWidth),
+                    GestureDetector(onTap: () => showLoading(context), child: HomePageBanner(maxWidth: maxWidth)),
                     const SizedBox(
                       height: 8,
                     ),

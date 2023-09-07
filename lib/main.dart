@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
@@ -42,6 +43,7 @@ void main() {
     DeviceOrientation.portraitDown,
   ]).then((_) async {
     // configureApp();
+    usePathUrlStrategy();
     runApp(const MyApp());
   });
 }
