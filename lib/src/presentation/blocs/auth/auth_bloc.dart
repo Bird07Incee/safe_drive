@@ -31,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
         if (!isLogin) {
           // liff.login();
           const url =
-              'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz';
+              'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fdev-app.marketplace.ksauto.net%2F&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz';
           if (await canLaunch(url)) {
             window.open(url, '_self');
           } else {
