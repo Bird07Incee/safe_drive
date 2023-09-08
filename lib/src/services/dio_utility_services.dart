@@ -5,9 +5,8 @@ class DioUtilityService with HeaderUtil {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? Dio();
   final Dio _dioClient;
 
-  Future<Response> getByURL(String path, Map<String, Object> params,
-      {bool isRecursion = false}) async {
-    _dioClient.options.headers["Access-Control-Allow-Origin"] = "*";
+  Future<Response> getByURL(String path, Map<String, Object> params, {bool isRecursion = false}) async {
+    _dioClient.options.headers = HeaderUtil.baseHeader;
 
     try {
       final response = await _dioClient.get(
@@ -21,8 +20,7 @@ class DioUtilityService with HeaderUtil {
           throw Exception("Getting path \"$path\" error");
         }
       } else {
-        throw Exception(
-            "Getting service error with response ${response.statusCode}");
+        throw Exception("Getting service error with response ${response.statusCode}");
       }
     } on DioError catch (e) {
       if (e.error != null) {
@@ -34,11 +32,8 @@ class DioUtilityService with HeaderUtil {
     }
   }
 
-  Future<Response> postByURL(String path, Map<String, Object?> body,
-      {bool isRecursion = false}) async {
-    _dioClient.options.headers["Access-Control-Allow-Origin"] = "*";
-    _dioClient.options.headers["Access-Control-Allow-Methods"] =
-        "POST, GET, OPTIONS, PUT, DELETE, HEAD";
+  Future<Response> postByURL(String path, Map<String, Object?> body, {bool isRecursion = false}) async {
+    _dioClient.options.headers = HeaderUtil.baseHeader;
 
     try {
       final response = await _dioClient.post(
@@ -52,8 +47,7 @@ class DioUtilityService with HeaderUtil {
           throw Exception("Posting path \"$path\" error");
         }
       } else {
-        throw Exception(
-            "Posting service error with response ${response.statusCode}");
+        throw Exception("Posting service error with response ${response.statusCode}");
       }
     } on DioError catch (e) {
       if (e.error != null) {

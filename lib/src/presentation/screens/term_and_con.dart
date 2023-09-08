@@ -208,13 +208,13 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       onTap: () async {
                         if (scrollFinished) {
                           print("accept click");
-                          termAndConHelper.setTermAndConToAccept();
-
                           String code = lineDataHelper.getLineCode();
+
                           Response response = await dioUtilityRepository.postByURL(
                               "https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"code": code});
                           if (response.statusCode == 200) {
                             lineDataHelper.saveSocialDataToLocalStorage(response.data);
+                            termAndConHelper.setTermAndConToAccept();
                           }
 
                           Navigator.of(context).pop();

@@ -14,10 +14,7 @@ class GeneralDialog {
   final OnTap? onAccept;
 
   showLoadingDialog({Key? key, required BuildContext context}) {
-    return _showGeneralLoading(
-      context,
-      key: key ?? const Key("loading")
-    );
+    return _showGeneralLoading(context, key: key ?? const Key("loading"));
   }
 
   showNoContentAlert({Key? key, required BuildContext context, double? padding}) {
@@ -44,8 +41,7 @@ class GeneralDialog {
           children: [
             AlvaCPILoader(),
           ],
-        )
-    );
+        ));
 
     return showDialog<void>(
       context: context,
@@ -55,9 +51,7 @@ class GeneralDialog {
   }
 
   _showGeneralAlert(BuildContext context, Widget body,
-      {Key? key,
-        EdgeInsetsGeometry? contentPadding,
-        EdgeInsetsGeometry? actionPadding}) {
+      {Key? key, EdgeInsetsGeometry? contentPadding, EdgeInsetsGeometry? actionPadding}) {
     Widget acceptButton = TextButton(
       child: AlvaText(
         title: acceptButtonTH,
