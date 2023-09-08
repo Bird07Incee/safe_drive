@@ -215,9 +215,10 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           if (response.statusCode == 200) {
                             lineDataHelper.saveSocialDataToLocalStorage(response.data);
                             termAndConHelper.setTermAndConToAccept();
-                          }
 
-                          Navigator.of(context).pop();
+                            if (!mounted) return;
+                            Navigator.of(context).pop();
+                          }
                         }
                       },
                       child: Container(
