@@ -23,14 +23,15 @@ void main() {
     DeviceOrientation.portraitDown,
   ]).then((_) async {
     usePathUrlStrategy();
-    await DatadogSdk.runApp(configuration, () async {
-      runApp(const MyApp());
-    });
+    runApp(const MyApp());
+    // await DatadogSdk.runApp(configuration, () async {
+    //   runApp(const MyApp());
+    // });
   });
 }
 
 _configureApp() {
-  _setUpDatadog(); //get ENV also implemented here.
+  //_setUpDatadog(); //get ENV also implemented here.
   _setUpLineLIFF();
 }
 
@@ -127,9 +128,9 @@ class _RootPageState extends State<RootPage> {
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
       ),
-      navigatorObservers: [
-        DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
-      ],
+      // navigatorObservers: [
+      //   DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+      // ],
     );
   }
 }
