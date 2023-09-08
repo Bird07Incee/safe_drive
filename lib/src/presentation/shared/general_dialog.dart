@@ -36,7 +36,7 @@ class GeneralDialog {
   }
 
   _showGeneralLoading(BuildContext context, {Key? key}) {
-    Widget loading = const SizedBox(
+    Widget loading = SizedBox(
         width: 64.0,
         height: 64.0,
         child: Row(
