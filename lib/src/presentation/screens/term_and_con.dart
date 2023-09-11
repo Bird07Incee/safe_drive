@@ -213,6 +213,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                               "https://api.marketplace.ksauto.net/mercury-social-dev/line/token",
                               {"code": lineDataHelper.getLineCode()});
                           if (response.statusCode == 200) {
+                            print(response.data);
                             lineDataHelper.saveSocialDataToLocalStorage(response.data);
 
                             Response responseTerm = await dioUtilityRepository.postByURL(
