@@ -42,7 +42,7 @@ class LineDataHelper {
   }
 
   void saveSocialDataToLocalStorage(dynamic data) {
-    localStorage.addAll({"socialData": data});
+    localStorage.addAll({"socialData": json.decode(data)});
   }
 
   String getUidFromSocialData() {
