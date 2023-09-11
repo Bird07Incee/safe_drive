@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
@@ -213,12 +215,11 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                               "https://api.marketplace.ksauto.net/mercury-social-dev/line/token",
                               {"code": lineDataHelper.getLineCode()});
                           if (response.statusCode == 200) {
-                            print(response.data);
                             lineDataHelper.saveSocialDataToLocalStorage(response.data);
 
                             Response responseTerm = await dioUtilityRepository.postByURL(
                                 "https://api.marketplace.ksauto.net/mercury-social-dev/accept/termandcond",
-                                {"uid": lineDataHelper.getUidFromSocialData()});
+                                {"uid": response.data["uid"]});
 
                             if (responseTerm.statusCode == 200) {
                               termAndConHelper.setTermAndConToAccept();
