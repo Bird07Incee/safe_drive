@@ -215,11 +215,13 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                               "https://api.marketplace.ksauto.net/mercury-social-dev/line/token",
                               {"code": lineDataHelper.getLineCode()});
                           if (response.statusCode == 200) {
-                            lineDataHelper.saveSocialDataToLocalStorage(response.data);
+                            lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
 
+                            String accessToken = response.data["access_token"];
                             Response responseTerm = await dioUtilityRepository.postByURL(
                                 "https://api.marketplace.ksauto.net/mercury-social-dev/accept/termandcond",
-                                {"uid": response.data["uid"]});
+                                {"uid": response.data["uid"]},
+                                headers: {"Authorization": "Bearer $accessToken"});
 
                             if (responseTerm.statusCode == 200) {
                               termAndConHelper.setTermAndConToAccept();

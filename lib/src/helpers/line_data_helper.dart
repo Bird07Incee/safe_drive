@@ -50,7 +50,7 @@ class LineDataHelper {
 
     localStorage.forEach((key, value) {
       if (key == "socialData" && value.isNotEmpty) {
-        print(json.decode(value));
+        uid = json.decode(value)["uid"];
       }
     });
 
