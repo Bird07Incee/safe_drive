@@ -33,8 +33,11 @@ class DioUtilityService with HeaderUtil {
   }
 
   Future<Response> postByURL(String path, Map<String, Object?> body,
-      {bool isRecursion = false, Map<String, dynamic> headers = const {"": ""}}) async {
-    _dioClient.options.headers = {...HeaderUtil.baseHeader, ...headers};
+      {bool isRecursion = false, Map<String, dynamic>? headers}) async {
+    _dioClient.options.headers = HeaderUtil.baseHeader;
+    if (headers != null){
+      _dioClient.options.headers.addAll(headers);
+    }
 
     try {
       final response = await _dioClient.post(
