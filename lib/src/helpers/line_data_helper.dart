@@ -1,4 +1,5 @@
 // ignore: avoid_web_libraries_in_flutter
+import 'dart:convert';
 import 'dart:html';
 
 class LineDataHelper {
@@ -42,5 +43,19 @@ class LineDataHelper {
 
   void saveSocialDataToLocalStorage(dynamic data) {
     localStorage.addAll({"socialData": data});
+  }
+
+  String getUidFromSocialData() {
+    String uid = "";
+
+    localStorage.forEach((key, value) {
+      if (key == "socialData" && value.isNotEmpty) {
+        uid = json.decode(value)["uid"];
+      }
+    });
+
+    print("uid : $uid");
+
+    return uid;
   }
 }

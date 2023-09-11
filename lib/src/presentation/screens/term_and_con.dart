@@ -208,16 +208,22 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       onTap: () async {
                         if (scrollFinished) {
                           print("accept click");
-                          String code = lineDataHelper.getLineCode();
 
                           Response response = await dioUtilityRepository.postByURL(
-                              "https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"code": code});
+                              "https://api.marketplace.ksauto.net/mercury-social-dev/line/token",
+                              {"code": lineDataHelper.getLineCode()});
                           if (response.statusCode == 200) {
                             lineDataHelper.saveSocialDataToLocalStorage(response.data);
-                            termAndConHelper.setTermAndConToAccept();
 
-                            if (!mounted) return;
-                            Navigator.of(context).pop();
+                            Response responseTerm = await dioUtilityRepository.postByURL(
+                                "https://api.marketplace.ksauto.net/mercury-social-dev/accept/termandcond",
+                                {"uid": lineDataHelper.getUidFromSocialData()});
+
+                            if (responseTerm.statusCode == 200) {
+                              termAndConHelper.setTermAndConToAccept();
+                              if (!mounted) return;
+                              Navigator.of(context).pop();
+                            }
                           }
                         }
                       },

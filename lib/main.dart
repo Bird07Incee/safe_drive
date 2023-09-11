@@ -69,9 +69,7 @@ _setUpDatadog() {
     trackingConsent: TrackingConsent.granted,
     nativeCrashReportEnabled: true,
     loggingConfiguration: LoggingConfiguration(),
-    rumConfiguration: RumConfiguration(
-      applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'
-    ),
+    rumConfiguration: RumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
   );
 }
 
