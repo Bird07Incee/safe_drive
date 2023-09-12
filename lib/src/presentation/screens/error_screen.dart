@@ -17,58 +17,62 @@ class ErrorScreen extends StatelessWidget {
     var maxWidth = MediaQuery.of(context).size.width;
     var maxHeight = MediaQuery.of(context).size.height;
 
-    return AlvaRootWidget(
-        titlePage: titleWebPage,
-        child: Container(
-          color: whitePure,
-          height: maxHeight,
-          width: maxWidth,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 356,
-                width: maxWidth - 30,
-                child: Column(
-                  children: [
-                    // Image.asset(
-                    //   ErrorConst().imagePath,
-                    //   width: 96,
-                    //   height: 96,
-                    // ),
-                    const Icon(
-                      Icons.warning_amber_rounded,
-                      color: cloudSoftDeepWhite,
-                      size: 125,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    AlvaText(title: title!, textStyle: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    AlvaText(title: subTitle!, textStyle: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    SizedBox(
-                      width: 160,
-                      height: 32,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          onTap!();
-                        },
-                        style: AlvaStyles().outlineButtonStyle(Colors.transparent, sugarRed, 8),
-                        child:
-                            AlvaText(title: titleBtn!, textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: AlvaRootWidget(
+          titlePage: titleWebPage,
+          child: Container(
+            color: whitePure,
+            height: maxHeight,
+            width: maxWidth,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 356,
+                  width: maxWidth - 30,
+                  child: Column(
+                    children: [
+                      // Image.asset(
+                      //   ErrorConst().imagePath,
+                      //   width: 96,
+                      //   height: 96,
+                      // ),
+                      const Icon(
+                        Icons.warning_amber_rounded,
+                        color: cloudSoftDeepWhite,
+                        size: 125,
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      AlvaText(title: title!, textStyle: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      AlvaText(
+                          title: subTitle!, textStyle: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      SizedBox(
+                        width: 160,
+                        height: 32,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            onTap!();
+                          },
+                          style: AlvaStyles().outlineButtonStyle(Colors.transparent, sugarRed, 8),
+                          child:
+                              AlvaText(title: titleBtn!, textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ));
+              ],
+            ),
+          )),
+    );
   }
 }
