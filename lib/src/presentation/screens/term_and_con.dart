@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
@@ -22,6 +24,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   TermAndConHelper termAndConHelper = TermAndConHelper();
   DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
   LineDataHelper lineDataHelper = LineDataHelper();
+  final liff = fll.FlutterLineLiff();
 
   @override
   void initState() {
@@ -185,7 +188,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                     GestureDetector(
                       onTap: () {
                         if (scrollFinished) {
-                          print("deny click");
+                          liff.closeWindow();
                         }
                       },
                       child: Container(
@@ -209,7 +212,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                     GestureDetector(
                       onTap: () async {
                         if (scrollFinished) {
-                          print("accept click");
+                          GeneralDialog().showLoadingDialog(context: context);
 
                           Response response = await dioUtilityRepository.postByURL(
                               "https://api.marketplace.ksauto.net/mercury-social-dev/line/token",
@@ -229,6 +232,9 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                               Navigator.of(context).pop();
                             }
                           }
+
+                          if (!mounted) return;
+                          Navigator.of(context).pop();
                         }
                       },
                       child: Container(
