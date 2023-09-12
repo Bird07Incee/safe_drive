@@ -13,8 +13,8 @@ class GeneralDialog {
   final OnTap? onCancel;
   final OnTap? onAccept;
 
-  showLoadingDialog({Key? key, required BuildContext context}) {
-    return _showGeneralLoading(context, key: key ?? const Key("loading"));
+  showLoadingDialog({Key? key, required BuildContext context, bool? canBack}) {
+    return _showGeneralLoading(context, key: key ?? const Key("loading"), canBack: false);
   }
 
   showNoContentAlert({Key? key, required BuildContext context, double? padding}) {
@@ -32,16 +32,19 @@ class GeneralDialog {
     );
   }
 
-  _showGeneralLoading(BuildContext context, {Key? key}) {
-    Widget loading = SizedBox(
-        width: 64.0,
-        height: 64.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AlvaCPILoader(),
-          ],
-        ));
+  _showGeneralLoading(BuildContext context, {Key? key, bool? canBack}) {
+    Widget loading = WillPopScope(
+      onWillPop: () async => canBack ?? false,
+      child: SizedBox(
+          width: 64.0,
+          height: 64.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AlvaCPILoader(),
+            ],
+          )),
+    );
 
     return showDialog<void>(
       context: context,
