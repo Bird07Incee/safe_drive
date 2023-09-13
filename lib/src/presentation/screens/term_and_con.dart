@@ -1,12 +1,13 @@
 import 'dart:convert';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/marketplace_datastore.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
@@ -49,14 +50,15 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   void acceptTermAndCond() async {
     try {
       GeneralDialog().showLoadingDialog(context: context);
-
+      final baseUrl = MarketplaceDataStore().getEnv<String>("BFF_BASE_URL");
+      final socialApiPath = MarketplaceDataStore().getEnv<String>("ENVIRONMENT_NAME");
       Response response = await dioUtilityRepository.postByURL(
-          "https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"code": lineDataHelper.getLineCode()});
+          "$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
       if (response.statusCode == 200) {
         lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
         String accessToken = response.data["access_token"];
         Response responseTerm = await dioUtilityRepository.postByURL(
-            "https://api.marketplace.ksauto.net/mercury-social-dev/accept/termandcond", {"uid": response.data["uid"]},
+            "$baseUrl$socialApiPath/accept/termandcond", {"uid": response.data["uid"]},
             headers: {"Authorization": "Bearer $accessToken"});
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
