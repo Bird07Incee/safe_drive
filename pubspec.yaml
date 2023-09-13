@@ -88,7 +88,6 @@ flutter:
   assets:
     - assets/
     - env-local
-    - env/
     - assets/images/
     - assets/images/wall_charges/
     - assets/homepage/
