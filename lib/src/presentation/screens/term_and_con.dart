@@ -46,31 +46,30 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   }
 
   void acceptTermAndCond() async {
-    GeneralDialog().showLoadingDialog(context: context);
+    try {
+      GeneralDialog().showLoadingDialog(context: context);
 
-    Response response = await dioUtilityRepository.postByURL(
-        "https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"code": lineDataHelper.getLineCode()});
-    if (response.statusCode == 200) {
-      lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
-
-      String accessToken = response.data["access_token"];
-      Response responseTerm = await dioUtilityRepository.postByURL(
-          "https://api.marketplace.ksauto.net/mercury-social-dev/accept/termandcond", {"uid": response.data["uid"]},
-          headers: {"Authorization": "Bearer $accessToken"});
-
-      if (responseTerm.statusCode == 200) {
-        termAndConHelper.setTermAndConToAccept();
-        if (!mounted) return;
-        Navigator.of(context).pop();
-      } else {
-        _handleError();
+      Response response = await dioUtilityRepository.postByURL(
+          "https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"code": lineDataHelper.getLineCode()});
+      if (response.statusCode == 200) {
+        lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
+        String accessToken = response.data["access_token"];
+        Response responseTerm = await dioUtilityRepository.postByURL(
+            "https://api.marketplace.ksauto.net/mercury-social-dev/accept/termandcond", {"uid": response.data["uid"]},
+            headers: {"Authorization": "Bearer $accessToken"});
+        if (responseTerm.statusCode == 200) {
+          termAndConHelper.setTermAndConToAccept();
+          if (!mounted) return;
+          Navigator.of(context).pop();
+        }
       }
-    } else {
+
+      if (!mounted) return;
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e);
       _handleError();
     }
-
-    if (!mounted) return;
-    Navigator.of(context).pop();
   }
 
   void _handleError() {
