@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
             throw "Couldn't launch URL";
           }
         } else {
-          print("termandcon value ${termAndConHelper.isTermAndConAccepted().toString()}");
+          // print("termandcon value ${termAndConHelper.isTermAndConAccepted().toString()}");
           if (termAndConHelper.isTermAndConAccepted()) {
             print("term and con already accept");
             loadOneTrustCookieScript();

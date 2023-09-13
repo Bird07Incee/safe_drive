@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 Map<String, dynamic> envConfig = {
   "dev": {
     "ENVIRONMENT_NAME": "dev",
