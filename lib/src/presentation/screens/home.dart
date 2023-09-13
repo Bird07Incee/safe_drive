@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,9 +110,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              AlvaText(
-                                title: HomeConst().termsAndConditions,
-                                textStyle: AlvaStyles().headingSize10(),
+                              GestureDetector(
+                                onTap: () {
+                                  Storage localStorage = window.localStorage;
+                                  localStorage.clear();
+                                },
+                                child: AlvaText(
+                                  title: HomeConst().termsAndConditions,
+                                  textStyle: AlvaStyles().headingSize10(),
+                                ),
                               ),
                               Container(
                                 margin: const EdgeInsets.symmetric(horizontal: 8),
