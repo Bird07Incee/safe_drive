@@ -74,19 +74,11 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   }
 
   void _handleError() {
-    Storage localStorage = window.localStorage;
-    String query = "";
-    localStorage.forEach((key, value) {
-      if (key == "query") {
-        query = value;
-      }
-    });
-
     Navigator.of(context).pop();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ErrorScreen(
         title: ErrorConst().titleNS,
-        subTitle: query,
+        subTitle: ErrorConst().subTitleNS,
         titleBtn: ErrorConst().titleBtnNS,
         onTap: () {
           Navigator.of(context).pop();
