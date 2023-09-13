@@ -4,10 +4,10 @@ import 'dart:html';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
+import 'package:marketplace_line_oa/configs/envs.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
-import 'package:marketplace_line_oa/src/helpers/marketplace_datastore.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
@@ -50,8 +50,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   void acceptTermAndCond() async {
     try {
       GeneralDialog().showLoadingDialog(context: context);
-      final baseUrl = MarketplaceDataStore().getEnv<String>("BFF_BASE_URL");
-      final socialApiPath = MarketplaceDataStore().getEnv<String>("ENVIRONMENT_NAME");
+      final baseUrl = Environment().getValue("BFF_BASE_URL");
+      final socialApiPath = Environment().getValue("ENVIRONMENT_NAME");
       Response response = await dioUtilityRepository
           .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
       if (response.statusCode == 200) {

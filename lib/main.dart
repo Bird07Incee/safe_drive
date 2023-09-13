@@ -1,4 +1,3 @@
-import 'dart:developer';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -9,16 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
-import 'package:marketplace_line_oa/src/helpers/marketplace_datastore.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
 late DdSdkConfiguration configuration;
-bool get isForE2E => MarketplaceDataStore().getArgs<bool>("isForE2E");
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   _configureApp();
@@ -35,7 +31,6 @@ void main() {
 }
 
 _configureApp() {
-  _setEnv();
   _setUpDatadog();
   _setUpLineLIFF();
 }
@@ -76,24 +71,6 @@ _setUpDatadog() {
     loggingConfiguration: LoggingConfiguration(),
     rumConfiguration: RumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
   );
-}
-
-_setEnv() async {
-  try {
-    const setEnv = String.fromEnvironment('SET_ENV', defaultValue: 'dev');
-    String? env = setEnv;
-
-    if (isForE2E) {
-      env = 'mock';
-    } else {
-      env = await rootBundle.loadString('env-local');
-    }
-    env = env.trim().replaceAll('\n', '');
-    await dotenv.load(fileName: 'env/$env');
-    MarketplaceDataStore().setEnv(dotenv.env);
-  } catch (e) {
-    log(e.toString());
-  }
 }
 
 class MyApp extends StatelessWidget {

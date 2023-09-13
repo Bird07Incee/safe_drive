@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/configs/envs.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/helpers/marketplace_datastore.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     Timer(const Duration(seconds: 1), () {
       final checkBrowserState = context.read<CheckBrowserBloc>().state;
-      final env = MarketplaceDataStore().getEnv<String>("ENVIRONMENT_NAME");
+      final env = Environment().getValue("ENVIRONMENT_NAME");
       if (checkBrowserState is BrowserIsLineLiff || (env != 'uat' && env != 'prod')) {
         context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
       }
