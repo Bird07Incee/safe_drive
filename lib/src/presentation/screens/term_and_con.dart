@@ -80,7 +80,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ErrorScreen(
         title: ErrorConst().titleNS,
-        subTitle: ErrorConst().subTitleNS,
+        subTitle: lineDataHelper.getLineCode(),
         titleBtn: ErrorConst().titleBtnNS,
         onTap: () {
           Navigator.of(context).pop();
