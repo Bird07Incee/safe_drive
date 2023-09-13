@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 Map<String, dynamic> envConfig = {
   "dev": {
     "ENVIRONMENT_NAME": "dev",
@@ -48,12 +50,16 @@ class Environment {
   String getValue(String key) {
     try {
       if(config.isEmpty || config == {}) {
+        print('config is empty');
         var jsonEnv = getEnv();
+        print('return k,v ($key, ${jsonEnv[key]})');
         return jsonEnv[key];
       } else {
+        print('return k,v ($key, ${config[key]})');
         return config[key];
       }
     } catch (e) {
+      print('exception getValue: $key , e: $e');
       return '';
     }
   }
