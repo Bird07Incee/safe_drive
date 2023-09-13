@@ -633,7 +633,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       ),
                       width: 40,
                       height: 32,
-                      child: const Row(
+                      child: Row(
                         children: [
                           SizedBox(
                             width: 14,
