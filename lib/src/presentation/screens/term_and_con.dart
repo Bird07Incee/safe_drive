@@ -52,8 +52,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = MarketplaceDataStore().getEnv<String>("BFF_BASE_URL");
       final socialApiPath = MarketplaceDataStore().getEnv<String>("ENVIRONMENT_NAME");
-      Response response = await dioUtilityRepository.postByURL(
-          "$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
+      Response response = await dioUtilityRepository
+          .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
       if (response.statusCode == 200) {
         lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
         String accessToken = response.data["access_token"];

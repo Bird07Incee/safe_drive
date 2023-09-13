@@ -94,7 +94,6 @@ _setEnv() async {
   } catch (e) {
     log(e.toString());
   }
-
 }
 
 class MyApp extends StatelessWidget {
