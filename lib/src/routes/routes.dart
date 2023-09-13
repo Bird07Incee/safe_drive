@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_detail_creen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
-enum Routes { initial, termAndCon, errorScreen, loadingScreen }
+enum Routes { initial, termAndCon, errorScreen, loadingScreen, productDetail }
 
 extension TypeCoverter on Routes {
   String toStringPath() {
@@ -18,6 +19,8 @@ extension TypeCoverter on Routes {
         return 'errorScreen';
       case Routes.loadingScreen:
         return 'loadingScreen';
+      case Routes.productDetail:
+        return 'productDetail';
     }
   }
 }
@@ -26,7 +29,8 @@ final Map<String, WidgetBuilder> routes = {
   (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
   (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
-  (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen()
+  (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
+  (Routes.productDetail).toStringPath(): (BuildContext _) => const ProductDetailScreen()
 };
 
 // extension StringExtension on String {

@@ -20,6 +20,8 @@ class AlvaStyles {
 
   TextStyle headingSize12w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color);
+  TextStyle headingSize22w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: color);
 
   TextStyle headingSize32() => const TextStyle(
         fontFamily: fontFamily,
@@ -29,18 +31,33 @@ class AlvaStyles {
 
   TextStyle headingSize10w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w400, color: color);
+  TextStyle headingSize10w500(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w500, color: color);
+  TextStyle headingSize10w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w700, color: color);
 
   TextStyle headingSize10() => const TextStyle(
         fontFamily: fontFamily,
         fontSize: 10,
         fontWeight: FontWeight.bold,
       );
-
+  TextStyle headingSize16w500(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w500, color: color);
   TextStyle headingSize16w600(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w600, color: color);
+  TextStyle headingSize16w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w700, color: color);
 
   TextStyle headingSize12w700(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.bold, color: color);
+  TextStyle headingSize18w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 18, fontWeight: FontWeight.w700, color: color);
+  TextStyle discountPriceTxt14w400(Color color) => TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: color,
+      decoration: TextDecoration.lineThrough);
 
   TextStyle body1() => const TextStyle(fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
 

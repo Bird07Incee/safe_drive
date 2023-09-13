@@ -38,3 +38,12 @@ const cloudSoftDeepWhite = Color(0xffDEDEDE);
 const whiteSoftGreen = Color(0xffE8F7EE);
 
 const btnBlue = Color(0xFF1094FB);
+
+const YellowKrungsri = Color(0xFFFFD400);
+const BlueFantasy = Color(0xFF40A9FC);
+const ModernDarkGray = Color(0xFF063B64);
+const RedWordShow = Color(0xFFE60000);
+const RedSoft = Color(0xFFFDE6E6);
+const backgroundNo2 = Color(0xFFF5F5F5);
+
+const cloudWhite = Color(0xffEFEFEF);
