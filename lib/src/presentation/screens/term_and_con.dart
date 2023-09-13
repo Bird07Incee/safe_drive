@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -113,9 +114,15 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       const SizedBox(
                         height: 12,
                       ),
-                      Text(
-                        "ข้อกำหนดและเงื่อนไข",
-                        style: AlvaStyles().heading1(),
+                      GestureDetector(
+                        onTap: () {
+                          Storage localStorage = window.localStorage;
+                          localStorage.clear();
+                        },
+                        child: Text(
+                          "ข้อกำหนดและเงื่อนไข",
+                          style: AlvaStyles().heading1(),
+                        ),
                       )
                     ]),
                   ),
