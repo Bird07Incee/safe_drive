@@ -48,6 +48,7 @@ _setUpLineLIFF() {
     // waiting for change
     Storage localStorage = window.localStorage;
     localStorage.addAll({"LineLogin": 'true'});
+    localStorage.addAll({"query": Uri.base.queryParameters.toString()});
   }
   const env = String.fromEnvironment('SET_ENV', defaultValue: 'dev');
   FlutterLineLiff().init(
