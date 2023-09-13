@@ -12,6 +12,9 @@ class LineDataHelper {
 
         localStorage.addAll({"code": code});
         break;
+      case "code":
+        localStorage.addAll({"code": value});
+        break;
       default:
         break;
     }
