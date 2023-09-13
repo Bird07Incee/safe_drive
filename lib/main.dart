@@ -7,7 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
@@ -49,10 +51,11 @@ _setUpLineLIFF() {
     Storage localStorage = window.localStorage;
     localStorage.addAll({"LineLogin": 'true'});
   }
-  const env = String.fromEnvironment('SET_ENV', defaultValue: 'dev');
+
+  String lineId = Environment().getValue("LIFF_ID");
   FlutterLineLiff().init(
       //TODO: config LIFF for prod
-      config: env == "prod" ? Config(liffId: '1661164508-Kn9nO7oB') : Config(liffId: '1661164508-Kn9nO7oB'),
+      config: Config(liffId: lineId),
       successCallback: () {
         print('successCallback');
       },
@@ -105,6 +108,7 @@ class _RootPageState extends State<RootPage> {
     Connectivity().onConnectivityChanged.listen((result) {
       context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: result));
     });
+    context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
   }
 
   Future<void> initConnectivity() async {
@@ -126,9 +130,9 @@ class _RootPageState extends State<RootPage> {
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
       ),
-      // navigatorObservers: [
-      //   DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
-      // ],
+      navigatorObservers: [
+        DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+      ],
     );
   }
 }

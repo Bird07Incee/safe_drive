@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketplace_line_oa/configs/envs.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -40,13 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(const Duration(seconds: 1), () {
-      final checkBrowserState = context.read<CheckBrowserBloc>().state;
-      final env = Environment().getValue("ENVIRONMENT_NAME");
-      if (checkBrowserState is BrowserIsLineLiff || (env != 'uat' && env != 'prod')) {
-        context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
-      }
-    });
+    // Timer(const Duration(seconds: 1), () {
+    //   final checkBrowserState = context.read<CheckBrowserBloc>().state;
+    //   final env = Environment().getValue("ENVIRONMENT_NAME");
+    //   if (checkBrowserState is BrowserIsLineLiff || (env != 'uat' && env != 'prod')) {
+    //     context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+    //   }
+    // });
   }
 
   Future<void> openLine() async {
