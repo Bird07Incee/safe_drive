@@ -6,19 +6,15 @@ import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({Key? key}) : super(key: key);
@@ -58,9 +54,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       var pixelScreen = scrollController.position.pixels;
       context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(pixelScreen, context, "0"));
     });
-    // -------------------------bypass-------------------------------------------------------
-    context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
-// -------------------------bypass-------------------------------------------------------
   }
 
   int indicator = 1;
@@ -72,74 +65,39 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   // TapUpDetails? _doubleTapDetails;
   bool viewPhoto = false;
   bool isZoom = false;
-  Future<void> openLine() async {
-    final Uri deepLink = Uri.parse(HomeConst().lineOAURL);
-    if (!await launchUrl(deepLink)) {
-      throw Exception('Could not launch $deepLink');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
-
-    return BlocBuilder<ConnectivityStatusBloc, ConnectivityStatusState>(
-      builder: (context, errorNWState) {
-        if (errorNWState is NoInternet) {
-          return ErrorScreen(
-            title: ErrorConst().titleNS,
-            subTitle: ErrorConst().subTitleNS,
-            titleBtn: ErrorConst().titleBtnNS,
-            onTap: () {},
-          );
-        } else {
-          return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(
-            builder: (context, checkBrowserState) {
-              if (checkBrowserState is CheckBrowserLoading) {
-                return const LoadingScreen();
-              } else if (checkBrowserState is BrowserIsNotLineLiff) {
-                return ErrorScreen(
-                  title: ErrorConst().titleBrowser,
-                  subTitle: ErrorConst().subTitleBrowser,
-                  titleBtn: ErrorConst().titleBtnBrowser,
-                  onTap: () {
-                    openLine();
-                  },
-                );
-              } else {
-                return BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
-                  builder: (ctx, stateAppBar) {
-                    return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
-                      builder: (context, zoomState) {
-                        return BlocBuilder<PreviousScaleBloc, double>(
-                          builder: (context, previousState) {
-                            return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
-                              builder: (context, switchState) {
-                                return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
-                                  builder: (context, carouselState) {
-                                    return switchState
-                                        ? viewImagePage(carouselState, context, zoomState, previousState)
-                                        : productDetailPage(
-                                            stateAppBar,
-                                            context,
-                                            carouselState,
-                                          );
-                                  },
+    return RootPageCondition(
+      child: BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
+        builder: (ctx, stateAppBar) {
+          return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
+            builder: (context, zoomState) {
+              return BlocBuilder<PreviousScaleBloc, double>(
+                builder: (context, previousState) {
+                  return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
+                    builder: (context, switchState) {
+                      return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
+                        builder: (context, carouselState) {
+                          return switchState
+                              ? viewImagePage(carouselState, context, zoomState, previousState)
+                              : productDetailPage(
+                                  stateAppBar,
+                                  context,
+                                  carouselState,
                                 );
-                              },
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
-                );
-              }
+                        },
+                      );
+                    },
+                  );
+                },
+              );
             },
           );
-        }
-      },
+        },
+      ),
     );
   }
 
@@ -536,189 +494,193 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
         ));
   }
 
-  Scaffold viewImagePage(
+  Widget viewImagePage(
       PageController carouselState, BuildContext context, TransformationController zoomState, double previousState) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-          child: Stack(
-        children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: Hero(
-                  tag: 'herousel',
-                  createRectTween: (Rect? begin, Rect? end) {
-                    return MaterialRectCenterArcTween(begin: begin, end: end);
-                  },
-                  child: GestureDetector(
-                    onDoubleTapDown: (TapDownDetails detail) {
-                      // _handleDoubleTap(detail);
-                      context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
-                      if (previousState > 0.6) {
-                        // _previousScale = 0.5;
-                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
-                      } else {
-                        // _previousScale = 0.8;
-                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
-                      }
-                      // if(isZoom){
-                      //   isZoom = false;
-                      // }else{
-                      //   isZoom = true;
-                      // }
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+            child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: Hero(
+                    tag: 'herousel',
+                    createRectTween: (Rect? begin, Rect? end) {
+                      return MaterialRectCenterArcTween(begin: begin, end: end);
                     },
-                    child: InteractiveViewer(
-                      transformationController: zoomState,
-                      panEnabled: true,
-                      minScale: 0.5,
-                      maxScale: 5.0,
-                      scaleEnabled: true,
-                      onInteractionUpdate: (ScaleUpdateDetails details) {
-                        _scale = previousState * details.scale;
+                    child: GestureDetector(
+                      onDoubleTapDown: (TapDownDetails detail) {
+                        // _handleDoubleTap(detail);
+                        context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
+                        if (previousState > 0.6) {
+                          // _previousScale = 0.5;
+                          context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+                        } else {
+                          // _previousScale = 0.8;
+                          context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
+                        }
+                        // if(isZoom){
+                        //   isZoom = false;
+                        // }else{
+                        //   isZoom = true;
+                        // }
                       },
-                      onInteractionEnd: (ScaleEndDetails details) {
-                        context
-                            .read<PreviousScaleBloc>()
-                            .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
-                        // log("_previousScale ${_previousScale}");
-                        // log("_previousScale ${_previousScale > 0.6}");
-                      },
-                      child: AspectRatio(
-                        aspectRatio: 16.0 / 9.0,
-                        child: PageView.builder(
-                            itemCount: 5,
-                            physics: previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
-                            controller: carouselState,
-                            onPageChanged: (val) {
-                              context
-                                  .read<ProductDetailCarouselScrollControllerBloc>()
-                                  .add(CarouselScrollAction(index: val));
+                      child: InteractiveViewer(
+                        transformationController: zoomState,
+                        panEnabled: true,
+                        minScale: 0.5,
+                        maxScale: 5.0,
+                        scaleEnabled: true,
+                        onInteractionUpdate: (ScaleUpdateDetails details) {
+                          _scale = previousState * details.scale;
+                        },
+                        onInteractionEnd: (ScaleEndDetails details) {
+                          context
+                              .read<PreviousScaleBloc>()
+                              .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
+                          // log("_previousScale ${_previousScale}");
+                          // log("_previousScale ${_previousScale > 0.6}");
+                        },
+                        child: AspectRatio(
+                          aspectRatio: 16.0 / 9.0,
+                          child: PageView.builder(
+                              itemCount: 5,
+                              physics:
+                                  previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
+                              controller: carouselState,
+                              onPageChanged: (val) {
+                                context
+                                    .read<ProductDetailCarouselScrollControllerBloc>()
+                                    .add(CarouselScrollAction(index: val));
 
-                              if (val + 1 == 5) {
-                                carouselState.jumpToPage(0);
-                              }
-                            },
-                            itemBuilder: (ctx, i) {
-                              return AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: SizedBox(
-                                    width: maxWidth,
-                                    height: 576,
-                                    child: Image.asset('assets/mockimg/product.png', fit: BoxFit.fitWidth)),
-                              );
-                            }),
+                                if (val + 1 == 5) {
+                                  carouselState.jumpToPage(0);
+                                }
+                              },
+                              itemBuilder: (ctx, i) {
+                                return AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: SizedBox(
+                                      width: maxWidth,
+                                      height: 576,
+                                      child: Image.asset('assets/mockimg/product.png', fit: BoxFit.fitWidth)),
+                                );
+                              }),
+                        ),
                       ),
                     ),
-                  ),
-                )),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 48, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: spaceGrey123,
-                      ),
-                      width: 40,
-                      height: 32,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 14,
-                          ),
-                          Icon(
-                            Icons.arrow_back_ios,
-                            color: whitePure,
-                            size: 16,
-                          ),
-                        ],
-                      )),
+                  )),
                 ],
               ),
             ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: maxWidth,
-                  padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: true,
-                        child: Hero(
-                          tag: 'herousel-indicator',
-                          createRectTween: (Rect? begin, Rect? end) {
-                            return MaterialRectCenterArcTween(begin: begin, end: end);
-                          },
-                          child: SmoothPageIndicator(
-                              controller: carouselState,
-                              count: 5,
-                              effect: const ExpandingDotsEffect(
-                                expansionFactor: 2,
-                                dotHeight: 6,
-                                dotWidth: 6,
-                                activeDotColor: BlueFantasy,
-                                dotColor: cloudSoftDeepWhite,
-                              )),
+            GestureDetector(
+              onTap: () {
+                context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 48, left: 16, right: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: spaceGrey123,
                         ),
-                      ),
-                    ],
-                  ),
+                        width: 40,
+                        height: 32,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 14,
+                            ),
+                            Icon(
+                              Icons.arrow_back_ios,
+                              color: whitePure,
+                              size: 16,
+                            ),
+                          ],
+                        )),
+                  ],
                 ),
-              ],
+              ),
             ),
-          )
-          // Center(
-          //   child: state.selectedCarDetail.carImage!.length > 1
-          //       ? Column(
-          //     mainAxisAlignment: MainAxisAlignment.end,
-          //     children: [
-          //       Container(
-          //         color: whitePure,
-          //         width: maxWidth,
-          //         padding:
-          //         const EdgeInsets.only(top: 12.0, bottom: 12.0),
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.center,
-          //           children: [
-          //             Visibility(
-          //               visible: true,
-          //               child: SmoothPageIndicator(
-          //                   controller: pageViewController,
-          //                   count: 5,
-          //                   effect:  const ExpandingDotsEffect(
-          //                     expansionFactor: 2,
-          //                     dotHeight: 6,
-          //                     dotWidth: 6,
-          //                     activeDotColor: BlueFantasy,
-          //                     dotColor: cloudSoftDeepWhite,
-          //                   )),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //   )
-          //       : Container(),
-          // ),
-        ],
-      )),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: maxWidth,
+                    padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Visibility(
+                          visible: true,
+                          child: Hero(
+                            tag: 'herousel-indicator',
+                            createRectTween: (Rect? begin, Rect? end) {
+                              return MaterialRectCenterArcTween(begin: begin, end: end);
+                            },
+                            child: SmoothPageIndicator(
+                                controller: carouselState,
+                                count: 5,
+                                effect: const ExpandingDotsEffect(
+                                  expansionFactor: 2,
+                                  dotHeight: 6,
+                                  dotWidth: 6,
+                                  activeDotColor: BlueFantasy,
+                                  dotColor: cloudSoftDeepWhite,
+                                )),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+            // Center(
+            //   child: state.selectedCarDetail.carImage!.length > 1
+            //       ? Column(
+            //     mainAxisAlignment: MainAxisAlignment.end,
+            //     children: [
+            //       Container(
+            //         color: whitePure,
+            //         width: maxWidth,
+            //         padding:
+            //         const EdgeInsets.only(top: 12.0, bottom: 12.0),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             Visibility(
+            //               visible: true,
+            //               child: SmoothPageIndicator(
+            //                   controller: pageViewController,
+            //                   count: 5,
+            //                   effect:  const ExpandingDotsEffect(
+            //                     expansionFactor: 2,
+            //                     dotHeight: 6,
+            //                     dotWidth: 6,
+            //                     activeDotColor: BlueFantasy,
+            //                     dotColor: cloudSoftDeepWhite,
+            //                   )),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   )
+            //       : Container(),
+            // ),
+          ],
+        )),
+      ),
     );
   }
 }
