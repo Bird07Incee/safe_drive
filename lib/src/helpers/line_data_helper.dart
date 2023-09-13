@@ -7,13 +7,13 @@ class LineDataHelper {
 
   void lineDataGrabber(String key, String value) {
     switch (key) {
+      case "code":
+        localStorage.addAll({"code": value});
+        break;
       case "liff.state":
         String code = value.split("&")[0].replaceAll("?code=", "");
 
         localStorage.addAll({"code": code});
-        break;
-      case "code":
-        localStorage.addAll({"code": value});
         break;
       default:
         break;
