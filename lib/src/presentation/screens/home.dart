@@ -18,7 +18,6 @@ import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_t
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -69,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
-    final liff = fll.FlutterLineLiff();
     return RootPageCondition(
         child: AlvaRootWidget(
             titlePage: titleWebPage,
@@ -103,17 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Storage localStorage = window.localStorage;
-                                localStorage.clear();
-
-                                liff.logout();
-                              },
-                              child: AlvaText(
-                                title: HomeConst().termsAndConditions,
-                                textStyle: AlvaStyles().headingSize10(),
-                              ),
+                            AlvaText(
+                              title: HomeConst().termsAndConditions,
+                              textStyle: AlvaStyles().headingSize10(),
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(horizontal: 8),

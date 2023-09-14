@@ -3,6 +3,8 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:universal_html/html.dart';
+import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
 
 class HomePageBanner extends StatefulWidget {
   final PageController pageControllerState;
@@ -21,6 +23,7 @@ class HomePageBanner extends StatefulWidget {
 
 class _HomePageBannerState extends State<HomePageBanner> {
   bool errorCase = true;
+  final liff = fll.FlutterLineLiff();
   @override
   Widget build(BuildContext context) {
     int itemBannerLength = errorCase ? assetsCarouselItem.length : carouselItem.length;
@@ -39,6 +42,11 @@ class _HomePageBannerState extends State<HomePageBanner> {
               itemBuilder: (ctx, i) {
                 return GestureDetector(
                   onTap: () {
+                    Storage localStorage = window.localStorage;
+                    localStorage.clear();
+
+                    liff.logout();
+
                     GeneralDialog().showLoadingDialog(context: context);
                     Future.delayed(const Duration(seconds: 2)).then((value) => Navigator.pop(context));
                   },
