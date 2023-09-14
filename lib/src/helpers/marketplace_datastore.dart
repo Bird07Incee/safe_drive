@@ -1,4 +1,4 @@
-import 'package:marketplace_line_oa/src/extensions/map_extension.dart';
+import 'package:marketplace_line_oa/src/extension/map_extension.dart';
 
 class MarketplaceDataStore {
   MarketplaceDataStore._internal();
