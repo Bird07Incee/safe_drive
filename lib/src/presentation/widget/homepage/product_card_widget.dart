@@ -23,6 +23,16 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     1,
     1,
     1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
   ];
 
   @override
@@ -66,22 +76,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           borderRadius:
                               const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
                           child: PageView.builder(
-                              itemCount: 5,
-                              // pageSnapping: true,
+                              itemCount: 10,
                               controller: pageViewController,
-                              // allowImplicitScrolling: true,
                               onPageChanged: (val) {
                                 setState(() {
                                   indicator[index] = val + 1;
                                 });
-                                // if (!state.onFullscreenGallery) {
-                                //   if (val == state.selectedCarDetail.carImage!.length) {
-                                //     context.read<CarListBloc>().add(const SetFixibleCurrentNumberActiveImage(1));
-                                //     pageViewController.jumpToPage(0);
-                                //   } else {
-                                //     context.read<CarListBloc>().add(SetCurrentNumberActiveImage(val));
-                                //   }
-                                // }
                               },
                               itemBuilder: (ctx, i) {
                                 return Stack(

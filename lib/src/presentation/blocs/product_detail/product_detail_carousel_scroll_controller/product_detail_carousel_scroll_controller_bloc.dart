@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'product_detail_carousel_scroll_controller_event.dart';
-part 'product_detail_carousel_scroll_controller_state.dart';
 
 class ProductDetailCarouselScrollControllerBloc
     extends Bloc<ProductDetailCarouselScrollControllerEvent, PageController> {

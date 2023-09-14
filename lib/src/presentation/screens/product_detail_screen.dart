@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
+import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
@@ -31,7 +33,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     keepPage: true,
   );
 
-  // late TabController _tabController;
   late final TabController _tabController;
   late double maxWidth, maxHeight;
   int? installmentPerMonth, month;
@@ -41,7 +42,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   void dispose() {
     _tabController.dispose();
     pageViewController.dispose();
-    // BlocProvider.of<ProductDetailCarouselScrollControllerBloc>(context).close();
     super.dispose();
   }
 
@@ -58,14 +58,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   int indicator = 1;
   double _scale = 1.0;
-  // double _previousScale = 0.5;
-  double? x;
-  double? y;
 
-  // TapUpDetails? _doubleTapDetails;
-  bool viewPhoto = false;
-  bool isZoom = false;
-
+  List dataCarouselMock = carouselSingleItem;
   @override
   Widget build(BuildContext context) {
     maxWidth = MediaQuery.of(context).size.width;
@@ -192,25 +186,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         AspectRatio(
                           aspectRatio: 16.0 / 9.0,
                           child: PageView.builder(
-                              itemCount: 5,
-                              // pageSnapping: true,
+                              itemCount:
+                                  dataCarouselMock.length == 1 ? dataCarouselMock.length : dataCarouselMock.length + 1,
                               controller: carouselState,
-                              // allowImplicitScrolling: true,
                               onPageChanged: (val) {
                                 context
                                     .read<ProductDetailCarouselScrollControllerBloc>()
                                     .add(CarouselScrollAction(index: val));
-                                // context
-                                //     .read<ProductDetailCarouselScrollControllerBloc>()
-                                //     .add(CarouselScrollAction());
-                                if (val + 1 == 5) {
+
+                                if (val == dataCarouselMock.length) {
                                   carouselState.jumpToPage(0);
-                                  // if (val == state.selectedCarDetail.carImage!.length) {
-                                  //   context.read<CarListBloc>().add(const SetFixibleCurrentNumberActiveImage(1));
-                                  //   pageViewController.jumpToPage(0);
-                                  // } else {
-                                  //   context.read<CarListBloc>().add(SetCurrentNumberActiveImage(val));
-                                  // }
                                 }
                               },
                               itemBuilder: (ctx, i) {
@@ -221,20 +206,40 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                         context
                                             .read<ViewImgDetailPageSwitchBloc>()
                                             .add(SwitchPageAction(statePage: true));
-                                        log("page ${carouselState.page}");
-                                        // carouselState.jumpToPage(0);
                                       },
-                                      child: Hero(
-                                        tag: 'herousel',
-                                        createRectTween: (Rect? begin, Rect? end) {
-                                          return MaterialRectCenterArcTween(begin: begin, end: end);
-                                        },
-                                        child: AspectRatio(
-                                          aspectRatio: 16 / 9,
-                                          child: SizedBox(
-                                              width: maxWidth,
-                                              height: 576,
-                                              child: Image.asset('assets/mockimg/product.png', fit: BoxFit.fitWidth)),
+                                      onLongPress: () {
+                                        setState(() {
+                                          if (dataCarouselMock == carouselItem) {
+                                            dataCarouselMock = carouselSingleItem;
+                                          } else {
+                                            dataCarouselMock = carouselItem;
+                                          }
+                                        });
+                                      },
+                                      onDoubleTap: () {
+                                        setState(() {
+                                          if (dataCarouselMock != carouselTripleItem) {
+                                            dataCarouselMock = carouselTripleItem;
+                                          } else {
+                                            dataCarouselMock = carouselSingleItem;
+                                          }
+                                        });
+                                      },
+                                      child: AspectRatio(
+                                        aspectRatio: 16 / 9,
+                                        child: SizedBox(
+                                          width: maxWidth,
+                                          height: 576,
+                                          child: FadeInImage(
+                                            placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                            // Replace with your placeholder image path
+                                            image: NetworkImage(
+                                              i == dataCarouselMock.length ? dataCarouselMock[0] : dataCarouselMock[i],
+                                            ),
+                                            fit: BoxFit.fitWidth,
+                                            imageErrorBuilder: (context, error, stackTrace) =>
+                                                Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -255,7 +260,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             ),
                             child: Center(
                               child: AlvaText(
-                                  title: "${carouselState.initialPage + 1}/5",
+                                  title: "${carouselState.initialPage + 1}/${dataCarouselMock.length}",
                                   textStyle: AlvaStyles().headingSize10w500(ModernDarkGray)),
                             ),
                           ),
@@ -280,15 +285,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Visibility(
-                            visible: true,
-                            child: Hero(
-                              tag: 'herousel-indicator',
-                              createRectTween: (Rect? begin, Rect? end) {
-                                return MaterialRectCenterArcTween(begin: begin, end: end);
-                              },
+                            visible: dataCarouselMock.length == 1 ? false : true,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                               child: SmoothPageIndicator(
                                   controller: carouselState,
-                                  count: 5,
+                                  count: dataCarouselMock.length <= 5 ? dataCarouselMock.length : 5,
                                   effect: const ExpandingDotsEffect(
                                     expansionFactor: 2,
                                     dotHeight: 6,
@@ -472,10 +474,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         },
                         tabs: const [
                           Tab(
-                            key: Key("car_detail_tab_view"),
                             text: "ข้อมูลทั่วไป",
                           ),
-                          Tab(key: Key("free_text_tab_view"), text: "รายละเอียดอื่นๆ"),
+                          Tab(text: "รายละเอียดอื่นๆ"),
                         ]),
                     const SizedBox(
                       height: 16,
@@ -508,70 +509,63 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                      child: Hero(
-                    tag: 'herousel',
-                    createRectTween: (Rect? begin, Rect? end) {
-                      return MaterialRectCenterArcTween(begin: begin, end: end);
+                      child: GestureDetector(
+                    onDoubleTapDown: (TapDownDetails detail) {
+                      context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
+                      if (previousState > 0.6) {
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+                      } else {
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
+                      }
                     },
-                    child: GestureDetector(
-                      onDoubleTapDown: (TapDownDetails detail) {
-                        // _handleDoubleTap(detail);
-                        context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
-                        if (previousState > 0.6) {
-                          // _previousScale = 0.5;
-                          context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
-                        } else {
-                          // _previousScale = 0.8;
-                          context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
-                        }
-                        // if(isZoom){
-                        //   isZoom = false;
-                        // }else{
-                        //   isZoom = true;
-                        // }
+                    child: InteractiveViewer(
+                      transformationController: zoomState,
+                      panEnabled: true,
+                      minScale: 0.5,
+                      maxScale: 5.0,
+                      scaleEnabled: true,
+                      onInteractionUpdate: (ScaleUpdateDetails details) {
+                        _scale = previousState * details.scale;
                       },
-                      child: InteractiveViewer(
-                        transformationController: zoomState,
-                        panEnabled: true,
-                        minScale: 0.5,
-                        maxScale: 5.0,
-                        scaleEnabled: true,
-                        onInteractionUpdate: (ScaleUpdateDetails details) {
-                          _scale = previousState * details.scale;
-                        },
-                        onInteractionEnd: (ScaleEndDetails details) {
-                          context
-                              .read<PreviousScaleBloc>()
-                              .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
-                          // log("_previousScale ${_previousScale}");
-                          // log("_previousScale ${_previousScale > 0.6}");
-                        },
-                        child: AspectRatio(
-                          aspectRatio: 16.0 / 9.0,
-                          child: PageView.builder(
-                              itemCount: 5,
-                              physics:
-                                  previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
-                              controller: carouselState,
-                              onPageChanged: (val) {
-                                context
-                                    .read<ProductDetailCarouselScrollControllerBloc>()
-                                    .add(CarouselScrollAction(index: val));
+                      onInteractionEnd: (ScaleEndDetails details) {
+                        context
+                            .read<PreviousScaleBloc>()
+                            .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
+                      },
+                      child: AspectRatio(
+                        aspectRatio: 16.0 / 9.0,
+                        child: PageView.builder(
+                            itemCount:
+                                dataCarouselMock.length == 1 ? dataCarouselMock.length : dataCarouselMock.length + 1,
+                            physics: previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
+                            controller: carouselState,
+                            onPageChanged: (val) {
+                              context
+                                  .read<ProductDetailCarouselScrollControllerBloc>()
+                                  .add(CarouselScrollAction(index: val));
 
-                                if (val + 1 == 5) {
-                                  carouselState.jumpToPage(0);
-                                }
-                              },
-                              itemBuilder: (ctx, i) {
-                                return AspectRatio(
-                                  aspectRatio: 16 / 9,
-                                  child: SizedBox(
-                                      width: maxWidth,
-                                      height: 576,
-                                      child: Image.asset('assets/mockimg/product.png', fit: BoxFit.fitWidth)),
-                                );
-                              }),
-                        ),
+                              if (val == dataCarouselMock.length) {
+                                carouselState.jumpToPage(0);
+                              }
+                            },
+                            itemBuilder: (ctx, i) {
+                              return AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: SizedBox(
+                                  width: maxWidth,
+                                  height: 576,
+                                  child: FadeInImage(
+                                    placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
+                                    image: NetworkImage(
+                                      i == dataCarouselMock.length ? dataCarouselMock[0] : dataCarouselMock[i],
+                                    ),
+                                    fit: BoxFit.fitWidth,
+                                    imageErrorBuilder: (context, error, stackTrace) =>
+                                        Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
+                                  ),
+                                ),
+                              );
+                            }),
                       ),
                     ),
                   )),
@@ -581,9 +575,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             GestureDetector(
               onTap: () {
                 context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
+                if (zoomState.value != Matrix4.identity()) {
+                  context
+                      .read<ImgGalleryZoomBloc>()
+                      .add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
+                }
               },
               child: Padding(
-                padding: const EdgeInsets.only(top: 48, left: 16, right: 16),
+                padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -621,23 +620,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Visibility(
-                          visible: true,
-                          child: Hero(
-                            tag: 'herousel-indicator',
-                            createRectTween: (Rect? begin, Rect? end) {
-                              return MaterialRectCenterArcTween(begin: begin, end: end);
-                            },
-                            child: SmoothPageIndicator(
-                                controller: carouselState,
-                                count: 5,
-                                effect: const ExpandingDotsEffect(
-                                  expansionFactor: 2,
-                                  dotHeight: 6,
-                                  dotWidth: 6,
-                                  activeDotColor: BlueFantasy,
-                                  dotColor: cloudSoftDeepWhite,
-                                )),
-                          ),
+                          visible: dataCarouselMock.length == 1 ? false : true,
+                          child: SmoothPageIndicator(
+                              controller: carouselState,
+                              count: dataCarouselMock.length <= 5 ? dataCarouselMock.length : 5,
+                              effect: const ExpandingDotsEffect(
+                                expansionFactor: 2,
+                                dotHeight: 6,
+                                dotWidth: 6,
+                                activeDotColor: spaceGrey123,
+                                dotColor: cloudSoftDeepWhite,
+                              )),
                         ),
                       ],
                     ),
@@ -645,48 +638,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                 ],
               ),
             )
-            // Center(
-            //   child: state.selectedCarDetail.carImage!.length > 1
-            //       ? Column(
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       Container(
-            //         color: whitePure,
-            //         width: maxWidth,
-            //         padding:
-            //         const EdgeInsets.only(top: 12.0, bottom: 12.0),
-            //         child: Row(
-            //           mainAxisAlignment: MainAxisAlignment.center,
-            //           children: [
-            //             Visibility(
-            //               visible: true,
-            //               child: SmoothPageIndicator(
-            //                   controller: pageViewController,
-            //                   count: 5,
-            //                   effect:  const ExpandingDotsEffect(
-            //                     expansionFactor: 2,
-            //                     dotHeight: 6,
-            //                     dotWidth: 6,
-            //                     activeDotColor: BlueFantasy,
-            //                     dotColor: cloudSoftDeepWhite,
-            //                   )),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ],
-            //   )
-            //       : Container(),
-            // ),
           ],
         )),
       ),
     );
-  }
-}
-
-extension NumberConverter on int {
-  String toDecimalFormat() {
-    return NumberFormat.decimalPattern().format(this);
   }
 }

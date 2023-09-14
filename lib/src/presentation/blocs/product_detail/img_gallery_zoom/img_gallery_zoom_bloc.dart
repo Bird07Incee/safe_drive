@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'img_gallery_zoom_event.dart';
-part 'img_gallery_zoom_state.dart';
 
 class ImgGalleryZoomBloc extends Bloc<ImgGalleryZoomEvent, TransformationController> {
   ImgGalleryZoomBloc() : super(TransformationController()) {
@@ -11,12 +10,10 @@ class ImgGalleryZoomBloc extends Bloc<ImgGalleryZoomEvent, TransformationControl
     on<ZoomImageAction>((event, emit) {
       if (transformationController.value != Matrix4.identity()) {
         transformationController.value = Matrix4.identity();
-        print('out');
         emit(transformationController);
       } else {
-        print('in');
-        transformationController.value = Matrix4.identity() * 3
-          ..translate(-(event.details.localPosition.dx / 2), -(event.details.localPosition.dy / 2));
+        transformationController.value = Matrix4.identity() * 2
+          ..translate(-(event.details.localPosition.dx / 2), -(event.details.localPosition.dy / 1.9));
         emit(transformationController);
       }
     });

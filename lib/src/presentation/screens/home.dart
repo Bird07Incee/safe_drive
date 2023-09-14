@@ -64,6 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.delayed(const Duration(seconds: 10)).then((value) => Navigator.pop(context));
   }
 
+  PageController pageController = PageController(initialPage: 0, keepPage: false);
+
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
@@ -76,7 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 children: [
                   HomepageTopSection(maxWidth: maxWidth),
-                  GestureDetector(onTap: () => showLoading(context), child: HomePageBanner(maxWidth: maxWidth)),
+                  HomePageBanner(
+                    maxWidth: maxWidth,
+                    pageControllerState: pageController,
+                  ),
                   const SizedBox(
                     height: 8,
                   ),
