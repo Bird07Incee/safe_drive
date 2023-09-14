@@ -48,17 +48,23 @@ class LineDataHelper {
     localStorage.addAll({"socialData": data});
   }
 
-  String getUidFromSocialData() {
-    String uid = "";
+  Map<dynamic, dynamic> _getSocialData() {
+    var socialData = {};
 
     localStorage.forEach((key, value) {
       if (key == "socialData" && value.isNotEmpty) {
-        uid = json.decode(value)["uid"];
+        socialData = json.decode(value);
       }
     });
 
-    print("uid : $uid");
+    return socialData;
+  }
 
-    return uid;
+  String getLineUid() {
+    return _getSocialData()["uid"];
+  }
+
+  String getLineAccessToken() {
+    return _getSocialData()["access_token"];
   }
 }
