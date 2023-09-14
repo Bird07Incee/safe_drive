@@ -76,11 +76,13 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   }
 
   void _handleError() {
+    Storage localStorage = window.localStorage;
+
     Navigator.of(context).pop();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ErrorScreen(
         title: ErrorConst().titleNS,
-        subTitle: lineDataHelper.getLineCode(),
+        subTitle: localStorage.toString(),
         titleBtn: ErrorConst().titleBtnNS,
         onTap: () {
           Navigator.of(context).pop();
