@@ -26,7 +26,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
   final liff = fll.FlutterLineLiff();
   @override
   Widget build(BuildContext context) {
-    int itemBannerLength = errorCase ? assetsCarouselItem.length : carouselItem.length;
+    int itemBannerLength = errorCase ? assetsCarouselItem.length : carouselOver20Item.length;
     return Stack(
       children: [
         AspectRatio(
@@ -67,7 +67,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                           : FadeInImage(
                               placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                               image: NetworkImage(
-                                i == carouselItem.length ? carouselItem[0] : carouselItem[i],
+                                i == carouselOver20Item.length ? carouselOver20Item[0] : carouselOver20Item[i],
                               ),
                               fit: BoxFit.fitWidth,
                               imageErrorBuilder: (context, error, stackTrace) =>
@@ -87,7 +87,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: SmoothPageIndicator(
                   controller: widget.pageControllerState,
-                  count: itemBannerLength <= 5 ? itemBannerLength : 5,
+                  count: itemBannerLength <= carouselShowLimit ? itemBannerLength : carouselShowLimit,
                   effect: const ExpandingDotsEffect(
                     expansionFactor: 2,
                     dotHeight: 6,

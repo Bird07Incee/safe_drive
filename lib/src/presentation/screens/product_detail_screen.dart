@@ -62,6 +62,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   List dataCarouselMock = carouselSingleItem;
   @override
   Widget build(BuildContext context) {
+    int imageDataLength = dataCarouselMock.length == 1
+        ? dataCarouselMock.length
+        : dataCarouselMock.length > 20
+            ? 20
+            : dataCarouselMock.length;
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
@@ -76,12 +81,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
                         builder: (context, carouselState) {
                           return switchState
-                              ? viewImagePage(carouselState, context, zoomState, previousState)
-                              : productDetailPage(
-                                  stateAppBar,
-                                  context,
-                                  carouselState,
-                                );
+                              ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
+                              : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
                         },
                       );
                     },
@@ -96,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   }
 
   AlvaRootWidget productDetailPage(
-      ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState) {
+      ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
     return AlvaRootWidget(
         titlePage: titleWebPage,
         appBar: stateAppBar.appBarCarDetailStatus
@@ -186,15 +187,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         AspectRatio(
                           aspectRatio: 16.0 / 9.0,
                           child: PageView.builder(
-                              itemCount:
-                                  dataCarouselMock.length == 1 ? dataCarouselMock.length : dataCarouselMock.length + 1,
+                              itemCount: imageDataLength + 1,
                               controller: carouselState,
                               onPageChanged: (val) {
                                 context
                                     .read<ProductDetailCarouselScrollControllerBloc>()
                                     .add(CarouselScrollAction(index: val));
-
-                                if (val == dataCarouselMock.length) {
+                                if (val == imageDataLength) {
                                   carouselState.jumpToPage(0);
                                 }
                               },
@@ -206,17 +205,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                         context
                                             .read<ViewImgDetailPageSwitchBloc>()
                                             .add(SwitchPageAction(statePage: true));
+                                        context
+                                            .read<ProductDetailCarouselScrollControllerBloc>()
+                                            .add(CarouselScrollAction(index: carouselState.initialPage));
                                       },
                                       onLongPress: () {
+                                        //////////////////////For Test/////////////////////////
                                         setState(() {
-                                          if (dataCarouselMock == carouselItem) {
+                                          if (dataCarouselMock == carouselOver20Item) {
                                             dataCarouselMock = carouselSingleItem;
                                           } else {
-                                            dataCarouselMock = carouselItem;
+                                            dataCarouselMock = carouselOver20Item;
                                           }
                                         });
+                                        //////////////////////For Test/////////////////////////
                                       },
                                       onDoubleTap: () {
+                                        //////////////////////For Test/////////////////////////
                                         setState(() {
                                           if (dataCarouselMock != carouselTripleItem) {
                                             dataCarouselMock = carouselTripleItem;
@@ -224,6 +229,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                             dataCarouselMock = carouselSingleItem;
                                           }
                                         });
+                                        //////////////////////For Test/////////////////////////
                                       },
                                       child: AspectRatio(
                                         aspectRatio: 16 / 9,
@@ -234,7 +240,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                             placeholder: const AssetImage('assets/homepage/img_default.png'),
                                             // Replace with your placeholder image path
                                             image: NetworkImage(
-                                              i == dataCarouselMock.length ? dataCarouselMock[0] : dataCarouselMock[i],
+                                              i == imageDataLength ? dataCarouselMock[0] : dataCarouselMock[i],
                                             ),
                                             fit: BoxFit.fitWidth,
                                             imageErrorBuilder: (context, error, stackTrace) =>
@@ -260,7 +266,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             ),
                             child: Center(
                               child: AlvaText(
-                                  title: "${carouselState.initialPage + 1}/${dataCarouselMock.length}",
+                                  title: "${carouselState.initialPage + 1}/$imageDataLength",
                                   textStyle: AlvaStyles().headingSize10w500(ModernDarkGray)),
                             ),
                           ),
@@ -285,12 +291,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Visibility(
-                            visible: dataCarouselMock.length == 1 ? false : true,
+                            visible: imageDataLength == 1 ? false : true,
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                               child: SmoothPageIndicator(
                                   controller: carouselState,
-                                  count: dataCarouselMock.length <= 5 ? dataCarouselMock.length : 5,
+                                  count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
                                   effect: const ExpandingDotsEffect(
                                     expansionFactor: 2,
                                     dotHeight: 6,
@@ -495,8 +501,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
         ));
   }
 
-  Widget viewImagePage(
-      PageController carouselState, BuildContext context, TransformationController zoomState, double previousState) {
+  Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
+      double previousState, int imageDataLength) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -535,8 +541,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       child: AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
-                            itemCount:
-                                dataCarouselMock.length == 1 ? dataCarouselMock.length : dataCarouselMock.length + 1,
+                            itemCount: imageDataLength + 1,
                             physics: previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
                             controller: carouselState,
                             onPageChanged: (val) {
@@ -544,7 +549,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                   .read<ProductDetailCarouselScrollControllerBloc>()
                                   .add(CarouselScrollAction(index: val));
 
-                              if (val == dataCarouselMock.length) {
+                              if (val == imageDataLength) {
                                 carouselState.jumpToPage(0);
                               }
                             },
@@ -557,7 +562,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                   child: FadeInImage(
                                     placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                                     image: NetworkImage(
-                                      i == dataCarouselMock.length ? dataCarouselMock[0] : dataCarouselMock[i],
+                                      i == imageDataLength ? dataCarouselMock[0] : dataCarouselMock[i],
                                     ),
                                     fit: BoxFit.fitWidth,
                                     imageErrorBuilder: (context, error, stackTrace) =>
@@ -575,6 +580,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             GestureDetector(
               onTap: () {
                 context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
+                context
+                    .read<ProductDetailCarouselScrollControllerBloc>()
+                    .add(CarouselScrollAction(index: carouselState.initialPage));
                 if (zoomState.value != Matrix4.identity()) {
                   context
                       .read<ImgGalleryZoomBloc>()
@@ -620,10 +628,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Visibility(
-                          visible: dataCarouselMock.length == 1 ? false : true,
+                          visible: imageDataLength == 1 ? false : true,
                           child: SmoothPageIndicator(
                               controller: carouselState,
-                              count: dataCarouselMock.length <= 5 ? dataCarouselMock.length : 5,
+                              count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
                               effect: const ExpandingDotsEffect(
                                 expansionFactor: 2,
                                 dotHeight: 6,
