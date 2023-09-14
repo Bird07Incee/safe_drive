@@ -87,7 +87,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/
-    - env-local
     - assets/images/
     - assets/images/wall_charges/
     - assets/homepage/
