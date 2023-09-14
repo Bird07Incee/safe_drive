@@ -89,7 +89,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     SizedBox(
                                         width: widget.maxWidth,
                                         height: 576,
-                                        child: Image.asset('assets/mockimg/product.png', fit: BoxFit.fitWidth)),
+                                        child: Image.asset('assets/mocking/product.png', fit: BoxFit.fitWidth)),
                                   ],
                                 );
                               }),
