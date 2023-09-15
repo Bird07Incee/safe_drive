@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 part 'auth_event.dart';
@@ -44,7 +45,8 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
             loadOneTrustCookieScript();
           } else {
             print("term and con not accept");
-            await Navigator.pushNamed(event.context, "termAndCon");
+            await Navigator.pushNamed(
+                event.context, Routes.termAndCon.toStringPath());
             loadOneTrustCookieScript();
           }
         }
