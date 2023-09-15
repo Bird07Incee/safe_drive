@@ -62,6 +62,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
             headers: {"Authorization": "Bearer $accessToken"});
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
+          //stamp version
           if (!mounted) return;
           Navigator.of(context).pop();
         }
@@ -116,9 +117,17 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       const SizedBox(
                         height: 12,
                       ),
-                      Text(
-                        "ข้อกำหนดและเงื่อนไข",
-                        style: AlvaStyles().heading1(),
+                      GestureDetector(
+                        onTap: () {
+                          Storage localStorage = window.localStorage;
+                          localStorage.clear();
+
+                          liff.logout();
+                        },
+                        child: Text(
+                          "ข้อกำหนดและเงื่อนไข",
+                          style: AlvaStyles().heading1(),
+                        ),
                       )
                     ]),
                   ),
