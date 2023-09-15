@@ -56,9 +56,8 @@ class _RootPageConditionState extends State<RootPageCondition> {
               if (checkBrowserState is CheckBrowserInitial || checkBrowserState is CheckBrowserLoading) {
                 return const LoadingScreen();
               } else if (checkBrowserState is BrowserIsNotLineLiff && (env == 'uat' || env == 'prod')) {
-                var u = window.navigator.userAgent;
                 return ErrorScreen(
-                  title: u,
+                  title: ErrorConst().titleBrowser,
                   subTitle: ErrorConst().subTitleBrowser,
                   titleBtn: ErrorConst().titleBtnBrowser,
                   onTap: () {
