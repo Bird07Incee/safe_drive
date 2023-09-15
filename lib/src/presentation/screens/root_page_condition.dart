@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
@@ -51,11 +53,12 @@ class _RootPageConditionState extends State<RootPageCondition> {
           return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(
             builder: (context, checkBrowserState) {
               final env = Environment().getValue("ENVIRONMENT_NAME");
-              if (checkBrowserState is CheckBrowserLoading) {
+              if (checkBrowserState is CheckBrowserInitial || checkBrowserState is CheckBrowserLoading) {
                 return const LoadingScreen();
               } else if (checkBrowserState is BrowserIsNotLineLiff && (env == 'uat' || env == 'prod')) {
+                var u = window.navigator.userAgent;
                 return ErrorScreen(
-                  title: ErrorConst().titleBrowser,
+                  title: u,
                   subTitle: ErrorConst().subTitleBrowser,
                   titleBtn: ErrorConst().titleBtnBrowser,
                   onTap: () {
