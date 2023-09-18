@@ -263,14 +263,75 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   },
                                 ),
                                 const SizedBox(
-                                  height: 32,
+                                  height: 16,
                                 ),
-                                AlvaText(
-                                  title: '฿ ${NumberFormat.decimalPattern().format(products[index].price)}',
-                                  textStyle: AlvaStyles().headingSize32(),
+                                Visibility(
+                                  visible: products[index].discountPrice != 0,
+                                  child: Row(
+                                    children: [
+                                      AlvaText(
+                                        title: NumberFormat.decimalPattern().format(products[index].discountPrice),
+                                        textStyle: AlvaStyles().bodySize14W400MutedLine(),
+                                      ),
+                                      const SizedBox(
+                                        width: 1,
+                                      ),
+                                      AlvaText(
+                                        title: "บาท",
+                                        textStyle: AlvaStyles().bodySize14W400Muted(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        AlvaText(
+                                          title: NumberFormat.decimalPattern().format(products[index].price),
+                                          textStyle: products[index].discountPrice == 0
+                                              ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
+                                              : AlvaStyles().headingSize22(RedWordShow),
+                                        ),
+                                        Column(
+                                          children: [
+                                            const SizedBox(
+                                              height: 2,
+                                            ),
+                                            AlvaText(
+                                              title: "บาท",
+                                              textStyle: products[index].discountPrice == 0
+                                                  ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                  : AlvaStyles().headingSize18(RedWordShow),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      height: 40,
+                                      decoration: const BoxDecoration(
+                                          color: YellowKrungsri, borderRadius: BorderRadius.all(Radius.circular(8))),
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 32,
+                                          ),
+                                          AlvaText(
+                                            title: 'สนใจ',
+                                            textStyle: AlvaStyles().bodySize14W600(),
+                                          ),
+                                          const SizedBox(
+                                            width: 32,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 const SizedBox(
-                                  height: 32,
+                                  height: 16,
                                 ),
                               ],
                             ),

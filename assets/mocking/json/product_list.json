@@ -179,8 +179,8 @@
         "remark": "html",
         "currency": "THB",
         "price": 26640,
-        "discountPrice": 59000,
-        "percentDiscountPrice": 5,
+        "discountPrice": 0,
+        "percentDiscountPrice": 0,
         "productionAssets": [
           "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
