@@ -15,12 +15,9 @@ class ProductList {
   final List<Products>? products;
 
   ProductList.fromJson(Map<String, dynamic> json)
-      : banner =
-            List.from(json['banner']).map((e) => Banner.fromJson(e)).toList(),
+      : banner = List.from(json['banner']).map((e) => Banner.fromJson(e)).toList(),
         category = List.from(json['category']).map((e) => e as String).toList(),
-        products = List.from(json['products'])
-            .map((e) => Products.fromJson(e))
-            .toList(),
+        products = List.from(json['products']).map((e) => Products.fromJson(e)).toList(),
         productAllItems = json['productAllItems'] as int?,
         productPage = json['productPage'] as int?,
         productCountItems = json['productCountItems'] as int?;
@@ -162,9 +159,7 @@ class Products {
     merchantLogo = json['merchantLogo'];
     merchantMobile = json['merchantMobile'];
     merchantEmail = json['merchantEmail'];
-    productionOptionals = List.from(json['productionOptionals'])
-        .map((e) => ProductionOptionals.fromJson(e))
-        .toList();
+    productionOptionals = List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -200,8 +195,7 @@ class Products {
     _data['merchantLogo'] = merchantLogo;
     _data['merchantMobile'] = merchantMobile;
     _data['merchantEmail'] = merchantEmail;
-    _data['productionOptionals'] =
-        productionOptionals.map((e) => e.toJson()).toList();
+    _data['productionOptionals'] = productionOptionals.map((e) => e.toJson()).toList();
     return _data;
   }
 }
