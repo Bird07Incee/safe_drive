@@ -127,7 +127,24 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) => const SizedBox(),
                             ),
-                          ))
+                          )),
+                          Visibility(
+                            visible: products?[index].percentDiscountPrice != 0,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                              decoration: const BoxDecoration(
+                                  color: Color(0xff40a9fc),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      topRight: Radius.circular(0),
+                                      bottomLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(8))),
+                              child: AlvaText(
+                                title: "ถูกลง ${products?[index].percentDiscountPrice} %",
+                                textStyle: AlvaStyles().headingSize12w600(Colors.white),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                       Container(

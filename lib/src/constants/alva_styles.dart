@@ -20,6 +20,10 @@ class AlvaStyles {
 
   TextStyle headingSize12w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color);
+
+  TextStyle headingSize12w600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.bold, color: color);
+
   TextStyle headingSize22w700(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: color);
 
