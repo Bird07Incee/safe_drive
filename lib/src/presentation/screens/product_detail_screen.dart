@@ -187,13 +187,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         AspectRatio(
                           aspectRatio: 16.0 / 9.0,
                           child: PageView.builder(
-                              itemCount: imageDataLength + 1,
+                              itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
                               controller: carouselState,
                               onPageChanged: (val) {
                                 context
                                     .read<ProductDetailCarouselScrollControllerBloc>()
                                     .add(CarouselScrollAction(index: val));
-                                if (val == imageDataLength) {
+                                if (val == imageDataLength && val != 1) {
                                   carouselState.jumpToPage(0);
                                 }
                               },
@@ -541,7 +541,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       child: AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
-                            itemCount: imageDataLength + 1,
+                            itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
                             physics: previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
                             controller: carouselState,
                             onPageChanged: (val) {
@@ -549,7 +549,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                   .read<ProductDetailCarouselScrollControllerBloc>()
                                   .add(CarouselScrollAction(index: val));
 
-                              if (val == imageDataLength) {
+                              if (val == imageDataLength && val != 1) {
                                 carouselState.jumpToPage(0);
                               }
                             },
