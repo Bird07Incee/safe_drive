@@ -12,14 +12,16 @@ part 'product_list_state.dart';
 
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   ProductListBloc() : super(const ProductListState()) {
-    on<ProductListEvent>((event, emit) async {
-     await DefaultAssetBundle.of(event.context)
+    on<GetProductListMock>(_onGetProductListMock);
+  }
+
+  _onGetProductListMock(GetProductListMock event, Emitter<ProductListState> emit) async{
+      await DefaultAssetBundle.of(event.context)
           .loadString('assets/mocking/json/product_list.json')
           .then((value) {
         final jsonObj = json.decode(value);
         final productList = ProductList.fromJson(jsonObj);
         emit(state.copyWith(productList: productList));
       });
-    });
-  }
+    }
 }
