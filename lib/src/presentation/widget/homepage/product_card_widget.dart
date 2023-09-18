@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
@@ -26,16 +28,6 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     1,
     1,
     1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
   ];
 
   @override
@@ -48,6 +40,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductListBloc, ProductListState>(
       builder: (context, state) {
+        final products = state.productList.products;
         return ListView.builder(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
@@ -146,7 +139,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       Container(
                         color: whitePure,
                         width: widget.maxWidth,
-                        padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -175,68 +168,43 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 AlvaText(
-                                  title: 'Pulsar Plus',
-                                  textStyle: AlvaStyles().headingSize32(),
+                                  title: products![index].productName,
+                                  textStyle:
+                                      AlvaStyles().headingSize22Height32(),
                                 ),
                                 Row(
-                                  children: [
-                                    Container(
-                                      margin:
-                                          const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                      decoration: BoxDecoration(
-                                          color: whiteSoftGreen,
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 8),
-                                        child: AlvaText(
-                                          title: 'ติดตั้งฟรี',
-                                          textStyle:
-                                              AlvaStyles().headingSize10(),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 1,
-                                      height: 16,
-                                      color: cloudSoftDeepWhite,
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 8),
-                                        child: AlvaText(
-                                          title: 'รับประกัน 3 ปี',
-                                          textStyle:
-                                              AlvaStyles().headingSize10(),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 1,
-                                      height: 16,
-                                      color: cloudSoftDeepWhite,
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 8),
-                                        child: AlvaText(
-                                          title:
-                                              'สิทธิพิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้ ',
-                                          textStyle:
-                                              AlvaStyles().headingSize10(),
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                  children: products[index]
+                                      .promotionTag
+                                      .map((tag) => Row(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 4),
+                                                child: AlvaText(
+                                                  title: tag,
+                                                  textStyle: AlvaStyles()
+                                                      .headingSize10(),
+                                                ),
+                                              ),
+
+                                              // add srperator exclude tail
+                                              if (products[index]
+                                                      .promotionTag
+                                                      .indexOf(tag) !=
+                                                  products[index]
+                                                          .promotionTag
+                                                          .length -
+                                                      1)
+                                                const Text("|")
+                                              // const VerticalDivider(
+                                              //   width: 8,
+                                              //   thickness: 100,
+                                              //   color: Colors.grey,
+                                              // )
+                                            ],
+                                          ))
+                                      .toList(),
                                 ),
                                 const SizedBox(
                                   height: 16,
@@ -249,25 +217,43 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 const SizedBox(
                                   height: 16,
                                 ),
-                                AlvaText(
-                                  title: 'เล็ก ทรงพลัง',
-                                  textStyle: AlvaStyles().headingSize16w600(
-                                      BTN_SELECTED_TEXT_COLOR_NEW),
-                                ),
+                                Html(data: products[index].tagline, style: {
+                                  "body": Style(
+                                      margin: EdgeInsets.zero,
+                                      padding: EdgeInsets.zero),
+                                  "h1": Style(
+                                    padding: EdgeInsets.zero,
+                                    margin: EdgeInsets.zero,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: const FontSize(16.0),
+                                    fontFamily: 'Krungsri Condensed',
+                                  )
+                                }),
                                 const SizedBox(
-                                  height: 16,
+                                  height: 8,
                                 ),
-                                AlvaText(
-                                  title:
-                                      'เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application',
-                                  textStyle: AlvaStyles()
-                                      .headingSize10w400(blackInBlack),
+                                Html(
+                                  data: products[index].description,
+                                  style: {
+                                    "body": Style(
+                                        margin: EdgeInsets.zero,
+                                        padding: EdgeInsets.zero),
+                                    "p": Style(
+                                      padding: EdgeInsets.zero,
+                                      margin: EdgeInsets.zero,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: const FontSize(10.0),
+                                      fontFamily: 'Krungsri Condensed',
+                                      lineHeight: const LineHeight(1.5),
+                                    )
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 32,
                                 ),
                                 AlvaText(
-                                  title: '฿ 44,500',
+                                  title:
+                                      '฿ ${NumberFormat.decimalPattern().format(products[index].price)}',
                                   textStyle: AlvaStyles().headingSize32(),
                                 ),
                                 const SizedBox(

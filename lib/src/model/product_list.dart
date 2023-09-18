@@ -14,18 +14,13 @@ class ProductList {
   final List<String>? category;
   final List<Products>? products;
 
-// LoanData.fromJson(Map<String, dynamic> json)
-//       : installment = json['installment'] as int?,
-//         value = json['value'] as int?,
-//         loanRatePercent = json['loanRatePercent'] as double?,
-//         downAmount = json['downAmount'] as int?,
-//         financeAmount = json['financeAmount'] as int?;
-
-  ProductList.fromJson(
-      Map<String, dynamic> json)
-      : banner = json['banner'] as List<Banner>?,
-        category = json['category'] as List<String>?,
-        products = json['products'] as List<Products>?,
+  ProductList.fromJson(Map<String, dynamic> json)
+      : banner =
+            List.from(json['banner']).map((e) => Banner.fromJson(e)).toList(),
+        category = List.from(json['category']).map((e) => e as String).toList(),
+        products = List.from(json['products'])
+            .map((e) => Products.fromJson(e))
+            .toList(),
         productAllItems = json['productAllItems'] as int?,
         productPage = json['productPage'] as int?,
         productCountItems = json['productCountItems'] as int?;

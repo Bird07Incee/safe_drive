@@ -29,6 +29,13 @@ class AlvaStyles {
         fontWeight: FontWeight.bold,
       );
 
+  TextStyle headingSize22Height32() => const TextStyle(
+        fontFamily: fontFamily,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        height: 32/22,
+      );
+
   TextStyle headingSize10w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w400, color: color);
   TextStyle headingSize10w500(Color color) =>
