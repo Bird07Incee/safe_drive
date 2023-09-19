@@ -518,7 +518,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       child: GestureDetector(
                     onDoubleTapDown: (TapDownDetails detail) {
                       context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
-                      if (previousState > 0.6) {
+                      if (previousState > 0.5) {
                         context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                       } else {
                         context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
@@ -542,7 +542,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
                             itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
-                            physics: previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
+                            physics: previousState == 0.5 ? const ScrollPhysics () : const NeverScrollableScrollPhysics(),
                             controller: carouselState,
                             onPageChanged: (val) {
                               context
@@ -583,11 +583,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                 context
                     .read<ProductDetailCarouselScrollControllerBloc>()
                     .add(CarouselScrollAction(index: carouselState.initialPage));
+                context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                 if (zoomState.value != Matrix4.identity()) {
                   context
                       .read<ImgGalleryZoomBloc>()
                       .add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
                 }
+
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
