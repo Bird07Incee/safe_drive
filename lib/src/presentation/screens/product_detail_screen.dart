@@ -60,6 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   double _scale = 1.0;
 
   List dataCarouselMock = carouselSingleItem;
+
   @override
   Widget build(BuildContext context) {
     int imageDataLength = dataCarouselMock.length == 1
@@ -82,7 +83,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         builder: (context, carouselState) {
                           return switchState
                               ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
-                              : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
+                              : productDetailPage(stateAppBar, context, carouselState, imageDataLength, zoomState);
                         },
                       );
                     },
@@ -96,8 +97,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     );
   }
 
-  AlvaRootWidget productDetailPage(
-      ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
+  AlvaRootWidget productDetailPage(ScrollProductDetailState stateAppBar, BuildContext context,
+      PageController carouselState, int imageDataLength, TransformationController zoomState) {
     return AlvaRootWidget(
         titlePage: titleWebPage,
         appBar: stateAppBar.appBarCarDetailStatus
@@ -208,6 +209,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                         context
                                             .read<ProductDetailCarouselScrollControllerBloc>()
                                             .add(CarouselScrollAction(index: carouselState.initialPage));
+                                        context
+                                            .read<PreviousScaleBloc>()
+                                            .add(const PreviousScaleEvent(previousScale: 0.5));
+                                        if (zoomState.value != Matrix4.identity()) {
+                                          context.read<ImgGalleryZoomBloc>().add(
+                                              ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
+                                        }
                                       },
                                       onLongPress: () {
                                         //////////////////////For Test/////////////////////////
@@ -240,8 +248,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                             placeholder: const AssetImage('assets/homepage/img_default.png'),
                                             // Replace with your placeholder image path
                                             image: NetworkImage(
-                                              i == imageDataLength ? dataCarouselMock[0] : dataCarouselMock[i],
+                                              i == imageDataLength
+                                                  ? dataCarouselMock[0]
+                                                  : dataCarouselMock[i],
                                             ),
+                                            // image: NetworkImage(
+                                            //   i == imageDataLength
+                                            //       ? dataCarouselMock[0].substring(46)
+                                            //       : dataCarouselMock[i].substring(46),
+                                            // ),
                                             fit: BoxFit.fitWidth,
                                             imageErrorBuilder: (context, error, stackTrace) =>
                                                 Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
@@ -503,8 +518,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
       double previousState, int imageDataLength) {
+    backButtontoDetail() {
+      log("backButtontoDetail");
+      context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
+      context
+          .read<ProductDetailCarouselScrollControllerBloc>()
+          .add(CarouselScrollAction(index: carouselState.initialPage));
+      context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+      if (zoomState.value != Matrix4.identity()) {
+        context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
+      }
+    }
+
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async {
+        backButtontoDetail();
+        return true;
+      },
       child: Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
@@ -542,7 +572,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
                             itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
-                            physics: previousState == 0.5 ? const ScrollPhysics () : const NeverScrollableScrollPhysics(),
+                            physics:
+                                previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
                             controller: carouselState,
                             onPageChanged: (val) {
                               context
@@ -562,8 +593,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                   child: FadeInImage(
                                     placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                                     image: NetworkImage(
-                                      i == imageDataLength ? dataCarouselMock[0] : dataCarouselMock[i],
+                                      i == imageDataLength
+                                          ? dataCarouselMock[0]
+                                          : dataCarouselMock[i],
                                     ),
+                                    // image: NetworkImage(
+                                    //   i == imageDataLength
+                                    //       ? dataCarouselMock[0].substring(46)
+                                    //       : dataCarouselMock[i].substring(46),
+                                    // ),
                                     fit: BoxFit.fitWidth,
                                     imageErrorBuilder: (context, error, stackTrace) =>
                                         Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
@@ -579,17 +617,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             ),
             GestureDetector(
               onTap: () {
-                context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
-                context
-                    .read<ProductDetailCarouselScrollControllerBloc>()
-                    .add(CarouselScrollAction(index: carouselState.initialPage));
-                context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
-                if (zoomState.value != Matrix4.identity()) {
-                  context
-                      .read<ImgGalleryZoomBloc>()
-                      .add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
-                }
-
+                backButtontoDetail();
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 16, left: 16, right: 16),

@@ -75,7 +75,7 @@ const carouselOver20Item = [
   "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Residential_Complex_Pulsar_Plus_NA_4657.jpg",
 ];
 const carouselSingleItem = [
- "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
 ];
 const carouselTripleItem = [
   "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",

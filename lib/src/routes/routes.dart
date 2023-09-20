@@ -27,13 +27,10 @@ extension TypeCoverter on Routes {
 
 final Map<String, WidgetBuilder> routes = {
   (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
-  (Routes.termAndCon).toStringPath(): (BuildContext _) =>
-      const TermAndConScreen(),
+  (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
-  (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
-      const LoadingScreen(),
-  (Routes.productDetail).toStringPath(): (BuildContext _) =>
-      const ProductDetailScreen()
+  (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
+  (Routes.productDetail).toStringPath(): (BuildContext _) => const ProductDetailScreen()
 };
 
 // extension StringExtension on String {

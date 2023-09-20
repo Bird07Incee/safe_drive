@@ -45,8 +45,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
-          late final PageController pageViewController =
-              PageController(initialPage: 0);
+          late final PageController pageViewController = PageController(initialPage: 0);
           return GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, Routes.productDetail.toStringPath());
@@ -76,9 +75,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16)),
+                          borderRadius:
+                              const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
                           child: PageView.builder(
                               itemCount: 10,
                               controller: pageViewController,
@@ -93,9 +91,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     SizedBox(
                                         width: widget.maxWidth,
                                         height: 576,
-                                        child: Image.asset(
-                                            'assets/mocking/product.png',
-                                            fit: BoxFit.fitWidth)),
+                                        child: Image.asset('assets/mocking/product.png', fit: BoxFit.fitWidth)),
                                   ],
                                 );
                               }),
@@ -127,8 +123,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           "assets/homepage/brand.png",
                           height: 32,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const SizedBox(),
+                          errorBuilder: (context, error, stackTrace) => const SizedBox(),
                         ),
                       ))
                     ],
@@ -172,12 +167,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               children: [
                                 Container(
                                   margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                  decoration: BoxDecoration(
-                                      color: whiteSoftGreen,
-                                      borderRadius: BorderRadius.circular(4)),
+                                  decoration:
+                                      BoxDecoration(color: whiteSoftGreen, borderRadius: BorderRadius.circular(4)),
                                   child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 8),
+                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                                     child: AlvaText(
                                       title: 'ติดตั้งฟรี',
                                       textStyle: AlvaStyles().headingSize10(),
@@ -190,11 +183,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   color: cloudSoftDeepWhite,
                                 ),
                                 Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4)),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
                                   child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 8),
+                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                                     child: AlvaText(
                                       title: 'รับประกัน 3 ปี',
                                       textStyle: AlvaStyles().headingSize10(),
@@ -207,14 +198,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   color: cloudSoftDeepWhite,
                                 ),
                                 Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4)),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
                                   child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 8),
+                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                                     child: AlvaText(
-                                      title:
-                                          'สิทธิพิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้ ',
+                                      title: 'สิทธิพิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้ ',
                                       textStyle: AlvaStyles().headingSize10(),
                                     ),
                                   ),
@@ -234,8 +222,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             ),
                             AlvaText(
                               title: 'เล็ก ทรงพลัง',
-                              textStyle: AlvaStyles().headingSize16w600(
-                                  BTN_SELECTED_TEXT_COLOR_NEW),
+                              textStyle: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                             const SizedBox(
                               height: 16,
@@ -243,8 +230,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             AlvaText(
                               title:
                                   'เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application',
-                              textStyle:
-                                  AlvaStyles().headingSize10w400(blackInBlack),
+                              textStyle: AlvaStyles().headingSize10w400(blackInBlack),
                             ),
                             const SizedBox(
                               height: 32,
