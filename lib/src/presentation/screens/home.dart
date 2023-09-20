@@ -9,6 +9,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 // import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 // import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
@@ -78,101 +79,109 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             titlePage: titleWebPage,
             child: BlocBuilder<ProductListBloc, ProductListState>(
               builder: (context, state) {
-                return state.productListStatus == GetProductListStatus.success
-                    ? Container(
-                        color: cloudyWhite,
-                        child: ListView(
+                if (state.productListStatus == GetProductListStatus.success) {
+                  return Container(
+                    color: cloudyWhite,
+                    child: ListView(
+                      children: [
+                        HomepageTopSection(maxWidth: maxWidth),
+                        HomePageBanner(
+                          maxWidth: maxWidth,
+                          pageControllerState: pageController,
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            HomepageTopSection(maxWidth: maxWidth),
-                            HomePageBanner(
-                              maxWidth: maxWidth,
-                              pageControllerState: pageController,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: maxWidth - 32,
-                                  child: ProductCardWidget(maxWidth: maxWidth),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Container(
-                                  color: cloudDeepWhite,
-                                  height: 32,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      AlvaText(
-                                        title: HomeConst().termsAndConditions,
-                                        textStyle: AlvaStyles().headingSize10(),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(horizontal: 8),
-                                        width: 1,
-                                        height: 16,
-                                        color: cloudSoftDeepWhite,
-                                      ),
-                                      AlvaText(
-                                        title: HomeConst().privacyPolicy,
-                                        textStyle: AlvaStyles().headingSize10(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  color: cloudDeepWhite,
-                                  height: 72,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          AlvaText(
-                                            title: HomeConst().askInformation,
-                                            textStyle: AlvaStyles().headingSize10(),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          AlvaText(
-                                            title: HomeConst().pleaseContact,
-                                            textStyle: AlvaStyles().headingSize12w700(sugarRed),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  color: spaceGrey,
-                                  height: 40,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      AlvaText(
-                                        title: HomeConst().warningWord,
-                                        textStyle: AlvaStyles().headingSize10w400(whiteFalse),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                            SizedBox(
+                              width: maxWidth - 32,
+                              child: ProductCardWidget(maxWidth: maxWidth),
                             ),
                           ],
                         ),
-                      )
-                    : const LoadingScreen();
+                        Column(
+                          children: [
+                            Container(
+                              height: 40,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  AlvaText(
+                                    title: HomeConst().warningWord,
+                                    textStyle: AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              color: cloudDeepWhite,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  AlvaText(
+                                    title: HomeConst().termsAndConditions,
+                                    textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                                    width: 1,
+                                    height: 16,
+                                    color: sugarRed,
+                                  ),
+                                  AlvaText(
+                                    title: HomeConst().privacyPolicy,
+                                    textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              color: spaceGrey,
+                              height: 72,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AlvaText(
+                                        title: HomeConst().askInformation,
+                                        textStyle: AlvaStyles().headingSize10w600(whiteFalse),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AlvaText(
+                                        title: HomeConst().pleaseContact,
+                                        textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (state.productListStatus == GetProductListStatus.error) {
+                  return ErrorScreen(
+                    title: ErrorConst().titleNS,
+                    subTitle: ErrorConst().subTitleNS,
+                    titleBtn: ErrorConst().titleBtnNS,
+                    onTap: () {},
+                  );
+                } else {
+                  return const LoadingScreen();
+                }
               },
             )));
   }
