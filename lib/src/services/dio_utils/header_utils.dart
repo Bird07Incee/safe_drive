@@ -10,7 +10,7 @@ class HeaderUtil {
       HttpHeaders.contentTypeHeader: "application/json; charset=UTF-8",
       HttpHeaders.acceptHeader: "application/json",
       "Nonce": "MARKETPLACE|${uuid.v4()}|$dateTime",
-      "Access-Control-Allow-Origin": "*"
+      "Accept": "application/json"
     };
   }
 }

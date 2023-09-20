@@ -33,7 +33,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   @override
   void initState() {
     super.initState();
-    context.read<ProductListBloc>().add(GetProductListMock(context));
+    // context.read<ProductListBloc>().add(GetProductListMock(context));
   }
 
   @override
