@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -67,6 +68,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Future.delayed(const Duration(seconds: 10)).then((value) => Navigator.pop(context));
   }
 
+  ProductList getProductListByCategory(ProductList unSortProductList, int id) {
+    // ignore: prefer_const_constructors
+    ProductList result = ProductList(
+        productAllItems: 0, productPage: 0, productCountItems: 0, banner: [], category: [], products: []);
+
+    for (final product in unSortProductList.products!) {
+      if (product.categoryId == (id + 1).toString()) {
+        result.products?.add(product);
+      }
+    }
+
+    return result;
+  }
+
   PageController pageController = PageController(initialPage: 0, keepPage: false);
 
   @override
@@ -89,21 +104,95 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           maxWidth: maxWidth,
                           pageControllerState: pageController,
                         ),
-                        const SizedBox(
-                          height: 8,
+                        Container(
+                          color: Colors.white,
+                          child: TabBar(
+                              controller: tabController,
+                              labelColor: Colors.black,
+                              indicatorColor: BlueFantasy,
+                              labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
+                              unselectedLabelColor: const Color(0xffA4A8AD),
+                              onTap: (int index) {
+                                context.read<ProductListBloc>().add(SetSelectTabIndex(index));
+                              },
+                              tabs: const [
+                                Tab(
+                                  text: "ทั้งหมด",
+                                ),
+                                Tab(text: "วอลชาร์จ"),
+                                Tab(text: "โซลาร์เซลล์"),
+                                Tab(text: "สินค้าอื่นๆ"),
+                              ]),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        IndexedStack(
+                          index: state.selectedTabIndex,
                           children: [
-                            SizedBox(
-                              width: maxWidth - 32,
-                              child: ProductCardWidget(maxWidth: maxWidth),
+                            Visibility(
+                              maintainState: true,
+                              visible: state.selectedTabIndex == 0,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: maxWidth - 32,
+                                    child: ProductCardWidget(
+                                      maxWidth: maxWidth,
+                                      productList: state.productList,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Visibility(
+                              maintainState: true,
+                              visible: state.selectedTabIndex == 1,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: maxWidth - 32,
+                                    child: ProductCardWidget(
+                                        maxWidth: maxWidth,
+                                        productList: getProductListByCategory(state.productList, 1)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Visibility(
+                              maintainState: true,
+                              visible: state.selectedTabIndex == 2,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: maxWidth - 32,
+                                    child: ProductCardWidget(
+                                        maxWidth: maxWidth,
+                                        productList: getProductListByCategory(state.productList, 2)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Visibility(
+                              maintainState: true,
+                              visible: state.selectedTabIndex == 3,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: maxWidth - 32,
+                                    child: ProductCardWidget(
+                                        maxWidth: maxWidth,
+                                        productList: getProductListByCategory(state.productList, 3)),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                         Column(
                           children: [
-                            Container(
+                            SizedBox(
                               height: 40,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -186,202 +275,3 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             )));
   }
 }
-
-// Poc appbar
-class TabBarApp extends StatelessWidget {
-  const TabBarApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
-      home: const TabBarExample(),
-    );
-  }
-}
-
-class TabBarExample extends StatelessWidget {
-  const TabBarExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 1,
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.cloud_outlined),
-              ),
-              Tab(
-                icon: Icon(Icons.beach_access_sharp),
-              ),
-              Tab(
-                icon: Icon(Icons.brightness_5_sharp),
-              ),
-            ],
-          ),
-        ),
-        // body: Expanded(
-        //   child: ,
-        // ),
-      ),
-    );
-  }
-}
-
-// CustomScrollView(
-//                 clipBehavior: Clip.none,
-//                 slivers: [
-//                   SliverList(
-//                       delegate: SliverChildListDelegate.fixed([
-//                     HomepageTopSection(maxWidth: maxWidth),
-//                     HomePageBanner(
-//                       maxWidth: maxWidth,
-//                       pageControllerState: pageController,
-//                     ),
-//                     const SizedBox(
-//                       height: 8,
-//                     ),
-//                   ])),
-//                   const SliverToBoxAdapter(
-//                     child: SizedBox(
-//                       height: 16,
-//                     ),
-//                   ),
-//                   SliverList(
-//                       delegate: SliverChildListDelegate.fixed([
-//                     TabBar(
-//                       controller: tabController,
-//                       tabs: const <Widget>[
-//                         Tab(
-//                           icon: Icon(Icons.cloud_outlined),
-//                           // icon: Image.asset("assets/images/category/icon_cate_all.png"),
-//                           text: "ทั้งหมด",
-//                         ),
-//                         Tab(
-//                           icon: Icon(Icons.beach_access_sharp),
-//                           text: "วอลชาร์จ",
-//                         ),
-//                         Tab(
-//                           icon: Icon(Icons.brightness_5_sharp),
-//                           text: "โซลาร์เซลล์",
-//                         ),
-//                         Tab(
-//                           icon: Icon(Icons.access_alarm_sharp),
-//                           text: "สินค้าอื่นๆ",
-//                         ),
-//                       ],
-//                     )
-//                   ])),
-//                   SliverFillRemaining(
-//                     child: TabBarView(
-//                       clipBehavior: Clip.none,
-//                       controller: tabController,
-//                       children: <Widget>[
-//                         // ProductCardWidget(maxWidth: maxWidth),
-//                         Text("It's qwer here"),
-//                         Text("It's rainy here"),
-//                         Text("It's sunny here"),
-//                         Text("It's asdf here"),
-//                       ],
-//                     ),
-
-//                     // child: Column(
-//                     //   mainAxisSize: MainAxisSize.min,
-//                     //   crossAxisAlignment: CrossAxisAlignment.stretch,
-//                     //   children: <Widget>[
-//                     //     Expanded(
-//                     //       child: TabBarView(
-//                     //           clipBehavior: Clip.none,
-//                     //           controller: tabController,
-//                     //           children: [
-//                     //             ProductCardWidget(maxWidth: maxWidth),
-//                     //             // Text("It's qwer here"),
-//                     //             Text("It's rainy here"),
-//                     //             Text("It's sunny here"),
-//                     //             Text("It's asdf here"),
-//                     //           ]),
-//                     //     )
-//                     //   ],
-//                     // ),
-//                   ),
-//                   SliverList(
-//                       delegate: SliverChildListDelegate.fixed([
-//                     Column(
-//                       children: [
-//                         Container(
-//                           color: cloudDeepWhite,
-//                           height: 32,
-//                           child: Row(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             crossAxisAlignment: CrossAxisAlignment.end,
-//                             children: [
-//                               AlvaText(
-//                                 title: HomeConst().termsAndConditions,
-//                                 textStyle: AlvaStyles().headingSize10(),
-//                               ),
-//                               Container(
-//                                 margin:
-//                                     const EdgeInsets.symmetric(horizontal: 8),
-//                                 width: 1,
-//                                 height: 16,
-//                                 color: cloudSoftDeepWhite,
-//                               ),
-//                               AlvaText(
-//                                 title: HomeConst().privacyPolicy,
-//                                 textStyle: AlvaStyles().headingSize10(),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                         Container(
-//                           color: cloudDeepWhite,
-//                           height: 72,
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Row(
-//                                 mainAxisAlignment: MainAxisAlignment.center,
-//                                 children: [
-//                                   AlvaText(
-//                                     title: HomeConst().askInformation,
-//                                     textStyle: AlvaStyles().headingSize10(),
-//                                   ),
-//                                 ],
-//                               ),
-//                               Row(
-//                                 mainAxisAlignment: MainAxisAlignment.center,
-//                                 children: [
-//                                   AlvaText(
-//                                     title: HomeConst().pleaseContact,
-//                                     textStyle: AlvaStyles()
-//                                         .headingSize12w700(sugarRed),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                         Container(
-//                           color: spaceGrey,
-//                           height: 40,
-//                           child: Row(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             crossAxisAlignment: CrossAxisAlignment.center,
-//                             children: [
-//                               AlvaText(
-//                                 title: HomeConst().warningWord,
-//                                 textStyle:
-//                                     AlvaStyles().headingSize10w400(whiteFalse),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ]))
-//                 ],
-//               ),

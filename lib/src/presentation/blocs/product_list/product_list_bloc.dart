@@ -19,6 +19,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   ProductListBloc() : super(const ProductListState()) {
     on<GetProductListMock>(_onGetProductListMock);
     on<GetProductList>(_onGetProductList);
+    on<SetSelectTabIndex>(_onSetSelectTabIndex);
   }
 
   _onGetProductListMock(GetProductListMock event, Emitter<ProductListState> emit) async {
@@ -27,6 +28,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       final productList = ProductList.fromJson(jsonObj);
       emit(state.copyWith(productList: productList));
     });
+  }
+
+  _onSetSelectTabIndex(SetSelectTabIndex event, Emitter<ProductListState> emit) {
+    emit(state.copyWith(selectedTabIndex: event.selectedTabIndex));
   }
 
   _onGetProductList(GetProductList event, Emitter<ProductListState> emit) async {

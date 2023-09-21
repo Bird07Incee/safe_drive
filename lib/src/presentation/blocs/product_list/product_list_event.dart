@@ -16,3 +16,9 @@ class GetProductListMock extends ProductListEvent {
 class GetProductList extends ProductListEvent {
   const GetProductList();
 }
+
+class SetSelectTabIndex extends ProductListEvent {
+  const SetSelectTabIndex(this.selectedTabIndex);
+
+  final int selectedTabIndex;
+}
