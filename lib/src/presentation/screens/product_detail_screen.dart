@@ -533,7 +533,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     return WillPopScope(
       onWillPop: () async {
         backButtontoDetail();
-        return true;
+        return false;
       },
       child: Scaffold(
         backgroundColor: Colors.black,
