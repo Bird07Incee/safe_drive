@@ -32,7 +32,7 @@ class DioUtilityService with HeaderUtil {
     }
   }
 
-  Future<Response> postByURL(String path, Map<String, Object?> body,
+  Future<Response> postByURL(String path, Map<dynamic, dynamic> body,
       {bool isRecursion = false, Map<String, dynamic>? headers}) async {
     _dioClient.options.headers = HeaderUtil.baseHeader;
     if (headers != null) {

@@ -12,3 +12,7 @@ class GetProductListMock extends ProductListEvent {
 
   final BuildContext context;
 }
+
+class GetProductList extends ProductListEvent {
+  const GetProductList();
+}
