@@ -69,13 +69,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   ProductList getProductListByCategory(ProductList unSortProductList, int id) {
-    // ignore: prefer_const_constructors
-    ProductList result =
+    var result =
+        // ignore: prefer_const_constructors
         ProductList(productAllItems: 0, productPage: 0, productCountItems: 0, banner: [], category: [], products: []);
 
     for (final product in unSortProductList.products!) {
       if (product.categoryId == (id + 1).toString()) {
         result.products?.add(product);
+      }
+    }
+
+    return result;
+  }
+
+  bool isProductListContainCategory(ProductList productList) {
+    bool result = false;
+
+    for (final product in productList.products!) {
+      if (int.parse(product.categoryId) >= 2) {
+        result = true;
       }
     }
 
@@ -104,51 +116,55 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           maxWidth: maxWidth,
                           pageControllerState: pageController,
                         ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          color: Colors.white,
-                          child: TabBar(
-                              controller: tabController,
-                              labelColor: Colors.black,
-                              indicatorColor: BlueFantasy,
-                              labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
-                              unselectedLabelColor: const Color(0xffA4A8AD),
-                              onTap: (int index) {
-                                context.read<ProductListBloc>().add(SetSelectTabIndex(index));
-                              },
-                              tabs: [
-                                Tab(
-                                  text: "ทั้งหมด",
-                                  icon: state.selectedTabIndex == 0
-                                      ? Image.asset('assets/images/category/icon_active_cate_all.png',
-                                          width: 24, height: 24)
-                                      : Image.asset('assets/images/category/icon_cate_all.png', width: 24, height: 24),
-                                ),
-                                Tab(
-                                  text: "วอลชาร์จ",
-                                  icon: state.selectedTabIndex == 1
-                                      ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
-                                          width: 24, height: 24)
-                                      : Image.asset('assets/images/category/icon_cate_wallcharge.png',
-                                          width: 24, height: 24),
-                                ),
-                                Tab(
-                                  text: "โซลาร์เซลล์",
-                                  icon: state.selectedTabIndex == 2
-                                      ? Image.asset('assets/images/category/icon_active_cate_solar.png',
-                                          width: 24, height: 24)
-                                      : Image.asset('assets/images/category/icon_cate_solar.png',
-                                          width: 24, height: 24),
-                                ),
-                                Tab(
-                                  text: "สินค้าอื่นๆ",
-                                  icon: state.selectedTabIndex == 3
-                                      ? Image.asset('assets/images/category/icon_active_cate_other.png',
-                                          width: 24, height: 24)
-                                      : Image.asset('assets/images/category/icon_cate_other.png',
-                                          width: 24, height: 24),
-                                ),
-                              ]),
+                        Visibility(
+                          visible: isProductListContainCategory(state.productList),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            color: Colors.white,
+                            child: TabBar(
+                                controller: tabController,
+                                labelColor: Colors.black,
+                                indicatorColor: BlueFantasy,
+                                labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
+                                unselectedLabelColor: const Color(0xffA4A8AD),
+                                onTap: (int index) {
+                                  context.read<ProductListBloc>().add(SetSelectTabIndex(index));
+                                },
+                                tabs: [
+                                  Tab(
+                                    text: "ทั้งหมด",
+                                    icon: state.selectedTabIndex == 0
+                                        ? Image.asset('assets/images/category/icon_active_cate_all.png',
+                                            width: 24, height: 24)
+                                        : Image.asset('assets/images/category/icon_cate_all.png',
+                                            width: 24, height: 24),
+                                  ),
+                                  Tab(
+                                    text: "วอลชาร์จ",
+                                    icon: state.selectedTabIndex == 1
+                                        ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
+                                            width: 24, height: 24)
+                                        : Image.asset('assets/images/category/icon_cate_wallcharge.png',
+                                            width: 24, height: 24),
+                                  ),
+                                  Tab(
+                                    text: "โซลาร์เซลล์",
+                                    icon: state.selectedTabIndex == 2
+                                        ? Image.asset('assets/images/category/icon_active_cate_solar.png',
+                                            width: 24, height: 24)
+                                        : Image.asset('assets/images/category/icon_cate_solar.png',
+                                            width: 24, height: 24),
+                                  ),
+                                  Tab(
+                                    text: "สินค้าอื่นๆ",
+                                    icon: state.selectedTabIndex == 3
+                                        ? Image.asset('assets/images/category/icon_active_cate_other.png',
+                                            width: 24, height: 24)
+                                        : Image.asset('assets/images/category/icon_cate_other.png',
+                                            width: 24, height: 24),
+                                  ),
+                                ]),
+                          ),
                         ),
                         IndexedStack(
                           index: state.selectedTabIndex,
