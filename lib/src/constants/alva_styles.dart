@@ -20,6 +20,10 @@ class AlvaStyles {
 
   TextStyle headingSize12w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color);
+
+  TextStyle headingSize12w600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.bold, color: color);
+
   TextStyle headingSize22w700(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: color);
 
@@ -27,6 +31,25 @@ class AlvaStyles {
         fontFamily: fontFamily,
         fontSize: 32,
         fontWeight: FontWeight.bold,
+      );
+  TextStyle headingSize22(Color color) => TextStyle(
+        fontFamily: fontFamily,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: color,
+      );
+  TextStyle headingSize18(Color color) => TextStyle(
+        fontFamily: fontFamily,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: color,
+      );
+
+  TextStyle headingSize22Height32() => const TextStyle(
+        fontFamily: fontFamily,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        height: 32 / 22,
       );
 
   TextStyle headingSize10w400(Color color) =>
@@ -60,6 +83,19 @@ class AlvaStyles {
       decoration: TextDecoration.lineThrough);
 
   TextStyle body1() => const TextStyle(fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
+
+  TextStyle bodySize14W600() => const TextStyle(
+      fontFamily: fontFamily, fontSize: 14, color: BTN_SELECTED_TEXT_COLOR_NEW, fontWeight: FontWeight.bold);
+
+  TextStyle bodySize14W400Muted() =>
+      const TextStyle(fontFamily: fontFamily, fontSize: 14, color: smockGrey, fontWeight: FontWeight.w400);
+
+  TextStyle bodySize14W400MutedLine() => const TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 14,
+      color: smockGrey,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.lineThrough);
 
 // ---------------------------------ButtonStyle-----------------------------------------------------------------------------------------
   ButtonStyle outlineButtonStyle(Color backgroundColor, Color foregroundColor, double borderRadius) => ButtonStyle(

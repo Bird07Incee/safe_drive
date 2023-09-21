@@ -4,7 +4,6 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:universal_html/html.dart';
 
 class ProductCardWidget extends StatefulWidget {
   const ProductCardWidget({

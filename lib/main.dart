@@ -52,15 +52,15 @@ _setUpLineLIFF() {
   }
 
   String lineId = Environment().getValue("LIFF_ID");
-  FlutterLineLiff().init(
-      //TODO: config LIFF for prod
-      config: Config(liffId: lineId),
-      successCallback: () {
-        print('successCallback');
-      },
-      errorCallback: (error) {
-        print('init error: ${error.name}, ${error.message}, ${error.stack}');
-      });
+  // FlutterLineLiff().init(
+  //     //TODO: config LIFF for prod
+  //     config: Config(liffId: lineId),
+  //     successCallback: () {
+  //       print('successCallback');
+  //     },
+  //     errorCallback: (error) {
+  //       print('init error: ${error.name}, ${error.message}, ${error.stack}');
+  //     });
 }
 
 _setUpDatadog() {
