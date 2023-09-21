@@ -20,18 +20,15 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
-  var indicator = [
-    1,
-    1,
-    1,
-    1,
-    1,
-  ];
+  List<int> counter = [];
 
   @override
   void initState() {
     super.initState();
-    // context.read<ProductListBloc>().add(GetProductListMock(context));
+
+    for (int i = 0; i < widget.productList.products!.length; i++) {
+      counter.add(1);
+    }
   }
 
   @override
@@ -78,11 +75,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           borderRadius:
                               const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
                           child: PageView.builder(
-                              itemCount: 10,
+                              itemCount: products?[index].productionAssets.length,
                               controller: pageViewController,
                               onPageChanged: (val) {
                                 setState(() {
-                                  indicator[index] = val + 1;
+                                  counter[index] = val + 1;
                                 });
                               },
                               itemBuilder: (ctx, i) {
@@ -91,7 +88,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     SizedBox(
                                         width: widget.maxWidth,
                                         height: 576,
-                                        child: Image.asset('assets/mocking/product.png', fit: BoxFit.fitWidth)),
+                                        child:
+                                            Image.network(products![index].productionAssets[i], fit: BoxFit.fitWidth)),
                                   ],
                                 );
                               }),
@@ -110,7 +108,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           ),
                           child: Center(
                             child: Text(
-                              "${indicator[index]}/ 5",
+                              "${counter[index]}/ ${products?[index].productionAssets.length}",
                               style: const TextStyle(color: whitePure),
                             ),
                           ),
@@ -156,7 +154,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           visible: true,
                           child: SmoothPageIndicator(
                               controller: pageViewController,
-                              count: 5,
+                              count: products![index].productionAssets.length,
                               effect: const ExpandingDotsEffect(
                                 expansionFactor: 2,
                                 dotHeight: 6,
@@ -177,7 +175,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AlvaText(
-                              title: products![index].productName,
+                              title: products[index].productName,
                               textStyle: AlvaStyles().headingSize22Height32(),
                             ),
                             Row(
