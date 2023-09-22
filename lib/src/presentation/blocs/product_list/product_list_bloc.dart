@@ -38,10 +38,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    // String accessToken = lineDataHelper.getLineAccessToken();
+    String accessToken = lineDataHelper.getLineAccessToken();
 
-    const accessToken =
-        "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQGmaDMj/8jftIGfyzlOMMWFAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwIyu3eQQ+ACLbmVHMCARCAggEHWnsxA2DpFQ06lORq5gfJ36nrt9McefuMuyhzK9DCT7g/y6vVagEfQv9e7y9vZ0AOT7P0VeppfxK7naxfSOR3EieFegM44IAYkqokSBXZmoOW1nx7dQRB4oLKyJZQW/u8V682aAQ+bBnQXJozKWSst95sTTijYKRed1wAlzXrVSySEQVK0diMN/K9bNPcBF0RI0uVRyCWVGdNChK3Qnb1rN1yNvoou6DdkN9GfFAjuixxxTGupmM8+Fch9PJCO4Wykt7wYe5SW66im+tHaGL+V6MIIVKTYgnRNB7DBRqEiesvG7K87uPBj1IM8xlw7RMWrGczEWc4ZN4/NG+o1UuuWMayrb47poU=";
+    // const accessToken =
+    //     "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQGmaDMj/8jftIGfyzlOMMWFAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwIyu3eQQ+ACLbmVHMCARCAggEHWnsxA2DpFQ06lORq5gfJ36nrt9McefuMuyhzK9DCT7g/y6vVagEfQv9e7y9vZ0AOT7P0VeppfxK7naxfSOR3EieFegM44IAYkqokSBXZmoOW1nx7dQRB4oLKyJZQW/u8V682aAQ+bBnQXJozKWSst95sTTijYKRed1wAlzXrVSySEQVK0diMN/K9bNPcBF0RI0uVRyCWVGdNChK3Qnb1rN1yNvoou6DdkN9GfFAjuixxxTGupmM8+Fch9PJCO4Wykt7wYe5SW66im+tHaGL+V6MIIVKTYgnRNB7DBRqEiesvG7K87uPBj1IM8xlw7RMWrGczEWc4ZN4/NG+o1UuuWMayrb47poU=";
 
     emit(state.copyWith(productListStatus: GetProductListStatus.loading));
 

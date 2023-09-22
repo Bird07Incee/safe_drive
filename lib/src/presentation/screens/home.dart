@@ -104,215 +104,225 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return RootPageCondition(
         child: AlvaRootWidget(
             titlePage: titleWebPage,
-            child: BlocBuilder<ProductListBloc, ProductListState>(
-              builder: (context, state) {
-                if (state.productListStatus == GetProductListStatus.success) {
-                  return Container(
-                    color: cloudyWhite,
-                    child: ListView(
-                      children: [
-                        HomepageTopSection(maxWidth: maxWidth),
-                        HomePageBanner(
-                          maxWidth: maxWidth,
-                          pageControllerState: pageController,
-                        ),
-                        Visibility(
-                          visible: isProductListContainCategory(state.productList),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            color: Colors.white,
-                            child: TabBar(
-                                controller: tabController,
-                                labelColor: Colors.black,
-                                indicatorColor: BlueFantasy,
-                                labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
-                                unselectedLabelColor: const Color(0xffA4A8AD),
-                                onTap: (int index) {
-                                  context.read<ProductListBloc>().add(SetSelectTabIndex(index));
-                                },
-                                tabs: [
-                                  Tab(
-                                    text: "ทั้งหมด",
-                                    icon: state.selectedTabIndex == 0
-                                        ? Image.asset('assets/images/category/icon_active_cate_all.png',
-                                            width: 24, height: 24)
-                                        : Image.asset('assets/images/category/icon_cate_all.png',
-                                            width: 24, height: 24),
-                                  ),
-                                  Tab(
-                                    text: "วอลชาร์จ",
-                                    icon: state.selectedTabIndex == 1
-                                        ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
-                                            width: 24, height: 24)
-                                        : Image.asset('assets/images/category/icon_cate_wallcharge.png',
-                                            width: 24, height: 24),
-                                  ),
-                                  Tab(
-                                    text: "โซลาร์เซลล์",
-                                    icon: state.selectedTabIndex == 2
-                                        ? Image.asset('assets/images/category/icon_active_cate_solar.png',
-                                            width: 24, height: 24)
-                                        : Image.asset('assets/images/category/icon_cate_solar.png',
-                                            width: 24, height: 24),
-                                  ),
-                                  Tab(
-                                    text: "สินค้าอื่นๆ",
-                                    icon: state.selectedTabIndex == 3
-                                        ? Image.asset('assets/images/category/icon_active_cate_other.png',
-                                            width: 24, height: 24)
-                                        : Image.asset('assets/images/category/icon_cate_other.png',
-                                            width: 24, height: 24),
-                                  ),
-                                ]),
-                          ),
-                        ),
-                        IndexedStack(
-                          index: state.selectedTabIndex,
-                          children: [
-                            Visibility(
-                              maintainState: true,
-                              visible: state.selectedTabIndex == 0,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: maxWidth - 32,
-                                    child: ProductCardWidget(
-                                      maxWidth: maxWidth,
-                                      productList: state.productList,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Visibility(
-                              maintainState: true,
-                              visible: state.selectedTabIndex == 1,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: maxWidth - 32,
-                                    child: ProductCardWidget(
-                                        maxWidth: maxWidth,
-                                        productList: getProductListByCategory(state.productList, 1)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Visibility(
-                              maintainState: true,
-                              visible: state.selectedTabIndex == 2,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: maxWidth - 32,
-                                    child: ProductCardWidget(
-                                        maxWidth: maxWidth,
-                                        productList: getProductListByCategory(state.productList, 2)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Visibility(
-                              maintainState: true,
-                              visible: state.selectedTabIndex == 3,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: maxWidth - 32,
-                                    child: ProductCardWidget(
-                                        maxWidth: maxWidth,
-                                        productList: getProductListByCategory(state.productList, 3)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 40,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  AlvaText(
-                                    title: HomeConst().warningWord,
-                                    textStyle: AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              color: cloudDeepWhite,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  AlvaText(
-                                    title: HomeConst().termsAndConditions,
-                                    textStyle: AlvaStyles().headingSize10w600(sugarRed),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                                    width: 1,
-                                    height: 16,
-                                    color: sugarRed,
-                                  ),
-                                  AlvaText(
-                                    title: HomeConst().privacyPolicy,
-                                    textStyle: AlvaStyles().headingSize10w600(sugarRed),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              color: spaceGrey,
-                              height: 72,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AlvaText(
-                                        title: HomeConst().askInformation,
-                                        textStyle: AlvaStyles().headingSize10w600(whiteFalse),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AlvaText(
-                                        title: HomeConst().pleaseContact,
-                                        textStyle: AlvaStyles().headingSize12w700(whiteFalse),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                } else if (state.productListStatus == GetProductListStatus.error) {
-                  return ErrorScreen(
-                    title: ErrorConst().titleNS,
-                    subTitle: ErrorConst().subTitleNS,
-                    titleBtn: ErrorConst().titleBtnNS,
-                    onTap: () {},
-                  );
-                } else {
-                  return const LoadingScreen();
+            child: BlocConsumer<AuthBloc, AuthState>(
+              listener: (context, state) {
+                // TODO: implement listener
+                if (state.authStatus == AuthStatus.success) {
+                  context.read<ProductListBloc>().add(const GetProductList());
                 }
+              },
+              builder: (context, state) {
+                return BlocBuilder<ProductListBloc, ProductListState>(
+                  builder: (context, state) {
+                    if (state.productListStatus == GetProductListStatus.success) {
+                      return Container(
+                        color: cloudyWhite,
+                        child: ListView(
+                          children: [
+                            HomepageTopSection(maxWidth: maxWidth),
+                            HomePageBanner(
+                              maxWidth: maxWidth,
+                              pageControllerState: pageController,
+                            ),
+                            Visibility(
+                              visible: isProductListContainCategory(state.productList),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                color: Colors.white,
+                                child: TabBar(
+                                    controller: tabController,
+                                    labelColor: Colors.black,
+                                    indicatorColor: BlueFantasy,
+                                    labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
+                                    unselectedLabelColor: const Color(0xffA4A8AD),
+                                    onTap: (int index) {
+                                      context.read<ProductListBloc>().add(SetSelectTabIndex(index));
+                                    },
+                                    tabs: [
+                                      Tab(
+                                        text: "ทั้งหมด",
+                                        icon: state.selectedTabIndex == 0
+                                            ? Image.asset('assets/images/category/icon_active_cate_all.png',
+                                                width: 24, height: 24)
+                                            : Image.asset('assets/images/category/icon_cate_all.png',
+                                                width: 24, height: 24),
+                                      ),
+                                      Tab(
+                                        text: "วอลชาร์จ",
+                                        icon: state.selectedTabIndex == 1
+                                            ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
+                                                width: 24, height: 24)
+                                            : Image.asset('assets/images/category/icon_cate_wallcharge.png',
+                                                width: 24, height: 24),
+                                      ),
+                                      Tab(
+                                        text: "โซลาร์เซลล์",
+                                        icon: state.selectedTabIndex == 2
+                                            ? Image.asset('assets/images/category/icon_active_cate_solar.png',
+                                                width: 24, height: 24)
+                                            : Image.asset('assets/images/category/icon_cate_solar.png',
+                                                width: 24, height: 24),
+                                      ),
+                                      Tab(
+                                        text: "สินค้าอื่นๆ",
+                                        icon: state.selectedTabIndex == 3
+                                            ? Image.asset('assets/images/category/icon_active_cate_other.png',
+                                                width: 24, height: 24)
+                                            : Image.asset('assets/images/category/icon_cate_other.png',
+                                                width: 24, height: 24),
+                                      ),
+                                    ]),
+                              ),
+                            ),
+                            IndexedStack(
+                              index: state.selectedTabIndex,
+                              children: [
+                                Visibility(
+                                  maintainState: true,
+                                  visible: state.selectedTabIndex == 0,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: maxWidth - 32,
+                                        child: ProductCardWidget(
+                                          maxWidth: maxWidth,
+                                          productList: state.productList,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  maintainState: true,
+                                  visible: state.selectedTabIndex == 1,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: maxWidth - 32,
+                                        child: ProductCardWidget(
+                                            maxWidth: maxWidth,
+                                            productList: getProductListByCategory(state.productList, 1)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  maintainState: true,
+                                  visible: state.selectedTabIndex == 2,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: maxWidth - 32,
+                                        child: ProductCardWidget(
+                                            maxWidth: maxWidth,
+                                            productList: getProductListByCategory(state.productList, 2)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  maintainState: true,
+                                  visible: state.selectedTabIndex == 3,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: maxWidth - 32,
+                                        child: ProductCardWidget(
+                                            maxWidth: maxWidth,
+                                            productList: getProductListByCategory(state.productList, 3)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 40,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      AlvaText(
+                                        title: HomeConst().warningWord,
+                                        textStyle: AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  color: cloudDeepWhite,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      AlvaText(
+                                        title: HomeConst().termsAndConditions,
+                                        textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                                        width: 1,
+                                        height: 16,
+                                        color: sugarRed,
+                                      ),
+                                      AlvaText(
+                                        title: HomeConst().privacyPolicy,
+                                        textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  color: spaceGrey,
+                                  height: 72,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          AlvaText(
+                                            title: HomeConst().askInformation,
+                                            textStyle: AlvaStyles().headingSize10w600(whiteFalse),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          AlvaText(
+                                            title: HomeConst().pleaseContact,
+                                            textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    } else if (state.productListStatus == GetProductListStatus.error) {
+                      return ErrorScreen(
+                        title: ErrorConst().titleNS,
+                        subTitle: ErrorConst().subTitleNS,
+                        titleBtn: ErrorConst().titleBtnNS,
+                        onTap: () {},
+                      );
+                    } else {
+                      return const LoadingScreen();
+                    }
+                  },
+                );
               },
             )));
   }
