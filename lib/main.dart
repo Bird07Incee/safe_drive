@@ -9,9 +9,11 @@ import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
@@ -101,7 +103,6 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
     initConnectivity();
@@ -126,7 +127,6 @@ class _RootPageState extends State<RootPage> {
       themeMode: ThemeMode.system,
       initialRoute: "/",
       routes: routes,
-      // onGenerateRoute: (settings) => generateRoute(settings),
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 172, 204, 229),
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),

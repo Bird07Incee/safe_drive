@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -49,7 +50,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               PageController(initialPage: 0);
           return GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, Routes.productDetail.toStringPath());
+              Navigator.pushNamed(context, Routes.productDetail.toStringPath(),
+                  arguments: ProductDetailScreenArguments(test: "hello world"));
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 16),

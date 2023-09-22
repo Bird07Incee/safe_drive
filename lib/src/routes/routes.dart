@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -32,8 +33,11 @@ final Map<String, WidgetBuilder> routes = {
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
   (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
       const LoadingScreen(),
-  (Routes.productDetail).toStringPath(): (BuildContext _) =>
-      const ProductDetailScreen()
+  (Routes.productDetail).toStringPath(): (BuildContext context) =>
+      ProductDetailScreen(
+        arguments: ModalRoute.of(context)!.settings.arguments
+            as ProductDetailScreenArguments,
+      )
 };
 
 // extension StringExtension on String {

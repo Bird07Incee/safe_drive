@@ -15,6 +15,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_general_model.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
@@ -29,7 +30,8 @@ import 'package:html/parser.dart' as htmlparser;
 import 'package:html/dom.dart' as dom;
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({Key? key}) : super(key: key);
+  const ProductDetailScreen({Key? key, this.arguments}) : super(key: key);
+  final ProductDetailScreenArguments? arguments;
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -503,31 +505,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               const SizedBox(
                 height: 16,
               ),
-              Expanded(child: buildGeneralInfoWidgetAndInfo()),
+              buildGeneralInfoWidgetAndInfo(),
               const SizedBox(
                 height: 16,
               ),
-              Expanded(
-                  child: buildDetailCardWidget(
-                      titleKey: AppKeys().productDetailAboutSellerTitleKey,
-                      title: AppStrings().aboutSellerTitle,
-                      htmlPage: Container())),
+              buildDetailCardWidget(
+                  titleKey: AppKeys().productDetailAboutSellerTitleKey,
+                  title: AppStrings().aboutSellerTitle,
+                  htmlPage: Container()),
               const SizedBox(
                 height: 16,
               ),
-              Expanded(
-                  child: buildDetailCardWidget(
-                      titleKey: AppKeys().productDetailPromotionDetailTitleKey,
-                      title: AppStrings().promotionDetailTitle,
-                      htmlPage: Container())),
+              buildDetailCardWidget(
+                  titleKey: AppKeys().productDetailPromotionDetailTitleKey,
+                  title: AppStrings().promotionDetailTitle,
+                  htmlPage: Container()),
               const SizedBox(
                 height: 16,
               ),
-              Expanded(
-                  child: buildDetailCardWidget(
-                      titleKey: AppKeys().productDetailRemarkTitleKey,
-                      title: AppStrings().remarkTitle,
-                      htmlPage: Container())),
+              buildDetailCardWidget(
+                  titleKey: AppKeys().productDetailRemarkTitleKey,
+                  title: AppStrings().remarkTitle,
+                  htmlPage: Container()),
               const SizedBox(
                 height: 16,
               ),
@@ -560,6 +559,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             data =
                 "<h1>Mazda 3 2.0 C รถปี 2020<br />- เลขไมล์ 28,XXX รถบ้านขับน้อย ไม่เคยชน<br />- ล้อแม็กขอบ 18 รุ่นพิเศษ 100th Anniversary Edition & น็อต Rays แท้<br />- กรอบกระจก Glossy Black งานแท้เบิกศูนย์<br />- ติดระบบเรดาร์ถอยจอดของแท้ Mazda แบบไม่เจาะกันชน<br />- อัพเกรดระบบนำทาง Mazda แท้ พร้อมยิงขึ้นจอ HID ที่กระจก (Option นี้ในไทยไม่มี)<br />- กล้องบันทึกหน้าหลัง 70mai<br />- ท่อ HKS แท้ ปลายคาร์บอนคู่ ประกันเหลือ (ท่อเดิมยังอยู่)<br />- กรอบป้ายทะเบียน HEMI แบบพับได้<br />- ทะเบียนเลขจองพิเศษ 698 กทม<br />- รถ Service ศูนย์ตรงตามระยะ ฟรีค่าแรง 5 ปี (เหลืออีก 2 ปี)<br />- Service เคลือบแก้วเซรามิกทุก 6 เดือน<br /><br />ราคา 750,000.- <br />โทร 086-4868878 เกรท<br />นัดดูรถ หมู่บ้าน The City - รัตนาธิเบศร์ นนทบุรี </h1>";
           }
+
+          // data = widget.arguments!.test;
+
+          var args = ModalRoute.of(context)!.settings.arguments
+              as ProductDetailScreenArguments;
+
+          data = args.test;
+
           return Column(
             children: [
               Padding(
@@ -626,12 +633,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     return switchStyleForHtml(
                         title: AppStrings().productDetailTitle,
                         isPressedReadMore: isPressedReadMore);
-                  }
-
-                      // switchStyleForHtml(
-                      //     title: AppStrings().productDetailTitle,
-                      //     isPressedReadMore: isPressedReadMore),
-                      ),
+                  }),
                 ),
               ),
               const SizedBox(
