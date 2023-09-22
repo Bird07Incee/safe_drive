@@ -5,8 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/selected_product/selected_product_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductCardWidget extends StatefulWidget {
@@ -45,7 +47,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
           late final PageController pageViewController = PageController(initialPage: 0);
           return GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "productDetail");
+              context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
+              Navigator.pushNamed(context, Routes.productDetail.toStringPath());
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 16),
