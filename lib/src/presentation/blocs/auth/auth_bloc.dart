@@ -12,12 +12,12 @@ import 'package:url_launcher/url_launcher.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final liff = FlutterLineLiff();
   bool isLogin = false;
   TermAndConHelper termAndConHelper = TermAndConHelper();
 
-  AuthBloc() : super(UserAuthInitial()) {
+  AuthBloc() : super(const AuthState()) {
     on<UserAuthEventLogin>((event, emit) async {
       await liff.ready.then((_) async {
         // waiting for change
@@ -43,36 +43,20 @@ class AuthBloc extends Bloc<AuthEvent, UserAuthState> {
           if (termAndConHelper.isTermAndConAccepted()) {
             print("term and con already accept");
             loadOneTrustCookieScript();
+            emit(state.copyWith(authStatus: AuthStatus.success));
           } else {
             print("term and con not accept");
             await Navigator.pushNamed(
                 event.context, Routes.termAndCon.toStringPath());
             loadOneTrustCookieScript();
+            emit(state.copyWith(authStatus: AuthStatus.success));
           }
         }
       });
-
-      // emit(UserAuthLoading());
-      // await liff.profile;
-
-      // String url = Uri.base.path;
-      // Uri uri = Uri.parse(url);
-      // String code = uri.queryParameters["code"]!;
-      // String state = uri.queryParameters["state"]!;
-      // String liffClientId = uri.queryParameters["liffClientId"]!;
-      // String liffRedirectUri = uri.queryParameters["liffRedirectUri"]!;
-
-      // emit(UserAuthAuthenticated(
-      //     code: code,
-      //     state: state,
-      //     liffClientId: liffClientId,
-      //     liffRedirectUri: Uri.parse(liffRedirectUri),
-      //     accessToken: liff.id!));
     });
 
     on<UserAuthEventLogout>((event, emit) async {
       liff.logout();
-      emit(UserAuthLogout());
     });
   }
 }
