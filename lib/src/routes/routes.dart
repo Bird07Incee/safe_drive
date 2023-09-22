@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/product_detail_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 

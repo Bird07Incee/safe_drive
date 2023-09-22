@@ -53,9 +53,11 @@ class _RootPageConditionState extends State<RootPageCondition> {
           return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(
             builder: (context, checkBrowserState) {
               final env = Environment().getValue("ENVIRONMENT_NAME");
-              if (checkBrowserState is CheckBrowserInitial || checkBrowserState is CheckBrowserLoading) {
+              if (checkBrowserState is CheckBrowserInitial ||
+                  checkBrowserState is CheckBrowserLoading) {
                 return const LoadingScreen();
-              } else if (checkBrowserState is BrowserIsNotLineLiff && (env == 'uat' || env == 'prod')) {
+              } else if (checkBrowserState is BrowserIsNotLineLiff &&
+                  (env == 'uat' || env == 'prod')) {
                 return ErrorScreen(
                   title: ErrorConst().titleBrowser,
                   subTitle: ErrorConst().subTitleBrowser,
@@ -66,7 +68,7 @@ class _RootPageConditionState extends State<RootPageCondition> {
                 );
               } else {
                 ///code here
-                context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+                // context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
                 return widget.child;
               }
             },
