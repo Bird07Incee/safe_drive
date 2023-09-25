@@ -6,7 +6,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_ga
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/selected_product/selected_product_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 
@@ -20,5 +19,4 @@ final List<BlocProvider> blocs = [
   BlocProvider<PreviousScaleBloc>(create: (_) => PreviousScaleBloc()),
   BlocProvider<ViewImgDetailPageSwitchBloc>(create: (_) => ViewImgDetailPageSwitchBloc()),
   BlocProvider<ProductListBloc>(create: (_) => ProductListBloc()),
-  BlocProvider<SelectedProductBloc>(create: (_) => SelectedProductBloc()),
 ];

@@ -741,11 +741,11 @@ class Banner {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['image'] = image;
-    _data['route'] = route;
-    _data['url'] = url;
-    return _data;
+    final data = <String, dynamic>{};
+    data['image'] = image;
+    data['route'] = route;
+    data['url'] = url;
+    return data;
   }
 }
 

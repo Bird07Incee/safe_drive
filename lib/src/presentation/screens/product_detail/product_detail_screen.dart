@@ -1019,8 +1019,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         ),
                         width: 40,
                         height: 32,
-                        child: const Row(
-                          children: [
+                        child: Row(
+                          children: const [
                             SizedBox(
                               width: 14,
                             ),

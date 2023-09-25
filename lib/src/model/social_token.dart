@@ -30,15 +30,15 @@ class SocialToken {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['uid'] = this.uid;
-    data['access_token'] = this.accessToken;
-    data['refresh_token'] = this.refreshToken;
-    data['expires_in'] = this.expiresIn;
-    data['tc_version'] = this.tcVersion;
-    data['pdpa_version'] = this.pdpaVersion;
-    data['tc_accept'] = this.tcAccept;
-    data['pdpa_accept'] = this.pdpaAccept;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['uid'] = uid;
+    data['access_token'] = accessToken;
+    data['refresh_token'] = refreshToken;
+    data['expires_in'] = expiresIn;
+    data['tc_version'] = tcVersion;
+    data['pdpa_version'] = pdpaVersion;
+    data['tc_accept'] = tcAccept;
+    data['pdpa_accept'] = pdpaAccept;
     return data;
   }
 }

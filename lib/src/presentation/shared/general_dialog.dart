@@ -40,7 +40,7 @@ class GeneralDialog {
           height: 64.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               AlvaCPILoader(),
             ],
           )),

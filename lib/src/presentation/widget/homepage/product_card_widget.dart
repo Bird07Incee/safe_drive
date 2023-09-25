@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/model/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/selected_product/selected_product_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
