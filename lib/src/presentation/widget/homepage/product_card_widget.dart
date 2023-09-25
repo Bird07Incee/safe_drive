@@ -10,7 +10,8 @@ import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductCardWidget extends StatefulWidget {
-  const ProductCardWidget({super.key, required this.maxWidth, required this.productList});
+  const ProductCardWidget(
+      {super.key, required this.maxWidth, required this.productList});
 
   final double maxWidth;
   final ProductList productList;
@@ -42,12 +43,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: productList.products?.length,
         itemBuilder: (BuildContext context, int index) {
-          late final PageController pageViewController = PageController(initialPage: 0);
+          late final PageController pageViewController =
+              PageController(initialPage: 0);
           return GestureDetector(
             onTap: () {
               // context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
 
-              Navigator.pushNamed(context, Routes.productDetail.toStringPath(), arguments: ProductDetailArgs(product: products[index]));
+              Navigator.pushNamed(context, Routes.productDetail.toStringPath(),
+                  arguments: ProductDetailArgs(product: products[index]));
               // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
             },
             child: Container(
@@ -75,10 +78,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16)),
                           child: PageView.builder(
-                              itemCount: products?[index].productionAssets.length,
+                              itemCount:
+                                  products?[index].productionAssets.length,
                               controller: pageViewController,
                               onPageChanged: (val) {
                                 setState(() {
@@ -91,8 +96,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     SizedBox(
                                         width: widget.maxWidth,
                                         height: 576,
-                                        child:
-                                            Image.network(products![index].productionAssets[i], fit: BoxFit.fitWidth)),
+                                        child: Image.network(
+                                            products![index]
+                                                .productionAssets[i],
+                                            fit: BoxFit.fitWidth)),
                                   ],
                                 );
                               }),
@@ -124,13 +131,15 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           "assets/homepage/brand.png",
                           height: 32,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                          errorBuilder: (context, error, stackTrace) =>
+                              const SizedBox(),
                         ),
                       )),
                       Visibility(
                         visible: products?[index].percentDiscountPrice != 0,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 16),
                           decoration: const BoxDecoration(
                               color: Color(0xff40a9fc),
                               borderRadius: BorderRadius.only(
@@ -139,8 +148,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   bottomLeft: Radius.circular(0),
                                   bottomRight: Radius.circular(8))),
                           child: AlvaText(
-                            title: "ถูกลง ${products?[index].percentDiscountPrice} %",
-                            textStyle: AlvaStyles().headingSize12w600(Colors.white),
+                            title:
+                                "ถูกลง ${products?[index].percentDiscountPrice} %",
+                            textStyle:
+                                AlvaStyles().headingSize12w600(Colors.white),
                           ),
                         ),
                       )
@@ -187,16 +198,23 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   .map((tag) => Row(
                                         children: [
                                           Container(
-                                            margin: const EdgeInsets.symmetric(vertical: 4),
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 4),
                                             child: AlvaText(
                                               title: tag,
-                                              textStyle: AlvaStyles().headingSize10(),
+                                              textStyle:
+                                                  AlvaStyles().headingSize10(),
                                             ),
                                           ),
 
                                           // add srperator exclude tail
-                                          if (products[index].promotionTag.indexOf(tag) !=
-                                              products[index].promotionTag.length - 1)
+                                          if (products[index]
+                                                  .promotionTag
+                                                  .indexOf(tag) !=
+                                              products[index]
+                                                      .promotionTag
+                                                      .length -
+                                                  1)
                                             const Text("|")
                                           // const VerticalDivider(
                                           //   width: 8,
@@ -258,15 +276,18 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               child: Row(
                                 children: [
                                   AlvaText(
-                                    title: NumberFormat.decimalPattern().format(products[index].discountPrice),
-                                    textStyle: AlvaStyles().bodySize14W400MutedLine(),
+                                    title: NumberFormat.decimalPattern()
+                                        .format(products[index].discountPrice),
+                                    textStyle:
+                                        AlvaStyles().bodySize14W400MutedLine(),
                                   ),
                                   const SizedBox(
                                     width: 1,
                                   ),
                                   AlvaText(
                                     title: "บาท",
-                                    textStyle: AlvaStyles().bodySize14W400Muted(),
+                                    textStyle:
+                                        AlvaStyles().bodySize14W400Muted(),
                                   ),
                                 ],
                               ),
@@ -277,10 +298,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 Row(
                                   children: [
                                     AlvaText(
-                                      title: NumberFormat.decimalPattern().format(products[index].price),
-                                      textStyle: products[index].discountPrice == 0
-                                          ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
-                                          : AlvaStyles().headingSize22(RedWordShow),
+                                      title: NumberFormat.decimalPattern()
+                                          .format(products[index].price),
+                                      textStyle:
+                                          products[index].discountPrice == 0
+                                              ? AlvaStyles().headingSize22(
+                                                  BTN_SELECTED_TEXT_COLOR_NEW)
+                                              : AlvaStyles()
+                                                  .headingSize22(RedWordShow),
                                     ),
                                     Column(
                                       children: [
@@ -289,9 +314,13 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         ),
                                         AlvaText(
                                           title: "บาท",
-                                          textStyle: products[index].discountPrice == 0
-                                              ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
-                                              : AlvaStyles().headingSize18(RedWordShow),
+                                          textStyle: products[index]
+                                                      .discountPrice ==
+                                                  0
+                                              ? AlvaStyles().headingSize18(
+                                                  BTN_SELECTED_TEXT_COLOR_NEW)
+                                              : AlvaStyles()
+                                                  .headingSize18(RedWordShow),
                                         ),
                                       ],
                                     ),
@@ -300,7 +329,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 Container(
                                   height: 40,
                                   decoration: const BoxDecoration(
-                                      color: YellowKrungsri, borderRadius: BorderRadius.all(Radius.circular(8))),
+                                      color: YellowKrungsri,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8))),
                                   child: Row(
                                     children: [
                                       const SizedBox(
@@ -308,7 +339,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       ),
                                       AlvaText(
                                         title: 'สนใจ',
-                                        textStyle: AlvaStyles().bodySize14W600(),
+                                        textStyle:
+                                            AlvaStyles().bodySize14W600(),
                                       ),
                                       const SizedBox(
                                         width: 32,
