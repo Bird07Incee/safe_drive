@@ -8,6 +8,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/model/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
@@ -57,6 +58,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     });
   }
 
+  late ProductDetailArgs args;
   int indicator = 1;
   double _scale = 1.0;
 
@@ -64,6 +66,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   @override
   Widget build(BuildContext context) {
+    args = ModalRoute.of(context)!.settings.arguments as ProductDetailArgs;
     int imageDataLength = dataCarouselMock.length == 1
         ? dataCarouselMock.length
         : dataCarouselMock.length > 20
@@ -168,7 +171,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             physics: const ClampingScrollPhysics(),
             controller: scrollController,
             children: [
-              const PDTopSection(),
+              // PDTopSection(args: args),
               // AlvaText(title: 'รายละเอียดสินค้า',textStyle: AlvaStyles().headingSize16w500(ModernDarkGray),)
               const SizedBox(
                 height: 16,

@@ -4,6 +4,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/model/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/selected_product/selected_product_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
@@ -47,8 +48,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
           late final PageController pageViewController = PageController(initialPage: 0);
           return GestureDetector(
             onTap: () {
-              context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
-              Navigator.pushNamed(context, Routes.productDetail.toStringPath());
+              // context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
+
+              Navigator.pushNamed(context, Routes.productDetail.toStringPath(), arguments: ProductDetailArgs(product: products[index]));
+              // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 16),
