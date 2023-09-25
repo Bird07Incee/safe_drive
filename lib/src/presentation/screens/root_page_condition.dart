@@ -66,7 +66,7 @@ class _RootPageConditionState extends State<RootPageCondition> {
                 );
               } else {
                 ///code here
-                context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+                //context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
                 return widget.child;
               }
             },

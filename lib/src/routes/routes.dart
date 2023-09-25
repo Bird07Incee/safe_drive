@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/product_detail_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
@@ -27,10 +28,21 @@ extension TypeCoverter on Routes {
 
 final Map<String, WidgetBuilder> routes = {
   (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
-  (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
+  (Routes.termAndCon).toStringPath(): (BuildContext _) =>
+      const TermAndConScreen(),
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
-  (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
-  (Routes.productDetail).toStringPath(): (BuildContext _) => const ProductDetailScreen()
+  (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
+      const LoadingScreen(),
+  (Routes.productDetail).toStringPath(): (BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      return ProductDetailScreen(
+        arguments: ModalRoute.of(context)!.settings.arguments
+            as ProductDetailScreenArguments,
+      );
+    } else {
+      return const ProductDetailScreen();
+    }
+  }
 };
 
 // extension StringExtension on String {

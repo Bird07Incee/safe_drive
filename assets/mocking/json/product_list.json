@@ -2,698 +2,700 @@
     "productAllItems": 10,
     "productPage": 1,
     "productCountItems": 1,
-    "Banner": [
-        {
-            "Image": "",
-            "Route": "Home",
-            "Url": "http://"
-        }
+    "banner": [
+      {
+        "image": "",
+        "route": "Home",
+        "url": "http://"
+      }
     ],
-    "Category": [
-        "All",
-        "EV Charger",
-        "Accessory"
+    "category": [
+      "All",
+      "EV Charger",
+      "Accessory",
+      "Other"
     ],
-    "Products": [
-        {
-            "AppId": "Marketplace-mini-app",
-            "ChannelId": "LINE",
-            "MerchantId": "0004234232",
-            "PaymentChannelCode": "",
-            "RefundDay": 7,
-            "PostDate": "2023‐09‐01T02:49:06−07:00",
-            "LastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-            "CategoryID": "1",
-            "Category": "EV Charger",
-            "ProductId": "P001",
-            "Quantity": 100,
-            "ProductName": "Palsar Max",
-            "ProductStatus": "Available",
-            "CommissionAmount": 2000,
-            "ServiceFee": 0,
-            "ShippingFee": 0,
-            "Tagline": "html",
-            "PromotionTag": [
-                "ติดตั้งฟรี",
-                "รับประกัน 3 ปี",
-                "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-            ],
-            "Description": "html",
-            "TechnicalSpec": "html",
-            "Remark": "html",
-            "Currency": "THB",
-            "Price": 56640,
-            "DiscountPrice": 59000,
-            "PercentDiscountPrice": 5,
-            "ProductionAssets": [
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
-                "https://youtube.com/?fdsfdfsdf",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
-            ],
-            "MerchantFullName": "",
-            "MerchantAddress": "",
-            "MerchantLogo": "Url",
-            "MerchantMobile": "",
-            "MerchantEmail": "",
-            "ProductionOptionals": [
-                {
-                    "Label": "สีดำ",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 56640,
-                    "SubProductId": "P001-1",
-                    "Quantity": 200,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-11",
-                            "Quantity": 100
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-12",
-                            "Quantity": 100
-                        }
-                    ]
-                },
-                {
-                    "Label": "สีขาว",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 57640,
-                    "SubProductId": "P001-2",
-                    "Quantity": 250,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-21",
-                            "Quantity": 50
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-22",
-                            "Quantity": 80
-                        },
-                        {
-                            "Label": "10 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 700,
-                            "SubProductId": "P001-23",
-                            "Quantity": 120,
-                            "Level3": [
-                                {
-                                    "Label": "สายธรรมดา",
-                                    "LevelName": "รูปแบบสาย",
-                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                    "Price": 100,
-                                    "SubProductId": "P001-231",
-                                    "Quantity": 120,
-                                    "Level4": [
-                                        {
-                                            "Label": "สายธรรมดา",
-                                            "LevelName": "รูปแบบสาย",
-                                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                            "Price": 200,
-                                            "SubProductId": "P001-2311",
-                                            "Quantity": 120,
-                                            "Level5": [
-                                                {
-                                                    "Label": "สายธรรมดา",
-                                                    "LevelName": "รูปแบบสาย",
-                                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                                    "Price": 300,
-                                                    "SubProductId": "P001-23111",
-                                                    "Quantity": 120
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
+    "products": [
+      {
+        "appId": "Marketplace-mini-app",
+        "channelId": "LINE",
+        "merchantId": "0004234232",
+        "paymentChannelCode": "",
+        "refundDay": 7,
+        "postDate": "2023‐09‐01T02:49:06−07:00",
+        "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+        "categoryId": "1",
+        "category": "EV Charger",
+        "productId": "P001",
+        "quantity": 100,
+        "productName": "Palsar Max 1",
+        "productStatus": "Available",
+        "commissionAmount": 2000,
+        "serviceFee": 0,
+        "shippingFee": 0,
+        "tagline": "<h1>เล็ก ทรงพลัง</h1>",
+        "promotionTag": [
+          "ติดตั้งฟรี",
+          "รับประกัน 3 ปี",
+          "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+        ],
+        "description": "<p>เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application</p>",
+        "technicalSpec": "html",
+        "remark": "html",
+        "currency": "THB",
+        "price": 16640,
+        "discountPrice": 59000,
+        "percentDiscountPrice": 5,
+        "productionAssets": [
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
+          "https://youtube.com/?fdsfdfsdf",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
+        ],
+        "merchantFullName": "",
+        "merchantAddress": "",
+        "merchantLogo": "Url",
+        "merchantMobile": "",
+        "merchantEmail": "",
+        "productionOptionals": [
+          {
+            "label": "สีดำ",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 56640,
+            "subProductId": "P001-1",
+            "quantity": 200,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-11",
+                "quantity": 100
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-12",
+                "quantity": 100
+              }
             ]
-        },
-        {
-            "AppId": "Marketplace-mini-app",
-            "ChannelId": "LINE",
-            "MerchantId": "0004234232",
-            "PaymentChannelCode": "",
-            "RefundDay": 7,
-            "PostDate": "2023‐09‐01T02:49:06−07:00",
-            "LastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-            "CategoryID": "1",
-            "Category": "EV Charger",
-            "ProductId": "P001",
-            "Quantity": 100,
-            "ProductName": "Palsar Max",
-            "ProductStatus": "Available",
-            "CommissionAmount": 2000,
-            "ServiceFee": 0,
-            "ShippingFee": 0,
-            "Tagline": "html",
-            "PromotionTag": [
-                "ติดตั้งฟรี",
-                "รับประกัน 3 ปี",
-                "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-            ],
-            "Description": "html",
-            "TechnicalSpec": "html",
-            "Remark": "html",
-            "Currency": "THB",
-            "Price": 56640,
-            "DiscountPrice": 59000,
-            "PercentDiscountPrice": 5,
-            "ProductionAssets": [
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
-                "https://youtube.com/?fdsfdfsdf",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
-            ],
-            "MerchantFullName": "",
-            "MerchantAddress": "",
-            "MerchantLogo": "Url",
-            "MerchantMobile": "",
-            "MerchantEmail": "",
-            "ProductionOptionals": [
-                {
-                    "Label": "สีดำ",
-                    "LevelName": "สี",
+          },
+          {
+            "label": "สีขาว",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 57640,
+            "subProductId": "P001-2",
+            "quantity": 250,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-21",
+                "quantity": 50
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-22",
+                "quantity": 80
+              },
+              {
+                "label": "10 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 700,
+                "subProductId": "P001-23",
+                "quantity": 120,
+                "level3": [
+                  {
+                    "label": "สายธรรมดา",
+                    "levelName": "รูปแบบสาย",
                     "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 56640,
-                    "SubProductId": "P001-1",
-                    "Quantity": 200,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
+                    "price": 100,
+                    "subProductId": "P001-231",
+                    "quantity": 120,
+                    "level4": [
+                      {
+                        "label": "สายธรรมดา",
+                        "levelName": "รูปแบบสาย",
+                        "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                        "price": 200,
+                        "subProductId": "P001-2311",
+                        "quantity": 120,
+                        "level5": [
+                          {
+                            "label": "สายธรรมดา",
+                            "levelName": "รูปแบบสาย",
                             "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-11",
-                            "Quantity": 100
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-12",
-                            "Quantity": 100
-                        }
+                            "price": 300,
+                            "subProductId": "P001-23111",
+                            "quantity": 120
+                          }
+                        ]
+                      }
                     ]
-                },
-                {
-                    "Label": "สีขาว",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 57640,
-                    "SubProductId": "P001-2",
-                    "Quantity": 250,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-21",
-                            "Quantity": 50
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-22",
-                            "Quantity": 80
-                        },
-                        {
-                            "Label": "10 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 700,
-                            "SubProductId": "P001-23",
-                            "Quantity": 120,
-                            "Level3": [
-                                {
-                                    "Label": "สายธรรมดา",
-                                    "LevelName": "รูปแบบสาย",
-                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                    "Price": 100,
-                                    "SubProductId": "P001-231",
-                                    "Quantity": 120,
-                                    "Level4": [
-                                        {
-                                            "Label": "สายธรรมดา",
-                                            "LevelName": "รูปแบบสาย",
-                                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                            "Price": 200,
-                                            "SubProductId": "P001-2311",
-                                            "Quantity": 120,
-                                            "Level5": [
-                                                {
-                                                    "Label": "สายธรรมดา",
-                                                    "LevelName": "รูปแบบสาย",
-                                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                                    "Price": 300,
-                                                    "SubProductId": "P001-23111",
-                                                    "Quantity": 120
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
+                  }
+                ]
+              }
             ]
-        },
-        {
-            "AppId": "Marketplace-mini-app",
-            "ChannelId": "LINE",
-            "MerchantId": "0004234232",
-            "PaymentChannelCode": "",
-            "RefundDay": 7,
-            "PostDate": "2023‐09‐01T02:49:06−07:00",
-            "LastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-            "CategoryID": "1",
-            "Category": "EV Charger",
-            "ProductId": "P001",
-            "Quantity": 100,
-            "ProductName": "Palsar Max",
-            "ProductStatus": "Available",
-            "CommissionAmount": 2000,
-            "ServiceFee": 0,
-            "ShippingFee": 0,
-            "Tagline": "html",
-            "PromotionTag": [
-                "ติดตั้งฟรี",
-                "รับประกัน 3 ปี",
-                "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-            ],
-            "Description": "html",
-            "TechnicalSpec": "html",
-            "Remark": "html",
-            "Currency": "THB",
-            "Price": 56640,
-            "DiscountPrice": 59000,
-            "PercentDiscountPrice": 5,
-            "ProductionAssets": [
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
-                "https://youtube.com/?fdsfdfsdf",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
-            ],
-            "MerchantFullName": "",
-            "MerchantAddress": "",
-            "MerchantLogo": "Url",
-            "MerchantMobile": "",
-            "MerchantEmail": "",
-            "ProductionOptionals": [
-                {
-                    "Label": "สีดำ",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 56640,
-                    "SubProductId": "P001-1",
-                    "Quantity": 200,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-11",
-                            "Quantity": 100
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-12",
-                            "Quantity": 100
-                        }
-                    ]
-                },
-                {
-                    "Label": "สีขาว",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 57640,
-                    "SubProductId": "P001-2",
-                    "Quantity": 250,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-21",
-                            "Quantity": 50
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-22",
-                            "Quantity": 80
-                        },
-                        {
-                            "Label": "10 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 700,
-                            "SubProductId": "P001-23",
-                            "Quantity": 120,
-                            "Level3": [
-                                {
-                                    "Label": "สายธรรมดา",
-                                    "LevelName": "รูปแบบสาย",
-                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                    "Price": 100,
-                                    "SubProductId": "P001-231",
-                                    "Quantity": 120,
-                                    "Level4": [
-                                        {
-                                            "Label": "สายธรรมดา",
-                                            "LevelName": "รูปแบบสาย",
-                                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                            "Price": 200,
-                                            "SubProductId": "P001-2311",
-                                            "Quantity": 120,
-                                            "Level5": [
-                                                {
-                                                    "Label": "สายธรรมดา",
-                                                    "LevelName": "รูปแบบสาย",
-                                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                                    "Price": 300,
-                                                    "SubProductId": "P001-23111",
-                                                    "Quantity": 120
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
+          }
+        ]
+      },
+      {
+        "appId": "Marketplace-mini-app",
+        "channelId": "LINE",
+        "merchantId": "0004234232",
+        "paymentChannelCode": "",
+        "refundDay": 7,
+        "postDate": "2023‐09‐01T02:49:06−07:00",
+        "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+        "categoryId": "1",
+        "category": "EV Charger",
+        "productId": "P001",
+        "quantity": 100,
+        "productName": "Palsar Max 2",
+        "productStatus": "Available",
+        "commissionAmount": 2000,
+        "serviceFee": 0,
+        "shippingFee": 0,
+        "tagline": "html",
+        "promotionTag": [
+          "ติดตั้งฟรี",
+          "รับประกัน 3 ปี",
+          "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+        ],
+        "description": "html",
+        "technicalSpec": "html",
+        "remark": "html",
+        "currency": "THB",
+        "price": 26640,
+        "discountPrice": 0,
+        "percentDiscountPrice": 0,
+        "productionAssets": [
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
+          "https://youtube.com/?fdsfdfsdf",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
+        ],
+        "merchantFullName": "",
+        "merchantAddress": "",
+        "merchantLogo": "Url",
+        "merchantMobile": "",
+        "merchantEmail": "",
+        "productionOptionals": [
+          {
+            "label": "สีดำ",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 56640,
+            "subProductId": "P001-1",
+            "quantity": 200,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-11",
+                "quantity": 100
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-12",
+                "quantity": 100
+              }
             ]
-        },
-        {
-            "AppId": "Marketplace-mini-app",
-            "ChannelId": "LINE",
-            "MerchantId": "0004234232",
-            "PaymentChannelCode": "",
-            "RefundDay": 7,
-            "PostDate": "2023‐09‐01T02:49:06−07:00",
-            "LastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-            "CategoryID": "1",
-            "Category": "EV Charger",
-            "ProductId": "P001",
-            "Quantity": 100,
-            "ProductName": "Palsar Max",
-            "ProductStatus": "Available",
-            "CommissionAmount": 2000,
-            "ServiceFee": 0,
-            "ShippingFee": 0,
-            "Tagline": "html",
-            "PromotionTag": [
-                "ติดตั้งฟรี",
-                "รับประกัน 3 ปี",
-                "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-            ],
-            "Description": "html",
-            "TechnicalSpec": "html",
-            "Remark": "html",
-            "Currency": "THB",
-            "Price": 56640,
-            "DiscountPrice": 59000,
-            "PercentDiscountPrice": 5,
-            "ProductionAssets": [
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
-                "https://youtube.com/?fdsfdfsdf",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
-            ],
-            "MerchantFullName": "",
-            "MerchantAddress": "",
-            "MerchantLogo": "Url",
-            "MerchantMobile": "",
-            "MerchantEmail": "",
-            "ProductionOptionals": [
-                {
-                    "Label": "สีดำ",
-                    "LevelName": "สี",
+          },
+          {
+            "label": "สีขาว",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 57640,
+            "subProductId": "P001-2",
+            "quantity": 250,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-21",
+                "quantity": 50
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-22",
+                "quantity": 80
+              },
+              {
+                "label": "10 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 700,
+                "subProductId": "P001-23",
+                "quantity": 120,
+                "level3": [
+                  {
+                    "label": "สายธรรมดา",
+                    "levelName": "รูปแบบสาย",
                     "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 56640,
-                    "SubProductId": "P001-1",
-                    "Quantity": 200,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
+                    "price": 100,
+                    "subProductId": "P001-231",
+                    "quantity": 120,
+                    "level4": [
+                      {
+                        "label": "สายธรรมดา",
+                        "levelName": "รูปแบบสาย",
+                        "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                        "price": 200,
+                        "subProductId": "P001-2311",
+                        "quantity": 120,
+                        "level5": [
+                          {
+                            "label": "สายธรรมดา",
+                            "levelName": "รูปแบบสาย",
                             "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-11",
-                            "Quantity": 100
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-12",
-                            "Quantity": 100
-                        }
+                            "price": 300,
+                            "subProductId": "P001-23111",
+                            "quantity": 120
+                          }
+                        ]
+                      }
                     ]
-                },
-                {
-                    "Label": "สีขาว",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 57640,
-                    "SubProductId": "P001-2",
-                    "Quantity": 250,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-21",
-                            "Quantity": 50
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-22",
-                            "Quantity": 80
-                        },
-                        {
-                            "Label": "10 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 700,
-                            "SubProductId": "P001-23",
-                            "Quantity": 120,
-                            "Level3": [
-                                {
-                                    "Label": "สายธรรมดา",
-                                    "LevelName": "รูปแบบสาย",
-                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                    "Price": 100,
-                                    "SubProductId": "P001-231",
-                                    "Quantity": 120,
-                                    "Level4": [
-                                        {
-                                            "Label": "สายธรรมดา",
-                                            "LevelName": "รูปแบบสาย",
-                                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                            "Price": 200,
-                                            "SubProductId": "P001-2311",
-                                            "Quantity": 120,
-                                            "Level5": [
-                                                {
-                                                    "Label": "สายธรรมดา",
-                                                    "LevelName": "รูปแบบสาย",
-                                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                                    "Price": 300,
-                                                    "SubProductId": "P001-23111",
-                                                    "Quantity": 120
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
+                  }
+                ]
+              }
             ]
-        },
-        {
-            "AppId": "Marketplace-mini-app",
-            "ChannelId": "LINE",
-            "MerchantId": "0004234232",
-            "PaymentChannelCode": "",
-            "RefundDay": 7,
-            "PostDate": "2023‐09‐01T02:49:06−07:00",
-            "LastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-            "CategoryID": "1",
-            "Category": "EV Charger",
-            "ProductId": "P001",
-            "Quantity": 100,
-            "ProductName": "Palsar Max",
-            "ProductStatus": "Available",
-            "CommissionAmount": 2000,
-            "ServiceFee": 0,
-            "ShippingFee": 0,
-            "Tagline": "html",
-            "PromotionTag": [
-                "ติดตั้งฟรี",
-                "รับประกัน 3 ปี",
-                "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-            ],
-            "Description": "html",
-            "TechnicalSpec": "html",
-            "Remark": "html",
-            "Currency": "THB",
-            "Price": 56640,
-            "DiscountPrice": 59000,
-            "PercentDiscountPrice": 5,
-            "ProductionAssets": [
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
-                "https://youtube.com/?fdsfdfsdf",
-                "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
-            ],
-            "MerchantFullName": "",
-            "MerchantAddress": "",
-            "MerchantLogo": "Url",
-            "MerchantMobile": "",
-            "MerchantEmail": "",
-            "ProductionOptionals": [
-                {
-                    "Label": "สีดำ",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 56640,
-                    "SubProductId": "P001-1",
-                    "Quantity": 200,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-11",
-                            "Quantity": 100
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-12",
-                            "Quantity": 100
-                        }
-                    ]
-                },
-                {
-                    "Label": "สีขาว",
-                    "LevelName": "สี",
-                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                    "Price": 57640,
-                    "SubProductId": "P001-2",
-                    "Quantity": 250,
-                    "Level2": [
-                        {
-                            "Label": "3 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 0,
-                            "SubProductId": "P001-21",
-                            "Quantity": 50
-                        },
-                        {
-                            "Label": "5 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 500,
-                            "SubProductId": "P001-22",
-                            "Quantity": 80
-                        },
-                        {
-                            "Label": "10 เมตร",
-                            "LevelName": "ความยาวสาย",
-                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                            "Price": 700,
-                            "SubProductId": "P001-23",
-                            "Quantity": 120,
-                            "Level3": [
-                                {
-                                    "Label": "สายธรรมดา",
-                                    "LevelName": "รูปแบบสาย",
-                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                    "Price": 100,
-                                    "SubProductId": "P001-231",
-                                    "Quantity": 120,
-                                    "Level4": [
-                                        {
-                                            "Label": "สายธรรมดา",
-                                            "LevelName": "รูปแบบสาย",
-                                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                            "Price": 200,
-                                            "SubProductId": "P001-2311",
-                                            "Quantity": 120,
-                                            "Level5": [
-                                                {
-                                                    "Label": "สายธรรมดา",
-                                                    "LevelName": "รูปแบบสาย",
-                                                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                                                    "Price": 300,
-                                                    "SubProductId": "P001-23111",
-                                                    "Quantity": 120
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
+          }
+        ]
+      },
+      {
+        "appId": "Marketplace-mini-app",
+        "channelId": "LINE",
+        "merchantId": "0004234232",
+        "paymentChannelCode": "",
+        "refundDay": 7,
+        "postDate": "2023‐09‐01T02:49:06−07:00",
+        "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+        "categoryId": "1",
+        "category": "EV Charger",
+        "productId": "P001",
+        "quantity": 100,
+        "productName": "Palsar Max 3",
+        "productStatus": "Available",
+        "commissionAmount": 2000,
+        "serviceFee": 0,
+        "shippingFee": 0,
+        "tagline": "html",
+        "promotionTag": [
+          "ติดตั้งฟรี",
+          "รับประกัน 3 ปี",
+          "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+        ],
+        "description": "html",
+        "technicalSpec": "html",
+        "remark": "html",
+        "currency": "THB",
+        "price": 36640,
+        "discountPrice": 59000,
+        "percentDiscountPrice": 5,
+        "productionAssets": [
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
+          "https://youtube.com/?fdsfdfsdf",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
+        ],
+        "merchantFullName": "",
+        "merchantAddress": "",
+        "merchantLogo": "Url",
+        "merchantMobile": "",
+        "merchantEmail": "",
+        "productionOptionals": [
+          {
+            "label": "สีดำ",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 56640,
+            "subProductId": "P001-1",
+            "quantity": 200,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-11",
+                "quantity": 100
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-12",
+                "quantity": 100
+              }
             ]
-        }
+          },
+          {
+            "label": "สีขาว",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 57640,
+            "subProductId": "P001-2",
+            "quantity": 250,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-21",
+                "quantity": 50
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-22",
+                "quantity": 80
+              },
+              {
+                "label": "10 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 700,
+                "subProductId": "P001-23",
+                "quantity": 120,
+                "level3": [
+                  {
+                    "label": "สายธรรมดา",
+                    "levelName": "รูปแบบสาย",
+                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                    "price": 100,
+                    "subProductId": "P001-231",
+                    "quantity": 120,
+                    "level4": [
+                      {
+                        "label": "สายธรรมดา",
+                        "levelName": "รูปแบบสาย",
+                        "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                        "price": 200,
+                        "subProductId": "P001-2311",
+                        "quantity": 120,
+                        "level5": [
+                          {
+                            "label": "สายธรรมดา",
+                            "levelName": "รูปแบบสาย",
+                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                            "price": 300,
+                            "subProductId": "P001-23111",
+                            "quantity": 120
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "appId": "Marketplace-mini-app",
+        "channelId": "LINE",
+        "merchantId": "0004234232",
+        "paymentChannelCode": "",
+        "refundDay": 7,
+        "postDate": "2023‐09‐01T02:49:06−07:00",
+        "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+        "categoryId": "1",
+        "category": "EV Charger",
+        "productId": "P001",
+        "quantity": 100,
+        "productName": "Palsar Max 4",
+        "productStatus": "Available",
+        "commissionAmount": 2000,
+        "serviceFee": 0,
+        "shippingFee": 0,
+        "tagline": "html",
+        "promotionTag": [
+          "ติดตั้งฟรี",
+          "รับประกัน 3 ปี",
+          "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+        ],
+        "description": "html",
+        "technicalSpec": "html",
+        "remark": "html",
+        "currency": "THB",
+        "price": 46640,
+        "discountPrice": 59000,
+        "percentDiscountPrice": 5,
+        "productionAssets": [
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
+          "https://youtube.com/?fdsfdfsdf",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
+        ],
+        "merchantFullName": "",
+        "merchantAddress": "",
+        "merchantLogo": "Url",
+        "merchantMobile": "",
+        "merchantEmail": "",
+        "productionOptionals": [
+          {
+            "label": "สีดำ",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 56640,
+            "subProductId": "P001-1",
+            "quantity": 200,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-11",
+                "quantity": 100
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-12",
+                "quantity": 100
+              }
+            ]
+          },
+          {
+            "label": "สีขาว",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 57640,
+            "subProductId": "P001-2",
+            "quantity": 250,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-21",
+                "quantity": 50
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-22",
+                "quantity": 80
+              },
+              {
+                "label": "10 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 700,
+                "subProductId": "P001-23",
+                "quantity": 120,
+                "level3": [
+                  {
+                    "label": "สายธรรมดา",
+                    "levelName": "รูปแบบสาย",
+                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                    "price": 100,
+                    "subProductId": "P001-231",
+                    "quantity": 120,
+                    "level4": [
+                      {
+                        "label": "สายธรรมดา",
+                        "levelName": "รูปแบบสาย",
+                        "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                        "price": 200,
+                        "subProductId": "P001-2311",
+                        "quantity": 120,
+                        "level5": [
+                          {
+                            "label": "สายธรรมดา",
+                            "levelName": "รูปแบบสาย",
+                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                            "price": 300,
+                            "subProductId": "P001-23111",
+                            "quantity": 120
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "appId": "Marketplace-mini-app",
+        "channelId": "LINE",
+        "merchantId": "0004234232",
+        "paymentChannelCode": "",
+        "refundDay": 7,
+        "postDate": "2023‐09‐01T02:49:06−07:00",
+        "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+        "categoryId": "1",
+        "category": "EV Charger",
+        "productId": "P001",
+        "quantity": 100,
+        "productName": "Palsar Max 5",
+        "productStatus": "Available",
+        "commissionAmount": 2000,
+        "serviceFee": 0,
+        "shippingFee": 0,
+        "tagline": "html",
+        "promotionTag": [
+          "ติดตั้งฟรี",
+          "รับประกัน 3 ปี",
+          "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+        ],
+        "description": "html",
+        "technicalSpec": "html",
+        "remark": "html",
+        "currency": "THB",
+        "price": 56640,
+        "discountPrice": 59000,
+        "percentDiscountPrice": 5,
+        "productionAssets": [
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124652137419.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.JPG",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.mpeg",
+          "https://youtube.com/?fdsfdfsdf",
+          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
+        ],
+        "merchantFullName": "",
+        "merchantAddress": "",
+        "merchantLogo": "Url",
+        "merchantMobile": "",
+        "merchantEmail": "",
+        "productionOptionals": [
+          {
+            "label": "สีดำ",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 56640,
+            "subProductId": "P001-1",
+            "quantity": 200,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-11",
+                "quantity": 100
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-12",
+                "quantity": 100
+              }
+            ]
+          },
+          {
+            "label": "สีขาว",
+            "levelName": "สี",
+            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+            "price": 57640,
+            "subProductId": "P001-2",
+            "quantity": 250,
+            "level2": [
+              {
+                "label": "3 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 0,
+                "subProductId": "P001-21",
+                "quantity": 50
+              },
+              {
+                "label": "5 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 500,
+                "subProductId": "P001-22",
+                "quantity": 80
+              },
+              {
+                "label": "10 เมตร",
+                "levelName": "ความยาวสาย",
+                "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                "price": 700,
+                "subProductId": "P001-23",
+                "quantity": 120,
+                "level3": [
+                  {
+                    "label": "สายธรรมดา",
+                    "levelName": "รูปแบบสาย",
+                    "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                    "price": 100,
+                    "subProductId": "P001-231",
+                    "quantity": 120,
+                    "level4": [
+                      {
+                        "label": "สายธรรมดา",
+                        "levelName": "รูปแบบสาย",
+                        "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                        "price": 200,
+                        "subProductId": "P001-2311",
+                        "quantity": 120,
+                        "level5": [
+                          {
+                            "label": "สายธรรมดา",
+                            "levelName": "รูปแบบสาย",
+                            "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                            "price": 300,
+                            "subProductId": "P001-23111",
+                            "quantity": 120
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ]
-}
+  }
+  

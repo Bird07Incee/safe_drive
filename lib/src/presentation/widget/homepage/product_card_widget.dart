@@ -1,54 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/model/product_detail_args.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/selected_product/selected_product_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:universal_html/html.dart';
 
 class ProductCardWidget extends StatefulWidget {
-  const ProductCardWidget({
-    super.key,
-    required this.maxWidth,
-  });
+  const ProductCardWidget({super.key, required this.maxWidth, required this.productList});
 
   final double maxWidth;
+  final ProductList productList;
 
   @override
   State<ProductCardWidget> createState() => _ProductCardWidgetState();
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
-  var indicator = [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-  ];
+  List<int> counter = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    for (int i = 0; i < widget.productList.products!.length; i++) {
+      counter.add(1);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    var productList = widget.productList;
+    var products = productList.products;
+
     return ListView.builder(
         shrinkWrap: true,
         padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 5,
+        itemCount: productList.products?.length,
         itemBuilder: (BuildContext context, int index) {
           late final PageController pageViewController = PageController(initialPage: 0);
           return GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, Routes.productDetail.toStringPath());
+              // context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
+
+              Navigator.pushNamed(context, Routes.productDetail.toStringPath(), arguments: ProductDetailArgs(product: products[index]));
+              // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 16),
@@ -78,11 +81,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           borderRadius:
                               const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
                           child: PageView.builder(
-                              itemCount: 10,
+                              itemCount: products?[index].productionAssets.length,
                               controller: pageViewController,
                               onPageChanged: (val) {
                                 setState(() {
-                                  indicator[index] = val + 1;
+                                  counter[index] = val + 1;
                                 });
                               },
                               itemBuilder: (ctx, i) {
@@ -91,7 +94,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     SizedBox(
                                         width: widget.maxWidth,
                                         height: 576,
-                                        child: Image.asset('assets/mocking/product.png', fit: BoxFit.fitWidth)),
+                                        child:
+                                            Image.network(products![index].productionAssets[i], fit: BoxFit.fitWidth)),
                                   ],
                                 );
                               }),
@@ -110,7 +114,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           ),
                           child: Center(
                             child: Text(
-                              "${indicator[index]}/ 5",
+                              "${counter[index]}/ ${products?[index].productionAssets.length}",
                               style: const TextStyle(color: whitePure),
                             ),
                           ),
@@ -125,13 +129,30 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) => const SizedBox(),
                         ),
-                      ))
+                      )),
+                      Visibility(
+                        visible: products?[index].percentDiscountPrice != 0,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                          decoration: const BoxDecoration(
+                              color: Color(0xff40a9fc),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(0),
+                                  bottomLeft: Radius.circular(0),
+                                  bottomRight: Radius.circular(8))),
+                          child: AlvaText(
+                            title: "ถูกลง ${products?[index].percentDiscountPrice} %",
+                            textStyle: AlvaStyles().headingSize12w600(Colors.white),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                   Container(
                     color: whitePure,
                     width: widget.maxWidth,
-                    padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                    padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -139,7 +160,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           visible: true,
                           child: SmoothPageIndicator(
                               controller: pageViewController,
-                              count: 5,
+                              count: products![index].productionAssets.length,
                               effect: const ExpandingDotsEffect(
                                 expansionFactor: 2,
                                 dotHeight: 6,
@@ -160,54 +181,34 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AlvaText(
-                              title: 'Pulsar Plus',
-                              textStyle: AlvaStyles().headingSize32(),
+                              title: products[index].productName,
+                              textStyle: AlvaStyles().headingSize22Height32(),
                             ),
                             Row(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                  decoration:
-                                      BoxDecoration(color: whiteSoftGreen, borderRadius: BorderRadius.circular(4)),
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                    child: AlvaText(
-                                      title: 'ติดตั้งฟรี',
-                                      textStyle: AlvaStyles().headingSize10(),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 1,
-                                  height: 16,
-                                  color: cloudSoftDeepWhite,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                    child: AlvaText(
-                                      title: 'รับประกัน 3 ปี',
-                                      textStyle: AlvaStyles().headingSize10(),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 1,
-                                  height: 16,
-                                  color: cloudSoftDeepWhite,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                    child: AlvaText(
-                                      title: 'สิทธิพิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้ ',
-                                      textStyle: AlvaStyles().headingSize10(),
-                                    ),
-                                  ),
-                                )
-                              ],
+                              children: products[index]
+                                  .promotionTag
+                                  .map((tag) => Row(
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.symmetric(vertical: 4),
+                                            child: AlvaText(
+                                              title: tag,
+                                              textStyle: AlvaStyles().headingSize10(),
+                                            ),
+                                          ),
+
+                                          // add srperator exclude tail
+                                          if (products[index].promotionTag.indexOf(tag) !=
+                                              products[index].promotionTag.length - 1)
+                                            const Text("|")
+                                          // const VerticalDivider(
+                                          //   width: 8,
+                                          //   thickness: 100,
+                                          //   color: Colors.grey,
+                                          // )
+                                        ],
+                                      ))
+                                  .toList(),
                             ),
                             const SizedBox(
                               height: 16,
@@ -220,27 +221,108 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             const SizedBox(
                               height: 16,
                             ),
-                            AlvaText(
-                              title: 'เล็ก ทรงพลัง',
-                              textStyle: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW),
+                            HtmlWidget(
+                              products[index].tagline,
+                              customStylesBuilder: (element) {
+                                if (element.localName == "h1") {
+                                  return {
+                                    'font-family': 'Krungsri Condensed',
+                                    'font-size': '16px',
+                                    'font-weight': '600'
+                                  };
+                                }
+
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            HtmlWidget(
+                              products[index].description,
+                              customStylesBuilder: (element) {
+                                if (element.localName == "p") {
+                                  return {
+                                    'font-family': 'Krungsri Condensed',
+                                    'font-size': '10px',
+                                    'font-weight': '400',
+                                    'line-height': '16px'
+                                  };
+                                }
+
+                                return null;
+                              },
                             ),
                             const SizedBox(
                               height: 16,
                             ),
-                            AlvaText(
-                              title:
-                                  'เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application',
-                              textStyle: AlvaStyles().headingSize10w400(blackInBlack),
+                            Visibility(
+                              visible: products[index].discountPrice != 0,
+                              child: Row(
+                                children: [
+                                  AlvaText(
+                                    title: NumberFormat.decimalPattern().format(products[index].discountPrice),
+                                    textStyle: AlvaStyles().bodySize14W400MutedLine(),
+                                  ),
+                                  const SizedBox(
+                                    width: 1,
+                                  ),
+                                  AlvaText(
+                                    title: "บาท",
+                                    textStyle: AlvaStyles().bodySize14W400Muted(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    AlvaText(
+                                      title: NumberFormat.decimalPattern().format(products[index].price),
+                                      textStyle: products[index].discountPrice == 0
+                                          ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
+                                          : AlvaStyles().headingSize22(RedWordShow),
+                                    ),
+                                    Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                        AlvaText(
+                                          title: "บาท",
+                                          textStyle: products[index].discountPrice == 0
+                                              ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
+                                              : AlvaStyles().headingSize18(RedWordShow),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 40,
+                                  decoration: const BoxDecoration(
+                                      color: YellowKrungsri, borderRadius: BorderRadius.all(Radius.circular(8))),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 32,
+                                      ),
+                                      AlvaText(
+                                        title: 'สนใจ',
+                                        textStyle: AlvaStyles().bodySize14W600(),
+                                      ),
+                                      const SizedBox(
+                                        width: 32,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(
-                              height: 32,
-                            ),
-                            AlvaText(
-                              title: '฿ 44,500',
-                              textStyle: AlvaStyles().headingSize32(),
-                            ),
-                            const SizedBox(
-                              height: 32,
+                              height: 16,
                             ),
                           ],
                         ),

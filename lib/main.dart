@@ -1,4 +1,3 @@
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
@@ -9,17 +8,18 @@ import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
-
 late DdSdkConfiguration configuration;
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   _configureApp();
-  SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
@@ -30,39 +30,33 @@ void main() {
     });
   });
 }
-
 _configureApp() {
   _setUpDatadog();
   _setUpLineLIFF();
 }
-
 _setUpLineLIFF() {
   LineDataHelper lineDataHelper = LineDataHelper();
-
   if (Uri.base.queryParameters.isNotEmpty) {
     print("params:");
     Uri.base.queryParameters.forEach((key, value) {
       print("$key=$value");
       lineDataHelper.lineDataGrabber(key, value);
     });
-
     // waiting for change
     Storage localStorage = window.localStorage;
     localStorage.addAll({"LineLogin": 'true'});
   }
-
   String lineId = Environment().getValue("LIFF_ID");
-  FlutterLineLiff().init(
-      //TODO: config LIFF for prod
-      config: Config(liffId: lineId),
-      successCallback: () {
-        print('successCallback');
-      },
-      errorCallback: (error) {
-        print('init error: ${error.name}, ${error.message}, ${error.stack}');
-      });
+  // FlutterLineLiff().init(
+  //   //TODO: config LIFF for prod
+  //     config: Config(liffId: lineId),
+  //     successCallback: () {
+  //       print('successCallback');
+  //     },
+  //     errorCallback: (error) {
+  //       print('init error: ${error.name}, ${error.message}, ${error.stack}');
+  //     });
 }
-
 _setUpDatadog() {
   configuration = DdSdkConfiguration(
     clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
@@ -71,13 +65,12 @@ _setUpDatadog() {
     trackingConsent: TrackingConsent.granted,
     nativeCrashReportEnabled: true,
     loggingConfiguration: LoggingConfiguration(),
-    rumConfiguration: RumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
+    rumConfiguration:
+    RumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
   );
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -87,33 +80,30 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class RootPage extends StatefulWidget {
   const RootPage({
     super.key,
   });
-
   @override
   State<RootPage> createState() => _RootPageState();
 }
-
 class _RootPageState extends State<RootPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
     initConnectivity();
     Connectivity().onConnectivityChanged.listen((result) {
-      context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: result));
+      context
+          .read<ConnectivityStatusBloc>()
+          .add(ConnectivityStatusEvent(connectivityResult: result));
     });
   }
-
   Future<void> initConnectivity() async {
-    await Connectivity().checkConnectivity().then(
-        (value) => context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: value)));
+    await Connectivity().checkConnectivity().then((value) => context
+        .read<ConnectivityStatusBloc>()
+        .add(ConnectivityStatusEvent(connectivityResult: value)));
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -122,11 +112,11 @@ class _RootPageState extends State<RootPage> {
       themeMode: ThemeMode.system,
       initialRoute: "/",
       routes: routes,
-      // onGenerateRoute: (settings) => generateRoute(settings),
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 172, 204, 229),
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
+        appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
       ),
       navigatorObservers: [
         DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),

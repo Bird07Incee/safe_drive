@@ -52,6 +52,7 @@ dependencies:
   connectivity_plus: ^4.0.2
   universal_html: 2.0.9
   uuid: ^3.0.6
+  flutter_widget_from_html: 0.9.1
 
 dev_dependencies:
   flutter_test:
@@ -88,10 +89,12 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/category/
     - assets/images/wall_charges/
     - assets/homepage/
     - assets/raw/
     - assets/mocking/
+    - assets/mocking/json/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -65,6 +65,6 @@ class LineDataHelper {
   }
 
   String getLineAccessToken() {
-    return _getSocialData()["access_token"];
+    return _getSocialData()["access_token"] ?? '';
   }
 }
