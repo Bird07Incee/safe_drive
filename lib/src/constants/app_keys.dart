@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppKeys {
   //Product Detail Screen
-  Key productDetailTitleKey = const Key('product_detail_title_key');
+  Key productDetailProductDescriptionKey =
+      const Key('product_detail_title_key');
   Key productDetailGeneralDetailTabKey =
       const Key('product_detail_general_detail_tab_key');
   Key productDetailEtcDetailTabKey =

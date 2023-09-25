@@ -14,7 +14,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
-import 'package:marketplace_line_oa/src/model/product_detail/product_detail_general_model.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_product_description_model.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
@@ -505,28 +505,78 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               const SizedBox(
                 height: 16,
               ),
-              buildGeneralInfoWidgetAndInfo(),
+              buildProductDescriptionWidget(),
               const SizedBox(
                 height: 16,
               ),
               buildDetailCardWidget(
                   titleKey: AppKeys().productDetailAboutSellerTitleKey,
                   title: AppStrings().aboutSellerTitle,
-                  htmlPage: Container()),
+                  bodyPage: Column(
+                    children: [
+                      Row(
+                        children: [
+                          AlvaText(
+                              title: "Company",
+                              textStyle:
+                                  AlvaStyles().headingSize14w700(blackInBlack))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          AlvaText(
+                              title: "Company Address",
+                              textStyle:
+                                  AlvaStyles().headingSize10w400(smockGrey))
+                        ],
+                      ),
+                    ],
+                  )),
               const SizedBox(
                 height: 16,
               ),
               buildDetailCardWidget(
                   titleKey: AppKeys().productDetailPromotionDetailTitleKey,
                   title: AppStrings().promotionDetailTitle,
-                  htmlPage: Container()),
+                  bodyPage: Column(
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.bookmark,
+                            size: 12,
+                            color: smockGrey,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          AlvaText(
+                              title: "Promotion Desc",
+                              textStyle:
+                                  AlvaStyles().headingSize12w700(blackInBlack))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  )),
               const SizedBox(
                 height: 16,
               ),
               buildDetailCardWidget(
                   titleKey: AppKeys().productDetailRemarkTitleKey,
                   title: AppStrings().remarkTitle,
-                  htmlPage: Container()),
+                  bodyPage: HtmlWidget("remark", buildAsync: true,
+                      customStylesBuilder: (element) {
+                    return {
+                      'font-family': 'Krungsri Condensed',
+                      'font-size': '14px'
+                    };
+                  })),
               const SizedBox(
                 height: 16,
               ),
@@ -535,10 +585,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         ));
   }
 
-  Widget buildGeneralInfoWidgetAndInfo() {
+  Widget buildProductDescriptionWidget() {
     bool isPressedReadMore = false;
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           color: whitePure,
           boxShadow: [
@@ -557,15 +606,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 "มาสด้า 3 SP 2.0 Carbon Edition ปี 2023 สีเทาฟ้า (Poly Metal Grey) \r<br />รุ่นพิเศษ เบาะแดง ตะเข็บคอนโซลแดง กระจกมองข้าง ล้อแม็กสีดำ \r<br />\r<br />มีติดชุดสเกิร์ตหน้าแท้สีดำเงา Mazda Signature Stlye\r<br />เคลือบแก้วเซรามิก 10 H \r<br />มาแล้ว มีรับประกัน 2 ปี \r<br />\r<br />ออกรถ 4 เมษา 2023\r<br />ป้ายแดง ยังไม่จดทะเบียน\r<br />รถมีซื้อโปรแกรม MUS \r<br />ดูแลรักษาฟรี 5 ปี\r<br />วารันตี 5 ปี\r<br />ไมล์ 4,xxx กิโล\r<br />มีประกันภัยชั้น 1 ซ่อมห้างของ วิริยะประกันภัย\r<br />\r<br />รถเหมือนใหม่ป้ายแดง ไม่เคยมีอุบัติเหตุใดๆ เช็คประวัติได้\r<br />\r<br />รถใหม่ราคา 1,210,000 บาท\r<br />ขาย 1,090,000 บาท\r<br />\r<br />สนใจติดต่อ คุณเอ \r<br />065-2299569";
           } else {
             data =
-                "<h1>Mazda 3 2.0 C รถปี 2020<br />- เลขไมล์ 28,XXX รถบ้านขับน้อย ไม่เคยชน<br />- ล้อแม็กขอบ 18 รุ่นพิเศษ 100th Anniversary Edition & น็อต Rays แท้<br />- กรอบกระจก Glossy Black งานแท้เบิกศูนย์<br />- ติดระบบเรดาร์ถอยจอดของแท้ Mazda แบบไม่เจาะกันชน<br />- อัพเกรดระบบนำทาง Mazda แท้ พร้อมยิงขึ้นจอ HID ที่กระจก (Option นี้ในไทยไม่มี)<br />- กล้องบันทึกหน้าหลัง 70mai<br />- ท่อ HKS แท้ ปลายคาร์บอนคู่ ประกันเหลือ (ท่อเดิมยังอยู่)<br />- กรอบป้ายทะเบียน HEMI แบบพับได้<br />- ทะเบียนเลขจองพิเศษ 698 กทม<br />- รถ Service ศูนย์ตรงตามระยะ ฟรีค่าแรง 5 ปี (เหลืออีก 2 ปี)<br />- Service เคลือบแก้วเซรามิกทุก 6 เดือน<br /><br />ราคา 750,000.- <br />โทร 086-4868878 เกรท<br />นัดดูรถ หมู่บ้าน The City - รัตนาธิเบศร์ นนทบุรี </h1>";
+                "<article>Mazda 3 2.0 C รถปี 2020<br />- เลขไมล์ 28,XXX รถบ้านขับน้อย ไม่เคยชน<br />- ล้อแม็กขอบ 18 รุ่นพิเศษ 100th Anniversary Edition & น็อต Rays แท้<br />- กรอบกระจก Glossy Black งานแท้เบิกศูนย์<br />- ติดระบบเรดาร์ถอยจอดของแท้ Mazda แบบไม่เจาะกันชน<br />- อัพเกรดระบบนำทาง Mazda แท้ พร้อมยิงขึ้นจอ HID ที่กระจก (Option นี้ในไทยไม่มี)<br />- กล้องบันทึกหน้าหลัง 70mai<br />- ท่อ HKS แท้ ปลายคาร์บอนคู่ ประกันเหลือ (ท่อเดิมยังอยู่)<br />- กรอบป้ายทะเบียน HEMI แบบพับได้<br />- ทะเบียนเลขจองพิเศษ 698 กทม<br />- รถ Service ศูนย์ตรงตามระยะ ฟรีค่าแรง 5 ปี (เหลืออีก 2 ปี)<br />- Service เคลือบแก้วเซรามิกทุก 6 เดือน<br /><br />ราคา 750,000.- <br />โทร 086-4868878 เกรท<br />นัดดูรถ หมู่บ้าน The City - รัตนาธิเบศร์ นนทบุรี </article>";
           }
 
           // data = widget.arguments!.test;
 
-          var args = ModalRoute.of(context)!.settings.arguments
-              as ProductDetailScreenArguments;
+          // var args = ModalRoute.of(context)!.settings.arguments
+          //     as ProductDetailScreenArguments;
 
-          data = args.test;
+          // data = args.test;
 
           return Column(
             children: [
@@ -574,10 +623,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(8),
                       child: AlvaText(
-                        key: AppKeys().productDetailTitleKey,
-                        title: AppStrings().productDetailTitle,
+                        key: AppKeys().productDetailProductDescriptionKey,
+                        title: AppStrings().productDetailProductDescription,
                         textStyle:
                             AlvaStyles().headingSize16w500(ModernDarkGray),
                       )),
@@ -615,26 +664,51 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     if (details.primaryVelocity! < 0) {
                       _tabController.animateTo(1,
                           duration: const Duration(milliseconds: 300));
+                      setState(() {});
                     }
                   } else {
                     if (details.primaryVelocity! > 0) {
                       _tabController.animateTo(0,
                           duration: const Duration(milliseconds: 300));
+                      setState(() {});
                     }
                   }
-                  setState(() {});
                 },
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 16, vertical: data.isEmpty ? 32 : 0),
-                  child: HtmlWidget(
-                      data.isNotEmpty ? data : AppStrings().noDataFromSeller,
-                      customStylesBuilder: (element) {
-                    return switchStyleForHtml(
-                        title: AppStrings().productDetailTitle,
-                        isPressedReadMore: isPressedReadMore);
-                  }),
-                ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 16, vertical: data.isEmpty ? 32 : 0),
+                    child: Column(
+                      children: [
+                        isPressedReadMore
+                            ? HtmlWidget(
+                                data.isNotEmpty
+                                    ? data
+                                    : AppStrings().noDataFromSeller,
+                                buildAsync: true,
+                                customStylesBuilder: (element) {
+                                return {
+                                  'font-family': 'Krungsri Condensed',
+                                  'font-size': '14px'
+                                };
+                              })
+                            : Container(),
+                        !isPressedReadMore
+                            ? HtmlWidget(
+                                data.isNotEmpty
+                                    ? data
+                                    : AppStrings().noDataFromSeller,
+                                buildAsync: true,
+                                customStylesBuilder: (element) {
+                                return {
+                                  'font-family': 'Krungsri Condensed',
+                                  'font-size': '14px',
+                                  'max-lines': '5',
+                                  'text-overflow': 'ellipsis'
+                                };
+                              })
+                            : Container(),
+                      ],
+                    )),
               ),
               const SizedBox(
                 height: 16,
@@ -650,9 +724,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 height: 48,
                                 child: OutlinedButton(
-                                  onPressed: () {
-                                    isPressedReadMore = !isPressedReadMore;
-                                    setState(() {});
+                                  onPressed: () async {
+                                    setState((() {
+                                      isPressedReadMore = !isPressedReadMore;
+                                    }));
+                                    log(isPressedReadMore.toString());
                                   },
                                   style: AlvaStyles()
                                       .outlineNoneBorderButtonStyle(
@@ -660,8 +736,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                           Colors.transparent),
                                   child: AlvaText(
                                     title: isPressedReadMore
-                                        ? "ซ่อนรายละเอียด"
-                                        : "อ่านเพิ่มเติม",
+                                        ? AppStrings().btnHideDescription
+                                        : AppStrings().btnReadMore,
                                     textStyle: AlvaStyles()
                                         .headingSize14w700(BlueFantasy),
                                     disableSelectableText: true,
@@ -679,21 +755,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   }
 
   switchStyleForHtml({String? title, bool isPressedReadMore = false}) {
-    if (title == AppStrings().productDetailTitle) {
-      if (_tabController.index == 0 && !isPressedReadMore) {
-        return {
-          'font-family': 'Krungsri Condensed',
-          'font-size': '14px',
-        };
-      } else {
-        return {
-          'font-family': 'Krungsri Condensed',
-          'font-size': '14px',
-          'max-lines': '5',
-          'text-overflow': 'ellipsis'
-        };
-      }
-    } else if (title == AppStrings().aboutSellerTitle) {
+    if (title == AppStrings().aboutSellerTitle) {
       return {
         'font-family': 'Krungsri Condensed',
         'font-size': '14px',
@@ -712,7 +774,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   }
 
   Widget buildDetailCardWidget(
-      {Key? titleKey, String? title, Widget? htmlPage}) {
+      {Key? titleKey, String? title, Widget? bodyPage}) {
     String phoneNumber = "091-862-5011";
 
     return Container(
@@ -735,7 +797,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(8),
                     child: AlvaText(
                       key: titleKey!,
                       title: title!,
@@ -749,7 +811,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             GestureDetector(
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: htmlPage)),
+                    child: bodyPage)),
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [

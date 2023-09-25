@@ -33,11 +33,16 @@ final Map<String, WidgetBuilder> routes = {
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
   (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
       const LoadingScreen(),
-  (Routes.productDetail).toStringPath(): (BuildContext context) =>
-      ProductDetailScreen(
+  (Routes.productDetail).toStringPath(): (BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      return ProductDetailScreen(
         arguments: ModalRoute.of(context)!.settings.arguments
             as ProductDetailScreenArguments,
-      )
+      );
+    } else {
+      return const ProductDetailScreen();
+    }
+  }
 };
 
 // extension StringExtension on String {
