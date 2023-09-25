@@ -542,151 +542,166 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
       double previousState, int imageDataLength) {
+    backButtontoDetail() {
+      log("backButtontoDetail");
+      context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
+      context
+          .read<ProductDetailCarouselScrollControllerBloc>()
+          .add(CarouselScrollAction(index: carouselState.initialPage));
+      context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+      if (zoomState.value != Matrix4.identity()) {
+        context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
+      }
+    }
+
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async {
+        backButtontoDetail();
+        return false;
+      },
       child: Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
             child: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: GestureDetector(
-                    onDoubleTapDown: (TapDownDetails detail) {
-                      context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
-                      if (previousState > 0.6) {
-                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
-                      } else {
-                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
-                      }
-                    },
-                    child: InteractiveViewer(
-                      transformationController: zoomState,
-                      panEnabled: true,
-                      minScale: 0.5,
-                      maxScale: 5.0,
-                      scaleEnabled: true,
-                      onInteractionUpdate: (ScaleUpdateDetails details) {
-                        _scale = previousState * details.scale;
-                      },
-                      onInteractionEnd: (ScaleEndDetails details) {
-                        context
-                            .read<PreviousScaleBloc>()
-                            .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
-                      },
-                      child: AspectRatio(
-                        aspectRatio: 16.0 / 9.0,
-                        child: PageView.builder(
-                            itemCount: imageDataLength + 1,
-                            physics: previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
-                            controller: carouselState,
-                            onPageChanged: (val) {
-                              context
-                                  .read<ProductDetailCarouselScrollControllerBloc>()
-                                  .add(CarouselScrollAction(index: val));
-
-                              if (val == imageDataLength) {
-                                carouselState.jumpToPage(0);
+              children: [
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: GestureDetector(
+                            onDoubleTapDown: (TapDownDetails detail) {
+                              context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
+                              if (previousState > 0.5) {
+                                context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+                              } else {
+                                context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
                               }
                             },
-                            itemBuilder: (ctx, i) {
-                              return AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: SizedBox(
-                                  width: maxWidth,
-                                  height: 576,
-                                  child: FadeInImage(
-                                    placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
-                                    image: NetworkImage(
-                                      i == imageDataLength ? dataCarouselMock[0] : dataCarouselMock[i],
-                                    ),
-                                    fit: BoxFit.fitWidth,
-                                    imageErrorBuilder: (context, error, stackTrace) =>
-                                        Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                    ),
-                  )),
-                ],
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
-                context
-                    .read<ProductDetailCarouselScrollControllerBloc>()
-                    .add(CarouselScrollAction(index: carouselState.initialPage));
-                if (zoomState.value != Matrix4.identity()) {
-                  context
-                      .read<ImgGalleryZoomBloc>()
-                      .add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: spaceGrey123,
-                        ),
-                        width: 40,
-                        height: 32,
-                        child: Row(
-                          children: const [
-                            SizedBox(
-                              width: 14,
+                            child: InteractiveViewer(
+                              transformationController: zoomState,
+                              panEnabled: true,
+                              minScale: 0.5,
+                              maxScale: 5.0,
+                              scaleEnabled: true,
+                              onInteractionUpdate: (ScaleUpdateDetails details) {
+                                _scale = previousState * details.scale;
+                              },
+                              onInteractionEnd: (ScaleEndDetails details) {
+                                context
+                                    .read<PreviousScaleBloc>()
+                                    .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
+                              },
+                              child: AspectRatio(
+                                aspectRatio: 16.0 / 9.0,
+                                child: PageView.builder(
+                                    itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
+                                    physics:
+                                    previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
+                                    controller: carouselState,
+                                    onPageChanged: (val) {
+                                      context
+                                          .read<ProductDetailCarouselScrollControllerBloc>()
+                                          .add(CarouselScrollAction(index: val));
+
+                                      if (val == imageDataLength && val != 1) {
+                                        carouselState.jumpToPage(0);
+                                      }
+                                    },
+                                    itemBuilder: (ctx, i) {
+                                      return AspectRatio(
+                                        aspectRatio: 16 / 9,
+                                        child: SizedBox(
+                                          width: maxWidth,
+                                          height: 576,
+                                          child: FadeInImage(
+                                            placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
+                                            image: NetworkImage(
+                                              i == imageDataLength
+                                                  ? dataCarouselMock[0]
+                                                  : dataCarouselMock[i],
+                                            ),
+                                            // image: NetworkImage(
+                                            //   i == imageDataLength
+                                            //       ? dataCarouselMock[0].substring(46)
+                                            //       : dataCarouselMock[i].substring(46),
+                                            // ),
+                                            fit: BoxFit.fitWidth,
+                                            imageErrorBuilder: (context, error, stackTrace) =>
+                                                Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              ),
                             ),
-                            Icon(
-                              Icons.arrow_back_ios,
-                              color: whitePure,
-                              size: 16,
-                            ),
-                          ],
-                        )),
-                  ],
+                          )),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    width: maxWidth,
-                    padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                GestureDetector(
+                  onTap: () {
+                    backButtontoDetail();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Visibility(
-                          visible: imageDataLength == 1 ? false : true,
-                          child: SmoothPageIndicator(
-                              controller: carouselState,
-                              count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
-                              effect: const ExpandingDotsEffect(
-                                expansionFactor: 2,
-                                dotHeight: 6,
-                                dotWidth: 6,
-                                activeDotColor: spaceGrey123,
-                                dotColor: cloudSoftDeepWhite,
-                              )),
-                        ),
+                        Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: spaceGrey123,
+                            ),
+                            width: 40,
+                            height: 32,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 14,
+                                ),
+                                Icon(
+                                  Icons.arrow_back_ios,
+                                  color: whitePure,
+                                  size: 16,
+                                ),
+                              ],
+                            )),
                       ],
                     ),
                   ),
-                ],
-              ),
-            )
-          ],
-        )),
+                ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: maxWidth,
+                        padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Visibility(
+                              visible: imageDataLength == 1 ? false : true,
+                              child: SmoothPageIndicator(
+                                  controller: carouselState,
+                                  count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
+                                  effect: const ExpandingDotsEffect(
+                                    expansionFactor: 2,
+                                    dotHeight: 6,
+                                    dotWidth: 6,
+                                    activeDotColor: spaceGrey123,
+                                    dotColor: cloudSoftDeepWhite,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )),
       ),
     );
   }
