@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_screen_arguments.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/product_detail_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
@@ -25,54 +26,63 @@ extension TypeCoverter on Routes {
   }
 }
 
-// final Map<String, WidgetBuilder> routes = {
-//   (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
-//   (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
-//   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
-//   (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
-//   (Routes.productDetail).toStringPath(): (BuildContext _) => const ProductDetailScreen()
-// };
-
-extension StringExtension on String {
-  RoutingData get getRoutingData {
-    var uriData = Uri.parse(this);
-    return RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+final Map<String, WidgetBuilder> routes = {
+  (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
+  (Routes.termAndCon).toStringPath(): (BuildContext _) =>
+      const TermAndConScreen(),
+  (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
+  (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
+      const LoadingScreen(),
+  (Routes.productDetail).toStringPath(): (BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      return ProductDetailScreen(
+        arguments: ModalRoute.of(context)!.settings.arguments
+            as ProductDetailScreenArguments,
+      );
+    } else {
+      return const ProductDetailScreen();
+    }
   }
-}
+};
 
-Route<dynamic> generateRoute(RouteSettings settings) {
-  var routingData = settings.name?.getRoutingData;
+// extension StringExtension on String {
+//   RoutingData get getRoutingData {
+//     var uriData = Uri.parse(this);
+//     return RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+//   }
+// }
 
-  // String code = "empty";
-  // String state = "empty";
-  // String liffClientId = "empty";
-  // Uri liffRedirectUri = Uri();
-  //
-  // if (routingData?.route == "/auths") {
-  //   code = (routingData?["code"] == null) ? "" : routingData?["code"];
-  //   state = (routingData?["state"] == null) ? "" : routingData?["state"];
-  //   liffClientId = (routingData?["liffClientId"] == null) ? "" : routingData?["liffClientId"];
-  //   liffRedirectUri =
-  //       (routingData?["liffRedirectUri"] == null) ? Uri() : Uri.parse(routingData!["liffRedirectUri"].toString());
-  // }
-  //
-  // print(code);
-  // print(state);
-  // print(liffClientId);
-  // print(liffRedirectUri);
+// Route<dynamic> generateRoute(RouteSettings settings) {
+//   var routingData = settings.name?.getRoutingData;
 
-  switch (routingData?.route) {
-    case "/":
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
-    case "/termAndCon":
-      return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
-    case "/errorScreen":
-      return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
-    case "/loadingScreen":
-      return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
-    case "/productDetail":
-      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
-    default:
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
-  }
-}
+//   String code = "empty";
+//   String state = "empty";
+//   String liffClientId = "empty";
+//   Uri liffRedirectUri = Uri();
+
+//   if (routingData?.route == "/auths") {
+//     code = (routingData?["code"] == null) ? "" : routingData?["code"];
+//     state = (routingData?["state"] == null) ? "" : routingData?["state"];
+//     liffClientId = (routingData?["liffClientId"] == null) ? "" : routingData?["liffClientId"];
+//     liffRedirectUri =
+//         (routingData?["liffRedirectUri"] == null) ? Uri() : Uri.parse(routingData!["liffRedirectUri"].toString());
+//   }
+
+//   print(code);
+//   print(state);
+//   print(liffClientId);
+//   print(liffRedirectUri);
+
+//   switch (routingData?.route) {
+//     case "/":
+//       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+//     case "termAndCon":
+//       return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
+//     case "errorScreen":
+//       return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
+//     case "loadingScreen":
+//       return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
+//     default:
+//       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+//   }
+// }
