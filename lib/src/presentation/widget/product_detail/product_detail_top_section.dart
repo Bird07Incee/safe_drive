@@ -45,7 +45,9 @@ class PDTopSection extends StatelessWidget {
                       AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
-                            itemCount: args.product.productionAssets.length == 1 ? args.product.productionAssets.length : args.product.productionAssets.length + 1,
+                            itemCount: args.product.productionAssets.length == 1
+                                ? args.product.productionAssets.length
+                                : args.product.productionAssets.length + 1,
                             controller: carouselState,
                             onPageChanged: (val) {
                               context
@@ -105,32 +107,32 @@ class PDTopSection extends StatelessWidget {
                       ),
                       Positioned.fill(
                           child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Container(
-                              margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
-                              width: 41,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: cloudyWhite.withOpacity(0.8),
-                              ),
-                              child: Center(
-                                child: AlvaText(
-                                    title: "${carouselState.initialPage + 1}/${args.product.productionAssets.length}",
-                                    textStyle: AlvaStyles().headingSize10w500(ModernDarkGray)),
-                              ),
-                            ),
-                          )),
+                        alignment: Alignment.bottomLeft,
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                          width: 41,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: cloudyWhite.withOpacity(0.8),
+                          ),
+                          child: Center(
+                            child: AlvaText(
+                                title: "${carouselState.initialPage + 1}/${args.product.productionAssets.length}",
+                                textStyle: AlvaStyles().headingSize10w500(ModernDarkGray)),
+                          ),
+                        ),
+                      )),
                       Positioned.fill(
                           child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: Image.asset(
-                              "assets/homepage/brand.png",
-                              height: 32,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) => const SizedBox(),
-                            ),
-                          ))
+                        alignment: Alignment.bottomRight,
+                        child: Image.asset(
+                          "assets/homepage/brand.png",
+                          height: 32,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                        ),
+                      ))
                     ],
                   ),
                   Container(
@@ -146,7 +148,9 @@ class PDTopSection extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                             child: SmoothPageIndicator(
                                 controller: carouselState,
-                                count: args.product.productionAssets.length <= carouselShowLimit ? args.product.productionAssets.length : carouselShowLimit,
+                                count: args.product.productionAssets.length <= carouselShowLimit
+                                    ? args.product.productionAssets.length
+                                    : carouselShowLimit,
                                 effect: const ExpandingDotsEffect(
                                   expansionFactor: 2,
                                   dotHeight: 6,
@@ -232,7 +236,7 @@ class PDTopSection extends StatelessWidget {
                             ),
                             AlvaText(
                               title:
-                              'เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application',
+                                  'เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application',
                               textStyle: AlvaStyles().headingSize10w400(spaceGrey),
                             ),
                             const SizedBox(

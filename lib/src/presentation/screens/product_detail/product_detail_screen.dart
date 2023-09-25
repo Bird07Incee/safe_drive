@@ -67,13 +67,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   //List dataCarouselMock = carouselSingleItem;
   @override
   Widget build(BuildContext context) {
-    int imageDataLength= 1;
-    if ( widget.arguments != null) {
+    int imageDataLength = 1;
+    if (widget.arguments != null) {
       imageDataLength = widget.arguments!.product.productionAssets.length == 1
           ? widget.arguments!.product.productionAssets.length
           : widget.arguments!.product.productionAssets.length > 20
-          ? 20
-          : widget.arguments!.product.productionAssets.length;
+              ? 20
+              : widget.arguments!.product.productionAssets.length;
     }
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
@@ -104,93 +104,108 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     );
   }
 
-  AlvaRootWidget productDetailPage(
+  WillPopScope productDetailPage(
       ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
-    return AlvaRootWidget(
-        titlePage: titleWebPage,
-        appBar: stateAppBar.appBarCarDetailStatus
-            ? AppBar(
-                automaticallyImplyLeading: false,
-                leading: IconButton(
-                  key: const Key("pop_navigator_to_home_page"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
-                  },
-                  icon: const Icon(Icons.arrow_back),
-                ),
-                leadingWidth: 60,
-                titleSpacing: 0,
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AlvaText(title: 'Pulsar MAX', textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
-                    AlvaTextMaxLinesOverflow(
-                        title: '${45900.toDecimalFormat()} บาท',
-                        maxLines: 1,
-                        textStyle: AlvaStyles().heading2(RedWordShow))
-                  ],
-                ),
-                centerTitle: false,
-              )
-            : AppBar(
-                title: AlvaText(
-                    title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                titleSpacing: 0,
-                leadingWidth: 60,
-                centerTitle: false,
-                automaticallyImplyLeading: false,
-                leading: IconButton(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context);
+        context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
+        context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+        return true;
+      },
+      child: AlvaRootWidget(
+          titlePage: titleWebPage,
+          appBar: stateAppBar.appBarCarDetailStatus
+              ? AppBar(
+                  automaticallyImplyLeading: false,
+                  leading: IconButton(
                     key: const Key("pop_navigator_to_home_page"),
                     onPressed: () {
                       Navigator.pop(context);
+                      context
+                          .read<ProductDetailCarouselScrollControllerBloc>()
+                          .add(const CarouselScrollAction(index: 0));
+                      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
                     },
-                    icon: const Icon(Icons.arrow_back)),
-              ),
-        bottomSheet: SizedBox(
-          width: maxWidth,
-          height: 96,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  height: 48,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
-                    child: AlvaText(
-                        title: "สั่งซื้อสินค้า",
-                        textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    icon: const Icon(Icons.arrow_back),
                   ),
+                  leadingWidth: 60,
+                  titleSpacing: 0,
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AlvaText(title: 'Pulsar MAX', textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
+                      AlvaTextMaxLinesOverflow(
+                          title: '${45900.toDecimalFormat()} บาท',
+                          maxLines: 1,
+                          textStyle: AlvaStyles().heading2(RedWordShow))
+                    ],
+                  ),
+                  centerTitle: false,
+                )
+              : AppBar(
+                  title: AlvaText(
+                      title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  titleSpacing: 0,
+                  leadingWidth: 60,
+                  centerTitle: false,
+                  automaticallyImplyLeading: false,
+                  leading: IconButton(
+                      key: const Key("pop_navigator_to_home_page"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        context
+                            .read<ProductDetailCarouselScrollControllerBloc>()
+                            .add(const CarouselScrollAction(index: 0));
+                        context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+                      },
+                      icon: const Icon(Icons.arrow_back)),
                 ),
-              )
-            ],
+          bottomSheet: SizedBox(
+            width: maxWidth,
+            height: 96,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    height: 48,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
+                      child: AlvaText(
+                          title: "สั่งซื้อสินค้า",
+                          textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        // child: ProductDetailBody(),
-        child: Container(
-          padding: const EdgeInsets.only(bottom: 96),
-          color: backgroundNo2,
-          child: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            controller: scrollController,
-            children: [
-              widget.arguments != null ? PDTopSection(args: widget.arguments!) : SizedBox(),
-              const SizedBox(
-                height: 16,
-              ),
-              widget.arguments != null ? PDBottomSection(args: widget.arguments!) : SizedBox(),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
-        ));
+          // child: ProductDetailBody(),
+          child: Container(
+            padding: const EdgeInsets.only(bottom: 96),
+            color: backgroundNo2,
+            child: ListView(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              controller: scrollController,
+              children: [
+                widget.arguments != null ? PDTopSection(args: widget.arguments!) : SizedBox(),
+                const SizedBox(
+                  height: 16,
+                ),
+                widget.arguments != null ? PDBottomSection(args: widget.arguments!) : SizedBox(),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
+          )),
+    );
   }
 
   Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
@@ -216,145 +231,145 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
         backgroundColor: Colors.black,
         body: SafeArea(
             child: Stack(
-              children: [
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                          child: GestureDetector(
-                            onDoubleTapDown: (TapDownDetails detail) {
-                              context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
-                              if (previousState > 0.5) {
-                                context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
-                              } else {
-                                context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: GestureDetector(
+                    onDoubleTapDown: (TapDownDetails detail) {
+                      context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
+                      if (previousState > 0.5) {
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+                      } else {
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
+                      }
+                    },
+                    child: InteractiveViewer(
+                      transformationController: zoomState,
+                      panEnabled: true,
+                      minScale: 0.5,
+                      maxScale: 5.0,
+                      scaleEnabled: true,
+                      onInteractionUpdate: (ScaleUpdateDetails details) {
+                        _scale = previousState * details.scale;
+                      },
+                      onInteractionEnd: (ScaleEndDetails details) {
+                        context
+                            .read<PreviousScaleBloc>()
+                            .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
+                      },
+                      child: AspectRatio(
+                        aspectRatio: 16.0 / 9.0,
+                        child: PageView.builder(
+                            itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
+                            physics:
+                                previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
+                            controller: carouselState,
+                            onPageChanged: (val) {
+                              context
+                                  .read<ProductDetailCarouselScrollControllerBloc>()
+                                  .add(CarouselScrollAction(index: val));
+
+                              if (val == imageDataLength && val != 1) {
+                                carouselState.jumpToPage(0);
                               }
                             },
-                            child: InteractiveViewer(
-                              transformationController: zoomState,
-                              panEnabled: true,
-                              minScale: 0.5,
-                              maxScale: 5.0,
-                              scaleEnabled: true,
-                              onInteractionUpdate: (ScaleUpdateDetails details) {
-                                _scale = previousState * details.scale;
-                              },
-                              onInteractionEnd: (ScaleEndDetails details) {
-                                context
-                                    .read<PreviousScaleBloc>()
-                                    .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
-                              },
-                              child: AspectRatio(
-                                aspectRatio: 16.0 / 9.0,
-                                child: PageView.builder(
-                                    itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
-                                    physics:
-                                    previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
-                                    controller: carouselState,
-                                    onPageChanged: (val) {
-                                      context
-                                          .read<ProductDetailCarouselScrollControllerBloc>()
-                                          .add(CarouselScrollAction(index: val));
-
-                                      if (val == imageDataLength && val != 1) {
-                                        carouselState.jumpToPage(0);
-                                      }
-                                    },
-                                    itemBuilder: (ctx, i) {
-                                      return AspectRatio(
-                                        aspectRatio: 16 / 9,
-                                        child: SizedBox(
-                                          width: maxWidth,
-                                          height: 576,
-                                          child: FadeInImage(
-                                            placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
-                                            image: NetworkImage(
-                                              i == imageDataLength
-                                                  ? widget.arguments!.product.productionAssets[0]
-                                                  : widget.arguments!.product.productionAssets[i],
-                                            ),
-                                            // image: NetworkImage(
-                                            //   i == imageDataLength
-                                            //       ? dataCarouselMock[0].substring(46)
-                                            //       : dataCarouselMock[i].substring(46),
-                                            // ),
-                                            fit: BoxFit.fitWidth,
-                                            imageErrorBuilder: (context, error, stackTrace) =>
-                                                Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              ),
+                            itemBuilder: (ctx, i) {
+                              return AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: SizedBox(
+                                  width: maxWidth,
+                                  height: 576,
+                                  child: FadeInImage(
+                                    placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
+                                    image: NetworkImage(
+                                      i == imageDataLength
+                                          ? widget.arguments!.product.productionAssets[0]
+                                          : widget.arguments!.product.productionAssets[i],
+                                    ),
+                                    // image: NetworkImage(
+                                    //   i == imageDataLength
+                                    //       ? dataCarouselMock[0].substring(46)
+                                    //       : dataCarouselMock[i].substring(46),
+                                    // ),
+                                    fit: BoxFit.fitWidth,
+                                    imageErrorBuilder: (context, error, stackTrace) =>
+                                        Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    ),
+                  )),
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                backButtontoDetail();
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: spaceGrey123,
+                        ),
+                        width: 40,
+                        height: 32,
+                        child: Row(
+                          children: const [
+                            SizedBox(
+                              width: 14,
                             ),
-                          )),
-                    ],
-                  ),
+                            Icon(
+                              Icons.arrow_back_ios,
+                              color: whitePure,
+                              size: 16,
+                            ),
+                          ],
+                        )),
+                  ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    backButtontoDetail();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: maxWidth,
+                    padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: spaceGrey123,
-                            ),
-                            width: 40,
-                            height: 32,
-                            child: Row(
-                              children: const [
-                                SizedBox(
-                                  width: 14,
-                                ),
-                                Icon(
-                                  Icons.arrow_back_ios,
-                                  color: whitePure,
-                                  size: 16,
-                                ),
-                              ],
-                            )),
+                        Visibility(
+                          visible: imageDataLength == 1 ? false : true,
+                          child: SmoothPageIndicator(
+                              controller: carouselState,
+                              count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
+                              effect: const ExpandingDotsEffect(
+                                expansionFactor: 2,
+                                dotHeight: 6,
+                                dotWidth: 6,
+                                activeDotColor: spaceGrey123,
+                                dotColor: cloudSoftDeepWhite,
+                              )),
+                        ),
                       ],
                     ),
                   ),
-                ),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        width: maxWidth,
-                        padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Visibility(
-                              visible: imageDataLength == 1 ? false : true,
-                              child: SmoothPageIndicator(
-                                  controller: carouselState,
-                                  count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
-                                  effect: const ExpandingDotsEffect(
-                                    expansionFactor: 2,
-                                    dotHeight: 6,
-                                    dotWidth: 6,
-                                    activeDotColor: spaceGrey123,
-                                    dotColor: cloudSoftDeepWhite,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )),
+                ],
+              ),
+            )
+          ],
+        )),
       ),
     );
   }
