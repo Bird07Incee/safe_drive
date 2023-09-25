@@ -314,7 +314,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         title: ErrorConst().titleNS,
                         subTitle: ErrorConst().subTitleNS,
                         titleBtn: ErrorConst().titleBtnNS,
-                        onTap: () {},
+                        onTap: () {
+                          context.read<ProductListBloc>().add(const GetProductList());
+                          Navigator.of(context).pop();
+                        },
                       );
                     } else {
                       return const LoadingScreen();

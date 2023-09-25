@@ -167,14 +167,16 @@ class Product {
         price: json['price'] ?? 0,
         discountPrice: json['discountPrice'] ?? 0,
         percentDiscountPrice: json['percentDiscountPrice'] ?? 0,
-        productionAssets: json['productionAssets'] != null ? List.castFrom<dynamic, String>(json['productionAssets']) : [],
+        productionAssets:
+            json['productionAssets'] != null ? List.castFrom<dynamic, String>(json['productionAssets']) : [],
         merchantFullName: json['merchantFullName'] ?? '',
         merchantAddress: json['merchantAddress'] ?? '',
         merchantLogo: json['merchantLogo'] ?? '',
         merchantMobile: json['merchantMobile'] ?? '',
         merchantEmail: json['merchantEmail'] ?? '',
-        productionOptionals: json['productionOptionals'] != null ? List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList() : []
-    );
+        productionOptionals: json['productionOptionals'] != null
+            ? List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList()
+            : []);
   }
 }
 
@@ -204,21 +206,19 @@ class ProductionOptionals {
         price: json['price'] ?? 0,
         subProductId: json['subProductId'] ?? '',
         quantity: json['quantity'] ?? 0,
-        level2: json['level2'] != null ? List.from(json['level2']).map((e) => Level2.fromJson(e)).toList() : []
-    );
+        level2: json['level2'] != null ? List.from(json['level2']).map((e) => Level2.fromJson(e)).toList() : []);
   }
 }
 
 class Level2 {
-  Level2({
-    required this.label,
-    required this.levelName,
-    required this.image,
-    required this.price,
-    required this.subProductId,
-    required this.quantity,
-    required this.level3
-  });
+  Level2(
+      {required this.label,
+      required this.levelName,
+      required this.image,
+      required this.price,
+      required this.subProductId,
+      required this.quantity,
+      required this.level3});
   final String label;
   final String levelName;
   final String image;
@@ -227,29 +227,27 @@ class Level2 {
   final int quantity;
   final List<Level3> level3;
 
- factory Level2.fromJson(Map<String, dynamic> json) {
-   return Level2(
-       label: json['label'] ?? '',
-       levelName: json['levelName'] ?? '',
-       image: json['image'] ?? '',
-       price: json['price'] ?? 0,
-       subProductId: json['subProductId'] ?? '',
-       quantity: json['quantity'] ?? 0,
-       level3: json['level3'] != null ? List.from(json['level3']).map((e) => Level3.fromJson(e)).toList() : []
-   );
+  factory Level2.fromJson(Map<String, dynamic> json) {
+    return Level2(
+        label: json['label'] ?? '',
+        levelName: json['levelName'] ?? '',
+        image: json['image'] ?? '',
+        price: json['price'] ?? 0,
+        subProductId: json['subProductId'] ?? '',
+        quantity: json['quantity'] ?? 0,
+        level3: json['level3'] != null ? List.from(json['level3']).map((e) => Level3.fromJson(e)).toList() : []);
   }
 }
 
 class Level3 {
-  Level3({
-    required this.label,
-    required this.levelName,
-    required this.image,
-    required this.price,
-    required this.subProductId,
-    required this.quantity,
-    required this.level4
-  });
+  Level3(
+      {required this.label,
+      required this.levelName,
+      required this.image,
+      required this.price,
+      required this.subProductId,
+      required this.quantity,
+      required this.level4});
   final String label;
   final String levelName;
   final String image;
@@ -266,21 +264,19 @@ class Level3 {
         price: json['price'] ?? 0,
         subProductId: json['subProductId'] ?? '',
         quantity: json['quantity'] ?? 0,
-        level4: json['level4'] != null ? List.from(json['level4']).map((e) => Level4.fromJson(e)).toList() : []
-    );
+        level4: json['level4'] != null ? List.from(json['level4']).map((e) => Level4.fromJson(e)).toList() : []);
   }
 }
 
 class Level4 {
-  Level4({
-    required this.label,
-    required this.levelName,
-    required this.image,
-    required this.price,
-    required this.subProductId,
-    required this.quantity,
-    required this.level5
-  });
+  Level4(
+      {required this.label,
+      required this.levelName,
+      required this.image,
+      required this.price,
+      required this.subProductId,
+      required this.quantity,
+      required this.level5});
   final String label;
   final String levelName;
   final String image;
@@ -297,8 +293,7 @@ class Level4 {
         price: json['price'] ?? 0,
         subProductId: json['subProductId'] ?? '',
         quantity: json['quantity'] ?? 0,
-        level5: json['level5'] != null ? List.from(json['level5']).map((e) => Level5.fromJson(e)).toList() : []
-    );
+        level5: json['level5'] != null ? List.from(json['level5']).map((e) => Level5.fromJson(e)).toList() : []);
   }
 }
 
@@ -325,8 +320,7 @@ class Level5 {
         image: json['image'] ?? '',
         price: json['price'] ?? 0,
         subProductId: json['subProductId'] ?? '',
-        quantity: json['quantity'] ?? 0
-    );
+        quantity: json['quantity'] ?? 0);
   }
 }
 
@@ -335,17 +329,9 @@ const mockProductResponse = {
   "productPage": 1,
   "productCountItems": 1,
   "banner": [
-    {
-      "image": "",
-      "route": "Home",
-      "url": "http://"
-    }
+    {"image": "", "route": "Home", "url": "http://"}
   ],
-  "category": [
-    "All",
-    "EV Charger",
-    "Accessory"
-  ],
+  "category": ["All", "EV Charger", "Accessory"],
   "products": [
     {
       "appId": "Marketplace-mini-app",
@@ -365,11 +351,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -501,11 +483,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -637,11 +615,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -773,11 +747,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -909,11 +879,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",

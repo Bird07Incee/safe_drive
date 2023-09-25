@@ -7,8 +7,7 @@ class ProductDetailProductDescriptionModel {
     this.tabEtcDetailHtmlData = "",
   });
 
-  factory ProductDetailProductDescriptionModel.fromJson(
-      Map<String, dynamic> json) {
+  factory ProductDetailProductDescriptionModel.fromJson(Map<String, dynamic> json) {
     return ProductDetailProductDescriptionModel(
       tabGeneralDetailHtmlData: json['tabGeneralDetailHtmlData'],
       tabEtcDetailHtmlData: json['tabEtcDetailHtmlData'],

@@ -33,8 +33,7 @@ class ProductDetailScreen extends StatefulWidget {
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen>
-    with TickerProviderStateMixin {
+class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerProviderStateMixin {
   final oCcy = NumberFormat("#,##0", "en_US");
   final scrollController = ScrollController();
   late PageController pageViewController = PageController(
@@ -59,15 +58,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   @override
   void initState() {
     super.initState();
-    context
-        .read<ProductDetailCarouselScrollControllerBloc>()
-        .add(const CarouselScrollAction(index: 0));
+    context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     scrollController.addListener(() {
       var pixelScreen = scrollController.position.pixels;
-      context
-          .read<ScrollProductDetailBloc>()
-          .add(ProductDetailScrollAction(pixelScreen, context, "0"));
+      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(pixelScreen, context, "0"));
     });
   }
 
@@ -93,15 +88,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 builder: (context, previousState) {
                   return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
                     builder: (context, switchState) {
-                      return BlocBuilder<
-                          ProductDetailCarouselScrollControllerBloc,
-                          PageController>(
+                      return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
                         builder: (context, carouselState) {
                           return switchState
-                              ? viewImagePage(carouselState, context, zoomState,
-                                  previousState, imageDataLength)
-                              : productDetailPage(stateAppBar, context,
-                                  carouselState, imageDataLength);
+                              ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
+                              : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
                         },
                       );
                     },
@@ -115,8 +106,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     );
   }
 
-  AlvaRootWidget productDetailPage(ScrollProductDetailState stateAppBar,
-      BuildContext context, PageController carouselState, int imageDataLength) {
+  AlvaRootWidget productDetailPage(
+      ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
     return AlvaRootWidget(
         titlePage: titleWebPage,
         appBar: stateAppBar.appBarCarDetailStatus
@@ -126,9 +117,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   key: const Key("pop_navigator_to_home_page"),
                   onPressed: () {
                     Navigator.pop(context);
-                    context
-                        .read<ScrollProductDetailBloc>()
-                        .add(ProductDetailScrollAction(0, context, "1"));
+                    context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
                   },
                   icon: const Icon(Icons.arrow_back),
                 ),
@@ -137,10 +126,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AlvaText(
-                        title: 'Pulsar MAX',
-                        textStyle:
-                            AlvaStyles().headingSize12w700(ModernDarkGray)),
+                    AlvaText(title: 'Pulsar MAX', textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
                     AlvaTextMaxLinesOverflow(
                         title: '${45900.toDecimalFormat()} บาท',
                         maxLines: 1,
@@ -151,9 +137,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               )
             : AppBar(
                 title: AlvaText(
-                    title: "ข้อมูลสินค้า",
-                    textStyle: AlvaStyles()
-                        .headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                 titleSpacing: 0,
                 leadingWidth: 60,
                 centerTitle: false,
@@ -179,12 +163,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    style: AlvaStyles().outlineNoneBorderButtonStyle(
-                        YellowKrungsri, Colors.transparent),
+                    style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
                     child: AlvaText(
                         title: "สั่งซื้อสินค้า",
-                        textStyle: AlvaStyles()
-                            .headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                        textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   ),
                 ),
               )
@@ -214,22 +196,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   bodyPage: Column(
                     children: [
                       Row(
-                        children: [
-                          AlvaText(
-                              title: "Company",
-                              textStyle:
-                                  AlvaStyles().headingSize14w700(blackInBlack))
-                        ],
+                        children: [AlvaText(title: "Company", textStyle: AlvaStyles().headingSize14w700(blackInBlack))],
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       Row(
                         children: [
-                          AlvaText(
-                              title: "Company Address",
-                              textStyle:
-                                  AlvaStyles().headingSize10w400(smockGrey))
+                          AlvaText(title: "Company Address", textStyle: AlvaStyles().headingSize10w400(smockGrey))
                         ],
                       ),
                     ],
@@ -252,10 +226,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           const SizedBox(
                             width: 8,
                           ),
-                          AlvaText(
-                              title: "Promotion Desc",
-                              textStyle:
-                                  AlvaStyles().headingSize12w700(blackInBlack))
+                          AlvaText(title: "Promotion Desc", textStyle: AlvaStyles().headingSize12w700(blackInBlack))
                         ],
                       ),
                       const SizedBox(
@@ -269,12 +240,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               buildDetailCardWidget(
                   titleKey: AppKeys().productDetailRemarkTitleKey,
                   title: AppStrings().remarkTitle,
-                  bodyPage: HtmlWidget("remark", buildAsync: true,
-                      customStylesBuilder: (element) {
-                    return {
-                      'font-family': 'Krungsri Condensed',
-                      'font-size': '14px'
-                    };
+                  bodyPage: HtmlWidget("remark", buildAsync: true, customStylesBuilder: (element) {
+                    return {'font-family': 'Krungsri Condensed', 'font-size': '14px'};
                   })),
               const SizedBox(
                 height: 16,
@@ -326,8 +293,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                       child: AlvaText(
                         key: AppKeys().productDetailProductDescriptionKey,
                         title: AppStrings().productDetailProductDescription,
-                        textStyle:
-                            AlvaStyles().headingSize16w500(ModernDarkGray),
+                        textStyle: AlvaStyles().headingSize16w500(ModernDarkGray),
                       )),
                 ),
               ),
@@ -350,9 +316,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                       key: AppKeys().productDetailGeneralDetailTabKey,
                       text: AppStrings().generalDetail,
                     ),
-                    Tab(
-                        key: AppKeys().productDetailEtcDetailTabKey,
-                        text: AppStrings().etcDetail),
+                    Tab(key: AppKeys().productDetailEtcDetailTabKey, text: AppStrings().etcDetail),
                   ]),
               const SizedBox(
                 height: 16,
@@ -361,42 +325,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 onHorizontalDragEnd: (details) async {
                   if (_tabController.index == 0) {
                     if (details.primaryVelocity! < 0) {
-                      _tabController.animateTo(1,
-                          duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(1, duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   } else {
                     if (details.primaryVelocity! > 0) {
-                      _tabController.animateTo(0,
-                          duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(0, duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   }
                 },
                 child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 16, vertical: data.isEmpty ? 32 : 0),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: data.isEmpty ? 32 : 0),
                     child: Column(
                       children: [
                         isPressedReadMore
-                            ? HtmlWidget(
-                                data.isNotEmpty
-                                    ? data
-                                    : AppStrings().noDataFromSeller,
-                                buildAsync: true,
+                            ? HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller, buildAsync: true,
                                 customStylesBuilder: (element) {
-                                return {
-                                  'font-family': 'Krungsri Condensed',
-                                  'font-size': '14px'
-                                };
+                                return {'font-family': 'Krungsri Condensed', 'font-size': '14px'};
                               })
                             : Container(),
                         !isPressedReadMore
-                            ? HtmlWidget(
-                                data.isNotEmpty
-                                    ? data
-                                    : AppStrings().noDataFromSeller,
-                                buildAsync: true,
+                            ? HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller, buildAsync: true,
                                 customStylesBuilder: (element) {
                                 return {
                                   'font-family': 'Krungsri Condensed',
@@ -419,8 +369,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           children: [
                             Expanded(
                               child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
                                 height: 48,
                                 child: OutlinedButton(
                                   onPressed: () async {
@@ -429,16 +378,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                     }));
                                     log(isPressedReadMore.toString());
                                   },
-                                  style: AlvaStyles()
-                                      .outlineNoneBorderButtonStyle(
-                                          Colors.transparent,
-                                          Colors.transparent),
+                                  style:
+                                      AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, Colors.transparent),
                                   child: AlvaText(
-                                    title: isPressedReadMore
-                                        ? AppStrings().btnHideDescription
-                                        : AppStrings().btnReadMore,
-                                    textStyle: AlvaStyles()
-                                        .headingSize14w700(BlueFantasy),
+                                    title:
+                                        isPressedReadMore ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
+                                    textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
                                     disableSelectableText: true,
                                   ),
                                 ),
@@ -472,8 +417,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     }
   }
 
-  Widget buildDetailCardWidget(
-      {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget({Key? titleKey, String? title, Widget? bodyPage}) {
     String phoneNumber = "091-862-5011";
 
     return Container(
@@ -507,10 +451,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             const SizedBox(
               height: 16,
             ),
-            GestureDetector(
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: bodyPage)),
+            GestureDetector(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage)),
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [
@@ -531,8 +472,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                       Navigator.pop(context, true);
                                     },
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         const Icon(
                                           Icons.phone_in_talk_sharp,
@@ -542,8 +482,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                         const SizedBox(width: 8),
                                         AlvaText(
                                             title: "ติดต่อ $phoneNumber",
-                                            textStyle: AlvaStyles()
-                                                .heading2(BlueFantasy)),
+                                            textStyle: AlvaStyles().heading2(BlueFantasy)),
                                       ],
                                     ),
                                   ),
@@ -552,9 +491,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                       onPressed: () {
                                         Navigator.pop(context, false);
                                       },
-                                      child: Text('Cancel',
-                                          style: AlvaStyles()
-                                              .heading2(BlueFantasy))),
+                                      child: Text('Cancel', style: AlvaStyles().heading2(BlueFantasy))),
                                 ],
                               );
                               bool isConfirmCall = await showDialog(
@@ -588,8 +525,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                               const SizedBox(width: 8),
                               AlvaText(
                                   title: "ติดต่อ $phoneNumber",
-                                  textStyle: AlvaStyles()
-                                      .heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                  textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
                         ),
@@ -604,12 +540,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         ));
   }
 
-  Widget viewImagePage(
-      PageController carouselState,
-      BuildContext context,
-      TransformationController zoomState,
-      double previousState,
-      int imageDataLength) {
+  Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
+      double previousState, int imageDataLength) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -624,17 +556,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   Expanded(
                       child: GestureDetector(
                     onDoubleTapDown: (TapDownDetails detail) {
-                      context
-                          .read<ImgGalleryZoomBloc>()
-                          .add(ZoomImageAction(details: detail));
+                      context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
                       if (previousState > 0.6) {
-                        context
-                            .read<PreviousScaleBloc>()
-                            .add(const PreviousScaleEvent(previousScale: 0.5));
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                       } else {
-                        context
-                            .read<PreviousScaleBloc>()
-                            .add(const PreviousScaleEvent(previousScale: 0.8));
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
                       }
                     },
                     child: InteractiveViewer(
@@ -647,22 +573,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         _scale = previousState * details.scale;
                       },
                       onInteractionEnd: (ScaleEndDetails details) {
-                        context.read<PreviousScaleBloc>().add(
-                            PreviousScaleEvent(
-                                previousScale: _scale.clamp(0.5, 5.0)));
+                        context
+                            .read<PreviousScaleBloc>()
+                            .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
                       },
                       child: AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
                             itemCount: imageDataLength + 1,
-                            physics: previousState > 0.5
-                                ? const NeverScrollableScrollPhysics()
-                                : const ScrollPhysics(),
+                            physics: previousState > 0.5 ? const NeverScrollableScrollPhysics() : const ScrollPhysics(),
                             controller: carouselState,
                             onPageChanged: (val) {
                               context
-                                  .read<
-                                      ProductDetailCarouselScrollControllerBloc>()
+                                  .read<ProductDetailCarouselScrollControllerBloc>()
                                   .add(CarouselScrollAction(index: val));
 
                               if (val == imageDataLength) {
@@ -676,19 +599,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                   width: maxWidth,
                                   height: 576,
                                   child: FadeInImage(
-                                    placeholder: AssetImage(
-                                        ProductDetailConst().imgDefaultPath),
+                                    placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                                     image: NetworkImage(
-                                      i == imageDataLength
-                                          ? dataCarouselMock[0]
-                                          : dataCarouselMock[i],
+                                      i == imageDataLength ? dataCarouselMock[0] : dataCarouselMock[i],
                                     ),
                                     fit: BoxFit.fitWidth,
-                                    imageErrorBuilder: (context, error,
-                                            stackTrace) =>
-                                        Image.asset(
-                                            ProductDetailConst().imgDefaultPath,
-                                            fit: BoxFit.fitWidth),
+                                    imageErrorBuilder: (context, error, stackTrace) =>
+                                        Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
                                   ),
                                 ),
                               );
@@ -701,14 +618,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             GestureDetector(
               onTap: () {
+                context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
                 context
-                    .read<ViewImgDetailPageSwitchBloc>()
-                    .add(SwitchPageAction(statePage: false));
-                context.read<ProductDetailCarouselScrollControllerBloc>().add(
-                    CarouselScrollAction(index: carouselState.initialPage));
+                    .read<ProductDetailCarouselScrollControllerBloc>()
+                    .add(CarouselScrollAction(index: carouselState.initialPage));
                 if (zoomState.value != Matrix4.identity()) {
-                  context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(
-                      details: customTapDownDetails(const Offset(100, 100))));
+                  context
+                      .read<ImgGalleryZoomBloc>()
+                      .add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
                 }
               },
               child: Padding(
@@ -753,9 +670,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           visible: imageDataLength == 1 ? false : true,
                           child: SmoothPageIndicator(
                               controller: carouselState,
-                              count: imageDataLength <= carouselShowLimit
-                                  ? imageDataLength
-                                  : carouselShowLimit,
+                              count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
                               effect: const ExpandingDotsEffect(
                                 expansionFactor: 2,
                                 dotHeight: 6,

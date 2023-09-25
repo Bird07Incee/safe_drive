@@ -3,17 +3,9 @@ const mockProductResponse = {
   "productPage": 1,
   "productCountItems": 1,
   "banner": [
-    {
-      "image": "",
-      "route": "Home",
-      "url": "http://"
-    }
+    {"image": "", "route": "Home", "url": "http://"}
   ],
-  "category": [
-    "All",
-    "EV Charger",
-    "Accessory"
-  ],
+  "category": ["All", "EV Charger", "Accessory"],
   "products": [
     {
       "appId": "Marketplace-mini-app",
@@ -33,11 +25,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -169,11 +157,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -305,11 +289,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -441,11 +421,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -577,11 +553,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -714,13 +686,13 @@ class ProductResponse {
   late final List<String> category;
   late final List<Products> products;
 
-  ProductResponse.fromJson(Map<String, dynamic> json){
+  ProductResponse.fromJson(Map<String, dynamic> json) {
     productAllItems = json['productAllItems'];
     productPage = json['productPage'];
     productCountItems = json['productCountItems'];
-    banner = List.from(json['banner']).map((e)=>Banner.fromJson(e)).toList();
+    banner = List.from(json['banner']).map((e) => Banner.fromJson(e)).toList();
     category = List.castFrom<dynamic, String>(json['category']);
-    products = List.from(json['products']).map((e)=>Products.fromJson(e)).toList();
+    products = List.from(json['products']).map((e) => Products.fromJson(e)).toList();
   }
 }
 
@@ -734,7 +706,7 @@ class Banner {
   late final String route;
   late final String url;
 
-  Banner.fromJson(Map<String, dynamic> json){
+  Banner.fromJson(Map<String, dynamic> json) {
     image = json['image'];
     route = json['route'];
     url = json['url'];
@@ -817,7 +789,7 @@ class Products {
   late final String merchantEmail;
   late final List<ProductionOptionals> productionOptionals;
 
-  Products.fromJson(Map<String, dynamic> json){
+  Products.fromJson(Map<String, dynamic> json) {
     appId = json['appId'];
     channelId = json['channelId'];
     merchantId = json['merchantId'];
@@ -849,7 +821,7 @@ class Products {
     merchantLogo = json['merchantLogo'];
     merchantMobile = json['merchantMobile'];
     merchantEmail = json['merchantEmail'];
-    productionOptionals = List.from(json['productionOptionals']).map((e)=>ProductionOptionals.fromJson(e)).toList();
+    productionOptionals = List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList();
   }
 }
 
@@ -879,18 +851,23 @@ class ProductionOptionals {
         price: json['price'],
         subProductId: json['subProductId'],
         quantity: json['quantity'],
-        level2: List.from(json['level2']).map((e)=>Level2.fromJson(e)).toList()
-    );
+        level2: List.from(json['level2']).map((e) => Level2.fromJson(e)).toList());
   }
 }
 
 class Level2 extends ProductionOptionals {
-  Level2({label,levelName,image,price,subProductId,quantity,level2,
-    required this.level3
-  }) : super(label: label, levelName: levelName, image: image, price: price, subProductId: subProductId, quantity: quantity, level2: level2);
+  Level2({label, levelName, image, price, subProductId, quantity, level2, required this.level3})
+      : super(
+            label: label,
+            levelName: levelName,
+            image: image,
+            price: price,
+            subProductId: subProductId,
+            quantity: quantity,
+            level2: level2);
   late final List<ProductionOptionals> level3;
 
-  factory Level2.fromJson(Map<String, dynamic> json){
+  factory Level2.fromJson(Map<String, dynamic> json) {
     return Level2(
         label: json['label'],
         levelName: json['levelName'],
@@ -898,18 +875,23 @@ class Level2 extends ProductionOptionals {
         price: json['price'],
         subProductId: json['subProductId'],
         quantity: json['quantity'],
-        level3: List.from(json['level3']).map((e)=>Level3.fromJson(e)).toList()
-    );
+        level3: List.from(json['level3']).map((e) => Level3.fromJson(e)).toList());
   }
 }
 
 class Level3 extends ProductionOptionals {
-  Level3({label,levelName,image,price,subProductId,quantity,level2,
-    required this.level4
-  }) : super(label: label, levelName: levelName, image: image, price: price, subProductId: subProductId, quantity: quantity, level2: level2);
+  Level3({label, levelName, image, price, subProductId, quantity, level2, required this.level4})
+      : super(
+            label: label,
+            levelName: levelName,
+            image: image,
+            price: price,
+            subProductId: subProductId,
+            quantity: quantity,
+            level2: level2);
   late final List<Level4> level4;
 
-  factory Level3.fromJson(Map<String, dynamic> json){
+  factory Level3.fromJson(Map<String, dynamic> json) {
     return Level3(
       label: json['label'],
       levelName: json['levelName'],
@@ -917,18 +899,24 @@ class Level3 extends ProductionOptionals {
       price: json['price'],
       subProductId: json['subProductId'],
       quantity: json['quantity'],
-      level4: List.from(json['level4']).map((e)=>Level4.fromJson(e)).toList(),
+      level4: List.from(json['level4']).map((e) => Level4.fromJson(e)).toList(),
     );
   }
 }
 
 class Level4 extends ProductionOptionals {
-  Level4({label,levelName,image,price,subProductId,quantity,level2,
-    required this.level5
-  }) : super(label: label, levelName: levelName, image: image, price: price, subProductId: subProductId, quantity: quantity, level2: level2);
+  Level4({label, levelName, image, price, subProductId, quantity, level2, required this.level5})
+      : super(
+            label: label,
+            levelName: levelName,
+            image: image,
+            price: price,
+            subProductId: subProductId,
+            quantity: quantity,
+            level2: level2);
   late final List<Level5> level5;
 
-  factory Level4.fromJson(Map<String, dynamic> json){
+  factory Level4.fromJson(Map<String, dynamic> json) {
     return Level4(
       label: json['label'],
       levelName: json['levelName'],
@@ -936,23 +924,29 @@ class Level4 extends ProductionOptionals {
       price: json['price'],
       subProductId: json['subProductId'],
       quantity: json['quantity'],
-      level5: List.from(json['level5']).map((e)=>Level5.fromJson(e)).toList(),
+      level5: List.from(json['level5']).map((e) => Level5.fromJson(e)).toList(),
     );
   }
 }
 
 class Level5 extends ProductionOptionals {
-  Level5({label,levelName,image,price,subProductId,quantity}) : super(label: label, levelName: levelName, image: image, price: price, subProductId: subProductId, quantity: quantity);
+  Level5({label, levelName, image, price, subProductId, quantity})
+      : super(
+            label: label,
+            levelName: levelName,
+            image: image,
+            price: price,
+            subProductId: subProductId,
+            quantity: quantity);
   late final Level2 level3;
 
-  factory Level5.fromJson(Map<String, dynamic> json){
+  factory Level5.fromJson(Map<String, dynamic> json) {
     return Level5(
-      label: json['label'],
-      levelName: json['levelName'],
-      image: json['image'],
-      price: json['price'],
-      subProductId: json['subProductId'],
-      quantity: json['quantity']
-    );
+        label: json['label'],
+        levelName: json['levelName'],
+        image: json['image'],
+        price: json['price'],
+        subProductId: json['subProductId'],
+        quantity: json['quantity']);
   }
 }

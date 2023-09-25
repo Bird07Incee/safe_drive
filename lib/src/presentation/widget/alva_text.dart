@@ -4,11 +4,7 @@ class AlvaText extends StatelessWidget {
   final String title;
   final TextStyle textStyle;
   final bool disableSelectableText;
-  const AlvaText(
-      {super.key,
-      required this.title,
-      required this.textStyle,
-      this.disableSelectableText = false});
+  const AlvaText({super.key, required this.title, required this.textStyle, this.disableSelectableText = false});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +26,7 @@ class AlvaTextMaxLinesOverflow extends StatelessWidget {
   final int maxLines;
 
   const AlvaTextMaxLinesOverflow(
-      {super.key,
-      required this.title,
-      required this.textStyle,
-      required this.maxLines,
-      required});
+      {super.key, required this.title, required this.textStyle, required this.maxLines, required});
   @override
   Widget build(BuildContext context) {
     return Text(

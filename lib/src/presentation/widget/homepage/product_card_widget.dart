@@ -3,6 +3,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
@@ -47,7 +48,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             onTap: () {
               // context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
 
-              Navigator.pushNamed(context, Routes.productDetail.toStringPath(), arguments: ProductDetailArgs(product: products[index]));
+              Navigator.pushNamed(context, Routes.productDetail.toStringPath(),
+                  arguments: ProductDetailArgs(product: products[index]));
               // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
             },
             child: Container(
@@ -157,7 +159,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           visible: true,
                           child: SmoothPageIndicator(
                               controller: pageViewController,
-                              count: products![index].productionAssets.length,
+                              count: products![index].productionAssets.length <= carouselShowLimit
+                                  ? products[index].productionAssets.length
+                                  : carouselShowLimit,
                               effect: const ExpandingDotsEffect(
                                 expansionFactor: 2,
                                 dotHeight: 6,

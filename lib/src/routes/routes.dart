@@ -73,7 +73,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   // print(liffClientId);
   // print(liffRedirectUri);
   String pid = '';
-  if(routingData?.route == "/productDetail") {
+  if (routingData?.route == "/productDetail") {
     pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
   }
   print(pid);
@@ -88,8 +88,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case "/loadingScreen":
       return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
     case "/productDetail":
-      return MaterialPageRoute(builder: (_) => ProductDetailScreen(
-        arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => ProductDetailScreen(
+                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
+              ),
+          settings: settings);
     default:
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }

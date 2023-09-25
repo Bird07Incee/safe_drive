@@ -9,23 +9,14 @@ class AlvaStyles {
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle heading2(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: color);
+  TextStyle heading2(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.bold, color: color);
 
   TextStyle heading3() => const TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: BTN_SELECTED_TEXT_COLOR_NEW);
+      fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.bold, color: BTN_SELECTED_TEXT_COLOR_NEW);
 
-  TextStyle heading3Muted() => const TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: smockGrey);
+  TextStyle heading3Muted() =>
+      const TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.bold, color: smockGrey);
 
   TextStyle headingSize12w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color);
@@ -61,21 +52,12 @@ class AlvaStyles {
         height: 32 / 22,
       );
 
-  TextStyle headingSize10w400(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 10,
-      fontWeight: FontWeight.w400,
-      color: color);
-  TextStyle headingSize10w500(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 10,
-      fontWeight: FontWeight.w500,
-      color: color);
-  TextStyle headingSize10w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 10,
-      fontWeight: FontWeight.w700,
-      color: color);
+  TextStyle headingSize10w400(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w400, color: color);
+  TextStyle headingSize10w500(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w500, color: color);
+  TextStyle headingSize10w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w700, color: color);
 
   TextStyle headingSize10() => const TextStyle(
         fontFamily: fontFamily,
@@ -95,16 +77,10 @@ class AlvaStyles {
   TextStyle headingSize16w700(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w700, color: color);
 
-  TextStyle headingSize12w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-      color: color);
-  TextStyle headingSize18w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 18,
-      fontWeight: FontWeight.w700,
-      color: color);
+  TextStyle headingSize12w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.bold, color: color);
+  TextStyle headingSize18w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 18, fontWeight: FontWeight.w700, color: color);
   TextStyle discountPriceTxt14w400(Color color) => TextStyle(
       fontFamily: fontFamily,
       fontSize: 14,
@@ -112,14 +88,10 @@ class AlvaStyles {
       color: color,
       decoration: TextDecoration.lineThrough);
 
-  TextStyle body1() => const TextStyle(
-      fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
+  TextStyle body1() => const TextStyle(fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
 
-  TextStyle bodySize14w400(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: color);
+  TextStyle bodySize14w400(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color);
 
   TextStyle bodySize14W600() => const TextStyle(
       fontFamily: fontFamily, fontSize: 14, color: BTN_SELECTED_TEXT_COLOR_NEW, fontWeight: FontWeight.bold);
@@ -135,8 +107,7 @@ class AlvaStyles {
       decoration: TextDecoration.lineThrough);
 
 // ---------------------------------ButtonStyle-----------------------------------------------------------------------------------------
-  ButtonStyle outlineButtonStyle(
-          Color backgroundColor, Color foregroundColor, double borderRadius,
+  ButtonStyle outlineButtonStyle(Color backgroundColor, Color foregroundColor, double borderRadius,
           {BorderSide? side}) =>
       ButtonStyle(
         side: MaterialStateProperty.all(side ?? BorderSide.none),
@@ -147,9 +118,7 @@ class AlvaStyles {
         )),
       );
 
-  ButtonStyle outlineNoneBorderButtonStyle(
-          Color backgroundColor, Color foregroundColor) =>
-      OutlinedButton.styleFrom(
+  ButtonStyle outlineNoneBorderButtonStyle(Color backgroundColor, Color foregroundColor) => OutlinedButton.styleFrom(
         side: BorderSide.none,
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,

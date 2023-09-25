@@ -3,10 +3,7 @@ class ProductDetailAboutSellerModel {
   String? merchantAddress;
   String? merchantMobile;
 
-  ProductDetailAboutSellerModel(
-      {this.merchantName = "",
-      this.merchantAddress = "",
-      this.merchantMobile = ""});
+  ProductDetailAboutSellerModel({this.merchantName = "", this.merchantAddress = "", this.merchantMobile = ""});
 
   factory ProductDetailAboutSellerModel.fromJson(Map<String, dynamic> json) {
     return ProductDetailAboutSellerModel(
