@@ -1,13 +1,8 @@
 import 'dart:developer';
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
-import 'package:marketplace_line_oa/src/constants/app_keys.dart';
-import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
@@ -24,7 +19,6 @@ import 'package:marketplace_line_oa/src/presentation/widget/product_detail/produ
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({Key? key, this.arguments}) : super(key: key);
@@ -70,14 +64,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   int indicator = 1;
   double _scale = 1.0;
 
-  List dataCarouselMock = carouselSingleItem;
+  //List dataCarouselMock = carouselSingleItem;
   @override
   Widget build(BuildContext context) {
-    int imageDataLength = dataCarouselMock.length == 1
-        ? dataCarouselMock.length
-        : dataCarouselMock.length > 20
-            ? 20
-            : dataCarouselMock.length;
+    int imageDataLength= 1;
+    if ( widget.arguments != null) {
+      imageDataLength = widget.arguments!.product.productionAssets.length == 1
+          ? widget.arguments!.product.productionAssets.length
+          : widget.arguments!.product.productionAssets.length > 20
+          ? 20
+          : widget.arguments!.product.productionAssets.length;
+    }
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
@@ -274,8 +271,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                             placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                                             image: NetworkImage(
                                               i == imageDataLength
-                                                  ? dataCarouselMock[0]
-                                                  : dataCarouselMock[i],
+                                                  ? widget.arguments!.product.productionAssets[0]
+                                                  : widget.arguments!.product.productionAssets[i],
                                             ),
                                             // image: NetworkImage(
                                             //   i == imageDataLength
@@ -312,7 +309,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             width: 40,
                             height: 32,
                             child: Row(
-                              children: [
+                              children: const [
                                 SizedBox(
                                   width: 14,
                                 ),
