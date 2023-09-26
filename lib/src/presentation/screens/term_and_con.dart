@@ -108,7 +108,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: AlvaRootWidget(
-          titlePage: "term",
+          titlePage: titleWebPage,
           child: Column(
             children: [
               Container(
