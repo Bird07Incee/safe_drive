@@ -177,7 +177,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 expansionFactor: 2,
                                 dotHeight: 6,
                                 dotWidth: 6,
-                                activeDotColor: spaceGrey123,
+                                activeDotColor: BlueFantasy,
                                 dotColor: cloudSoftDeepWhite,
                               )),
                         ),
