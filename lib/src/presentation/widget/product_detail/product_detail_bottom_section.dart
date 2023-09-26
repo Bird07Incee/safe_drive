@@ -209,12 +209,12 @@ class _PDBottomSectionState extends State<PDBottomSection>
                                     ? data
                                     : AppStrings().noDataFromSeller,
                                 buildAsync: true,
-                                customStylesBuilder: (element) {
-                                  return {
-                                    'font-family': 'Krungsri Condensed',
-                                    'font-size': '14px'
-                                  };
-                                },
+                                // customStylesBuilder: (element) {
+                                //   return {
+                                //     'font-family': 'Krungsri Condensed',
+                                //     'font-size': '14px'
+                                //   };
+                                // },
                                 factoryBuilder: () => _MyFactory(),
                               )
                             : Container(),
@@ -347,57 +347,9 @@ class _PDBottomSectionState extends State<PDBottomSection>
                         height: 48,
                         child: OutlinedButton(
                           onPressed: () async {
-                            if (Platform.isIOS) {
-                              var alert = CupertinoAlertDialog(
-                                actions: <Widget>[
-                                  CupertinoDialogAction(
-                                    isDestructiveAction: true,
-                                    onPressed: () {
-                                      String mobile = product.merchantMobile
-                                          .replaceAll('-', '');
-                                      callPhone(mobile);
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.phone_in_talk_sharp,
-                                          color: BTN_SELECTED_TEXT_COLOR_NEW,
-                                          size: 16,
-                                        ),
-                                        const SizedBox(width: 8),
-                                        AlvaText(
-                                            title:
-                                                "ติดต่อ ${product.merchantMobile}",
-                                            textStyle: AlvaStyles()
-                                                .heading2(BlueFantasy)),
-                                      ],
-                                    ),
-                                  ),
-                                  CupertinoDialogAction(
-                                      isDefaultAction: true,
-                                      onPressed: () {
-                                        Navigator.pop(context, false);
-                                      },
-                                      child: Text('Cancel',
-                                          style: AlvaStyles()
-                                              .heading2(BlueFantasy))),
-                                ],
-                              );
-                              bool isConfirmCall = await showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return alert;
-                                  });
-                              if (isConfirmCall) {
-                                await launchUrlString(
-                                    'tel:${product.merchantMobile}');
-                              }
-                            } else if (Platform.isAndroid) {
-                              await launchUrlString(
-                                  'tel:${product.merchantMobile}');
-                            }
+                            String mobile =
+                                product.merchantMobile.replaceAll('-', '');
+                            callPhone(mobile);
                           },
                           style: AlvaStyles().outlineButtonStyle(
                               side: const BorderSide(
