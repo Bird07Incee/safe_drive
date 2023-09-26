@@ -26,24 +26,24 @@ extension TypeCoverter on Routes {
   }
 }
 
-// final Map<String, WidgetBuilder> routes = {
-//   (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
-//   (Routes.termAndCon).toStringPath(): (BuildContext _) =>
-//       const TermAndConScreen(),
-//   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
-//   (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
-//       const LoadingScreen(),
-//   (Routes.productDetail).toStringPath(): (BuildContext context) {
-//     if (ModalRoute.of(context)!.settings.arguments != null) {
-//       return ProductDetailScreen(
-//         arguments: ModalRoute.of(context)!.settings.arguments
-//             as ProductDetailArgs,
-//       );
-//     } else {
-//       return const ProductDetailScreen();
-//     }
-//   }
-// };
+final Map<String, WidgetBuilder> routes = {
+  (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
+  (Routes.termAndCon).toStringPath(): (BuildContext _) =>
+      const TermAndConScreen(),
+  (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
+  (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
+      const LoadingScreen(),
+  (Routes.productDetail).toStringPath(): (BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      return ProductDetailScreen(
+        arguments: ModalRoute.of(context)!.settings.arguments
+            as ProductDetailArgs,
+      );
+    } else {
+      return const ProductDetailScreen();
+    }
+  }
+};
 
 extension StringExtension on String {
   RoutingData get getRoutingData {
@@ -77,6 +77,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
   }
   print(pid);
+  print("generateRoute");
 
   switch (routingData?.route) {
     case "/":
