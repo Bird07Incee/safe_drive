@@ -28,16 +28,13 @@ extension TypeCoverter on Routes {
 
 final Map<String, WidgetBuilder> routes = {
   (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
-  (Routes.termAndCon).toStringPath(): (BuildContext _) =>
-      const TermAndConScreen(),
+  (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
-  (Routes.loadingScreen).toStringPath(): (BuildContext _) =>
-      const LoadingScreen(),
+  (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
   (Routes.productDetail).toStringPath(): (BuildContext context) {
     if (ModalRoute.of(context)!.settings.arguments != null) {
       return ProductDetailScreen(
-        arguments: ModalRoute.of(context)!.settings.arguments
-            as ProductDetailArgs,
+        arguments: ModalRoute.of(context)!.settings.arguments as ProductDetailArgs,
       );
     } else {
       return const ProductDetailScreen();
@@ -77,10 +74,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
   }
   print(pid);
-  print("generateRoute");
 
   switch (routingData?.route) {
     case "/":
+      print("case /");
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
     case "/termAndCon":
       return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
@@ -95,6 +92,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               ),
           settings: settings);
     default:
+      print("case default");
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }
 }

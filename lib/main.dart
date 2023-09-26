@@ -114,8 +114,9 @@ class _RootPageState extends State<RootPage> {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       initialRoute: "/",
-      routes: routes,
-      // onGenerateRoute: (settings) => generateRoute(settings),
+      // routes: routes,
+      onGenerateInitialRoutes: (initialRoute) => [generateRoute(RouteSettings(name: initialRoute))],
+      onGenerateRoute: (settings) => generateRoute(settings),
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 172, 204, 229),
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
