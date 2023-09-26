@@ -67,31 +67,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Future.delayed(const Duration(seconds: 10)).then((value) => Navigator.pop(context));
   }
 
-  ProductList getProductListByCategory(ProductList unSortProductList, int id) {
-    var result =
-        // ignore: prefer_const_constructors
-        ProductList(productAllItems: 0, productPage: 0, productCountItems: 0, banner: [], category: [], products: []);
+  ProductList getProductListByCategory(ProductList unSortProductList, int id) => ProductList(
+        productAllItems: 0,
+        productPage: 0,
+        productCountItems: 0,
+        banner: [],
+        category: [],
+        products:
+            unSortProductList.products?.where((product) => product.categoryId == (id + 1).toString()).toList() ?? [],
+      );
 
-    for (final product in unSortProductList.products!) {
-      if (product.categoryId == (id + 1).toString()) {
-        result.products?.add(product);
-      }
-    }
-
-    return result;
-  }
-
-  bool isProductListContainCategory(ProductList productList) {
-    bool result = false;
-
-    for (final product in productList.products!) {
-      if (int.parse(product.categoryId) >= 2) {
-        result = true;
-      }
-    }
-
-    return result;
-  }
+  bool isProductListContainCategory(ProductList productList) =>
+      productList.products?.any((product) => int.parse(product.categoryId) >= 2) ?? false;
 
   PageController pageController = PageController(initialPage: 0, keepPage: false);
 
