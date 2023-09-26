@@ -304,7 +304,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         titleBtn: ErrorConst().titleBtnNS,
                         onTap: () {
                           context.read<ProductListBloc>().add(const GetProductList());
-                          Navigator.of(context).pop();
                         },
                       );
                     } else {
