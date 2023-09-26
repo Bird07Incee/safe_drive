@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 import 'dart:io';
 
@@ -9,6 +10,7 @@ import 'package:marketplace_line_oa/src/constants/app_keys.dart';
 import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
@@ -22,7 +24,8 @@ class PDBottomSection extends StatefulWidget {
   State<PDBottomSection> createState() => _PDBottomSectionState();
 }
 
-class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderStateMixin {
+class _PDBottomSectionState extends State<PDBottomSection>
+    with TickerProviderStateMixin {
   late final TabController _tabController;
   late final Product product;
 
@@ -54,7 +57,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               children: [
                 Row(
                   children: [
-                    AlvaText(title: product.merchantFullName, textStyle: AlvaStyles().headingSize14w700(blackInBlack))
+                    AlvaText(
+                        title: product.merchantFullName,
+                        textStyle: AlvaStyles().headingSize14w700(blackInBlack))
                   ],
                 ),
                 const SizedBox(
@@ -62,7 +67,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 ),
                 Row(
                   children: [
-                    AlvaText(title: product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(smockGrey))
+                    AlvaText(
+                        title: product.merchantAddress,
+                        textStyle: AlvaStyles().headingSize10w400(smockGrey))
                   ],
                 ),
               ],
@@ -90,7 +97,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       width: 8,
                     ),
                     AlvaText(
-                        title: product.promotionTag[index], textStyle: AlvaStyles().headingSize12w700(blackInBlack))
+                        title: product.promotionTag[index],
+                        textStyle: AlvaStyles().headingSize12w700(blackInBlack))
                   ],
                 );
               })),
@@ -101,7 +109,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         buildDetailCardWidget(context,
             titleKey: AppKeys().productDetailRemarkTitleKey,
             title: AppStrings().remarkTitle,
-            bodyPage: HtmlWidget(product.remark, buildAsync: true, customStylesBuilder: (element) {
+            bodyPage: HtmlWidget(product.remark, buildAsync: true,
+                customStylesBuilder: (element) {
               return {'font-family': 'Krungsri Condensed', 'font-size': '14px'};
             })),
       ],
@@ -126,6 +135,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           String data = "";
           if (_tabController.index == 0) {
             data = product.technicalSpec;
+            log(data);
           } else {
             data = product.description;
           }
@@ -141,7 +151,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       child: AlvaText(
                         key: AppKeys().productDetailProductDescriptionKey,
                         title: AppStrings().productDetailProductDescription,
-                        textStyle: AlvaStyles().headingSize16w500(ModernDarkGray),
+                        textStyle:
+                            AlvaStyles().headingSize16w500(ModernDarkGray),
                       )),
                 ),
               ),
@@ -164,7 +175,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       key: AppKeys().productDetailGeneralDetailTabKey,
                       text: AppStrings().generalDetail,
                     ),
-                    Tab(key: AppKeys().productDetailEtcDetailTabKey, text: AppStrings().etcDetail),
+                    Tab(
+                        key: AppKeys().productDetailEtcDetailTabKey,
+                        text: AppStrings().etcDetail),
                   ]),
               const SizedBox(
                 height: 16,
@@ -173,28 +186,44 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 onHorizontalDragEnd: (details) async {
                   if (_tabController.index == 0) {
                     if (details.primaryVelocity! < 0) {
-                      _tabController.animateTo(1, duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(1,
+                          duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   } else {
                     if (details.primaryVelocity! > 0) {
-                      _tabController.animateTo(0, duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(0,
+                          duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   }
                 },
                 child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: data.isEmpty ? 32 : 0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 16, vertical: data.isEmpty ? 32 : 0),
                     child: Column(
                       children: [
                         isPressedReadMore
-                            ? HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller, buildAsync: true,
+                            ? HtmlWidget(
+                                data.isNotEmpty
+                                    ? data
+                                    : AppStrings().noDataFromSeller,
+                                buildAsync: true,
                                 customStylesBuilder: (element) {
-                                return {'font-family': 'Krungsri Condensed', 'font-size': '14px'};
-                              })
+                                  return {
+                                    'font-family': 'Krungsri Condensed',
+                                    'font-size': '14px'
+                                  };
+                                },
+                                factoryBuilder: () => _MyFactory(),
+                              )
                             : Container(),
                         !isPressedReadMore
-                            ? HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller, buildAsync: true,
+                            ? HtmlWidget(
+                                data.isNotEmpty
+                                    ? data
+                                    : AppStrings().noDataFromSeller,
+                                buildAsync: true,
                                 customStylesBuilder: (element) {
                                 return {
                                   'font-family': 'Krungsri Condensed',
@@ -217,7 +246,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                           children: [
                             Expanded(
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
                                 height: 48,
                                 child: OutlinedButton(
                                   onPressed: () async {
@@ -226,12 +256,16 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                     }));
                                     log(isPressedReadMore.toString());
                                   },
-                                  style:
-                                      AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, Colors.transparent),
+                                  style: AlvaStyles()
+                                      .outlineNoneBorderButtonStyle(
+                                          Colors.transparent,
+                                          Colors.transparent),
                                   child: AlvaText(
-                                    title:
-                                        isPressedReadMore ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
-                                    textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
+                                    title: isPressedReadMore
+                                        ? AppStrings().btnHideDescription
+                                        : AppStrings().btnReadMore,
+                                    textStyle: AlvaStyles()
+                                        .headingSize14w700(BlueFantasy),
                                     disableSelectableText: true,
                                   ),
                                 ),
@@ -265,7 +299,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
     }
   }
 
-  Widget buildDetailCardWidget(BuildContext context, {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget(BuildContext context,
+      {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
@@ -297,7 +332,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             const SizedBox(
               height: 16,
             ),
-            GestureDetector(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage)),
+            GestureDetector(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: bodyPage)),
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [
@@ -315,10 +353,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                   CupertinoDialogAction(
                                     isDestructiveAction: true,
                                     onPressed: () {
-                                      Navigator.pop(context, true);
+                                      String mobile = product.merchantMobile
+                                          .replaceAll('-', '');
+                                      callPhone(mobile);
                                     },
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         const Icon(
                                           Icons.phone_in_talk_sharp,
@@ -327,8 +368,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                         ),
                                         const SizedBox(width: 8),
                                         AlvaText(
-                                            title: "ติดต่อ ${product.merchantMobile}",
-                                            textStyle: AlvaStyles().heading2(BlueFantasy)),
+                                            title:
+                                                "ติดต่อ ${product.merchantMobile}",
+                                            textStyle: AlvaStyles()
+                                                .heading2(BlueFantasy)),
                                       ],
                                     ),
                                   ),
@@ -337,7 +380,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                       onPressed: () {
                                         Navigator.pop(context, false);
                                       },
-                                      child: Text('Cancel', style: AlvaStyles().heading2(BlueFantasy))),
+                                      child: Text('Cancel',
+                                          style: AlvaStyles()
+                                              .heading2(BlueFantasy))),
                                 ],
                               );
                               bool isConfirmCall = await showDialog(
@@ -346,10 +391,12 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                     return alert;
                                   });
                               if (isConfirmCall) {
-                                await launchUrlString('tel:${product.merchantMobile}');
+                                await launchUrlString(
+                                    'tel:${product.merchantMobile}');
                               }
                             } else if (Platform.isAndroid) {
-                              await launchUrlString('tel:${product.merchantMobile}');
+                              await launchUrlString(
+                                  'tel:${product.merchantMobile}');
                             }
                           },
                           style: AlvaStyles().outlineButtonStyle(
@@ -371,7 +418,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                               const SizedBox(width: 8),
                               AlvaText(
                                   title: "ติดต่อ ${product.merchantMobile}",
-                                  textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                  textStyle: AlvaStyles()
+                                      .heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
                         ),
@@ -384,5 +432,30 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 : Container()
           ],
         ));
+  }
+}
+
+class _MyFactory extends WidgetFactory {
+  @override
+  void parse(BuildMetadata meta) {
+    final e = meta.element;
+    log(e.toString());
+    if (e.localName == 'tr') {
+      for (int i = 0; i < e.nodes.length; i++) {
+        if (i == 0) {
+          meta.element.nodes[i].nodes.first.attributes = {
+            "style": "color:#9c9c9c",
+            "": "",
+          } as LinkedHashMap<Object, String>;
+        } else {
+          meta.element.nodes[i].nodes.first.attributes = {
+            "style": "color:#2c2626",
+            "": "",
+          } as LinkedHashMap<Object, String>;
+        }
+      }
+      return;
+    }
+    return super.parse(meta);
   }
 }

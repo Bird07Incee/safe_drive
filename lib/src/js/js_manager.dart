@@ -8,3 +8,4 @@ import 'package:js/js.dart';
 @JS()
 external void loadOneTrustCookieScript();
 external void jsAlert(val);
+external void callPhone(val);
