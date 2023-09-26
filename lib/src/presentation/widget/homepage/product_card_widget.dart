@@ -125,7 +125,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           child: Center(
                             child: Text(
                               "${counter[index]}/ ${products?[index].productionAssets.length}",
-                              style: const TextStyle(color: whitePure),
+                              style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                           ),
                         ),
