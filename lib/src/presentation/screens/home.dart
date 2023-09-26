@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print("home init state");
     context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
     // Timer(const Duration(seconds: 1), () {
     //   final checkBrowserState = context.read<CheckBrowserBloc>().state;

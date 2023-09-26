@@ -52,13 +52,19 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
-      Response response = await dioUtilityRepository
-          .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
-      if (response.statusCode == 200) {
-        lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
-        String accessToken = response.data["access_token"];
+      bool codeVerify = lineDataHelper.isLineCodeExist();
+      if (!codeVerify) {
+        Response response = await dioUtilityRepository
+            .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
+        if (response.statusCode == 200) {
+          codeVerify = true;
+          lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
+        }
+      }
+      if (codeVerify) {
+        String accessToken = lineDataHelper.getLineAccessToken();
         Response responseTerm = await dioUtilityRepository.postByURL(
-            "$baseUrl$socialApiPath/accept/termandcond", {"uid": response.data["uid"]},
+            "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineDataHelper.getLineUid()},
             headers: {"Authorization": "Bearer $accessToken"});
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
