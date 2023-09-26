@@ -86,6 +86,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 setState(() {
                                   counter[index] = val + 1;
                                 });
+
+                                if (val == products?[index].productionAssets.length && val != 1) {
+                                  pageViewController.jumpToPage(0);
+                                }
                               },
                               itemBuilder: (ctx, i) {
                                 return Stack(
