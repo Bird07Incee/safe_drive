@@ -91,10 +91,21 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 return Stack(
                                   children: [
                                     SizedBox(
-                                        width: widget.maxWidth,
-                                        height: 576,
-                                        child:
-                                            Image.network(products![index].productionAssets[i], fit: BoxFit.fitWidth)),
+                                      width: widget.maxWidth,
+                                      height: 576,
+                                      child: FadeInImage(
+                                        placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                        // Replace with your placeholder image path
+                                        image: NetworkImage(
+                                          i == products![index].productionAssets.length
+                                              ? products[index].productionAssets[0]
+                                              : products[index].productionAssets[i],
+                                        ),
+                                        fit: BoxFit.fitWidth,
+                                        imageErrorBuilder: (context, error, stackTrace) =>
+                                            Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
+                                      ),
+                                    )
                                   ],
                                 );
                               }),
