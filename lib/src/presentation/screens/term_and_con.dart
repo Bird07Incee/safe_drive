@@ -52,7 +52,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
-      bool codeVerify = lineDataHelper.isLineCodeExist();
+      bool codeVerify = lineDataHelper.getLineAccessToken().isNotEmpty;
       if (!codeVerify) {
         Response response = await dioUtilityRepository
             .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
