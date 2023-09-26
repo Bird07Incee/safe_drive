@@ -212,7 +212,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                           // add srperator exclude tail
                                           if (products[index].promotionTag.indexOf(tag) !=
                                               products[index].promotionTag.length - 1)
-                                            const Text("|")
+                                            const Text("| ")
                                           // const VerticalDivider(
                                           //   width: 8,
                                           //   thickness: 100,
