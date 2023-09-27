@@ -187,7 +187,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     child: OutlinedButton(
                       onPressed: () {
                         Navigator.pushNamed(context,
-                            '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}');
+                            '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}',
+                            arguments: ProductDetailArgs(product: widget.arguments!.product));
                       },
                       style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
                       child: AlvaText(

@@ -4,6 +4,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -13,7 +14,8 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
 class ProductSelectOptions extends StatefulWidget {
-  const ProductSelectOptions({Key? key}) : super(key: key);
+  const ProductSelectOptions({Key? key, this.arguments}) : super(key: key);
+  final ProductDetailArgs? arguments;
 
   @override
   State<ProductSelectOptions> createState() => _ProductSelectOptionsState();
@@ -88,7 +90,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                               width: MediaQuery.of(context).size.width - 32,
                               padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
                               child: AlvaText(
-                                title: state.productList.products![0].productionOptionals[0].levelName,
+                                title: widget.arguments!.product.productionOptionals[0].levelName,
                                 textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
                               ),
                             ),
@@ -99,7 +101,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                   ListView.builder(
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
-                                      itemCount: state.productList.products![0].productionOptionals.length,
+                                      itemCount: widget.arguments!.product.productionOptionals.length,
                                       itemBuilder: (BuildContext context, int index) {
                                         return Column(
                                           children: [
@@ -196,7 +198,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                           child: ClipRRect(
                                                             borderRadius: BorderRadius.circular(4),
                                                             child: Image.network(
-                                                              state.productList.products![0].productionAssets[index],
+                                                              widget.arguments!.product.productionAssets[index],
                                                               // .substring(46) local
                                                               fit: BoxFit.fitWidth,
                                                             ),
@@ -218,7 +220,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                   ),
                                                   AlvaText(
                                                       title:
-                                                          "${state.productList.products![0].productionOptionals[index].price.toDecimalFormat()} บาท",
+                                                          "${widget.arguments!.product.productionOptionals[index].price.toDecimalFormat()} บาท",
                                                       textStyle: AlvaStyles().headingSize12w400(spaceGrey)),
                                                 ],
                                               ),
@@ -260,8 +262,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                           ],
                         ),
                         prodOptState.stepOneGroupValueRadio == "" ||
-                                state.productList.products![0].productionOptionals[prodOptState.stepOneIndexSelect!]
-                                    .level2.isEmpty
+                                widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2
+                                    .isEmpty
                             ? Container()
                             : Column(
                                 children: [
@@ -395,7 +397,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         ),
                                                         AlvaText(
                                                             title:
-                                                                "${state.productList.products![0].productionOptionals[prodOptState.stepOneIndexSelect!].level2[index].price.toDecimalFormat()} บาท",
+                                                                "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[index].price.toDecimalFormat()} บาท",
                                                             textStyle: AlvaStyles().headingSize12w400(spaceGrey)),
                                                       ],
                                                     ),
@@ -437,7 +439,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 ],
                               ),
                         prodOptState.stepTwoGroupValueRadio == "" ||
-                                state.productList.products![0].productionOptionals[prodOptState.stepOneIndexSelect!]
+                                widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
                                     .level2[prodOptState.stepTwoIndexSelect!].level3.isEmpty
                             ? Container()
                             : Column(
@@ -576,7 +578,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         ),
                                                         AlvaText(
                                                             title:
-                                                                "${state.productList.products![0].productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[index].price.toDecimalFormat()} บาท",
+                                                                "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[index].price.toDecimalFormat()} บาท",
                                                             textStyle: AlvaStyles().headingSize12w400(spaceGrey)),
                                                       ],
                                                     ),
@@ -759,7 +761,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         ),
                                                         AlvaText(
                                                             title:
-                                                                "${state.productList.products![0].productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[index].price.toDecimalFormat()} บาท",
+                                                                "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[index].price.toDecimalFormat()} บาท",
                                                             textStyle: AlvaStyles().headingSize12w400(spaceGrey)),
                                                       ],
                                                     ),
@@ -925,7 +927,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         ),
                                                         AlvaText(
                                                             title:
-                                                                "${state.productList.products![0].productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5[index].price.toDecimalFormat()} บาท",
+                                                                "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5[index].price.toDecimalFormat()} บาท",
                                                             textStyle: AlvaStyles().headingSize12w400(spaceGrey)),
                                                       ],
                                                     ),

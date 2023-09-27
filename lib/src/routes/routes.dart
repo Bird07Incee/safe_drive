@@ -34,7 +34,6 @@ final Map<String, WidgetBuilder> routes = {
   (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
   (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
-  (Routes.selectOptions).toStringPath(): (BuildContext _) => const ProductSelectOptions(),
   (Routes.productDetail).toStringPath(): (BuildContext context) {
     if (ModalRoute.of(context)!.settings.arguments != null) {
       return ProductDetailScreen(
@@ -42,6 +41,15 @@ final Map<String, WidgetBuilder> routes = {
       );
     } else {
       return const ProductDetailScreen();
+    }
+  },
+  (Routes.selectOptions).toStringPath(): (BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      return ProductSelectOptions(
+        arguments: ModalRoute.of(context)!.settings.arguments as ProductDetailArgs,
+      );
+    } else {
+      return const ProductSelectOptions();
     }
   }
 };
@@ -89,11 +97,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
     case "/loadingScreen":
       return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
-    case "/selectOptions":
-      return MaterialPageRoute(builder: (_) => const ProductSelectOptions(), settings: settings);
     case "/productDetail":
       return MaterialPageRoute(
           builder: (_) => ProductDetailScreen(
+                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
+              ),
+          settings: settings);
+    case "/selectOptions":
+      return MaterialPageRoute(
+          builder: (_) => ProductSelectOptions(
                 arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
               ),
           settings: settings);
