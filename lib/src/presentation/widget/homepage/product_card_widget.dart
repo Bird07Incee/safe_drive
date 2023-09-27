@@ -330,7 +330,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       ),
                                       AlvaText(
                                         title: 'สนใจ',
-                                        textStyle: AlvaStyles().bodySize14W600(),
+                                        textStyle: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW),
                                       ),
                                       const SizedBox(
                                         width: 32,

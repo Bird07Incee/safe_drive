@@ -4,10 +4,11 @@ import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
-enum Routes { initial, termAndCon, errorScreen, loadingScreen, productDetail }
+enum Routes { initial, termAndCon, errorScreen, loadingScreen, productDetail, selectOptions }
 
 extension TypeCoverter on Routes {
   String toStringPath() {
@@ -22,6 +23,8 @@ extension TypeCoverter on Routes {
         return '/loadingScreen';
       case Routes.productDetail:
         return '/productDetail';
+      case Routes.selectOptions:
+        return '/selectOptions';
     }
   }
 }
@@ -31,6 +34,7 @@ final Map<String, WidgetBuilder> routes = {
   (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
   (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
+  (Routes.selectOptions).toStringPath(): (BuildContext _) => const ProductSelectOptions(),
   (Routes.productDetail).toStringPath(): (BuildContext context) {
     if (ModalRoute.of(context)!.settings.arguments != null) {
       return ProductDetailScreen(
@@ -70,7 +74,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   // print(liffClientId);
   // print(liffRedirectUri);
   String pid = '';
-  if (routingData?.route == "/productDetail") {
+  if (routingData?.route == "/productDetail" || routingData?.route == "/selectOptions") {
     pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
   }
   print(pid);
@@ -85,6 +89,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
     case "/loadingScreen":
       return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
+    case "/selectOptions":
+      return MaterialPageRoute(builder: (_) => const ProductSelectOptions(), settings: settings);
     case "/productDetail":
       return MaterialPageRoute(
           builder: (_) => ProductDetailScreen(

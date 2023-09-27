@@ -94,8 +94,10 @@ class AlvaStyles {
   TextStyle bodySize14w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color);
 
-  TextStyle bodySize14W600() => const TextStyle(
-      fontFamily: fontFamily, fontSize: 14, color: BTN_SELECTED_TEXT_COLOR_NEW, fontWeight: FontWeight.bold);
+  TextStyle bodySize14W600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, color: color, fontWeight: FontWeight.bold);
+  TextStyle bodySize16W600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, color: color, fontWeight: FontWeight.w600);
 
   TextStyle bodySize14W400Muted() =>
       const TextStyle(fontFamily: fontFamily, fontSize: 14, color: smockGrey, fontWeight: FontWeight.w400);
