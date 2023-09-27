@@ -59,7 +59,8 @@ class _PDBottomSectionState extends State<PDBottomSection>
                   children: [
                     AlvaText(
                         title: product.merchantFullName,
-                        textStyle: AlvaStyles().headingSize14w700(blackInBlack))
+                        textStyle: AlvaStyles()
+                            .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW))
                   ],
                 ),
                 const SizedBox(
@@ -69,7 +70,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                   children: [
                     AlvaText(
                         title: product.merchantAddress,
-                        textStyle: AlvaStyles().headingSize10w400(smockGrey))
+                        textStyle: AlvaStyles().headingSize10w400(spaceGrey))
                   ],
                 ),
               ],
@@ -77,32 +78,38 @@ class _PDBottomSectionState extends State<PDBottomSection>
         const SizedBox(
           height: 16,
         ),
-        buildDetailCardWidget(
-          context,
-          titleKey: AppKeys().productDetailPromotionDetailTitleKey,
-          title: AppStrings().promotionDetailTitle,
-          bodyPage: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: product.promotionTag.length,
-              itemBuilder: ((context, index) {
-                return Row(
-                  children: [
-                    const Icon(
-                      Icons.bookmark,
-                      size: 12,
-                      color: smockGrey,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    AlvaText(
-                        title: product.promotionTag[index],
-                        textStyle: AlvaStyles().headingSize12w700(blackInBlack))
-                  ],
-                );
-              })),
-        ),
+        buildDetailCardWidget(context,
+            titleKey: AppKeys().productDetailPromotionDetailTitleKey,
+            title: AppStrings().promotionDetailTitle,
+            bodyPage: Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 8),
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: product.promotionTag.length > 3
+                      ? 3
+                      : product.promotionTag.length,
+                  itemBuilder: ((context, index) {
+                    return Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.bookmark,
+                              size: 16,
+                              color: cloudSoftDeepWhite,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            AlvaText(
+                                title: product.promotionTag[index],
+                                textStyle:
+                                    AlvaStyles().headingSize12w500(spaceGrey))
+                          ],
+                        ));
+                  })),
+            )),
         const SizedBox(
           height: 16,
         ),
@@ -111,7 +118,11 @@ class _PDBottomSectionState extends State<PDBottomSection>
             title: AppStrings().remarkTitle,
             bodyPage: HtmlWidget(product.remark, buildAsync: true,
                 customStylesBuilder: (element) {
-              return {'font-family': 'Krungsri Condensed', 'font-size': '14px'};
+              return {
+                'font-family': 'Krungsri Condensed',
+                'font-size': '12px',
+                'font-weight': '400'
+              };
             })),
       ],
     );
@@ -139,45 +150,59 @@ class _PDBottomSectionState extends State<PDBottomSection>
           } else {
             data = product.description;
           }
-
+          List<String> line = data.split('<br>');
+          log('line: ${line.length.toString()}');
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.all(16),
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: AlvaText(
-                        key: AppKeys().productDetailProductDescriptionKey,
-                        title: AppStrings().productDetailProductDescription,
-                        textStyle:
-                            AlvaStyles().headingSize16w500(ModernDarkGray),
-                      )),
+                  child: AlvaText(
+                    key: AppKeys().productDetailProductDescriptionKey,
+                    title: AppStrings().productDetailProductDescription,
+                    textStyle: AlvaStyles()
+                        .headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                  ),
                 ),
               ),
-              TabBar(
-                  controller: _tabController,
-                  labelColor: ModernDarkGray,
-                  indicatorColor: BlueFantasy,
-                  unselectedLabelColor: const Color(0xffA4A8AD),
-                  labelStyle: const TextStyle(
-                    fontFamily: fontFamily,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  onTap: (int index) {
-                    setState(() {});
-                    log("TapBar index $index");
-                  },
-                  tabs: [
-                    Tab(
-                      key: AppKeys().productDetailGeneralDetailTabKey,
-                      text: AppStrings().generalDetail,
+              Stack(
+                  fit: StackFit.passthrough,
+                  alignment: Alignment.bottomCenter,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: cloudWhite, width: 2.0),
+                        ),
+                      ),
                     ),
-                    Tab(
-                        key: AppKeys().productDetailEtcDetailTabKey,
-                        text: AppStrings().etcDetail),
+                    SizedBox(
+                      height: 40,
+                      child: TabBar(
+                          controller: _tabController,
+                          labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
+                          indicatorColor: BlueFantasy,
+                          unselectedLabelColor: cloudSoftDeepWhite,
+                          labelStyle: const TextStyle(
+                            fontFamily: fontFamily,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          onTap: (int index) {
+                            setState(() {});
+                            log("TapBar index $index");
+                          },
+                          tabs: [
+                            Tab(
+                              key: AppKeys().productDetailGeneralDetailTabKey,
+                              text: AppStrings().generalDetail,
+                            ),
+                            Tab(
+                                key: AppKeys().productDetailEtcDetailTabKey,
+                                text: AppStrings().etcDetail),
+                          ]),
+                    )
                   ]),
               const SizedBox(
                 height: 16,
@@ -209,12 +234,12 @@ class _PDBottomSectionState extends State<PDBottomSection>
                                     ? data
                                     : AppStrings().noDataFromSeller,
                                 buildAsync: true,
-                                // customStylesBuilder: (element) {
-                                //   return {
-                                //     'font-family': 'Krungsri Condensed',
-                                //     'font-size': '14px'
-                                //   };
-                                // },
+                                customStylesBuilder: (element) {
+                                  return {
+                                    'font-family': 'Krungsri Condensed',
+                                    'font-size': '14px'
+                                  };
+                                },
                                 factoryBuilder: () => _MyFactory(),
                               )
                             : Container(),
@@ -225,13 +250,15 @@ class _PDBottomSectionState extends State<PDBottomSection>
                                     : AppStrings().noDataFromSeller,
                                 buildAsync: true,
                                 customStylesBuilder: (element) {
-                                return {
-                                  'font-family': 'Krungsri Condensed',
-                                  'font-size': '14px',
-                                  'max-lines': '5',
-                                  'text-overflow': 'ellipsis'
-                                };
-                              })
+                                  return {
+                                    'font-family': 'Krungsri Condensed',
+                                    'font-size': '14px',
+                                    'max-lines': '5',
+                                    'text-overflow': 'ellipsis'
+                                  };
+                                },
+                                factoryBuilder: () => _MyFactory(),
+                              )
                             : Container(),
                       ],
                     )),
@@ -302,7 +329,6 @@ class _PDBottomSectionState extends State<PDBottomSection>
   Widget buildDetailCardWidget(BuildContext context,
       {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           color: whitePure,
           boxShadow: [
@@ -317,20 +343,16 @@ class _PDBottomSectionState extends State<PDBottomSection>
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.all(16),
               child: Align(
                 alignment: Alignment.topLeft,
-                child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: AlvaText(
-                      key: titleKey!,
-                      title: title!,
-                      textStyle: AlvaStyles().headingSize16w500(ModernDarkGray),
-                    )),
+                child: AlvaText(
+                  key: titleKey!,
+                  title: title!,
+                  textStyle: AlvaStyles()
+                      .headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 16,
             ),
             GestureDetector(
                 child: Padding(
@@ -376,12 +398,12 @@ class _PDBottomSectionState extends State<PDBottomSection>
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
                     ],
                   )
-                : Container()
+                : Container(),
+            const SizedBox(
+              height: 16,
+            ),
           ],
         ));
   }
@@ -395,14 +417,18 @@ class _MyFactory extends WidgetFactory {
     if (e.localName == 'tr') {
       for (int i = 0; i < e.nodes.length; i++) {
         if (i == 0) {
-          meta.element.nodes[i].nodes.first.attributes = {
+          meta.element.nodes[i].nodes[0].attributes = {
             "style": "color:#9c9c9c",
-            "": "",
+            "margin-left": "40px",
+            "font-family": "Krungsri Condensed",
+            "font-size": "14px"
           } as LinkedHashMap<Object, String>;
         } else {
-          meta.element.nodes[i].nodes.first.attributes = {
+          meta.element.nodes[i].nodes[0].attributes = {
             "style": "color:#2c2626",
-            "": "",
+            "margin-left": "40px",
+            "font-family": "Krungsri Condensed",
+            "font-size": "14px"
           } as LinkedHashMap<Object, String>;
         }
       }
