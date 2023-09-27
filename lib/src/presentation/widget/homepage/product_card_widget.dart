@@ -74,7 +74,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         aspectRatio: 16.0 / 9.0,
                         child: ClipRRect(
                           borderRadius:
-                              const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                              const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                           child: PageView.builder(
                               itemCount: products?[index].productionAssets.length,
                               controller: pageViewController,
