@@ -147,7 +147,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     children: [
                       AlvaText(
                           title: widget.arguments!.product.productName,
-                          textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
+                          textStyle: AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                       AlvaTextMaxLinesOverflow(
                           title: '${widget.arguments!.product.price.toDecimalFormat()} บาท',
                           maxLines: 1,

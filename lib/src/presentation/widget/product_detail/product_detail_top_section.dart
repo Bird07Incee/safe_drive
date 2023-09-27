@@ -204,7 +204,7 @@ class PDTopSection extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AlvaText(
-                              title: 'Pulsar Plus',
+                              title: args.product.productName,
                               textStyle: AlvaStyles().headingSize22w700(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                             Row(
@@ -285,14 +285,30 @@ class PDTopSection extends StatelessWidget {
                             const SizedBox(
                               height: 16,
                             ),
-                            AlvaText(
-                              title: '${args.product.discountPrice.toDecimalFormat()} บาท',
-                              textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
+                            Row(
+                              children: [
+                                AlvaText(
+                                  title: args.product.discountPrice.toDecimalFormat(),
+                                  textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
+                                ),
+                                AlvaText(
+                                  title: ' บาท',
+                                  textStyle: AlvaStyles().bodySize14w400(smockGrey).copyWith(height: 1.714),
+                                ),
+                              ],
                             ),
-                            AlvaText(
-                              title: '${args.product.price.toDecimalFormat()} บาท',
-                              textStyle: AlvaStyles().headingSize22w700(RedWordShow).copyWith(height: 1.454),
-                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                AlvaText(
+                                  title: args.product.price.toDecimalFormat(),
+                                  textStyle: AlvaStyles().headingSize22w700(RedWordShow).copyWith(height: 1.454),
+                                ),
+                                AlvaText(
+                                  title: ' บาท',
+                                  textStyle: AlvaStyles().headingSize18w700(RedWordShow).copyWith(height: 1.454),
+                                ),
+                              ],),
                             const SizedBox(
                               height: 16,
                             ),
