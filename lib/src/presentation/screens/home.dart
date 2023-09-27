@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
@@ -20,6 +21,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_b
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -295,6 +297,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         },
                       );
                     } else {
+                      return Container(
+                        width: 50,
+                        height: 50,
+                        color: Colors.red,
+                        child: GestureDetector(
+                          onTap: () {
+                            var p = ProductList.fromJson(mockProductResponse).products;
+                            Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${p!.first.productId}',
+                                arguments: ProductDetailArgs(product: p.first));
+                          },
+                        ),
+                      );
+
                       return const LoadingScreen();
                     }
                   },
