@@ -18,6 +18,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -30,6 +31,7 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerProviderStateMixin {
   final oCcy = NumberFormat("#,##0", "en_US");
+  late RouteSettings? settings;
   final scrollController = ScrollController();
   late PageController pageViewController = PageController(
     viewportFraction: 1,
@@ -68,12 +70,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   @override
   Widget build(BuildContext context) {
     int imageDataLength = 1;
+    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (widget.arguments != null) {
       imageDataLength = widget.arguments!.product.productionAssets.length == 1
           ? widget.arguments!.product.productionAssets.length
           : widget.arguments!.product.productionAssets.length > 20
               ? 20
               : widget.arguments!.product.productionAssets.length;
+    } else if (settings != null) {
+      // var uriData = Uri.parse(settings!.name!);
+      // var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+      // String pid = '';
+      // if (settings?.route == "/productDetail") {
+      //   pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
+      // }
+      // print(pid);
+
     }
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
@@ -134,9 +146,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AlvaText(title: 'Pulsar MAX', textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
+                      AlvaText(title: widget.arguments!.product.productName, textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
                       AlvaTextMaxLinesOverflow(
-                          title: '${45900.toDecimalFormat()} บาท',
+                          title: '${widget.arguments!.product.price.toDecimalFormat()} บาท',
                           maxLines: 1,
                           textStyle: AlvaStyles().heading2(RedWordShow))
                     ],

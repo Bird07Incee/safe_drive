@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -17,6 +18,30 @@ class PDTopSection extends StatelessWidget {
   const PDTopSection({super.key, required this.args});
   final ProductDetailArgs args;
 
+  List<Widget> promos() {
+    List<Widget> l = [];
+    for(var i = 0; i < args.product.promotionTag.length; i++) {
+      Widget w = Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+            child: AlvaText(
+              title: args.product.promotionTag[i],
+              textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+            ),
+          ),
+          i%2 == 0 ? Container(
+            width: 1,
+            height: 16,
+            color: cloudSoftDeepWhite,
+          ) : SizedBox()
+        ],
+      );
+      l.add(w);
+    }
+    return l;
+  }
+
   @override
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
@@ -25,14 +50,6 @@ class PDTopSection extends StatelessWidget {
       // height: 520,
       decoration: BoxDecoration(
         color: whitePure,
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xffdedede).withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
       ),
       child: BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
         builder: (context, zoomState) {
@@ -105,24 +122,27 @@ class PDTopSection extends StatelessWidget {
                               );
                             }),
                       ),
-                      Positioned.fill(
-                          child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
-                          width: 41,
-                          height: 24,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: cloudyWhite.withOpacity(0.8),
+                      Visibility(
+                        visible: args.product.productionAssets.length > 1,
+                        child: Positioned.fill(
+                            child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                            width: 41,
+                            height: 24,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: cloudyWhite.withOpacity(0.8),
+                            ),
+                            child: Center(
+                              child: AlvaText(
+                                  title: "${carouselState.initialPage + 1}/${args.product.productionAssets.length}",
+                                  textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)),
+                            ),
                           ),
-                          child: Center(
-                            child: AlvaText(
-                                title: "${carouselState.initialPage + 1}/${args.product.productionAssets.length}",
-                                textStyle: AlvaStyles().headingSize10w500(ModernDarkGray)),
-                          ),
-                        ),
-                      )),
+                        )),
+                      ),
                       Positioned.fill(
                           child: Align(
                         alignment: Alignment.bottomRight,
@@ -132,7 +152,21 @@ class PDTopSection extends StatelessWidget {
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) => const SizedBox(),
                         ),
-                      ))
+                      )),
+                      Visibility(
+                        visible: args.product.percentDiscountPrice > 0,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                          decoration: const BoxDecoration(
+                              color: BlueFantasy,
+                              borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(8))),
+                          child: AlvaText(
+                            title: "ถูกลง ${args.product.percentDiscountPrice} %",
+                            textStyle: AlvaStyles().headingSize12w600(Colors.white),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                   Container(
@@ -173,48 +207,49 @@ class PDTopSection extends StatelessWidget {
                           children: [
                             AlvaText(
                               title: 'Pulsar Plus',
-                              textStyle: AlvaStyles().headingSize22w700(ModernDarkGray),
+                              textStyle: AlvaStyles().headingSize22w700(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                             Row(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                  child: AlvaText(
-                                    title: 'ติดตั้งฟรี',
-                                    textStyle: AlvaStyles().headingSize10w500(spaceGrey),
-                                  ),
-                                ),
-                                Container(
-                                  width: 1,
-                                  height: 16,
-                                  color: cloudSoftDeepWhite,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                    child: AlvaText(
-                                      title: 'รับประกัน 3 ปี',
-                                      textStyle: AlvaStyles().headingSize10w500(spaceGrey),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 1,
-                                  height: 16,
-                                  color: cloudSoftDeepWhite,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                    child: AlvaText(
-                                      title: 'สิทธิพิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้ ',
-                                      textStyle: AlvaStyles().headingSize10w500(spaceGrey),
-                                    ),
-                                  ),
-                                )
-                              ],
+                              children: promos(),
+                              // [
+                              //   Container(
+                              //     margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                              //     child: AlvaText(
+                              //       title: 'ติดตั้งฟรี',
+                              //       textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                              //     ),
+                              //   ),
+                              //   Container(
+                              //     width: 1,
+                              //     height: 16,
+                              //     color: cloudSoftDeepWhite,
+                              //   ),
+                              //   Container(
+                              //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+                              //     child: Container(
+                              //       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                              //       child: AlvaText(
+                              //         title: 'รับประกัน 3 ปี',
+                              //         textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                              //       ),
+                              //     ),
+                              //   ),
+                              //   Container(
+                              //     width: 1,
+                              //     height: 16,
+                              //     color: cloudSoftDeepWhite,
+                              //   ),
+                              //   Container(
+                              //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+                              //     child: Container(
+                              //       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                              //       child: AlvaText(
+                              //         title: 'สิทธิพิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้ ',
+                              //         textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                              //       ),
+                              //     ),
+                              //   )
+                              // ],
                             ),
                             const SizedBox(
                               height: 16,
@@ -227,46 +262,43 @@ class PDTopSection extends StatelessWidget {
                             const SizedBox(
                               height: 16,
                             ),
-                            AlvaText(
-                              title: 'แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น',
-                              textStyle: AlvaStyles().headingSize16w500(ModernDarkGray),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            AlvaText(
-                              title:
-                                  'เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวันอีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่างเต็มที่ผ่านการใช้งานร่วมกับ myWallbox Application',
+                            HtmlWidget(args.product.tagline,
+                              buildAsync: true,
+                              // factoryBuilder: () => _MyFactory(),
                               textStyle: AlvaStyles().headingSize10w400(spaceGrey),
+                              customStylesBuilder: (element) {
+                                if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
+                                  if(element.attributes['style'].toString().contains('9c9c9c')) {
+                                    element.attributes['style'] = 'color:#9c9c9c';
+                                  } else {
+                                    element.attributes['style'] = 'color:#2c2626';
+                                  }
+                                } else {
+                                  element.attributes['style'] = '';
+                                }
+                                if (element.localName == "table") {
+                                  return {
+                                    'width': '100%'
+                                  };
+                                } else if (element.localName == "td") {
+                                  return {
+                                    'width': '50%'
+                                  };
+                                }
+
+                                return null;
+                              }
                             ),
                             const SizedBox(
                               height: 16,
                             ),
-                            Row(
-                              children: [
-                                AlvaText(
-                                  title: '${56640.toDecimalFormat()} บาท',
-                                  textStyle: AlvaStyles().headingSize22w700(RedWordShow),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Container(
-                                  // margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                  decoration: BoxDecoration(color: RedSoft, borderRadius: BorderRadius.circular(4)),
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                    child: AlvaText(
-                                      title: 'ถูกลง 4 %',
-                                      textStyle: AlvaStyles().headingSize10w700(RedWordShow),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            AlvaText(
+                              title: '${args.product.discountPrice.toDecimalFormat()} บาท',
+                              textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
                             ),
                             AlvaText(
-                              title: '${56640.toDecimalFormat()} บาท',
-                              textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey),
+                              title: '${args.product.price.toDecimalFormat()} บาท',
+                              textStyle: AlvaStyles().headingSize22w700(RedWordShow).copyWith(height: 1.454),
                             ),
                             const SizedBox(
                               height: 16,
