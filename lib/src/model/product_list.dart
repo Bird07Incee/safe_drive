@@ -11,12 +11,12 @@ class ProductList {
   final int? productPage;
   final int? productCountItems;
   final List<Banner>? banner;
-  final List<String>? category;
+  final List<Map>? category;
   final List<Product>? products;
 
   ProductList.fromJson(Map<String, dynamic> json)
       : banner = json['banner'] != null ? List.from(json['banner']).map((e) => Banner.fromJson(e)).toList() : [],
-        category = json['category'] != null ? List.from(json['category']).map((e) => e as String).toList() : [],
+        category = json['category'] != null ? List.from(json['category']).map((e) => e as Map).toList() : [],
         products = json['products'] != null ? List.from(json['products']).map((e) => Product.fromJson(e)).toList() : [],
         productAllItems = json['productAllItems'] != null ? json['productAllItems'] as int? : 0,
         productPage = json['productPage'] != null ? json['productPage'] as int? : 0,
@@ -28,13 +28,15 @@ class Banner {
     required this.image,
     required this.route,
     required this.url,
+    required this.seqNo,
   });
   final String image;
   final String route;
   final String url;
+  final String seqNo;
 
   factory Banner.fromJson(Map<String, dynamic> json) {
-    return Banner(image: json['image'] ?? '', route: json['route'] ?? '', url: json['url'] ?? '');
+    return Banner(image: json['image'] ?? '', route: json['route'] ?? '', url: json['url'] ?? '', seqNo: json['seqNo']);
   }
 }
 
