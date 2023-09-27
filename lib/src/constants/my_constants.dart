@@ -49,6 +49,13 @@ const List assetsCarouselItem = [
   // "assets/homepage/banner.png",
 ];
 
+class ProductSelectOptionsConst {
+  String continueText = "ดำเนินการต่อ";
+  String selectProdText = "ตัวเลือกสินค้า";
+  String priceProdDefaultText = "0 บาท";
+  String backButtonKey = "pop_navigator_to_product_detail";
+}
+
 const carouselOver20Item = [
   "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
   "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/EIFFEL_BASIC_COMMANDER.png",
