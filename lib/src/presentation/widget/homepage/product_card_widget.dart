@@ -56,15 +56,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               margin: const EdgeInsets.only(top: 16),
               decoration: BoxDecoration(
                 color: whitePure,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12)),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 boxShadow: [
                   BoxShadow(
-                    color: whitePure.withOpacity(0.5),
-                    spreadRadius: 5,
+                    color: whitePure.withOpacity(0.4),
+                    spreadRadius: 0,
                     blurRadius: 8,
                     offset: const Offset(0, 2), // changes position of shadow
                   ),
@@ -209,7 +205,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                             margin: const EdgeInsets.symmetric(vertical: 4),
                                             child: AlvaText(
                                               title: tag,
-                                              textStyle: AlvaStyles().headingSize10(),
+                                              textStyle: AlvaStyles().headingSize10w500(spaceGrey),
                                             ),
                                           ),
 

@@ -267,10 +267,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 ),
                                 Container(
                                   color: spaceGrey,
-                                  height: 104,
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
@@ -288,6 +289,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             textStyle: AlvaStyles().headingSize12w700(whiteFalse),
                                           ),
                                         ],
+                                      ),
+                                      const SizedBox(
+                                        height: 32,
                                       ),
                                     ],
                                   ),
