@@ -5,7 +5,6 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
@@ -42,14 +41,15 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                               onPressed: () {},
                               style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
                               child: AlvaText(
-                                  title: "ดำเนินการต่อ",
+                                  title: ProductSelectOptionsConst().continueText,
                                   textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                             )
                           : OutlinedButton(
                               onPressed: () {},
                               style: AlvaStyles().outlineNoneBorderButtonStyle(cloudSoftDeepWhite, Colors.transparent),
-                              child:
-                                  AlvaText(title: "ดำเนินการต่อ", textStyle: AlvaStyles().headingSize16w700(smockGrey)),
+                              child: AlvaText(
+                                  title: ProductSelectOptionsConst().continueText,
+                                  textStyle: AlvaStyles().headingSize16w700(smockGrey)),
                             ),
                     ),
                   )
@@ -58,14 +58,17 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
             ),
             appBar: AppBar(
               title: AlvaText(
-                  title: "ตัวเลือกสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  title: ProductSelectOptionsConst().selectProdText,
+                  textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
               titleSpacing: 0,
               leadingWidth: 60,
               elevation: 0,
               centerTitle: false,
               automaticallyImplyLeading: false,
               leading: IconButton(
-                  key: const Key("pop_navigator_to_home_page"), onPressed: () {}, icon: const Icon(Icons.arrow_back)),
+                  key: Key(ProductSelectOptionsConst().backButtonKey),
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_back)),
             ),
             child: Container(
               color: cloudyWhite,
@@ -226,14 +229,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 children: [
                                   prodOptState.stepOneGroupValueRadio == ""
                                       ? AlvaText(
-                                          title: "ตัวเลือกสี",
+                                          title:
+                                              "ตัวเลือก${widget.arguments!.product.productionOptionals[0].levelName}",
                                           textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                       : AlvaText(
                                           title: prodOptState.stepOneGroupValueRadio,
                                           textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
                                   prodOptState.stepOnePrice == null
                                       ? AlvaText(
-                                          title: "0 บาท", textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
+                                          title: ProductSelectOptionsConst().priceProdDefaultText,
+                                          textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                       : AlvaText(
                                           title: "${prodOptState.stepOnePrice!.toDecimalFormat()} บาท",
                                           textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
@@ -398,14 +403,15 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         prodOptState.stepTwoGroupValueRadio == ""
                                             ? AlvaText(
-                                                title: "ตัวเลือกสี",
+                                                title:
+                                                    "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[0].levelName}",
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: prodOptState.stepTwoGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
                                         prodOptState.stepTwoPrice == null
                                             ? AlvaText(
-                                                title: "0 บาท",
+                                                title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: "${prodOptState.stepTwoPrice!.toDecimalFormat()} บาท",
@@ -571,14 +577,15 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         prodOptState.stepTreeGroupValueRadio == ""
                                             ? AlvaText(
-                                                title: "ตัวเลือกสี",
+                                                title:
+                                                    "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[0].levelName}",
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: prodOptState.stepTreeGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
                                         prodOptState.stepTreePrice == null
                                             ? AlvaText(
-                                                title: "0 บาท",
+                                                title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: "${prodOptState.stepTreePrice!.toDecimalFormat()} บาท",
@@ -751,14 +758,15 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         prodOptState.stepFourGroupValueRadio == ""
                                             ? AlvaText(
-                                                title: "ตัวเลือกสี",
+                                                title:
+                                                    "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[0].levelName}",
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: prodOptState.stepFourGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
                                         prodOptState.stepFourPrice == null
                                             ? AlvaText(
-                                                title: "0 บาท",
+                                                title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: "${prodOptState.stepFourPrice!.toDecimalFormat()} บาท",
@@ -915,14 +923,15 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         prodOptState.stepFiveGroupValueRadio == ""
                                             ? AlvaText(
-                                                title: "ตัวเลือกสี",
+                                                title:
+                                                    "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5[0].levelName}",
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: prodOptState.stepFiveGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
                                         prodOptState.stepFivePrice == null
                                             ? AlvaText(
-                                                title: "0 บาท",
+                                                title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
                                             : AlvaText(
                                                 title: "${prodOptState.stepFivePrice!.toDecimalFormat()} บาท",
