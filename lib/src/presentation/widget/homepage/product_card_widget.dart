@@ -48,7 +48,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             onTap: () {
               // context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
 
-              Navigator.pushNamed(context, Routes.productDetail.toStringPath(),
+              Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}',
                   arguments: ProductDetailArgs(product: products[index]));
               // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
             },
