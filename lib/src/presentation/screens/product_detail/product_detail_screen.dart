@@ -18,7 +18,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
-import 'package:marketplace_line_oa/src/routes/routing_data.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -186,7 +186,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     height: 48,
                     child: OutlinedButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context,
+                            '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}');
                       },
                       style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
                       child: AlvaText(
