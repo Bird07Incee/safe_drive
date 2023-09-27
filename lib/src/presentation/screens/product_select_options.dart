@@ -196,8 +196,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                           child: ClipRRect(
                                                             borderRadius: BorderRadius.circular(4),
                                                             child: Image.network(
-                                                              state.productList.products![0].productionAssets[index]
-                                                                  .substring(46),
+                                                              state.productList.products![0].productionAssets[index],
+                                                              // .substring(46) local
                                                               fit: BoxFit.fitWidth,
                                                             ),
                                                           ),
