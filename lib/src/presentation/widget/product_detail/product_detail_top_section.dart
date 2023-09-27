@@ -308,7 +308,8 @@ class PDTopSection extends StatelessWidget {
                                   title: ' บาท',
                                   textStyle: AlvaStyles().headingSize18w700(RedWordShow).copyWith(height: 1.454),
                                 ),
-                              ],),
+                              ],
+                            ),
                             const SizedBox(
                               height: 16,
                             ),
