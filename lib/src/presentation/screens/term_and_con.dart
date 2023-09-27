@@ -123,17 +123,9 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                       const SizedBox(
                         height: 12,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Storage localStorage = window.localStorage;
-                          localStorage.clear();
-
-                          liff.logout();
-                        },
-                        child: Text(
-                          "ข้อกำหนดและเงื่อนไข",
-                          style: AlvaStyles().heading1(),
-                        ),
+                      Text(
+                        "ข้อกำหนดและเงื่อนไข",
+                        style: AlvaStyles().heading1(),
                       )
                     ]),
                   ),

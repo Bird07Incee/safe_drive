@@ -120,10 +120,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         alignment: Alignment.bottomLeft,
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
-                          width: 62,
                           height: 24,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(16),
                             color: cloudyWhite.withOpacity(0.5),
                           ),
                           child: Center(

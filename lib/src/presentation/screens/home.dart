@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     labelColor: Colors.black,
                                     indicatorColor: BlueFantasy,
                                     labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
-                                    unselectedLabelColor: const Color(0xffA4A8AD),
+                                    unselectedLabelColor: const Color(0xffDEDEDE),
                                     onTap: (int index) {
                                       context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                     },
@@ -242,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  padding: const EdgeInsets.only(top: 16),
                                   color: cloudDeepWhite,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 ),
                                 Container(
                                   color: spaceGrey,
-                                  height: 72,
+                                  height: 104,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
