@@ -82,10 +82,6 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 setState(() {
                                   counter[index] = val + 1;
                                 });
-
-                                if (val == products?[index].productionAssets.length && val != 1) {
-                                  pageViewController.jumpToPage(0);
-                                }
                               },
                               itemBuilder: (ctx, i) {
                                 return Stack(
@@ -192,9 +188,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AlvaText(
-                              title: products[index].productName,
-                              textStyle: AlvaStyles().headingSize22Height32(),
+                            Text(
+                              products[index].productName,
+                              style: AlvaStyles().headingSize22Height32(),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             Row(
                               children: products[index]

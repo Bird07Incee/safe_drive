@@ -163,66 +163,50 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             IndexedStack(
                               index: state.selectedTabIndex,
                               children: [
-                                Visibility(
-                                  maintainState: true,
-                                  visible: state.selectedTabIndex == 0,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: maxWidth - 32,
-                                        child: ProductCardWidget(
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: maxWidth - 32,
+                                      child: ProductCardWidget(
+                                        maxWidth: maxWidth,
+                                        productList: state.productList,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: maxWidth - 32,
+                                      child: ProductCardWidget(
                                           maxWidth: maxWidth,
-                                          productList: state.productList,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                          productList: getProductListByCategory(state.productList, 1)),
+                                    ),
+                                  ],
                                 ),
-                                Visibility(
-                                  maintainState: true,
-                                  visible: state.selectedTabIndex == 1,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: maxWidth - 32,
-                                        child: ProductCardWidget(
-                                            maxWidth: maxWidth,
-                                            productList: getProductListByCategory(state.productList, 1)),
-                                      ),
-                                    ],
-                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: maxWidth - 32,
+                                      child: ProductCardWidget(
+                                          maxWidth: maxWidth,
+                                          productList: getProductListByCategory(state.productList, 2)),
+                                    ),
+                                  ],
                                 ),
-                                Visibility(
-                                  maintainState: true,
-                                  visible: state.selectedTabIndex == 2,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: maxWidth - 32,
-                                        child: ProductCardWidget(
-                                            maxWidth: maxWidth,
-                                            productList: getProductListByCategory(state.productList, 2)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Visibility(
-                                  maintainState: true,
-                                  visible: state.selectedTabIndex == 3,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: maxWidth - 32,
-                                        child: ProductCardWidget(
-                                            maxWidth: maxWidth,
-                                            productList: getProductListByCategory(state.productList, 3)),
-                                      ),
-                                    ],
-                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: maxWidth - 32,
+                                      child: ProductCardWidget(
+                                          maxWidth: maxWidth,
+                                          productList: getProductListByCategory(state.productList, 3)),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
