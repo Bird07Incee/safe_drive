@@ -242,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.only(top: 16),
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
                                   color: cloudDeepWhite,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

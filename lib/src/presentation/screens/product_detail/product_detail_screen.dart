@@ -85,7 +85,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       //   pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
       // }
       // print(pid);
-
     }
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
@@ -146,7 +145,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AlvaText(title: widget.arguments!.product.productName, textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
+                      AlvaText(
+                          title: widget.arguments!.product.productName,
+                          textStyle: AlvaStyles().headingSize12w700(ModernDarkGray)),
                       AlvaTextMaxLinesOverflow(
                           title: '${widget.arguments!.product.price.toDecimalFormat()} บาท',
                           maxLines: 1,

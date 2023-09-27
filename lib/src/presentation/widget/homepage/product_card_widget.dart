@@ -53,7 +53,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 16),
+              margin: const EdgeInsets.only(top: 16),
               decoration: BoxDecoration(
                 color: whitePure,
                 borderRadius: const BorderRadius.only(
@@ -120,6 +120,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         alignment: Alignment.bottomLeft,
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                          width: 41,
                           height: 24,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),

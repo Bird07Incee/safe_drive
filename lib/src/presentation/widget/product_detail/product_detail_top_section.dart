@@ -20,19 +20,21 @@ class PDTopSection extends StatelessWidget {
 
   List<Widget> promos() {
     List<Widget> l = [];
-    for(var i = 0; i < args.product.promotionTag.length; i++) {
+    for (var i = 0; i < args.product.promotionTag.length; i++) {
       Widget w = Row(
         children: [
           AlvaText(
             title: args.product.promotionTag[i],
             textStyle: AlvaStyles().headingSize10w500(spaceGrey),
           ),
-          (i != args.product.promotionTag.length - 1) ? Container(
-            width: 1,
-            height: 16,
-            margin: EdgeInsets.only(left: 4, right: 4),
-            color: cloudSoftDeepWhite,
-          ) : SizedBox()
+          (i != args.product.promotionTag.length - 1)
+              ? Container(
+                  width: 1,
+                  height: 16,
+                  margin: EdgeInsets.only(left: 4, right: 4),
+                  color: cloudSoftDeepWhite,
+                )
+              : SizedBox()
         ],
       );
       l.add(w);
@@ -156,9 +158,7 @@ class PDTopSection extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                           decoration: const BoxDecoration(
-                              color: BlueFantasy,
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(8))),
+                              color: BlueFantasy, borderRadius: BorderRadius.only(bottomRight: Radius.circular(8))),
                           child: AlvaText(
                             title: "ถูกลง ${args.product.percentDiscountPrice} %",
                             textStyle: AlvaStyles().headingSize12w600(Colors.white),
@@ -261,32 +261,27 @@ class PDTopSection extends StatelessWidget {
                               height: 16,
                             ),
                             HtmlWidget(args.product.tagline,
-                              buildAsync: true,
-                              // factoryBuilder: () => _MyFactory(),
-                              textStyle: AlvaStyles().headingSize10w400(spaceGrey),
-                              customStylesBuilder: (element) {
-                                if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
-                                  if(element.attributes['style'].toString().contains('9c9c9c')) {
-                                    element.attributes['style'] = 'color:#9c9c9c';
-                                  } else {
-                                    element.attributes['style'] = 'color:#2c2626';
-                                  }
+                                buildAsync: true,
+                                // factoryBuilder: () => _MyFactory(),
+                                textStyle: AlvaStyles().headingSize10w400(spaceGrey), customStylesBuilder: (element) {
+                              if (element.attributes['style'] != null &&
+                                  element.attributes['style'].toString().contains('color')) {
+                                if (element.attributes['style'].toString().contains('9c9c9c')) {
+                                  element.attributes['style'] = 'color:#9c9c9c';
                                 } else {
-                                  element.attributes['style'] = '';
+                                  element.attributes['style'] = 'color:#2c2626';
                                 }
-                                if (element.localName == "table") {
-                                  return {
-                                    'width': '100%'
-                                  };
-                                } else if (element.localName == "td") {
-                                  return {
-                                    'width': '50%'
-                                  };
-                                }
-
-                                return null;
+                              } else {
+                                element.attributes['style'] = '';
                               }
-                            ),
+                              if (element.localName == "table") {
+                                return {'width': '100%'};
+                              } else if (element.localName == "td") {
+                                return {'width': '50%'};
+                              }
+
+                              return null;
+                            }),
                             const SizedBox(
                               height: 16,
                             ),
