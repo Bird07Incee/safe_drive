@@ -98,6 +98,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 children: [
                                   ListView.builder(
                                       shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
                                       itemCount: state.productList.products![0].productionOptionals.length,
                                       itemBuilder: (BuildContext context, int index) {
                                         return Column(
@@ -279,6 +280,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         ListView.builder(
                                             shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
                                             itemCount: state.productList.products![0]
                                                 .productionOptionals[prodOptState.stepOneIndexSelect!].level2.length,
                                             itemBuilder: (BuildContext context, int index) {
@@ -460,6 +462,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         ListView.builder(
                                             shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
                                             itemCount: state
                                                 .productList
                                                 .products![0]
@@ -647,6 +650,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         ListView.builder(
                                             shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
                                             itemCount: state
                                                 .productList
                                                 .products![0]
@@ -831,6 +835,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       children: [
                                         ListView.builder(
                                             shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
                                             itemCount: state
                                                 .productList
                                                 .products![0]
