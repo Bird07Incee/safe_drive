@@ -23,16 +23,14 @@ class PDTopSection extends StatelessWidget {
     for(var i = 0; i < args.product.promotionTag.length; i++) {
       Widget w = Row(
         children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-            child: AlvaText(
-              title: args.product.promotionTag[i],
-              textStyle: AlvaStyles().headingSize10w500(spaceGrey),
-            ),
+          AlvaText(
+            title: args.product.promotionTag[i],
+            textStyle: AlvaStyles().headingSize10w500(spaceGrey),
           ),
-          i%2 == 0 ? Container(
+          (i != args.product.promotionTag.length - 1) ? Container(
             width: 1,
             height: 16,
+            margin: EdgeInsets.only(left: 4, right: 4),
             color: cloudSoftDeepWhite,
           ) : SizedBox()
         ],
