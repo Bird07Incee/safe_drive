@@ -12,50 +12,46 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previo
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PDTopSection extends StatelessWidget {
   const PDTopSection({super.key, required this.args});
   final ProductDetailArgs args;
 
-  List<Widget> promos() {
-    List<Widget> l = [];
-    for (var i = 0; i < args.product.promotionTag.length; i++) {
-      Widget w = Row(
-        children: [
-          AlvaText(
-            title: args.product.promotionTag[i],
-            textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+  Widget promos() {
+    List<InlineSpan> l = [];
+    int len = args.product.promotionTag.length > 3 ? 3 : args.product.promotionTag.length;
+    for (var i = 0; i < len; i++) {
+      l.add(TextSpan(text: args.product.promotionTag[i], style: AlvaStyles().headingSize10w500(spaceGrey)));
+      if (i != len - 1) {
+        l.add(WidgetSpan(
+          child: Container(
+            width: 1,
+            height: 16,
+            margin: EdgeInsets.only(left: 4, right: 4),
+            color: cloudSoftDeepWhite,
           ),
-          (i != args.product.promotionTag.length - 1)
-              ? Container(
-                  width: 1,
-                  height: 16,
-                  margin: EdgeInsets.only(left: 4, right: 4),
-                  color: cloudSoftDeepWhite,
-                )
-              : SizedBox()
-        ],
-      );
-      l.add(w);
+        ));
+      }
     }
-    return l;
+    return RichText(
+      text: TextSpan(children: l),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
-    return Container(
-      width: maxWidth - 32,
-      // height: 520,
-      decoration: BoxDecoration(
-        color: whitePure,
-      ),
-      child: BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
-        builder: (context, zoomState) {
-          return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
-            builder: (context, carouselState) {
-              return Column(
+    return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
+      builder: (context, zoomState) {
+        return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
+          builder: (context, carouselState) {
+            return Container(
+              decoration: BoxDecoration(
+                color: whitePure,
+              ),
+              child: Column(
                 children: [
                   Stack(
                     children: [
@@ -106,11 +102,6 @@ class PDTopSection extends StatelessWidget {
                                                 ? args.product.productionAssets[0]
                                                 : args.product.productionAssets[i],
                                           ),
-                                          // image: NetworkImage(
-                                          //   i == imageDataLength
-                                          //       ? dataCarouselMock[0].substring(46)
-                                          //       : dataCarouselMock[i].substring(46),
-                                          // ),
                                           fit: BoxFit.fitWidth,
                                           imageErrorBuilder: (context, error, stackTrace) =>
                                               Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
@@ -195,75 +186,53 @@ class PDTopSection extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: maxWidth - 32,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AlvaText(
-                              title: args.product.productName,
-                              textStyle: AlvaStyles().headingSize22w700(BTN_SELECTED_TEXT_COLOR_NEW),
-                            ),
-                            Row(
-                              children: promos(),
-                              // [
-                              //   Container(
-                              //     margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                              //     child: AlvaText(
-                              //       title: 'ติดตั้งฟรี',
-                              //       textStyle: AlvaStyles().headingSize10w500(spaceGrey),
-                              //     ),
-                              //   ),
-                              //   Container(
-                              //     width: 1,
-                              //     height: 16,
-                              //     color: cloudSoftDeepWhite,
-                              //   ),
-                              //   Container(
-                              //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                              //     child: Container(
-                              //       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                              //       child: AlvaText(
-                              //         title: 'รับประกัน 3 ปี',
-                              //         textStyle: AlvaStyles().headingSize10w500(spaceGrey),
-                              //       ),
-                              //     ),
-                              //   ),
-                              //   Container(
-                              //     width: 1,
-                              //     height: 16,
-                              //     color: cloudSoftDeepWhite,
-                              //   ),
-                              //   Container(
-                              //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                              //     child: Container(
-                              //       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                              //       child: AlvaText(
-                              //         title: 'สิทธิพิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้ ',
-                              //         textStyle: AlvaStyles().headingSize10w500(spaceGrey),
-                              //       ),
-                              //     ),
-                              //   )
-                              // ],
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Container(
-                              width: maxWidth - 32,
-                              height: 1,
-                              color: cloudWhite,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            HtmlWidget(args.product.tagline,
-                                buildAsync: true,
-                                // factoryBuilder: () => _MyFactory(),
-                                textStyle: AlvaStyles().headingSize10w400(spaceGrey), customStylesBuilder: (element) {
+                  Container(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AlvaText(
+                          title: args.product.productName,
+                          textStyle: AlvaStyles().headingSize22w700(BTN_SELECTED_TEXT_COLOR_NEW),
+                        ),
+                        args.product.promotionTag.isEmpty ? SizedBox() : promos(),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Container(
+                          width: maxWidth - 32,
+                          height: 1,
+                          color: cloudWhite,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        HtmlWidget(args.product.tagline,
+                            buildAsync: true,
+                            customWidgetBuilder: (element) {
+                              if (element.localName == 'p' || element.localName == 'span') {
+                                String text = element.text;
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 0, bottom: 16.0),
+                                  child: ReadMoreText(
+                                    text,
+                                    trimLines: 3,
+                                    preDataText: null,
+                                    postDataText: null,
+                                    style: AlvaStyles().headingSize10w400(spaceGrey),
+                                    lessStyle: AlvaStyles().headingSize10w700(BlueFantasy),
+                                    moreStyle: AlvaStyles().headingSize10w700(BlueFantasy),
+                                    postDataTextStyle: AlvaStyles().headingSize10w400(spaceGrey),
+                                    trimMode: TrimMode.Line,
+                                    trimCollapsedText: ' อ่านต่อ ',
+                                    trimExpandedText: '  ซ่อนรายละเอียด',
+                                  ),
+                                );
+                              }
+                              return null;
+                            },
+                            textStyle: AlvaStyles().headingSize10w400(spaceGrey),
+                            customStylesBuilder: (element) {
                               if (element.attributes['style'] != null &&
                                   element.attributes['style'].toString().contains('color')) {
                                 if (element.attributes['style'].toString().contains('9c9c9c')) {
@@ -282,48 +251,43 @@ class PDTopSection extends StatelessWidget {
 
                               return null;
                             }),
-                            const SizedBox(
-                              height: 16,
+                        Row(
+                          children: [
+                            AlvaText(
+                              title: args.product.discountPrice.toDecimalFormat(),
+                              textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
                             ),
-                            Row(
-                              children: [
-                                AlvaText(
-                                  title: args.product.discountPrice.toDecimalFormat(),
-                                  textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
-                                ),
-                                AlvaText(
-                                  title: ' บาท',
-                                  textStyle: AlvaStyles().bodySize14w400(smockGrey).copyWith(height: 1.714),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                AlvaText(
-                                  title: args.product.price.toDecimalFormat(),
-                                  textStyle: AlvaStyles().headingSize22w700(RedWordShow).copyWith(height: 1.454),
-                                ),
-                                AlvaText(
-                                  title: ' บาท',
-                                  textStyle: AlvaStyles().headingSize18w700(RedWordShow).copyWith(height: 1.454),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 16,
+                            AlvaText(
+                              title: ' บาท',
+                              textStyle: AlvaStyles().bodySize14w400(smockGrey).copyWith(height: 1.714),
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            AlvaText(
+                              title: args.product.price.toDecimalFormat(),
+                              textStyle: AlvaStyles().headingSize22w700(RedWordShow).copyWith(height: 1.454),
+                            ),
+                            AlvaText(
+                              title: ' บาท',
+                              textStyle: AlvaStyles().headingSize18w700(RedWordShow).copyWith(height: 1.454),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    ),
                   )
                 ],
-              );
-            },
-          );
-        },
-      ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

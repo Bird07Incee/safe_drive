@@ -1,9 +1,6 @@
 import 'dart:collection';
 import 'dart:developer';
-import 'dart:html';
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
@@ -15,7 +12,6 @@ import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class PDBottomSection extends StatefulWidget {
   const PDBottomSection({super.key, required this.args});
