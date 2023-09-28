@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/constants/tab_icons.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -115,10 +116,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         Tab(
                                           text: state.productList.category![i]["category"],
                                           icon: state.selectedTabIndex == (i + 1)
-                                              ? Image.asset('assets/images/category/icon_active_cate_other.png',
-                                                  width: 24, height: 24)
-                                              : Image.asset('assets/images/category/icon_cate_other.png',
-                                                  width: 24, height: 24),
+                                              ? Image.asset(
+                                                  tabIconsMapping[state.productList.category![i]["categoryId"]]![
+                                                          "active"] ??
+                                                      'assets/images/category/icon_active_cate_other.png',
+                                                  width: 24,
+                                                  height: 24)
+                                              : Image.asset(
+                                                  tabIconsMapping[state.productList.category![i]["categoryId"]]![
+                                                          "inactive"] ??
+                                                      'assets/images/category/icon_cate_other.png',
+                                                  width: 24,
+                                                  height: 24),
                                         ),
                                       // Tab(
                                       //   text: "วอลชาร์จ",
