@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:developer';
+import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -24,7 +25,8 @@ class PDBottomSection extends StatefulWidget {
   State<PDBottomSection> createState() => _PDBottomSectionState();
 }
 
-class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderStateMixin {
+class _PDBottomSectionState extends State<PDBottomSection>
+    with TickerProviderStateMixin {
   late final TabController _tabController;
   late final Product product;
 
@@ -56,17 +58,23 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               children: [
                 Row(
                   children: [
-                    AlvaText(
-                        title: product.merchantFullName,
-                        textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW))
+                    Expanded(
+                        child: AlvaText(
+                            title: product.merchantFullName,
+                            textStyle: AlvaStyles().headingSize12w500(
+                                BTN_SELECTED_TEXT_COLOR_NEW)))
                   ],
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 8,
                 ),
                 Row(
                   children: [
-                    AlvaText(title: product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(spaceGrey))
+                    Expanded(
+                        child: AlvaText(
+                            title: product.merchantAddress,
+                            textStyle:
+                                AlvaStyles().headingSize10w400(spaceGrey)))
                   ],
                 ),
               ],
@@ -78,27 +86,39 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             titleKey: AppKeys().productDetailPromotionDetailTitleKey,
             title: AppStrings().promotionDetailTitle,
             bodyPage: Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 8),
+              padding: EdgeInsets.only(top: 8),
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: product.promotionTag.length > 3 ? 3 : product.promotionTag.length,
+                  itemCount: product.promotionTag.length > 3
+                      ? 3
+                      : product.promotionTag.length,
                   itemBuilder: ((context, index) {
                     return Padding(
                         padding: EdgeInsets.only(bottom: 8),
-                        child: Row(
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.start,
                           children: [
-                            const Icon(
-                              Icons.bookmark,
-                              size: 16,
-                              color: cloudSoftDeepWhite,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            AlvaText(
-                                title: product.promotionTag[index],
-                                textStyle: AlvaStyles().headingSize12w500(spaceGrey))
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.bookmark,
+                                  size: 16,
+                                  color: cloudSoftDeepWhite,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Flexible(
+                                    child: AlvaText(
+                                        title: product.promotionTag[index],
+                                        textStyle: AlvaStyles()
+                                            .headingSize12w500WithHeightFixed(
+                                                spaceGrey)))
+                              ],
+                            )
                           ],
                         ));
                   })),
@@ -109,9 +129,18 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         buildDetailCardWidget(context,
             titleKey: AppKeys().productDetailRemarkTitleKey,
             title: AppStrings().remarkTitle,
-            bodyPage: HtmlWidget(product.remark, buildAsync: true, customStylesBuilder: (element) {
-              return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'font-weight': '400'};
-            })),
+            bodyPage: HtmlWidget(
+              product.remark,
+              buildAsync: true,
+              customStylesBuilder: (element) {
+                return {
+                  'font-family': 'Krungsri Condensed',
+                  'font-size': '12px',
+                  'font-weight': '400'
+                };
+              },
+              factoryBuilder: () => _MyFactory(title: AppStrings().remarkTitle),
+            )),
       ],
     );
   }
@@ -121,14 +150,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xffdedede).withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 3,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
         ),
         child: StatefulBuilder(builder: (context, setState) {
           String data = "";
@@ -149,43 +170,49 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   child: AlvaText(
                     key: AppKeys().productDetailProductDescriptionKey,
                     title: AppStrings().productDetailProductDescription,
-                    textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                    textStyle: AlvaStyles()
+                        .headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                   ),
                 ),
               ),
-              Stack(fit: StackFit.passthrough, alignment: Alignment.bottomCenter, children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: cloudWhite, width: 2.0),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                  child: TabBar(
-                      controller: _tabController,
-                      labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
-                      indicatorColor: BlueFantasy,
-                      unselectedLabelColor: cloudSoftDeepWhite,
-                      labelStyle: const TextStyle(
-                        fontFamily: fontFamily,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      onTap: (int index) {
-                        setState(() {});
-                        log("TapBar index $index");
-                      },
-                      tabs: [
-                        Tab(
-                          key: AppKeys().productDetailGeneralDetailTabKey,
-                          text: AppStrings().generalDetail,
+              Stack(
+                  fit: StackFit.passthrough,
+                  alignment: Alignment.bottomCenter,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: cloudWhite, width: 2.0),
                         ),
-                        Tab(key: AppKeys().productDetailEtcDetailTabKey, text: AppStrings().etcDetail),
-                      ]),
-                )
-              ]),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                      child: TabBar(
+                          controller: _tabController,
+                          labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
+                          indicatorColor: BlueFantasy,
+                          unselectedLabelColor: cloudSoftDeepWhite,
+                          labelStyle: const TextStyle(
+                            fontFamily: fontFamily,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          onTap: (int index) {
+                            setState(() {});
+                            log("TapBar index $index");
+                          },
+                          tabs: [
+                            Tab(
+                              key: AppKeys().productDetailGeneralDetailTabKey,
+                              text: AppStrings().generalDetail,
+                            ),
+                            Tab(
+                                key: AppKeys().productDetailEtcDetailTabKey,
+                                text: AppStrings().etcDetail),
+                          ]),
+                    )
+                  ]),
               const SizedBox(
                 height: 16,
               ),
@@ -193,33 +220,39 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 onHorizontalDragEnd: (details) async {
                   if (_tabController.index == 0) {
                     if (details.primaryVelocity! < 0) {
-                      _tabController.animateTo(1, duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(1,
+                          duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   } else {
                     if (details.primaryVelocity! > 0) {
-                      _tabController.animateTo(0, duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(0,
+                          duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   }
                 },
                 child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: data.isEmpty ? 32 : 0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 16, vertical: data.isEmpty ? 32 : 0),
                     child: Column(
                       children: [
                         isPressedReadMore
                             ? HtmlWidget(
-                                data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+                                data.isNotEmpty
+                                    ? data
+                                    : AppStrings().noDataFromSeller,
                                 buildAsync: true,
-                                customStylesBuilder: (element) {
-                                  return {'font-family': 'Krungsri Condensed', 'font-size': '14px'};
-                                },
-                                factoryBuilder: () => _MyFactory(),
+                                factoryBuilder: () => _MyFactory(
+                                    title: AppStrings()
+                                        .productDetailProductDescription),
                               )
                             : Container(),
                         !isPressedReadMore
                             ? HtmlWidget(
-                                data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+                                data.isNotEmpty
+                                    ? data
+                                    : AppStrings().noDataFromSeller,
                                 buildAsync: true,
                                 customStylesBuilder: (element) {
                                   return {
@@ -229,44 +262,50 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                     'text-overflow': 'ellipsis'
                                   };
                                 },
-                                factoryBuilder: () => _MyFactory(),
+                                factoryBuilder: () => _MyFactory(
+                                    title: AppStrings()
+                                        .productDetailProductDescription),
                               )
                             : Container(),
                       ],
                     )),
               ),
-              const SizedBox(
-                height: 16,
-              ),
               data.isNotEmpty
                   ? _tabController.index == 1
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                height: 48,
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    setState((() {
-                                      isPressedReadMore = !isPressedReadMore;
-                                    }));
-                                    log(isPressedReadMore.toString());
-                                  },
-                                  style:
-                                      AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, Colors.transparent),
-                                  child: AlvaText(
-                                    title:
-                                        isPressedReadMore ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
-                                    textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
-                                    disableSelectableText: true,
+                      ? Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  height: 24,
+                                  child: OutlinedButton(
+                                    onPressed: () async {
+                                      setState((() {
+                                        isPressedReadMore = !isPressedReadMore;
+                                      }));
+                                      log(isPressedReadMore.toString());
+                                    },
+                                    style: AlvaStyles()
+                                        .outlineNoneBorderButtonStyle(
+                                            Colors.transparent,
+                                            Colors.transparent),
+                                    child: AlvaText(
+                                      title: isPressedReadMore
+                                          ? AppStrings().btnHideDescription
+                                          : AppStrings().btnReadMore,
+                                      textStyle: AlvaStyles()
+                                          .headingSize14w700(BlueFantasy),
+                                      disableSelectableText: true,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
-                        )
+                              )
+                            ],
+                          ))
                       : Container()
                   : Container()
             ],
@@ -274,37 +313,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         }));
   }
 
-  switchStyleForHtml({String? title, bool isPressedReadMore = false}) {
-    if (title == AppStrings().aboutSellerTitle) {
-      return {
-        'font-family': 'Krungsri Condensed',
-        'font-size': '14px',
-      };
-    } else if (title == AppStrings().promotionDetailTitle) {
-      return {
-        'font-family': 'Krungsri Condensed',
-        'font-size': '14px',
-      };
-    } else if (title == AppStrings().remarkTitle) {
-      return {
-        'font-family': 'Krungsri Condensed',
-        'font-size': '14px',
-      };
-    }
-  }
-
-  Widget buildDetailCardWidget(BuildContext context, {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget(BuildContext context,
+      {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xffdedede).withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 3,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
         ),
         child: Column(
           children: [
@@ -315,11 +328,15 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 child: AlvaText(
                   key: titleKey!,
                   title: title!,
-                  textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                  textStyle: AlvaStyles()
+                      .headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                 ),
               ),
             ),
-            GestureDetector(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage)),
+            GestureDetector(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: bodyPage)),
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [
@@ -331,7 +348,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         height: 48,
                         child: OutlinedButton(
                           onPressed: () async {
-                            String mobile = product.merchantMobile.replaceAll('-', '');
+                            String mobile =
+                                product.merchantMobile.replaceAll('-', '');
                             callPhone(mobile);
                           },
                           style: AlvaStyles().outlineButtonStyle(
@@ -353,7 +371,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                               const SizedBox(width: 8),
                               AlvaText(
                                   title: "ติดต่อ ${product.merchantMobile}",
-                                  textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                  textStyle: AlvaStyles()
+                                      .heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
                         ),
@@ -362,7 +381,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   )
                 : Container(),
             const SizedBox(
-              height: 16,
+              height: 24,
             ),
           ],
         ));
@@ -370,29 +389,54 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
 }
 
 class _MyFactory extends WidgetFactory {
+  _MyFactory({this.title = ""});
+
+  String title;
   @override
   void parse(BuildMetadata meta) {
     final e = meta.element;
     log(e.toString());
-    if (e.localName == 'tr') {
-      for (int i = 0; i < e.nodes.length; i++) {
-        if (i == 0) {
-          meta.element.nodes[i].nodes[0].attributes = {
-            "style": "color:#9c9c9c",
-            "margin-left": "40px",
-            "font-family": "Krungsri Condensed",
-            "font-size": "14px"
-          } as LinkedHashMap<Object, String>;
-        } else {
-          meta.element.nodes[i].nodes[0].attributes = {
-            "style": "color:#2c2626",
-            "margin-left": "40px",
-            "font-family": "Krungsri Condensed",
-            "font-size": "14px"
-          } as LinkedHashMap<Object, String>;
+    if (title == AppStrings().productDetailProductDescription) {
+      if (e.localName == 'tr') {
+        for (int i = 0; i < e.nodes.length; i++) {
+          if (i == 0) {
+            meta.element.nodes[i].nodes[0].attributes = {
+              "style":
+                  "color:#9c9c9c; font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
+            } as LinkedHashMap<Object, String>;
+          } else {
+            meta.element.nodes[i].nodes[0].attributes = {
+              "style":
+                  "color:#2c2626;  font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
+            } as LinkedHashMap<Object, String>;
+          }
+        }
+        return;
+      }
+    } else if (title == AppStrings().remarkTitle) {
+      if (e.nodes.isNotEmpty) {
+        for (int i = 0; i < e.nodes.length; i++) {
+          if (e.nodes[i].text!.contains('เบอร์ติดต่อ')) {
+            // RegExp pattern = RegExp(r'เบอร์ติดต่อ \d{3}-\d{3}-\d{4}');
+            // String stringBeforeReplace = "";
+            // Iterable<RegExpMatch> match = pattern.allMatches(e.nodes[i].text!);
+
+            // for (var match in match) {
+            //   stringBeforeReplace =
+            //       e.nodes[i].text!.substring(match.start, match.end);
+            // }
+            // meta.element.nodes[i].text =
+            //     meta.element.nodes[i].text!.replaceAll(pattern, '');
+
+            // meta.element.nodes.insert(i + 1, meta.element.nodes[i]);
+            // meta.element.attributes = {
+            //   "style":
+            //       "font-size:12px; font-family:Krungsri Condensed; font-style:medium ; line-height:24px"
+            // } as LinkedHashMap<Object, String>;
+            return;
+          }
         }
       }
-      return;
     }
     return super.parse(meta);
   }
