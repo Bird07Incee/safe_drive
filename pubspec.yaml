@@ -53,6 +53,7 @@ dependencies:
   universal_html: 2.0.9
   uuid: ^3.0.6
   flutter_widget_from_html: 0.9.1
+  sticky_headers: "^0.3.0"
 
 dev_dependencies:
   flutter_test:
