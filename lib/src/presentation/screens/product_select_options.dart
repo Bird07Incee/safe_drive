@@ -194,12 +194,28 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                           aspectRatio: 16 / 9,
                                                           child: ClipRRect(
                                                             borderRadius: BorderRadius.circular(4),
-                                                            child: Image.network(
-                                                              widget
-                                                                  .arguments!.product.productionOptionals[index].image,
-                                                              // .substring(46) local
+                                                            child: FadeInImage(
+                                                              placeholder:
+                                                                  const AssetImage('assets/homepage/img_default.png'),
+                                                              // Replace with your placeholder image path
+                                                              image: NetworkImage(widget
+                                                                  .arguments!.product.productionOptionals[index].image),
+                                                              // image: NetworkImage(
+                                                              //   i == imageDataLength
+                                                              //       ? dataCarouselMock[0].substring(46)
+                                                              //       : dataCarouselMock[i].substring(46),
+                                                              // ),
                                                               fit: BoxFit.fitWidth,
+                                                              imageErrorBuilder: (context, error, stackTrace) =>
+                                                                  Image.asset('assets/homepage/img_default.png',
+                                                                      fit: BoxFit.fitWidth),
                                                             ),
+                                                            // Image.network(
+                                                            //   widget
+                                                            //       .arguments!.product.productionOptionals[index].image,
+                                                            //   // .substring(46) local
+                                                            //   fit: BoxFit.fitWidth,
+                                                            // ),
                                                           ),
                                                         ),
                                                       ),
@@ -405,17 +421,40 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               aspectRatio: 16 / 9,
                                                               child: ClipRRect(
                                                                 borderRadius: BorderRadius.circular(4),
-                                                                child: Image.network(
-                                                                  widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[index]
-                                                                      .image,
-                                                                  // .substring(46) local
+                                                                child: FadeInImage(
+                                                                  placeholder: const AssetImage(
+                                                                      'assets/homepage/img_default.png'),
+                                                                  // Replace with your placeholder image path
+                                                                  image: NetworkImage(
+                                                                    widget
+                                                                        .arguments!
+                                                                        .product
+                                                                        .productionOptionals[
+                                                                            prodOptState.stepOneIndexSelect!]
+                                                                        .level2[index]
+                                                                        .image,
+                                                                  ),
+                                                                  // image: NetworkImage(
+                                                                  //   i == imageDataLength
+                                                                  //       ? dataCarouselMock[0].substring(46)
+                                                                  //       : dataCarouselMock[i].substring(46),
+                                                                  // ),
                                                                   fit: BoxFit.fitWidth,
+                                                                  imageErrorBuilder: (context, error, stackTrace) =>
+                                                                      Image.asset('assets/homepage/img_default.png',
+                                                                          fit: BoxFit.fitWidth),
                                                                 ),
+                                                                // Image.network(
+                                                                //   widget
+                                                                //       .arguments!
+                                                                //       .product
+                                                                //       .productionOptionals[
+                                                                //           prodOptState.stepOneIndexSelect!]
+                                                                //       .level2[index]
+                                                                //       .image,
+                                                                //   // .substring(46) local
+                                                                //   fit: BoxFit.fitWidth,
+                                                                // ),
                                                               ),
                                                             ),
                                                           ),
@@ -632,17 +671,24 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               aspectRatio: 16 / 9,
                                                               child: ClipRRect(
                                                                 borderRadius: BorderRadius.circular(4),
-                                                                child: Image.network(
-                                                                  widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                                      .level3[index]
-                                                                      .image,
-                                                                  // .substring(46) local
+                                                                child: FadeInImage(
+                                                                  placeholder: const AssetImage(
+                                                                      'assets/homepage/img_default.png'),
+                                                                  // Replace with your placeholder image path
+                                                                  image: NetworkImage(
+                                                                    widget
+                                                                        .arguments!
+                                                                        .product
+                                                                        .productionOptionals[
+                                                                            prodOptState.stepOneIndexSelect!]
+                                                                        .level2[prodOptState.stepTwoIndexSelect!]
+                                                                        .level3[index]
+                                                                        .image,
+                                                                  ),
                                                                   fit: BoxFit.fitWidth,
+                                                                  imageErrorBuilder: (context, error, stackTrace) =>
+                                                                      Image.asset('assets/homepage/img_default.png',
+                                                                          fit: BoxFit.fitWidth),
                                                                 ),
                                                               ),
                                                             ),
@@ -869,18 +915,25 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               aspectRatio: 16 / 9,
                                                               child: ClipRRect(
                                                                 borderRadius: BorderRadius.circular(4),
-                                                                child: Image.network(
-                                                                  widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                                      .level3[prodOptState.stepTreeIndexSelect!]
-                                                                      .level4[index]
-                                                                      .image,
-                                                                  // .substring(46) local
+                                                                child: FadeInImage(
+                                                                  placeholder: const AssetImage(
+                                                                      'assets/homepage/img_default.png'),
+                                                                  // Replace with your placeholder image path
+                                                                  image: NetworkImage(
+                                                                    widget
+                                                                        .arguments!
+                                                                        .product
+                                                                        .productionOptionals[
+                                                                            prodOptState.stepOneIndexSelect!]
+                                                                        .level2[prodOptState.stepTwoIndexSelect!]
+                                                                        .level3[prodOptState.stepTreeIndexSelect!]
+                                                                        .level4[index]
+                                                                        .image,
+                                                                  ),
                                                                   fit: BoxFit.fitWidth,
+                                                                  imageErrorBuilder: (context, error, stackTrace) =>
+                                                                      Image.asset('assets/homepage/img_default.png',
+                                                                          fit: BoxFit.fitWidth),
                                                                 ),
                                                               ),
                                                             ),
@@ -1094,19 +1147,26 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               aspectRatio: 16 / 9,
                                                               child: ClipRRect(
                                                                 borderRadius: BorderRadius.circular(4),
-                                                                child: Image.network(
-                                                                  widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                                      .level3[prodOptState.stepTreeIndexSelect!]
-                                                                      .level4[prodOptState.stepFourIndexSelect!]
-                                                                      .level5[index]
-                                                                      .image,
-                                                                  // .substring(46) local
+                                                                child: FadeInImage(
+                                                                  placeholder: const AssetImage(
+                                                                      'assets/homepage/img_default.png'),
+                                                                  // Replace with your placeholder image path
+                                                                  image: NetworkImage(
+                                                                    widget
+                                                                        .arguments!
+                                                                        .product
+                                                                        .productionOptionals[
+                                                                            prodOptState.stepOneIndexSelect!]
+                                                                        .level2[prodOptState.stepTwoIndexSelect!]
+                                                                        .level3[prodOptState.stepTreeIndexSelect!]
+                                                                        .level4[prodOptState.stepFourIndexSelect!]
+                                                                        .level5[index]
+                                                                        .image,
+                                                                  ),
                                                                   fit: BoxFit.fitWidth,
+                                                                  imageErrorBuilder: (context, error, stackTrace) =>
+                                                                      Image.asset('assets/homepage/img_default.png',
+                                                                          fit: BoxFit.fitWidth),
                                                                 ),
                                                               ),
                                                             ),
