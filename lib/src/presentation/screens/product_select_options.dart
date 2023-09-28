@@ -219,40 +219,36 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         },
                                                       ),
                                                     ),
-                                                    Visibility(
-                                                      visible:
-                                                          widget.arguments!.product.productionOptionals[index].image ==
-                                                                  ""
-                                                              ? false
-                                                              : true,
-                                                      child: Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 42,
-                                                            child: AspectRatio(
-                                                              aspectRatio: 16 / 9,
-                                                              child: ClipRRect(
-                                                                borderRadius: BorderRadius.circular(4),
-                                                                child: FadeInImage(
-                                                                  placeholder: AssetImage(
-                                                                      ProductSelectOptionsConst().imgDefaultPath),
-                                                                  image: NetworkImage(widget.arguments!.product
-                                                                      .productionOptionals[index].image),
-                                                                  fit: BoxFit.fitWidth,
-                                                                  imageErrorBuilder: (context, error, stackTrace) =>
-                                                                      Image.asset(
-                                                                          ProductSelectOptionsConst().imgDefaultPath,
-                                                                          fit: BoxFit.fitWidth),
+                                                    widget.arguments!.product.productionOptionals[index].image == ""
+                                                        ? SizedBox.shrink()
+                                                        : Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 16,
+                                                              ),
+                                                              SizedBox(
+                                                                height: 42,
+                                                                child: AspectRatio(
+                                                                  aspectRatio: 16 / 9,
+                                                                  child: ClipRRect(
+                                                                    borderRadius: BorderRadius.circular(4),
+                                                                    child: FadeInImage(
+                                                                      placeholder: AssetImage(
+                                                                          ProductSelectOptionsConst().imgDefaultPath),
+                                                                      image: NetworkImage(widget.arguments!.product
+                                                                          .productionOptionals[index].image),
+                                                                      fit: BoxFit.fitWidth,
+                                                                      imageErrorBuilder: (context, error, stackTrace) =>
+                                                                          Image.asset(
+                                                                              ProductSelectOptionsConst()
+                                                                                  .imgDefaultPath,
+                                                                              fit: BoxFit.fitWidth),
+                                                                    ),
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
+                                                            ],
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
                                                     SizedBox(
                                                       width: 16,
                                                     ),
@@ -428,53 +424,52 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             },
                                                           ),
                                                         ),
-                                                        Visibility(
-                                                          visible: widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[index]
-                                                                      .image ==
-                                                                  ""
-                                                              ? false
-                                                              : true,
-                                                          child: Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 16,
-                                                              ),
-                                                              SizedBox(
-                                                                height: 42,
-                                                                child: AspectRatio(
-                                                                  aspectRatio: 16 / 9,
-                                                                  child: ClipRRect(
-                                                                    borderRadius: BorderRadius.circular(4),
-                                                                    child: FadeInImage(
-                                                                      placeholder: AssetImage(
-                                                                          ProductSelectOptionsConst().imgDefaultPath),
-                                                                      image: NetworkImage(
-                                                                        widget
-                                                                            .arguments!
-                                                                            .product
-                                                                            .productionOptionals[
-                                                                                prodOptState.stepOneIndexSelect!]
-                                                                            .level2[index]
-                                                                            .image,
-                                                                      ),
-                                                                      fit: BoxFit.fitWidth,
-                                                                      imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset(
+                                                        widget
+                                                                    .arguments!
+                                                                    .product
+                                                                    .productionOptionals[
+                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .level2[index]
+                                                                    .image ==
+                                                                ""
+                                                            ? SizedBox.shrink()
+                                                            : Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 16,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 42,
+                                                                    child: AspectRatio(
+                                                                      aspectRatio: 16 / 9,
+                                                                      child: ClipRRect(
+                                                                        borderRadius: BorderRadius.circular(4),
+                                                                        child: FadeInImage(
+                                                                          placeholder: AssetImage(
                                                                               ProductSelectOptionsConst()
-                                                                                  .imgDefaultPath,
-                                                                              fit: BoxFit.fitWidth),
+                                                                                  .imgDefaultPath),
+                                                                          image: NetworkImage(
+                                                                            widget
+                                                                                .arguments!
+                                                                                .product
+                                                                                .productionOptionals[
+                                                                                    prodOptState.stepOneIndexSelect!]
+                                                                                .level2[index]
+                                                                                .image,
+                                                                          ),
+                                                                          fit: BoxFit.fitWidth,
+                                                                          imageErrorBuilder: (context, error,
+                                                                                  stackTrace) =>
+                                                                              Image.asset(
+                                                                                  ProductSelectOptionsConst()
+                                                                                      .imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
                                                         SizedBox(width: 16),
                                                       ],
                                                     ),
@@ -662,55 +657,55 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             },
                                                           ),
                                                         ),
-                                                        Visibility(
-                                                          visible: widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                                      .level3[index]
-                                                                      .image ==
-                                                                  ""
-                                                              ? false
-                                                              : true,
-                                                          child: Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 16,
-                                                              ),
-                                                              SizedBox(
-                                                                height: 42,
-                                                                child: AspectRatio(
-                                                                  aspectRatio: 16 / 9,
-                                                                  child: ClipRRect(
-                                                                    borderRadius: BorderRadius.circular(4),
-                                                                    child: FadeInImage(
-                                                                      placeholder: AssetImage(
-                                                                          ProductSelectOptionsConst().imgDefaultPath),
-                                                                      image: NetworkImage(
-                                                                        widget
-                                                                            .arguments!
-                                                                            .product
-                                                                            .productionOptionals[
-                                                                                prodOptState.stepOneIndexSelect!]
-                                                                            .level2[prodOptState.stepTwoIndexSelect!]
-                                                                            .level3[index]
-                                                                            .image,
-                                                                      ),
-                                                                      fit: BoxFit.fitWidth,
-                                                                      imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset(
+                                                        widget
+                                                                    .arguments!
+                                                                    .product
+                                                                    .productionOptionals[
+                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .level2[prodOptState.stepTwoIndexSelect!]
+                                                                    .level3[index]
+                                                                    .image ==
+                                                                ""
+                                                            ? SizedBox.shrink()
+                                                            : Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 16,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 42,
+                                                                    child: AspectRatio(
+                                                                      aspectRatio: 16 / 9,
+                                                                      child: ClipRRect(
+                                                                        borderRadius: BorderRadius.circular(4),
+                                                                        child: FadeInImage(
+                                                                          placeholder: AssetImage(
                                                                               ProductSelectOptionsConst()
-                                                                                  .imgDefaultPath,
-                                                                              fit: BoxFit.fitWidth),
+                                                                                  .imgDefaultPath),
+                                                                          image: NetworkImage(
+                                                                            widget
+                                                                                .arguments!
+                                                                                .product
+                                                                                .productionOptionals[
+                                                                                    prodOptState.stepOneIndexSelect!]
+                                                                                .level2[
+                                                                                    prodOptState.stepTwoIndexSelect!]
+                                                                                .level3[index]
+                                                                                .image,
+                                                                          ),
+                                                                          fit: BoxFit.fitWidth,
+                                                                          imageErrorBuilder: (context, error,
+                                                                                  stackTrace) =>
+                                                                              Image.asset(
+                                                                                  ProductSelectOptionsConst()
+                                                                                      .imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
                                                         SizedBox(width: 16),
                                                       ],
                                                     ),
@@ -908,58 +903,59 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             },
                                                           ),
                                                         ),
-                                                        Visibility(
-                                                          visible: widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                                      .level3[prodOptState.stepTreeIndexSelect!]
-                                                                      .level4[index]
-                                                                      .image ==
-                                                                  ""
-                                                              ? false
-                                                              : true,
-                                                          child: Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 16,
-                                                              ),
-                                                              SizedBox(
-                                                                height: 42,
-                                                                child: AspectRatio(
-                                                                  aspectRatio: 16 / 9,
-                                                                  child: ClipRRect(
-                                                                    borderRadius: BorderRadius.circular(4),
-                                                                    child: FadeInImage(
-                                                                      placeholder: AssetImage(
-                                                                          ProductSelectOptionsConst().imgDefaultPath),
-                                                                      // Replace with your placeholder image path
-                                                                      image: NetworkImage(
-                                                                        widget
-                                                                            .arguments!
-                                                                            .product
-                                                                            .productionOptionals[
-                                                                                prodOptState.stepOneIndexSelect!]
-                                                                            .level2[prodOptState.stepTwoIndexSelect!]
-                                                                            .level3[prodOptState.stepTreeIndexSelect!]
-                                                                            .level4[index]
-                                                                            .image,
-                                                                      ),
-                                                                      fit: BoxFit.fitWidth,
-                                                                      imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset(
+                                                        widget
+                                                                    .arguments!
+                                                                    .product
+                                                                    .productionOptionals[
+                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .level2[prodOptState.stepTwoIndexSelect!]
+                                                                    .level3[prodOptState.stepTreeIndexSelect!]
+                                                                    .level4[index]
+                                                                    .image ==
+                                                                ""
+                                                            ? SizedBox.shrink()
+                                                            : Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 16,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 42,
+                                                                    child: AspectRatio(
+                                                                      aspectRatio: 16 / 9,
+                                                                      child: ClipRRect(
+                                                                        borderRadius: BorderRadius.circular(4),
+                                                                        child: FadeInImage(
+                                                                          placeholder: AssetImage(
                                                                               ProductSelectOptionsConst()
-                                                                                  .imgDefaultPath,
-                                                                              fit: BoxFit.fitWidth),
+                                                                                  .imgDefaultPath),
+                                                                          // Replace with your placeholder image path
+                                                                          image: NetworkImage(
+                                                                            widget
+                                                                                .arguments!
+                                                                                .product
+                                                                                .productionOptionals[
+                                                                                    prodOptState.stepOneIndexSelect!]
+                                                                                .level2[
+                                                                                    prodOptState.stepTwoIndexSelect!]
+                                                                                .level3[
+                                                                                    prodOptState.stepTreeIndexSelect!]
+                                                                                .level4[index]
+                                                                                .image,
+                                                                          ),
+                                                                          fit: BoxFit.fitWidth,
+                                                                          imageErrorBuilder: (context, error,
+                                                                                  stackTrace) =>
+                                                                              Image.asset(
+                                                                                  ProductSelectOptionsConst()
+                                                                                      .imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
                                                         SizedBox(
                                                           width: 16,
                                                         ),
@@ -1143,60 +1139,62 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             },
                                                           ),
                                                         ),
-                                                        Visibility(
-                                                          visible: widget
-                                                                      .arguments!
-                                                                      .product
-                                                                      .productionOptionals[
-                                                                          prodOptState.stepOneIndexSelect!]
-                                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                                      .level3[prodOptState.stepTreeIndexSelect!]
-                                                                      .level4[prodOptState.stepFourIndexSelect!]
-                                                                      .level5[index]
-                                                                      .image ==
-                                                                  ""
-                                                              ? false
-                                                              : true,
-                                                          child: Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 16,
-                                                              ),
-                                                              SizedBox(
-                                                                height: 42,
-                                                                child: AspectRatio(
-                                                                  aspectRatio: 16 / 9,
-                                                                  child: ClipRRect(
-                                                                    borderRadius: BorderRadius.circular(4),
-                                                                    child: FadeInImage(
-                                                                      placeholder: AssetImage(
-                                                                          ProductSelectOptionsConst().imgDefaultPath),
-                                                                      // Replace with your placeholder image path
-                                                                      image: NetworkImage(
-                                                                        widget
-                                                                            .arguments!
-                                                                            .product
-                                                                            .productionOptionals[
-                                                                                prodOptState.stepOneIndexSelect!]
-                                                                            .level2[prodOptState.stepTwoIndexSelect!]
-                                                                            .level3[prodOptState.stepTreeIndexSelect!]
-                                                                            .level4[prodOptState.stepFourIndexSelect!]
-                                                                            .level5[index]
-                                                                            .image,
-                                                                      ),
-                                                                      fit: BoxFit.fitWidth,
-                                                                      imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset(
+                                                        widget
+                                                                    .arguments!
+                                                                    .product
+                                                                    .productionOptionals[
+                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .level2[prodOptState.stepTwoIndexSelect!]
+                                                                    .level3[prodOptState.stepTreeIndexSelect!]
+                                                                    .level4[prodOptState.stepFourIndexSelect!]
+                                                                    .level5[index]
+                                                                    .image ==
+                                                                ""
+                                                            ? SizedBox.shrink()
+                                                            : Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 16,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 42,
+                                                                    child: AspectRatio(
+                                                                      aspectRatio: 16 / 9,
+                                                                      child: ClipRRect(
+                                                                        borderRadius: BorderRadius.circular(4),
+                                                                        child: FadeInImage(
+                                                                          placeholder: AssetImage(
                                                                               ProductSelectOptionsConst()
-                                                                                  .imgDefaultPath,
-                                                                              fit: BoxFit.fitWidth),
+                                                                                  .imgDefaultPath),
+                                                                          // Replace with your placeholder image path
+                                                                          image: NetworkImage(
+                                                                            widget
+                                                                                .arguments!
+                                                                                .product
+                                                                                .productionOptionals[
+                                                                                    prodOptState.stepOneIndexSelect!]
+                                                                                .level2[
+                                                                                    prodOptState.stepTwoIndexSelect!]
+                                                                                .level3[
+                                                                                    prodOptState.stepTreeIndexSelect!]
+                                                                                .level4[
+                                                                                    prodOptState.stepFourIndexSelect!]
+                                                                                .level5[index]
+                                                                                .image,
+                                                                          ),
+                                                                          fit: BoxFit.fitWidth,
+                                                                          imageErrorBuilder: (context, error,
+                                                                                  stackTrace) =>
+                                                                              Image.asset(
+                                                                                  ProductSelectOptionsConst()
+                                                                                      .imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
                                                         SizedBox(
                                                           width: 16,
                                                         ),
