@@ -139,7 +139,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                         children: [
                                           Container(
                                             margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                                            // cloudSoftDeepWhite
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
@@ -238,27 +237,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               child: ClipRRect(
                                                                 borderRadius: BorderRadius.circular(4),
                                                                 child: FadeInImage(
-                                                                  placeholder: const AssetImage(
-                                                                      'assets/homepage/img_default.png'),
-                                                                  // Replace with your placeholder image path
+                                                                  placeholder: AssetImage(
+                                                                      ProductSelectOptionsConst().imgDefaultPath),
                                                                   image: NetworkImage(widget.arguments!.product
                                                                       .productionOptionals[index].image),
-                                                                  // image: NetworkImage(
-                                                                  //   i == imageDataLength
-                                                                  //       ? dataCarouselMock[0].substring(46)
-                                                                  //       : dataCarouselMock[i].substring(46),
-                                                                  // ),
                                                                   fit: BoxFit.fitWidth,
                                                                   imageErrorBuilder: (context, error, stackTrace) =>
-                                                                      Image.asset('assets/homepage/img_default.png',
+                                                                      Image.asset(
+                                                                          ProductSelectOptionsConst().imgDefaultPath,
                                                                           fit: BoxFit.fitWidth),
                                                                 ),
-                                                                // Image.network(
-                                                                //   widget
-                                                                //       .arguments!.product.productionOptionals[index].image,
-                                                                //   // .substring(46) local
-                                                                //   fit: BoxFit.fitWidth,
-                                                                // ),
                                                               ),
                                                             ),
                                                           ),
@@ -297,7 +285,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                     }),
                                 Container(
                                   margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                                  // cloudSoftDeepWhite
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -333,7 +320,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                           ? Container()
                           : Column(
                               children: [
-                                // First Container
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -343,12 +329,10 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                     textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
                                   ),
                                 ),
-                                // Second Container
                                 Container(
                                   color: whitePure,
                                   child: Column(
                                     children: [
-                                      // ListView.builder
                                       ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
@@ -357,13 +341,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                         itemBuilder: (BuildContext context, int index) {
                                           return Column(
                                             children: [
-                                              // Nested Container inside ListView.builder
                                               Container(
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    // Row with Radio, SizedBox, AlvaText
                                                     Row(
                                                       children: [
                                                         SizedBox(
@@ -379,7 +361,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             groupValue: prodOptState.stepTwoGroupValueRadio,
                                                             toggleable: true,
                                                             onChanged: (value) {
-                                                              // Radio onChanged logic
                                                               if (value == null) {
                                                                 myBloc.updateStepTwoVariables(
                                                                   groupValueRadio: "",
@@ -470,9 +451,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   child: ClipRRect(
                                                                     borderRadius: BorderRadius.circular(4),
                                                                     child: FadeInImage(
-                                                                      placeholder: const AssetImage(
-                                                                          'assets/homepage/img_default.png'),
-                                                                      // Replace with your placeholder image path
+                                                                      placeholder: AssetImage(
+                                                                          ProductSelectOptionsConst().imgDefaultPath),
                                                                       image: NetworkImage(
                                                                         widget
                                                                             .arguments!
@@ -482,27 +462,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                             .level2[index]
                                                                             .image,
                                                                       ),
-                                                                      // image: NetworkImage(
-                                                                      //   i == imageDataLength
-                                                                      //       ? dataCarouselMock[0].substring(46)
-                                                                      //       : dataCarouselMock[i].substring(46),
-                                                                      // ),
                                                                       fit: BoxFit.fitWidth,
                                                                       imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset('assets/homepage/img_default.png',
+                                                                          Image.asset(
+                                                                              ProductSelectOptionsConst()
+                                                                                  .imgDefaultPath,
                                                                               fit: BoxFit.fitWidth),
                                                                     ),
-                                                                    // Image.network(
-                                                                    //   widget
-                                                                    //       .arguments!
-                                                                    //       .product
-                                                                    //       .productionOptionals[
-                                                                    //           prodOptState.stepOneIndexSelect!]
-                                                                    //       .level2[index]
-                                                                    //       .image,
-                                                                    //   // .substring(46) local
-                                                                    //   fit: BoxFit.fitWidth,
-                                                                    // ),
                                                                   ),
                                                                 ),
                                                               ),
@@ -544,13 +510,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                           );
                                         },
                                       ),
-                                      // Another Container for additional information
                                       Container(
                                         margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            // AlvaText based on the selected option
                                             prodOptState.stepTwoGroupValueRadio == ""
                                                 ? AlvaText(
                                                     title:
@@ -563,7 +527,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         maxLines: 1,
                                                         textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
                                                   ),
-                                            // AlvaText for price
                                             SizedBox(width: 16),
                                             prodOptState.stepTwoPrice == 0 && prodOptState.selectCurrentOption != 2
                                                 ? AlvaText(
@@ -588,7 +551,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                           ? Container()
                           : Column(
                               children: [
-                                // First Container
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -603,12 +565,10 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                     textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
                                   ),
                                 ),
-                                // Second Container
                                 Container(
                                   color: whitePure,
                                   child: Column(
                                     children: [
-                                      // ListView.builder
                                       ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
@@ -622,13 +582,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                         itemBuilder: (BuildContext context, int index) {
                                           return Column(
                                             children: [
-                                              // Nested Container inside ListView.builder
                                               Container(
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    // Row with Radio, SizedBox, AlvaText
                                                     Row(
                                                       children: [
                                                         SizedBox(
@@ -728,9 +686,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   child: ClipRRect(
                                                                     borderRadius: BorderRadius.circular(4),
                                                                     child: FadeInImage(
-                                                                      placeholder: const AssetImage(
-                                                                          'assets/homepage/img_default.png'),
-                                                                      // Replace with your placeholder image path
+                                                                      placeholder: AssetImage(
+                                                                          ProductSelectOptionsConst().imgDefaultPath),
                                                                       image: NetworkImage(
                                                                         widget
                                                                             .arguments!
@@ -743,7 +700,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                       ),
                                                                       fit: BoxFit.fitWidth,
                                                                       imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset('assets/homepage/img_default.png',
+                                                                          Image.asset(
+                                                                              ProductSelectOptionsConst()
+                                                                                  .imgDefaultPath,
                                                                               fit: BoxFit.fitWidth),
                                                                     ),
                                                                   ),
@@ -755,7 +714,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         SizedBox(width: 16),
                                                       ],
                                                     ),
-                                                    // SizedBox, AlvaText for price
                                                     Expanded(
                                                       child: AlvaTextMaxLinesOverflow(
                                                           title: widget
@@ -975,8 +933,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   child: ClipRRect(
                                                                     borderRadius: BorderRadius.circular(4),
                                                                     child: FadeInImage(
-                                                                      placeholder: const AssetImage(
-                                                                          'assets/homepage/img_default.png'),
+                                                                      placeholder: AssetImage(
+                                                                          ProductSelectOptionsConst().imgDefaultPath),
                                                                       // Replace with your placeholder image path
                                                                       image: NetworkImage(
                                                                         widget
@@ -991,7 +949,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                       ),
                                                                       fit: BoxFit.fitWidth,
                                                                       imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset('assets/homepage/img_default.png',
+                                                                          Image.asset(
+                                                                              ProductSelectOptionsConst()
+                                                                                  .imgDefaultPath,
                                                                               fit: BoxFit.fitWidth),
                                                                     ),
                                                                   ),
@@ -1209,8 +1169,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   child: ClipRRect(
                                                                     borderRadius: BorderRadius.circular(4),
                                                                     child: FadeInImage(
-                                                                      placeholder: const AssetImage(
-                                                                          'assets/homepage/img_default.png'),
+                                                                      placeholder: AssetImage(
+                                                                          ProductSelectOptionsConst().imgDefaultPath),
                                                                       // Replace with your placeholder image path
                                                                       image: NetworkImage(
                                                                         widget
@@ -1226,7 +1186,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                       ),
                                                                       fit: BoxFit.fitWidth,
                                                                       imageErrorBuilder: (context, error, stackTrace) =>
-                                                                          Image.asset('assets/homepage/img_default.png',
+                                                                          Image.asset(
+                                                                              ProductSelectOptionsConst()
+                                                                                  .imgDefaultPath,
                                                                               fit: BoxFit.fitWidth),
                                                                     ),
                                                                   ),

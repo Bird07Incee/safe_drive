@@ -54,6 +54,7 @@ class ProductSelectOptionsConst {
   String selectProdText = "ตัวเลือกสินค้า";
   String priceProdDefaultText = "0 บาท";
   String backButtonKey = "pop_navigator_to_product_detail";
+  String imgDefaultPath = "assets/homepage/img_default.png";
 }
 
 const carouselOver20Item = [
