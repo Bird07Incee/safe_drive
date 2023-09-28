@@ -31,7 +31,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   PageController pageController = PageController(initialPage: 0, keepPage: false);
-  late TabController tabController;
+  // late TabController tabController;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final maxWidth = size.width;
-    // final tabController = TabController(length: 5, vsync: this);
+    final tabController = TabController(length: 5, vsync: this);
     return RootPageCondition(
         child: AlvaRootWidget(
             titlePage: titleWebPage,
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               builder: (context, state) {
                 return BlocBuilder<ProductListBloc, ProductListState>(
                   builder: (context, state) {
-                    tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
+                    // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
                     if (state.productListStatus == GetProductListStatus.success) {
                       return Container(
                         color: cloudyWhite,
