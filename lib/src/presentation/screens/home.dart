@@ -91,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                             StickyHeader(
                               header: Container(
+                                width: maxWidth,
                                 padding: const EdgeInsets.symmetric(horizontal: 16),
                                 color: Colors.white,
                                 child: TabBar(
