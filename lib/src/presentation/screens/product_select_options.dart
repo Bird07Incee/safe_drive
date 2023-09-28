@@ -121,11 +121,10 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                           Container(
                             width: MediaQuery.of(context).size.width - 32,
                             padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                            child: Expanded(
-                                child: AlvaTextMaxLinesOverflow(
-                                    title: widget.arguments!.product.productionOptionals[0].levelName,
-                                    maxLines: 1,
-                                    textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
+                            child: AlvaTextMaxLinesOverflow(
+                                title: widget.arguments!.product.productionOptionals[0].levelName,
+                                maxLines: 1,
+                                textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                           ),
                           Container(
                             color: whitePure,
@@ -322,13 +321,12 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: Expanded(
-                                      child: AlvaTextMaxLinesOverflow(
+                                  child: AlvaTextMaxLinesOverflow(
                                     title: widget.arguments!.product
                                         .productionOptionals[prodOptState.stepOneIndexSelect!].level2[0].levelName,
                                     maxLines: 1,
                                     textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
-                                  )),
+                                  ),
                                 ),
                                 Container(
                                   color: whitePure,
@@ -556,17 +554,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: Expanded(
-                                      child: AlvaTextMaxLinesOverflow(
-                                          title: widget
-                                              .arguments!
-                                              .product
-                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                              .level2[prodOptState.stepTwoIndexSelect!]
-                                              .level3[0]
-                                              .levelName,
-                                          maxLines: 1,
-                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
+                                  child: AlvaTextMaxLinesOverflow(
+                                      title: widget
+                                          .arguments!
+                                          .product
+                                          .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                          .level2[prodOptState.stepTwoIndexSelect!]
+                                          .level3[0]
+                                          .levelName,
+                                      maxLines: 1,
+                                      textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                                 ),
                                 Container(
                                   color: whitePure,
@@ -805,18 +802,17 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: Expanded(
-                                      child: AlvaTextMaxLinesOverflow(
-                                          title: widget
-                                              .arguments!
-                                              .product
-                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                              .level2[prodOptState.stepTwoIndexSelect!]
-                                              .level3[prodOptState.stepTreeIndexSelect!]
-                                              .level4[0]
-                                              .levelName,
-                                          maxLines: 1,
-                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
+                                  child: AlvaTextMaxLinesOverflow(
+                                      title: widget
+                                          .arguments!
+                                          .product
+                                          .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                          .level2[prodOptState.stepTwoIndexSelect!]
+                                          .level3[prodOptState.stepTreeIndexSelect!]
+                                          .level4[0]
+                                          .levelName,
+                                      maxLines: 1,
+                                      textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                                 ),
                                 // Second Container
                                 Container(
@@ -1063,19 +1059,18 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: Expanded(
-                                      child: AlvaTextMaxLinesOverflow(
-                                          title: widget
-                                              .arguments!
-                                              .product
-                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                              .level2[prodOptState.stepTwoIndexSelect!]
-                                              .level3[prodOptState.stepTreeIndexSelect!]
-                                              .level4[prodOptState.stepFourIndexSelect!]
-                                              .level5[0]
-                                              .levelName,
-                                          maxLines: 1,
-                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
+                                  child: AlvaTextMaxLinesOverflow(
+                                      title: widget
+                                          .arguments!
+                                          .product
+                                          .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                          .level2[prodOptState.stepTwoIndexSelect!]
+                                          .level3[prodOptState.stepTreeIndexSelect!]
+                                          .level4[prodOptState.stepFourIndexSelect!]
+                                          .level5[0]
+                                          .levelName,
+                                      maxLines: 1,
+                                      textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                                 ),
                                 // Second Container
                                 Container(
