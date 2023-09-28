@@ -121,10 +121,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                           Container(
                             width: MediaQuery.of(context).size.width - 32,
                             padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                            child: AlvaText(
-                              title: widget.arguments!.product.productionOptionals[0].levelName,
-                              textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
-                            ),
+                            child: Expanded(
+                                child: AlvaTextMaxLinesOverflow(
+                                    title: widget.arguments!.product.productionOptionals[0].levelName,
+                                    maxLines: 1,
+                                    textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
                           ),
                           Container(
                             color: whitePure,
@@ -190,22 +191,22 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             );
                                                             myBloc.updateStepTwoVariables(
                                                               groupValueRadio: "",
-                                                              price: myBloc.state.stepTwoPrice,
+                                                              price: 0,
                                                               indexSelect: myBloc.state.stepTwoIndexSelect,
                                                             );
                                                             myBloc.updateStepTreeVariables(
                                                               groupValueRadio: "",
-                                                              price: myBloc.state.stepTreePrice,
+                                                              price: 0,
                                                               indexSelect: myBloc.state.stepTreeIndexSelect,
                                                             );
                                                             myBloc.updateStepFourVariables(
                                                               groupValueRadio: "",
-                                                              price: myBloc.state.stepFourPrice,
+                                                              price: 0,
                                                               indexSelect: myBloc.state.stepFourIndexSelect,
                                                             );
                                                             myBloc.updateStepFiveVariables(
                                                               groupValueRadio: "",
-                                                              price: myBloc.state.stepFivePrice,
+                                                              price: 0,
                                                               indexSelect: myBloc.state.stepFiveIndexSelect,
                                                             );
                                                             myBloc.updateSelectCurrentOption(1);
@@ -255,9 +256,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                   ],
                                                 ),
                                                 Expanded(
-                                                  child: AlvaTextMaxLinesOverflow(
+                                                  child: AlvaText(
                                                       title: widget.arguments!.product.productionOptionals[index].label,
-                                                      maxLines: 1,
                                                       textStyle:
                                                           AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                 ),
@@ -285,10 +285,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       prodOptState.stepOneGroupValueRadio == ""
-                                          ? AlvaText(
-                                              title:
-                                                  "ตัวเลือก${widget.arguments!.product.productionOptionals[0].levelName}",
-                                              textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
+                                          ? Expanded(
+                                              child: AlvaTextMaxLinesOverflow(
+                                                  title:
+                                                      "ตัวเลือก${widget.arguments!.product.productionOptionals[0].levelName}",
+                                                  maxLines: 1,
+                                                  textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite)),
+                                            )
                                           : Expanded(
                                               child: AlvaTextMaxLinesOverflow(
                                                   title: prodOptState.stepOneGroupValueRadio,
@@ -319,11 +322,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: AlvaText(
+                                  child: Expanded(
+                                      child: AlvaTextMaxLinesOverflow(
                                     title: widget.arguments!.product
                                         .productionOptionals[prodOptState.stepOneIndexSelect!].level2[0].levelName,
+                                    maxLines: 1,
                                     textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
-                                  ),
+                                  )),
                                 ),
                                 Container(
                                   color: whitePure,
@@ -394,17 +399,17 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 );
                                                                 myBloc.updateStepTreeVariables(
                                                                   groupValueRadio: "",
-                                                                  price: myBloc.state.stepTreePrice,
+                                                                  price: 0,
                                                                   indexSelect: myBloc.state.stepTreeIndexSelect,
                                                                 );
                                                                 myBloc.updateStepFourVariables(
                                                                   groupValueRadio: "",
-                                                                  price: myBloc.state.stepFourPrice,
+                                                                  price: 0,
                                                                   indexSelect: myBloc.state.stepFourIndexSelect,
                                                                 );
                                                                 myBloc.updateStepFiveVariables(
                                                                   groupValueRadio: "",
-                                                                  price: myBloc.state.stepFivePrice,
+                                                                  price: 0,
                                                                   indexSelect: myBloc.state.stepFiveIndexSelect,
                                                                 );
                                                                 myBloc.updateSelectCurrentOption(2);
@@ -475,14 +480,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     ),
                                                     // SizedBox, AlvaText for price
                                                     Expanded(
-                                                      child: AlvaTextMaxLinesOverflow(
+                                                      child: AlvaText(
                                                           title: widget
                                                               .arguments!
                                                               .product
                                                               .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                               .level2[index]
                                                               .label,
-                                                          maxLines: 1,
                                                           textStyle:
                                                               AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                     ),
@@ -511,10 +515,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             prodOptState.stepTwoGroupValueRadio == ""
-                                                ? AlvaText(
-                                                    title:
-                                                        "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[0].levelName}",
-                                                    textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                ? Expanded(
+                                                    child: AlvaTextMaxLinesOverflow(
+                                                      title:
+                                                          "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[0].levelName}",
+                                                      maxLines: 1,
+                                                      textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                    ),
                                                   )
                                                 : Expanded(
                                                     child: AlvaTextMaxLinesOverflow(
@@ -549,16 +556,17 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: AlvaText(
-                                    title: widget
-                                        .arguments!
-                                        .product
-                                        .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                        .level2[prodOptState.stepTwoIndexSelect!]
-                                        .level3[0]
-                                        .levelName,
-                                    textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
-                                  ),
+                                  child: Expanded(
+                                      child: AlvaTextMaxLinesOverflow(
+                                          title: widget
+                                              .arguments!
+                                              .product
+                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                              .level2[prodOptState.stepTwoIndexSelect!]
+                                              .level3[0]
+                                              .levelName,
+                                          maxLines: 1,
+                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
                                 ),
                                 Container(
                                   color: whitePure,
@@ -631,12 +639,12 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 );
                                                                 myBloc.updateStepFourVariables(
                                                                   groupValueRadio: "",
-                                                                  price: myBloc.state.stepFourPrice,
+                                                                  price: 0,
                                                                   indexSelect: myBloc.state.stepFourIndexSelect,
                                                                 );
                                                                 myBloc.updateStepFiveVariables(
                                                                   groupValueRadio: "",
-                                                                  price: myBloc.state.stepFivePrice,
+                                                                  price: 0,
                                                                   indexSelect: myBloc.state.stepFiveIndexSelect,
                                                                 );
                                                                 myBloc.updateSelectCurrentOption(3);
@@ -710,7 +718,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                       ],
                                                     ),
                                                     Expanded(
-                                                      child: AlvaTextMaxLinesOverflow(
+                                                      child: AlvaText(
                                                           title: widget
                                                               .arguments!
                                                               .product
@@ -718,7 +726,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               .level2[prodOptState.stepTwoIndexSelect!]
                                                               .level3[index]
                                                               .label,
-                                                          maxLines: 1,
                                                           textStyle:
                                                               AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                     ),
@@ -749,10 +756,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                           children: [
                                             // AlvaText based on the selected option
                                             prodOptState.stepTreeGroupValueRadio == ""
-                                                ? AlvaText(
-                                                    title:
-                                                        "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[0].levelName}",
-                                                    textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                ? Expanded(
+                                                    child: AlvaTextMaxLinesOverflow(
+                                                      title:
+                                                          "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[0].levelName}",
+                                                      maxLines: 1,
+                                                      textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                    ),
                                                   )
                                                 : Expanded(
                                                     child: AlvaTextMaxLinesOverflow(
@@ -795,17 +805,18 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: AlvaText(
-                                    title: widget
-                                        .arguments!
-                                        .product
-                                        .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                        .level2[prodOptState.stepTwoIndexSelect!]
-                                        .level3[prodOptState.stepTreeIndexSelect!]
-                                        .level4[0]
-                                        .levelName,
-                                    textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
-                                  ),
+                                  child: Expanded(
+                                      child: AlvaTextMaxLinesOverflow(
+                                          title: widget
+                                              .arguments!
+                                              .product
+                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                              .level2[prodOptState.stepTwoIndexSelect!]
+                                              .level3[prodOptState.stepTreeIndexSelect!]
+                                              .level4[0]
+                                              .levelName,
+                                          maxLines: 1,
+                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
                                 ),
                                 // Second Container
                                 Container(
@@ -963,7 +974,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     ),
                                                     // SizedBox, AlvaText for price
                                                     Expanded(
-                                                      child: AlvaTextMaxLinesOverflow(
+                                                      child: AlvaText(
                                                           title: widget
                                                               .arguments!
                                                               .product
@@ -972,7 +983,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               .level3[prodOptState.stepTreeIndexSelect!]
                                                               .level4[index]
                                                               .label,
-                                                          maxLines: 1,
                                                           textStyle:
                                                               AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                     ),
@@ -1003,10 +1013,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                           children: [
                                             // AlvaText based on the selected option
                                             prodOptState.stepFourGroupValueRadio == ""
-                                                ? AlvaText(
-                                                    title:
-                                                        "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[0].levelName}",
-                                                    textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                ? Expanded(
+                                                    child: AlvaTextMaxLinesOverflow(
+                                                      title:
+                                                          "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[0].levelName}",
+                                                      maxLines: 1,
+                                                      textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                    ),
                                                   )
                                                 : Expanded(
                                                     child: AlvaTextMaxLinesOverflow(
@@ -1050,18 +1063,19 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 Container(
                                   width: MediaQuery.of(context).size.width - 32,
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                  child: AlvaText(
-                                    title: widget
-                                        .arguments!
-                                        .product
-                                        .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                        .level2[prodOptState.stepTwoIndexSelect!]
-                                        .level3[prodOptState.stepTreeIndexSelect!]
-                                        .level4[prodOptState.stepFourIndexSelect!]
-                                        .level5[0]
-                                        .levelName,
-                                    textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
-                                  ),
+                                  child: Expanded(
+                                      child: AlvaTextMaxLinesOverflow(
+                                          title: widget
+                                              .arguments!
+                                              .product
+                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                              .level2[prodOptState.stepTwoIndexSelect!]
+                                              .level3[prodOptState.stepTreeIndexSelect!]
+                                              .level4[prodOptState.stepFourIndexSelect!]
+                                              .level5[0]
+                                              .levelName,
+                                          maxLines: 1,
+                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW))),
                                 ),
                                 // Second Container
                                 Container(
@@ -1202,7 +1216,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     ),
                                                     // SizedBox, AlvaText for price
                                                     Expanded(
-                                                      child: AlvaTextMaxLinesOverflow(
+                                                      child: AlvaText(
                                                           title: widget
                                                               .arguments!
                                                               .product
@@ -1212,7 +1226,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               .level4[prodOptState.stepFourIndexSelect!]
                                                               .level5[index]
                                                               .label,
-                                                          maxLines: 1,
                                                           textStyle:
                                                               AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                     ),
@@ -1243,10 +1256,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                           children: [
                                             // AlvaText based on the selected option
                                             prodOptState.stepFiveGroupValueRadio == ""
-                                                ? AlvaText(
-                                                    title:
-                                                        "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5[0].levelName}",
-                                                    textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                ? Expanded(
+                                                    child: AlvaTextMaxLinesOverflow(
+                                                      title:
+                                                          "ตัวเลือก${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5[0].levelName}",
+                                                      maxLines: 1,
+                                                      textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite),
+                                                    ),
                                                   )
                                                 : Expanded(
                                                     child: AlvaTextMaxLinesOverflow(
