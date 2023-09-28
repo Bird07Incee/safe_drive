@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductOptionBloc extends Cubit<ProductOptionState> {
@@ -74,7 +75,7 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
   }
 }
 
-class ProductOptionState {
+class ProductOptionState extends Equatable {
   final String stepOneGroupValueRadio;
   final int? stepOnePrice;
   final int? stepOneIndexSelect;
@@ -93,7 +94,7 @@ class ProductOptionState {
   final int? lastOption;
   final int? selectCurrentOption;
 
-  ProductOptionState({
+  const ProductOptionState({
     this.stepOneGroupValueRadio = "",
     this.stepOnePrice,
     this.stepOneIndexSelect,
@@ -152,4 +153,26 @@ class ProductOptionState {
       selectCurrentOption: selectCurrentOption ?? this.selectCurrentOption,
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        stepOneGroupValueRadio,
+        stepOnePrice,
+        stepOneIndexSelect,
+        stepTwoGroupValueRadio,
+        stepTwoPrice,
+        stepTwoIndexSelect,
+        stepTreeGroupValueRadio,
+        stepTreePrice,
+        stepTreeIndexSelect,
+        stepFourGroupValueRadio,
+        stepFourPrice,
+        stepFourIndexSelect,
+        stepFiveGroupValueRadio,
+        stepFivePrice,
+        stepFiveIndexSelect,
+        lastOption,
+        selectCurrentOption,
+      ];
 }
