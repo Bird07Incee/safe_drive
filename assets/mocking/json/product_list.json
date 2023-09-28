@@ -10,11 +10,23 @@
       }
     ],
     "category": [
-      "All",
-      "EV Charger",
-      "Accessory",
-      "Other"
-    ],
+      {
+          "categoryId": "CT_9P2UW6F426C6",
+          "category": "EV Charger"
+      },
+      {
+          "categoryId": "CT_0XSC1E4ELDFV",
+          "category": "Accessory"
+      },
+      {
+          "categoryId": "CT_371KNH5QXG6O",
+          "category": "Solar"
+      },
+      {
+          "categoryId": "CT_2YP8LLQG95FS",
+          "category": "EV Cate4"
+      }
+  ],
     "products": [
       {
         "appId": "Marketplace-mini-app",
