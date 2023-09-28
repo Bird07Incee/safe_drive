@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
@@ -36,7 +38,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       height: 48,
-                      child: prodOptState.selectCurrentOption == prodOptState.lastOption
+                      child: prodOptState.selectCurrentOption == prodOptState.lastOption &&
+                              (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                           ? OutlinedButton(
                               onPressed: () {},
                               style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
@@ -114,31 +117,31 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                       if (value == null) {
                                                         myBloc.updateStepOneVariables(
                                                           groupValueRadio: "",
-                                                          price: null,
+                                                          price: 0,
                                                           indexSelect: myBloc.state.stepOneIndexSelect,
                                                         );
                                                         myBloc.updateStepTwoVariables(
                                                           groupValueRadio: "",
-                                                          price: null,
+                                                          price: 0,
                                                           indexSelect: myBloc.state.stepTwoIndexSelect,
                                                         );
                                                         myBloc.updateStepTreeVariables(
                                                           groupValueRadio: "",
-                                                          price: null,
+                                                          price: 0,
                                                           indexSelect: myBloc.state.stepTreeIndexSelect,
                                                         );
                                                         myBloc.updateStepFourVariables(
                                                           groupValueRadio: "",
-                                                          price: null,
+                                                          price: 0,
                                                           indexSelect: myBloc.state.stepFourIndexSelect,
                                                         );
                                                         myBloc.updateStepFiveVariables(
                                                           groupValueRadio: "",
-                                                          price: null,
+                                                          price: 0,
                                                           indexSelect: myBloc.state.stepFiveIndexSelect,
                                                         );
                                                         myBloc.updateSelectCurrentOption(0);
-                                                        myBloc.updateLastOption(1);
+                                                        myBloc.updateLastOption(0);
                                                       } else {
                                                         myBloc.updateStepOneVariables(
                                                           groupValueRadio: value.toString(),
@@ -235,7 +238,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       : AlvaText(
                                           title: prodOptState.stepOneGroupValueRadio,
                                           textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
-                                  prodOptState.stepOnePrice == null
+                                  prodOptState.stepOnePrice == 0 && prodOptState.selectCurrentOption != 1
                                       ? AlvaText(
                                           title: ProductSelectOptionsConst().priceProdDefaultText,
                                           textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
@@ -300,26 +303,26 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             if (value == null) {
                                                               myBloc.updateStepTwoVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepTwoIndexSelect,
                                                               );
                                                               myBloc.updateStepTreeVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepTreeIndexSelect,
                                                               );
                                                               myBloc.updateStepFourVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepFourIndexSelect,
                                                               );
                                                               myBloc.updateStepFiveVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepFiveIndexSelect,
                                                               );
-                                                              // myBloc.updateSelectCurrentOption(1);
-                                                              myBloc.updateLastOption(1);
+                                                              myBloc.updateSelectCurrentOption(1);
+                                                              myBloc.updateLastOption(2);
                                                             } else {
                                                               myBloc.updateStepTwoVariables(
                                                                 groupValueRadio: value.toString(),
@@ -409,7 +412,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             : AlvaText(
                                                 title: prodOptState.stepTwoGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
-                                        prodOptState.stepTwoPrice == null
+                                        prodOptState.stepTwoPrice == 0 && prodOptState.selectCurrentOption != 2
                                             ? AlvaText(
                                                 title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
@@ -481,21 +484,21 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             if (value == null) {
                                                               myBloc.updateStepTreeVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepTreeIndexSelect,
                                                               );
                                                               myBloc.updateStepFourVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepFourIndexSelect,
                                                               );
                                                               myBloc.updateStepFiveVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepFiveIndexSelect,
                                                               );
-                                                              // myBloc.updateSelectCurrentOption(2);
-                                                              myBloc.updateLastOption(2);
+                                                              myBloc.updateSelectCurrentOption(2);
+                                                              myBloc.updateLastOption(3);
                                                             } else {
                                                               myBloc.updateStepTreeVariables(
                                                                 groupValueRadio: value.toString(),
@@ -583,7 +586,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             : AlvaText(
                                                 title: prodOptState.stepTreeGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
-                                        prodOptState.stepTreePrice == null
+                                        prodOptState.stepTreePrice == 0 && prodOptState.selectCurrentOption != 3
                                             ? AlvaText(
                                                 title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
@@ -669,16 +672,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             if (value == null) {
                                                               myBloc.updateStepFourVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepFourIndexSelect,
                                                               );
                                                               myBloc.updateStepFiveVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepFiveIndexSelect,
                                                               );
-                                                              // myBloc.updateSelectCurrentOption(3);
-                                                              myBloc.updateLastOption(3);
+                                                              myBloc.updateSelectCurrentOption(3);
+                                                              myBloc.updateLastOption(4);
                                                             } else {
                                                               myBloc.updateStepFourVariables(
                                                                 groupValueRadio: value.toString(),
@@ -764,7 +767,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             : AlvaText(
                                                 title: prodOptState.stepFourGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
-                                        prodOptState.stepFourPrice == null
+                                        prodOptState.stepFourPrice == 0 && prodOptState.selectCurrentOption != 4
                                             ? AlvaText(
                                                 title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
@@ -854,11 +857,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             if (value == null) {
                                                               myBloc.updateStepFiveVariables(
                                                                 groupValueRadio: "",
-                                                                price: null,
+                                                                price: 0,
                                                                 indexSelect: myBloc.state.stepFiveIndexSelect,
                                                               );
-                                                              // myBloc.updateSelectCurrentOption(4);
-                                                              myBloc.updateLastOption(4);
+                                                              myBloc.updateSelectCurrentOption(4);
+                                                              myBloc.updateLastOption(5);
                                                             } else {
                                                               myBloc.updateStepFiveVariables(
                                                                 groupValueRadio: value.toString(),
@@ -929,7 +932,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             : AlvaText(
                                                 title: prodOptState.stepFiveGroupValueRadio,
                                                 textStyle: AlvaStyles().bodySize16W600(blackGoMunTo)),
-                                        prodOptState.stepFivePrice == null
+                                        prodOptState.stepFivePrice == 0 && prodOptState.selectCurrentOption != 5
                                             ? AlvaText(
                                                 title: ProductSelectOptionsConst().priceProdDefaultText,
                                                 textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite))
