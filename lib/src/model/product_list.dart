@@ -350,11 +350,14 @@ const mockProductResponse = {
       "commissionAmount": 2000,
       "serviceFee": 0,
       "shippingFee": 0,
-      "tagline": '<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>',
+      "tagline":
+          '<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>',
       "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "",
-      "technicalSpec": '<table border="0" cellpadding="1" cellspacing="1" style="width:100%"><tbody><tr><td style="width:50%;height:40px"><p>รหัสสินค้า</p></td><td style="width:50%;height:40px"><p>PM12345678</p></td></tr><tr><td style="width:50%;height:60px"><p>ประเภทของเครื่องชาร์จ</p></td><td style="width:50%;height:60px"><p>Mode 3</p></td></tr><tr><td style="width:50%"><p>ขนาด</p></td><td style="width:50%"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style="width:50%"><p>น้ำหนัก</p></td><td style="width:50%"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style="width:50%"><p>ความยาวสายชาร์จ</p></td><td style="width:50%"><p>5 เมตร</p></td></tr><tr><td style="width:50%"><p>การเชื่อมต่อ</p></td><td style="width:50%"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style="width:50%"><p>การเข้าใช้งาน</p></td><td style="width:50%"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style="width:50%"><p>สี</p></td><td style="width:50%"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>',
-      "remark": "<article>• ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา<br> • Krungsri Auto เป็นช่องทางการแสดงสินค้าเท่านั้น </br>• สอบถามข้อมูลเพิ่มเติมเกี่ยวกับสินค้า กรุณาติดต่อผู้ขายโดยตรง <strong>เบอร์ติดต่อ 091-862-5011</strong><br> • แจ้งปัญหาสอบถามข้อมูลการสั่งซื้อ กรุณาติดต่อผู้ดูแลระบบ <strong>เบอร์ติดต่อ 081-123-4567</strong></br><article>",
+      "technicalSpec":
+          '<table border="0" cellpadding="1" cellspacing="1" style="width:100%"><tbody><tr><td style="width:50%;height:40px"><p>รหัสสินค้า</p></td><td style="width:50%;height:40px"><p>PM12345678</p></td></tr><tr><td style="width:50%;height:60px"><p>ประเภทของเครื่องชาร์จ</p></td><td style="width:50%;height:60px"><p>Mode 3</p></td></tr><tr><td style="width:50%"><p>ขนาด</p></td><td style="width:50%"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style="width:50%"><p>น้ำหนัก</p></td><td style="width:50%"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style="width:50%"><p>ความยาวสายชาร์จ</p></td><td style="width:50%"><p>5 เมตร</p></td></tr><tr><td style="width:50%"><p>การเชื่อมต่อ</p></td><td style="width:50%"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style="width:50%"><p>การเข้าใช้งาน</p></td><td style="width:50%"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style="width:50%"><p>สี</p></td><td style="width:50%"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>',
+      "remark":
+          "<article>• ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา<br> • Krungsri Auto เป็นช่องทางการแสดงสินค้าเท่านั้น </br>• สอบถามข้อมูลเพิ่มเติมเกี่ยวกับสินค้า กรุณาติดต่อผู้ขายโดยตรง <strong>เบอร์ติดต่อ 091-862-5011</strong><br> • แจ้งปัญหาสอบถามข้อมูลการสั่งซื้อ กรุณาติดต่อผู้ดูแลระบบ <strong>เบอร์ติดต่อ 081-123-4567</strong></br><article>",
       "currency": "THB",
       "price": 56640,
       "discountPrice": 59000,
@@ -374,7 +377,8 @@ const mockProductResponse = {
       "merchantEmail": "",
       "productionOptionals": [
         {
-          "label": "สีดำ",
+          "label":
+              "สีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำ",
           "levelName": "สี",
           "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 56640,
@@ -400,9 +404,10 @@ const mockProductResponse = {
           ]
         },
         {
-          "label": "สีขาว",
+          "label":
+              "สีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาวสีขาว",
           "levelName": "สี",
-          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "",
           "price": 57640,
           "subProductId": "P001-2",
           "quantity": 250,
@@ -462,7 +467,223 @@ const mockProductResponse = {
               ]
             }
           ]
-        }
+        },
+        {
+          "label": "สีขาว",
+          "levelName": "สี",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "price": 57640,
+          "subProductId": "P001-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label":
+                  "3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร3 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "",
+              "price": 0,
+              "subProductId": "P001-21",
+              "quantity": 50
+            },
+            {
+              "label":
+                  "5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "price": 500,
+              "subProductId": "P001-22",
+              "quantity": 80
+            },
+            {
+              "label": "10 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "price": 700,
+              "subProductId": "P001-23",
+              "quantity": 120,
+              "level3": [
+                {
+                  "label":
+                      "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
+                  "levelName": "รูปแบบสาย",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "price": 9999999,
+                  "subProductId": "P001-231",
+                  "quantity": 120,
+                  "level4": [
+                    {
+                      "label":
+                          "สายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดา",
+                      "levelName": "รูปแบบสาย",
+                      "image": "",
+                      "price": 200,
+                      "subProductId": "P001-2311",
+                      "quantity": 120,
+                      "level5": [
+                        {
+                          "label":
+                              "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        },
+                        {
+                          "label":
+                              "สายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "",
+                          "price": 9999999,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        },
+                        {
+                          "label": "สายธรรมดาส",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        }
+                      ]
+                    },
+                    {
+                      "label":
+                          "สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้",
+                      "levelName": "รูปแบบสาย",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "price": 200,
+                      "subProductId": "P001-2311",
+                      "quantity": 120,
+                      "level5": [
+                        {
+                          "label":
+                              "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        },
+                        {
+                          "label":
+                              "สายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "",
+                          "price": 9999999,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        },
+                        {
+                          "label": "สายธรรมดาส",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        }
+                      ]
+                    },
+                    {
+                      "label": "สายไฟ",
+                      "levelName": "รูปแบบสาย",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "price": 200,
+                      "subProductId": "P001-2311",
+                      "quantity": 120,
+                      "level5": [
+                        {
+                          "label":
+                              "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        },
+                        {
+                          "label":
+                              "สายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดาสายไม่ธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "",
+                          "price": 9999999,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        },
+                        {
+                          "label": "สายธรรมดาส",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label":
+                      "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
+                  "levelName": "รูปแบบสาย",
+                  "image": "",
+                  "price": 100,
+                  "subProductId": "P001-231",
+                  "quantity": 120,
+                  "level4": [
+                    {
+                      "label": "สายธรรมดา",
+                      "levelName": "รูปแบบสาย",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "price": 200,
+                      "subProductId": "P001-2311",
+                      "quantity": 120,
+                      "level5": [
+                        {
+                          "label": "สายธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "สายธรรมดา",
+                  "levelName": "รูปแบบสาย",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "price": 9999999,
+                  "subProductId": "P001-231",
+                  "quantity": 120,
+                  "level4": [
+                    {
+                      "label": "สายธรรมดา",
+                      "levelName": "รูปแบบสาย",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "price": 200,
+                      "subProductId": "P001-2311",
+                      "quantity": 120,
+                      "level5": [
+                        {
+                          "label": "สายธรรมดา",
+                          "levelName": "รูปแบบสาย",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "price": 300,
+                          "subProductId": "P001-23111",
+                          "quantity": 120
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
       ]
     },
     {

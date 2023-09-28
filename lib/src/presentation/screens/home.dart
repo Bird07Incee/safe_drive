@@ -304,7 +304,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: GestureDetector(
                           onTap: () {
                             var p = ProductList.fromJson(mockProductResponse).products;
-                            Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${p!.first.productId}',
+                            Navigator.pushNamed(
+                                context, '${Routes.productDetail.toStringPath()}?pid=${p!.first.productId}',
                                 arguments: ProductDetailArgs(product: p.first));
                           },
                         ),
