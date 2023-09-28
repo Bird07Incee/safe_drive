@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -32,7 +31,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   PageController pageController = PageController(initialPage: 0, keepPage: false);
-  late TabController tabController;
 
   @override
   void initState() {
@@ -64,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final maxWidth = size.width;
-    // final tabController = TabController(length: 4, vsync: this);
+    final tabController = TabController(length: 5, vsync: this);
     return RootPageCondition(
         child: AlvaRootWidget(
             titlePage: titleWebPage,
@@ -78,8 +76,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               builder: (context, state) {
                 return BlocBuilder<ProductListBloc, ProductListState>(
                   builder: (context, state) {
-                    tabController = TabController(length: state.productList.category!.length, vsync: this);
-
                     if (state.productListStatus == GetProductListStatus.success) {
                       return Container(
                         color: cloudyWhite,
