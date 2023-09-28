@@ -29,7 +29,7 @@ class PDTopSection extends StatelessWidget {
           child: Container(
             width: 1,
             height: 16,
-            margin: EdgeInsets.only(left: 4, right: 4),
+            margin: EdgeInsets.only(left: 6, right: 6),
             color: cloudSoftDeepWhite,
           ),
         ));
@@ -251,28 +251,40 @@ class PDTopSection extends StatelessWidget {
 
                               return null;
                             }),
-                        Row(
-                          children: [
-                            AlvaText(
-                              title: args.product.discountPrice.toDecimalFormat(),
-                              textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
-                            ),
-                            AlvaText(
-                              title: ' บาท',
-                              textStyle: AlvaStyles().bodySize14w400(smockGrey).copyWith(height: 1.714),
-                            ),
-                          ],
+                        Visibility(
+                          visible: args.product.discountPrice > 0,
+                          child: Row(
+                            children: [
+                              AlvaText(
+                                title: args.product.discountPrice.toDecimalFormat(),
+                                textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
+                              ),
+                              AlvaText(
+                                title: ' บาท',
+                                textStyle: AlvaStyles().bodySize14w400(smockGrey).copyWith(height: 1.714),
+                              ),
+                            ],
+                          ),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             AlvaText(
                               title: args.product.price.toDecimalFormat(),
-                              textStyle: AlvaStyles().headingSize22w700(RedWordShow).copyWith(height: 1.454),
+                              textStyle: AlvaStyles()
+                                  .headingSize22w700(
+                                      args.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                  .copyWith(height: 1.454),
                             ),
-                            AlvaText(
-                              title: ' บาท',
-                              textStyle: AlvaStyles().headingSize18w700(RedWordShow).copyWith(height: 1.454),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 2),
+                              child: AlvaText(
+                                title: ' บาท',
+                                textStyle: AlvaStyles()
+                                    .headingSize18w700(
+                                        args.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                    .copyWith(height: 1.454),
+                              ),
                             ),
                           ],
                         ),
