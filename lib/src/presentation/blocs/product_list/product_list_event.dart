@@ -17,6 +17,12 @@ class GetProductList extends ProductListEvent {
   const GetProductList();
 }
 
+class GetProductListByCategory extends ProductListEvent {
+  const GetProductListByCategory(this.categoryId);
+
+  final String categoryId;
+}
+
 class SetSelectTabIndex extends ProductListEvent {
   const SetSelectTabIndex(this.selectedTabIndex);
 

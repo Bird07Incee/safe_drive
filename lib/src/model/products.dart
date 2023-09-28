@@ -31,11 +31,7 @@ const mockProductResponse = {
       "shippingFee": 0,
       "tagline":
           '<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>',
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "",
       "technicalSpec":
           '<table border="0" cellpadding="1" cellspacing="1" style="width:100%"><tbody><tr><td style="width:50%;height:40px"><p>รหัสสินค้า</p></td><td style="width:50%;height:40px"><p>PM12345678</p></td></tr><tr><td style="width:50%;height:60px"><p>ประเภทของเครื่องชาร์จ</p></td><td style="width:50%;height:60px"><p>Mode 3</p></td></tr><tr><td style="width:50%"><p>ขนาด</p></td><td style="width:50%"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style="width:50%"><p>น้ำหนัก</p></td><td style="width:50%"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style="width:50%"><p>ความยาวสายชาร์จ</p></td><td style="width:50%"><p>5 เมตร</p></td></tr><tr><td style="width:50%"><p>การเชื่อมต่อ</p></td><td style="width:50%"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style="width:50%"><p>การเข้าใช้งาน</p></td><td style="width:50%"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style="width:50%"><p>สี</p></td><td style="width:50%"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>',
@@ -54,8 +50,7 @@ const mockProductResponse = {
         "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124654629060.avi"
       ],
       "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
-      "merchantAddress":
-          "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
       "merchantLogo": "Url",
       "merchantMobile": "091-862-5011",
       "merchantEmail": "",
@@ -64,8 +59,7 @@ const mockProductResponse = {
           "label":
               "สีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำ",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 56640,
           "subProductId": "P001-1",
           "quantity": 200,
@@ -73,8 +67,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-11",
               "quantity": 100
@@ -82,8 +75,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-12",
               "quantity": 100
@@ -102,8 +94,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-21",
               "quantity": 50
@@ -111,8 +102,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-22",
               "quantity": 80
@@ -120,8 +110,7 @@ const mockProductResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 700,
               "subProductId": "P001-23",
               "quantity": 120,
@@ -129,8 +118,7 @@ const mockProductResponse = {
                 {
                   "label": "สายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                   "price": 100,
                   "subProductId": "P001-231",
                   "quantity": 120,
@@ -138,8 +126,7 @@ const mockProductResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -147,8 +134,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -164,8 +150,7 @@ const mockProductResponse = {
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 57640,
           "subProductId": "P001-2",
           "quantity": 250,
@@ -183,8 +168,7 @@ const mockProductResponse = {
               "label":
                   "5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-22",
               "quantity": 80
@@ -192,8 +176,7 @@ const mockProductResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 700,
               "subProductId": "P001-23",
               "quantity": 120,
@@ -202,8 +185,7 @@ const mockProductResponse = {
                   "label":
                       "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                   "price": 9999999,
                   "subProductId": "P001-231",
                   "quantity": 120,
@@ -221,8 +203,7 @@ const mockProductResponse = {
                           "label":
                               "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -239,8 +220,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดาส",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -251,8 +231,7 @@ const mockProductResponse = {
                       "label":
                           "สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้สายไรไม่รู้",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -261,8 +240,7 @@ const mockProductResponse = {
                           "label":
                               "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -279,8 +257,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดาส",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -290,8 +267,7 @@ const mockProductResponse = {
                     {
                       "label": "สายไฟ",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -300,8 +276,7 @@ const mockProductResponse = {
                           "label":
                               "สายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดาสายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -318,8 +293,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดาส",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -340,8 +314,7 @@ const mockProductResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -349,8 +322,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -362,8 +334,7 @@ const mockProductResponse = {
                 {
                   "label": "สายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                   "price": 9999999,
                   "subProductId": "P001-231",
                   "quantity": 120,
@@ -371,8 +342,7 @@ const mockProductResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -380,8 +350,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -414,11 +383,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -443,8 +408,7 @@ const mockProductResponse = {
         {
           "label": "สีดำ",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 56640,
           "subProductId": "P001-1",
           "quantity": 200,
@@ -452,8 +416,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-11",
               "quantity": 100
@@ -461,8 +424,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-12",
               "quantity": 100
@@ -472,8 +434,7 @@ const mockProductResponse = {
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 57640,
           "subProductId": "P001-2",
           "quantity": 250,
@@ -481,8 +442,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-21",
               "quantity": 50
@@ -490,8 +450,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-22",
               "quantity": 80
@@ -499,8 +458,7 @@ const mockProductResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 700,
               "subProductId": "P001-23",
               "quantity": 120,
@@ -508,8 +466,7 @@ const mockProductResponse = {
                 {
                   "label": "สายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                   "price": 100,
                   "subProductId": "P001-231",
                   "quantity": 120,
@@ -517,8 +474,7 @@ const mockProductResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -526,8 +482,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -560,11 +515,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -589,8 +540,7 @@ const mockProductResponse = {
         {
           "label": "สีดำ",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 56640,
           "subProductId": "P001-1",
           "quantity": 200,
@@ -598,8 +548,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-11",
               "quantity": 100
@@ -607,8 +556,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-12",
               "quantity": 100
@@ -618,8 +566,7 @@ const mockProductResponse = {
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 57640,
           "subProductId": "P001-2",
           "quantity": 250,
@@ -627,8 +574,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-21",
               "quantity": 50
@@ -636,8 +582,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-22",
               "quantity": 80
@@ -645,8 +590,7 @@ const mockProductResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 700,
               "subProductId": "P001-23",
               "quantity": 120,
@@ -654,8 +598,7 @@ const mockProductResponse = {
                 {
                   "label": "สายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                   "price": 100,
                   "subProductId": "P001-231",
                   "quantity": 120,
@@ -663,8 +606,7 @@ const mockProductResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -672,8 +614,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -706,11 +647,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -735,8 +672,7 @@ const mockProductResponse = {
         {
           "label": "สีดำ",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 56640,
           "subProductId": "P001-1",
           "quantity": 200,
@@ -744,8 +680,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-11",
               "quantity": 100
@@ -753,8 +688,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-12",
               "quantity": 100
@@ -764,8 +698,7 @@ const mockProductResponse = {
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 57640,
           "subProductId": "P001-2",
           "quantity": 250,
@@ -773,8 +706,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-21",
               "quantity": 50
@@ -782,8 +714,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-22",
               "quantity": 80
@@ -791,8 +722,7 @@ const mockProductResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 700,
               "subProductId": "P001-23",
               "quantity": 120,
@@ -800,8 +730,7 @@ const mockProductResponse = {
                 {
                   "label": "สายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                   "price": 100,
                   "subProductId": "P001-231",
                   "quantity": 120,
@@ -809,8 +738,7 @@ const mockProductResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -818,8 +746,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -852,11 +779,7 @@ const mockProductResponse = {
       "serviceFee": 0,
       "shippingFee": 0,
       "tagline": "html",
-      "promotionTag": [
-        "ติดตั้งฟรี",
-        "รับประกัน 3 ปี",
-        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
-      ],
+      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
       "description": "html",
       "technicalSpec": "html",
       "remark": "html",
@@ -881,8 +804,7 @@ const mockProductResponse = {
         {
           "label": "สีดำ",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 56640,
           "subProductId": "P001-1",
           "quantity": 200,
@@ -890,8 +812,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-11",
               "quantity": 100
@@ -899,8 +820,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-12",
               "quantity": 100
@@ -910,8 +830,7 @@ const mockProductResponse = {
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 57640,
           "subProductId": "P001-2",
           "quantity": 250,
@@ -919,8 +838,7 @@ const mockProductResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 0,
               "subProductId": "P001-21",
               "quantity": 50
@@ -928,8 +846,7 @@ const mockProductResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P001-22",
               "quantity": 80
@@ -937,8 +854,7 @@ const mockProductResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 700,
               "subProductId": "P001-23",
               "quantity": 120,
@@ -946,8 +862,7 @@ const mockProductResponse = {
                 {
                   "label": "สายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                   "price": 100,
                   "subProductId": "P001-231",
                   "quantity": 120,
@@ -955,8 +870,7 @@ const mockProductResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                       "price": 200,
                       "subProductId": "P001-2311",
                       "quantity": 120,
@@ -964,8 +878,7 @@ const mockProductResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                          "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
                           "price": 300,
                           "subProductId": "P001-23111",
                           "quantity": 120
@@ -1005,8 +918,7 @@ class ProductResponse {
     productCountItems = json['productCountItems'];
     banner = List.from(json['banner']).map((e) => Banner.fromJson(e)).toList();
     category = List.castFrom<dynamic, String>(json['category']);
-    products =
-        List.from(json['products']).map((e) => Products.fromJson(e)).toList();
+    products = List.from(json['products']).map((e) => Products.fromJson(e)).toList();
   }
 }
 
@@ -1135,9 +1047,7 @@ class Products {
     merchantLogo = json['merchantLogo'];
     merchantMobile = json['merchantMobile'];
     merchantEmail = json['merchantEmail'];
-    productionOptionals = List.from(json['productionOptionals'])
-        .map((e) => ProductionOptionals.fromJson(e))
-        .toList();
+    productionOptionals = List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList();
   }
 }
 
@@ -1167,21 +1077,12 @@ class ProductionOptionals {
         price: json['price'],
         subProductId: json['subProductId'],
         quantity: json['quantity'],
-        level2:
-            List.from(json['level2']).map((e) => Level2.fromJson(e)).toList());
+        level2: List.from(json['level2']).map((e) => Level2.fromJson(e)).toList());
   }
 }
 
 class Level2 extends ProductionOptionals {
-  Level2(
-      {label,
-      levelName,
-      image,
-      price,
-      subProductId,
-      quantity,
-      level2,
-      required this.level3})
+  Level2({label, levelName, image, price, subProductId, quantity, level2, required this.level3})
       : super(
             label: label,
             levelName: levelName,
@@ -1200,21 +1101,12 @@ class Level2 extends ProductionOptionals {
         price: json['price'],
         subProductId: json['subProductId'],
         quantity: json['quantity'],
-        level3:
-            List.from(json['level3']).map((e) => Level3.fromJson(e)).toList());
+        level3: List.from(json['level3']).map((e) => Level3.fromJson(e)).toList());
   }
 }
 
 class Level3 extends ProductionOptionals {
-  Level3(
-      {label,
-      levelName,
-      image,
-      price,
-      subProductId,
-      quantity,
-      level2,
-      required this.level4})
+  Level3({label, levelName, image, price, subProductId, quantity, level2, required this.level4})
       : super(
             label: label,
             levelName: levelName,
@@ -1239,15 +1131,7 @@ class Level3 extends ProductionOptionals {
 }
 
 class Level4 extends ProductionOptionals {
-  Level4(
-      {label,
-      levelName,
-      image,
-      price,
-      subProductId,
-      quantity,
-      level2,
-      required this.level5})
+  Level4({label, levelName, image, price, subProductId, quantity, level2, required this.level5})
       : super(
             label: label,
             levelName: levelName,

@@ -5,8 +5,12 @@ class DioUtilityService with HeaderUtil {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? Dio();
   final Dio _dioClient;
 
-  Future<Response> getByURL(String path, Map<String, Object> params, {bool isRecursion = false}) async {
+  Future<Response> getByURL(String path, Map<String, Object> params,
+      {bool isRecursion = false, Map<String, dynamic>? headers}) async {
     _dioClient.options.headers = HeaderUtil.baseHeader;
+    if (headers != null) {
+      _dioClient.options.headers.addAll(headers);
+    }
 
     try {
       final response = await _dioClient.get(

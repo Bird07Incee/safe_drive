@@ -18,6 +18,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   ProductListBloc() : super(const ProductListState()) {
     on<GetProductListMock>(_onGetProductListMock);
     on<GetProductList>(_onGetProductList);
+    on<GetProductListByCategory>(_onGetProductListByCategory);
     on<SetSelectTabIndex>(_onSetSelectTabIndex);
   }
 
@@ -47,6 +48,30 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     try {
       Response response = await dioUtilityRepository.postByURL(
           "$baseUrl/mercury-inventory-manager-dev/ecommerce/v1/products", {},
+          headers: {"Authorization": "Bearer $accessToken"});
+
+      final productList = ProductList.fromJson(response.data);
+      emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+    } catch (e) {
+      print(e);
+      emit(state.copyWith(productListStatus: GetProductListStatus.error));
+    }
+  }
+
+  _onGetProductListByCategory(GetProductListByCategory event, Emitter<ProductListState> emit) async {
+    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
+    LineDataHelper lineDataHelper = LineDataHelper();
+    final baseUrl = Environment().getValue("BFF_BASE_URL");
+    String accessToken = lineDataHelper.getLineAccessToken();
+
+    // const accessToken =
+    //     "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQEUk3/Zj+oXruNIaluHKaLyAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwU35iBDNidEe3In6YCARCAggEHapD+3ohNbUyQshpMkrgAsg7klkyxCW1ZYFmwUNtr6IDuetQ3c0/yChhINiYRAPMloZ7aY2abHIkS3xVUblaznTUy+fbw6KcPON19rABqciIzDj9fB8Dxog+BdYbsjc0zOA2Aw/rAA7cI9Lyn22YNZTb51wXFINYI/tTyGxgPPMXukDkHQvo0H4asAvTka6FXjldV8t/W365W53PUD5Wy1KedP3XZ8rWeBRYfs7gO42ixVhjQbLS/1o1VfN61wvdRpkQO1ba2afeV86L6qDihXg9xoNzBvHcKcobmTY+NvT3LjMPc2lHYIO5CfgC3CEDAnNiPxobENBR5SpLZNrxQ10lDkY8ZqFk=";
+
+    emit(state.copyWith(productListStatus: GetProductListStatus.loading));
+
+    try {
+      Response response = await dioUtilityRepository.getByURL(
+          "$baseUrl/mercury-inventory-manager-dev/ecommerce/v1/products", {"categoryId": event.categoryId},
           headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);

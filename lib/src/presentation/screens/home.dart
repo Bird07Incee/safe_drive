@@ -103,6 +103,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     unselectedLabelColor: const Color(0xffDEDEDE),
                                     onTap: (int index) {
                                       context.read<ProductListBloc>().add(SetSelectTabIndex(index));
+                                      if (index == 0) {
+                                        context.read<ProductListBloc>().add(const GetProductList());
+                                      } else {
+                                        print(state.productList.category![index]["categoryId"]);
+                                        context.read<ProductListBloc>().add(
+                                            GetProductListByCategory(state.productList.category![index]["categoryId"]));
+                                      }
                                     },
                                     tabs: [
                                       Tab(
@@ -156,39 +163,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       // ),
                                     ]),
                               ),
-                              content: IndexedStack(
-                                index: state.selectedTabIndex,
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Visibility(
-                                    maintainState: true,
-                                    visible: state.selectedTabIndex == 0,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          width: maxWidth - 32,
-                                          child: ProductCardWidget(
-                                            maxWidth: maxWidth,
-                                            productList: state.productList,
-                                          ),
-                                        ),
-                                      ],
+                                  SizedBox(
+                                    width: maxWidth - 32,
+                                    child: ProductCardWidget(
+                                      maxWidth: maxWidth,
+                                      productList: state.productList,
                                     ),
                                   ),
-                                  for (int i = 0; i < state.productList.category!.length; i++)
-                                    Visibility(
-                                      maintainState: true,
-                                      visible: state.selectedTabIndex == (i + 1),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            width: maxWidth - 32,
-                                            child: Text("index ${i + 1}"),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                 ],
                               ),
                             ),
