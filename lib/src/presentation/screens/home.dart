@@ -21,6 +21,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_b
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,16 +33,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  // void webCookiePolicyBTS() {
-  //   var maxWidth = MediaQuery.of(context).size.width;
-  //   // เรียกใช้ showModalBottomSheet
-  //   showModalBottomSheet<void>(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return CookieAcceptUI(maxWidth: maxWidth);
-  //     },
-  //   );
-  // }
+  PageController pageController = PageController(initialPage: 0, keepPage: false);
+
   @override
   void initState() {
     // TODO: implement initState
@@ -68,21 +61,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     GeneralDialog().showLoadingDialog(context: context);
     Future.delayed(const Duration(seconds: 10)).then((value) => Navigator.pop(context));
   }
-
-  ProductList getProductListByCategory(ProductList unSortProductList, int id) => ProductList(
-        productAllItems: 0,
-        productPage: 0,
-        productCountItems: 0,
-        banner: [],
-        category: [],
-        products:
-            unSortProductList.products?.where((product) => product.categoryId == (id + 1).toString()).toList() ?? [],
-      );
-
-  bool isProductListContainCategory(ProductList productList) =>
-      productList.products?.any((product) => int.parse(product.categoryId) >= 2) ?? false;
-
-  PageController pageController = PageController(initialPage: 0, keepPage: false);
 
   @override
   Widget build(BuildContext context) {
@@ -112,15 +90,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               maxWidth: maxWidth,
                               pageControllerState: pageController,
                             ),
-                            Visibility(
-                              visible: isProductListContainCategory(state.productList),
-                              child: Container(
+                            StickyHeader(
+                              header: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 16),
                                 color: Colors.white,
                                 child: TabBar(
                                     controller: tabController,
                                     labelColor: Colors.black,
                                     indicatorColor: BlueFantasy,
+                                    isScrollable: true,
                                     labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
                                     unselectedLabelColor: const Color(0xffDEDEDE),
                                     onTap: (int index) {
@@ -135,82 +113,76 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             : Image.asset('assets/images/category/icon_cate_all.png',
                                                 width: 24, height: 24),
                                       ),
-                                      Tab(
-                                        text: "วอลชาร์จ",
-                                        icon: state.selectedTabIndex == 1
-                                            ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
-                                                width: 24, height: 24)
-                                            : Image.asset('assets/images/category/icon_cate_wallcharge.png',
-                                                width: 24, height: 24),
-                                      ),
-                                      Tab(
-                                        text: "โซลาร์เซลล์",
-                                        icon: state.selectedTabIndex == 2
-                                            ? Image.asset('assets/images/category/icon_active_cate_solar.png',
-                                                width: 24, height: 24)
-                                            : Image.asset('assets/images/category/icon_cate_solar.png',
-                                                width: 24, height: 24),
-                                      ),
-                                      Tab(
-                                        text: "สินค้าอื่นๆ",
-                                        icon: state.selectedTabIndex == 3
-                                            ? Image.asset('assets/images/category/icon_active_cate_other.png',
-                                                width: 24, height: 24)
-                                            : Image.asset('assets/images/category/icon_cate_other.png',
-                                                width: 24, height: 24),
-                                      ),
+                                      for (int i = 0; i < state.productList.category!.length; i++)
+                                        Tab(
+                                          text: state.productList.category![i]["category"],
+                                          icon: state.selectedTabIndex == (i + 1)
+                                              ? Image.asset('assets/images/category/icon_active_cate_other.png',
+                                                  width: 24, height: 24)
+                                              : Image.asset('assets/images/category/icon_cate_other.png',
+                                                  width: 24, height: 24),
+                                        ),
+                                      // Tab(
+                                      //   text: "วอลชาร์จ",
+                                      //   icon: state.selectedTabIndex == 1
+                                      //       ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
+                                      //           width: 24, height: 24)
+                                      //       : Image.asset('assets/images/category/icon_cate_wallcharge.png',
+                                      //           width: 24, height: 24),
+                                      // ),
+                                      // Tab(
+                                      //   text: "โซลาร์เซลล์",
+                                      //   icon: state.selectedTabIndex == 2
+                                      //       ? Image.asset('assets/images/category/icon_active_cate_solar.png',
+                                      //           width: 24, height: 24)
+                                      //       : Image.asset('assets/images/category/icon_cate_solar.png',
+                                      //           width: 24, height: 24),
+                                      // ),
+                                      // Tab(
+                                      //   text: "สินค้าอื่นๆ",
+                                      //   icon: state.selectedTabIndex == 3
+                                      //       ? Image.asset('assets/images/category/icon_active_cate_other.png',
+                                      //           width: 24, height: 24)
+                                      //       : Image.asset('assets/images/category/icon_cate_other.png',
+                                      //           width: 24, height: 24),
+                                      // ),
                                     ]),
                               ),
-                            ),
-                            IndexedStack(
-                              index: state.selectedTabIndex,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: maxWidth - 32,
-                                      child: ProductCardWidget(
-                                        maxWidth: maxWidth,
-                                        productList: state.productList,
+                              content: IndexedStack(
+                                index: state.selectedTabIndex,
+                                children: [
+                                  Visibility(
+                                    maintainState: true,
+                                    visible: state.selectedTabIndex == 0,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: maxWidth - 32,
+                                          child: ProductCardWidget(
+                                            maxWidth: maxWidth,
+                                            productList: state.productList,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  for (int i = 0; i < state.productList.category!.length; i++)
+                                    Visibility(
+                                      maintainState: true,
+                                      visible: state.selectedTabIndex == (i + 1),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: maxWidth - 32,
+                                            child: Text("index ${i + 1}"),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: maxWidth - 32,
-                                      child: ProductCardWidget(
-                                          maxWidth: maxWidth,
-                                          productList: getProductListByCategory(state.productList, 1)),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: maxWidth - 32,
-                                      child: ProductCardWidget(
-                                          maxWidth: maxWidth,
-                                          productList: getProductListByCategory(state.productList, 2)),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: maxWidth - 32,
-                                      child: ProductCardWidget(
-                                          maxWidth: maxWidth,
-                                          productList: getProductListByCategory(state.productList, 3)),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             Column(
                               children: [
@@ -311,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       );
 
-                      return const LoadingScreen();
+                      //return const LoadingScreen();
                     }
                   },
                 );

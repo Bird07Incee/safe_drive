@@ -1,6 +1,5 @@
 import 'dart:convert';
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
