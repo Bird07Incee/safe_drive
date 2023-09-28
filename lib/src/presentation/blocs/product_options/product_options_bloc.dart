@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductOptionBloc extends Cubit<ProductOptionState> {
@@ -74,7 +75,7 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
   }
 }
 
-class ProductOptionState {
+class ProductOptionState extends Equatable {
   final String stepOneGroupValueRadio;
   final int? stepOnePrice;
   final int? stepOneIndexSelect;
@@ -93,23 +94,23 @@ class ProductOptionState {
   final int? lastOption;
   final int? selectCurrentOption;
 
-  ProductOptionState({
+  const ProductOptionState({
     this.stepOneGroupValueRadio = "",
-    this.stepOnePrice,
-    this.stepOneIndexSelect,
+    this.stepOnePrice = 0,
+    this.stepOneIndexSelect = 0,
     this.stepTwoGroupValueRadio = "",
-    this.stepTwoPrice,
-    this.stepTwoIndexSelect,
+    this.stepTwoPrice = 0,
+    this.stepTwoIndexSelect = 0,
     this.stepTreeGroupValueRadio = "",
-    this.stepTreePrice,
-    this.stepTreeIndexSelect,
+    this.stepTreePrice = 0,
+    this.stepTreeIndexSelect = 0,
     this.stepFourGroupValueRadio = "",
-    this.stepFourPrice,
-    this.stepFourIndexSelect,
+    this.stepFourPrice = 0,
+    this.stepFourIndexSelect = 0,
     this.stepFiveGroupValueRadio = "",
-    this.stepFivePrice,
-    this.stepFiveIndexSelect,
-    this.lastOption,
+    this.stepFivePrice = 0,
+    this.stepFiveIndexSelect = 0,
+    this.lastOption = 0,
     this.selectCurrentOption = 0,
   });
 
@@ -152,4 +153,26 @@ class ProductOptionState {
       selectCurrentOption: selectCurrentOption ?? this.selectCurrentOption,
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+    stepOneGroupValueRadio,
+    stepOnePrice,
+    stepOneIndexSelect,
+    stepTwoGroupValueRadio,
+    stepTwoPrice,
+    stepTwoIndexSelect,
+    stepTreeGroupValueRadio,
+    stepTreePrice,
+    stepTreeIndexSelect,
+    stepFourGroupValueRadio,
+    stepFourPrice,
+    stepFourIndexSelect,
+    stepFiveGroupValueRadio,
+    stepFivePrice,
+    stepFiveIndexSelect,
+    lastOption,
+    selectCurrentOption,
+  ];
 }
