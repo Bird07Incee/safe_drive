@@ -10,5 +10,9 @@ const tabIconsMapping = {
   "CT_371KNH5QXG6O": {
     "active": 'assets/images/category/icon_active_cate_other.png',
     "inactive": 'assets/images/category/icon_cate_other.png'
-  }
+  },
+  "CT_2YP8LLQG95FS": {
+    "active": 'assets/images/category/icon_active_cate_other.png',
+    "inactive": 'assets/images/category/icon_cate_other.png'
+  },
 };
