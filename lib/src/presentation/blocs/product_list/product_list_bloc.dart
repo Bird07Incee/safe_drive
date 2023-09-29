@@ -46,11 +46,11 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     emit(state.copyWith(productListStatus: GetProductListStatus.loading));
 
     try {
-      Response response = await dioUtilityRepository.postByURL(
-          "$baseUrl/mercury-inventory-manager-dev/ecommerce/v1/products", {},
-          headers: {"Authorization": "Bearer $accessToken"});
+      // Response response = await dioUtilityRepository.postByURL(
+      //     "$baseUrl/mercury-inventory-manager-dev/ecommerce/v1/products", {},
+      //     headers: {"Authorization": "Bearer $accessToken"});
 
-      final productList = ProductList.fromJson(response.data);
+      final productList = ProductList.fromJson(mockProductResponse);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } catch (e) {
       print(e);
