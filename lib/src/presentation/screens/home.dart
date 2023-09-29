@@ -187,6 +187,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           print("click see more");
                                         },
                                         child: Container(
+                                          width: 100,
                                           margin: EdgeInsets.symmetric(vertical: 4),
                                           decoration: BoxDecoration(
                                               color: Colors.white,
