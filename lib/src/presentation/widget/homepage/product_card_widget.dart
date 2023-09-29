@@ -240,11 +240,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             Visibility(
                               visible: products[index].tagline == "" ? false : true,
                               child: HtmlWidget(
-                                "<div>${products[index].tagline}</div>",
+                                products[index].tagline,
                                 customStylesBuilder: (element) {
-                                  if (element.localName == "div") {
-                                    return {'max-lines': '4', 'text-overflow': 'ellipsis'};
-                                  }
                                   if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
                                     return {
                                       'font-family': 'Krungsri Condensed',
@@ -257,7 +254,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       'font-family': 'Krungsri Condensed',
                                       'font-size': '10px',
                                       'font-weight': '400',
-                                      'color': '#5A5A5A'
+                                      'color': '#5A5A5A',
+                                      'max-lines': '4',
+                                      'text-overflow': 'ellipsis'
                                     };
                                   }
                                 },
