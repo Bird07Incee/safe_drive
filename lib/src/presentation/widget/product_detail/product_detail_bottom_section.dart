@@ -417,9 +417,8 @@ class _PDBottomSectionState extends State<PDBottomSection>
                                 size: 16,
                               ),
                               const SizedBox(width: 8),
-                              AlvaText(
-                                  title: "ติดต่อ ${product.merchantMobile}",
-                                  textStyle: AlvaStyles()
+                              Text("ติดต่อ ${product.merchantMobile}",
+                                  style: AlvaStyles()
                                       .heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
