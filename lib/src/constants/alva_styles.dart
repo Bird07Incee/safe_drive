@@ -96,6 +96,9 @@ class AlvaStyles {
   TextStyle bodySize14w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color);
 
+  TextStyle bodySize12W600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, color: color, fontWeight: FontWeight.bold);
+
   TextStyle bodySize14W600(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 14, color: color, fontWeight: FontWeight.bold);
   TextStyle bodySize16W600(Color color) =>

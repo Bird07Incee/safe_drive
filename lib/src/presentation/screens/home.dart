@@ -173,6 +173,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       productList: state.productList,
                                     ),
                                   ),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          print("click see more");
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.symmetric(vertical: 4),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black.withOpacity(0.4),
+                                                  spreadRadius: 0,
+                                                  blurRadius: 8,
+                                                  offset: const Offset(0, 2),
+                                                ),
+                                              ]),
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 16,
+                                              ),
+                                              AlvaText(
+                                                title: 'โหลดเพิ่มเติม',
+                                                textStyle: AlvaStyles().bodySize12W600(spaceGrey),
+                                              ),
+                                              const SizedBox(
+                                                width: 16,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 32,
+                                      ),
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
