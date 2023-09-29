@@ -235,35 +235,28 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               height: 16,
                             ),
                             HtmlWidget(
-                              products[index].tagline,
+                              products[index].tagline + products[index].description,
                               customStylesBuilder: (element) {
-                                if (element.localName == "h1") {
+                                if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
                                   return {
                                     'font-family': 'Krungsri Condensed',
                                     'font-size': '16px',
-                                    'font-weight': '600'
+                                    'font-weight': '600',
+                                    'max-lines': '4',
+                                    'text-overflow': 'ellipsis',
+                                    'color': '#2C2626'
                                   };
-                                }
-
-                                return null;
-                              },
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            HtmlWidget(
-                              products[index].description,
-                              customStylesBuilder: (element) {
-                                if (element.localName == "p") {
+                                } else {
                                   return {
                                     'font-family': 'Krungsri Condensed',
                                     'font-size': '10px',
                                     'font-weight': '400',
-                                    'line-height': '16px'
+                                    'line-height': '16px',
+                                    'max-lines': '4',
+                                    'text-overflow': 'ellipsis',
+                                    'color': '#5A5A5A'
                                   };
                                 }
-
-                                return null;
                               },
                             ),
                             const SizedBox(

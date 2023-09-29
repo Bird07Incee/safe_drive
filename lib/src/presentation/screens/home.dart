@@ -251,8 +251,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ],
                         ),
                       );
-                    } 
-                    else if (state.productListStatus == GetProductListStatus.error) {
+                    } else if (state.productListStatus == GetProductListStatus.error) {
                       return ErrorScreen(
                         title: ErrorConst().titleNS,
                         subTitle: ErrorConst().subTitleNS,
@@ -261,11 +260,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           context.read<ProductListBloc>().add(const GetProductList());
                         },
                       );
-                    }
-                    else if (state.productListStatus == GetProductListStatus.loadingTranparent){
+                    } else if (state.productListStatus == GetProductListStatus.loadingTranparent) {
                       return const LoadingScreen();
-                    } 
-                    else {
+                    } else {
                       return const LoadingScreen();
                     }
                   },
