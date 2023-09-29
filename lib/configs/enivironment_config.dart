@@ -3,31 +3,36 @@ Map<String, dynamic> envConfig = {
     "ENVIRONMENT_NAME": "dev",
     "LIFF_ID": "1661164508-Kn9nO7oB",
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
-    "BFF_SOCIAL_BASE_URL": "/mercury-social-dev"
+    "BFF_SOCIAL_BASE_URL": "/mercury-social-dev",
+    "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-dev"
   },
   "qa": {
     "ENVIRONMENT_NAME": "qa",
     "LIFF_ID": "1661164508-Kn9nO7oB",
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
-    "BFF_SOCIAL_BASE_URL": "/mercury-social-qa"
+    "BFF_SOCIAL_BASE_URL": "/mercury-social-qa",
+    "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-qa"
   },
   "int": {
     "ENVIRONMENT_NAME": "int",
     "LIFF_ID": "1661164508-Kn9nO7oB",
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
-    "BFF_SOCIAL_BASE_URL": "/mercury-social-int"
+    "BFF_SOCIAL_BASE_URL": "/mercury-social-int",
+    "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-int"
   },
   "uat": {
     "ENVIRONMENT_NAME": "uat",
     "LIFF_ID": "1661164508-Kn9nO7oB",
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
-    "BFF_SOCIAL_BASE_URL": "/mercury-social-uat"
+    "BFF_SOCIAL_BASE_URL": "/mercury-social-uat",
+    "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-uat"
   },
   "prod": {
     "ENVIRONMENT_NAME": "prod",
     "LIFF_ID": "1661164508-Kn9nO7oB",
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
-    "BFF_SOCIAL_BASE_URL": "/mercury-social-prod"
+    "BFF_SOCIAL_BASE_URL": "/mercury-social-prod",
+    "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-prod"
   },
 };
 

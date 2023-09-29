@@ -38,6 +38,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
+    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = lineDataHelper.getLineAccessToken();
 
     // const accessToken =
@@ -46,8 +47,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     emit(state.copyWith(productListStatus: GetProductListStatus.loading));
 
     try {
-      Response response = await dioUtilityRepository.postByURL(
-          "$baseUrl/mercury-inventory-manager-dev/ecommerce/v1/products", {},
+      Response response = await dioUtilityRepository.postByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {},
           headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);
@@ -62,6 +62,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
+    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = lineDataHelper.getLineAccessToken();
 
     // const accessToken =
@@ -71,7 +72,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
     try {
       Response response = await dioUtilityRepository.getByURL(
-          "$baseUrl/mercury-inventory-manager-dev/ecommerce/v1/products", {"categoryId": event.categoryId},
+          "$baseUrl$inventoryApiPath/ecommerce/v1/products", {"categoryId": event.categoryId},
           headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);

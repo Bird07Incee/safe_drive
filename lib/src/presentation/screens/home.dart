@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       ),
                                       for (int i = 0; i < state.productList.category!.length; i++)
                                         Tab(
-                                          text: state.productList.category![i]["category"],
+                                          text: state.productList.category![i]["categoryTh"],
                                           icon: state.selectedTabIndex == (i + 1)
                                               ? Image.asset(
                                                   tabIconsMapping[state.productList.category![i]["categoryId"]]![

@@ -30,8 +30,7 @@ class ProductDetailScreen extends StatefulWidget {
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen>
-    with TickerProviderStateMixin {
+class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerProviderStateMixin {
   final oCcy = NumberFormat("#,##0", "en_US");
   late RouteSettings? settings;
   final scrollController = ScrollController();
@@ -57,15 +56,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   @override
   void initState() {
     super.initState();
-    context
-        .read<ProductDetailCarouselScrollControllerBloc>()
-        .add(const CarouselScrollAction(index: 0));
+    context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     scrollController.addListener(() {
       var pixelScreen = scrollController.position.pixels;
-      context
-          .read<ScrollProductDetailBloc>()
-          .add(ProductDetailScrollAction(pixelScreen, context, "0"));
+      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(pixelScreen, context, "0"));
     });
   }
 
@@ -76,9 +71,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   @override
   Widget build(BuildContext context) {
     int imageDataLength = 1;
-    settings = ModalRoute.of(context) != null
-        ? ModalRoute.of(context)!.settings
-        : null;
+    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (widget.arguments != null) {
       imageDataLength = widget.arguments!.product.productionAssets.length == 1
           ? widget.arguments!.product.productionAssets.length
@@ -105,15 +98,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 builder: (context, previousState) {
                   return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
                     builder: (context, switchState) {
-                      return BlocBuilder<
-                          ProductDetailCarouselScrollControllerBloc,
-                          PageController>(
+                      return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
                         builder: (context, carouselState) {
                           return switchState
-                              ? viewImagePage(carouselState, context, zoomState,
-                                  previousState, imageDataLength)
-                              : productDetailPage(stateAppBar, context,
-                                  carouselState, imageDataLength);
+                              ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
+                              : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
                         },
                       );
                     },
@@ -127,17 +116,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     );
   }
 
-  WillPopScope productDetailPage(ScrollProductDetailState stateAppBar,
-      BuildContext context, PageController carouselState, int imageDataLength) {
+  WillPopScope productDetailPage(
+      ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
-        context
-            .read<ProductDetailCarouselScrollControllerBloc>()
-            .add(const CarouselScrollAction(index: 0));
-        context
-            .read<ScrollProductDetailBloc>()
-            .add(ProductDetailScrollAction(0, context, "1"));
+        context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
+        context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
         return true;
       },
       child: AlvaRootWidget(
@@ -152,9 +137,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                       context
                           .read<ProductDetailCarouselScrollControllerBloc>()
                           .add(const CarouselScrollAction(index: 0));
-                      context
-                          .read<ScrollProductDetailBloc>()
-                          .add(ProductDetailScrollAction(0, context, "1"));
+                      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
                     },
                     icon: const Icon(Icons.arrow_back),
                   ),
@@ -165,11 +148,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     children: [
                       AlvaText(
                           title: widget.arguments!.product.productName,
-                          textStyle: AlvaStyles()
-                              .headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          textStyle: AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                       AlvaTextMaxLinesOverflow(
-                          title:
-                              '${widget.arguments!.product.price.toDecimalFormat()} บาท',
+                          title: '${widget.arguments!.product.price.toDecimalFormat()} บาท',
                           maxLines: 1,
                           textStyle: AlvaStyles().heading2(RedWordShow))
                     ],
@@ -178,9 +159,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 )
               : AppBar(
                   title: AlvaText(
-                      title: "ข้อมูลสินค้า",
-                      textStyle: AlvaStyles()
-                          .headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 0,
                   leadingWidth: 60,
                   centerTitle: false,
@@ -192,9 +171,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         context
                             .read<ProductDetailCarouselScrollControllerBloc>()
                             .add(const CarouselScrollAction(index: 0));
-                        context
-                            .read<ScrollProductDetailBloc>()
-                            .add(ProductDetailScrollAction(0, context, "1"));
+                        context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
                       },
                       icon: const Icon(Icons.arrow_back)),
                 ),
@@ -202,29 +179,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             color: whitePure,
             width: maxWidth,
             height: 96,
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
             child: Row(
               children: [
                 Expanded(
                   child: Container(
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
                     height: 48,
                     child: OutlinedButton(
                       onPressed: () {
                         Navigator.pushNamed(context,
                             '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}',
-                            arguments: ProductDetailArgs(
-                                product: widget.arguments!.product));
+                            arguments: ProductDetailArgs(product: widget.arguments!.product));
                       },
-                      style: AlvaStyles().outlineNoneBorderButtonStyle(
-                          YellowKrungsri, Colors.transparent,
-                          isRadius8: true),
+                      style: AlvaStyles()
+                          .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
                       child: AlvaText(
                           title: "สั่งซื้อสินค้า",
-                          textStyle: AlvaStyles()
-                              .headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                     ),
                   ),
                 )
@@ -240,9 +212,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               physics: const BouncingScrollPhysics(),
               controller: scrollController,
               children: [
-                widget.arguments != null
-                    ? PDTopSection(args: widget.arguments!)
-                    : SizedBox(),
+                widget.arguments != null ? PDTopSection(args: widget.arguments!) : SizedBox(),
                 Container(
                   height: 16,
                   decoration: BoxDecoration(
@@ -254,35 +224,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     ),
                   ),
                 ),
-                widget.arguments != null
-                    ? PDBottomSection(args: widget.arguments!)
-                    : SizedBox()
+                widget.arguments != null ? PDBottomSection(args: widget.arguments!) : SizedBox()
               ],
             ),
           )),
     );
   }
 
-  Widget viewImagePage(
-      PageController carouselState,
-      BuildContext context,
-      TransformationController zoomState,
-      double previousState,
-      int imageDataLength) {
+  Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
+      double previousState, int imageDataLength) {
     backButtontoDetail() {
       log("backButtontoDetail");
-      context
-          .read<ViewImgDetailPageSwitchBloc>()
-          .add(SwitchPageAction(statePage: false));
+      context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
       context
           .read<ProductDetailCarouselScrollControllerBloc>()
           .add(CarouselScrollAction(index: carouselState.initialPage));
-      context
-          .read<PreviousScaleBloc>()
-          .add(const PreviousScaleEvent(previousScale: 0.5));
+      context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
       if (zoomState.value != Matrix4.identity()) {
-        context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(
-            details: customTapDownDetails(const Offset(100, 100))));
+        context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
       }
     }
 
@@ -303,17 +262,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   Expanded(
                       child: GestureDetector(
                     onDoubleTapDown: (TapDownDetails detail) {
-                      context
-                          .read<ImgGalleryZoomBloc>()
-                          .add(ZoomImageAction(details: detail));
+                      context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
                       if (previousState > 0.5) {
-                        context
-                            .read<PreviousScaleBloc>()
-                            .add(const PreviousScaleEvent(previousScale: 0.5));
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                       } else {
-                        context
-                            .read<PreviousScaleBloc>()
-                            .add(const PreviousScaleEvent(previousScale: 0.8));
+                        context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.8));
                       }
                     },
                     child: InteractiveViewer(
@@ -326,24 +279,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         _scale = previousState * details.scale;
                       },
                       onInteractionEnd: (ScaleEndDetails details) {
-                        context.read<PreviousScaleBloc>().add(
-                            PreviousScaleEvent(
-                                previousScale: _scale.clamp(0.5, 5.0)));
+                        context
+                            .read<PreviousScaleBloc>()
+                            .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
                       },
                       child: AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
-                            itemCount: imageDataLength == 1
-                                ? imageDataLength
-                                : imageDataLength + 1,
-                            physics: previousState == 0.5
-                                ? const ScrollPhysics()
-                                : const NeverScrollableScrollPhysics(),
+                            itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
+                            physics:
+                                previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
                             controller: carouselState,
                             onPageChanged: (val) {
                               context
-                                  .read<
-                                      ProductDetailCarouselScrollControllerBloc>()
+                                  .read<ProductDetailCarouselScrollControllerBloc>()
                                   .add(CarouselScrollAction(index: val));
 
                               if (val == imageDataLength && val != 1) {
@@ -357,14 +306,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                   width: maxWidth,
                                   height: 576,
                                   child: FadeInImage(
-                                    placeholder: AssetImage(
-                                        ProductDetailConst().imgDefaultPath),
+                                    placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                                     image: NetworkImage(
                                       i == imageDataLength
-                                          ? widget.arguments!.product
-                                              .productionAssets[0]
-                                          : widget.arguments!.product
-                                              .productionAssets[i],
+                                          ? widget.arguments!.product.productionAssets[0]
+                                          : widget.arguments!.product.productionAssets[i],
                                     ),
                                     // image: NetworkImage(
                                     //   i == imageDataLength
@@ -372,11 +318,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                                     //       : dataCarouselMock[i].substring(46),
                                     // ),
                                     fit: BoxFit.fitWidth,
-                                    imageErrorBuilder: (context, error,
-                                            stackTrace) =>
-                                        Image.asset(
-                                            ProductDetailConst().imgDefaultPath,
-                                            fit: BoxFit.fitWidth),
+                                    imageErrorBuilder: (context, error, stackTrace) =>
+                                        Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
                                   ),
                                 ),
                               );
@@ -433,9 +376,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           visible: imageDataLength == 1 ? false : true,
                           child: SmoothPageIndicator(
                               controller: carouselState,
-                              count: imageDataLength <= carouselShowLimit
-                                  ? imageDataLength
-                                  : carouselShowLimit,
+                              count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
                               effect: const ExpandingDotsEffect(
                                 expansionFactor: 2,
                                 dotHeight: 6,
