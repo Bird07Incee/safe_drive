@@ -102,11 +102,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
                                     unselectedLabelColor: const Color(0xffDEDEDE),
                                     onTap: (int index) {
+                                      print("tab index : $index");
                                       context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                       if (index == 0) {
                                         context.read<ProductListBloc>().add(const GetProductList());
                                       } else {
-                                        print(state.productList.category![index]["categoryId"]);
+                                        print(state.productList.category![index - 1]["categoryId"]);
                                         context.read<ProductListBloc>().add(GetProductListByCategory(
                                             state.productList.category![index - 1]["categoryId"]));
                                       }
