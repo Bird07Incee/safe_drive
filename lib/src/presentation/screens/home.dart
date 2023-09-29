@@ -163,15 +163,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       // ),
                                     ]),
                               ),
-                              content: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              content: Column(
                                 children: [
-                                  SizedBox(
-                                    width: maxWidth - 32,
-                                    child: ProductCardWidget(
-                                      maxWidth: maxWidth,
-                                      productList: state.productList,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: maxWidth - 32,
+                                        child: ProductCardWidget(
+                                          maxWidth: maxWidth,
+                                          productList: state.productList,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Column(
                                     children: [
