@@ -64,6 +64,11 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = lineDataHelper.getLineAccessToken();
+    var category = {};
+
+    if (event.categoryId.isNotEmpty) {
+      category = {"categoryId": event.categoryId};
+    }
 
     // const accessToken =
     //     "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQEUk3/Zj+oXruNIaluHKaLyAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwU35iBDNidEe3In6YCARCAggEHapD+3ohNbUyQshpMkrgAsg7klkyxCW1ZYFmwUNtr6IDuetQ3c0/yChhINiYRAPMloZ7aY2abHIkS3xVUblaznTUy+fbw6KcPON19rABqciIzDj9fB8Dxog+BdYbsjc0zOA2Aw/rAA7cI9Lyn22YNZTb51wXFINYI/tTyGxgPPMXukDkHQvo0H4asAvTka6FXjldV8t/W365W53PUD5Wy1KedP3XZ8rWeBRYfs7gO42ixVhjQbLS/1o1VfN61wvdRpkQO1ba2afeV86L6qDihXg9xoNzBvHcKcobmTY+NvT3LjMPc2lHYIO5CfgC3CEDAnNiPxobENBR5SpLZNrxQ10lDkY8ZqFk=";
@@ -72,7 +77,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
     try {
       Response response = await dioUtilityRepository.getByURL(
-          "$baseUrl$inventoryApiPath/ecommerce/v1/products", {"categoryId": event.categoryId},
+          "$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
           headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);
