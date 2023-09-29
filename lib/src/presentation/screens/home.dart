@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       } else {
                                         print(state.productList.category![index]["categoryId"]);
                                         context.read<ProductListBloc>().add(GetProductListByCategory(
-                                            state.productList.category![index + 1]["categoryId"]));
+                                            state.productList.category![index - 1]["categoryId"]));
                                       }
                                     },
                                     tabs: [
@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       for (int i = 0; i < state.productList.category!.length; i++)
                                         Tab(
                                           text: state.productList.category![i]["categoryTh"],
-                                          icon: state.selectedTabIndex == (i - 1)
+                                          icon: state.selectedTabIndex == (i + 1)
                                               ? Image.asset(
                                                   tabIconsMapping[state.productList.category![i]["categoryId"]]![
                                                           "active"] ??
@@ -251,7 +251,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ],
                         ),
                       );
-                    } else if (state.productListStatus == GetProductListStatus.error) {
+                    } 
+                    else if (state.productListStatus == GetProductListStatus.error) {
                       return ErrorScreen(
                         title: ErrorConst().titleNS,
                         subTitle: ErrorConst().subTitleNS,
@@ -260,7 +261,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           context.read<ProductListBloc>().add(const GetProductList());
                         },
                       );
-                    } else {
+                    }
+                    else if (state.productListStatus == GetProductListStatus.loadingTranparent){
+                      return const LoadingScreen();
+                    } 
+                    else {
                       return const LoadingScreen();
                     }
                   },
