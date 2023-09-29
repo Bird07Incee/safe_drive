@@ -141,6 +141,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -344,6 +345,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
@@ -586,6 +588,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
@@ -839,6 +842,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     // Row with Radio, SizedBox, AlvaText
                                                     Row(
@@ -1098,6 +1102,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     // Row with Radio, SizedBox, AlvaText
                                                     Row(
