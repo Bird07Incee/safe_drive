@@ -25,6 +25,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
   late final TabController _tabController;
   late final Product product;
   String? remarkHtmlString;
+  bool isPressedReadMore = false;
   @override
   void dispose() {
     _tabController.dispose();
@@ -182,7 +183,6 @@ class _PDBottomSectionState extends State<PDBottomSection>
   }
 
   Widget buildProductDescriptionWidget() {
-    bool isPressedReadMore = false;
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
