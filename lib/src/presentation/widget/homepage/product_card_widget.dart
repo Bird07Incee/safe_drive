@@ -194,34 +194,37 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            Row(
-                              children: products[index]
-                                  .promotionTag
-                                  .map((tag) => Row(
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.symmetric(vertical: 4),
-                                            child: AlvaText(
-                                              title: tag,
-                                              textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                            Visibility(
+                              visible: products[index].promotionTag.isEmpty ? false : true,
+                              child: Row(
+                                children: products[index]
+                                    .promotionTag
+                                    .map((tag) => Row(
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.symmetric(vertical: 4),
+                                              child: AlvaText(
+                                                title: tag,
+                                                textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                                              ),
                                             ),
-                                          ),
 
-                                          // add srperator exclude tail
-                                          if (products[index].promotionTag.indexOf(tag) !=
-                                              products[index].promotionTag.length - 1)
-                                            const Text(
-                                              "| ",
-                                              style: TextStyle(color: cloudSoftDeepWhite),
-                                            )
-                                          // const VerticalDivider(
-                                          //   width: 8,
-                                          //   thickness: 100,
-                                          //   color: Colors.grey,
-                                          // )
-                                        ],
-                                      ))
-                                  .toList(),
+                                            // add srperator exclude tail
+                                            if (products[index].promotionTag.indexOf(tag) !=
+                                                products[index].promotionTag.length - 1)
+                                              const Text(
+                                                "| ",
+                                                style: TextStyle(color: cloudSoftDeepWhite),
+                                              )
+                                            // const VerticalDivider(
+                                            //   width: 8,
+                                            //   thickness: 100,
+                                            //   color: Colors.grey,
+                                            // )
+                                          ],
+                                        ))
+                                    .toList(),
+                              ),
                             ),
                             const SizedBox(
                               height: 16,
@@ -234,28 +237,31 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             const SizedBox(
                               height: 16,
                             ),
-                            HtmlWidget(
-                              "<body>${products[index].tagline}${products[index].description}</body>",
-                              customStylesBuilder: (element) {
-                                if (element.localName == "body") {
-                                  return {'max-lines': '4', 'text-overflow': 'ellipsis'};
-                                }
-                                if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
-                                  return {
-                                    'font-family': 'Krungsri Condensed',
-                                    'font-size': '16px',
-                                    'font-weight': '600',
-                                    'color': '#2C2626'
-                                  };
-                                } else {
-                                  return {
-                                    'font-family': 'Krungsri Condensed',
-                                    'font-size': '10px',
-                                    'font-weight': '400',
-                                    'color': '#5A5A5A'
-                                  };
-                                }
-                              },
+                            Visibility(
+                              visible: products[index].tagline == "" ? false : true,
+                              child: HtmlWidget(
+                                "<div>${products[index].tagline}</div>",
+                                customStylesBuilder: (element) {
+                                  if (element.localName == "div") {
+                                    return {'max-lines': '4', 'text-overflow': 'ellipsis'};
+                                  }
+                                  if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '16px',
+                                      'font-weight': '600',
+                                      'color': '#2C2626'
+                                    };
+                                  } else {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '10px',
+                                      'font-weight': '400',
+                                      'color': '#5A5A5A'
+                                    };
+                                  }
+                                },
+                              ),
                             ),
                             const SizedBox(
                               height: 16,
