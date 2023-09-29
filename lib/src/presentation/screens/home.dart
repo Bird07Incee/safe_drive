@@ -107,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         context.read<ProductListBloc>().add(const GetProductList());
                                       } else {
                                         print(state.productList.category![index]["categoryId"]);
-                                        context.read<ProductListBloc>().add(
-                                            GetProductListByCategory(state.productList.category![index]["categoryId"]));
+                                        context.read<ProductListBloc>().add(GetProductListByCategory(
+                                            state.productList.category![index + 1]["categoryId"]));
                                       }
                                     },
                                     tabs: [
