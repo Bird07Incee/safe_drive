@@ -122,7 +122,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           ),
                           child: Center(
                             child: Text(
-                              "${counter[index].toString.isUndefined ? "1" : counter[index]}/ ${products?[index].productionAssets.length}",
+                              "${counter[index].isNull ? "1" : counter[index]}/ ${products?[index].productionAssets.length}",
                               style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                           ),
