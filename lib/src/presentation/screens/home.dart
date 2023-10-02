@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     onTap: (int index) {
                                       context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                       if (index == 0) {
-                                        context.read<ProductListBloc>().add(const GetProductList());
+                                        context.read<ProductListBloc>().add(const GetProductListByCategory(""));
                                       } else {
                                         context.read<ProductListBloc>().add(GetProductListByCategory(
                                             state.productList.category![index - 1]["categoryId"]));
