@@ -20,8 +20,7 @@ class PDBottomSection extends StatefulWidget {
   State<PDBottomSection> createState() => _PDBottomSectionState();
 }
 
-class _PDBottomSectionState extends State<PDBottomSection>
-    with TickerProviderStateMixin {
+class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderStateMixin {
   late final TabController _tabController;
   late final Product product;
   String? remarkHtmlString;
@@ -75,8 +74,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                     Expanded(
                         child: AlvaText(
                             title: product.merchantFullName,
-                            textStyle: AlvaStyles().headingSize12w500(
-                                BTN_SELECTED_TEXT_COLOR_NEW)))
+                            textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)))
                   ],
                 ),
                 const SizedBox(
@@ -86,9 +84,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                   children: [
                     Expanded(
                         child: AlvaText(
-                            title: product.merchantAddress,
-                            textStyle:
-                                AlvaStyles().headingSize10w400(spaceGrey)))
+                            title: product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
                   ],
                 ),
               ],
@@ -114,13 +110,10 @@ class _PDBottomSectionState extends State<PDBottomSection>
                 child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: product.promotionTag.length > 3
-                        ? 3
-                        : product.promotionTag.length,
+                    itemCount: product.promotionTag.length > 3 ? 3 : product.promotionTag.length,
                     itemBuilder: ((context, index) {
                       return Padding(
-                          padding: EdgeInsets.only(
-                              top: index == 0 ? 0 : 8, bottom: 8),
+                          padding: EdgeInsets.only(top: index == 0 ? 0 : 8, bottom: 8),
                           child: Wrap(
                             crossAxisAlignment: WrapCrossAlignment.start,
                             children: [
@@ -139,9 +132,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                                   Flexible(
                                       child: AlvaText(
                                           title: product.promotionTag[index],
-                                          textStyle: AlvaStyles()
-                                              .headingSize12w500WithHeightFixed(
-                                                  spaceGrey)))
+                                          textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
                                 ],
                               )
                             ],
@@ -169,11 +160,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                 remarkHtmlString ?? "",
                 buildAsync: true,
                 customStylesBuilder: (element) {
-                  return {
-                    'font-family': 'Krungsri Condensed',
-                    'font-size': '12px',
-                    'line-height': '24px'
-                  };
+                  return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
                 },
                 textStyle: TextStyle(fontWeight: FontWeight.w400),
               )),
@@ -203,48 +190,42 @@ class _PDBottomSectionState extends State<PDBottomSection>
                   child: AlvaText(
                     key: AppKeys().productDetailProductDescriptionKey,
                     title: AppStrings().productDetailProductDescription,
-                    textStyle: AlvaStyles()
-                        .headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                    textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                   ),
                 ),
               ),
-              Stack(
-                  fit: StackFit.passthrough,
-                  alignment: Alignment.bottomCenter,
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: cloudWhite, width: 2.0),
-                        ),
-                      ),
+              Stack(fit: StackFit.passthrough, alignment: Alignment.bottomCenter, children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: cloudWhite, width: 2.0),
                     ),
-                    SizedBox(
-                      height: 40,
-                      child: TabBar(
-                          controller: _tabController,
-                          labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
-                          indicatorColor: BlueFantasy,
-                          unselectedLabelColor: cloudSoftDeepWhite,
-                          labelStyle: const TextStyle(
-                            fontFamily: fontFamily,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          onTap: (int index) {
-                            setState(() {});
-                          },
-                          tabs: [
-                            Tab(
-                              key: AppKeys().productDetailGeneralDetailTabKey,
-                              text: AppStrings().generalDetail,
-                            ),
-                            Tab(
-                                key: AppKeys().productDetailEtcDetailTabKey,
-                                text: AppStrings().etcDetail),
-                          ]),
-                    )
-                  ]),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                  child: TabBar(
+                      controller: _tabController,
+                      labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
+                      indicatorColor: BlueFantasy,
+                      unselectedLabelColor: cloudSoftDeepWhite,
+                      labelStyle: const TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      onTap: (int index) {
+                        setState(() {});
+                      },
+                      tabs: [
+                        Tab(
+                          key: AppKeys().productDetailGeneralDetailTabKey,
+                          text: AppStrings().generalDetail,
+                        ),
+                        Tab(key: AppKeys().productDetailEtcDetailTabKey, text: AppStrings().etcDetail),
+                      ]),
+                )
+              ]),
               const SizedBox(
                 height: 16,
               ),
@@ -252,14 +233,12 @@ class _PDBottomSectionState extends State<PDBottomSection>
                 onHorizontalDragEnd: (details) async {
                   if (_tabController.index == 0) {
                     if (details.primaryVelocity! < 0) {
-                      _tabController.animateTo(1,
-                          duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(1, duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   } else {
                     if (details.primaryVelocity! > 0) {
-                      _tabController.animateTo(0,
-                          duration: const Duration(milliseconds: 300));
+                      _tabController.animateTo(0, duration: const Duration(milliseconds: 300));
                       setState(() {});
                     }
                   }
@@ -278,20 +257,14 @@ class _PDBottomSectionState extends State<PDBottomSection>
                       children: [
                         isPressedReadMore
                             ? HtmlWidget(
-                                data.isNotEmpty
-                                    ? data
-                                    : AppStrings().noDataFromSeller,
+                                data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                 buildAsync: true,
-                                factoryBuilder: () => _MyFactory(
-                                    title: AppStrings()
-                                        .productDetailProductDescription),
+                                factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
                             : Container(),
                         !isPressedReadMore
                             ? HtmlWidget(
-                                data.isNotEmpty
-                                    ? data
-                                    : AppStrings().noDataFromSeller,
+                                data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                 buildAsync: true,
                                 customStylesBuilder: (element) {
                                   return {
@@ -301,9 +274,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                                     'text-overflow': 'ellipsis'
                                   };
                                 },
-                                factoryBuilder: () => _MyFactory(
-                                    title: AppStrings()
-                                        .productDetailProductDescription),
+                                factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
                             : Container(),
                       ],
@@ -312,54 +283,37 @@ class _PDBottomSectionState extends State<PDBottomSection>
               data.isNotEmpty
                   ? _tabController.index == 1
                       ? LayoutBuilder(builder: (context, constraints) {
-                          final span = TextSpan(
-                              text: data,
-                              style: TextStyle(
-                                  fontFamily: 'Krungsri Condensed',
-                                  fontSize: 14));
-                          final tp = TextPainter(
-                              text: span, textDirection: TextDirection.ltr);
+                          final span =
+                              TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
+                          final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
                           tp.layout(maxWidth: constraints.maxWidth);
                           final numLines = tp.computeLineMetrics().length;
                           return Container(
-                              padding: numLines >= 5
-                                  ? null
-                                  : EdgeInsets.only(top: 16),
+                              padding: numLines >= 5 ? null : EdgeInsets.only(top: 16),
                               child: Visibility(
                                   visible: numLines >= 5,
                                   child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 16),
+                                      padding: EdgeInsets.symmetric(vertical: 16),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Expanded(
                                             child: Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 16),
+                                              padding: const EdgeInsets.symmetric(horizontal: 16),
                                               height: 24,
                                               child: OutlinedButton(
                                                 onPressed: () async {
                                                   setState((() {
-                                                    isPressedReadMore =
-                                                        !isPressedReadMore;
+                                                    isPressedReadMore = !isPressedReadMore;
                                                   }));
                                                 },
-                                                style: AlvaStyles()
-                                                    .outlineNoneBorderButtonStyle(
-                                                        Colors.transparent,
-                                                        Colors.transparent),
+                                                style: AlvaStyles().outlineNoneBorderButtonStyle(
+                                                    Colors.transparent, Colors.transparent),
                                                 child: AlvaText(
                                                   title: isPressedReadMore
-                                                      ? AppStrings()
-                                                          .btnHideDescription
-                                                      : AppStrings()
-                                                          .btnReadMore,
-                                                  textStyle: AlvaStyles()
-                                                      .headingSize14w700(
-                                                          BlueFantasy),
+                                                      ? AppStrings().btnHideDescription
+                                                      : AppStrings().btnReadMore,
+                                                  textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
                                                   disableSelectableText: true,
                                                 ),
                                               ),
@@ -375,8 +329,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
         }));
   }
 
-  Widget buildDetailCardWidget(BuildContext context,
-      {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget(BuildContext context, {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
@@ -390,15 +343,11 @@ class _PDBottomSectionState extends State<PDBottomSection>
                 child: AlvaText(
                   key: titleKey!,
                   title: title!,
-                  textStyle: AlvaStyles()
-                      .headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                  textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                 ),
               ),
             ),
-            GestureDetector(
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: bodyPage)),
+            GestureDetector(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage)),
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [
@@ -408,8 +357,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                         height: 48,
                         child: OutlinedButton(
                           onPressed: () async {
-                            String mobile =
-                                product.merchantMobile.replaceAll('-', '');
+                            String mobile = product.merchantMobile.replaceAll('-', '');
                             callPhone(mobile);
                           },
                           style: AlvaStyles().outlineButtonStyle(
@@ -430,8 +378,7 @@ class _PDBottomSectionState extends State<PDBottomSection>
                               ),
                               const SizedBox(width: 8),
                               Text("ติดต่อ ${product.merchantMobile}",
-                                  style: AlvaStyles()
-                                      .heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                  style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
                         ),
@@ -459,13 +406,11 @@ class _MyFactory extends WidgetFactory {
         for (int i = 0; i < e.nodes.length; i++) {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style":
-                  "color:#9c9c9c; font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
+              "style": "color:#9c9c9c; font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style":
-                  "color:#2c2626;  font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
+              "style": "color:#2c2626;  font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
             } as LinkedHashMap<Object, String>;
           }
         }

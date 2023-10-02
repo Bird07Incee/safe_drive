@@ -190,16 +190,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                   Visibility(
                                     visible: isMorePageToLoad(state.productList),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 16,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            print("click see more");
-                                          },
-                                          child: Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        print("click see more button");
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          Container(
                                             width: 100,
                                             height: 32,
                                             margin: EdgeInsets.symmetric(vertical: 4),
@@ -229,11 +229,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               ],
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 32,
-                                        ),
-                                      ],
+                                          SizedBox(
+                                            height: 32,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],
