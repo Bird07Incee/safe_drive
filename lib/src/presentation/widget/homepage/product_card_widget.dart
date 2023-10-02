@@ -238,37 +238,30 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               height: 16,
                             ),
                             Visibility(
-                                visible: products[index].tagline == "" ? false : true,
-                                child: LayoutBuilder(builder: (context, constraints) {
-                                  final span = TextSpan(
-                                      text: products[index].tagline,
-                                      style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
-                                  final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
-                                  tp.layout(maxWidth: constraints.maxWidth);
-                                  final numLines = tp.computeLineMetrics().length;
-                                  return HtmlWidget(
-                                    products[index].tagline,
-                                    customStylesBuilder: (element) {
-                                      if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
-                                        return {
-                                          'font-family': 'Krungsri Condensed',
-                                          'font-size': '16px',
-                                          'font-weight': '600',
-                                          'color': '#2C2626'
-                                        };
-                                      } else {
-                                        return {
-                                          'font-family': 'Krungsri Condensed',
-                                          'font-size': '10px',
-                                          'font-weight': '400',
-                                          'color': '#5A5A5A',
-                                          'max-lines': numLines >= 4 ? '4' : '',
-                                          'text-overflow': 'ellipsis'
-                                        };
-                                      }
-                                    },
-                                  );
-                                })),
+                              visible: products[index].tagline == "" ? false : true,
+                              child: HtmlWidget(
+                                products[index].tagline,
+                                customStylesBuilder: (element) {
+                                  if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '16px',
+                                      'font-weight': '600',
+                                      'color': '#2C2626'
+                                    };
+                                  } else {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '10px',
+                                      'font-weight': '400',
+                                      'color': '#5A5A5A',
+                                      'max-lines': '4',
+                                      'text-overflow': 'ellipsis'
+                                    };
+                                  }
+                                },
+                              ),
+                            ),
                             const SizedBox(
                               height: 16,
                             ),

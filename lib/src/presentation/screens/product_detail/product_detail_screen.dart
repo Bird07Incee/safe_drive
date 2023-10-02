@@ -167,8 +167,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                 title: ' บาท',
                                 textStyle: AlvaStyles()
                                     .heading2(widget.arguments!.product.discountPrice > 0
-                                    ? RedWordShow
-                                    : BTN_SELECTED_TEXT_COLOR_NEW)
+                                        ? RedWordShow
+                                        : BTN_SELECTED_TEXT_COLOR_NEW)
                                     .copyWith(height: 1.33)),
                           ),
                         ],
