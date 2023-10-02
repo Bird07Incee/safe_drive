@@ -25,10 +25,12 @@ class GetProductListByCategory extends ProductListEvent {
 }
 
 class GetProductListByPage extends ProductListEvent {
-  const GetProductListByPage(this.productList, this.categoryId);
+  const GetProductListByPage(this.productList, this.page, this.categoryId, this.context);
 
   final ProductList productList;
+  final int page;
   final String categoryId;
+  final BuildContext context;
 }
 
 class SetSelectTabIndex extends ProductListEvent {

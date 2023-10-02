@@ -99,13 +99,13 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = lineDataHelper.getLineAccessToken();
-    var params = {};
+    var params = {"page": event.page.toString(), "itemPersPage": 10};
 
     if (event.categoryId.isNotEmpty) {
-      params = {"categoryId": event.categoryId};
+      params["categoryId"] = event.categoryId;
     }
 
-    emit(state.copyWith(productListStatus: GetProductListStatus.loadingTranparent));
+    GeneralDialog().showLoadingDialog(context: event.context);
 
     try {
       Response response = await dioUtilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params,
@@ -123,9 +123,15 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           products: oldProducts! + currentProductList.products!);
 
       emit(state.copyWith(productList: nextProduct, productListStatus: GetProductListStatus.success));
+
+      if (!event.context.mounted) return;
+      Navigator.of(event.context).pop();
     } catch (e) {
       print(e);
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
+
+      if (!event.context.mounted) return;
+      Navigator.of(event.context).pop();
     }
   }
 }

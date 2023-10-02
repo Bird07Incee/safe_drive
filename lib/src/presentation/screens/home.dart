@@ -194,6 +194,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     child: GestureDetector(
                                       onTap: () {
                                         print("click see more button");
+                                        if (state.selectedTabIndex == 0) {
+                                          context.read<ProductListBloc>().add(GetProductListByPage(
+                                              state.productList, state.productList.productPage! + 1, "", context));
+                                        } else {
+                                          context.read<ProductListBloc>().add(GetProductListByPage(
+                                              state.productList,
+                                              state.productList.productPage! + 1,
+                                              state.productList.category![state.selectedTabIndex - 1]["categoryId"],
+                                              context));
+                                        }
                                       },
                                       child: Column(
                                         children: [
