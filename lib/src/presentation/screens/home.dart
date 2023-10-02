@@ -109,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     controller: tabController,
                                     labelColor: Colors.black,
                                     indicatorColor: BlueFantasy,
+                                    padding: EdgeInsets.only(right: 8),
                                     // isScrollable: state.productList.category!.length <= 3 ? false : true ,
                                     isScrollable: true,
                                     labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
