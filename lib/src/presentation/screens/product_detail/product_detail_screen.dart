@@ -194,7 +194,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
                       },
                       icon: const Icon(Icons.arrow_back_ios_rounded)),
-          ),
+                ),
           bottomSheet: Container(
             color: whitePure,
             width: maxWidth,
