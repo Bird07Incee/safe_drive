@@ -193,7 +193,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     visible: isMorePageToLoad(state.productList),
                                     child: GestureDetector(
                                       onTap: () {
-                                        print("click see more button");
                                         if (state.selectedTabIndex == 0) {
                                           context.read<ProductListBloc>().add(GetProductListByPage(
                                               state.productList, state.productList.productPage! + 1, "", context));
@@ -219,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 borderRadius: BorderRadius.all(Radius.circular(16)),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: Colors.black.withOpacity(0.4),
+                                                    color: whitePure.withOpacity(0.4),
                                                     spreadRadius: 0,
                                                     blurRadius: 8,
                                                     offset: const Offset(0, 2),
