@@ -208,22 +208,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     height: 48,
                     child: OutlinedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}',
+                        Navigator.pushNamed(context,
+                            '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}',
                             arguments: ProductDetailArgs(product: widget.arguments!.product));
                       },
                       style: AlvaStyles()
                           .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
-                      child: InkWell(
-                        onTap: (){
-                          Navigator.pushNamed(
-                              context, '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}',
-                              arguments: ProductDetailArgs(product: widget.arguments!.product));
-                        },
-                        child: AlvaText(
-                            title: "สั่งซื้อสินค้า",
-                            textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                      ),
+                      child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                     ),
                   ),
                 )
