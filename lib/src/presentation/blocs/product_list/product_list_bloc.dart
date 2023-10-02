@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
@@ -71,7 +72,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       category = {"categoryId": event.categoryId};
     }
 
-    emit(state.copyWith(productListStatus: GetProductListStatus.loadingTranparent));
+    GeneralDialog().showLoadingDialog(context: event.context);
 
     try {
       Response response = await dioUtilityRepository.getByURL(
@@ -80,9 +81,15 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       final productList = ProductList.fromJson(response.data);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+
+      if (!event.context.mounted) return;
+      Navigator.of(event.context).pop();
     } catch (e) {
       print(e);
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
+
+      if (!event.context.mounted) return;
+      Navigator.of(event.context).pop();
     }
   }
 

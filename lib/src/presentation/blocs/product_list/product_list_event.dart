@@ -18,9 +18,10 @@ class GetProductList extends ProductListEvent {
 }
 
 class GetProductListByCategory extends ProductListEvent {
-  const GetProductListByCategory(this.categoryId);
+  const GetProductListByCategory(this.categoryId, this.context);
 
   final String categoryId;
+  final BuildContext context;
 }
 
 class GetProductListByPage extends ProductListEvent {

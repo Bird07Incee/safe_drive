@@ -117,10 +117,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     onTap: (int index) {
                                       context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                       if (index == 0) {
-                                        context.read<ProductListBloc>().add(const GetProductListByCategory(""));
+                                        context.read<ProductListBloc>().add(GetProductListByCategory("", context));
                                       } else {
                                         context.read<ProductListBloc>().add(GetProductListByCategory(
-                                            state.productList.category![index - 1]["categoryId"]));
+                                            state.productList.category![index - 1]["categoryId"], context));
                                       }
                                     },
                                     tabs: [
@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             context.read<ProductListBloc>().add(const GetProductList());
                           } else {
                             context.read<ProductListBloc>().add(GetProductListByCategory(
-                                state.productList.category![state.selectedTabIndex - 1]["categoryId"]));
+                                state.productList.category![state.selectedTabIndex - 1]["categoryId"], context));
                           }
                         },
                       );
