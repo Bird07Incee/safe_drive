@@ -229,7 +229,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             color: backgroundNo2,
             child: ListView(
               shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
               controller: scrollController,
               children: [
                 widget.arguments != null ? PDTopSection(args: widget.arguments!) : SizedBox(),
