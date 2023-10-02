@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart' as intl;
@@ -120,7 +122,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           ),
                           child: Center(
                             child: Text(
-                              "${counter[index]}/ ${products?[index].productionAssets.length}",
+                              "${counter[index].isUndefined ? "1" : counter[index]}/ ${products?[index].productionAssets.length}",
                               style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                           ),
