@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -238,30 +238,37 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               height: 16,
                             ),
                             Visibility(
-                              visible: products[index].tagline == "" ? false : true,
-                              child: HtmlWidget(
-                                products[index].tagline,
-                                customStylesBuilder: (element) {
-                                  if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
-                                    return {
-                                      'font-family': 'Krungsri Condensed',
-                                      'font-size': '16px',
-                                      'font-weight': '600',
-                                      'color': '#2C2626'
-                                    };
-                                  } else {
-                                    return {
-                                      'font-family': 'Krungsri Condensed',
-                                      'font-size': '10px',
-                                      'font-weight': '400',
-                                      'color': '#5A5A5A',
-                                      'max-lines': '4',
-                                      'text-overflow': 'ellipsis'
-                                    };
-                                  }
-                                },
-                              ),
-                            ),
+                                visible: products[index].tagline == "" ? false : true,
+                                child: LayoutBuilder(builder: (context, constraints) {
+                                  final span = TextSpan(
+                                      text: products[index].tagline,
+                                      style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
+                                  final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
+                                  tp.layout(maxWidth: constraints.maxWidth);
+                                  final numLines = tp.computeLineMetrics().length;
+                                  return HtmlWidget(
+                                    products[index].tagline,
+                                    customStylesBuilder: (element) {
+                                      if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
+                                        return {
+                                          'font-family': 'Krungsri Condensed',
+                                          'font-size': '16px',
+                                          'font-weight': '600',
+                                          'color': '#2C2626'
+                                        };
+                                      } else {
+                                        return {
+                                          'font-family': 'Krungsri Condensed',
+                                          'font-size': '10px',
+                                          'font-weight': '400',
+                                          'color': '#5A5A5A',
+                                          'max-lines': numLines >= 4 ? '4' : '',
+                                          'text-overflow': 'ellipsis'
+                                        };
+                                      }
+                                    },
+                                  );
+                                })),
                             const SizedBox(
                               height: 16,
                             ),
@@ -270,7 +277,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               child: Row(
                                 children: [
                                   AlvaText(
-                                    title: NumberFormat.decimalPattern().format(products[index].discountPrice),
+                                    title: intl.NumberFormat.decimalPattern().format(products[index].discountPrice),
                                     textStyle: AlvaStyles().bodySize14W400MutedLine(),
                                   ),
                                   const SizedBox(
@@ -289,7 +296,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 Row(
                                   children: [
                                     AlvaText(
-                                      title: NumberFormat.decimalPattern().format(products[index].price),
+                                      title: intl.NumberFormat.decimalPattern().format(products[index].price),
                                       textStyle: products[index].discountPrice == 0
                                           ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
                                           : AlvaStyles().headingSize22(RedWordShow),
