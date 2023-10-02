@@ -321,7 +321,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         subTitle: ErrorConst().subTitleNS,
                         titleBtn: ErrorConst().titleBtnNS,
                         onTap: () {
-                          context.read<ProductListBloc>().add(const GetProductList());
+                          if (state.selectedTabIndex == 0) {
+                            context.read<ProductListBloc>().add(const GetProductList());
+                          } else {
+                            context.read<ProductListBloc>().add(GetProductListByCategory(
+                                state.productList.category![state.selectedTabIndex - 1]["categoryId"]));
+                          }
                         },
                       );
                     } else if (state.productListStatus == GetProductListStatus.loadingTranparent) {
