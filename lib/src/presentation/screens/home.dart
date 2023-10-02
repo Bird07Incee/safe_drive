@@ -98,6 +98,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     controller: tabController,
                                     labelColor: Colors.black,
                                     indicatorColor: BlueFantasy,
+                                    padding: EdgeInsets.only(right: 8),
+                                    labelPadding: EdgeInsets.symmetric(horizontal: 24),
                                     isScrollable: true,
                                     labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
                                     unselectedLabelColor: const Color(0xffDEDEDE),
@@ -106,9 +108,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       if (index == 0) {
                                         context.read<ProductListBloc>().add(const GetProductList());
                                       } else {
-                                        print(state.productList.category![index]["categoryId"]);
                                         context.read<ProductListBloc>().add(
-                                            GetProductListByCategory(state.productList.category![index]["categoryId"]));
+                                            GetProductListByCategory(state.productList.category![index - 1]["categoryId"]));
                                       }
                                     },
                                     tabs: [
