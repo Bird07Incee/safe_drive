@@ -139,7 +139,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                           .add(const CarouselScrollAction(index: 0));
                       context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
                     },
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back_ios_rounded),
                   ),
                   leadingWidth: 60,
                   titleSpacing: 0,
@@ -148,11 +148,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     children: [
                       AlvaText(
                           title: widget.arguments!.product.productName,
-                          textStyle: AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                      AlvaTextMaxLinesOverflow(
-                          title: '${widget.arguments!.product.price.toDecimalFormat()} บาท',
-                          maxLines: 1,
-                          textStyle: AlvaStyles().heading2(RedWordShow))
+                          textStyle: AlvaStyles()
+                              .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
+                              .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          AlvaText(
+                              title: widget.arguments!.product.price.toDecimalFormat(),
+                              textStyle: AlvaStyles().heading1().copyWith(
+                                  color: widget.arguments!.product.discountPrice > 0
+                                      ? RedWordShow
+                                      : BTN_SELECTED_TEXT_COLOR_NEW,
+                                  height: 1.33)),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 1),
+                            child: AlvaText(
+                                title: ' บาท',
+                                textStyle: AlvaStyles()
+                                    .heading2(widget.arguments!.product.discountPrice > 0
+                                    ? RedWordShow
+                                    : BTN_SELECTED_TEXT_COLOR_NEW)
+                                    .copyWith(height: 1.33)),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                   centerTitle: false,
