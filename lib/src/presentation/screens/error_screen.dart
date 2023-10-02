@@ -64,7 +64,7 @@ class ErrorScreen extends StatelessWidget {
                           },
                           style: AlvaStyles().outlineButtonStyle(Colors.transparent, sugarRed, 8),
                           child:
-                              AlvaText(title: titleBtn!, textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                              Text(titleBtn!, style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                         ),
                       ),
                     ],

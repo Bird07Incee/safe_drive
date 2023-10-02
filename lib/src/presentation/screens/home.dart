@@ -220,9 +220,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 const SizedBox(
                                                   width: 16,
                                                 ),
-                                                AlvaText(
-                                                  title: 'โหลดเพิ่มเติม',
-                                                  textStyle: AlvaStyles().bodySize12W600(spaceGrey),
+                                                Text(
+                                                  'โหลดเพิ่มเติม',
+                                                  style: AlvaStyles().bodySize12W600(spaceGrey),
                                                 ),
                                                 const SizedBox(
                                                   width: 16,
