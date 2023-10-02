@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart' as intl;
@@ -23,15 +21,15 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
-  List<int> counter = [];
+  List<int> counter = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   @override
   void initState() {
     super.initState();
 
-    for (int i = 0; i < widget.productList.products!.length; i++) {
-      counter.add(1);
-    }
+    // for (int i = 0; i < widget.productList.products!.length; i++) {
+    //   counter.add(1);
+    // }
   }
 
   @override
