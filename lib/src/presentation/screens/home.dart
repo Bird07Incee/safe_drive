@@ -12,6 +12,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 // import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 // import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
@@ -274,6 +275,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       AlvaText(
                                         title: HomeConst().termsAndConditions,
                                         textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                        onTapfunction: () {
+                                          Navigator.pushNamed(context, '/readTermAndCon');
+                                        }
                                       ),
                                       Container(
                                         margin: const EdgeInsets.symmetric(horizontal: 8),
