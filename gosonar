@@ -2,7 +2,7 @@
 
 SONARSCANNER_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:4"
 SONARSCANNER_WORKING_DIR="/usr/src"
-DEFAULT_SONAR_HOST_URL="https://sonarqube.tools.buk0.com"
+DEFAULT_SONAR_HOST_URL="https://sonarqube.auto.buk0.com"
 
 # Utility functions
 log() {
