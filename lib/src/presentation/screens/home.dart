@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                             StickyHeader(
                               header: Visibility(
-                                visible: state.hideCategory ? true : false,
+                                visible: state.hideCategory ? false : true,
                                 child: Container(
                                   width: maxWidth,
                                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -243,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 32,
+                                            height: 16,
                                           ),
                                         ],
                                       ),
@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         ],
                                       ),
                                       const SizedBox(
-                                        height: 16,
+                                        height: 32,
                                       ),
                                     ],
                                   ),

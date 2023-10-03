@@ -54,10 +54,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       final productList = ProductList.fromJson(response.data);
 
-      if(productList.products!.length == 1){
-        emit(state.copyWith(
-          hideCategory: true
-        ));
+      if (productList.products!.length == 1) {
+        emit(state.copyWith(hideCategory: true));
       }
 
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));

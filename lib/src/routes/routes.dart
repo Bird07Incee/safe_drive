@@ -106,8 +106,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case "/selectOptions":
       return MaterialPageRoute(
           builder: (_) => ProductSelectOptions(
-            arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
-          ),
+                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
+              ),
           settings: settings);
     default:
       print("case default");
