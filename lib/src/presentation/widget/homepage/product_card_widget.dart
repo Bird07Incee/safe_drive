@@ -23,19 +23,36 @@ class ProductCardWidget extends StatefulWidget {
 class _ProductCardWidgetState extends State<ProductCardWidget> {
   List<int> counter = [];
 
+  String cleanHtml(String text) {
+    String temp = text;
+
+    temp = temp.replaceAll("<p>", "");
+    temp = temp.replaceAll("</p>", "<br>");
+
+    temp = temp.replaceAll("<h1>", "<b>");
+    temp = temp.replaceAll("<h2>", "<b>");
+    temp = temp.replaceAll("<h3>", "<b>");
+    temp = temp.replaceAll("<h4>", "<b>");
+
+    temp = temp.replaceAll("</h1>", "</b>");
+    temp = temp.replaceAll("</h2>", "</b>");
+    temp = temp.replaceAll("</h3>", "</b>");
+    temp = temp.replaceAll("</h4>", "</b>");
+
+    return temp;
+  }
+
   @override
   void initState() {
     super.initState();
-    
+
     int count = 0;
     for (int i = 0; i < widget.productList.products!.length; i++) {
       count++;
     }
 
     setState(() {
-      counter = [
-        for (int i = 0; i < count; i ++) 1
-      ];
+      counter = [for (int i = 0; i < count; i++) 1];
     });
   }
 
@@ -247,9 +264,18 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             Visibility(
                               visible: products[index].tagline == "" ? false : true,
                               child: HtmlWidget(
-                                products[index].tagline,
+                                "<p>${cleanHtml(products[index].tagline)}</p>",
                                 customStylesBuilder: (element) {
-                                  if (["h1", "h2", "h3", "h4"].contains(element.localName)) {
+                                  if (element.localName == "p") {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '10px',
+                                      'font-weight': '400',
+                                      'color': '#5A5A5A',
+                                      'max-lines': '4',
+                                      'text-overflow': 'ellipsis'
+                                    };
+                                  } else if (element.localName == "b") {
                                     return {
                                       'font-family': 'Krungsri Condensed',
                                       'font-size': '16px',
