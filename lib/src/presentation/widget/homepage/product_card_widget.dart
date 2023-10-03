@@ -5,7 +5,6 @@ import 'package:intl/intl.dart' as intl;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
@@ -72,11 +71,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
           late final PageController pageViewController = PageController(initialPage: 0);
           return GestureDetector(
             onTap: () {
-              // context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
               context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
-              Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}',
-                  arguments: ProductDetailArgs(product: products[index]));
-              // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
+              Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
             },
             child: Container(
               margin: const EdgeInsets.only(top: 16),

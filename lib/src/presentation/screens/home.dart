@@ -12,7 +12,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 // import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 // import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';

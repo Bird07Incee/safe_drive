@@ -28,8 +28,7 @@ import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({Key? key, this.arguments}) : super(key: key);
-  final ProductDetailArgs? arguments;
+  const ProductDetailScreen({Key? key}) : super(key: key);
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();

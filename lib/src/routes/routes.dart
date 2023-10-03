@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -103,7 +104,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case "/productDetail":
       return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
     case "/selectOptions":
-      return MaterialPageRoute(builder: (_) => const ProductSelectOptions(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => ProductSelectOptions(
+            arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
+          ),
+          settings: settings);
     default:
       print("case default");
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
