@@ -9,17 +9,22 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
+import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -66,6 +71,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   int indicator = 1;
   double _scale = 1.0;
+  String pid = '';
 
   //List dataCarouselMock = carouselSingleItem;
   @override
@@ -78,39 +84,65 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
           : widget.arguments!.product.productionAssets.length > 20
               ? 20
               : widget.arguments!.product.productionAssets.length;
-    } else if (settings != null) {
-      // var uriData = Uri.parse(settings!.name!);
-      // var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
-      // String pid = '';
-      // if (settings?.route == "/productDetail") {
-      //   pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
-      // }
-      // print(pid);
+    } else {
+      if (settings != null) {
+        var uriData = Uri.parse(settings!.name!);
+        var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+        if (settings!.name == "/productDetail") {
+          pid = (routingData["pid"] == null) ? "" : routingData["pid"];
+        }
+        print(pid);
+      }
     }
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
-      child: BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
-        builder: (ctx, stateAppBar) {
-          return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
-            builder: (context, zoomState) {
-              return BlocBuilder<PreviousScaleBloc, double>(
-                builder: (context, previousState) {
-                  return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
-                    builder: (context, switchState) {
-                      return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
-                        builder: (context, carouselState) {
-                          return switchState
-                              ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
-                              : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
-                        },
-                      );
-                    },
-                  );
-                },
-              );
-            },
-          );
+      child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
+        listener: (context, state) {
+          if ((widget.arguments == null || widget.arguments?.product == Product.empty) && state.status.isInitial && pid != "") {
+            context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
+          }
+        },
+        builder: (context, state) {
+          if (state.status.isSuccess) {
+            return BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
+              builder: (ctx, stateAppBar) {
+                return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
+                  builder: (context, zoomState) {
+                    return BlocBuilder<PreviousScaleBloc, double>(
+                      builder: (context, previousState) {
+                        return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
+                          builder: (context, switchState) {
+                            return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
+                              builder: (context, carouselState) {
+                                return switchState
+                                    ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
+                                    : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            );
+          } else if (state.status.isLoading) {
+            return const LoadingScreen();
+          } else {
+            return ErrorScreen(
+              title: ErrorConst().titleNS,
+              subTitle: ErrorConst().subTitleNS,
+              titleBtn: ErrorConst().titleBtnNS,
+              onTap: () {
+                if ((widget.arguments == null || widget.arguments?.product == Product.empty) && state.status.isInitial && pid != "") {
+                  context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
+                }
+              },
+            );
+          }
+
         },
       ),
     );
@@ -146,8 +178,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AlvaText(
+                      AlvaTextMaxLinesOverflow(
                           title: widget.arguments!.product.productName,
+                          maxLines: 1,
                           textStyle: AlvaStyles()
                               .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
                               .copyWith(fontWeight: FontWeight.w500, height: 1.17)),

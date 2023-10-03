@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -81,11 +82,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   // print(state);
   // print(liffClientId);
   // print(liffRedirectUri);
-  String pid = '';
-  if (routingData?.route == "/productDetail" || routingData?.route == "/selectOptions") {
-    pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
-  }
-  print(pid);
+  // String pid = '';
+  // if (routingData?.route == "/productDetail" || routingData?.route == "/selectOptions") {
+  //   pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
+  // }
+  // print(pid);
 
   switch (routingData?.route) {
     case "/":
@@ -100,7 +101,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case "/productDetail":
       return MaterialPageRoute(
           builder: (_) => ProductDetailScreen(
-                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
+                arguments: ModalRoute.of(_)!.settings.arguments != null ? ModalRoute.of(_)!.settings.arguments as ProductDetailArgs : ProductDetailArgs(product: Product.empty),
               ),
           settings: settings);
     case "/selectOptions":

@@ -144,6 +144,7 @@ class Product {
       productionOptionals: []);
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    List<String> productAssets = List.castFrom<dynamic, String>(json['productionAssets']);
     return Product(
         appId: json['appId'] ?? '',
         channelId: json['channelId'] ?? '',
@@ -171,7 +172,7 @@ class Product {
         discountPrice: json['discountPrice'] ?? 0,
         percentDiscountPrice: json['percentDiscountPrice'] ?? 0,
         productionAssets:
-            json['productionAssets'] != null ? List.castFrom<dynamic, String>(json['productionAssets']) : [],
+            json['productionAssets'] != null ? productAssets.length > 20 ? productAssets.sublist(0, 19) : productAssets: [],
         merchantFullName: json['merchantFullName'] ?? '',
         merchantAddress: json['merchantAddress'] ?? '',
         merchantLogo: json['merchantLogo'] ?? '',
