@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -8,17 +9,22 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
+import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -65,51 +71,85 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   int indicator = 1;
   double _scale = 1.0;
+  String pid = '';
+  late Product product;
+  late Widget topSection = SizedBox();
+  late Widget bottomSection = SizedBox();
 
   //List dataCarouselMock = carouselSingleItem;
   @override
   Widget build(BuildContext context) {
     int imageDataLength = 1;
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
-    if (widget.arguments != null) {
-      imageDataLength = widget.arguments!.product.productionAssets.length == 1
-          ? widget.arguments!.product.productionAssets.length
-          : widget.arguments!.product.productionAssets.length > 20
-              ? 20
-              : widget.arguments!.product.productionAssets.length;
-    } else if (settings != null) {
-      // var uriData = Uri.parse(settings!.name!);
-      // var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
-      // String pid = '';
-      // if (settings?.route == "/productDetail") {
-      //   pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
-      // }
-      // print(pid);
-    }
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
+    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    if (settings != null) {
+      var uriData = Uri.parse(settings!.name!);
+      var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+      if (routingData.route == "/productDetail") {
+        pid = (routingData["pid"] == null) ? "" : routingData["pid"];
+      }
+      print("routingData route: ${routingData.route}");
+      print("routingData queryParams: ${routingData.queryParameters}");
+      print("settings!.name : ${settings!.name}");
+      print("pid : $pid");
+    }
     return RootPageCondition(
-      child: BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
-        builder: (ctx, stateAppBar) {
-          return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
-            builder: (context, zoomState) {
-              return BlocBuilder<PreviousScaleBloc, double>(
-                builder: (context, previousState) {
-                  return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
-                    builder: (context, switchState) {
-                      return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
-                        builder: (context, carouselState) {
-                          return switchState
-                              ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
-                              : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
-                        },
-                      );
-                    },
-                  );
-                },
-              );
-            },
-          );
+      child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
+        listener: (context, state) {
+          if (state.status.isSuccess && pid != "") {
+            product = state.product;
+            print('get product success');
+            print('product id : ${product.productId}, productName: ${product.productName}');
+            imageDataLength = product.productionAssets.length == 1
+                ? product.productionAssets.length
+                : product.productionAssets.length > 20
+                    ? 20
+                    : product.productionAssets.length;
+          }
+        },
+        builder: (context, pdState) {
+          if (pdState.status.isInitial && pid != "") {
+            context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
+          }
+          if (pdState.status.isSuccess) {
+            return BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
+              builder: (ctx, stateAppBar) {
+                return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
+                  builder: (context, zoomState) {
+                    return BlocBuilder<PreviousScaleBloc, double>(
+                      builder: (context, previousState) {
+                        return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
+                          builder: (context, switchState) {
+                            return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
+                              builder: (context, carouselState) {
+                                return switchState
+                                    ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
+                                    : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            );
+          } else if (pdState.status.isLoading) {
+            return const LoadingScreen();
+          } else {
+            return ErrorScreen(
+              title: ErrorConst().titleNS,
+              subTitle: ErrorConst().subTitleNS,
+              titleBtn: ErrorConst().titleBtnNS,
+              onTap: () {
+                if (pdState.status.isInitial && pid != "") {
+                  context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
+                }
+              },
+            );
+          }
         },
       ),
     );
@@ -124,122 +164,131 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
         context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
         return true;
       },
-      child: AlvaRootWidget(
-          titlePage: titleWebPage,
-          appBar: stateAppBar.appBarCarDetailStatus
-              ? AppBar(
-                  automaticallyImplyLeading: false,
-                  leading: IconButton(
-                    key: const Key("pop_navigator_to_home_page"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      context
-                          .read<ProductDetailCarouselScrollControllerBloc>()
-                          .add(const CarouselScrollAction(index: 0));
-                      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
-                    },
-                    icon: const Icon(Icons.arrow_back),
-                  ),
-                  leadingWidth: 60,
-                  titleSpacing: 0,
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AlvaText(
-                          title: widget.arguments!.product.productName,
-                          textStyle: AlvaStyles()
-                              .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
-                              .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+        builder: (context, state) {
+          return AlvaRootWidget(
+              titlePage: titleWebPage,
+              appBar: stateAppBar.appBarCarDetailStatus
+                  ? AppBar(
+                      automaticallyImplyLeading: false,
+                      leading: IconButton(
+                        key: const Key("pop_navigator_to_home_page"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          context
+                              .read<ProductDetailCarouselScrollControllerBloc>()
+                              .add(const CarouselScrollAction(index: 0));
+                          context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+                        },
+                        icon: const Icon(Icons.arrow_back_ios_rounded),
+                      ),
+                      leadingWidth: 60,
+                      titleSpacing: 0,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AlvaText(
-                              title: widget.arguments!.product.price.toDecimalFormat(),
-                              textStyle: AlvaStyles().heading1().copyWith(
-                                  color: widget.arguments!.product.discountPrice > 0
-                                      ? RedWordShow
-                                      : BTN_SELECTED_TEXT_COLOR_NEW,
-                                  height: 1.33)),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 1),
-                            child: AlvaText(
-                                title: ' บาท',
-                                textStyle: AlvaStyles()
-                                    .heading2(widget.arguments!.product.discountPrice > 0
-                                        ? RedWordShow
-                                        : BTN_SELECTED_TEXT_COLOR_NEW)
-                                    .copyWith(height: 1.33)),
-                          ),
+                          AlvaTextMaxLinesOverflow(
+                              title: state.product.productName,
+                              maxLines: 1,
+                              textStyle: AlvaStyles()
+                                  .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
+                                  .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              AlvaText(
+                                  title: state.product.price.toDecimalFormat(),
+                                  textStyle: AlvaStyles().heading1().copyWith(
+                                      color:
+                                          state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW,
+                                      height: 1.33)),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 1),
+                                child: AlvaText(
+                                    title: ' บาท',
+                                    textStyle: AlvaStyles()
+                                        .heading2(
+                                            state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                        .copyWith(height: 1.33)),
+                              ),
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  ),
-                  centerTitle: false,
-                )
-              : AppBar(
-                  title: AlvaText(
-                      title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                  titleSpacing: 0,
-                  leadingWidth: 60,
-                  centerTitle: false,
-                  automaticallyImplyLeading: false,
-                  leading: IconButton(
-                      key: const Key("pop_navigator_to_home_page"),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        context
-                            .read<ProductDetailCarouselScrollControllerBloc>()
-                            .add(const CarouselScrollAction(index: 0));
-                        context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
-                      },
-                      icon: const Icon(Icons.arrow_back)),
-                ),
-          bottomSheet: SizedBox(
-            width: maxWidth,
-            height: 96,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 48,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context,
-                            '${Routes.selectOptions.toStringPath()}?pid=${widget.arguments!.product.productId}',
-                            arguments: ProductDetailArgs(product: widget.arguments!.product));
-                      },
-                      style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
-                      child: AlvaText(
-                          title: "สั่งซื้อสินค้า",
-                          textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      ),
+                      centerTitle: false,
+                    )
+                  : AppBar(
+                      title: AlvaText(
+                          title: "ข้อมูลสินค้า",
+                          textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      titleSpacing: 0,
+                      leadingWidth: 60,
+                      centerTitle: false,
+                      automaticallyImplyLeading: false,
+                      leading: IconButton(
+                          key: const Key("pop_navigator_to_home_page"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            context
+                                .read<ProductDetailCarouselScrollControllerBloc>()
+                                .add(const CarouselScrollAction(index: 0));
+                            context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+                          },
+                          icon: const Icon(Icons.arrow_back_ios_rounded)),
                     ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          // child: ProductDetailBody(),
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 96),
-            color: backgroundNo2,
-            child: ListView(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              controller: scrollController,
-              children: [
-                widget.arguments != null ? PDTopSection(args: widget.arguments!) : SizedBox(),
-                const SizedBox(
-                  height: 16,
+              bottomSheet: Container(
+                color: whitePure,
+                width: maxWidth,
+                height: 96,
+                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, '${Routes.selectOptions.toStringPath()}?pid=${state.product.productId}',
+                                arguments: ProductDetailArgs(product: state.product));
+                          },
+                          style: AlvaStyles()
+                              .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
+                          child: Text("สั่งซื้อสินค้า",
+                              style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                widget.arguments != null ? PDBottomSection(args: widget.arguments!) : SizedBox(),
-                const SizedBox(
-                  height: 16,
+              ),
+              // child: ProductDetailBody(),
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 96),
+                color: backgroundNo2,
+                child: ListView(
+                  shrinkWrap: true,
+                  controller: scrollController,
+                  children: [
+                    PDTopSection(),
+                    Container(
+                      height: 16,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: cloudWhite, // Replace with your color
+                            width: 2.0, // Adjust the border width as needed
+                          ),
+                        ),
+                      ),
+                    ),
+                    PDBottomSection()
+                  ],
                 ),
-              ],
-            ),
-          )),
+              ));
+        },
+      ),
     );
   }
 
@@ -317,21 +366,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                 child: SizedBox(
                                   width: maxWidth,
                                   height: 576,
-                                  child: FadeInImage(
-                                    placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
-                                    image: NetworkImage(
-                                      i == imageDataLength
-                                          ? widget.arguments!.product.productionAssets[0]
-                                          : widget.arguments!.product.productionAssets[i],
-                                    ),
-                                    // image: NetworkImage(
-                                    //   i == imageDataLength
-                                    //       ? dataCarouselMock[0].substring(46)
-                                    //       : dataCarouselMock[i].substring(46),
-                                    // ),
-                                    fit: BoxFit.fitWidth,
-                                    imageErrorBuilder: (context, error, stackTrace) =>
-                                        Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
+                                  child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+                                    builder: (context, state) {
+                                      return FadeInImage(
+                                        placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
+                                        image: NetworkImage(
+                                          i == imageDataLength
+                                              ? state.product.productionAssets[0]
+                                              : state.product.productionAssets[i],
+                                        ),
+                                        // image: NetworkImage(
+                                        //   i == imageDataLength
+                                        //       ? dataCarouselMock[0].substring(46)
+                                        //       : dataCarouselMock[i].substring(46),
+                                        // ),
+                                        fit: BoxFit.fitWidth,
+                                        imageErrorBuilder: (context, error, stackTrace) =>
+                                            Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
+                                      );
+                                    },
                                   ),
                                 ),
                               );

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,15 +23,39 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
-  List<int> counter = [];
+  List<int> counter = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+  String cleanHtml(String text) {
+    String temp = text;
+
+    temp = temp.replaceAll("<p>", "");
+    temp = temp.replaceAll("</p>", "<br>");
+
+    temp = temp.replaceAll("<h1>", "<b>");
+    temp = temp.replaceAll("<h2>", "<b>");
+    temp = temp.replaceAll("<h3>", "<b>");
+    temp = temp.replaceAll("<h4>", "<b>");
+
+    temp = temp.replaceAll("</h1>", "</b><br>");
+    temp = temp.replaceAll("</h2>", "</b><br>");
+    temp = temp.replaceAll("</h3>", "</b><br>");
+    temp = temp.replaceAll("</h4>", "</b><br>");
+
+    return temp;
+  }
 
   @override
   void initState() {
     super.initState();
 
-    for (int i = 0; i < widget.productList.products!.length; i++) {
-      counter.add(1);
-    }
+    // int count = 0;
+    // for (int i = 0; i < widget.productList.products!.length; i++) {
+    //   count++;
+    // }
+
+    // setState(() {
+    //   counter = [for (int i = 0; i < count; i++) 1];
+    // });
   }
 
   @override
@@ -47,7 +73,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
           return GestureDetector(
             onTap: () {
               // context.read<SelectedProductBloc>().add(SelectedProductEvent(products[index]));
-
+              context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
               Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}',
                   arguments: ProductDetailArgs(product: products[index]));
               // Navigator.of(context).pushNamed("${Routes.productDetail.toStringPath()}?id=1");
@@ -194,34 +220,37 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            Row(
-                              children: products[index]
-                                  .promotionTag
-                                  .map((tag) => Row(
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.symmetric(vertical: 4),
-                                            child: AlvaText(
-                                              title: tag,
-                                              textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                            Visibility(
+                              visible: products[index].promotionTag.isEmpty ? false : true,
+                              child: Row(
+                                children: products[index]
+                                    .promotionTag
+                                    .map((tag) => Row(
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.symmetric(vertical: 4),
+                                              child: AlvaText(
+                                                title: tag,
+                                                textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                                              ),
                                             ),
-                                          ),
 
-                                          // add srperator exclude tail
-                                          if (products[index].promotionTag.indexOf(tag) !=
-                                              products[index].promotionTag.length - 1)
-                                            const Text(
-                                              "| ",
-                                              style: TextStyle(color: cloudSoftDeepWhite),
-                                            )
-                                          // const VerticalDivider(
-                                          //   width: 8,
-                                          //   thickness: 100,
-                                          //   color: Colors.grey,
-                                          // )
-                                        ],
-                                      ))
-                                  .toList(),
+                                            // add srperator exclude tail
+                                            if (products[index].promotionTag.indexOf(tag) !=
+                                                products[index].promotionTag.length - 1)
+                                              const Text(
+                                                "| ",
+                                                style: TextStyle(color: cloudSoftDeepWhite),
+                                              )
+                                            // const VerticalDivider(
+                                            //   width: 8,
+                                            //   thickness: 100,
+                                            //   color: Colors.grey,
+                                            // )
+                                          ],
+                                        ))
+                                    .toList(),
+                              ),
                             ),
                             const SizedBox(
                               height: 16,
@@ -234,37 +263,39 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             const SizedBox(
                               height: 16,
                             ),
-                            HtmlWidget(
-                              products[index].tagline,
-                              customStylesBuilder: (element) {
-                                if (element.localName == "h1") {
-                                  return {
-                                    'font-family': 'Krungsri Condensed',
-                                    'font-size': '16px',
-                                    'font-weight': '600'
-                                  };
-                                }
-
-                                return null;
-                              },
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            HtmlWidget(
-                              products[index].description,
-                              customStylesBuilder: (element) {
-                                if (element.localName == "p") {
-                                  return {
-                                    'font-family': 'Krungsri Condensed',
-                                    'font-size': '10px',
-                                    'font-weight': '400',
-                                    'line-height': '16px'
-                                  };
-                                }
-
-                                return null;
-                              },
+                            Visibility(
+                              visible: products[index].tagline == "" ? false : true,
+                              child: HtmlWidget(
+                                "<p>${cleanHtml(products[index].tagline)}</p>",
+                                customStylesBuilder: (element) {
+                                  if (element.localName == "p") {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '10px',
+                                      'font-weight': '400',
+                                      'color': '#5A5A5A',
+                                      'max-lines': '4',
+                                      'text-overflow': 'ellipsis'
+                                    };
+                                  } else if (element.localName == "b") {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '16px',
+                                      'font-weight': '600',
+                                      'color': '#2C2626'
+                                    };
+                                  } else {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '10px',
+                                      'font-weight': '400',
+                                      'color': '#5A5A5A',
+                                      'max-lines': '4',
+                                      'text-overflow': 'ellipsis'
+                                    };
+                                  }
+                                },
+                              ),
                             ),
                             const SizedBox(
                               height: 16,
@@ -274,7 +305,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               child: Row(
                                 children: [
                                   AlvaText(
-                                    title: NumberFormat.decimalPattern().format(products[index].discountPrice),
+                                    title: intl.NumberFormat.decimalPattern().format(products[index].discountPrice),
                                     textStyle: AlvaStyles().bodySize14W400MutedLine(),
                                   ),
                                   const SizedBox(
@@ -293,7 +324,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 Row(
                                   children: [
                                     AlvaText(
-                                      title: NumberFormat.decimalPattern().format(products[index].price),
+                                      title: intl.NumberFormat.decimalPattern().format(products[index].price),
                                       textStyle: products[index].discountPrice == 0
                                           ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
                                           : AlvaStyles().headingSize22(RedWordShow),

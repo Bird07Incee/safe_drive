@@ -108,7 +108,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                       resetAllState();
                       Navigator.pop(context);
                     },
-                    icon: const Icon(Icons.arrow_back)),
+                    icon: const Icon(Icons.arrow_back_ios)),
               ),
               child: Container(
                 color: cloudyWhite,
@@ -141,6 +141,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -255,18 +256,25 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                   ],
                                                 ),
                                                 Expanded(
-                                                  child: AlvaText(
-                                                      title: widget.arguments!.product.productionOptionals[index].label,
-                                                      textStyle:
-                                                          AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                  child: Container(
+                                                    margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                                                    child: AlvaText(
+                                                        title:
+                                                            widget.arguments!.product.productionOptionals[index].label,
+                                                        textStyle:
+                                                            AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                  ),
                                                 ),
                                                 SizedBox(
                                                   width: 16,
                                                 ),
-                                                AlvaText(
-                                                    title:
-                                                        "${widget.arguments!.product.productionOptionals[index].price.toDecimalFormat()} บาท",
-                                                    textStyle: AlvaStyles().headingSize12w400(spaceGrey)),
+                                                Container(
+                                                  margin: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                                                  child: AlvaText(
+                                                      title:
+                                                          "${widget.arguments!.product.productionOptionals[index].price.toDecimalFormat()} บาท",
+                                                      textStyle: AlvaStyles().headingSize12w400(spaceGrey)),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -344,6 +352,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
@@ -478,21 +487,27 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     ),
                                                     // SizedBox, AlvaText for price
                                                     Expanded(
-                                                      child: AlvaText(
-                                                          title: widget
-                                                              .arguments!
-                                                              .product
-                                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                              .level2[index]
-                                                              .label,
-                                                          textStyle:
-                                                              AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      child: Container(
+                                                        margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                                                        child: AlvaText(
+                                                            title: widget
+                                                                .arguments!
+                                                                .product
+                                                                .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                .level2[index]
+                                                                .label,
+                                                            textStyle: AlvaStyles()
+                                                                .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      ),
                                                     ),
                                                     SizedBox(width: 16),
-                                                    AlvaText(
-                                                      title:
-                                                          "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[index].price.toDecimalFormat()} บาท",
-                                                      textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                    Container(
+                                                      margin: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                                                      child: AlvaText(
+                                                        title:
+                                                            "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[index].price.toDecimalFormat()} บาท",
+                                                        textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -586,6 +601,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
@@ -715,22 +731,28 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                       ],
                                                     ),
                                                     Expanded(
-                                                      child: AlvaText(
-                                                          title: widget
-                                                              .arguments!
-                                                              .product
-                                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                              .level2[prodOptState.stepTwoIndexSelect!]
-                                                              .level3[index]
-                                                              .label,
-                                                          textStyle:
-                                                              AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      child: Container(
+                                                        margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                                                        child: AlvaText(
+                                                            title: widget
+                                                                .arguments!
+                                                                .product
+                                                                .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                .level2[prodOptState.stepTwoIndexSelect!]
+                                                                .level3[index]
+                                                                .label,
+                                                            textStyle: AlvaStyles()
+                                                                .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      ),
                                                     ),
                                                     SizedBox(width: 16),
-                                                    AlvaText(
-                                                      title:
-                                                          "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[index].price.toDecimalFormat()} บาท",
-                                                      textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                    Container(
+                                                      margin: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                                                      child: AlvaText(
+                                                        title:
+                                                            "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[index].price.toDecimalFormat()} บาท",
+                                                        textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -839,6 +861,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     // Row with Radio, SizedBox, AlvaText
                                                     Row(
@@ -970,23 +993,29 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     ),
                                                     // SizedBox, AlvaText for price
                                                     Expanded(
-                                                      child: AlvaText(
-                                                          title: widget
-                                                              .arguments!
-                                                              .product
-                                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                              .level2[prodOptState.stepTwoIndexSelect!]
-                                                              .level3[prodOptState.stepTreeIndexSelect!]
-                                                              .level4[index]
-                                                              .label,
-                                                          textStyle:
-                                                              AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      child: Container(
+                                                        margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                                                        child: AlvaText(
+                                                            title: widget
+                                                                .arguments!
+                                                                .product
+                                                                .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                .level2[prodOptState.stepTwoIndexSelect!]
+                                                                .level3[prodOptState.stepTreeIndexSelect!]
+                                                                .level4[index]
+                                                                .label,
+                                                            textStyle: AlvaStyles()
+                                                                .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      ),
                                                     ),
                                                     SizedBox(width: 16),
-                                                    AlvaText(
-                                                      title:
-                                                          "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[index].price.toDecimalFormat()} บาท",
-                                                      textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                    Container(
+                                                      margin: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                                                      child: AlvaText(
+                                                        title:
+                                                            "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[index].price.toDecimalFormat()} บาท",
+                                                        textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -1098,6 +1127,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     // Row with Radio, SizedBox, AlvaText
                                                     Row(
@@ -1211,24 +1241,30 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     ),
                                                     // SizedBox, AlvaText for price
                                                     Expanded(
-                                                      child: AlvaText(
-                                                          title: widget
-                                                              .arguments!
-                                                              .product
-                                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                              .level2[prodOptState.stepTwoIndexSelect!]
-                                                              .level3[prodOptState.stepTreeIndexSelect!]
-                                                              .level4[prodOptState.stepFourIndexSelect!]
-                                                              .level5[index]
-                                                              .label,
-                                                          textStyle:
-                                                              AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      child: Container(
+                                                        margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                                                        child: AlvaText(
+                                                            title: widget
+                                                                .arguments!
+                                                                .product
+                                                                .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                .level2[prodOptState.stepTwoIndexSelect!]
+                                                                .level3[prodOptState.stepTreeIndexSelect!]
+                                                                .level4[prodOptState.stepFourIndexSelect!]
+                                                                .level5[index]
+                                                                .label,
+                                                            textStyle: AlvaStyles()
+                                                                .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                      ),
                                                     ),
                                                     SizedBox(width: 16),
-                                                    AlvaText(
-                                                      title:
-                                                          "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5[index].price.toDecimalFormat()} บาท",
-                                                      textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                    Container(
+                                                      margin: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                                                      child: AlvaText(
+                                                        title:
+                                                            "${widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5[index].price.toDecimalFormat()} บาท",
+                                                        textStyle: AlvaStyles().headingSize12w400(spaceGrey),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),

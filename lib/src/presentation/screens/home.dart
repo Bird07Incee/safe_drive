@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/constants/tab_icons.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -60,6 +61,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Future.delayed(const Duration(seconds: 10)).then((value) => Navigator.pop(context));
   }
 
+  bool isMorePageToLoad(ProductList productList) {
+    bool isMore = false;
+
+    if ((10 - productList.productCountItems!) == 0 && productList.productAllItems! > (productList.productPage! * 10)) {
+      isMore = true;
+    }
+
+    return isMore;
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -106,10 +117,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     onTap: (int index) {
                                       context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                       if (index == 0) {
-                                        context.read<ProductListBloc>().add(const GetProductList());
+                                        context.read<ProductListBloc>().add(GetProductListByCategory("", context));
                                       } else {
-                                        context.read<ProductListBloc>().add(
-                                            GetProductListByCategory(state.productList.category![index - 1]["categoryId"]));
+                                        context.read<ProductListBloc>().add(GetProductListByCategory(
+                                            state.productList.category![index - 1]["categoryId"], context));
                                       }
                                     },
                                     tabs: [
@@ -123,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       ),
                                       for (int i = 0; i < state.productList.category!.length; i++)
                                         Tab(
-                                          text: state.productList.category![i]["category"],
+                                          text: state.productList.category![i]["categoryTh"],
                                           icon: state.selectedTabIndex == (i + 1)
                                               ? Image.asset(
                                                   tabIconsMapping[state.productList.category![i]["categoryId"]]![
@@ -164,16 +175,77 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       // ),
                                     ]),
                               ),
-                              content: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              content: Column(
                                 children: [
-                                  SizedBox(
-                                    width: maxWidth - 32,
-                                    child: ProductCardWidget(
-                                      maxWidth: maxWidth,
-                                      productList: state.productList,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: maxWidth - 32,
+                                        child: ProductCardWidget(
+                                          maxWidth: maxWidth,
+                                          productList: state.productList,
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                  Visibility(
+                                    visible: isMorePageToLoad(state.productList),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        if (state.selectedTabIndex == 0) {
+                                          context.read<ProductListBloc>().add(GetProductListByPage(
+                                              state.productList, state.productList.productPage! + 1, "", context));
+                                        } else {
+                                          context.read<ProductListBloc>().add(GetProductListByPage(
+                                              state.productList,
+                                              state.productList.productPage! + 1,
+                                              state.productList.category![state.selectedTabIndex - 1]["categoryId"],
+                                              context));
+                                        }
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          Container(
+                                            width: 100,
+                                            height: 32,
+                                            margin: EdgeInsets.symmetric(vertical: 4),
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(Radius.circular(16)),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: whitePure.withOpacity(0.4),
+                                                    spreadRadius: 0,
+                                                    blurRadius: 8,
+                                                    offset: const Offset(0, 2),
+                                                  ),
+                                                ]),
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 16,
+                                                ),
+                                                Text(
+                                                  'โหลดเพิ่มเติม',
+                                                  style: AlvaStyles().bodySize12W600(spaceGrey),
+                                                ),
+                                                const SizedBox(
+                                                  width: 16,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 32,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -242,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         ],
                                       ),
                                       const SizedBox(
-                                        height: 32,
+                                        height: 16,
                                       ),
                                     ],
                                   ),
@@ -258,9 +330,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         subTitle: ErrorConst().subTitleNS,
                         titleBtn: ErrorConst().titleBtnNS,
                         onTap: () {
-                          context.read<ProductListBloc>().add(const GetProductList());
+                          if (state.selectedTabIndex == 0) {
+                            context.read<ProductListBloc>().add(const GetProductList());
+                          } else {
+                            context.read<ProductListBloc>().add(GetProductListByCategory(
+                                state.productList.category![state.selectedTabIndex - 1]["categoryId"], context));
+                          }
                         },
                       );
+                    } else if (state.productListStatus == GetProductListStatus.loadingTranparent) {
+                      return const LoadingScreen();
                     } else {
                       return const LoadingScreen();
                     }

@@ -41,6 +41,10 @@ class Banner {
   }
 }
 
+extension ProductX on Product {
+  bool get isEmpty => this != Product.empty;
+}
+
 class Product {
   const Product({
     required this.appId,
@@ -144,6 +148,7 @@ class Product {
       productionOptionals: []);
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    List<String> productAssets = List.castFrom<dynamic, String>(json['productionAssets']);
     return Product(
         appId: json['appId'] ?? '',
         channelId: json['channelId'] ?? '',
@@ -170,8 +175,11 @@ class Product {
         price: json['price'] ?? 0,
         discountPrice: json['discountPrice'] ?? 0,
         percentDiscountPrice: json['percentDiscountPrice'] ?? 0,
-        productionAssets:
-            json['productionAssets'] != null ? List.castFrom<dynamic, String>(json['productionAssets']) : [],
+        productionAssets: json['productionAssets'] != null
+            ? productAssets.length > 20
+                ? productAssets.sublist(0, 19)
+                : productAssets
+            : [],
         merchantFullName: json['merchantFullName'] ?? '',
         merchantAddress: json['merchantAddress'] ?? '',
         merchantLogo: json['merchantLogo'] ?? '',
@@ -405,7 +413,8 @@ const mockProductResponse = {
       "merchantEmail": "",
       "productionOptionals": [
         {
-          "label": "สีดำ",
+          "label":
+              "สีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำ",
           "levelName": "สี",
           "image":
               "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",

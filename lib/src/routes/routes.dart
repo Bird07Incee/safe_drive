@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -29,30 +28,30 @@ extension TypeCoverter on Routes {
   }
 }
 
-final Map<String, WidgetBuilder> routes = {
-  (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
-  (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
-  (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
-  (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
-  (Routes.productDetail).toStringPath(): (BuildContext context) {
-    if (ModalRoute.of(context)!.settings.arguments != null) {
-      return ProductDetailScreen(
-        arguments: ModalRoute.of(context)!.settings.arguments as ProductDetailArgs,
-      );
-    } else {
-      return const ProductDetailScreen();
-    }
-  },
-  (Routes.selectOptions).toStringPath(): (BuildContext context) {
-    if (ModalRoute.of(context)!.settings.arguments != null) {
-      return ProductSelectOptions(
-        arguments: ModalRoute.of(context)!.settings.arguments as ProductDetailArgs,
-      );
-    } else {
-      return const ProductSelectOptions();
-    }
-  }
-};
+// final Map<String, WidgetBuilder> routes = {
+//   (Routes.initial).toStringPath(): (BuildContext _) => const HomeScreen(),
+//   (Routes.termAndCon).toStringPath(): (BuildContext _) => const TermAndConScreen(),
+//   (Routes.errorScreen).toStringPath(): (BuildContext _) => const ErrorScreen(),
+//   (Routes.loadingScreen).toStringPath(): (BuildContext _) => const LoadingScreen(),
+//   (Routes.productDetail).toStringPath(): (BuildContext context) {
+//     if (ModalRoute.of(context)!.settings.arguments != null) {
+//       return ProductDetailScreen(
+//         arguments: ModalRoute.of(context)!.settings.arguments as ProductDetailArgs,
+//       );
+//     } else {
+//       return const ProductDetailScreen();
+//     }
+//   },
+//   (Routes.selectOptions).toStringPath(): (BuildContext context) {
+//     if (ModalRoute.of(context)!.settings.arguments != null) {
+//       return ProductSelectOptions(
+//         arguments: ModalRoute.of(context)!.settings.arguments as ProductDetailArgs,
+//       );
+//     } else {
+//       return const ProductSelectOptions();
+//     }
+//   }
+// };
 
 extension StringExtension on String {
   RoutingData get getRoutingData {
@@ -81,15 +80,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   // print(state);
   // print(liffClientId);
   // print(liffRedirectUri);
-  String pid = '';
-  if (routingData?.route == "/productDetail" || routingData?.route == "/selectOptions") {
-    pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
-  }
-  print(pid);
+  // String pid = '';
+  // if (routingData?.route == "/productDetail" || routingData?.route == "/selectOptions") {
+  //   pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
+  // }
+  // print(pid);
 
   switch (routingData?.route) {
     case "/":
-      print("case /");
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
     case "/termAndCon":
       return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
@@ -98,17 +96,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case "/loadingScreen":
       return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
     case "/productDetail":
-      return MaterialPageRoute(
-          builder: (_) => ProductDetailScreen(
-                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
-              ),
-          settings: settings);
+      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
     case "/selectOptions":
-      return MaterialPageRoute(
-          builder: (_) => ProductSelectOptions(
-                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
-              ),
-          settings: settings);
+      return MaterialPageRoute(builder: (_) => const ProductSelectOptions(), settings: settings);
     default:
       print("case default");
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);

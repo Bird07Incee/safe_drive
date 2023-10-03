@@ -1,7 +1,7 @@
 import 'dart:collection';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/app_keys.dart';
@@ -9,13 +9,12 @@ import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
-import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
 class PDBottomSection extends StatefulWidget {
-  const PDBottomSection({super.key, required this.args});
-  final ProductDetailArgs args;
+  const PDBottomSection({super.key});
 
   @override
   State<PDBottomSection> createState() => _PDBottomSectionState();
@@ -23,8 +22,8 @@ class PDBottomSection extends StatefulWidget {
 
 class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderStateMixin {
   late final TabController _tabController;
-  late final Product product;
-
+  String? remarkHtmlString;
+  bool isPressedReadMore = false;
   @override
   void dispose() {
     _tabController.dispose();
@@ -34,103 +33,142 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   @override
   void initState() {
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
-    product = widget.args.product;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        buildProductDescriptionWidget(),
-        const SizedBox(
-          height: 16,
-        ),
-        buildDetailCardWidget(context,
-            titleKey: AppKeys().productDetailAboutSellerTitleKey,
-            title: AppStrings().aboutSellerTitle,
-            bodyPage: Column(
-              children: [
-                Row(
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      builder: (context, state) {
+        remarkHtmlString = state.product.remark.replaceAllMapped(
+          RegExp(r'เบอร์ติดต่อ (\d{3}-\d{3}-\d{4})'),
+          (match) {
+            return '<strong>${match.group(0)}</strong>';
+          },
+        );
+        return Column(
+          children: [
+            buildProductDescriptionWidget(state.product),
+            Container(
+              height: 16,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: cloudWhite, // Replace with your color
+                    width: 2.0, // Adjust the border width as needed
+                  ),
+                ),
+              ),
+            ),
+            buildDetailCardWidget(context, state.product,
+                titleKey: AppKeys().productDetailAboutSellerTitleKey,
+                title: AppStrings().aboutSellerTitle,
+                bodyPage: Column(
                   children: [
-                    Expanded(
-                        child: AlvaText(
-                            title: product.merchantFullName,
-                            textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)))
+                    Row(
+                      children: [
+                        Expanded(
+                            child: AlvaText(
+                                title: state.product.merchantFullName,
+                                textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: AlvaText(
+                                title: state.product.merchantAddress,
+                                textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
+                      ],
+                    ),
                   ],
+                )),
+            Container(
+              height: 16,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: cloudWhite, // Replace with your color
+                    width: 2.0, // Adjust the border width as needed
+                  ),
                 ),
-                const SizedBox(
-                  height: 8,
+              ),
+            ),
+            Visibility(
+              visible: state.product.promotionTag.isNotEmpty,
+              child: buildDetailCardWidget(context, state.product,
+                  titleKey: AppKeys().productDetailPromotionDetailTitleKey,
+                  title: AppStrings().promotionDetailTitle,
+                  bodyPage: Padding(
+                    padding: EdgeInsets.only(top: 8),
+                    child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: state.product.promotionTag.length > 3 ? 3 : state.product.promotionTag.length,
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                              padding: EdgeInsets.only(top: index == 0 ? 0 : 8, bottom: 8),
+                              child: Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.bookmark,
+                                        size: 16,
+                                        color: cloudSoftDeepWhite,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Flexible(
+                                          child: AlvaText(
+                                              title: state.product.promotionTag[index],
+                                              textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
+                                    ],
+                                  )
+                                ],
+                              ));
+                        })),
+                  )),
+            ),
+            Container(
+              height: 16,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: cloudWhite, // Replace with your color
+                    width: 2.0, // Adjust the border width as needed
+                  ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: AlvaText(
-                            title: product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
-                  ],
-                ),
-              ],
-            )),
-        const SizedBox(
-          height: 16,
-        ),
-        buildDetailCardWidget(context,
-            titleKey: AppKeys().productDetailPromotionDetailTitleKey,
-            title: AppStrings().promotionDetailTitle,
-            bodyPage: Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: product.promotionTag.length > 3 ? 3 : product.promotionTag.length,
-                  itemBuilder: ((context, index) {
-                    return Padding(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.bookmark,
-                                  size: 16,
-                                  color: cloudSoftDeepWhite,
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Flexible(
-                                    child: AlvaText(
-                                        title: product.promotionTag[index],
-                                        textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
-                              ],
-                            )
-                          ],
-                        ));
-                  })),
-            )),
-        const SizedBox(
-          height: 16,
-        ),
-        buildDetailCardWidget(context,
-            titleKey: AppKeys().productDetailRemarkTitleKey,
-            title: AppStrings().remarkTitle,
-            bodyPage: HtmlWidget(
-              product.remark,
-              buildAsync: true,
-              customStylesBuilder: (element) {
-                return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'font-weight': '400'};
-              },
-              factoryBuilder: () => _MyFactory(title: AppStrings().remarkTitle),
-            )),
-      ],
+              ),
+            ),
+            Visibility(
+              visible: state.product.promotionTag.isNotEmpty,
+              child: buildDetailCardWidget(context, state.product,
+                  titleKey: AppKeys().productDetailRemarkTitleKey,
+                  title: AppStrings().remarkTitle,
+                  bodyPage: HtmlWidget(
+                    remarkHtmlString ?? "",
+                    buildAsync: true,
+                    customStylesBuilder: (element) {
+                      return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
+                    },
+                    textStyle: TextStyle(fontWeight: FontWeight.w400),
+                  )),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  Widget buildProductDescriptionWidget() {
-    bool isPressedReadMore = false;
+  Widget buildProductDescriptionWidget(Product product) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
@@ -139,12 +177,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           String data = "";
           if (_tabController.index == 0) {
             data = product.technicalSpec;
-            log(data);
           } else {
             data = product.description;
           }
-          List<String> line = data.split('<br>');
-          log('line: ${line.length.toString()}');
           return Column(
             children: [
               Padding(
@@ -180,7 +215,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       ),
                       onTap: (int index) {
                         setState(() {});
-                        log("TapBar index $index");
                       },
                       tabs: [
                         Tab(
@@ -209,7 +243,15 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   }
                 },
                 child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: data.isEmpty ? 32 : 0),
+                    padding: EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        top: data.isEmpty ? 16 : 0,
+                        bottom: data.isEmpty
+                            ? 32
+                            : _tabController.index == 0
+                                ? 16
+                                : 0),
                     child: Column(
                       children: [
                         isPressedReadMore
@@ -239,36 +281,46 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               ),
               data.isNotEmpty
                   ? _tabController.index == 1
-                      ? Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                                  height: 24,
-                                  child: OutlinedButton(
-                                    onPressed: () async {
-                                      setState((() {
-                                        isPressedReadMore = !isPressedReadMore;
-                                      }));
-                                      log(isPressedReadMore.toString());
-                                    },
-                                    style: AlvaStyles()
-                                        .outlineNoneBorderButtonStyle(Colors.transparent, Colors.transparent),
-                                    child: AlvaText(
-                                      title: isPressedReadMore
-                                          ? AppStrings().btnHideDescription
-                                          : AppStrings().btnReadMore,
-                                      textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
-                                      disableSelectableText: true,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ))
+                      ? LayoutBuilder(builder: (context, constraints) {
+                          final span =
+                              TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
+                          final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
+                          tp.layout(maxWidth: constraints.maxWidth);
+                          final numLines = tp.computeLineMetrics().length;
+                          return Container(
+                              padding: numLines >= 5 ? null : EdgeInsets.only(top: 16),
+                              child: Visibility(
+                                  visible: numLines >= 5,
+                                  child: Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 16),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                                              height: 24,
+                                              child: OutlinedButton(
+                                                onPressed: () async {
+                                                  setState((() {
+                                                    isPressedReadMore = !isPressedReadMore;
+                                                  }));
+                                                },
+                                                style: AlvaStyles().outlineNoneBorderButtonStyle(
+                                                    Colors.transparent, Colors.transparent),
+                                                child: AlvaText(
+                                                  title: isPressedReadMore
+                                                      ? AppStrings().btnHideDescription
+                                                      : AppStrings().btnReadMore,
+                                                  textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
+                                                  disableSelectableText: true,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ))));
+                        })
                       : Container()
                   : Container()
             ],
@@ -276,7 +328,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         }));
   }
 
-  Widget buildDetailCardWidget(BuildContext context, {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget(BuildContext context, Product product,
+      {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
@@ -298,9 +351,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      SizedBox(height: 16),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         height: 48,
@@ -326,9 +377,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 size: 16,
                               ),
                               const SizedBox(width: 8),
-                              AlvaText(
-                                  title: "ติดต่อ ${product.merchantMobile}",
-                                  textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                              Text("ติดต่อ ${product.merchantMobile}",
+                                  style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
                         ),
@@ -351,7 +401,6 @@ class _MyFactory extends WidgetFactory {
   @override
   void parse(BuildMetadata meta) {
     final e = meta.element;
-    log(e.toString());
     if (title == AppStrings().productDetailProductDescription) {
       if (e.localName == 'tr') {
         for (int i = 0; i < e.nodes.length; i++) {
@@ -366,30 +415,6 @@ class _MyFactory extends WidgetFactory {
           }
         }
         return;
-      }
-    } else if (title == AppStrings().remarkTitle) {
-      if (e.nodes.isNotEmpty) {
-        for (int i = 0; i < e.nodes.length; i++) {
-          if (e.nodes[i].text!.contains('เบอร์ติดต่อ')) {
-            // RegExp pattern = RegExp(r'เบอร์ติดต่อ \d{3}-\d{3}-\d{4}');
-            // String stringBeforeReplace = "";
-            // Iterable<RegExpMatch> match = pattern.allMatches(e.nodes[i].text!);
-
-            // for (var match in match) {
-            //   stringBeforeReplace =
-            //       e.nodes[i].text!.substring(match.start, match.end);
-            // }
-            // meta.element.nodes[i].text =
-            //     meta.element.nodes[i].text!.replaceAll(pattern, '');
-
-            // meta.element.nodes.insert(i + 1, meta.element.nodes[i]);
-            // meta.element.attributes = {
-            //   "style":
-            //       "font-size:12px; font-family:Krungsri Condensed; font-style:medium ; line-height:24px"
-            // } as LinkedHashMap<Object, String>;
-            return;
-          }
-        }
       }
     }
     return super.parse(meta);
