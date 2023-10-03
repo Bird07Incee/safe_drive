@@ -11,6 +11,7 @@ import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/term_and_con/term_and_con_section.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
@@ -131,97 +132,10 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                 ),
               ),
               Container(
-                width: maxWidth,
-                height: maxHeight - (56 + 96),
-                color: const Color(0xfff3f3f3),
-                child: ListView(controller: _controller, children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                        child: Text(
-                          "การรับรองความถูกต้องของข้อมูล",
-                          style: AlvaStyles().heading2(Color(0xff5a5a5a)),
-                        )),
-                  ),
-                  Container(
-                    width: maxWidth,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text(
-                        mockText,
-                        style: AlvaStyles().body1(),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                        child: Text(
-                          "การยินยอมให้เปิดเผยข้อมูลส่วนตัว",
-                          style: AlvaStyles().heading2(Color(0xff5a5a5a)),
-                        )),
-                  ),
-                  Container(
-                    width: maxWidth,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text(
-                        mockText,
-                        style: AlvaStyles().body1(),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                        child: Text(
-                          "การยินยอมให้เปิดเผยข้อมูลส่วนตัว",
-                          style: AlvaStyles().heading2(Color(0xff5a5a5a)),
-                        )),
-                  ),
-                  Container(
-                    width: maxWidth,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text(
-                        mockText,
-                        style: AlvaStyles().body1(),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                        child: Text(
-                          "การยินยอมให้เปิดเผยข้อมูลส่วนตัว",
-                          style: AlvaStyles().heading2(Color(0xff5a5a5a)),
-                        )),
-                  ),
-                  Container(
-                    width: maxWidth,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text(
-                        mockText,
-                        style: AlvaStyles().body1(),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    width: maxWidth,
-                    height: 16,
-                  )
-                ]),
-              ),
+                  width: maxWidth,
+                  height: maxHeight - (56 + 96),
+                  color: const Color(0xfff3f3f3),
+                  child: ListView(controller: _controller, children: const [TermAndConSection()])),
               Container(
                 alignment: Alignment.topCenter,
                 width: maxWidth,

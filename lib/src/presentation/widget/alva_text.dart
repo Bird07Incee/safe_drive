@@ -4,7 +4,8 @@ class AlvaText extends StatelessWidget {
   final String title;
   final TextStyle textStyle;
   final bool disableSelectableText;
-  const AlvaText({super.key, required this.title, required this.textStyle, this.disableSelectableText = false});
+  final Function()? onTapfunction;
+  const AlvaText({super.key, required this.title, required this.textStyle, this.disableSelectableText = false, this.onTapfunction});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class AlvaText extends StatelessWidget {
         : SelectableText(
             title,
             style: textStyle,
+            onTap: onTapfunction,
           );
   }
 }
