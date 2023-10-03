@@ -273,12 +273,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       AlvaText(
-                                        title: HomeConst().termsAndConditions,
-                                        textStyle: AlvaStyles().headingSize10w600(sugarRed),
-                                        onTapfunction: () {
-                                          Navigator.pushNamed(context, '/readTermAndCon');
-                                        }
-                                      ),
+                                          title: HomeConst().termsAndConditions,
+                                          textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                          onTapfunction: () {
+                                            Navigator.pushNamed(context, '/readTermAndCon');
+                                          }),
                                       Container(
                                         margin: const EdgeInsets.symmetric(horizontal: 8),
                                         width: 1,
