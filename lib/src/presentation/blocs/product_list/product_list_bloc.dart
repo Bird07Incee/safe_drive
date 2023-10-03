@@ -53,6 +53,13 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);
+
+      if(productList.products!.length == 1){
+        emit(state.copyWith(
+          hideCategory: true
+        ));
+      }
+
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } catch (e) {
       print(e);
