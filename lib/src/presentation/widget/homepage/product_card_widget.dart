@@ -21,7 +21,7 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
-  List<int> counter = [];
+  List<int> counter = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   String cleanHtml(String text) {
     String temp = text;
@@ -46,14 +46,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   void initState() {
     super.initState();
 
-    int count = 0;
-    for (int i = 0; i < widget.productList.products!.length; i++) {
-      count++;
-    }
+    // int count = 0;
+    // for (int i = 0; i < widget.productList.products!.length; i++) {
+    //   count++;
+    // }
 
-    setState(() {
-      counter = [for (int i = 0; i < count; i++) 1];
-    });
+    // setState(() {
+    //   counter = [for (int i = 0; i < count; i++) 1];
+    // });
   }
 
   @override

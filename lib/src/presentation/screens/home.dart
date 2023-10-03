@@ -314,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         ],
                                       ),
                                       const SizedBox(
-                                        height: 32,
+                                        height: 16,
                                       ),
                                     ],
                                   ),
