@@ -14,3 +14,11 @@ class GetProductByID extends ProductDetailEvent {
   @override
   List<Object> get props => [pid];
 }
+
+class SetProduct extends ProductDetailEvent {
+  const SetProduct({required this.product});
+  final Product product;
+
+  @override
+  List<Object> get props => [product];
+}

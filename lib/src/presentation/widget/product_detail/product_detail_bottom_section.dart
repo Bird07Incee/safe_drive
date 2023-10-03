@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/app_keys.dart';
@@ -8,13 +9,12 @@ import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
-import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
 class PDBottomSection extends StatefulWidget {
-  const PDBottomSection({super.key, required this.args});
-  final ProductDetailArgs args;
+  const PDBottomSection({super.key});
 
   @override
   State<PDBottomSection> createState() => _PDBottomSectionState();
@@ -22,7 +22,6 @@ class PDBottomSection extends StatefulWidget {
 
 class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderStateMixin {
   late final TabController _tabController;
-  late final Product product;
   String? remarkHtmlString;
   bool isPressedReadMore = false;
   @override
@@ -34,25 +33,22 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   @override
   void initState() {
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
-    product = widget.args.product;
-    setUpData();
     super.initState();
-  }
-
-  setUpData() {
-    remarkHtmlString = product.remark.replaceAllMapped(
-      RegExp(r'เบอร์ติดต่อ (\d{3}-\d{3}-\d{4})'),
-      (match) {
-        return '<strong>${match.group(0)}</strong>';
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+  builder: (context, state) {
+    remarkHtmlString = state.product.remark.replaceAllMapped(
+      RegExp(r'เบอร์ติดต่อ (\d{3}-\d{3}-\d{4})'),
+          (match) {
+        return '<strong>${match.group(0)}</strong>';
+      },
+    );
     return Column(
       children: [
-        buildProductDescriptionWidget(),
+        buildProductDescriptionWidget(state.product),
         Container(
           height: 16,
           decoration: BoxDecoration(
@@ -64,7 +60,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             ),
           ),
         ),
-        buildDetailCardWidget(context,
+        buildDetailCardWidget(context, state.product,
             titleKey: AppKeys().productDetailAboutSellerTitleKey,
             title: AppStrings().aboutSellerTitle,
             bodyPage: Column(
@@ -73,7 +69,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   children: [
                     Expanded(
                         child: AlvaText(
-                            title: product.merchantFullName,
+                            title: state.product.merchantFullName,
                             textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)))
                   ],
                 ),
@@ -84,7 +80,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   children: [
                     Expanded(
                         child: AlvaText(
-                            title: product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
+                            title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
                   ],
                 ),
               ],
@@ -101,8 +97,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           ),
         ),
         Visibility(
-          visible: product.promotionTag.isNotEmpty,
-          child: buildDetailCardWidget(context,
+          visible: state.product.promotionTag.isNotEmpty,
+          child: buildDetailCardWidget(context, state.product,
               titleKey: AppKeys().productDetailPromotionDetailTitleKey,
               title: AppStrings().promotionDetailTitle,
               bodyPage: Padding(
@@ -110,7 +106,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: product.promotionTag.length > 3 ? 3 : product.promotionTag.length,
+                    itemCount: state.product.promotionTag.length > 3 ? 3 : state.product.promotionTag.length,
                     itemBuilder: ((context, index) {
                       return Padding(
                           padding: EdgeInsets.only(top: index == 0 ? 0 : 8, bottom: 8),
@@ -131,7 +127,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                   ),
                                   Flexible(
                                       child: AlvaText(
-                                          title: product.promotionTag[index],
+                                          title: state.product.promotionTag[index],
                                           textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
                                 ],
                               )
@@ -152,8 +148,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           ),
         ),
         Visibility(
-          visible: product.promotionTag.isNotEmpty,
-          child: buildDetailCardWidget(context,
+          visible: state.product.promotionTag.isNotEmpty,
+          child: buildDetailCardWidget(context, state.product,
               titleKey: AppKeys().productDetailRemarkTitleKey,
               title: AppStrings().remarkTitle,
               bodyPage: HtmlWidget(
@@ -167,9 +163,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         ),
       ],
     );
+  },
+);
   }
 
-  Widget buildProductDescriptionWidget() {
+  Widget buildProductDescriptionWidget(Product product) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
@@ -329,7 +327,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         }));
   }
 
-  Widget buildDetailCardWidget(BuildContext context, {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget(BuildContext context, Product product, {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,

@@ -15,6 +15,7 @@ part 'product_detail_state.dart';
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   ProductDetailBloc() : super(const ProductDetailState()) {
     on<GetProductByID>(_onGetProduct);
+    on<SetProduct>(_onSetProduct);
   }
 
 
@@ -24,7 +25,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = lineDataHelper.getLineAccessToken();
-
     emit(state.copyWith(status: ProductDetailStatus.loading));
 
     try {
@@ -37,5 +37,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     } catch (e) {
       emit(state.copyWith(status: ProductDetailStatus.error));
     }
+  }
+
+  _onSetProduct(SetProduct event, Emitter<ProductDetailState> emit) async {
+    emit(state.copyWith(status: ProductDetailStatus.success, product: event.product));
   }
 }

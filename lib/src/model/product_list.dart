@@ -41,6 +41,10 @@ class Banner {
   }
 }
 
+extension ProductX on Product {
+  bool get isEmpty => this != Product.empty;
+}
+
 class Product {
   const Product({
     required this.appId,
