@@ -34,10 +34,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     temp = temp.replaceAll("<h3>", "<b>");
     temp = temp.replaceAll("<h4>", "<b>");
 
-    temp = temp.replaceAll("</h1>", "</b>");
-    temp = temp.replaceAll("</h2>", "</b>");
-    temp = temp.replaceAll("</h3>", "</b>");
-    temp = temp.replaceAll("</h4>", "</b>");
+    temp = temp.replaceAll("</h1>", "</b><br>");
+    temp = temp.replaceAll("</h2>", "</b><br>");
+    temp = temp.replaceAll("</h3>", "</b><br>");
+    temp = temp.replaceAll("</h4>", "</b><br>");
 
     return temp;
   }
