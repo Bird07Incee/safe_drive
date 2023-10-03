@@ -5,9 +5,10 @@ import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
-enum Routes { initial, termAndCon, errorScreen, loadingScreen, productDetail, selectOptions }
+enum Routes { readTermAndCon, initial, termAndCon, errorScreen, loadingScreen, productDetail, selectOptions }
 
 extension TypeCoverter on Routes {
   String toStringPath() {
@@ -16,6 +17,8 @@ extension TypeCoverter on Routes {
         return '/';
       case Routes.termAndCon:
         return '/termAndCon';
+      case Routes.readTermAndCon:
+        return '/readTermAndCon';
       case Routes.errorScreen:
         return '/errorScreen';
       case Routes.loadingScreen:
@@ -91,6 +94,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
     case "/termAndCon":
       return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
+    case "/readTermAndCon":
+      return MaterialPageRoute(builder: (_) => const ReadTermAndConScreen(), settings: settings);
     case "/errorScreen":
       return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
     case "/loadingScreen":
