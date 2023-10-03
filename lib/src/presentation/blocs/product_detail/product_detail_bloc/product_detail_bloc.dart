@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +16,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     on<SetProduct>(_onSetProduct);
   }
 
-
   _onGetProduct(GetProductByID event, Emitter<ProductDetailState> emit) async {
     DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
@@ -29,8 +26,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
 
     try {
       String path = "/ecommerce/v1/products${event.pid != '' ? '?pid=${event.pid}' : ''}";
-      Response response = await dioUtilityRepository.postByURL("$baseUrl$inventoryApiPath$path", {},
-          headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await dioUtilityRepository
+          .postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer $accessToken"});
 
       final p = Product.fromJson(response.data);
       emit(state.copyWith(status: ProductDetailStatus.success, product: p));

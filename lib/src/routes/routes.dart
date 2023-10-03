@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
-import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';

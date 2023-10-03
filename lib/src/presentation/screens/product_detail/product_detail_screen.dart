@@ -104,8 +104,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             imageDataLength = product.productionAssets.length == 1
                 ? product.productionAssets.length
                 : product.productionAssets.length > 20
-                ? 20
-                : product.productionAssets.length;
+                    ? 20
+                    : product.productionAssets.length;
           }
         },
         builder: (context, pdState) {
@@ -136,8 +136,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                 );
               },
             );
-          }
-          else if (pdState.status.isLoading) {
+          } else if (pdState.status.isLoading) {
             return const LoadingScreen();
           } else {
             return ErrorScreen(
@@ -151,13 +150,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
               },
             );
           }
-
         },
       ),
     );
   }
 
-  WillPopScope productDetailPage(ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
+  WillPopScope productDetailPage(
+      ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
@@ -171,73 +170,72 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
               titlePage: titleWebPage,
               appBar: stateAppBar.appBarCarDetailStatus
                   ? AppBar(
-                automaticallyImplyLeading: false,
-                leading: IconButton(
-                  key: const Key("pop_navigator_to_home_page"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    context
-                        .read<ProductDetailCarouselScrollControllerBloc>()
-                        .add(const CarouselScrollAction(index: 0));
-                    context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
-                  },
-                  icon: const Icon(Icons.arrow_back_ios_rounded),
-                ),
-                leadingWidth: 60,
-                titleSpacing: 0,
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AlvaTextMaxLinesOverflow(
-                        title: state.product.productName,
-                        maxLines: 1,
-                        textStyle: AlvaStyles()
-                            .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
-                            .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        AlvaText(
-                            title: state.product.price.toDecimalFormat(),
-                            textStyle: AlvaStyles().heading1().copyWith(
-                                color: state.product.discountPrice > 0
-                                    ? RedWordShow
-                                    : BTN_SELECTED_TEXT_COLOR_NEW,
-                                height: 1.33)),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 1),
-                          child: AlvaText(
-                              title: ' บาท',
+                      automaticallyImplyLeading: false,
+                      leading: IconButton(
+                        key: const Key("pop_navigator_to_home_page"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          context
+                              .read<ProductDetailCarouselScrollControllerBloc>()
+                              .add(const CarouselScrollAction(index: 0));
+                          context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+                        },
+                        icon: const Icon(Icons.arrow_back_ios_rounded),
+                      ),
+                      leadingWidth: 60,
+                      titleSpacing: 0,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AlvaTextMaxLinesOverflow(
+                              title: state.product.productName,
+                              maxLines: 1,
                               textStyle: AlvaStyles()
-                                  .heading2(state.product.discountPrice > 0
-                                  ? RedWordShow
-                                  : BTN_SELECTED_TEXT_COLOR_NEW)
-                                  .copyWith(height: 1.33)),
-                        ),
-                      ],
+                                  .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
+                                  .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              AlvaText(
+                                  title: state.product.price.toDecimalFormat(),
+                                  textStyle: AlvaStyles().heading1().copyWith(
+                                      color:
+                                          state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW,
+                                      height: 1.33)),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 1),
+                                child: AlvaText(
+                                    title: ' บาท',
+                                    textStyle: AlvaStyles()
+                                        .heading2(
+                                            state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                        .copyWith(height: 1.33)),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      centerTitle: false,
                     )
-                  ],
-                ),
-                centerTitle: false,
-              )
                   : AppBar(
-                title: AlvaText(
-                    title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                titleSpacing: 0,
-                leadingWidth: 60,
-                centerTitle: false,
-                automaticallyImplyLeading: false,
-                leading: IconButton(
-                    key: const Key("pop_navigator_to_home_page"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      context
-                          .read<ProductDetailCarouselScrollControllerBloc>()
-                          .add(const CarouselScrollAction(index: 0));
-                      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_rounded)),
-              ),
+                      title: AlvaText(
+                          title: "ข้อมูลสินค้า",
+                          textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      titleSpacing: 0,
+                      leadingWidth: 60,
+                      centerTitle: false,
+                      automaticallyImplyLeading: false,
+                      leading: IconButton(
+                          key: const Key("pop_navigator_to_home_page"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            context
+                                .read<ProductDetailCarouselScrollControllerBloc>()
+                                .add(const CarouselScrollAction(index: 0));
+                            context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+                          },
+                          icon: const Icon(Icons.arrow_back_ios_rounded)),
+                    ),
               bottomSheet: Container(
                 color: whitePure,
                 width: maxWidth,
@@ -251,13 +249,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         height: 48,
                         child: OutlinedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context,
-                                '${Routes.selectOptions.toStringPath()}?pid=${state.product.productId}',
+                            Navigator.pushNamed(
+                                context, '${Routes.selectOptions.toStringPath()}?pid=${state.product.productId}',
                                 arguments: ProductDetailArgs(product: state.product));
                           },
                           style: AlvaStyles()
                               .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
-                          child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          child: Text("สั่งซื้อสินค้า",
+                              style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                         ),
                       ),
                     )
@@ -284,7 +283,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         ),
                       ),
                     ),
-                  PDBottomSection()
+                    PDBottomSection()
                   ],
                 ),
               ));

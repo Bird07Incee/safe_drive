@@ -175,8 +175,11 @@ class Product {
         price: json['price'] ?? 0,
         discountPrice: json['discountPrice'] ?? 0,
         percentDiscountPrice: json['percentDiscountPrice'] ?? 0,
-        productionAssets:
-            json['productionAssets'] != null ? productAssets.length > 20 ? productAssets.sublist(0, 19) : productAssets: [],
+        productionAssets: json['productionAssets'] != null
+            ? productAssets.length > 20
+                ? productAssets.sublist(0, 19)
+                : productAssets
+            : [],
         merchantFullName: json['merchantFullName'] ?? '',
         merchantAddress: json['merchantAddress'] ?? '',
         merchantLogo: json['merchantLogo'] ?? '',

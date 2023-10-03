@@ -6,7 +6,6 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
-import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
@@ -120,33 +119,34 @@ class PDTopSection extends StatelessWidget {
                             visible: state.product.productionAssets.length > 1,
                             child: Positioned.fill(
                                 child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Container(
-                                    margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
-                                    width: 41,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      color: cloudyWhite.withOpacity(0.8),
-                                    ),
-                                    child: Center(
-                                      child: AlvaText(
-                                          title: "${carouselarguments.initialPage + 1}/${state.product.productionAssets.length}",
-                                          textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)),
-                                    ),
-                                  ),
-                                )),
+                              alignment: Alignment.bottomLeft,
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                                width: 41,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: cloudyWhite.withOpacity(0.8),
+                                ),
+                                child: Center(
+                                  child: AlvaText(
+                                      title:
+                                          "${carouselarguments.initialPage + 1}/${state.product.productionAssets.length}",
+                                      textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                ),
+                              ),
+                            )),
                           ),
                           Positioned.fill(
                               child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: Image.asset(
-                                  "assets/homepage/brand.png",
-                                  height: 32,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) => const SizedBox(),
-                                ),
-                              )),
+                            alignment: Alignment.bottomRight,
+                            child: Image.asset(
+                              "assets/homepage/brand.png",
+                              height: 32,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                            ),
+                          )),
                           Visibility(
                             visible: state.product.percentDiscountPrice > 0,
                             child: Container(
@@ -276,7 +276,7 @@ class PDTopSection extends StatelessWidget {
                                   title: state.product.price.toDecimalFormat(),
                                   textStyle: AlvaStyles()
                                       .headingSize22w700(
-                                      state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                          state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
                                       .copyWith(height: 1.454),
                                 ),
                                 Padding(
@@ -285,7 +285,7 @@ class PDTopSection extends StatelessWidget {
                                     title: ' บาท',
                                     textStyle: AlvaStyles()
                                         .headingSize18w700(
-                                        state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                            state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
                                         .copyWith(height: 1.454),
                                   ),
                                 ),
