@@ -97,11 +97,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               itemCount: products?[index].productionAssets.length,
                               controller: pageViewController,
                               onPageChanged: (val) {
-                                print(counter);
-
                                 setState(() {
                                   counter[index] = val + 1;
                                 });
+
+                                print(counter);
                               },
                               itemBuilder: (ctx, i) {
                                 return Stack(
