@@ -5,6 +5,7 @@ import 'package:intl/intl.dart' as intl;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/extension/safe_get_extension.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
@@ -47,9 +48,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   void initState() {
     super.initState();
 
-    setState(() {
-      counter = [for (int i = 0; i < widget.productList.products!.length; i++) 1];
-    });
+    // setState(() {
+    //   counter = [for (int i = 0; i < widget.productList.products!.length; i++) 1];
+    // });
   }
 
   @override
@@ -139,7 +140,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           ),
                           child: Center(
                             child: Text(
-                              "${counter[index]}/ ${products?[index].productionAssets.length}",
+                              "${counter.get(index) ?? 1}/ ${products?[index].productionAssets.length}",
                               style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                           ),
