@@ -32,6 +32,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   PageController pageController = PageController(initialPage: 0, keepPage: false);
+  ScrollController scrollController = ScrollController();
   // late TabController tabController;
 
   @override
@@ -93,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       return Container(
                         color: cloudyWhite,
                         child: ListView(
+                          controller: scrollController,
                           children: [
                             HomepageTopSection(maxWidth: maxWidth),
                             HomePageBanner(
@@ -123,6 +125,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           context.read<ProductListBloc>().add(GetProductListByCategory(
                                               state.productList.category![index - 1]["categoryId"], context));
                                         }
+                                        scrollController.animateTo(
+                                            //go to top of scroll
+                                            0, //scroll offset to go
+                                            duration: Duration(milliseconds: 500), //duration of scroll
+                                            curve: Curves.fastOutSlowIn //scroll type
+                                            );
                                       },
                                       tabs: [
                                         Tab(
