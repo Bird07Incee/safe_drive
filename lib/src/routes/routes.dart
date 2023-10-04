@@ -5,8 +5,8 @@ import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 enum Routes {
@@ -104,15 +104,23 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
   switch (routingData?.route) {
     case "/":
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const HomeScreen(), settings: settings);
     case "/termAndCon":
-      return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const TermAndConScreen(), settings: settings);
+    case "/readTermAndCon":
+      return MaterialPageRoute(
+          builder: (_) => const ReadTermAndConScreen(), settings: settings);
     case "/errorScreen":
-      return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ErrorScreen(), settings: settings);
     case "/loadingScreen":
-      return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const LoadingScreen(), settings: settings);
     case "/productDetail":
-      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ProductDetailScreen(), settings: settings);
     case "/selectOptions":
       return MaterialPageRoute(
           builder: (_) => ProductSelectOptions(
@@ -125,6 +133,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (_) => const ProductDetailScreen(), settings: settings);
     default:
       print("case default");
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const HomeScreen(), settings: settings);
   }
 }
