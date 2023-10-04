@@ -24,27 +24,27 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
     resetAllState() {
       myBloc.updateStepOneVariables(
         groupValueRadio: "",
-        price: null,
+        price: 0,
         indexSelect: myBloc.state.stepOneIndexSelect,
       );
       myBloc.updateStepTwoVariables(
         groupValueRadio: "",
-        price: null,
+        price: 0,
         indexSelect: myBloc.state.stepTwoIndexSelect,
       );
       myBloc.updateStepTreeVariables(
         groupValueRadio: "",
-        price: null,
+        price: 0,
         indexSelect: myBloc.state.stepTreeIndexSelect,
       );
       myBloc.updateStepFourVariables(
         groupValueRadio: "",
-        price: null,
+        price: 0,
         indexSelect: myBloc.state.stepFourIndexSelect,
       );
       myBloc.updateStepFiveVariables(
         groupValueRadio: "",
-        price: null,
+        price: 0,
         indexSelect: myBloc.state.stepFiveIndexSelect,
       );
       myBloc.updateSelectCurrentOption(0);
