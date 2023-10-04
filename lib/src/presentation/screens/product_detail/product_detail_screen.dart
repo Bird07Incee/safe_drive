@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -154,13 +155,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     );
   }
 
+  void onBack() {
+    var stack = CurrentRouteObserver.instance.stack;
+    print('route stack : $stack');
+    if (stack.contains(Routes.initial.toStringPath())) {
+      Navigator.pop(context);
+    } else {
+      Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
+    }
+    context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
+    context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+  }
+
   WillPopScope productDetailPage(
       ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pop(context);
-        context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
-        context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+        onBack();
         return true;
       },
       child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
@@ -173,11 +184,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       leading: IconButton(
                         key: const Key("pop_navigator_to_home_page"),
                         onPressed: () {
-                          Navigator.pop(context);
-                          context
-                              .read<ProductDetailCarouselScrollControllerBloc>()
-                              .add(const CarouselScrollAction(index: 0));
-                          context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+                          onBack();
                         },
                         icon: const Icon(Icons.arrow_back_ios_rounded),
                       ),
@@ -227,11 +234,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       leading: IconButton(
                           key: const Key("pop_navigator_to_home_page"),
                           onPressed: () {
-                            Navigator.pop(context);
-                            context
-                                .read<ProductDetailCarouselScrollControllerBloc>()
-                                .add(const CarouselScrollAction(index: 0));
-                            context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+                            onBack();
                           },
                           icon: const Icon(Icons.arrow_back_ios_rounded)),
                     ),
