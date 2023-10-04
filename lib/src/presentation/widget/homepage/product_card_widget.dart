@@ -100,8 +100,6 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 setState(() {
                                   counter[index] = val + 1;
                                 });
-
-                                print(counter);
                               },
                               itemBuilder: (ctx, i) {
                                 return Stack(
