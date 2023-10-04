@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/term_and_con/term_and_con_section.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
@@ -111,25 +113,14 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
           titlePage: titleWebPage,
           child: Column(
             children: [
-              Container(
-                height: 56,
-                width: maxWidth,
-                color: Colors.white,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(children: [
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        "ข้อกำหนดและเงื่อนไข",
-                        style: AlvaStyles().heading1(),
-                      )
-                    ]),
-                  ),
-                ),
+              AppBar(
+                title: AlvaText(
+                    title: "ข้อกำหนดและเงื่อนไข",
+                    textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                titleSpacing: 16,
+                leadingWidth: 60,
+                centerTitle: false,
+                automaticallyImplyLeading: false,
               ),
               Container(
                   width: maxWidth,
