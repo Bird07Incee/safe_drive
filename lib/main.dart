@@ -122,10 +122,7 @@ class _RootPageState extends State<RootPage> {
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
       ),
-      navigatorObservers: [
-        DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
-        CurrentRouteObserver.instance
-      ],
+      navigatorObservers: [DatadogNavigationObserver(datadogSdk: DatadogSdk.instance), CurrentRouteObserver.instance],
     );
   }
 }
