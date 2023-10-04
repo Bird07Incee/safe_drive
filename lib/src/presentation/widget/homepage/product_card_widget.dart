@@ -6,8 +6,11 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/safe_get_extension.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 // import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
@@ -92,92 +95,99 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   ),
                   child: Column(
                     children: [
-                      Stack(
-                        children: [
-                          AspectRatio(
-                            aspectRatio: 16.0 / 9.0,
-                            child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                              child: PageView.builder(
-                                  itemCount: products?[index].productionAssets.length,
-                                  controller: pageViewController,
-                                  onPageChanged: (val) {
-                                    setState(() {
-                                      counter[index] = val + 1;
-                                    });
-                                  },
-                                  itemBuilder: (ctx, i) {
-                                    return Stack(
-                                      children: [
-                                        SizedBox(
-                                          width: widget.maxWidth,
-                                          height: 576,
-                                          child: FadeInImage(
-                                            placeholder: const AssetImage('assets/homepage/img_default.png'),
-                                            // Replace with your placeholder image path
-                                            image: NetworkImage(
-                                              i == products![index].productionAssets.length
-                                                  ? products[index].productionAssets[0]
-                                                  : products[index].productionAssets[i],
+                      GestureDetector(
+                        onTap: () {
+                          context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
+                          context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: 0));
+                          context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+                        },
+                        child: Stack(
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 16.0 / 9.0,
+                              child: ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+                                child: PageView.builder(
+                                    itemCount: products?[index].productionAssets.length,
+                                    controller: pageViewController,
+                                    onPageChanged: (val) {
+                                      setState(() {
+                                        counter[index] = val + 1;
+                                      });
+                                    },
+                                    itemBuilder: (ctx, i) {
+                                      return Stack(
+                                        children: [
+                                          SizedBox(
+                                            width: widget.maxWidth,
+                                            height: 576,
+                                            child: FadeInImage(
+                                              placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                              // Replace with your placeholder image path
+                                              image: NetworkImage(
+                                                i == products![index].productionAssets.length
+                                                    ? products[index].productionAssets[0]
+                                                    : products[index].productionAssets[i],
+                                              ),
+                                              fit: BoxFit.fitWidth,
+                                              imageErrorBuilder: (context, error, stackTrace) =>
+                                                  Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
                                             ),
-                                            fit: BoxFit.fitWidth,
-                                            imageErrorBuilder: (context, error, stackTrace) =>
-                                                Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  }),
-                            ),
-                          ),
-                          Positioned.fill(
-                              child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Container(
-                              margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
-                              width: 41,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: cloudyWhite.withOpacity(0.5),
+                                          )
+                                        ],
+                                      );
+                                    }),
                               ),
-                              child: Center(
-                                child: Text(
-                                  "${counter.get(index) == null ? "1" : counter[index]}/ ${products?[index].productionAssets.length}",
-                                  style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                            ),
+                            Positioned.fill(
+                                child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                                width: 41,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: cloudyWhite.withOpacity(0.5),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "${counter.get(index) == null ? "1" : counter[index]}/ ${products?[index].productionAssets.length}",
+                                    style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                                  ),
                                 ),
                               ),
-                            ),
-                          )),
-                          Positioned.fill(
-                              child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: Image.asset(
-                              "assets/homepage/brand.png",
-                              height: 32,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) => const SizedBox(),
-                            ),
-                          )),
-                          Visibility(
-                            visible: products?[index].percentDiscountPrice != 0,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                              decoration: const BoxDecoration(
-                                  color: Color(0xff40a9fc),
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(8),
-                                      topRight: Radius.circular(0),
-                                      bottomLeft: Radius.circular(0),
-                                      bottomRight: Radius.circular(8))),
-                              child: AlvaText(
-                                title: "ถูกลง ${products?[index].percentDiscountPrice} %",
-                                textStyle: AlvaStyles().headingSize12w600(Colors.white),
+                            )),
+                            Positioned.fill(
+                                child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Image.asset(
+                                "assets/homepage/brand.png",
+                                height: 32,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) => const SizedBox(),
                               ),
-                            ),
-                          )
-                        ],
+                            )),
+                            Visibility(
+                              visible: products?[index].percentDiscountPrice != 0,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                                decoration: const BoxDecoration(
+                                    color: Color(0xff40a9fc),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(8),
+                                        topRight: Radius.circular(0),
+                                        bottomLeft: Radius.circular(0),
+                                        bottomRight: Radius.circular(8))),
+                                child: AlvaText(
+                                  title: "ถูกลง ${products?[index].percentDiscountPrice} %",
+                                  textStyle: AlvaStyles().headingSize12w600(Colors.white),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       Container(
                         color: whitePure,
