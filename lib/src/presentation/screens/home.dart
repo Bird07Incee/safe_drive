@@ -139,14 +139,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             text: state.productList.category![i]["categoryTh"],
                                             icon: state.selectedTabIndex == (i + 1)
                                                 ? Image.asset(
-                                                    tabIconsMapping[state.productList.category![i]["categoryId"]]![
-                                                            "active"] ??
+                                                    state.productList.category![i]["img_active"] ??
                                                         'assets/images/category/icon_active_cate_other.png',
                                                     width: 24,
                                                     height: 24)
                                                 : Image.asset(
-                                                    tabIconsMapping[state.productList.category![i]["categoryId"]]![
-                                                            "inactive"] ??
+                                                    state.productList.category![i]["img_inactive"] ??
                                                         'assets/images/category/icon_cate_other.png',
                                                     width: 24,
                                                     height: 24),
