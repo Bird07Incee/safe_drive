@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/constants/tab_icons.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
@@ -136,19 +135,38 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         ),
                                         for (int i = 0; i < state.productList.category!.length; i++)
                                           Tab(
-                                            text: state.productList.category![i]["categoryTh"],
-                                            icon: state.selectedTabIndex == (i + 1)
-                                                ? Image.asset(
-                                                    state.productList.category![i]["img_active"] ??
-                                                        'assets/images/category/icon_active_cate_other.png',
-                                                    width: 24,
-                                                    height: 24)
-                                                : Image.asset(
-                                                    state.productList.category![i]["img_inactive"] ??
-                                                        'assets/images/category/icon_cate_other.png',
-                                                    width: 24,
-                                                    height: 24),
-                                          ),
+                                              text: state.productList.category![i]["categoryTh"],
+                                              icon: state.selectedTabIndex == (i + 1)
+                                                  ? SizedBox(
+                                                      width: 24,
+                                                      height: 24,
+                                                      child: FadeInImage(
+                                                        placeholder: const AssetImage(
+                                                            'assets/images/category/icon_active_cate_other.png'),
+                                                        // Replace with your placeholder image path
+                                                        image:
+                                                            NetworkImage(state.productList.category![i]["img_active"]),
+                                                        fit: BoxFit.fitWidth,
+                                                        imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                            'assets/images/category/icon_active_cate_other.png',
+                                                            fit: BoxFit.fitWidth),
+                                                      ),
+                                                    )
+                                                  : SizedBox(
+                                                      width: 24,
+                                                      height: 24,
+                                                      child: FadeInImage(
+                                                        placeholder: const AssetImage(
+                                                            'assets/images/category/icon_cate_other.png'),
+                                                        // Replace with your placeholder image path
+                                                        image: NetworkImage(
+                                                            state.productList.category![i]["img_inactive"]),
+                                                        fit: BoxFit.fitWidth,
+                                                        imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                            'assets/images/category/icon_cate_other.png',
+                                                            fit: BoxFit.fitWidth),
+                                                      ),
+                                                    )),
                                         // Tab(
                                         //   text: "วอลชาร์จ",
                                         //   icon: state.selectedTabIndex == 1
