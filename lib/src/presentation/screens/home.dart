@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         width: maxWidth - 32,
                                         child: ProductCardWidget(
                                           maxWidth: maxWidth,
-                                          productList: state.productList,
+                                          // productList: state.productList,
                                         ),
                                       ),
                                     ],
