@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/term_and_con/term_and_con_section.dart';
 
@@ -18,50 +20,19 @@ class ReadTermAndConScreen extends StatelessWidget {
           titlePage: titleWebPage,
           child: Column(
             children: [
-              Container(
-                height: 56,
-                width: maxWidth,
-                color: Colors.white,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(children: [
-                      Row(children: [
-                        Column(children: [
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          SizedBox(
-                            height: 18.0,
-                            width: 18.0,
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.arrow_back_ios),
-                            ),
-                          ),
-                        ]),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Column(
-                          children: [
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Text(
-                              "ข้อกำหนดและเงื่อนไข",
-                              style: AlvaStyles().heading1(),
-                            )
-                          ],
-                        ),
-                      ]),
-                    ]),
-                  ),
-                ),
+              AppBar(
+                title: AlvaText(
+                    title: "ข้อกำหนดและเงื่อนไข",
+                    textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                titleSpacing: 0,
+                leadingWidth: 60,
+                centerTitle: false,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_rounded)),
               ),
               Container(
                   width: maxWidth,
