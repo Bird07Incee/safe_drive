@@ -140,7 +140,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           ),
                           child: Center(
                             child: Text(
-                              "${counter.get(index) ?? 1}/ ${products?[index].productionAssets.length}",
+                              "${counter.get(index) == null ? "1" : counter[index]}/ ${products?[index].productionAssets.length}",
                               style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                           ),

@@ -4,6 +4,8 @@ extension SafeLookup<E> on List<E> {
       return this[index];
     } on RangeError {
       return null;
+    } on TypeError {
+      return null;
     }
   }
 }
