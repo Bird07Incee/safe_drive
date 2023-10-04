@@ -5,11 +5,20 @@ import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
-enum Routes { readTermAndCon, initial, termAndCon, errorScreen, loadingScreen, productDetail, selectOptions }
+enum Routes {
+  readTermAndCon,
+  initial,
+  termAndCon,
+  errorScreen,
+  loadingScreen,
+  productDetail,
+  selectOptions,
+  shippingAddress
+}
 
 extension TypeCoverter on Routes {
   String toStringPath() {
@@ -28,6 +37,8 @@ extension TypeCoverter on Routes {
         return '/productDetail';
       case Routes.selectOptions:
         return '/selectOptions';
+      case Routes.shippingAddress:
+        return '/shippingAddress';
     }
   }
 }
@@ -60,7 +71,8 @@ extension TypeCoverter on Routes {
 extension StringExtension on String {
   RoutingData get getRoutingData {
     var uriData = Uri.parse(this);
-    return RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+    return RoutingData(
+        route: uriData.path, queryParameters: uriData.queryParameters);
   }
 }
 
@@ -92,25 +104,36 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
   switch (routingData?.route) {
     case "/":
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const HomeScreen(), settings: settings);
     case "/termAndCon":
-      return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const TermAndConScreen(), settings: settings);
     case "/readTermAndCon":
-      return MaterialPageRoute(builder: (_) => const ReadTermAndConScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ReadTermAndConScreen(), settings: settings);
     case "/errorScreen":
-      return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ErrorScreen(), settings: settings);
     case "/loadingScreen":
-      return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const LoadingScreen(), settings: settings);
     case "/productDetail":
-      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ProductDetailScreen(), settings: settings);
     case "/selectOptions":
       return MaterialPageRoute(
           builder: (_) => ProductSelectOptions(
-                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
+                arguments:
+                    ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
               ),
           settings: settings);
+    case "/shippingAddress":
+      return MaterialPageRoute(
+          builder: (_) => const ProductDetailScreen(), settings: settings);
     default:
       print("case default");
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const HomeScreen(), settings: settings);
   }
 }
