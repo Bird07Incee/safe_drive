@@ -124,7 +124,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
                               builder: (context, carouselState) {
                                 return switchState
-                                    ? viewImagePage(carouselState, context, zoomState, previousState, imageDataLength)
+                                    ? viewImagePage(
+                                        carouselState, context, zoomState, previousState, imageDataLength, pdState)
                                     : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
                               },
                             );
@@ -295,8 +296,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   }
 
   Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
-      double previousState, int imageDataLength) {
+      double previousState, int imageDataLength, ProductDetailState productDetailState) {
     backButtontoDetail() {
+      if (productDetailState.clickFromImage == true) {
+        Navigator.pop(context);
+      }
+
       log("backButtontoDetail");
       context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
       context

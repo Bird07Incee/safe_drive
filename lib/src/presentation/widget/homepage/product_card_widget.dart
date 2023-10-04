@@ -76,6 +76,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               return GestureDetector(
                 onTap: () {
                   context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
+                  context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
                   Navigator.pushNamed(
                       context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
                 },
@@ -100,6 +101,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                           context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: 0));
                           context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
+                          context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
 
                           context.read<ProductDetailBloc>().add(SetProduct(product: products![index]));
                           Navigator.pushNamed(

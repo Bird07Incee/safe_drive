@@ -14,6 +14,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   ProductDetailBloc() : super(const ProductDetailState()) {
     on<GetProductByID>(_onGetProduct);
     on<SetProduct>(_onSetProduct);
+    on<SetClickFromImage>(_onSetClickFromImage);
   }
 
   _onGetProduct(GetProductByID event, Emitter<ProductDetailState> emit) async {
@@ -40,5 +41,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     print('state in bloc: ${event.product.productName}');
     emit(state.copyWith(status: ProductDetailStatus.loading));
     emit(state.copyWith(status: ProductDetailStatus.success, product: event.product));
+  }
+
+  _onSetClickFromImage(SetClickFromImage event, Emitter<ProductDetailState> emit) async {
+    emit(state.copyWith(clickFromImage: event.isClickFromImage));
   }
 }
