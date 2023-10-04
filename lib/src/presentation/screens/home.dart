@@ -206,9 +206,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               state.productList.category![state.selectedTabIndex - 1]["categoryId"],
                                               context));
                                         }
-
-                                        var nextCounter = state.counter + [1,1,1,1,1,1,1,1,1,1];
-                                        context.read<ProductListBloc>().add(SetCounter(nextCounter));
                                       },
                                       child: Column(
                                         children: [
