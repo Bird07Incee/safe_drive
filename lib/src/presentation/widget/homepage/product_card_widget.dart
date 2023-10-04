@@ -48,9 +48,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   void initState() {
     super.initState();
 
-    // setState(() {
-    //   counter = [for (int i = 0; i < widget.productList.products!.length; i++) 1];
-    // });
+    setState(() {
+      counter = [for (int i = 0; i < widget.productList.products!.length; i++) 1];
+    });
   }
 
   @override
