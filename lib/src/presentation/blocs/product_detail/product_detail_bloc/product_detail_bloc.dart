@@ -17,23 +17,27 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   }
 
   _onGetProduct(GetProductByID event, Emitter<ProductDetailState> emit) async {
-    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
-    LineDataHelper lineDataHelper = LineDataHelper();
-    final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
-    String accessToken = lineDataHelper.getLineAccessToken();
     emit(state.copyWith(status: ProductDetailStatus.loading));
-
-    try {
-      String path = "/ecommerce/v1/products${event.pid != '' ? '?pid=${event.pid}' : ''}";
-      Response response = await dioUtilityRepository
-          .postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer $accessToken"});
-
-      final p = Product.fromJson(response.data);
-      emit(state.copyWith(status: ProductDetailStatus.success, product: p));
-    } catch (e) {
-      emit(state.copyWith(status: ProductDetailStatus.error));
-    }
+    ProductList pl = ProductList.fromJson(mockProductResponse);
+    Product p = pl.products!.where((element) => element.productId == event.pid).first;
+    emit(state.copyWith(status: ProductDetailStatus.success, product: p));
+    // DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
+    // LineDataHelper lineDataHelper = LineDataHelper();
+    // final baseUrl = Environment().getValue("BFF_BASE_URL");
+    // final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    // String accessToken = lineDataHelper.getLineAccessToken();
+    // emit(state.copyWith(status: ProductDetailStatus.loading));
+    //
+    // try {
+    //   String path = "/ecommerce/v1/products${event.pid != '' ? '?pid=${event.pid}' : ''}";
+    //   Response response = await dioUtilityRepository
+    //       .postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer $accessToken"});
+    //
+    //   final p = Product.fromJson(response.data);
+    //   emit(state.copyWith(status: ProductDetailStatus.success, product: p));
+    // } catch (e) {
+    //   emit(state.copyWith(status: ProductDetailStatus.error));
+    // }
   }
 
   _onSetProduct(SetProduct event, Emitter<ProductDetailState> emit) async {
