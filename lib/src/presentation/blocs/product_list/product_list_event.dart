@@ -38,3 +38,9 @@ class SetSelectTabIndex extends ProductListEvent {
 
   final int selectedTabIndex;
 }
+
+class SetCounter extends ProductListEvent {
+  const SetCounter(this.counterList);
+
+  final List<int> counterList;
+}

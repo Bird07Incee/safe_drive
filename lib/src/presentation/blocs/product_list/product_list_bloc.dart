@@ -22,6 +22,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
     on<SetSelectTabIndex>(_onSetSelectTabIndex);
+    on<SetCounter>(_onSetCounter);
   }
 
   _onGetProductListMock(GetProductListMock event, Emitter<ProductListState> emit) async {
@@ -138,5 +139,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       if (!event.context.mounted) return;
       Navigator.of(event.context).pop();
     }
+  }
+
+  _onSetCounter(SetCounter event, Emitter<ProductListState> emit) {
+    emit(state.copyWith(counter: state.counter));
   }
 }
