@@ -103,7 +103,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                           context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
 
-                          context.read<ProductDetailBloc>().add(SetProduct(product: products![index]));
+                          context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                           Navigator.pushNamed(
                               context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
                         },
@@ -120,13 +120,13 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         : products![index].productionAssets.length + 1,
                                     controller: pageViewController,
                                     onPageChanged: (val) {
-                                      if (val == products[index].productionAssets.length && val != 1) {
-                                        pageViewController.jumpToPage(0);
-                                      }
-
                                       setState(() {
                                         counter[index] = val + 1;
                                       });
+
+                                      if (val == products[index].productionAssets.length && val != 1) {
+                                        pageViewController.jumpToPage(0);
+                                      }
                                     },
                                     itemBuilder: (ctx, i) {
                                       return Stack(
@@ -138,7 +138,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                               placeholder: const AssetImage('assets/homepage/img_default.png'),
                                               // Replace with your placeholder image path
                                               image: NetworkImage(
-                                                i == products![index].productionAssets.length
+                                                i == products[index].productionAssets.length
                                                     ? products[index].productionAssets[0]
                                                     : products[index].productionAssets[i],
                                               ),
@@ -165,7 +165,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "${counter.get(index) == null ? "1" : counter[index]}/ ${products?[index].productionAssets.length}",
+                                    "${counter.get(index) == null ? "1" : counter[index]}/ ${products[index].productionAssets.length}",
                                     style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                   ),
                                 ),
@@ -182,7 +182,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               ),
                             )),
                             Visibility(
-                              visible: products?[index].percentDiscountPrice != 0,
+                              visible: products[index].percentDiscountPrice != 0,
                               child: Container(
                                 padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                                 decoration: const BoxDecoration(
@@ -193,7 +193,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         bottomLeft: Radius.circular(0),
                                         bottomRight: Radius.circular(8))),
                                 child: AlvaText(
-                                  title: "ถูกลง ${products?[index].percentDiscountPrice} %",
+                                  title: "ถูกลง ${products[index].percentDiscountPrice} %",
                                   textStyle: AlvaStyles().headingSize12w600(Colors.white),
                                 ),
                               ),
@@ -212,7 +212,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               visible: true,
                               child: SmoothPageIndicator(
                                   controller: pageViewController,
-                                  count: products![index].productionAssets.length <= carouselShowLimit
+                                  count: products[index].productionAssets.length <= carouselShowLimit
                                       ? products[index].productionAssets.length
                                       : carouselShowLimit,
                                   effect: const ExpandingDotsEffect(
