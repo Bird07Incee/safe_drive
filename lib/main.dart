@@ -11,7 +11,9 @@ import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
+import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 late DdSdkConfiguration configuration;
@@ -76,9 +78,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: blocs,
-      child: const RootPage(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<DioUtilityRepository>(
+            create: (context) => DioUtilityRepository(service: DioUtilityService())),
+      ],
+      child: MultiBlocProvider(
+        providers: blocs,
+        child: const RootPage(),
+      ),
     );
   }
 }

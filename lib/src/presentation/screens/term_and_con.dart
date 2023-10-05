@@ -54,7 +54,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
-      bool codeVerify = lineDataHelper.getLineAccessToken().isNotEmpty;
+      bool codeVerify = await lineDataHelper.getLineAccessToken() != "";
       if (!codeVerify) {
         Response response = await dioUtilityRepository
             .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
@@ -64,7 +64,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         }
       }
       if (codeVerify) {
-        String accessToken = lineDataHelper.getLineAccessToken();
+        String accessToken = await lineDataHelper.getLineAccessToken();
         Response responseTerm = await dioUtilityRepository.postByURL(
             "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineDataHelper.getLineUid()},
             headers: {"Authorization": "Bearer $accessToken"});
@@ -89,7 +89,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ErrorScreen(
         title: ErrorConst().titleNS,
-        subTitle: lineDataHelper.getLineCode(),
+        subTitle: ErrorConst().subTitleNS,
         titleBtn: ErrorConst().titleBtnNS,
         onTap: () {
           Navigator.of(context).pop();
