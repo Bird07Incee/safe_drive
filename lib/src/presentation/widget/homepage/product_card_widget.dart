@@ -118,6 +118,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     itemCount: products?[index].productionAssets.length,
                                     controller: pageViewController,
                                     onPageChanged: (val) {
+                                      if (val == products![index].productionAssets.length && val != 1) {
+                                        pageViewController.jumpToPage(0);
+                                      }
+
                                       setState(() {
                                         counter[index] = val + 1;
                                       });
