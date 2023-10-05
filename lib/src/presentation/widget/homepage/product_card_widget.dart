@@ -115,10 +115,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 borderRadius:
                                     const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                                 child: PageView.builder(
-                                    itemCount: products?[index].productionAssets.length,
+                                    itemCount: products?[index].productionAssets.length == 1
+                                        ? products![index].productionAssets.length
+                                        : products![index].productionAssets.length + 1,
                                     controller: pageViewController,
                                     onPageChanged: (val) {
-                                      if (val == products![index].productionAssets.length && val != 1) {
+                                      if (val == products[index].productionAssets.length && val != 1) {
                                         pageViewController.jumpToPage(0);
                                       }
 
