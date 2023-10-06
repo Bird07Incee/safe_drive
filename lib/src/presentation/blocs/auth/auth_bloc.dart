@@ -40,7 +40,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }
         } else {
           // print("termandcon value ${termAndConHelper.isTermAndConAccepted().toString()}");
-          if (termAndConHelper.isTermAndConAccepted()) {
+          bool isAccepted = await termAndConHelper.isTermAndConAccepted();
+          if (isAccepted) {
             print("term and con already accept");
             loadOneTrustCookieScript();
             emit(state.copyWith(authStatus: AuthStatus.success));
