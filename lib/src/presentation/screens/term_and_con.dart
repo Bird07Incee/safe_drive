@@ -58,6 +58,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       bool isCodeVerify = accessToken != "";
       if (!isCodeVerify) {
         String lineCode = await lineDataHelper.getLineCode();
+        print('accessToken : $accessToken, code: $lineCode');
         Response response = await dioUtilityRepository
             .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
         if (response.statusCode == 200) {
@@ -67,8 +68,9 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       }
       if (isCodeVerify) {
         String accessToken = await lineDataHelper.getLineAccessToken();
+        String lineUid = await lineDataHelper.getLineUid();
         Response responseTerm = await dioUtilityRepository.postByURL(
-            "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineDataHelper.getLineUid()},
+            "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineUid},
             headers: {"Authorization": "Bearer $accessToken"});
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
