@@ -82,6 +82,13 @@ flutter_app() {
   echo "${DOCKER_ARGS}"
 
   docker_run $@
+
+  echo "Current Diractory"
+  pwd
+
+  ls /opt/
+  ls /home
+
 }
 
 help__build_web="Run build web"
