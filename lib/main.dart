@@ -1,4 +1,5 @@
 import 'dart:html';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,8 @@ _setUpDatadog() {
     trackingConsent: TrackingConsent.granted,
     nativeCrashReportEnabled: true,
     loggingConfiguration: LoggingConfiguration(),
-    rumConfiguration: RumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
+    rumConfiguration:
+        RumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
   );
 }
 
@@ -98,13 +100,16 @@ class _RootPageState extends State<RootPage> {
     context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
     initConnectivity();
     Connectivity().onConnectivityChanged.listen((result) {
-      context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: result));
+      context
+          .read<ConnectivityStatusBloc>()
+          .add(ConnectivityStatusEvent(connectivityResult: result));
     });
   }
 
   Future<void> initConnectivity() async {
-    await Connectivity().checkConnectivity().then(
-        (value) => context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: value)));
+    await Connectivity().checkConnectivity().then((value) => context
+        .read<ConnectivityStatusBloc>()
+        .add(ConnectivityStatusEvent(connectivityResult: value)));
   }
 
   @override
@@ -115,14 +120,19 @@ class _RootPageState extends State<RootPage> {
       themeMode: ThemeMode.system,
       initialRoute: "/",
       // routes: routes,
-      onGenerateInitialRoutes: (initialRoute) => [generateRoute(RouteSettings(name: initialRoute))],
+      onGenerateInitialRoutes: (initialRoute) =>
+          [generateRoute(RouteSettings(name: initialRoute))],
       onGenerateRoute: (settings) => generateRoute(settings),
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 172, 204, 229),
         scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
+        appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
       ),
-      navigatorObservers: [DatadogNavigationObserver(datadogSdk: DatadogSdk.instance), CurrentRouteObserver.instance],
+      navigatorObservers: [
+        DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+        CurrentRouteObserver.instance
+      ],
     );
   }
 }

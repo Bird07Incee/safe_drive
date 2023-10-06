@@ -9,4 +9,6 @@ class AppStrings {
   String noDataFromSeller = "ไม่มีข้อมูลจากผู้ขาย";
   String btnReadMore = "อ่านเพิ่มเติม";
   String btnHideDescription = "ซ่อนรายละเอียด";
+
+  String shippingAddressTitle = "ที่อยู่ในการจัดส่งสินค้า";
 }

@@ -5,6 +5,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/product_summary/shipping_address_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
@@ -130,7 +131,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           settings: settings);
     case "/shippingAddress":
       return MaterialPageRoute(
-          builder: (_) => const ProductDetailScreen(), settings: settings);
+          builder: (_) => const ShippingAddressScreen(), settings: settings);
     default:
       print("case default");
       return MaterialPageRoute(
