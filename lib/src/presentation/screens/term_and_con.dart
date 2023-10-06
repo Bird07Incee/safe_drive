@@ -54,16 +54,18 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
-      bool codeVerify = await lineDataHelper.getLineAccessToken() != "";
-      if (!codeVerify) {
+      String accessToken = await lineDataHelper.getLineAccessToken();
+      bool isCodeVerify = accessToken != "";
+      if (!isCodeVerify) {
+        String lineCode = await lineDataHelper.getLineCode();
         Response response = await dioUtilityRepository
-            .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
+            .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
         if (response.statusCode == 200) {
-          codeVerify = true;
+          isCodeVerify = true;
           lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
         }
       }
-      if (codeVerify) {
+      if (isCodeVerify) {
         String accessToken = await lineDataHelper.getLineAccessToken();
         Response responseTerm = await dioUtilityRepository.postByURL(
             "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineDataHelper.getLineUid()},
@@ -79,7 +81,6 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       if (!mounted) return;
       Navigator.of(context).pop();
     } catch (e) {
-      print(e);
       _handleError();
     }
   }
