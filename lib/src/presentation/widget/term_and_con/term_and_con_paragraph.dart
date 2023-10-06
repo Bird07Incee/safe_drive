@@ -13,14 +13,18 @@ class TermAndConParagraph extends StatelessWidget {
 
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Text(
-                header,
-                style: AlvaStyles().heading2(Color(0xff5a5a5a)),
-              )),
+        Container(
+          width: maxWidth,
+          color: Colors.white,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Text(
+                  header,
+                  style: AlvaStyles().heading2(Color(0xff2C2626)),
+                )),
+          ),
         ),
         Container(
           width: maxWidth,
