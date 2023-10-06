@@ -9,7 +9,7 @@ set -o pipefail
 SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:4.7.0"
 
 ECR_URL="688318228301.dkr.ecr.ap-southeast-1.amazonaws.com"
-FLUTTER_IMAGE="${ECR_URL}/marketplace/flutter:3.10.3"
+FLUTTER_IMAGE="${ECR_URL}/marketplace/flutter:latest"
 
 COVERAGE_TARGET=0
 VERSION=1.0
@@ -82,16 +82,6 @@ flutter_app() {
   echo "${DOCKER_ARGS}"
 
   docker_run $@
-
-  echo "Current Diractory"
-  ls /godata/pipelines/mercury-web-build-nonprod/mercury-web
-
-  wf=${where flutter}
-  echo wf
-
-  dt=${flutter doctor}
-  echo dt
-
 }
 
 help__build_web="Run build web"
