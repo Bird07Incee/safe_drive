@@ -84,10 +84,13 @@ flutter_app() {
   docker_run $@
 
   echo "Current Diractory"
-  pwd
+  ls /godata/pipelines/mercury-web-build-nonprod/mercury-web
 
-  ls /opt/
-  ls /home
+  wf=${where flutter}
+  echo wf
+
+  dt=${flutter doctor}
+  echo dt
 
 }
 
