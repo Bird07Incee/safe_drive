@@ -8,7 +8,7 @@ Map<String, dynamic> envConfig = {
   },
   "qa": {
     "ENVIRONMENT_NAME": "qa",
-    "LIFF_ID": "1661164508-Kn9nO7oB",
+    "LIFF_ID": "1661164508-Wdam3RjL",
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
     "BFF_SOCIAL_BASE_URL": "/mercury-social-qa",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-qa"
