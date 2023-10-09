@@ -11,6 +11,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/show_m
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 final List<BlocProvider> blocs = [
   BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
@@ -24,5 +25,5 @@ final List<BlocProvider> blocs = [
   BlocProvider<ProductListBloc>(create: (_) => ProductListBloc()),
   BlocProvider<ProductOptionBloc>(create: (_) => ProductOptionBloc()),
   BlocProvider<ShowMoreTagLineCubit>(create: (_) => ShowMoreTagLineCubit()),
-  BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc()),
+  BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
 ];

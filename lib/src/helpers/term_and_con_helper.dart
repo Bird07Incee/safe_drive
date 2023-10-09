@@ -1,26 +1,12 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
+import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 
 class TermAndConHelper {
-  Storage localStorage = window.localStorage;
-
-  bool isTermAndConAccepted() {
-    var accepted = false;
-
-    localStorage.forEach((key, value) {
-      if (key == "termAndConAccepted") {
-        accepted = true;
-      }
-    });
-
+  Future<bool> isTermAndConAccepted() async {
+    var accepted = PreferencesHelper.getBool("termAndConAccepted");
     return accepted;
   }
 
   void setTermAndConToAccept() {
-    localStorage.addAll({"termAndConAccepted": "true"});
-  }
-
-  void removeTermAndconAccepted() {
-    localStorage.remove("termAndConAccepted");
+    PreferencesHelper.setBool("termAndConAccepted", true);
   }
 }

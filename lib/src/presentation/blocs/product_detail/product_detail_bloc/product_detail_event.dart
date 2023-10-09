@@ -22,3 +22,9 @@ class SetProduct extends ProductDetailEvent {
   @override
   List<Object> get props => [product];
 }
+
+class SetClickFromImage extends ProductDetailEvent {
+  const SetClickFromImage({required this.isClickFromImage});
+
+  final bool isClickFromImage;
+}
