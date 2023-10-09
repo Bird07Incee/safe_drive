@@ -4,6 +4,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_summary/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
@@ -35,9 +36,61 @@ class ShippingAddressScreen extends StatelessWidget {
         builder: (ctx, state) {
       return Container(
         color: whitePure,
-        child: ListView(
-          children: const [],
-        ),
+        child: Column(
+            children: state.listFormWidget!.map(
+          (FormWidgetModel item) {
+            bool required = true;
+
+            // if (item.checkRequiredField != null &&
+            //     item.checkRequiredFieldMatchValue != null) {
+            //   required = item.checkRequiredFieldMatchValue!.contains(
+            //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
+            // }
+
+            Widget input = Container();
+
+            if (item.formType == formTypeTextField) {
+              input = OutlineTextInput(
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                controller: item.controller,
+                label: item.label,
+                marginBottom: 15,
+                required: required,
+                textInputAction: TextInputAction.done,
+                keyboardType: item.textInputType,
+                maxLength: item.maxLength,
+                maxLines: item.maxLines,
+                showCounter: true,
+              );
+            } else if (item.formType == formTypeDropdown) {
+              input = OutlineDropDownInput(
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                label: item.label,
+                marginBottom: 15,
+                required: required,
+                value: item.value,
+                options: item.options!
+                    .map((e) =>
+                        dropdownItem(value: e['value'], label: e['label']))
+                    .toList(),
+                onChanged: (value) async {
+                  item.value = value;
+                  data.selectDropDownEvent(value, item);
+                },
+              );
+            }
+
+            // if (item.visibleIfMatchValue != null && item.matchField != null) {
+            //   if (item.visibleIfMatchValue!
+            //       .contains(data.entireFormMap[item.matchField])) {
+            //     return input;
+            //   }
+            //   return Container();
+            // }
+
+            return input;
+          },
+        ).toList()),
       );
     });
   }
