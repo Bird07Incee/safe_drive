@@ -13,7 +13,7 @@ Map<String, dynamic> envConfig = {
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
     "BFF_SOCIAL_BASE_URL": "/mercury-social-qa",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-qa",
-    "LINE_REDIRECT_URL": "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Wdam3RjL&scope=profile%20openid%20email"
+    "LINE_REDIRECT_URL": "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Wdam3RjL&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
   },
   "int": {
     "ENVIRONMENT_NAME": "int",
