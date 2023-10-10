@@ -61,6 +61,11 @@ class PreferencesHelper {
     return p.containsKey(key);
   }
 
+  static Future clear() async {
+    final p = await prefs;
+    return p.clear();
+  }
+
   // helper
   static Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 }

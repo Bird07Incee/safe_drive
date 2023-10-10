@@ -3,10 +3,11 @@ import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/order_summary_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 enum Routes {
@@ -17,7 +18,8 @@ enum Routes {
   loadingScreen,
   productDetail,
   selectOptions,
-  shippingAddress
+  shippingAddress,
+  orderSummary
 }
 
 extension TypeCoverter on Routes {
@@ -39,6 +41,8 @@ extension TypeCoverter on Routes {
         return '/selectOptions';
       case Routes.shippingAddress:
         return '/shippingAddress';
+      case Routes.orderSummary:
+        return '/orderSummary';
     }
   }
 }
@@ -121,7 +125,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               ),
           settings: settings);
     case "/shippingAddress":
-      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ProductDetailScreen(), settings: settings);
+    case "/orderSummary":
+      return MaterialPageRoute(builder: (_) => const OrderSummaryScreen(), settings: settings);
     default:
       print("case default");
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);

@@ -401,150 +401,6 @@ class Level5 extends Equatable {
 }
 
 const mockProductResponse = {
-  "appId": "Marketplace-mini-app",
-  "channelId": "LINE",
-  "merchantId": "0004234232",
-  "paymentChannelCode": "",
-  "refundDay": 7,
-  "postDate": "2023‐09‐01T02:49:06−07:00",
-  "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-  "categoryId": ["CT_9P2UW6F426C6", "CT_2YP8LLQG95FS"],
-  "productId": "PV_QQZ5W1QWKQC8",
-  "quantity": 100,
-  "productName": "Palsar Max",
-  "productStatus": "Available",
-  "commissionAmount": 2000,
-  "serviceFee": 0,
-  "shippingFee": 0,
-  "tagline":
-      "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-  "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
-  "description": "<p>Decription cate1 Innopower 1</p>",
-  "technicalSpec":
-      "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
-  "remark": "<h1>Remark cate1 Innopower 1</h1>",
-  "currency": "THB",
-  "price": 56640,
-  "discountPrice": 59000,
-  "percentDiscountPrice": 5,
-  "productionAssets": [
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
-  ],
-  "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
-  "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
-  "merchantLogo": "Url",
-  "merchantMobile": "091-862-5011",
-  "merchantEmail": "",
-  "productionOptionals": [
-    {
-      "label":
-          "สีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำ",
-      "levelName": "สี",
-      "image":
-          "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-      "price": 56640,
-      "subProductId": "P001-1",
-      "quantity": 200,
-      "level2": [
-        {
-          "label": "3 เมตร",
-          "levelName": "ความยาวสาย",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-          "price": 0,
-          "subProductId": "P001-11",
-          "quantity": 100
-        },
-        {
-          "label": "5 เมตร",
-          "levelName": "ความยาวสาย",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-          "price": 500,
-          "subProductId": "P001-12",
-          "quantity": 100
-        }
-      ]
-    },
-    {
-      "label": "สีขาว",
-      "levelName": "สี",
-      "image":
-          "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-      "price": 57640,
-      "subProductId": "P001-2",
-      "quantity": 250,
-      "level2": [
-        {
-          "label": "3 เมตร",
-          "levelName": "ความยาวสาย",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-          "price": 0,
-          "subProductId": "P001-21",
-          "quantity": 50
-        },
-        {
-          "label": "5 เมตร",
-          "levelName": "ความยาวสาย",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-          "price": 500,
-          "subProductId": "P001-22",
-          "quantity": 80
-        },
-        {
-          "label": "10 เมตร",
-          "levelName": "ความยาวสาย",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-          "price": 700,
-          "subProductId": "P001-23",
-          "quantity": 120,
-          "level3": [
-            {
-              "label": "สายธรรมดา",
-              "levelName": "รูปแบบสาย",
-              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-              "price": 100,
-              "subProductId": "P001-231",
-              "quantity": 120,
-              "level4": [
-                {
-                  "label": "สายธรรมดา",
-                  "levelName": "รูปแบบสาย",
-                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                  "price": 200,
-                  "subProductId": "P001-2311",
-                  "quantity": 120,
-                  "level5": [
-                    {
-                      "label": "สายธรรมดา",
-                      "levelName": "รูปแบบสาย",
-                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                      "price": 300,
-                      "subProductId": "P001-23111",
-                      "quantity": 120
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-};
-
-const mockProductListResponse = {
   "productAllItems": 10,
   "productPage": 1,
   "productCountItems": 1,
@@ -572,10 +428,27 @@ const mockProductListResponse = {
     }
   ],
   "category": [
-    {"categoryId": "CT_9P2UW6F426C6", "category": "EV Charger"},
-    {"categoryId": "CT_0XSC1E4ELDFV", "category": "Accessory"},
-    {"categoryId": "CT_371KNH5QXG6O", "category": "Solar"},
-    {"categoryId": "CT_2YP8LLQG95FS", "category": "EV Cate4"}
+    {
+      "categoryId": "CT_9P2UW6F426C6",
+      "categoryTh": "วอลล์ชาร์จ",
+      "categoryEn": "EV Charger",
+      "img_active": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_active_cate_wallcharge.png",
+      "img_inactive": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_cate_wallcharge.png"
+    },
+    {
+      "categoryId": "CT_0XSC1E4ELDFV",
+      "categoryTh": "โซลาร์เซลล์",
+      "categoryEn": "Solar",
+      "img_active": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_active_cate_solar.png",
+      "img_inactive": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_cate_solar.png"
+    },
+    {
+      "categoryId": "CT_371KNH5QXG6O",
+      "categoryTh": "สินค้าอื่นๆ",
+      "categoryEn": "Accessory",
+      "img_active": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_active_cate_other.png",
+      "img_inactive": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_cate_other.png"
+    }
   ],
   "products": [
     {
@@ -586,20 +459,22 @@ const mockProductListResponse = {
       "refundDay": 7,
       "postDate": "2023‐09‐01T02:49:06−07:00",
       "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-      "categoryId": ["CT_9P2UW6F426C6", "CT_2YP8LLQG95FS"],
-      "productId": "PV_QQZ5W1QWKQC8",
+      "categoryId": ["CT_9P2UW6F426C6","CT_371KNH5QXG6O"],
+      "productId": "PV_QQZ5W1QWKQC801",
       "quantity": 100,
       "productName": "Palsar Max",
       "productStatus": "Available",
       "commissionAmount": 2000,
       "serviceFee": 0,
       "shippingFee": 0,
-      "tagline":
-          "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
       "description": "<p>Decription cate1 Innopower 1</p>",
-      "technicalSpec":
-          "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
       "remark": "<h1>Remark cate1 Innopower 1</h1>",
       "currency": "THB",
       "price": 56640,
@@ -622,11 +497,9 @@ const mockProductListResponse = {
       "merchantEmail": "",
       "productionOptionals": [
         {
-          "label":
-              "สีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำ",
+          "label": "สีดำ",
           "levelName": "สี",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 56640,
           "subProductId": "P001-1",
           "quantity": 200,
@@ -634,8 +507,7 @@ const mockProductListResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
               "price": 0,
               "subProductId": "P001-11",
               "quantity": 100
@@ -643,8 +515,7 @@ const mockProductListResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
               "price": 500,
               "subProductId": "P001-12",
               "quantity": 100
@@ -654,8 +525,7 @@ const mockProductListResponse = {
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 57640,
           "subProductId": "P001-2",
           "quantity": 250,
@@ -663,8 +533,7 @@ const mockProductListResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
               "price": 0,
               "subProductId": "P001-21",
               "quantity": 50
@@ -672,8 +541,7 @@ const mockProductListResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
               "price": 500,
               "subProductId": "P001-22",
               "quantity": 80
@@ -681,8 +549,7 @@ const mockProductListResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
               "price": 700,
               "subProductId": "P001-23",
               "quantity": 120,
@@ -730,22 +597,22 @@ const mockProductListResponse = {
       "postDate": "2023‐09‐01T02:49:06−07:00",
       "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
       "categoryId": ["CT_0XSC1E4ELDFV"],
-      "productId": "PV_KH73Y1L00NLA",
+      "productId": "PV_KH73Y1L00NLA02",
       "quantity": 100,
       "productName": "Palsar Max version1",
       "productStatus": "Available",
       "commissionAmount": 2000,
       "serviceFee": 0,
       "shippingFee": 0,
-      "tagline":
-          "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
-      "description":
-          "<article>Wallbox Pulsar Max เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ทได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวัน เอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่ เพราะ Pulsar Max มีความสามารถในการชาร์จเร็ว และยังสามารถบริหารจัดการพลังงานได้อย่างง่ายดายอีกด้วย <br><br><br><strong> Tough:</strong> สามารถติดตั้งได้ทั้งภายในและภายนอกอาคารด้วยผิวสัมผัสแบบแมท ที่มีความสามารถในการป้องกันรอยขีดข่วน รวมถึงมาตรฐาน IP55 <br><strong>Connected:</strong> ควบคุมเครื่องชาร์จของคุณด้วย myWallbox App ผ่านเชื่อมต่อทั้ง Wifi และ บลูทูธ <br><strong>Compatible with your EV:</strong> Pulsar Max รองรับหัวชาร์จทั้ง Type 1 และ Type 2 </br><strong>Simply Installing:</strong> ออกแบบให้ติดตั้งเครื่องชาร์จได้ง่ายขึ้นเพื่อลดทั้งเวลาและงบประมาณลง<article>",
-      "technicalSpec":
-          "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
-      "remark":
-          "<article>• ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา<br> • Krungsri Auto เป็นช่องทางการแสดงสินค้าเท่านั้น </br>• สอบถามข้อมูลเพิ่มเติมเกี่ยวกับสินค้า กรุณาติดต่อผู้ขายโดยตรง <strong>เบอร์ติดต่อ 091-862-5011</strong><br> • แจ้งปัญหาสอบถามข้อมูลการสั่งซื้อ กรุณาติดต่อผู้ดูแลระบบ <strong>เบอร์ติดต่อ 081-123-4567</strong></br><article>",
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<article>Wallbox Pulsar Max เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ทได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวัน เอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่ เพราะ Pulsar Max มีความสามารถในการชาร์จเร็ว และยังสามารถบริหารจัดการพลังงานได้อย่างง่ายดายอีกด้วย <br><br><br><strong> Tough:</strong> สามารถติดตั้งได้ทั้งภายในและภายนอกอาคารด้วยผิวสัมผัสแบบแมท ที่มีความสามารถในการป้องกันรอยขีดข่วน รวมถึงมาตรฐาน IP55 <br><strong>Connected:</strong> ควบคุมเครื่องชาร์จของคุณด้วย myWallbox App ผ่านเชื่อมต่อทั้ง Wifi และ บลูทูธ <br><strong>Compatible with your EV:</strong> Pulsar Max รองรับหัวชาร์จทั้ง Type 1 และ Type 2 </br><strong>Simply Installing:</strong> ออกแบบให้ติดตั้งเครื่องชาร์จได้ง่ายขึ้นเพื่อลดทั้งเวลาและงบประมาณลง<article>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<article>• ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา<br> • Krungsri Auto เป็นช่องทางการแสดงสินค้าเท่านั้น </br>• สอบถามข้อมูลเพิ่มเติมเกี่ยวกับสินค้า กรุณาติดต่อผู้ขายโดยตรง <strong>เบอร์ติดต่อ 091-862-5011</strong><br> • แจ้งปัญหาสอบถามข้อมูลการสั่งซื้อ กรุณาติดต่อผู้ดูแลระบบ <strong>เบอร์ติดต่อ 081-123-4567</strong></br><article>",
       "currency": "THB",
       "price": 56640,
       "discountPrice": 0,
@@ -765,10 +632,10 @@ const mockProductListResponse = {
       "merchantEmail": "",
       "productionOptionals": [
         {
-          "label": "สีดำ",
+          "label": "Wallbox Pulsar Max เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ทได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวัน เอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่ เพราะ Pulsar Max มีความสามารถในการชาร์จเร็ว และยังสามารถบริหารจัดการพลังงานได้อย่างง่ายดายอีกด้วย",
           "levelName": "สี",
           "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-          "price": 56640,
+          "price": 9999999,
           "subProductId": "P002-1",
           "quantity": 200,
           "level2": [
@@ -786,7 +653,17 @@ const mockProductListResponse = {
               "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
               "price": 500,
               "subProductId": "P002-12",
-              "quantity": 100
+              "quantity": 100,
+              "level3": [
+                {
+                  "label": "สายธรรมดา",
+                  "levelName": "รูปแบบสาย",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "price": 100,
+                  "subProductId": "P002-231",
+                  "quantity": 120
+                }
+              ]
             }
           ]
         },
@@ -865,19 +742,21 @@ const mockProductListResponse = {
       "postDate": "2023‐09‐01T02:49:06−07:00",
       "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
       "categoryId": ["CT_371KNH5QXG6O"],
-      "productId": "PV_KH73Y1L00NLA",
+      "productId": "PV_KH73Y1L00NLA03",
       "quantity": 100,
       "productName": "Palsar Max version2",
       "productStatus": "Available",
       "commissionAmount": 2000,
       "serviceFee": 0,
       "shippingFee": 0,
-      "tagline":
-          "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
       "description": "<h1>Desc cate 2 Palsar Max version2</h1></h1>",
-      "technicalSpec":
-          "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
       "remark": "<h1>Remark cate 2 Palsar Max version2</h1></h1>",
       "currency": "THB",
       "price": 56640,
@@ -902,8 +781,7 @@ const mockProductListResponse = {
         {
           "label": "สีดำ",
           "levelName": "สี",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 56640,
           "subProductId": "P001-1",
           "quantity": 200,
@@ -911,8 +789,7 @@ const mockProductListResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
               "price": 0,
               "subProductId": "P002-11",
               "quantity": 100
@@ -920,8 +797,7 @@ const mockProductListResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
               "price": 500,
               "subProductId": "P002-12",
               "quantity": 100
@@ -931,8 +807,7 @@ const mockProductListResponse = {
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 57640,
           "subProductId": "P002-2",
           "quantity": 250,
@@ -940,8 +815,7 @@ const mockProductListResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
               "price": 0,
               "subProductId": "P001-21",
               "quantity": 50
@@ -949,8 +823,7 @@ const mockProductListResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
               "price": 500,
               "subProductId": "P002-22",
               "quantity": 80
@@ -958,8 +831,7 @@ const mockProductListResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
               "price": 700,
               "subProductId": "P002-23",
               "quantity": 120,
@@ -967,8 +839,7 @@ const mockProductListResponse = {
                 {
                   "label": "สายธรรมดา",
                   "levelName": "รูปแบบสาย",
-                  "image":
-                      "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+                  "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
                   "price": 100,
                   "subProductId": "P002-231",
                   "quantity": 120,
@@ -976,8 +847,7 @@ const mockProductListResponse = {
                     {
                       "label": "สายธรรมดา",
                       "levelName": "รูปแบบสาย",
-                      "image":
-                          "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+                      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
                       "price": 200,
                       "subProductId": "P002-2311",
                       "quantity": 120,
@@ -985,8 +855,7 @@ const mockProductListResponse = {
                         {
                           "label": "สายธรรมดา",
                           "levelName": "รูปแบบสาย",
-                          "image":
-                              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+                          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
                           "price": 300,
                           "subProductId": "P002-23111",
                           "quantity": 120
@@ -1009,20 +878,22 @@ const mockProductListResponse = {
       "refundDay": 7,
       "postDate": "2023‐09‐01T02:49:06−07:00",
       "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-      "categoryId": ["CT_2YP8LLQG95FS"],
-      "productId": "P003",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "P004",
       "quantity": 100,
       "productName": "Palsar Max EV3",
       "productStatus": "Available",
       "commissionAmount": 2000,
       "serviceFee": 0,
       "shippingFee": 0,
-      "tagline":
-          "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
       "description": "<h1>Desc cate 3 Palsar Max EV3</h1>",
-      "technicalSpec":
-          "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
       "remark": "<h1>Remark cate 3 Palsar Max EV3</h1>",
       "currency": "THB",
       "price": 56640,
@@ -1044,8 +915,7 @@ const mockProductListResponse = {
         {
           "label": "สีดำ",
           "levelName": "สี",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
           "price": 56640,
           "subProductId": "P003-1",
           "quantity": 200,
@@ -1053,8 +923,7 @@ const mockProductListResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
               "price": 0,
               "subProductId": "P003-11",
               "quantity": 100
@@ -1062,14 +931,14 @@ const mockProductListResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
               "price": 500,
               "subProductId": "P003-12",
               "quantity": 100
             }
           ]
         }
+
       ]
     },
     {
@@ -1080,20 +949,22 @@ const mockProductListResponse = {
       "refundDay": 7,
       "postDate": "2023‐09‐01T02:49:06−07:00",
       "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-      "categoryId": ["CT_2YP8LLQG95FS"],
-      "productId": "P004",
+      "categoryId": ["CT_371KNH5QXG6O"],
+      "productId": "P005",
       "quantity": 100,
       "productName": "Palsar Max EV4",
       "productStatus": "Available",
       "commissionAmount": 2000,
       "serviceFee": 0,
       "shippingFee": 0,
-      "tagline":
-          "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-      "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
       "description": "<p>Decription cate4 Palsar Max EV4</p>",
-      "technicalSpec":
-          "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
       "remark": "<h1>Remark cate 4 Palsar Max EV4</h1>",
       "currency": "THB",
       "price": 56640,
@@ -1110,11 +981,11 @@ const mockProductListResponse = {
       "merchantMobile": "091-862-5011",
       "merchantEmail": "",
       "productionOptionals": [
+
         {
           "label": "สีขาว",
           "levelName": "สี",
-          "image":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
           "price": 57640,
           "subProductId": "P004-1",
           "quantity": 250,
@@ -1122,8 +993,7 @@ const mockProductListResponse = {
             {
               "label": "3 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
               "price": 0,
               "subProductId": "P004-2",
               "quantity": 50
@@ -1131,8 +1001,7 @@ const mockProductListResponse = {
             {
               "label": "5 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
               "price": 500,
               "subProductId": "P004-3",
               "quantity": 80
@@ -1140,11 +1009,750 @@ const mockProductListResponse = {
             {
               "label": "10 เมตร",
               "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
               "price": 700,
               "subProductId": "P004-4",
               "quantity": 120
+
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6","CT_371KNH5QXG6O"],
+      "productId": "PV_QQZ5W1QWKQC8_106",
+      "quantity": 10,
+      "productName": "Palsar Max V1",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version1 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version1 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 489000,
+      "discountPrice": 89000,
+      "percentDiscountPrice": 18,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_1-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_1-11",
+              "quantity": 100
+            },
+            {
+              "label": "5.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 500,
+              "subProductId": "PV_QQZ5W1QWKQC8_1-12",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_1-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_1-21",
+              "quantity": 50
+            },
+            {
+              "label": "5.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 500,
+              "subProductId": "PV_QQZ5W1QWKQC8_1-22",
+              "quantity": 80
+            },
+            {
+              "label": "10.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 700,
+              "subProductId": "PV_QQZ5W1QWKQC8_1-23",
+              "quantity": 120
+
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "PV_QQZ5W1QWKQC8_207",
+      "quantity": 10,
+      "productName": "Palsar Max V2",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version2 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version2 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 89000,
+      "discountPrice": 0,
+      "percentDiscountPrice": 0,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_2-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_2-11",
+              "quantity": 100
+            },
+            {
+              "label": "5.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 500,
+              "subProductId": "PV_QQZ5W1QWKQC8_2-12",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_2-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_2-21",
+              "quantity": 50
+            },
+            {
+              "label": "5.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 500,
+              "subProductId": "PV_QQZ5W1QWKQC8_2-22",
+              "quantity": 80
+            },
+            {
+              "label": "10.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 700,
+              "subProductId": "PV_QQZ5W1QWKQC8_2-23",
+              "quantity": 120
+
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "PV_QQZ5W1QWKQC8_308",
+      "quantity": 10,
+      "productName": "Palsar Max Palsar เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ทเป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ทเป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ทเป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version3 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version3 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 49000,
+      "discountPrice": 0,
+      "percentDiscountPrice": 0,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_3-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_3-11",
+              "quantity": 100
+            },
+            {
+              "label": "5.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 500,
+              "subProductId": "PV_QQZ5W1QWKQC8_3-12",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_3-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_3-21",
+              "quantity": 50
+            },
+            {
+              "label": "5.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 500,
+              "subProductId": "PV_QQZ5W1QWKQC8_3-22",
+              "quantity": 80
+            },
+            {
+              "label": "10.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 700,
+              "subProductId": "PV_QQZ5W1QWKQC8_3-23",
+              "quantity": 120
+
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "PV_QQZ5W1QWKQC8_409",
+      "quantity": 10,
+      "productName": "Palsar Max V4",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version3 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version3 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 49000,
+      "discountPrice": 0,
+      "percentDiscountPrice": 0,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_4-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_4-11",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_4-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_4-21",
+              "quantity": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "PV_QQZ5W1QWKQC8_510",
+      "quantity": 10,
+      "productName": "Palsar Max V5",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version5 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version5 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 49000,
+      "discountPrice": 0,
+      "percentDiscountPrice": 0,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_5-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_5-11",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_5-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_5-21",
+              "quantity": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "PV_QQZ5W1QWKQC8_611",
+      "quantity": 10,
+      "productName": "Palsar Max V6",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version6 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version5 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 49000,
+      "discountPrice": 0,
+      "percentDiscountPrice": 0,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_6-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_6-11",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_6-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_6-21",
+              "quantity": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "PV_QQZ5W1QWKQC8_712",
+      "quantity": 10,
+      "productName": "Palsar Max V7",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version7 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version7 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 39000,
+      "discountPrice": 0,
+      "percentDiscountPrice": 0,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_7-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_7-11",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_7-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_7-21",
+              "quantity": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appId": "Marketplace-mini-app",
+      "channelId": "LINE",
+      "merchantId": "0004234232",
+      "paymentChannelCode": "",
+      "refundDay": 14,
+      "postDate": "2023‐09‐01T02:49:06−07:00",
+      "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+      "categoryId": ["CT_9P2UW6F426C6"],
+      "productId": "PV_QQZ5W1QWKQC8_813",
+      "quantity": 10,
+      "productName": "Palsar Max V8",
+      "productStatus": "Available",
+      "commissionAmount": 2000,
+      "serviceFee": 0,
+      "shippingFee": 0,
+      "tagline": "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+      "promotionTag": [
+        "ติดตั้งฟรี",
+        "รับประกัน 3 ปี",
+        "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"
+      ],
+      "description": "<p>Decription PV1 Version8 Innopower 1</p>",
+      "technicalSpec": "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+      "remark": "<h1>Remark PV1 Version8 Innopower 1</h1>",
+      "currency": "THB",
+      "price": 39000,
+      "discountPrice": 0,
+      "percentDiscountPrice": 0,
+      "productionAssets": [
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+        "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+      ],
+      "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+      "merchantLogo": "Url",
+      "merchantMobile": "091-862-5011",
+      "merchantEmail": "",
+      "productionOptionals": [
+        {
+          "label": "สีดำ",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 56640,
+          "subProductId": "PV_QQZ5W1QWKQC8_8-1",
+          "quantity": 200,
+          "level2": [
+            {
+              "label": "3.1 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_8-11",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "label": "สีเขียว",
+          "levelName": "สี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 57640,
+          "subProductId": "PV_QQZ5W1QWKQC8_8-2",
+          "quantity": 250,
+          "level2": [
+            {
+              "label": "3.5 เมตร",
+              "levelName": "ความยาวสาย",
+              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+              "price": 0,
+              "subProductId": "PV_QQZ5W1QWKQC8_8-21",
+              "quantity": 50
             }
           ]
         }
