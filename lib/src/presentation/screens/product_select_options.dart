@@ -9,6 +9,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_options/produ
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class ProductSelectOptions extends StatefulWidget {
   const ProductSelectOptions({Key? key, this.arguments}) : super(key: key);
@@ -74,14 +75,20 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                         child: prodOptState.selectCurrentOption == prodOptState.lastOption &&
                                 (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                             ? OutlinedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  print('1');
+                                  Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
+                                },
                                 style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
                                 child: AlvaText(
                                     title: ProductSelectOptionsConst().continueText,
                                     textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                               )
                             : OutlinedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  print('2');
+                                  Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
+                                },
                                 style:
                                     AlvaStyles().outlineNoneBorderButtonStyle(cloudSoftDeepWhite, Colors.transparent),
                                 child: AlvaText(
