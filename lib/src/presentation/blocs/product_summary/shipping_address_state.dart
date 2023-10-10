@@ -11,17 +11,14 @@ extension AddressStatusX on ShippingAddressStatus {
 
 class ShippingAddressState extends Equatable {
   const ShippingAddressState(
-      {this.status = ShippingAddressStatus.initial,
-      this.addressModel = ShippingAddressModel.empty});
+      {this.status = ShippingAddressStatus.initial, this.addressModel = ShippingAddressModel.empty});
   final ShippingAddressModel addressModel;
   final ShippingAddressStatus status;
 
   @override
   List<Object> get props => [status, addressModel];
 
-  ShippingAddressState copyWith(
-      {ShippingAddressStatus? status, ShippingAddressModel? address}) {
-    return ShippingAddressState(
-        status: status ?? this.status, addressModel: address ?? addressModel);
+  ShippingAddressState copyWith({ShippingAddressStatus? status, ShippingAddressModel? address}) {
+    return ShippingAddressState(status: status ?? this.status, addressModel: address ?? addressModel);
   }
 }

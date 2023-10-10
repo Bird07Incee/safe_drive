@@ -13,8 +13,7 @@ class ShippingAddressScreen extends StatelessWidget {
   }
 
   Widget buildBodyWidget() {
-    return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
-        builder: (ctx, state) {
+    return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
       return Container();
     });
   }

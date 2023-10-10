@@ -24,26 +24,20 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     on<SetSelectTabIndex>(_onSetSelectTabIndex);
   }
 
-  _onGetProductListMock(
-      GetProductListMock event, Emitter<ProductListState> emit) async {
-    await DefaultAssetBundle.of(event.context)
-        .loadString('assets/mocking/json/product_list.json')
-        .then((value) {
+  _onGetProductListMock(GetProductListMock event, Emitter<ProductListState> emit) async {
+    await DefaultAssetBundle.of(event.context).loadString('assets/mocking/json/product_list.json').then((value) {
       final jsonObj = json.decode(value);
       final productList = ProductList.fromJson(jsonObj);
       emit(state.copyWith(productList: productList));
     });
   }
 
-  _onSetSelectTabIndex(
-      SetSelectTabIndex event, Emitter<ProductListState> emit) {
+  _onSetSelectTabIndex(SetSelectTabIndex event, Emitter<ProductListState> emit) {
     emit(state.copyWith(selectedTabIndex: event.selectedTabIndex));
   }
 
-  _onGetProductList(
-      GetProductList event, Emitter<ProductListState> emit) async {
-    DioUtilityRepository dioUtilityRepository =
-        DioUtilityRepository(service: DioUtilityService());
+  _onGetProductList(GetProductList event, Emitter<ProductListState> emit) async {
+    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
@@ -62,19 +56,15 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       if (productList.products!.length == 1) {
         emit(state.copyWith(hideCategory: true));
       }
-      emit(state.copyWith(
-          productList: productList,
-          productListStatus: GetProductListStatus.success));
+      emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } catch (e) {
       print(e);
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
     }
   }
 
-  _onGetProductListByCategory(
-      GetProductListByCategory event, Emitter<ProductListState> emit) async {
-    DioUtilityRepository dioUtilityRepository =
-        DioUtilityRepository(service: DioUtilityService());
+  _onGetProductListByCategory(GetProductListByCategory event, Emitter<ProductListState> emit) async {
+    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
@@ -93,9 +83,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);
-      emit(state.copyWith(
-          productList: productList,
-          productListStatus: GetProductListStatus.success));
+      emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
 
       if (!event.context.mounted) return;
       Navigator.of(event.context).pop();
@@ -108,10 +96,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
   }
 
-  _onGetProductListByPage(
-      GetProductListByPage event, Emitter<ProductListState> emit) async {
-    DioUtilityRepository dioUtilityRepository =
-        DioUtilityRepository(service: DioUtilityService());
+  _onGetProductListByPage(GetProductListByPage event, Emitter<ProductListState> emit) async {
+    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
@@ -125,8 +111,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     GeneralDialog().showLoadingDialog(context: event.context);
 
     try {
-      Response response = await dioUtilityRepository.getByURL(
-          "$baseUrl$inventoryApiPath/ecommerce/v1/products", params,
+      Response response = await dioUtilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params,
           headers: {"Authorization": "Bearer $accessToken"});
 
       var currentProductList = ProductList.fromJson(response.data);
@@ -140,9 +125,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           category: currentProductList.category,
           products: oldProducts! + currentProductList.products!);
 
-      emit(state.copyWith(
-          productList: nextProduct,
-          productListStatus: GetProductListStatus.success));
+      emit(state.copyWith(productList: nextProduct, productListStatus: GetProductListStatus.success));
 
       if (!event.context.mounted) return;
       Navigator.of(event.context).pop();

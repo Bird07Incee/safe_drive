@@ -16,7 +16,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc() : super(const AuthState()) {
     on<UserAuthEventLogin>((event, emit) async {
-      
       if (await termAndConHelper.isTermAndConAccepted()) {
         print("term and con already accept");
         loadOneTrustCookieScript();
