@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 
 class TermAndConParagraph extends StatelessWidget {
-  const TermAndConParagraph({super.key, required this.header, required this.text});
+  const TermAndConParagraph({super.key, required this.header, required this.texts});
 
   final String header;
-  final String text;
+  final List<String> texts;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,17 @@ class TermAndConParagraph extends StatelessWidget {
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text(
-              text,
-              style: AlvaStyles().body1(),
+            child: Column(
+              children: [
+                for (var text in texts)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      text,
+                      style: AlvaStyles().body1(),
+                    ),
+                  ),
+              ],
             ),
           ),
         ),
