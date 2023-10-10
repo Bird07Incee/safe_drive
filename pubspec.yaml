@@ -55,6 +55,7 @@ dependencies:
   flutter_widget_from_html: 0.9.1
   readmore: ^2.1.0
   sticky_headers: "^0.3.0"
+  flutter_keyboard_visibility: ^5.4.1
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 
 class TextInputWidget extends StatefulWidget {
   final String? label;
@@ -279,27 +281,23 @@ class TextInputWidgetState extends State<TextInputWidget> {
                 suffixIcon: renderSuffix(),
                 prefixIcon: widget.prefixIcon,
                 fillColor: widget.disabled
-                    ? HexColor('#dbdbdb')
+                    ? spaceGrey
                     : widget.readOnly
-                        ? HexColor('#F8F8F8')
+                        ? spaceGrey
                         : Colors.white,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(widget.borderRadius),
-                  borderSide:
-                      BorderSide(color: HexColor('#19191952'), width: 1),
+                  borderSide: BorderSide(color: blackInBlack, width: 1),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                   borderSide: BorderSide(
-                      color: widget.readOnly
-                          ? HexColor('#19191952')
-                          : AppTheme.primary,
+                      color: widget.readOnly ? spaceGrey : blackInBlack,
                       width: 1),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(widget.borderRadius),
-                  borderSide:
-                      BorderSide(color: HexColor('#19191952'), width: 1),
+                  borderSide: BorderSide(color: Colors.black, width: 1),
                 ),
               ),
               keyboardType: widget.keyboardType,
@@ -343,51 +341,6 @@ class TextInputWidgetState extends State<TextInputWidget> {
               if (widget.onFocusChange != null) {
                 widget.onFocusChange?.call();
               }
-
-              if (widget.controller?.text != null &&
-                  widget.controller!.text.isNotEmpty &&
-                  widget.keyboardType == TextInputType.number) {
-                if (widget.isAllowAutoAddDecimal) {
-                  int textLength =
-                      widget.controller!.text.replaceAll(',', '').length;
-                  if (widget.controller!.text.contains('.')) {
-                    String textAfterDot = widget.controller!.text.substring(
-                        widget.controller!.text.indexOf('.') + 1,
-                        widget.controller!.text.length);
-                    if (textAfterDot.isEmpty) {
-                      widget.controller!.text =
-                          widget.controller!.text.replaceAll('.', '');
-                      widget.controller!.text += '.00';
-                    } else if (textAfterDot.length == 1) {
-                      widget.controller!.text += '0';
-                    }
-                  } else {
-                    if ((widget.digitForCheck! - textLength) >= 2) {
-                      widget.controller!.text += '.00';
-                    }
-                  }
-                }
-
-                String textRemoveComma =
-                    widget.controller!.text.replaceAll(',', '');
-                double numCheck = double.tryParse(textRemoveComma) ?? 0;
-
-                if (widget.isAbsoluteZeroForbidden) {
-                  if (numCheck == 0) {
-                    widget.controller!.clear();
-                    showErrorToast('ไม่อนุญาตให้ใส่ 0');
-                    focusNode!.requestFocus();
-                  }
-                }
-
-                if (widget.isPercentageFieldLimit100) {
-                  if (numCheck > 100) {
-                    widget.controller!.clear();
-                    showErrorToast('สูงสุด 100.00%');
-                    focusNode!.requestFocus();
-                  }
-                }
-              }
             },
           ),
           Visibility(
@@ -399,7 +352,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
               child: Text(
                 widget.helperText ?? '',
                 style: TextStyle(
-                  color: HexColor('#575757'),
+                  color: blackInBlack,
                   fontSize: textSize(10, context),
                   fontWeight: FontWeight.w300,
                 ),
@@ -410,4 +363,27 @@ class TextInputWidgetState extends State<TextInputWidget> {
       ),
     );
   }
+
+  double textSize(double expectSize, BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
+    double offset = 0;
+
+    if (width < 376) {
+      offset = -2;
+    } else if (width <= 476) {
+      offset = -1;
+    }
+
+    var result = expectSize + offset;
+
+    return result;
+  }
+}
+
+class Validator {
+  String? value;
+
+  bool get isBlank => (value == null || value!.trim().isEmpty);
+  bool get isNotBlank => ((value != null) && (value!.trim().isNotEmpty));
 }
