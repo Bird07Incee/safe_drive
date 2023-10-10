@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 // ignore: avoid_web_libraries_in_flutter
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -147,10 +148,11 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: () async {
+                        onTap: () {
                           if (scrollFinished) {
-                            SharedPreferences preferences = await SharedPreferences.getInstance();
-                            await preferences.clear();
+                            var localStorage = window.localStorage;
+                            localStorage.clear();
+
                             liff.logout();
                             liff.closeWindow();
                           }
