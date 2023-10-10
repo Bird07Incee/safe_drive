@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 class ProductList {
   const ProductList({
     required this.productAllItems,
@@ -45,7 +47,7 @@ extension ProductX on Product {
   bool get isEmpty => this != Product.empty;
 }
 
-class Product {
+class Product extends Equatable {
   const Product({
     required this.appId,
     required this.channelId,
@@ -189,10 +191,47 @@ class Product {
             ? List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList()
             : []);
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        appId,
+        channelId,
+        merchantId,
+        paymentChannelCode,
+        refundDay,
+        postDate,
+        lastUpdateDate,
+        categoryId,
+        category,
+        productId,
+        quantity,
+        productName,
+        productStatus,
+        commissionAmount,
+        serviceFee,
+        shippingFee,
+        tagline,
+        promotionTag,
+        description,
+        technicalSpec,
+        remark,
+        currency,
+        price,
+        discountPrice,
+        percentDiscountPrice,
+        productionAssets,
+        merchantFullName,
+        merchantAddress,
+        merchantLogo,
+        merchantMobile,
+        merchantEmail,
+        productionOptionals,
+      ];
 }
 
-class ProductionOptionals {
-  ProductionOptionals({
+class ProductionOptionals extends Equatable {
+  const ProductionOptionals({
     required this.label,
     required this.levelName,
     required this.image,
@@ -219,10 +258,22 @@ class ProductionOptionals {
         quantity: json['quantity'] ?? 0,
         level2: json['level2'] != null ? List.from(json['level2']).map((e) => Level2.fromJson(e)).toList() : []);
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        label,
+        levelName,
+        image,
+        price,
+        subProductId,
+        quantity,
+        level2,
+      ];
 }
 
-class Level2 {
-  Level2(
+class Level2 extends Equatable {
+  const Level2(
       {required this.label,
       required this.levelName,
       required this.image,
@@ -248,10 +299,14 @@ class Level2 {
         quantity: json['quantity'] ?? 0,
         level3: json['level3'] != null ? List.from(json['level3']).map((e) => Level3.fromJson(e)).toList() : []);
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [label, levelName, image, price, subProductId, quantity, level3];
 }
 
-class Level3 {
-  Level3(
+class Level3 extends Equatable {
+  const Level3(
       {required this.label,
       required this.levelName,
       required this.image,
@@ -277,10 +332,13 @@ class Level3 {
         quantity: json['quantity'] ?? 0,
         level4: json['level4'] != null ? List.from(json['level4']).map((e) => Level4.fromJson(e)).toList() : []);
   }
+  @override
+  // TODO: implement props
+  List<Object?> get props => [label, levelName, image, price, subProductId, quantity, level4];
 }
 
-class Level4 {
-  Level4(
+class Level4 extends Equatable {
+  const Level4(
       {required this.label,
       required this.levelName,
       required this.image,
@@ -306,10 +364,14 @@ class Level4 {
         quantity: json['quantity'] ?? 0,
         level5: json['level5'] != null ? List.from(json['level5']).map((e) => Level5.fromJson(e)).toList() : []);
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [label, levelName, image, price, subProductId, quantity, level5];
 }
 
-class Level5 {
-  Level5({
+class Level5 extends Equatable {
+  const Level5({
     required this.label,
     required this.levelName,
     required this.image,
@@ -333,9 +395,156 @@ class Level5 {
         subProductId: json['subProductId'] ?? '',
         quantity: json['quantity'] ?? 0);
   }
+  @override
+  // TODO: implement props
+  List<Object?> get props => [label, levelName, image, price, subProductId, quantity];
 }
 
 const mockProductResponse = {
+  "appId": "Marketplace-mini-app",
+  "channelId": "LINE",
+  "merchantId": "0004234232",
+  "paymentChannelCode": "",
+  "refundDay": 7,
+  "postDate": "2023‐09‐01T02:49:06−07:00",
+  "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
+  "categoryId": ["CT_9P2UW6F426C6", "CT_2YP8LLQG95FS"],
+  "productId": "PV_QQZ5W1QWKQC8",
+  "quantity": 100,
+  "productName": "Palsar Max",
+  "productStatus": "Available",
+  "commissionAmount": 2000,
+  "serviceFee": 0,
+  "shippingFee": 0,
+  "tagline":
+      "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
+  "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
+  "description": "<p>Decription cate1 Innopower 1</p>",
+  "technicalSpec":
+      "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
+  "remark": "<h1>Remark cate1 Innopower 1</h1>",
+  "currency": "THB",
+  "price": 56640,
+  "discountPrice": 59000,
+  "percentDiscountPrice": 5,
+  "productionAssets": [
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+  ],
+  "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+  "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
+  "merchantLogo": "Url",
+  "merchantMobile": "091-862-5011",
+  "merchantEmail": "",
+  "productionOptionals": [
+    {
+      "label":
+          "สีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำสีดำ",
+      "levelName": "สี",
+      "image":
+          "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+      "price": 56640,
+      "subProductId": "P001-1",
+      "quantity": 200,
+      "level2": [
+        {
+          "label": "3 เมตร",
+          "levelName": "ความยาวสาย",
+          "image":
+              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 0,
+          "subProductId": "P001-11",
+          "quantity": 100
+        },
+        {
+          "label": "5 เมตร",
+          "levelName": "ความยาวสาย",
+          "image":
+              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 500,
+          "subProductId": "P001-12",
+          "quantity": 100
+        }
+      ]
+    },
+    {
+      "label": "สีขาว",
+      "levelName": "สี",
+      "image":
+          "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+      "price": 57640,
+      "subProductId": "P001-2",
+      "quantity": 250,
+      "level2": [
+        {
+          "label": "3 เมตร",
+          "levelName": "ความยาวสาย",
+          "image":
+              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 0,
+          "subProductId": "P001-21",
+          "quantity": 50
+        },
+        {
+          "label": "5 เมตร",
+          "levelName": "ความยาวสาย",
+          "image":
+              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 500,
+          "subProductId": "P001-22",
+          "quantity": 80
+        },
+        {
+          "label": "10 เมตร",
+          "levelName": "ความยาวสาย",
+          "image":
+              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 700,
+          "subProductId": "P001-23",
+          "quantity": 120,
+          "level3": [
+            {
+              "label": "สายธรรมดา",
+              "levelName": "รูปแบบสาย",
+              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+              "price": 100,
+              "subProductId": "P001-231",
+              "quantity": 120,
+              "level4": [
+                {
+                  "label": "สายธรรมดา",
+                  "levelName": "รูปแบบสาย",
+                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                  "price": 200,
+                  "subProductId": "P001-2311",
+                  "quantity": 120,
+                  "level5": [
+                    {
+                      "label": "สายธรรมดา",
+                      "levelName": "รูปแบบสาย",
+                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
+                      "price": 300,
+                      "subProductId": "P001-23111",
+                      "quantity": 120
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+const mockProductListResponse = {
   "productAllItems": 10,
   "productPage": 1,
   "productCountItems": 1,

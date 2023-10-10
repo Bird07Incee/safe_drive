@@ -72,8 +72,7 @@ extension TypeCoverter on Routes {
 extension StringExtension on String {
   RoutingData get getRoutingData {
     var uriData = Uri.parse(this);
-    return RoutingData(
-        route: uriData.path, queryParameters: uriData.queryParameters);
+    return RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
   }
 }
 
@@ -105,36 +104,27 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
   switch (routingData?.route) {
     case "/":
-      return MaterialPageRoute(
-          builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
     case "/termAndCon":
-      return MaterialPageRoute(
-          builder: (_) => const TermAndConScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
     case "/readTermAndCon":
-      return MaterialPageRoute(
-          builder: (_) => const ReadTermAndConScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const ReadTermAndConScreen(), settings: settings);
     case "/errorScreen":
-      return MaterialPageRoute(
-          builder: (_) => const ErrorScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
     case "/loadingScreen":
-      return MaterialPageRoute(
-          builder: (_) => const LoadingScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
     case "/productDetail":
-      return MaterialPageRoute(
-          builder: (_) => const ProductDetailScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
     case "/selectOptions":
       return MaterialPageRoute(
           builder: (_) => ProductSelectOptions(
-                arguments:
-                    ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
+                arguments: ModalRoute.of(_)!.settings.arguments as ProductDetailArgs,
               ),
           settings: settings);
     case "/shippingAddress":
-      return MaterialPageRoute(
-          builder: (_) => const ShippingAddressScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
     default:
       print("case default");
-      return MaterialPageRoute(
-          builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }
 }

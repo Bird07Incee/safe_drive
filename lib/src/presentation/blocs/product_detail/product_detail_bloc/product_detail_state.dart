@@ -10,14 +10,19 @@ extension ProductStatusX on ProductDetailStatus {
 }
 
 class ProductDetailState extends Equatable {
-  const ProductDetailState({this.status = ProductDetailStatus.initial, this.product = Product.empty});
+  const ProductDetailState(
+      {this.status = ProductDetailStatus.initial, this.product = Product.empty, this.clickFromImage = false});
   final ProductDetailStatus status;
   final Product product;
+  final bool clickFromImage;
 
   @override
-  List<Object> get props => [status];
+  List<Object> get props => [status, product, clickFromImage];
 
-  ProductDetailState copyWith({ProductDetailStatus? status, Product? product}) {
-    return ProductDetailState(status: status ?? this.status, product: product ?? this.product);
+  ProductDetailState copyWith({ProductDetailStatus? status, Product? product, bool? clickFromImage}) {
+    return ProductDetailState(
+        status: status ?? this.status,
+        product: product ?? this.product,
+        clickFromImage: clickFromImage ?? this.clickFromImage);
   }
 }
