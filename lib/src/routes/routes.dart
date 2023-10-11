@@ -3,13 +3,23 @@ import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/order_success.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
-enum Routes { readTermAndCon, initial, termAndCon, errorScreen, loadingScreen, productDetail, selectOptions }
+enum Routes {
+  readTermAndCon,
+  initial,
+  termAndCon,
+  errorScreen,
+  loadingScreen,
+  productDetail,
+  selectOptions,
+  orderSuccess
+}
 
 extension TypeCoverter on Routes {
   String toStringPath() {
@@ -28,6 +38,8 @@ extension TypeCoverter on Routes {
         return '/productDetail';
       case Routes.selectOptions:
         return '/selectOptions';
+      case Routes.orderSuccess:
+        return '/orderSuccess';
     }
   }
 }
@@ -103,6 +115,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
     case "/productDetail":
       return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
+    case "/orderSuccess":
+      return MaterialPageRoute(builder: (_) => const OrderSuccessScreen(), settings: settings);
     case "/selectOptions":
       return MaterialPageRoute(
           builder: (_) => ProductSelectOptions(
