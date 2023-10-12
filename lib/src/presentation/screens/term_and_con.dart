@@ -52,6 +52,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
 
   void acceptTermAndCond() async {
     try {
+      var localStorage = window.localStorage;
+      localStorage.clear();
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
