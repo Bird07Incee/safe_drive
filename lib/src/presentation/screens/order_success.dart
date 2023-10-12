@@ -27,10 +27,11 @@ class OrderSuccessScreen extends StatelessWidget {
                 children: [
                   Container(
                     width: maxWidth,
+                    height: 76,
                     padding: EdgeInsets.all(16),
                     color: successGreen,
                     child: Row(children: [
-                      Container(width: 32, height: 32, child: Image.asset('assets/images/order_success.png')),
+                      SizedBox(width: 32, height: 32, child: Image.asset('assets/images/order_success.png')),
                       SizedBox(
                         width: 16,
                       ),
@@ -39,11 +40,11 @@ class OrderSuccessScreen extends StatelessWidget {
                         children: [
                           Text(
                             "ชำระเงินสำเร็จ",
-                            style: AlvaStyles().headingSize16w600(blackGoMunTo),
+                            style: AlvaStyles().headingSize14w600(blackGoMunTo),
                           ),
                           Text(
-                            "หมายเลขอ้างอิง: ABCD1234",
-                            style: AlvaStyles().headingSize14w400(blackGoMunTo),
+                            "หมายเลขอ้างอิง: REF00005678 ",
+                            style: AlvaStyles().headingSize12w400(blackGoMunTo),
                           )
                         ],
                       )
@@ -51,37 +52,37 @@ class OrderSuccessScreen extends StatelessWidget {
                   ),
                   Container(
                     width: maxWidth,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    padding: EdgeInsets.all(16),
                     color: Colors.white,
                     child: Column(children: [
                       ProductAttribute(
-                        attributeKey: "qwdknqwd",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "ชำระเงินโดย",
+                        attributevalue: "987654******1234",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwdefwfw",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "วันที่ชำระเงิน",
+                        attributevalue: "1 กันยายน 2566",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwdwef",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "เวลาที่ชำระเงิน",
+                        attributevalue: "09:54:22",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwd",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "ช่องทางการชำระเงิน",
+                        attributevalue: "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwdww",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "รูปแบบการชำระเงิน",
+                        attributevalue: "ผ่อนชำระ 6 เดือน",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwdwefwefwef",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "ผู้รับเงิน",
+                        attributevalue: "บริษัท อินโนพาวเวอร์ จำกัด",
                         maxWidth: maxWidth,
                       ),
                     ]),
@@ -90,13 +91,13 @@ class OrderSuccessScreen extends StatelessWidget {
                     width: maxWidth,
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
-                      "รหัสสินค้า: ABCD123456",
-                      style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                      "รหัสสินค้า: PM12345678",
+                      style: AlvaStyles().headingSize12w600(blackGoMunTo),
                     ),
                   ),
                   Container(
                     width: maxWidth,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    padding: EdgeInsets.all(16),
                     color: Colors.white,
                     child: Column(
                       children: [
@@ -131,7 +132,7 @@ class OrderSuccessScreen extends StatelessWidget {
                                     height: 8,
                                   ),
                                   Text(
-                                    "Black",
+                                    "สีดำ",
                                     style: AlvaStyles().headingSize12w400(blackGoMunTo),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -139,7 +140,7 @@ class OrderSuccessScreen extends StatelessWidget {
                                     height: 8,
                                   ),
                                   Text(
-                                    "1234123412341234",
+                                    "ความยาวสาย 3 เมตร",
                                     style: AlvaStyles().headingSize12w400(blackGoMunTo),
                                     overflow: TextOverflow.ellipsis,
                                   )
@@ -149,9 +150,14 @@ class OrderSuccessScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
+                          height: 16,
+                        ),
+                        Divider(
+                          color: cloudSoftDeepWhite,
+                        ),
+                        SizedBox(
                           height: 8,
                         ),
-                        Divider(),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -163,12 +169,12 @@ class OrderSuccessScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("1,234 บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
+                                  Text("56,640 บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                   SizedBox(
                                     height: 4,
                                   ),
                                   Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว",
-                                      style: AlvaStyles().headingSize10w400(blackGoMunTo))
+                                      style: AlvaStyles().headingSize12w400Cordia(spaceGrey))
                                 ],
                               ),
                             )
@@ -182,32 +188,33 @@ class OrderSuccessScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
                       "ที่อยู่ในการจัดส่งสินค้า",
-                      style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                      style: AlvaStyles().headingSize12w600(blackGoMunTo),
                     ),
                   ),
                   Container(
                     width: maxWidth,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    padding: EdgeInsets.all(16),
                     color: Colors.white,
                     child: Column(children: [
                       ProductAttribute(
-                        attributeKey: "qwdknqwd",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "ชื่อผู้รับสินค้า",
+                        attributevalue: "กรุงศรี ออโต้",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwdefwfw",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "เบอร์โทรติดต่อ",
+                        attributevalue: "081-234-5678",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwdwef",
-                        attributevalue: "qwdmqwdqwd",
+                        attributeKey: "อีเมล",
+                        attributevalue: "k_auto@krungsri.com",
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
-                        attributeKey: "qwdknqwd",
-                        attributevalue: "qwdmqwdqwdppeqimfpoejfopwjmef",
+                        attributeKey: "ที่อยู่",
+                        attributevalue:
+                            "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
                         maxWidth: maxWidth,
                       ),
                     ]),
@@ -217,23 +224,23 @@ class OrderSuccessScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
                       "ข้อมูลติดต่อผู้ขาย",
-                      style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                      style: AlvaStyles().headingSize12w600(blackGoMunTo),
                     ),
                   ),
                   Container(
                     width: maxWidth,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    padding: EdgeInsets.all(16),
                     color: Colors.white,
                     child: Column(children: [
                       Center(
                         child: Text(
-                          "Qwdqwd\noqwjdpojqwopd\noiqwdoiqnwdoinqwd",
+                          "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
                           style: AlvaStyles().headingSize12w400(spaceGrey),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 4,
                       ),
                       Text(
                         "โทร. 091-862-0511",

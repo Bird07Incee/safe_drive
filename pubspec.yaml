@@ -136,3 +136,9 @@ flutter:
           weight: 500
         - asset: assets/fonts/krungsri_con_bol-webfont.ttf
           weight: 700
+    - family: Cordia UPC
+      fonts:
+        - asset: assets/fonts/CORDIAU_0.TTF
+          weight: 400
+        - asset: assets/fonts/CORDIAUB_0.TTF
+          weight: 500
