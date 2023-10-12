@@ -10,7 +10,6 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
-import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
@@ -39,22 +38,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   final oCcy = NumberFormat("#,##0", "en_US");
   late RouteSettings? settings;
   final scrollController = ScrollController();
-  late PageController pageViewController = PageController(
-    viewportFraction: 1,
-    keepPage: true,
-  );
+  // late PageController pageViewController = PageController(
+  //   viewportFraction: 1,
+  //   keepPage: true,
+  // );
 
   late final TabController _tabController;
   late double maxWidth, maxHeight;
   int? installmentPerMonth, month;
   String? downPaymentPercent, interestRate;
-
+  int indicator = 1;
+  double _scale = 1.0;
+  String pid = '';
   GlobalKey stickyKey = GlobalKey();
 
   @override
   void dispose() {
     _tabController.dispose();
-    pageViewController.dispose();
     super.dispose();
   }
 
@@ -69,49 +69,33 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     });
   }
 
-  int indicator = 1;
-  double _scale = 1.0;
-  String pid = '';
-  late Product product;
-  late Widget topSection = SizedBox();
-  late Widget bottomSection = SizedBox();
-
-  //List dataCarouselMock = carouselSingleItem;
   @override
-  Widget build(BuildContext context) {
-    int imageDataLength = 1;
-    maxWidth = MediaQuery.of(context).size.width;
-    maxHeight = MediaQuery.of(context).size.height;
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loadProduct();
+  }
+
+  loadProduct() {
     settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
-      if (routingData.route == "/productDetail") {
-        pid = (routingData["pid"] == null) ? "" : routingData["pid"];
+      pid = (routingData["pid"] == null) ? "" : routingData["pid"];
+      ProductDetailState pdState = context.read<ProductDetailBloc>().state;
+      if (pdState.status.isInitial && pid != "") {
+        context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
       }
-      print("routingData route: ${routingData.route}");
-      print("routingData queryParams: ${routingData.queryParameters}");
-      print("settings!.name : ${settings!.name}");
-      print("pid : $pid");
     }
+  }
+
+  //List dataCarouselMock = carouselSingleItem;
+  @override
+  Widget build(BuildContext context) {
+    maxWidth = MediaQuery.of(context).size.width;
+    maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
-      child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
-        listener: (context, state) {
-          if (state.status.isSuccess && pid != "") {
-            product = state.product;
-            print('get product success');
-            print('product id : ${product.productId}, productName: ${product.productName}');
-            imageDataLength = product.productionAssets.length == 1
-                ? product.productionAssets.length
-                : product.productionAssets.length > 20
-                    ? 20
-                    : product.productionAssets.length;
-          }
-        },
+      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, pdState) {
-          if (pdState.status.isInitial && pid != "") {
-            context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
-          }
           if (pdState.status.isSuccess) {
             return BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
               builder: (ctx, stateAppBar) {
@@ -124,9 +108,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
                               builder: (context, carouselState) {
                                 return switchState
-                                    ? viewImagePage(
-                                        carouselState, context, zoomState, previousState, imageDataLength, pdState)
-                                    : productDetailPage(stateAppBar, context, carouselState, imageDataLength);
+                                    ? viewImagePage(carouselState, context, zoomState, previousState, pdState)
+                                    : productDetailPage(carouselState, stateAppBar, context, pdState);
                               },
                             );
                           },
@@ -168,160 +151,153 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
   }
 
-  WillPopScope productDetailPage(
-      ScrollProductDetailState stateAppBar, BuildContext context, PageController carouselState, int imageDataLength) {
+  WillPopScope productDetailPage(PageController pageController, ScrollProductDetailState stateAppBar,
+      BuildContext context, ProductDetailState pdState) {
     return WillPopScope(
       onWillPop: () async {
         onBack();
         return true;
       },
-      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-        builder: (context, state) {
-          return AlvaRootWidget(
-              titlePage: titleWebPage,
-              appBar: stateAppBar.appBarCarDetailStatus
-                  ? AppBar(
-                      automaticallyImplyLeading: false,
-                      leading: IconButton(
-                        key: const Key("pop_navigator_to_home_page"),
-                        onPressed: () {
-                          onBack();
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_rounded),
-                      ),
-                      leadingWidth: 60,
-                      titleSpacing: 0,
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+      child: AlvaRootWidget(
+          titlePage: titleWebPage,
+          appBar: stateAppBar.appBarCarDetailStatus
+              ? AppBar(
+                  automaticallyImplyLeading: false,
+                  leading: IconButton(
+                    key: const Key("pop_navigator_to_home_page"),
+                    onPressed: () {
+                      onBack();
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_rounded),
+                  ),
+                  leadingWidth: 60,
+                  titleSpacing: 0,
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AlvaTextMaxLinesOverflow(
+                          title: pdState.product.productName,
+                          maxLines: 1,
+                          textStyle: AlvaStyles()
+                              .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
+                              .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          AlvaTextMaxLinesOverflow(
-                              title: state.product.productName,
-                              maxLines: 1,
-                              textStyle: AlvaStyles()
-                                  .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
-                                  .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              AlvaText(
-                                  title: state.product.price.toDecimalFormat(),
-                                  textStyle: AlvaStyles().heading1().copyWith(
-                                      color:
-                                          state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW,
-                                      height: 1.33)),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 1),
-                                child: AlvaText(
-                                    title: ' บาท',
-                                    textStyle: AlvaStyles()
-                                        .heading2(
-                                            state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
-                                        .copyWith(height: 1.33)),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      centerTitle: false,
-                    )
-                  : AppBar(
-                      title: AlvaText(
-                          title: "ข้อมูลสินค้า",
-                          textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                      titleSpacing: 0,
-                      leadingWidth: 60,
-                      centerTitle: false,
-                      automaticallyImplyLeading: false,
-                      leading: IconButton(
-                          key: const Key("pop_navigator_to_home_page"),
-                          onPressed: () {
-                            onBack();
-                          },
-                          icon: const Icon(Icons.arrow_back_ios_rounded)),
-                    ),
-              bottomSheet: Container(
-                decoration: BoxDecoration(
-                  color: whitePure,
-                  boxShadow: [
-                    BoxShadow(
-                        color: const Color(0xff000000).withOpacity(0.04),
-                        spreadRadius: 0,
-                        blurRadius: 16,
-                        offset: const Offset(0, -4)),
-                  ],
-                ),
-                width: maxWidth,
-                height: 96,
-                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                        height: 48,
-                        child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, '${Routes.selectOptions.toStringPath()}?pid=${state.product.productId}',
-                                arguments: ProductDetailArgs(product: state.product));
-                          },
-                          style: AlvaStyles()
-                              .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
-                          child: Text("สั่งซื้อสินค้า",
-                              style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              // child: ProductDetailBody(),
-              child: Container(
-                padding: const EdgeInsets.only(bottom: 96),
-                color: backgroundNo2,
-                child: ListView(
-                  shrinkWrap: true,
-                  controller: scrollController,
-                  children: [
-                    PDTopSection(),
-                    Container(
-                      height: 16,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(
-                            color: cloudWhite, // Replace with your color
-                            width: 2.0, // Adjust the border width as needed
+                          AlvaText(
+                              title: pdState.product.price.toDecimalFormat(),
+                              textStyle: AlvaStyles().heading1().copyWith(
+                                  color: pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW,
+                                  height: 1.33)),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 1),
+                            child: AlvaText(
+                                title: ' บาท',
+                                textStyle: AlvaStyles()
+                                    .heading2(
+                                        pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                    .copyWith(height: 1.33)),
                           ),
-                        ),
+                        ],
+                      )
+                    ],
+                  ),
+                  centerTitle: false,
+                )
+              : AppBar(
+                  title: AlvaText(
+                      title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  titleSpacing: 0,
+                  leadingWidth: 60,
+                  centerTitle: false,
+                  automaticallyImplyLeading: false,
+                  leading: IconButton(
+                      key: const Key("pop_navigator_to_home_page"),
+                      onPressed: () {
+                        onBack();
+                      },
+                      icon: const Icon(Icons.arrow_back_ios_rounded)),
+                ),
+          bottomSheet: Container(
+            decoration: BoxDecoration(
+              color: whitePure,
+              boxShadow: [
+                BoxShadow(
+                    color: const Color(0xff000000).withOpacity(0.04),
+                    spreadRadius: 0,
+                    blurRadius: 16,
+                    offset: const Offset(0, -4)),
+              ],
+            ),
+            width: maxWidth,
+            height: 96,
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                    height: 48,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
+                            arguments: ProductDetailArgs(product: pdState.product));
+                      },
+                      style: AlvaStyles()
+                          .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
+                      child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          // child: ProductDetailBody(),
+          child: Container(
+            padding: const EdgeInsets.only(bottom: 96),
+            color: backgroundNo2,
+            child: ListView(
+              shrinkWrap: true,
+              controller: scrollController,
+              children: [
+                PDTopSection(),
+                Container(
+                  height: 16,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        color: cloudWhite, // Replace with your color
+                        width: 2.0, // Adjust the border width as needed
                       ),
                     ),
-                    PDBottomSection()
-                  ],
+                  ),
                 ),
-              ));
-        },
-      ),
+                PDBottomSection()
+              ],
+            ),
+          )),
     );
   }
 
-  Widget viewImagePage(PageController carouselState, BuildContext context, TransformationController zoomState,
-      double previousState, int imageDataLength, ProductDetailState productDetailState) {
+  Widget viewImagePage(PageController pageController, BuildContext context, TransformationController zoomState,
+      double previousState, ProductDetailState pdState) {
     backButtontoDetail() {
-      if (productDetailState.clickFromImage == true) {
+      if (pdState.clickFromImage == true) {
         Navigator.pop(context);
       }
-
       log("backButtontoDetail");
       context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
       context
           .read<ProductDetailCarouselScrollControllerBloc>()
-          .add(CarouselScrollAction(index: carouselState.initialPage));
+          .add(CarouselScrollAction(index: pageController.initialPage));
       context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
       if (zoomState.value != Matrix4.identity()) {
         context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
       }
     }
 
+    int imageLen = pdState.product.productionAssets.length;
     return WillPopScope(
       onWillPop: () async {
         backButtontoDetail();
@@ -363,17 +339,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       child: AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
-                            itemCount: imageDataLength == 1 ? imageDataLength : imageDataLength + 1,
+                            itemCount: imageLen == 1 ? 1 : imageLen + 1,
                             physics:
                                 previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
-                            controller: carouselState,
+                            controller: pageController,
                             onPageChanged: (val) {
                               context
                                   .read<ProductDetailCarouselScrollControllerBloc>()
                                   .add(CarouselScrollAction(index: val));
 
-                              if (val == imageDataLength && val != 1) {
-                                carouselState.jumpToPage(0);
+                              if (val == imageLen && val != 1) {
+                                pageController.jumpToPage(0);
                               }
                             },
                             itemBuilder: (ctx, i) {
@@ -382,25 +358,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                 child: SizedBox(
                                   width: maxWidth,
                                   height: 576,
-                                  child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-                                    builder: (context, state) {
-                                      return FadeInImage(
-                                        placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
-                                        image: NetworkImage(
-                                          i == imageDataLength
-                                              ? state.product.productionAssets[0]
-                                              : state.product.productionAssets[i],
-                                        ),
-                                        // image: NetworkImage(
-                                        //   i == imageDataLength
-                                        //       ? dataCarouselMock[0].substring(46)
-                                        //       : dataCarouselMock[i].substring(46),
-                                        // ),
-                                        fit: BoxFit.fitWidth,
-                                        imageErrorBuilder: (context, error, stackTrace) =>
-                                            Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
-                                      );
-                                    },
+                                  child: FadeInImage(
+                                    placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
+                                    image: NetworkImage(
+                                      i == imageLen
+                                          ? pdState.product.productionAssets[0]
+                                          : pdState.product.productionAssets[i],
+                                    ),
+                                    // image: NetworkImage(
+                                    //   i == imageDataLength
+                                    //       ? dataCarouselMock[0].substring(46)
+                                    //       : dataCarouselMock[i].substring(46),
+                                    // ),
+                                    fit: BoxFit.fitWidth,
+                                    imageErrorBuilder: (context, error, stackTrace) =>
+                                        Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
                                   ),
                                 ),
                               );
@@ -443,35 +415,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                 ),
               ),
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Visibility(
+                  visible: imageLen > 1 ? true : false,
+                  child: Container(
                     width: maxWidth,
-                    padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Visibility(
-                          visible: imageDataLength == 1 ? false : true,
-                          child: SmoothPageIndicator(
-                              controller: carouselState,
-                              count: imageDataLength <= carouselShowLimit ? imageDataLength : carouselShowLimit,
-                              effect: const ExpandingDotsEffect(
-                                expansionFactor: 2,
-                                dotHeight: 6,
-                                dotWidth: 6,
-                                activeDotColor: spaceGrey123,
-                                dotColor: cloudSoftDeepWhite,
-                              )),
-                        ),
-                      ],
+                    padding: EdgeInsets.only(bottom: 16),
+                    child: Center(
+                      child: SmoothPageIndicator(
+                          controller: pageController,
+                          count: imageLen <= carouselShowLimit ? imageLen : carouselShowLimit,
+                          effect: const ExpandingDotsEffect(
+                            expansionFactor: 2,
+                            dotHeight: 6,
+                            dotWidth: 6,
+                            activeDotColor: spaceGrey123,
+                            dotColor: cloudSoftDeepWhite,
+                          )),
                     ),
                   ),
-                ],
-              ),
-            )
+                ),
+              ],
+            ),
           ],
         )),
       ),

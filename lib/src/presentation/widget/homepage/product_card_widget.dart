@@ -5,7 +5,6 @@ import 'package:intl/intl.dart' as intl;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/extension/safe_get_extension.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 // import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
@@ -26,7 +25,7 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
-  List<int> counter = [];
+  int counter = 1;
 
   String cleanHtml(String text) {
     String temp = text;
@@ -39,10 +38,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     temp = temp.replaceAll("<h3>", "<b>");
     temp = temp.replaceAll("<h4>", "<b>");
 
-    temp = temp.replaceAll("</h1>", "</b><br>");
-    temp = temp.replaceAll("</h2>", "</b><br>");
-    temp = temp.replaceAll("</h3>", "</b><br>");
-    temp = temp.replaceAll("</h4>", "</b><br>");
+    temp = temp.replaceAll("</h1>", "</b><br><p>");
+    temp = temp.replaceAll("</h2>", "</b><br><p>");
+    temp = temp.replaceAll("</h3>", "</b><br><p>");
+    temp = temp.replaceAll("</h4>", "</b><br><p>");
+
+    temp += "</p>";
 
     return temp;
   }
@@ -99,7 +100,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       GestureDetector(
                         onTap: () {
                           context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
-                          context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: 0));
+                          context
+                              .read<ProductDetailCarouselScrollControllerBloc>()
+                              .add(CarouselScrollAction(index: counter - 1));
                           context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                           context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
 
@@ -121,7 +124,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     controller: pageViewController,
                                     onPageChanged: (val) {
                                       setState(() {
-                                        counter[index] = val + 1;
+                                        counter = val + 1;
                                       });
 
                                       if (val == products[index].productionAssets.length && val != 1) {
@@ -165,7 +168,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "${counter.get(index) == null ? "1" : counter[index]}/ ${products[index].productionAssets.length}",
+                                    "$counter/ ${products[index].productionAssets.length}",
                                     style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                   ),
                                 ),

@@ -17,7 +17,6 @@ import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/term_and_con/term_and_con_section.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class TermAndConScreen extends StatefulWidget {
   const TermAndConScreen({super.key});
