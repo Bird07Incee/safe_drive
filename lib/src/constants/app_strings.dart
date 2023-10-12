@@ -11,4 +11,6 @@ class AppStrings {
   String btnHideDescription = "ซ่อนรายละเอียด";
 
   String shippingAddressTitle = "ที่อยู่ในการจัดส่งสินค้า";
+  String shippingAddressDescription =
+      "กรุณาตรวจสอบข้อมูลให้ถูกต้อง และกรอกข้อมูลให้ครบถ้วน ก่อนดำเนินการต่อ";
 }

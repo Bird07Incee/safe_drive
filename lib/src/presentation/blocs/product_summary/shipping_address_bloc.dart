@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
@@ -29,9 +30,15 @@ class ShippingAddressBloc
           label: 'เบอร์โทรศัพท์',
           controller: TextEditingController(),
           fieldName: 'phone',
+          keyboardType: TextInputType.number,
           formType: 'textField',
+          listInputFormatter: [
+            LengthLimitingTextInputFormatter(12),
+            FilteringTextInputFormatter.allow(RegExp(r"[0-9-]")),
+            FilteringTextInputFormatter.deny(RegExp(
+                r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
+          ],
           required: true,
-          maxLength: 12,
           maxLines: 1),
       FormWidgetModel(
           label: 'อีเมล',
@@ -44,10 +51,11 @@ class ShippingAddressBloc
       FormWidgetModel(
           label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
           controller: TextEditingController(),
-          fieldName: 'phone',
+          fieldName: 'address',
           formType: 'textField',
           required: true,
-          maxLength: 12,
+          isShowCounter: true,
+          maxLength: 250,
           maxLines: 1),
       FormWidgetModel(
         label: 'จังหวัด',

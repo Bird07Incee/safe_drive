@@ -26,11 +26,14 @@ class ShippingAddressScreen extends StatelessWidget {
                   textStyle: AlvaStyles()
                       .headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
               titleSpacing: 0,
+              elevation: 0.7,
               leadingWidth: 60,
               centerTitle: false,
               automaticallyImplyLeading: false,
               leading: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(Icons.arrow_back_ios_rounded)),
             ),
             titlePage: titleWebPage,
@@ -47,63 +50,79 @@ class ShippingAddressScreen extends StatelessWidget {
       }
       if (state.status.isSuccess) {
         return Container(
-          color: whitePure,
-          child: Column(
-              children: state.listFormWidget!.map(
-            (FormWidgetModel item) {
-              bool required = true;
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            color: whitePure,
+            child: ListView(
+              children: [
+                AlvaText(
+                    title: AppStrings().shippingAddressDescription,
+                    textStyle: AlvaStyles().headingSize12w400(spaceGrey123)),
+                SizedBox(
+                  height: 24,
+                ),
+                Column(
+                    children: state.listFormWidget!.map(
+                  (FormWidgetModel item) {
+                    bool required = true;
 
-              // if (item.checkRequiredField != null &&
-              //     item.checkRequiredFieldMatchValue != null) {
-              //   required = item.checkRequiredFieldMatchValue!.contains(
-              //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
-              // }
+                    // if (item.checkRequiredField != null &&
+                    //     item.checkRequiredFieldMatchValue != null) {
+                    //   required = item.checkRequiredFieldMatchValue!.contains(
+                    //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
+                    // }
 
-              Widget input = Container();
+                    Widget input = Container();
 
-              if (item.formType == formTypeTextField) {
-                input = TextInputWidget(
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  controller: item.controller,
-                  label: item.label,
-                  marginBottom: 15,
-                  required: required,
-                  textInputAction: TextInputAction.done,
-                  keyboardType: item.textInputType,
-                  maxLength: item.maxLength,
-                  maxLines: item.maxLines,
-                  showCounter: true,
-                );
-              } else if (item.formType == formTypeDropdown) {
-                // input = OutlineDropDownInput(
-                //   autoValidateMode: AutovalidateMode.onUserInteraction,
-                //   label: item.label,
-                //   marginBottom: 15,
-                //   required: required,
-                //   value: item.value,
-                //   options: item.options!
-                //       .map((e) =>
-                //           dropdownItem(value: e['value'], label: e['label']))
-                //       .toList(),
-                //   onChanged: (value) async {
-                //     item.value = value;
-                //     data.selectDropDownEvent(value, item);
-                //   },
-                // );
-              }
+                    if (item.formType == formTypeTextField) {
+                      input = TextInputWidget(
+                        inputFormatters: item.listInputFormatter,
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        controller: item.controller,
+                        label: item.label,
+                        outsideLabel: true,
+                        marginBottom: 15,
+                        required: required,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: item.textInputType,
+                        maxLength: item.maxLength,
+                        maxLines: item.maxLines,
+                        showCounter: item.isShowCounter,
+                        isAllowAutoAddPhoneFormat:
+                            item.fieldName == 'phone' ? true : false,
+                        isAllowAutoAddEmailFormat:
+                            item.fieldName == 'email' ? true : false,
+                      );
+                    } else if (item.formType == formTypeDropdown) {
+                      // input = OutlineDropDownInput(
+                      //   autoValidateMode: AutovalidateMode.onUserInteraction,
+                      //   label: item.label,
+                      //   marginBottom: 15,
+                      //   required: required,
+                      //   value: item.value,
+                      //   options: item.options!
+                      //       .map((e) =>
+                      //           dropdownItem(value: e['value'], label: e['label']))
+                      //       .toList(),
+                      //   onChanged: (value) async {
+                      //     item.value = value;
+                      //     data.selectDropDownEvent(value, item);
+                      //   },
+                      // );
+                    }
 
-              // if (item.visibleIfMatchValue != null && item.matchField != null) {
-              //   if (item.visibleIfMatchValue!
-              //       .contains(data.entireFormMap[item.matchField])) {
-              //     return input;
-              //   }
-              //   return Container();
-              // }
+                    // if (item.visibleIfMatchValue != null && item.matchField != null) {
+                    //   if (item.visibleIfMatchValue!
+                    //       .contains(data.entireFormMap[item.matchField])) {
+                    //     return input;
+                    //   }
+                    //   return Container();
+                    // }
 
-              return input;
-            },
-          ).toList()),
-        );
+                    return input;
+                  },
+                ).toList()),
+              ],
+            ));
       } else if (state.status.isLoading) {
         return const LoadingScreen();
       } else {

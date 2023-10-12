@@ -1,7 +1,10 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 
 class TextInputWidget extends StatefulWidget {
   final String? label;
@@ -56,6 +59,8 @@ class TextInputWidget extends StatefulWidget {
   final bool isPercentageFieldLimit100;
   final bool isAllowAutoAddDecimal;
   final int? digitForCheck;
+  final bool isAllowAutoAddPhoneFormat;
+  final bool isAllowAutoAddEmailFormat;
 
   TextInputWidget({
     Key? key,
@@ -100,6 +105,8 @@ class TextInputWidget extends StatefulWidget {
     this.isPercentageFieldLimit100 = false,
     this.isAllowAutoAddDecimal = false,
     this.digitForCheck,
+    this.isAllowAutoAddPhoneFormat = false,
+    this.isAllowAutoAddEmailFormat = false,
   }) : super(key: key);
 
   @override
@@ -109,18 +116,28 @@ class TextInputWidget extends StatefulWidget {
 class TextInputWidgetState extends State<TextInputWidget> {
   bool passwordVisible = false;
   FocusNode? focusNode;
+  var phoneNumberFormatter = PhoneNumberFormatter();
+  String _formattedText = '';
 
   @override
   void initState() {
     super.initState();
     final keyboardVisibilityController = KeyboardVisibilityController();
-
     focusNode = FocusNode();
     focusNode!.addListener(() {
       if (widget.onFocus != null) {
         widget.onFocus!();
       }
     });
+
+    if (widget.isAllowAutoAddPhoneFormat) {
+      widget.inputFormatters!.add(phoneNumberFormatter);
+      if (widget.controller != null) {
+        widget.controller!.addListener(() {
+          _formatPhoneNumber();
+        });
+      }
+    }
 
     keyboardVisibilityController.onChange.listen((bool visible) {
       if (!visible) {
@@ -134,6 +151,31 @@ class TextInputWidgetState extends State<TextInputWidget> {
     focusNode!.dispose();
 
     super.dispose();
+  }
+
+  final RegExp _phoneNumberRegExp = RegExp(r'^\d{0,3}-\d{0,3}-\d{0,4}$');
+  final RegExp _emailRegExp = RegExp(
+    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+  );
+
+  String? _validateEmail(String value) {
+    bool isValid = EmailValidator.validate(value);
+    if (!_emailRegExp.hasMatch(value) || !isValid) {
+      return 'Invalid email format';
+    }
+    return null;
+  }
+
+  void _formatPhoneNumber() {
+    var text = widget.controller!.text;
+    _formattedText = phoneNumberFormatter.countOnlyNumber(text);
+    if (_phoneNumberRegExp.hasMatch(text)) {
+      text = phoneNumberFormatter._formatPhoneNumber(text);
+      widget.controller!.value = TextEditingValue(
+        text: text,
+        selection: widget.controller!.selection,
+      );
+    }
   }
 
   @override
@@ -189,16 +231,16 @@ class TextInputWidgetState extends State<TextInputWidget> {
                 style: TextStyle(
                     color: widget.labelColor ?? Colors.black,
                     fontWeight: FontWeight.w300,
-                    fontFamily: 'Prompt'),
-                children: <TextSpan>[
-                  if (widget.required)
-                    const TextSpan(
-                      text: ' *',
-                      style: TextStyle(
-                        color: Colors.red,
-                      ),
-                    ),
-                ],
+                    fontFamily: fontFamily),
+                // children: <TextSpan>[
+                //   if (widget.required)
+                //     const TextSpan(
+                //       text: ' *',
+                //       style: TextStyle(
+                //         color: Colors.red,
+                //       ),
+                //     ),
+                // ],
               ),
             ),
           ),
@@ -209,20 +251,6 @@ class TextInputWidgetState extends State<TextInputWidget> {
                   ? (widget.autoValidateMode ??
                       AutovalidateMode.onUserInteraction)
                   : null,
-              buildCounter: (BuildContext context,
-                  {int? currentLength, int? maxLength, bool? isFocused}) {
-                return widget.showCounter
-                    ? Text(
-                        '${widget.controller!.text.length}/$maxLength',
-                        semanticsLabel: 'character count',
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                          height: double.minPositive,
-                        ),
-                      )
-                    : Container();
-              },
               textCapitalization: widget.textCapitalization,
               readOnly: widget.readOnly,
               inputFormatters: widget.inputFormatters ??
@@ -241,10 +269,14 @@ class TextInputWidgetState extends State<TextInputWidget> {
               controller: widget.controller,
               obscureText: !widget.isPasswordField ? false : !passwordVisible,
               textAlign: widget.textAlign ?? TextAlign.left,
-              maxLength: widget.maxLength,
+              maxLength:
+                  widget.isAllowAutoAddPhoneFormat ? 12 : widget.maxLength,
               textInputAction: widget.textInputAction,
+              style: AlvaStyles().heading3Size16Bold(),
               decoration: InputDecoration(
-                errorMaxLines: 3,
+                counterText: "",
+                errorText: widget.errRequiredMessage,
+                errorStyle: AlvaStyles().bodySize12W400(RedWordShow),
                 suffixStyle: TextStyle(
                   color: Colors.grey,
                   fontSize: textSize(14, context),
@@ -252,8 +284,8 @@ class TextInputWidgetState extends State<TextInputWidget> {
                 suffixText: widget.suffixText,
                 filled: widget.filled == true ? widget.filled : widget.disabled,
                 contentPadding: EdgeInsets.only(
-                  left: widget.suffixText != null ? 0 : widget.padding,
-                  right: widget.suffixText != null ? 0 : widget.padding,
+                  left: 0,
+                  right: 0,
                   top: widget.padding,
                   bottom: widget.padding,
                 ),
@@ -264,14 +296,9 @@ class TextInputWidgetState extends State<TextInputWidget> {
                         children: [
                           Text(
                             !showOutsideLabel ? widget.label ?? '' : '',
+                            style: AlvaStyles()
+                                .bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW),
                           ),
-                          if (widget.required)
-                            const Text(
-                              ' *',
-                              style: TextStyle(
-                                color: Colors.red,
-                              ),
-                            ),
                         ],
                       )
                     : null,
@@ -285,19 +312,19 @@ class TextInputWidgetState extends State<TextInputWidget> {
                     : widget.readOnly
                         ? spaceGrey
                         : Colors.white,
-                border: OutlineInputBorder(
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: blackInBlack),
                   borderRadius: BorderRadius.circular(widget.borderRadius),
-                  borderSide: BorderSide(color: blackInBlack, width: 1),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                      color: widget.readOnly ? spaceGrey : blackInBlack,
-                      width: 1),
-                ),
-                enabledBorder: OutlineInputBorder(
+                      color: widget.readOnly ? spaceGrey : BlueFantasy,
+                      width: 2),
                   borderRadius: BorderRadius.circular(widget.borderRadius),
-                  borderSide: BorderSide(color: Colors.black, width: 1),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: blackInBlack, width: 1),
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
               ),
               keyboardType: widget.keyboardType,
@@ -319,7 +346,11 @@ class TextInputWidgetState extends State<TextInputWidget> {
                     widget.controller!.selection = TextSelection.fromPosition(
                         TextPosition(offset: widget.controller!.text.length));
                   }
+                  if (widget.isAllowAutoAddEmailFormat) {
+                    _validateEmail(text);
+                  }
                 }
+                setState(() {});
               },
               validator: (value) {
                 var validator = Validator();
@@ -331,7 +362,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
 
                 if (widget.required == true && validator.isBlank) {
                   return widget.errRequiredMessage ??
-                      'กรุณากรอก ${widget.label ?? ''}';
+                      'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
                 }
 
                 return null;
@@ -344,18 +375,16 @@ class TextInputWidgetState extends State<TextInputWidget> {
             },
           ),
           Visibility(
-            visible: widget.helperText != null,
+            visible: widget.showCounter ? true : widget.helperText != null,
             child: Padding(
               padding: const EdgeInsets.only(
                 top: 5,
               ),
               child: Text(
-                widget.helperText ?? '',
-                style: TextStyle(
-                  color: blackInBlack,
-                  fontSize: textSize(10, context),
-                  fontWeight: FontWeight.w300,
-                ),
+                widget.showCounter
+                    ? '${widget.isAllowAutoAddPhoneFormat ? _formattedText.length.toString() : widget.controller!.text.length.toString()}/${widget.isAllowAutoAddPhoneFormat ? 10 : widget.maxLength}'
+                    : widget.helperText ?? '',
+                style: AlvaStyles().headingSize12w400(spaceGrey123),
               ),
             ),
           ),
@@ -386,4 +415,32 @@ class Validator {
 
   bool get isBlank => (value == null || value!.trim().isEmpty);
   bool get isNotBlank => ((value != null) && (value!.trim().isNotEmpty));
+}
+
+class PhoneNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final newText = _formatPhoneNumber(newValue.text);
+    return TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: newText.length),
+    );
+  }
+
+  String countOnlyNumber(String text) {
+    final formatted = text.replaceAll('-', '');
+    return formatted;
+  }
+
+  String _formatPhoneNumber(String text) {
+    final formatted = text.replaceAll(RegExp(r'[^0-9]'), '');
+    if (formatted.length <= 3) {
+      return formatted;
+    } else if (formatted.length <= 6) {
+      return '${formatted.substring(0, 3)}-${formatted.substring(3)}';
+    } else {
+      return '${formatted.substring(0, 3)}-${formatted.substring(3, 6)}-${formatted.substring(6, formatted.length)}';
+    }
+  }
 }
