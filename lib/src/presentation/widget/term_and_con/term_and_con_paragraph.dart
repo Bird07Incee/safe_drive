@@ -31,10 +31,7 @@ class TermAndConParagraph extends StatelessWidget {
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: SafetyText(
-              text,
-              style: AlvaStyles().body1(),
-            ),
+            child: SafetyText(text, style: AlvaStyles().body1(), pattern: 'กรุงศรี ออโต้'),
           ),
         ),
       ],
@@ -45,6 +42,7 @@ class TermAndConParagraph extends StatelessWidget {
 class SafetyText extends StatelessWidget {
   final String text;
   final TextStyle? style;
+  final String? pattern;
 
   final String _pattern = '\n';
 
@@ -52,6 +50,7 @@ class SafetyText extends StatelessWidget {
     this.text, {
     Key? key,
     this.style,
+    this.pattern,
   }) : super(key: key);
 
   @override
@@ -62,10 +61,43 @@ class SafetyText extends StatelessWidget {
       children: textList
           .map(
             (value) => SizedBox(
-              child: Text(value, style: style),
+              child: UnbreakableText(
+                value,
+                style: style,
+                pattern: pattern,
+              ),
             ),
           )
           .toList(),
     );
+  }
+}
+
+class UnbreakableText extends StatelessWidget {
+  final String text;
+  final TextStyle? style;
+  final String? pattern;
+
+  const UnbreakableText(
+    this.text, {
+    Key? key,
+    this.style,
+    this.pattern,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final textList = text.split(pattern!);
+    return RichText(
+        text: TextSpan(
+      style: style,
+      children: [
+        for (var i = 0; i < textList.length; i++) ...[
+          TextSpan(text: textList[i]),
+          if (i + 1 != textList.length)
+            WidgetSpan(alignment: PlaceholderAlignment.middle, child: Text(pattern!, style: style)),
+        ],
+      ],
+    ));
   }
 }
