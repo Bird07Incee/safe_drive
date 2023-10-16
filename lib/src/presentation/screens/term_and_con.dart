@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:html';
 // ignore: avoid_web_libraries_in_flutter
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -49,39 +53,40 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
 
   void acceptTermAndCond() async {
     try {
+      var localStorage = window.localStorage;
+      localStorage.clear();
       GeneralDialog().showLoadingDialog(context: context);
-      // final baseUrl = Environment().getValue("BFF_BASE_URL");
-      // final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
-      // bool codeVerify = lineDataHelper.getLineAccessToken().isNotEmpty;
-      // if (!codeVerify) {
-      //   Response response = await dioUtilityRepository
-      //       .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineDataHelper.getLineCode()});
-      //   if (response.statusCode == 200) {
-      //     codeVerify = true;
-      //     lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
-      //   }
-      // }
-      // if (codeVerify) {
-      //   String accessToken = lineDataHelper.getLineAccessToken();
-      //   Response responseTerm = await dioUtilityRepository.postByURL(
-      //       "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineDataHelper.getLineUid()},
-      //       headers: {"Authorization": "Bearer $accessToken"});
-      //   if (responseTerm.statusCode == 200) {
-      //     termAndConHelper.setTermAndConToAccept();
-      //     //stamp version
-      //     if (!mounted) return;
-      //     Navigator.of(context).pop();
-      //   }
-      // }
-      termAndConHelper.setTermAndConToAccept();
-      //stamp version
-      if (!mounted) return;
-      Navigator.of(context).pop();
+      final baseUrl = Environment().getValue("BFF_BASE_URL");
+      final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
+      String accessToken = await lineDataHelper.getLineAccessToken();
+      bool isCodeVerify = accessToken != "";
+      if (!isCodeVerify) {
+        String lineCode = await lineDataHelper.getLineCode();
+        print('accessToken : $accessToken, code: $lineCode');
+        Response response =
+            await dioUtilityRepository.postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
+        if (response.statusCode == 200) {
+          isCodeVerify = true;
+          lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
+        }
+      }
+      if (isCodeVerify) {
+        String accessToken = await lineDataHelper.getLineAccessToken();
+        String lineUid = await lineDataHelper.getLineUid();
+        Response responseTerm = await dioUtilityRepository.postByURL(
+            "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineUid},
+            headers: {"Authorization": "Bearer $accessToken"});
+        if (responseTerm.statusCode == 200) {
+          termAndConHelper.setTermAndConToAccept();
+          //stamp version
+          if (!mounted) return;
+          Navigator.of(context).pop();
+        }
+      }
 
       if (!mounted) return;
       Navigator.of(context).pop();
     } catch (e) {
-      print(e);
       _handleError();
     }
   }
@@ -151,6 +156,10 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                         GestureDetector(
                           onTap: () {
                             if (scrollFinished) {
+                              var localStorage = window.localStorage;
+                              localStorage.clear();
+
+                              liff.logout();
                               liff.closeWindow();
                             }
                           },
@@ -161,7 +170,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                                 color: Colors.white,
                                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                                 border: Border.all(
-                                    color: scrollFinished ? const Color(0xffffd400) : const Color(0xffdedede), width: 2)),
+                                    color: scrollFinished ? const Color(0xffffd400) : const Color(0xffdedede),
+                                    width: 2)),
                             child: Center(
                                 child: Text(
                               "ไม่ยอมรับ",

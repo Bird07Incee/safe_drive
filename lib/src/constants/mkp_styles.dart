@@ -48,3 +48,4 @@ const RedSoft = Color(0xFFFDE6E6);
 const backgroundNo2 = Color(0xFFF5F5F5);
 
 const cloudWhite = Color(0xffEFEFEF);
+const successGreen = Color(0xffE8F7EE);
