@@ -51,8 +51,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     try {
       // Response response = await dioUtilityRepository.postByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {},
       //     headers: {"Authorization": "Bearer $accessToken"});
-
-      final productList = ProductList.fromJson(mockProductResponse);
+      final productList = ProductList.fromJson(mockProductListResponse);
       if (productList.products!.length == 1) {
         emit(state.copyWith(hideCategory: true));
       }
@@ -78,12 +77,14 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     GeneralDialog().showLoadingDialog(context: event.context);
 
     try {
-      Response response = await dioUtilityRepository.getByURL(
-          "$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
-          headers: {"Authorization": "Bearer $accessToken"});
-
-      final productList = ProductList.fromJson(response.data);
-      emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+      // Response response = await dioUtilityRepository.getByURL(
+      //     "$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
+      //     headers: {"Authorization": "Bearer $accessToken"});
+      //
+      // final productList = ProductList.fromJson(response.data);
+      // emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+      emit(state.copyWith(
+          productList: ProductList.fromJson(mockProductListResponse), productListStatus: GetProductListStatus.success));
 
       if (!event.context.mounted) return;
       Navigator.of(event.context).pop();

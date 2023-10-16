@@ -9,41 +9,23 @@ class AlvaStyles {
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle heading2(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: color);
+  TextStyle heading2(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.bold, color: color);
 
   TextStyle heading3() => const TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: BTN_SELECTED_TEXT_COLOR_NEW);
+      fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.bold, color: BTN_SELECTED_TEXT_COLOR_NEW);
 
-  TextStyle heading3Size16Bold() => const TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-      color: BTN_SELECTED_TEXT_COLOR_NEW);
+  TextStyle heading3Muted() =>
+      const TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.bold, color: smockGrey);
 
-  TextStyle heading3Muted() => const TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: smockGrey);
+  TextStyle headingSize12w400(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color);
 
-  TextStyle headingSize12w400(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      color: color);
+  TextStyle headingSize12w400Cordia(Color color) =>
+      TextStyle(fontFamily: "Cordia UPC", fontSize: 12, fontWeight: FontWeight.w400, color: color);
 
-  TextStyle headingSize12w600(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-      color: color);
+  TextStyle headingSize12w600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.bold, color: color);
 
   TextStyle headingSize22w700(Color color) => TextStyle(
       fontFamily: fontFamily,
@@ -76,21 +58,12 @@ class AlvaStyles {
         height: 32 / 22,
       );
 
-  TextStyle headingSize10w400(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 10,
-      fontWeight: FontWeight.w400,
-      color: color);
-  TextStyle headingSize10w500(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 10,
-      fontWeight: FontWeight.w500,
-      color: color);
-  TextStyle headingSize10w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 10,
-      fontWeight: FontWeight.w700,
-      color: color);
+  TextStyle headingSize10w400(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w400, color: color);
+  TextStyle headingSize10w500(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w500, color: color);
+  TextStyle headingSize10w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.w700, color: color);
 
   TextStyle headingSize10() => const TextStyle(
         fontFamily: fontFamily,
@@ -98,53 +71,31 @@ class AlvaStyles {
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle headingSize10w600(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 10,
-      fontWeight: FontWeight.bold,
-      color: color);
-  TextStyle headingSize12w500WithHeightFixed(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      color: color,
-      height: 1.4);
-  TextStyle headingSize14w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.w700,
-      color: color);
+  TextStyle headingSize10w600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 10, fontWeight: FontWeight.bold, color: color);
+  TextStyle headingSize12w500WithHeightFixed(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w500, color: color, height: 1.4);
+  TextStyle headingSize14w400(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color);
+  TextStyle headingSize14w500(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w500, color: color);
+  TextStyle headingSize14w600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w600, color: color);
+  TextStyle headingSize14w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w700, color: color);
 
-  TextStyle headingSize16w500(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      color: color);
-  TextStyle headingSize16w600(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: color);
-  TextStyle headingSize16w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 16,
-      fontWeight: FontWeight.w700,
-      color: color);
-  TextStyle headingSize12w500(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      color: color);
-  TextStyle headingSize12w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-      color: color);
-  TextStyle headingSize18w700(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 18,
-      fontWeight: FontWeight.w700,
-      color: color);
+  TextStyle headingSize16w500(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w500, color: color);
+  TextStyle headingSize16w600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w600, color: color);
+  TextStyle headingSize16w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w700, color: color);
+  TextStyle headingSize12w500(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w500, color: color);
+  TextStyle headingSize12w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.bold, color: color);
+  TextStyle headingSize18w700(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 18, fontWeight: FontWeight.w700, color: color);
   TextStyle discountPriceTxt14w400(Color color) => TextStyle(
       fontFamily: fontFamily,
       fontSize: 14,
@@ -152,43 +103,21 @@ class AlvaStyles {
       color: color,
       decoration: TextDecoration.lineThrough);
 
-  TextStyle body1() => const TextStyle(
-      fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
+  TextStyle body1() => const TextStyle(fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
 
-  TextStyle bodySize14w400(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: color);
+  TextStyle bodySize14w400(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color);
 
-  TextStyle bodySize12W400(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      color: color,
-      fontWeight: FontWeight.w400);
+  TextStyle bodySize12W600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, color: color, fontWeight: FontWeight.bold);
 
-  TextStyle bodySize12W600(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      color: color,
-      fontWeight: FontWeight.bold);
+  TextStyle bodySize14W600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 14, color: color, fontWeight: FontWeight.bold);
+  TextStyle bodySize16W600(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, color: color, fontWeight: FontWeight.w600);
 
-  TextStyle bodySize14W600(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      color: color,
-      fontWeight: FontWeight.bold);
-  TextStyle bodySize16W600(Color color) => TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 16,
-      color: color,
-      fontWeight: FontWeight.w600);
-
-  TextStyle bodySize14W400Muted() => const TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      color: smockGrey,
-      fontWeight: FontWeight.w400);
+  TextStyle bodySize14W400Muted() =>
+      const TextStyle(fontFamily: fontFamily, fontSize: 14, color: smockGrey, fontWeight: FontWeight.w400);
 
   TextStyle bodySize14W400MutedLine() => const TextStyle(
       fontFamily: fontFamily,
@@ -198,8 +127,7 @@ class AlvaStyles {
       decoration: TextDecoration.lineThrough);
 
 // ---------------------------------ButtonStyle-----------------------------------------------------------------------------------------
-  ButtonStyle outlineButtonStyle(
-          Color backgroundColor, Color foregroundColor, double borderRadius,
+  ButtonStyle outlineButtonStyle(Color backgroundColor, Color foregroundColor, double borderRadius,
           {BorderSide? side}) =>
       ButtonStyle(
         side: MaterialStateProperty.all(side ?? BorderSide.none),
@@ -210,9 +138,7 @@ class AlvaStyles {
         )),
       );
 
-  ButtonStyle outlineNoneBorderButtonStyle(
-          Color backgroundColor, Color foregroundColor,
-          {bool isRadius8 = false}) =>
+  ButtonStyle outlineNoneBorderButtonStyle(Color backgroundColor, Color foregroundColor, {bool isRadius8 = false}) =>
       OutlinedButton.styleFrom(
         side: BorderSide.none,
         backgroundColor: backgroundColor,
@@ -221,12 +147,4 @@ class AlvaStyles {
           borderRadius: BorderRadius.circular(8.0),
         ),
       );
-}
-
-extension on TextStyle {
-  /// Temporary fix the following Flutter Web issues
-  /// https://github.com/flutter/flutter/issues/63467
-  /// https://github.com/flutter/flutter/issues/64904#issuecomment-699039851
-  /// https://github.com/flutter/flutter/issues/65526
-  TextStyle get withZoomFix => copyWith(wordSpacing: 0);
 }

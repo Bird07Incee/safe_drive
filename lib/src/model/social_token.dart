@@ -3,10 +3,10 @@ class SocialToken {
   String? accessToken;
   String? refreshToken;
   int? expiresIn;
-  int? tcVersion;
-  int? pdpaVersion;
-  bool? tcAccept;
-  bool? pdpaAccept;
+  String? tcVersion;
+  String? pdpaVersion;
+  String? tcAccept;
+  String? pdpaAccept;
 
   SocialToken(
       {this.uid,
