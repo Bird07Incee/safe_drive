@@ -30,89 +30,85 @@ class OrderSummaryScreen extends StatelessWidget {
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
-      child: WillPopScope(
-        onWillPop: () async {
-          onBack(context);
-          return true;
-        },
-        child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-          builder: (context, state) {
-            return AlvaRootWidget(
-                titlePage: titleWebPage,
-                appBar: AppBar(
-                  title: AlvaText(
-                      title: "สรุปรายการสั่งซื้อ",
-                      textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                  titleSpacing: 0,
-                  leadingWidth: 60,
-                  centerTitle: false,
-                  automaticallyImplyLeading: false,
-                  leading: IconButton(
-                      key: const Key("pop_navigator_to_home_page"),
-                      onPressed: () {
-                        onBack(context);
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_rounded)),
+        child: WillPopScope(
+      onWillPop: () async {
+        onBack(context);
+        return true;
+      },
+      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+        builder: (context, state) {
+          return AlvaRootWidget(
+              titlePage: titleWebPage,
+              appBar: AppBar(
+                title: AlvaText(
+                    title: "สรุปรายการสั่งซื้อ",
+                    textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                titleSpacing: 0,
+                leadingWidth: 60,
+                centerTitle: false,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                    key: const Key("pop_navigator_to_home_page"),
+                    onPressed: () {
+                      onBack(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_rounded)),
+              ),
+              bottomSheet: Container(
+                decoration: BoxDecoration(
+                  color: whitePure,
+                  boxShadow: [
+                    BoxShadow(
+                        color: const Color(0xff000000).withOpacity(0.04),
+                        spreadRadius: 0,
+                        blurRadius: 16,
+                        offset: const Offset(0, -4)),
+                  ],
                 ),
-                bottomSheet: Container(
-                  decoration: BoxDecoration(
-                    color: whitePure,
-                    boxShadow: [
-                      BoxShadow(
-                          color: const Color(0xff000000).withOpacity(0.04),
-                          spreadRadius: 0,
-                          blurRadius: 16,
-                          offset: const Offset(0, -4)),
-                    ],
-                  ),
-                  width: maxWidth,
-                  height: 96,
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                          height: 48,
-                          child: OutlinedButton(
-                            onPressed: () {
-
-                            },
-                            style: AlvaStyles()
-                                .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
-                            child: Text("สั่งซื้อสินค้า",
-                                style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                          ),
+                width: maxWidth,
+                height: 96,
+                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: AlvaStyles()
+                              .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
+                          child: Text("สั่งซื้อสินค้า",
+                              style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-                // child: ProductDetailBody(),
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 96),
-                  color: backgroundNo2,
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      Container(
-                        height: 16,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              color: cloudWhite, // Replace with your color
-                              width: 2.0, // Adjust the border width as needed
-                            ),
+              ),
+              // child: ProductDetailBody(),
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 96),
+                color: backgroundNo2,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Container(
+                      height: 16,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: cloudWhite, // Replace with your color
+                            width: 2.0, // Adjust the border width as needed
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ));
-          },
-        ),
-      )
-    );
+                    ),
+                  ],
+                ),
+              ));
+        },
+      ),
+    ));
   }
 }
-

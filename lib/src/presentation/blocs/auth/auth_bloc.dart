@@ -16,38 +16,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc() : super(const AuthState()) {
     on<UserAuthEventLogin>((event, emit) async {
-      if (await termAndConHelper.isTermAndConAccepted()) {
-        print("term and con already accept");
-        loadOneTrustCookieScript();
+      await Future.delayed(Duration(seconds: 1)).then((value) async {
         emit(state.copyWith(authStatus: AuthStatus.success));
-      } else {
-        print("term and con not accept");
-        await Navigator.pushNamed(event.context, Routes.termAndCon.toStringPath());
-        loadOneTrustCookieScript();
-        emit(state.copyWith(authStatus: AuthStatus.success));
-      }
+      });
       // await liff.ready.then((_) async {
       //   // waiting for change
-      //
-      //   Storage localStorage = window.localStorage;
-      //   localStorage.forEach((key, value) {
-      //     if (key == "LineLogin") {
-      //       isLogin = true;
-      //     }
-      //   });
-      //
+      //   bool isLogin = await PreferencesHelper.isContains('LineLogin');
+      //   int exp = await LineDataHelper().getTokenExp();
+      //   bool isExpired = exp < DateTime.now().millisecond * 1000;
       //   if (!isLogin) {
-      //     // liff.login();
-      //     const url =
-      //         'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz';
-      //     if (await canLaunch(url)) {
-      //       window.open(url, '_self');
-      //     } else {
-      //       throw "Couldn't launch URL";
-      //     }
+      //     String url = Environment().getValue("LINE_REDIRECT_URL");
+      //     window.open(url, '_self');
       //   } else {
-      //     // print("termandcon value ${termAndConHelper.isTermAndConAccepted().toString()}");
-      //     if (termAndConHelper.isTermAndConAccepted()) {
+      //     bool isAccepted = await termAndConHelper.isTermAndConAccepted();
+      //     if (isAccepted) {
       //       print("term and con already accept");
       //       loadOneTrustCookieScript();
       //       emit(state.copyWith(authStatus: AuthStatus.success));

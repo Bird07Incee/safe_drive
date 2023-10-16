@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
 class DioUtilityService with HeaderUtil {
-  DioUtilityService({Dio? dio}) : _dioClient = dio ?? Dio();
+  DioUtilityService({Dio? dio}) : _dioClient = dio ?? DioClient().dioClient;
   final Dio _dioClient;
 
   Future<Response> getByURL(String path, Map<String, Object> params,
@@ -67,5 +68,13 @@ class DioUtilityService with HeaderUtil {
       }
       rethrow;
     }
+  }
+}
+
+class DioClient {
+  static final Dio client = Dio();
+  Dio get dioClient {
+    client.interceptors.add(DioInterceptor());
+    return client;
   }
 }
