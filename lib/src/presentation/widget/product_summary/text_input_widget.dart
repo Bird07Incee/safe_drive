@@ -230,21 +230,13 @@ class TextInputWidgetState extends State<TextInputWidget> {
                 text: widget.label ?? '',
                 style: TextStyle(
                     color: widget.labelColor ?? Colors.black,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
                     fontFamily: fontFamily),
-                // children: <TextSpan>[
-                //   if (widget.required)
-                //     const TextSpan(
-                //       text: ' *',
-                //       style: TextStyle(
-                //         color: Colors.red,
-                //       ),
-                //     ),
-                // ],
               ),
             ),
           ),
-          SizedBox(height: showOutsideLabel ? 10 : 0),
+          SizedBox(height: showOutsideLabel ? 4 : 0),
           Focus(
             child: TextFormField(
               autovalidateMode: widget.required

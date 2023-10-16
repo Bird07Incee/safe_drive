@@ -97,8 +97,13 @@ class ShippingAddressBloc
         ],
       ),
     ];
+    List<FormWidgetResultModel> listResult = [];
+    for (int i = 0; i < listFormWidget.length; i++) {
+      listResult.add(FormWidgetResultModel(listFormWidget[i].fieldName, ''));
+    }
     emit(state.copyWith(
         status: ShippingAddressStatus.success,
-        formWidgetModel: listFormWidget));
+        formWidgetModel: listFormWidget,
+        formResultModel: listResult));
   }
 }

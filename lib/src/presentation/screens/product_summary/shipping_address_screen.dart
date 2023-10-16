@@ -10,6 +10,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/product_summary/dropdown_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/text_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
@@ -44,9 +45,9 @@ class ShippingAddressScreen extends StatelessWidget {
     return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
         builder: (ctx, state) {
       if (state.status.isInitial) {
-        ctx
-            .read<ShippingAddressBloc>()
-            .add(SetFormWidget(listForm: state.listFormWidget ?? []));
+        ctx.read<ShippingAddressBloc>().add(SetFormWidget(
+            listForm: state.listFormWidget ?? [],
+            listResult: state.formResult ?? []));
       }
       if (state.status.isSuccess) {
         return Container(
@@ -93,21 +94,25 @@ class ShippingAddressScreen extends StatelessWidget {
                             item.fieldName == 'email' ? true : false,
                       );
                     } else if (item.formType == formTypeDropdown) {
-                      // input = OutlineDropDownInput(
-                      //   autoValidateMode: AutovalidateMode.onUserInteraction,
-                      //   label: item.label,
-                      //   marginBottom: 15,
-                      //   required: required,
-                      //   value: item.value,
-                      //   options: item.options!
-                      //       .map((e) =>
-                      //           dropdownItem(value: e['value'], label: e['label']))
-                      //       .toList(),
-                      //   onChanged: (value) async {
-                      //     item.value = value;
-                      //     data.selectDropDownEvent(value, item);
-                      //   },
-                      // );
+                      input = DropDownInputWidget(
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        label: item.label,
+                        marginBottom: 15,
+                        required: required,
+                        value: item.value,
+                        // options: item.options!
+                        //     .map((e) => dropdownItem(
+                        //         value: e['value'], label: e['label']))
+                        //     .toList(),
+                        onChanged: (value) async {
+                          state.formResult!
+                              .where((element) =>
+                                  element.fieldName == item.fieldName)
+                              .first
+                              .value = value;
+                          print(state.formResult!);
+                        },
+                      );
                     }
 
                     // if (item.visibleIfMatchValue != null && item.matchField != null) {

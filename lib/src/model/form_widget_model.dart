@@ -78,3 +78,9 @@ class FormWidgetModel {
     formType: '',
   );
 }
+
+class FormWidgetResultModel {
+  String fieldName;
+  String value;
+  FormWidgetResultModel(this.fieldName, this.value);
+}

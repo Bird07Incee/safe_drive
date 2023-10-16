@@ -8,8 +8,9 @@ class ShippingAddressEvent {
 }
 
 class SetFormWidget extends ShippingAddressEvent {
-  const SetFormWidget({required this.listForm});
+  SetFormWidget({required this.listForm, required this.listResult});
   final List<FormWidgetModel> listForm;
+  List<FormWidgetResultModel> listResult;
 
   @override
   List<Object> get props => [listForm];
