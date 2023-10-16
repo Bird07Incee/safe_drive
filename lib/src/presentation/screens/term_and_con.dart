@@ -9,6 +9,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
@@ -53,8 +54,6 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
 
   void acceptTermAndCond() async {
     try {
-      var localStorage = window.localStorage;
-      localStorage.clear();
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
@@ -68,6 +67,10 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         if (response.statusCode == 200) {
           isCodeVerify = true;
           lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
+        } else if (response.statusCode == 400) {
+          PreferencesHelper.clear();
+          String url = Environment().getValue("LINE_REDIRECT_URL");
+          window.open(url, '_self');
         }
       }
       if (isCodeVerify) {

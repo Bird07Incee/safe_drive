@@ -21,7 +21,7 @@ class _RootPageConditionState extends State<RootPageCondition> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    initFunction();
+    //initFunction();
   }
 
   Future<void> openLine() async {
@@ -63,7 +63,6 @@ class _RootPageConditionState extends State<RootPageCondition> {
                 );
               } else {
                 ///code here
-                //context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
                 return widget.child;
               }
             },

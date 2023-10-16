@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
@@ -21,20 +23,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<UserAuthEventLogin>((event, emit) async {
       await liff.ready.then((_) async {
         // waiting for change
-
-        Storage localStorage = window.localStorage;
-        localStorage.forEach((key, value) {
-          if (key == "LineLogin") {
-            isLogin = true;
-          }
-        });
-
+        bool isLogin = await PreferencesHelper.isContains('LineLogin');
+        int exp = await LineDataHelper().getTokenExp();
+        bool isExpired = exp < DateTime.now().millisecond * 1000;
         if (!isLogin) {
-          // liff.login();
           String url = Environment().getValue("LINE_REDIRECT_URL");
           window.open(url, '_self');
         } else {
-          // print("termandcon value ${termAndConHelper.isTermAndConAccepted().toString()}");
           bool isAccepted = await termAndConHelper.isTermAndConAccepted();
           if (isAccepted) {
             print("term and con already accept");

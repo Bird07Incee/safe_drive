@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
@@ -46,8 +46,9 @@ _setUpLineLIFF() {
       lineDataHelper.lineDataGrabber(key, value);
     });
     // waiting for change
-    Storage localStorage = window.localStorage;
-    localStorage.addAll({"LineLogin": 'true'});
+    PreferencesHelper.setString("LineLogin", 'true');
+    // Storage localStorage = window.localStorage;
+    // localStorage.addAll({"LineLogin": 'true'});
   }
   String lineId = Environment().getValue("LIFF_ID");
   FlutterLineLiff().init(

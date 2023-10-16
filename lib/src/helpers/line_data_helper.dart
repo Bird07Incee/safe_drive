@@ -92,22 +92,32 @@ class LineDataHelper {
     return PreferencesHelper.getString("code");
   }
 
-  void saveSocialDataToLocalStorage(String data) {
-    PreferencesHelper.setString("socialData", data);
+  Future<void> saveSocialDataToLocalStorage(String data) async {
+    await PreferencesHelper.setString("socialData", data);
   }
 
-  Future<Map<dynamic, dynamic>> _getSocialData() async {
+  Future<Map<dynamic, dynamic>> getSocialData() async {
     var value = await PreferencesHelper.getString("socialData");
     return value != '' ? json.decode(value) : {};
   }
 
   Future<String> getLineUid() async {
-    var data = await _getSocialData();
+    var data = await getSocialData();
     return data["uid"] ?? '';
   }
 
+  Future<int> getTokenExp() async {
+    var data = await getSocialData();
+    return data["expires_in"] ?? 0;
+  }
+
   Future<String> getLineAccessToken() async {
-    var data = await _getSocialData();
+    var data = await getSocialData();
     return data["access_token"] ?? '';
+  }
+
+  Future<String> getLineRefreshToken() async {
+    var data = await getSocialData();
+    return data["refresh_token"] ?? '';
   }
 }
