@@ -21,6 +21,9 @@ class AlvaStyles {
   TextStyle headingSize12w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color);
 
+  TextStyle headingSize12w400WithLineHeight(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color, height: 2);
+
   TextStyle headingSize12w400Cordia(Color color) =>
       TextStyle(fontFamily: "Cordia UPC", fontSize: 12, fontWeight: FontWeight.w400, color: color);
 

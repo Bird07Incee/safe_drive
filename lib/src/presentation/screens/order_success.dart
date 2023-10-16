@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/model/inquiry_data.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
@@ -13,6 +14,30 @@ class OrderSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.of(context).size.width;
     final maxHeight = MediaQuery.of(context).size.height;
+
+    final mockJson = {
+      "refId": "REF00005678",
+      "payment_card": "987654******1234",
+      "payment_date": "1 กันยายน 2566",
+      "payment_time": "09:54:22",
+      "payment_medthod": "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
+      "payment_period": "ผ่อนชำระ 6 เดือน",
+      "payment_merchant": "บริษัท อินโนพาวเวอร์ จำกัด",
+      "product_asset": "image url",
+      "product_id": "PM12345678",
+      "product_name": "Pulsar Max",
+      "product_attr": ["สีดำ", "ความยาวสาย 3 เมตร", "ทดสอบ1", "ทดสอบ2"],
+      "product_price": "56640",
+      "customer_name": "กรุงศรี ออโต้",
+      "customer_tel": "081-234-5678",
+      "customer_email": "k_auto@krungsri.com",
+      "customer_address": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+      "seller_address":
+          "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
+      "seller_tel": "091-862-0511"
+    };
+
+    final InquiryData mock = InquiryData.fromJson(mockJson);
 
     return RootPageCondition(
         child: AlvaRootWidget(
@@ -43,7 +68,7 @@ class OrderSuccessScreen extends StatelessWidget {
                             style: AlvaStyles().headingSize14w600(blackGoMunTo),
                           ),
                           Text(
-                            "หมายเลขอ้างอิง: REF00005678 ",
+                            "หมายเลขอ้างอิง: ${mock.refId}",
                             style: AlvaStyles().headingSize12w400(blackGoMunTo),
                           )
                         ],
@@ -57,32 +82,32 @@ class OrderSuccessScreen extends StatelessWidget {
                     child: Column(children: [
                       ProductAttribute(
                         attributeKey: "ชำระเงินโดย",
-                        attributevalue: "987654******1234",
+                        attributevalue: mock.paymentCard!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "วันที่ชำระเงิน",
-                        attributevalue: "1 กันยายน 2566",
+                        attributevalue: mock.paymentDate!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "เวลาที่ชำระเงิน",
-                        attributevalue: "09:54:22",
+                        attributevalue: mock.paymentTime!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "ช่องทางการชำระเงิน",
-                        attributevalue: "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
+                        attributevalue: mock.paymentMedthod!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "รูปแบบการชำระเงิน",
-                        attributevalue: "ผ่อนชำระ 6 เดือน",
+                        attributevalue: mock.paymentPeriod!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "ผู้รับเงิน",
-                        attributevalue: "บริษัท อินโนพาวเวอร์ จำกัด",
+                        attributevalue: mock.paymentMerchant!,
                         maxWidth: maxWidth,
                       ),
                     ]),
@@ -91,7 +116,7 @@ class OrderSuccessScreen extends StatelessWidget {
                     width: maxWidth,
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
-                      "รหัสสินค้า: PM12345678",
+                      "รหัสสินค้า: ${mock.productId}",
                       style: AlvaStyles().headingSize12w600(blackGoMunTo),
                     ),
                   ),
@@ -102,6 +127,7 @@ class OrderSuccessScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
                               width: (maxWidth / 2) - 32,
@@ -124,26 +150,16 @@ class OrderSuccessScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Pulsar Max",
+                                    mock.productName!,
                                     style: AlvaStyles().headingSize14w600(blackGoMunTo),
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "สีดำ",
-                                    style: AlvaStyles().headingSize12w400(blackGoMunTo),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "ความยาวสาย 3 เมตร",
-                                    style: AlvaStyles().headingSize12w400(blackGoMunTo),
-                                    overflow: TextOverflow.ellipsis,
-                                  )
+                                  for (final attr in mock.productAttr!)
+                                    Text(
+                                      attr,
+                                      style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                 ],
                               ),
                             ),
@@ -169,7 +185,7 @@ class OrderSuccessScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("56,640 บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
+                                  Text("${mock.productPrice} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                   SizedBox(
                                     height: 4,
                                   ),
@@ -198,23 +214,22 @@ class OrderSuccessScreen extends StatelessWidget {
                     child: Column(children: [
                       ProductAttribute(
                         attributeKey: "ชื่อผู้รับสินค้า",
-                        attributevalue: "กรุงศรี ออโต้",
+                        attributevalue: mock.customerName!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "เบอร์โทรติดต่อ",
-                        attributevalue: "081-234-5678",
+                        attributevalue: mock.customerTel!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "อีเมล",
-                        attributevalue: "k_auto@krungsri.com",
+                        attributevalue: mock.customerEmail!,
                         maxWidth: maxWidth,
                       ),
                       ProductAttribute(
                         attributeKey: "ที่อยู่",
-                        attributevalue:
-                            "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+                        attributevalue: mock.customerAddress!,
                         maxWidth: maxWidth,
                       ),
                     ]),
@@ -234,7 +249,7 @@ class OrderSuccessScreen extends StatelessWidget {
                     child: Column(children: [
                       Center(
                         child: Text(
-                          "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
+                          mock.sellerAddress!,
                           style: AlvaStyles().headingSize12w400(spaceGrey),
                           textAlign: TextAlign.center,
                         ),
@@ -243,7 +258,7 @@ class OrderSuccessScreen extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        "โทร. 091-862-0511",
+                        mock.sellerTel!,
                         style: AlvaStyles().headingSize16w600(blackGoMunTo),
                       ),
                     ]),
