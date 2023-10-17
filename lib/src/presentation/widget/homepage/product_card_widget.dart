@@ -88,7 +88,7 @@ class ProductCardWidget extends StatelessWidget {
                               context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                               context
                                   .read<ProductDetailCarouselScrollControllerBloc>()
-                                  .add(CarouselScrollAction(index: activeIndex[index]));
+                                  .add(CarouselScrollAction(index: activeIndex[index] - 1));
                               context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                               context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
 
