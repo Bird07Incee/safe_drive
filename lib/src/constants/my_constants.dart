@@ -44,9 +44,7 @@ const cancelButtonTH = "ยกเลิก";
 const paymentTextTH = "กรุณากด ”ยืนยัน” เพื่อทำการชำระเงิน";
 
 // assets data
-const List assetsCarouselItem = [
-  "assets/homepage/HeroBanner.png"
-];
+const List assetsCarouselItem = ["assets/homepage/HeroBanner.png"];
 
 class ProductSelectOptionsConst {
   String continueText = "ดำเนินการต่อ";

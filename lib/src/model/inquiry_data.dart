@@ -1,63 +1,62 @@
 class InquiryData {
-  String? refId;
-  String? paymentCard;
-  String? paymentDate;
-  String? paymentTime;
-  String? paymentMedthod;
-  String? paymentPeriod;
-  String? paymentMerchant;
-  String? productAsset;
-  String? productId;
-  String? productName;
-  List<String>? productAttr;
-  String? productPrice;
-  String? customerName;
-  String? customerTel;
-  String? customerEmail;
-  String? customerAddress;
-  String? sellerAddress;
-  String? sellerTel;
+  const InquiryData(
+      {required this.refId,
+      required this.paymentCard,
+      required this.paymentDate,
+      required this.paymentTime,
+      required this.paymentMedthod,
+      required this.paymentPeriod,
+      required this.paymentMerchant,
+      required this.productAsset,
+      required this.productId,
+      required this.productName,
+      required this.productAttr,
+      required this.productPrice,
+      required this.customerName,
+      required this.customerTel,
+      required this.customerEmail,
+      required this.customerAddress,
+      required this.sellerAddress,
+      required this.sellerTel});
 
-  InquiryData(
-      {this.refId,
-      this.paymentCard,
-      this.paymentDate,
-      this.paymentTime,
-      this.paymentMedthod,
-      this.paymentPeriod,
-      this.paymentMerchant,
-      this.productAsset,
-      this.productId,
-      this.productName,
-      this.productAttr,
-      this.productPrice,
-      this.customerName,
-      this.customerTel,
-      this.customerEmail,
-      this.customerAddress,
-      this.sellerAddress,
-      this.sellerTel});
+  final String? refId;
+  final String? paymentCard;
+  final String? paymentDate;
+  final String? paymentTime;
+  final String? paymentMedthod;
+  final String? paymentPeriod;
+  final String? paymentMerchant;
+  final String? productAsset;
+  final String? productId;
+  final String? productName;
+  final List<String>? productAttr;
+  final String? productPrice;
+  final String? customerName;
+  final String? customerTel;
+  final String? customerEmail;
+  final String? customerAddress;
+  final String? sellerAddress;
+  final String? sellerTel;
 
-  InquiryData.fromJson(Map<String, dynamic> json) {
-    refId = json['refId'];
-    paymentCard = json['payment_card'];
-    paymentDate = json['payment_date'];
-    paymentTime = json['payment_time'];
-    paymentMedthod = json['payment_medthod'];
-    paymentPeriod = json['payment_period'];
-    paymentMerchant = json['payment_merchant'];
-    productAsset = json['product_asset'];
-    productId = json['product_id'];
-    productName = json['product_name'];
-    productAttr = json['product_attr'].cast<String>();
-    productPrice = json['product_price'];
-    customerName = json['customer_name'];
-    customerTel = json['customer_tel'];
-    customerEmail = json['customer_email'];
-    customerAddress = json['customer_address'];
-    sellerAddress = json['seller_address'];
-    sellerTel = json['seller_tel'];
-  }
+  InquiryData.fromJson(Map<String, dynamic> json)
+      : refId = json['refId'] ?? "",
+        paymentCard = json['payment_card'] ?? "",
+        paymentDate = json['payment_date'] ?? "",
+        paymentTime = json['payment_time'] ?? "",
+        paymentMedthod = json['payment_medthod'] ?? "",
+        paymentPeriod = json['payment_period'] ?? "",
+        paymentMerchant = json['payment_merchant'] ?? "",
+        productAsset = json['product_asset'] ?? "",
+        productId = json['product_id'] ?? "",
+        productName = json['product_name'] ?? "",
+        productAttr = json['product_attr'].cast<String>() ?? [],
+        productPrice = json['product_price'] ?? "",
+        customerName = json['customer_name'] ?? "",
+        customerTel = json['customer_tel'] ?? "",
+        customerEmail = json['customer_email'] ?? "",
+        customerAddress = json['customer_address'] ?? "",
+        sellerAddress = json['seller_address'] ?? "",
+        sellerTel = json['seller_tel'] ?? "";
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
