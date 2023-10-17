@@ -46,7 +46,6 @@ const paymentTextTH = "กรุณากด ”ยืนยัน” เพื�
 // assets data
 const List assetsCarouselItem = [
   "assets/homepage/HeroBanner.png"
-  // "assets/homepage/banner.png",
 ];
 
 class ProductSelectOptionsConst {
