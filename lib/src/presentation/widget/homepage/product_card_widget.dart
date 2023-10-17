@@ -84,7 +84,7 @@ class ProductCardWidget extends StatelessWidget {
                       child: Column(
                         children: [
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                               context
                                   .read<ProductDetailCarouselScrollControllerBloc>()
@@ -93,8 +93,12 @@ class ProductCardWidget extends StatelessWidget {
                               context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
 
                               context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
-                              Navigator.pushNamed(
+                              await Navigator.pushNamed(
                                   context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
+
+                              int detailPage =
+                                  context.read<ProductDetailCarouselScrollControllerBloc>().state.page as int;
+                              pageViewController.jumpToPage(detailPage);
                             },
                             child: Stack(
                               children: [
