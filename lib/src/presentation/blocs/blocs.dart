@@ -7,8 +7,8 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previo
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/show_more_tagline.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
@@ -24,6 +24,6 @@ final List<BlocProvider> blocs = [
   BlocProvider<ViewImgDetailPageSwitchBloc>(create: (_) => ViewImgDetailPageSwitchBloc()),
   BlocProvider<ProductListBloc>(create: (_) => ProductListBloc()),
   BlocProvider<ProductOptionBloc>(create: (_) => ProductOptionBloc()),
-  BlocProvider<ShowMoreTagLineCubit>(create: (_) => ShowMoreTagLineCubit()),
   BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
+  BlocProvider<ActiveImagesIndexCubit>(create: (_) => ActiveImagesIndexCubit()),
 ];

@@ -9,7 +9,8 @@ import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 class DioInterceptor extends Interceptor {
   final LineDataHelper lineDataHelper = LineDataHelper();
-  final DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService(dio: DioClient.client));
+  final DioUtilityRepository dioUtilityRepository =
+      DioUtilityRepository(service: DioUtilityService(dio: DioClient.client));
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
