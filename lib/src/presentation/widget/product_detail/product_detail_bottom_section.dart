@@ -12,6 +12,7 @@ import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class PDBottomSection extends StatefulWidget {
   const PDBottomSection({super.key});
@@ -47,144 +48,149 @@ class _PDBottomSectionState extends State<PDBottomSection>
             return '<strong>${match.group(0)}</strong>';
           },
         );
-        return Column(
-          children: [
-            buildProductDescriptionWidget(state.product),
-            Container(
-              height: 16,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: cloudWhite, // Replace with your color
-                    width: 2.0, // Adjust the border width as needed
+        return GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, Routes.shippingAddress.toStringPath());
+          },
+          child: Column(
+            children: [
+              buildProductDescriptionWidget(state.product),
+              Container(
+                height: 16,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: cloudWhite, // Replace with your color
+                      width: 2.0, // Adjust the border width as needed
+                    ),
                   ),
                 ),
               ),
-            ),
-            buildDetailCardWidget(context, state.product,
-                titleKey: AppKeys().productDetailAboutSellerTitleKey,
-                title: AppStrings().aboutSellerTitle,
-                bodyPage: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            child: AlvaText(
-                                title: state.product.merchantFullName,
-                                textStyle: AlvaStyles().headingSize12w500(
-                                    BTN_SELECTED_TEXT_COLOR_NEW)))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: AlvaText(
-                                title: state.product.merchantAddress,
-                                textStyle:
-                                    AlvaStyles().headingSize10w400(spaceGrey)))
-                      ],
-                    ),
-                  ],
-                )),
-            Container(
-              height: 16,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: cloudWhite, // Replace with your color
-                    width: 2.0, // Adjust the border width as needed
-                  ),
-                ),
-              ),
-            ),
-            Visibility(
-              visible: state.product.promotionTag.isNotEmpty,
-              child: buildDetailCardWidget(context, state.product,
-                  titleKey: AppKeys().productDetailPromotionDetailTitleKey,
-                  title: AppStrings().promotionDetailTitle,
-                  bodyPage: Padding(
-                    padding: EdgeInsets.only(top: 8),
-                    child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.product.promotionTag.length > 3
-                            ? 3
-                            : state.product.promotionTag.length,
-                        itemBuilder: ((context, index) {
-                          return Padding(
-                              padding: EdgeInsets.only(
-                                  top: index == 0 ? 0 : 8, bottom: 8),
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(
-                                        Icons.bookmark,
-                                        size: 16,
-                                        color: cloudSoftDeepWhite,
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Flexible(
-                                          child: AlvaText(
-                                              title: state
-                                                  .product.promotionTag[index],
-                                              textStyle: AlvaStyles()
-                                                  .headingSize12w500WithHeightFixed(
-                                                      spaceGrey)))
-                                    ],
-                                  )
-                                ],
-                              ));
-                        })),
+              buildDetailCardWidget(context, state.product,
+                  titleKey: AppKeys().productDetailAboutSellerTitleKey,
+                  title: AppStrings().aboutSellerTitle,
+                  bodyPage: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: AlvaText(
+                                  title: state.product.merchantFullName,
+                                  textStyle: AlvaStyles().headingSize12w500(
+                                      BTN_SELECTED_TEXT_COLOR_NEW)))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: AlvaText(
+                                  title: state.product.merchantAddress,
+                                  textStyle: AlvaStyles()
+                                      .headingSize10w400(spaceGrey)))
+                        ],
+                      ),
+                    ],
                   )),
-            ),
-            Container(
-              height: 16,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: cloudWhite, // Replace with your color
-                    width: 2.0, // Adjust the border width as needed
+              Container(
+                height: 16,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: cloudWhite, // Replace with your color
+                      width: 2.0, // Adjust the border width as needed
+                    ),
                   ),
                 ),
               ),
-            ),
-            Visibility(
-              visible: state.product.promotionTag.isNotEmpty,
-              child: buildDetailCardWidget(context, state.product,
-                  titleKey: AppKeys().productDetailRemarkTitleKey,
-                  title: AppStrings().remarkTitle,
-                  bodyPage: HtmlWidget(
-                    remarkHtmlString ?? "",
-                    buildAsync: true,
-                    customStylesBuilder: (element) {
-                      if (element.localName == 'strong') {
+              Visibility(
+                visible: state.product.promotionTag.isNotEmpty,
+                child: buildDetailCardWidget(context, state.product,
+                    titleKey: AppKeys().productDetailPromotionDetailTitleKey,
+                    title: AppStrings().promotionDetailTitle,
+                    bodyPage: Padding(
+                      padding: EdgeInsets.only(top: 8),
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: state.product.promotionTag.length > 3
+                              ? 3
+                              : state.product.promotionTag.length,
+                          itemBuilder: ((context, index) {
+                            return Padding(
+                                padding: EdgeInsets.only(
+                                    top: index == 0 ? 0 : 8, bottom: 8),
+                                child: Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Icon(
+                                          Icons.bookmark,
+                                          size: 16,
+                                          color: cloudSoftDeepWhite,
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Flexible(
+                                            child: AlvaText(
+                                                title: state.product
+                                                    .promotionTag[index],
+                                                textStyle: AlvaStyles()
+                                                    .headingSize12w500WithHeightFixed(
+                                                        spaceGrey)))
+                                      ],
+                                    )
+                                  ],
+                                ));
+                          })),
+                    )),
+              ),
+              Container(
+                height: 16,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: cloudWhite, // Replace with your color
+                      width: 2.0, // Adjust the border width as needed
+                    ),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: state.product.promotionTag.isNotEmpty,
+                child: buildDetailCardWidget(context, state.product,
+                    titleKey: AppKeys().productDetailRemarkTitleKey,
+                    title: AppStrings().remarkTitle,
+                    bodyPage: HtmlWidget(
+                      remarkHtmlString ?? "",
+                      buildAsync: true,
+                      customStylesBuilder: (element) {
+                        if (element.localName == 'strong') {
+                          return {
+                            'font-family': 'Krungsri Condensed',
+                            'font-size': '12px',
+                            'line-height': '24px',
+                            'font-weight': 'Bold'
+                          };
+                        }
                         return {
                           'font-family': 'Krungsri Condensed',
                           'font-size': '12px',
-                          'line-height': '24px',
-                          'font-weight': 'Bold'
+                          'line-height': '24px'
                         };
-                      }
-                      return {
-                        'font-family': 'Krungsri Condensed',
-                        'font-size': '12px',
-                        'line-height': '24px'
-                      };
-                    },
-                    textStyle: TextStyle(fontWeight: FontWeight.w400),
-                  )),
-            ),
-          ],
+                      },
+                      textStyle: TextStyle(fontWeight: FontWeight.w400),
+                    )),
+              ),
+            ],
+          ),
         );
       },
     );
