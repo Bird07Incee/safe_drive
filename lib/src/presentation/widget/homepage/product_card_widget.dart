@@ -185,9 +185,9 @@ class ProductCardWidget extends StatelessWidget {
                                             topRight: Radius.circular(0),
                                             bottomLeft: Radius.circular(0),
                                             bottomRight: Radius.circular(8))),
-                                    child: AlvaText(
-                                      title: "ถูกลง ${products[index].percentDiscountPrice} %",
-                                      textStyle: AlvaStyles().headingSize12w600(Colors.white),
+                                    child: Text(
+                                      "ถูกลง ${products[index].percentDiscountPrice} %",
+                                      style: AlvaStyles().headingSize12w600(Colors.white),
                                     ),
                                   ),
                                 )
@@ -245,9 +245,9 @@ class ProductCardWidget extends StatelessWidget {
                                                   children: [
                                                     Container(
                                                       margin: const EdgeInsets.symmetric(vertical: 4),
-                                                      child: AlvaText(
-                                                        title: tag,
-                                                        textStyle: AlvaStyles().headingSize10w500(spaceGrey),
+                                                      child: Text(
+                                                        tag,
+                                                        style: AlvaStyles().headingSize10w500(spaceGrey),
                                                       ),
                                                     ),
 
@@ -320,17 +320,16 @@ class ProductCardWidget extends StatelessWidget {
                                       visible: products[index].discountPrice != 0,
                                       child: Row(
                                         children: [
-                                          AlvaText(
-                                            title: intl.NumberFormat.decimalPattern()
-                                                .format(products[index].discountPrice),
-                                            textStyle: AlvaStyles().bodySize14W400MutedLine(),
+                                          Text(
+                                            intl.NumberFormat.decimalPattern().format(products[index].discountPrice),
+                                            style: AlvaStyles().bodySize14W400MutedLine(),
                                           ),
                                           const SizedBox(
                                             width: 1,
                                           ),
-                                          AlvaText(
-                                            title: "บาท",
-                                            textStyle: AlvaStyles().bodySize14W400Muted(),
+                                          Text(
+                                            "บาท",
+                                            style: AlvaStyles().bodySize14W400Muted(),
                                           ),
                                         ],
                                       ),
@@ -340,9 +339,9 @@ class ProductCardWidget extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            AlvaText(
-                                              title: intl.NumberFormat.decimalPattern().format(products[index].price),
-                                              textStyle: products[index].discountPrice == 0
+                                            Text(
+                                              intl.NumberFormat.decimalPattern().format(products[index].price),
+                                              style: products[index].discountPrice == 0
                                                   ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   : AlvaStyles().headingSize22(RedWordShow),
                                             ),
@@ -351,9 +350,9 @@ class ProductCardWidget extends StatelessWidget {
                                                 const SizedBox(
                                                   height: 2,
                                                 ),
-                                                AlvaText(
-                                                  title: "บาท",
-                                                  textStyle: products[index].discountPrice == 0
+                                                Text(
+                                                  "บาท",
+                                                  style: products[index].discountPrice == 0
                                                       ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
                                                       : AlvaStyles().headingSize18(RedWordShow),
                                                 ),
@@ -371,9 +370,9 @@ class ProductCardWidget extends StatelessWidget {
                                               const SizedBox(
                                                 width: 32,
                                               ),
-                                              AlvaText(
-                                                title: 'สนใจ',
-                                                textStyle: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW),
+                                              Text(
+                                                'สนใจ',
+                                                style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW),
                                               ),
                                               const SizedBox(
                                                 width: 32,
