@@ -154,9 +154,11 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                           text: widget.label ?? '',
                           style: TextStyle(
                             color: widget.disable
-                                ? cloudSoftDeepWhite
+                                ? widget.options!.length == 1
+                                    ? blackInBlack
+                                    : cloudSoftDeepWhite
                                 : blackInBlack,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                             fontSize: 12,
                             fontFamily: fontFamily,
                           ),
@@ -203,11 +205,13 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                   ],
                                 )
                               : null,
-                          suffixIcon: Icon(Icons.keyboard_arrow_down_outlined,
-                              size: 24,
-                              color: widget.disable
-                                  ? cloudSoftDeepWhite
-                                  : blackInBlack),
+                          suffixIcon: widget.options!.length == 1
+                              ? null
+                              : Icon(Icons.keyboard_arrow_down_outlined,
+                                  size: 24,
+                                  color: widget.disable
+                                      ? cloudSoftDeepWhite
+                                      : blackInBlack),
                           fillColor: cloudSoftDeepWhite,
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: blackInBlack),
@@ -223,7 +227,9 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                           disabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: widget.disable
-                                    ? cloudSoftDeepWhite
+                                    ? widget.options!.length == 1
+                                        ? blackInBlack
+                                        : cloudSoftDeepWhite
                                     : blackInBlack,
                                 width: 1),
                             borderRadius:

@@ -230,7 +230,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
                 text: widget.label ?? '',
                 style: TextStyle(
                     color: widget.labelColor ?? Colors.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w400,
                     fontSize: 12,
                     fontFamily: fontFamily),
               ),
@@ -374,7 +374,9 @@ class TextInputWidgetState extends State<TextInputWidget> {
               ),
               child: Text(
                 widget.showCounter
-                    ? '${widget.isAllowAutoAddPhoneFormat ? _formattedText.length.toString() : widget.controller!.text.length.toString()}/${widget.isAllowAutoAddPhoneFormat ? 10 : widget.maxLength}'
+                    ? widget.controller!.text.isEmpty
+                        ? 'สูงสุด ${widget.maxLength} ตัวอักษร'
+                        : '${widget.isAllowAutoAddPhoneFormat ? _formattedText.length.toString() : widget.controller!.text.length.toString()}/${widget.isAllowAutoAddPhoneFormat ? 10 : widget.maxLength}'
                     : widget.helperText ?? '',
                 style: AlvaStyles().headingSize12w400(spaceGrey123),
               ),

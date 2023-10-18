@@ -38,6 +38,52 @@ class ShippingAddressScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.arrow_back_ios_rounded)),
             ),
+            bottomSheet: BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
+                builder: (ctx, state) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: whitePure,
+                  boxShadow: [
+                    BoxShadow(
+                        color: const Color(0xff000000).withOpacity(0.04),
+                        spreadRadius: 0,
+                        blurRadius: 16,
+                        offset: const Offset(0, -4)),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width,
+                height: 96,
+                padding: const EdgeInsets.only(
+                    left: 16, right: 16, bottom: 32, top: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8)),
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            if (state.isAllowSubmit) {}
+                          },
+                          style: AlvaStyles().outlineNoneBorderButtonStyle(
+                              state.isAllowSubmit
+                                  ? YellowKrungsri
+                                  : cloudSoftDeepWhite,
+                              Colors.transparent,
+                              isRadius8: true),
+                          child: Text("ยืนยัน",
+                              style: AlvaStyles().headingSize16w700(
+                                  state.isAllowSubmit
+                                      ? BTN_SELECTED_TEXT_COLOR_NEW
+                                      : smockGrey)),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            }),
             titlePage: titleWebPage,
             child: buildBodyWidget()));
   }
@@ -50,7 +96,7 @@ class ShippingAddressScreen extends StatelessWidget {
       }
       if (state.status.isSuccess) {
         return Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 96),
             color: whitePure,
             child: ListView(
               children: [
@@ -61,88 +107,98 @@ class ShippingAddressScreen extends StatelessWidget {
                   height: 24,
                 ),
                 StatefulBuilder(builder: (context, setState) {
-                  return Column(
-                      children: state.listFormWidget!.map(
-                    (FormWidgetModel item) {
-                      bool required = true;
-
-                      // if (item.checkRequiredField != null &&
-                      //     item.checkRequiredFieldMatchValue != null) {
-                      //   required = item.checkRequiredFieldMatchValue!.contains(
-                      //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
-                      // }
-
-                      Widget input = Container();
-
-                      if (item.formType == formTypeTextField) {
-                        input = TextInputWidget(
-                          inputFormatters: item.listInputFormatter,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          controller: item.controller,
-                          label: item.label,
-                          outsideLabel: true,
-                          marginBottom: 15,
-                          required: required,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: item.textInputType,
-                          maxLength: item.maxLength,
-                          maxLines: item.maxLines,
-                          showCounter: item.isShowCounter,
-                          isAllowAutoAddPhoneFormat:
-                              item.fieldName == 'phone' ? true : false,
-                          isAllowAutoAddEmailFormat:
-                              item.fieldName == 'email' ? true : false,
-                        );
-                      } else if (item.formType == formTypeDropdown) {
-                        bool isDisable = true;
-                        if (item.matchField != null) {
-                          if (state.formResult!
-                              .where((element) =>
-                                  element.fieldName == item.matchField)
-                              .first
-                              .value!
-                              .isNotEmpty) {
-                            isDisable = false;
-                          }
-                        } else {
-                          isDisable = false;
+                  return Form(
+                      key: state.mainFormKey,
+                      onChanged: () {
+                        if (state.mainFormKey!.currentState!.validate()) {
+                          state.isAllowSubmit = true;
                         }
+                      },
+                      child: Column(
+                          children: state.listFormWidget!.map(
+                        (FormWidgetModel item) {
+                          bool required = true;
 
-                        input = DropDownInputWidget(
-                          disable: isDisable,
-                          textEditingController: item.controller,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          label: item.label,
-                          marginBottom: 15,
-                          required: required,
-                          value: item.value,
-                          options: item.options!,
-                          onChanged: (value) async {
-                            DropdownAddressModel model = value;
-                            var field = state.formResult!
-                                .where((element) =>
-                                    item.fieldName == element.fieldName)
-                                .first;
-                            field.id = model.id;
-                            field.value = model.nameTh;
+                          // if (item.checkRequiredField != null &&
+                          //     item.checkRequiredFieldMatchValue != null) {
+                          //   required = item.checkRequiredFieldMatchValue!.contains(
+                          //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
+                          // }
 
-                            final myBloc =
-                                BlocProvider.of<ShippingAddressBloc>(ctx);
-                            myBloc.updateDropdownSelected(
-                                id: field.id,
-                                fieldName: item.fieldName,
-                                listFormWidget: state.listFormWidget,
-                                listResult: state.formResult);
+                          Widget input = Container();
 
-                            setState(() {});
-                            //test
-                          },
-                        );
-                      }
+                          if (item.formType == formTypeTextField) {
+                            input = TextInputWidget(
+                              inputFormatters: item.listInputFormatter,
+                              autoValidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: item.controller,
+                              label: item.label,
+                              outsideLabel: true,
+                              marginBottom: 15,
+                              required: required,
+                              textInputAction: TextInputAction.done,
+                              keyboardType: item.textInputType,
+                              maxLength: item.maxLength,
+                              maxLines: item.maxLines,
+                              showCounter: item.isShowCounter,
+                              isAllowAutoAddPhoneFormat:
+                                  item.fieldName == 'phone' ? true : false,
+                              isAllowAutoAddEmailFormat:
+                                  item.fieldName == 'email' ? true : false,
+                            );
+                          } else if (item.formType == formTypeDropdown) {
+                            bool isDisable = true;
+                            if (item.matchField != null) {
+                              if (state.formResult!
+                                      .where((element) =>
+                                          element.fieldName == item.matchField)
+                                      .first
+                                      .value!
+                                      .isNotEmpty &&
+                                  item.options!.length > 1) {
+                                isDisable = false;
+                              }
+                            } else {
+                              isDisable = false;
+                            }
 
-                      return input;
-                    },
-                  ).toList());
+                            input = DropDownInputWidget(
+                              disable: isDisable,
+                              textEditingController: item.controller,
+                              autoValidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              label: item.label,
+                              marginBottom: 15,
+                              required: required,
+                              value: item.value,
+                              options: item.options!,
+                              onChanged: (value) async {
+                                DropdownAddressModel model = value;
+                                var field = state.formResult!
+                                    .where((element) =>
+                                        item.fieldName == element.fieldName)
+                                    .first;
+                                field.id = model.id;
+                                field.value = model.nameTh;
+
+                                final myBloc =
+                                    BlocProvider.of<ShippingAddressBloc>(ctx);
+                                myBloc.updateDropdownSelected(
+                                    id: field.id,
+                                    fieldName: item.fieldName,
+                                    listForm: state.listFormWidget,
+                                    listResult: state.formResult);
+
+                                setState(() {});
+                                //test
+                              },
+                            );
+                          }
+
+                          return input;
+                        },
+                      ).toList()));
                 })
               ],
             ));

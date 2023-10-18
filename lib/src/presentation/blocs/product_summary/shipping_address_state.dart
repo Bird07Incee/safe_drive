@@ -14,24 +14,30 @@ class ShippingAddressState extends Equatable {
       {this.status = ShippingAddressStatus.initial,
       this.addressModel = ShippingAddressModel.empty,
       this.listFormWidget,
-      this.formResult});
+      this.formResult,
+      this.mainFormKey,
+      this.isAllowSubmit = false});
   final ShippingAddressModel addressModel;
   final ShippingAddressStatus status;
   final List<FormWidgetModel>? listFormWidget;
+  bool isAllowSubmit;
   List<FormWidgetResultModel>? formResult;
+  GlobalKey<FormState>? mainFormKey = GlobalKey<FormState>();
 
   @override
-  List<Object> get props => [status, addressModel];
+  List<Object> get props => [status, addressModel, isAllowSubmit];
 
   ShippingAddressState copyWith(
       {ShippingAddressStatus? status,
       ShippingAddressModel? address,
       List<FormWidgetModel>? formWidgetModel,
-      List<FormWidgetResultModel>? formResultModel}) {
+      List<FormWidgetResultModel>? formResultModel,
+      bool? allowSubmit}) {
     return ShippingAddressState(
         status: status ?? this.status,
         addressModel: address ?? addressModel,
         listFormWidget: formWidgetModel ?? listFormWidget,
-        formResult: formResultModel ?? formResult);
+        formResult: formResultModel ?? formResult,
+        isAllowSubmit: allowSubmit ?? isAllowSubmit);
   }
 }
