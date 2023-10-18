@@ -310,9 +310,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         height: 16,
                                         color: sugarRed,
                                       ),
-                                      AlvaText(
-                                        title: HomeConst().privacyPolicy,
-                                        textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                      GestureDetector(
+                                        onTap: () => launchUrl(
+                                            Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html"),
+                                            webOnlyWindowName: "_self"),
+                                        child: Text(
+                                          HomeConst().privacyPolicy,
+                                          style: AlvaStyles().headingSize10w600(sugarRed),
+                                        ),
                                       ),
                                     ],
                                   ),
