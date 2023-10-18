@@ -5,6 +5,7 @@ import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
+import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_summary/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -45,9 +46,7 @@ class ShippingAddressScreen extends StatelessWidget {
     return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
         builder: (ctx, state) {
       if (state.status.isInitial) {
-        ctx.read<ShippingAddressBloc>().add(SetFormWidget(
-            listForm: state.listFormWidget ?? [],
-            listResult: state.formResult ?? []));
+        // ctx.read<ShippingAddressBloc>().setFormData();
       }
       if (state.status.isSuccess) {
         return Container(
@@ -61,82 +60,101 @@ class ShippingAddressScreen extends StatelessWidget {
                 SizedBox(
                   height: 24,
                 ),
-                Column(
-                    children: state.listFormWidget!.map(
-                  (FormWidgetModel item) {
-                    bool required = true;
+                StatefulBuilder(builder: (context, setState) {
+                  return Column(
+                      children: state.listFormWidget!.map(
+                    (FormWidgetModel item) {
+                      bool required = true;
 
-                    // if (item.checkRequiredField != null &&
-                    //     item.checkRequiredFieldMatchValue != null) {
-                    //   required = item.checkRequiredFieldMatchValue!.contains(
-                    //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
-                    // }
+                      // if (item.checkRequiredField != null &&
+                      //     item.checkRequiredFieldMatchValue != null) {
+                      //   required = item.checkRequiredFieldMatchValue!.contains(
+                      //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
+                      // }
 
-                    Widget input = Container();
+                      Widget input = Container();
 
-                    if (item.formType == formTypeTextField) {
-                      input = TextInputWidget(
-                        inputFormatters: item.listInputFormatter,
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        controller: item.controller,
-                        label: item.label,
-                        outsideLabel: true,
-                        marginBottom: 15,
-                        required: required,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: item.textInputType,
-                        maxLength: item.maxLength,
-                        maxLines: item.maxLines,
-                        showCounter: item.isShowCounter,
-                        isAllowAutoAddPhoneFormat:
-                            item.fieldName == 'phone' ? true : false,
-                        isAllowAutoAddEmailFormat:
-                            item.fieldName == 'email' ? true : false,
-                      );
-                    } else if (item.formType == formTypeDropdown) {
-                      input = DropDownInputWidget(
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        label: item.label,
-                        marginBottom: 15,
-                        required: required,
-                        value: item.value,
-                        // options: item.options!
-                        //     .map((e) => dropdownItem(
-                        //         value: e['value'], label: e['label']))
-                        //     .toList(),
-                        onChanged: (value) async {
-                          state.formResult!
+                      if (item.formType == formTypeTextField) {
+                        input = TextInputWidget(
+                          inputFormatters: item.listInputFormatter,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          controller: item.controller,
+                          label: item.label,
+                          outsideLabel: true,
+                          marginBottom: 15,
+                          required: required,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: item.textInputType,
+                          maxLength: item.maxLength,
+                          maxLines: item.maxLines,
+                          showCounter: item.isShowCounter,
+                          isAllowAutoAddPhoneFormat:
+                              item.fieldName == 'phone' ? true : false,
+                          isAllowAutoAddEmailFormat:
+                              item.fieldName == 'email' ? true : false,
+                        );
+                      } else if (item.formType == formTypeDropdown) {
+                        bool isDisable = true;
+                        if (item.matchField != null) {
+                          if (state.formResult!
                               .where((element) =>
-                                  element.fieldName == item.fieldName)
+                                  element.fieldName == item.matchField)
                               .first
-                              .value = value;
-                          print(state.formResult!);
-                        },
-                      );
-                    }
+                              .value!
+                              .isNotEmpty) {
+                            isDisable = false;
+                          }
+                        } else {
+                          isDisable = false;
+                        }
 
-                    // if (item.visibleIfMatchValue != null && item.matchField != null) {
-                    //   if (item.visibleIfMatchValue!
-                    //       .contains(data.entireFormMap[item.matchField])) {
-                    //     return input;
-                    //   }
-                    //   return Container();
-                    // }
+                        input = DropDownInputWidget(
+                          disable: isDisable,
+                          textEditingController: item.controller,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          label: item.label,
+                          marginBottom: 15,
+                          required: required,
+                          value: item.value,
+                          options: item.options!,
+                          onChanged: (value) async {
+                            DropdownAddressModel model = value;
+                            var field = state.formResult!
+                                .where((element) =>
+                                    item.fieldName == element.fieldName)
+                                .first;
+                            field.id = model.id;
+                            field.value = model.nameTh;
 
-                    return input;
-                  },
-                ).toList()),
+                            final myBloc =
+                                BlocProvider.of<ShippingAddressBloc>(ctx);
+                            myBloc.updateDropdownSelected(
+                                id: field.id,
+                                fieldName: item.fieldName,
+                                listFormWidget: state.listFormWidget,
+                                listResult: state.formResult);
+
+                            setState(() {});
+                            //test
+                          },
+                        );
+                      }
+
+                      return input;
+                    },
+                  ).toList());
+                })
               ],
             ));
-      } else if (state.status.isLoading) {
-        return const LoadingScreen();
-      } else {
+      } else if (state.status.isError) {
         return ErrorScreen(
           title: ErrorConst().titleNS,
           subTitle: ErrorConst().subTitleNS,
           titleBtn: ErrorConst().titleBtnNS,
           onTap: () {},
         );
+      } else {
+        return const LoadingScreen();
       }
     });
   }

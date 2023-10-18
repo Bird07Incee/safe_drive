@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 
 class DropDownInputWidget extends StatefulWidget {
   final List<dynamic>? options;
@@ -20,6 +21,7 @@ class DropDownInputWidget extends StatefulWidget {
   final bool disable;
   final AutovalidateMode? autoValidateMode;
   final String? errRequiredMessage;
+  final TextEditingController? textEditingController;
 
   const DropDownInputWidget(
       {Key? key,
@@ -38,7 +40,8 @@ class DropDownInputWidget extends StatefulWidget {
       this.borderColor,
       this.disable = false,
       this.autoValidateMode,
-      this.errRequiredMessage})
+      this.errRequiredMessage,
+      this.textEditingController})
       : super(key: key);
 
   @override
@@ -54,11 +57,85 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
 
     return GestureDetector(
         onTap: () async {
-          await showModalBottomSheet(
-              context: context,
-              builder: (_) {
-                return Text('jello');
-              });
+          if (!widget.disable) {
+            List<DropdownAddressModel> items =
+                widget.options!.map((e) => e as DropdownAddressModel).toList();
+            await showModalBottomSheet(
+                isScrollControlled: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
+                backgroundColor: whitePure,
+                context: context,
+                builder: (_) {
+                  return SingleChildScrollView(
+                      physics: NeverScrollableScrollPhysics(),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height - 32,
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)),
+                              color: cloudSoftDeepWhite,
+                              child: SizedBox(
+                                height: 4,
+                                width: 48,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              widget.label!,
+                              style: AlvaStyles()
+                                  .headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Expanded(
+                              child: ListView.separated(
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      if (widget.textEditingController !=
+                                          null) {
+                                        widget.textEditingController!.text =
+                                            items[index].nameTh!;
+                                        if (widget.onChanged != null) {
+                                          widget.onChanged!(items[index]);
+                                        }
+                                        Navigator.pop(context);
+                                      }
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 12, horizontal: 4),
+                                      child: Text(items[index].nameTh!),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return Divider();
+                                },
+                                itemCount: widget.options!.length,
+                              ),
+                            )
+                          ],
+                        ),
+                      ));
+                });
+          }
         },
         child: Container(
             margin: EdgeInsets.only(
@@ -75,8 +152,10 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                         textAlign: TextAlign.left,
                         text: TextSpan(
                           text: widget.label ?? '',
-                          style: const TextStyle(
-                            color: Colors.black,
+                          style: TextStyle(
+                            color: widget.disable
+                                ? cloudSoftDeepWhite
+                                : blackInBlack,
                             fontWeight: FontWeight.w600,
                             fontSize: 12,
                             fontFamily: fontFamily,
@@ -97,8 +176,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                       width: MediaQuery.of(context).size.width - 32,
                       child: TextFormField(
                         enabled: false,
-                        controller:
-                            TextEditingController(text: widget.value ?? ''),
+                        controller: widget.textEditingController,
                         style: AlvaStyles().heading3Size16Bold(),
                         decoration: InputDecoration(
                           counterText: "",
@@ -118,14 +196,19 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                           ? widget.label ?? ''
                                           : '',
                                       style: AlvaStyles().bodySize12W600(
-                                          BTN_SELECTED_TEXT_COLOR_NEW),
+                                          widget.disable
+                                              ? cloudSoftDeepWhite
+                                              : BTN_SELECTED_TEXT_COLOR_NEW),
                                     ),
                                   ],
                                 )
                               : null,
                           suffixIcon: Icon(Icons.keyboard_arrow_down_outlined,
-                              size: 24, color: blackInBlack),
-                          fillColor: spaceGrey,
+                              size: 24,
+                              color: widget.disable
+                                  ? cloudSoftDeepWhite
+                                  : blackInBlack),
+                          fillColor: cloudSoftDeepWhite,
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: blackInBlack),
                             borderRadius:
@@ -137,15 +220,12 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                             borderRadius:
                                 BorderRadius.circular(widget.borderRadius),
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: blackInBlack, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(widget.borderRadius),
-                          ),
                           disabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: blackInBlack, width: 1),
+                            borderSide: BorderSide(
+                                color: widget.disable
+                                    ? cloudSoftDeepWhite
+                                    : blackInBlack,
+                                width: 1),
                             borderRadius:
                                 BorderRadius.circular(widget.borderRadius),
                           ),

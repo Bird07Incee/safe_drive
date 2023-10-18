@@ -1,5 +1,5 @@
 class DropdownAddressModel {
-  late String id;
+  String? id;
   String? nameEn;
   String? version;
   String? nameTh;
@@ -21,7 +21,7 @@ class DropdownAddressModel {
       this.zipCode});
 
   DropdownAddressModel.fromJson(Map<String, dynamic> json) {
-    id = json['uid'] ?? '';
+    id = json['id'] ?? '';
     nameEn = json['nameEn'] ?? '';
     version = json['version'] ?? '';
     nameTh = json['nameTh'] ?? '';
@@ -29,6 +29,6 @@ class DropdownAddressModel {
     regionId = json['regionId'] ?? '';
     provinceId = json['provinceId'] ?? '';
     districtId = json['districtId'] ?? '';
-    zipCode = json['zipCode'] ?? '';
+    zipCode = json['zipcode'] ?? '';
   }
 }

@@ -80,7 +80,8 @@ class FormWidgetModel {
 }
 
 class FormWidgetResultModel {
-  String fieldName;
-  String value;
-  FormWidgetResultModel(this.fieldName, this.value);
+  String? id;
+  String? fieldName;
+  String? value;
+  FormWidgetResultModel({this.id, this.fieldName, this.value});
 }
