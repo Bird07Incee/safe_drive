@@ -50,5 +50,11 @@ class OrderSuccessState extends Equatable {
   final InquiryData orderSuccessData;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [orderSuccessStatus, orderSuccessData];
+
+  OrderSuccessState copyWith({GetOrderSuccessDataStatus? orderSuccessStatus, InquiryData? orderSuccessData}) {
+    return OrderSuccessState(
+        orderSuccessData: orderSuccessData ?? this.orderSuccessData,
+        orderSuccessStatus: orderSuccessStatus ?? this.orderSuccessStatus);
+  }
 }

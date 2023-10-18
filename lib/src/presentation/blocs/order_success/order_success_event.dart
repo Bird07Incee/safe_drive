@@ -6,3 +6,9 @@ class OrderSuccessEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetOrderSuccessMock extends OrderSuccessEvent {
+  const GetOrderSuccessMock(this.context);
+
+  final BuildContext context;
+}
