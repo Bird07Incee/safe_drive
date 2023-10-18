@@ -11,7 +11,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
@@ -146,18 +145,21 @@ class ProductCardWidget extends StatelessWidget {
                                 Positioned.fill(
                                     child: Align(
                                   alignment: Alignment.bottomLeft,
-                                  child: Container(
-                                    margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
-                                    width: 41,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      color: cloudyWhite.withOpacity(0.5),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "${activeIndex[index]} / ${products[index].productionAssets.length}",
-                                        style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                                  child: Visibility(
+                                    visible: products[index].productionAssets.length == 1 ? false : true,
+                                    child: Container(
+                                      margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                                      width: 41,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        color: cloudyWhite.withOpacity(0.5),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "${activeIndex[index]} / ${products[index].productionAssets.length}",
+                                          style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -192,29 +194,32 @@ class ProductCardWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Container(
-                            color: whitePure,
-                            width: maxWidth,
-                            padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Visibility(
-                                  visible: true,
-                                  child: SmoothPageIndicator(
-                                      controller: pageViewController,
-                                      count: products[index].productionAssets.length <= carouselShowLimit
-                                          ? products[index].productionAssets.length
-                                          : carouselShowLimit,
-                                      effect: const ExpandingDotsEffect(
-                                        expansionFactor: 2,
-                                        dotHeight: 6,
-                                        dotWidth: 6,
-                                        activeDotColor: BlueFantasy,
-                                        dotColor: cloudSoftDeepWhite,
-                                      )),
-                                ),
-                              ],
+                          Visibility(
+                            visible: products[index].productionAssets.length == 1 ? false : true,
+                            child: Container(
+                              color: whitePure,
+                              width: maxWidth,
+                              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Visibility(
+                                    visible: true,
+                                    child: SmoothPageIndicator(
+                                        controller: pageViewController,
+                                        count: products[index].productionAssets.length <= carouselShowLimit
+                                            ? products[index].productionAssets.length
+                                            : carouselShowLimit,
+                                        effect: const ExpandingDotsEffect(
+                                          expansionFactor: 2,
+                                          dotHeight: 6,
+                                          dotWidth: 6,
+                                          activeDotColor: BlueFantasy,
+                                          dotColor: cloudSoftDeepWhite,
+                                        )),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Row(
