@@ -45,23 +45,27 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       listResult.where((element) => element.fieldName == 'district').first.id =
           '';
 
-      // var response = fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
       if (listForm
           .where((element) => element.fieldName == 'district')
           .first
           .options!
           .isEmpty) {
-        var items = districtDataMock['items'] as List;
-        List<DropdownAddressModel> listDistrict = [];
-        for (int i = 0; i < items.length; i++) {
-          listDistrict.add(DropdownAddressModel.fromJson(items[i]));
-        }
+        var response =
+            fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
+        if (response.statusCode == 200) {
+          // var items = districtDataMock['items'] as List;
+          var items = response.data['items'] as List;
+          List<DropdownAddressModel> listDistrict = [];
+          for (int i = 0; i < items.length; i++) {
+            listDistrict.add(DropdownAddressModel.fromJson(items[i]));
+          }
 
-        listForm
-            .where((element) => element.fieldName == 'district')
-            .first
-            .options!
-            .addAll(listDistrict);
+          listForm
+              .where((element) => element.fieldName == 'district')
+              .first
+              .options!
+              .addAll(listDistrict);
+        }
       }
     } else if (fieldName == 'district') {
       listForm!
