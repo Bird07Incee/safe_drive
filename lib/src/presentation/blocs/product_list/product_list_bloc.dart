@@ -36,23 +36,27 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     emit(state.copyWith(selectedTabIndex: event.selectedTabIndex));
   }
 
+  Future<ProductList> _getProductWithNoCategory() async {
+    try {
+      LineDataHelper lineDataHelper = LineDataHelper();
+      final baseUrl = Environment().getValue("BFF_BASE_URL");
+      final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+      String accessToken = await lineDataHelper.getLineAccessToken();
+      DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
+      Response response = await dioUtilityRepository.postByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {},
+          headers: {"Authorization": "Bearer $accessToken"});
+      final productList = ProductList.fromJson(response.data);
+      return productList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   _onGetProductList(GetProductList event, Emitter<ProductListState> emit) async {
-    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
-    LineDataHelper lineDataHelper = LineDataHelper();
-    final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
-    String accessToken = await lineDataHelper.getLineAccessToken();
-
-    // const accessToken =
-    //     "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQEUk3/Zj+oXruNIaluHKaLyAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwU35iBDNidEe3In6YCARCAggEHapD+3ohNbUyQshpMkrgAsg7klkyxCW1ZYFmwUNtr6IDuetQ3c0/yChhINiYRAPMloZ7aY2abHIkS3xVUblaznTUy+fbw6KcPON19rABqciIzDj9fB8Dxog+BdYbsjc0zOA2Aw/rAA7cI9Lyn22YNZTb51wXFINYI/tTyGxgPPMXukDkHQvo0H4asAvTka6FXjldV8t/W365W53PUD5Wy1KedP3XZ8rWeBRYfs7gO42ixVhjQbLS/1o1VfN61wvdRpkQO1ba2afeV86L6qDihXg9xoNzBvHcKcobmTY+NvT3LjMPc2lHYIO5CfgC3CEDAnNiPxobENBR5SpLZNrxQ10lDkY8ZqFk=";
-
     emit(state.copyWith(productListStatus: GetProductListStatus.loading));
 
     try {
-      Response response = await dioUtilityRepository.postByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {},
-          headers: {"Authorization": "Bearer $accessToken"});
-
-      final productList = ProductList.fromJson(response.data);
+      ProductList productList = await _getProductWithNoCategory();
 
       if (productList.products!.length == 1 || productList.category!.isEmpty) {
         emit(state.copyWith(hideCategory: true));
@@ -60,8 +64,16 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } catch (e) {
-      print(e);
-      emit(state.copyWith(productListStatus: GetProductListStatus.error));
+      print('re-load product list after refresh token');
+      try {
+        ProductList productList = await _getProductWithNoCategory();
+
+        if (productList.products!.length == 1 || productList.category!.isEmpty) {
+          emit(state.copyWith(hideCategory: true));
+        }
+      } catch (e) {
+        emit(state.copyWith(productListStatus: GetProductListStatus.error));
+      }
     }
   }
 

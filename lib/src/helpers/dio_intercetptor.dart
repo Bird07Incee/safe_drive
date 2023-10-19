@@ -24,14 +24,15 @@ class DioInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    _onErrorHandler(err, handler);
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    await _onErrorHandler(err, handler);
+    print('refresh token done');
     handler.next(err);
   }
 
-  void _onErrorHandler(DioError err, ErrorInterceptorHandler handler) {
+  Future<void> _onErrorHandler(DioError err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == HttpStatus.unauthorized) {
-      _refreshToken();
+      await _refreshToken();
     }
   }
 
@@ -58,7 +59,7 @@ class DioInterceptor extends Interceptor {
   //   }
   // }
 
-  _refreshToken() async {
+  Future<void> _refreshToken() async {
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final socialApiPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
     String refreshToken = await lineDataHelper.getLineRefreshToken();
