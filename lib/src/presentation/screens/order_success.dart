@@ -43,7 +43,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
               children: [
                 Container(
                     width: maxWidth,
-                    height: maxHeight - 88,
+                    height: maxHeight - 96,
                     color: cloudyWhite,
                     child: ListView(
                       children: [
@@ -176,7 +176,15 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 children: [
                                   SizedBox(
                                       width: (maxWidth / 2) - 32,
-                                      child: Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo))),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 4,
+                                          ),
+                                          Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo)),
+                                        ],
+                                      )),
                                   SizedBox(
                                     width: (maxWidth / 2) - 32,
                                     child: Column(
@@ -296,7 +304,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                     )),
                 Container(
                     width: maxWidth,
-                    height: 88,
+                    height: 96,
                     padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
                     decoration: BoxDecoration(
                       color: Colors.white,

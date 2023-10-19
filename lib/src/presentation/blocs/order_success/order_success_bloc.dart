@@ -24,8 +24,14 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
       "product_asset": "image url",
       "product_id": "PM12345678",
       "product_name": "Pulsar Max",
-      "product_attr": ["สีดำ", "ความยาวสาย 3 เมตร", "ทดสอบ1", "ทดสอบ2"],
-      "product_price": "56640",
+      "product_attr": [
+        "สีดำ",
+        "ความยาวสาย 3 เมตร",
+        "ทดสอบ1",
+        "ทดสอบ2",
+        "qwijdoiqjwdwefopkwepofjmoweinfoweinfoiwenfionwe"
+      ],
+      "product_price": "56,640",
       "customer_name": "กรุงศรี ออโต้",
       "customer_tel": "081-234-5678",
       "customer_email": "k_auto@krungsri.com",

@@ -175,30 +175,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             fit: BoxFit.fitWidth),
                                                       ),
                                                     )),
-                                        // Tab(
-                                        //   text: "วอลชาร์จ",
-                                        //   icon: state.selectedTabIndex == 1
-                                        //       ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
-                                        //           width: 24, height: 24)
-                                        //       : Image.asset('assets/images/category/icon_cate_wallcharge.png',
-                                        //           width: 24, height: 24),
-                                        // ),
-                                        // Tab(
-                                        //   text: "โซลาร์เซลล์",
-                                        //   icon: state.selectedTabIndex == 2
-                                        //       ? Image.asset('assets/images/category/icon_active_cate_solar.png',
-                                        //           width: 24, height: 24)
-                                        //       : Image.asset('assets/images/category/icon_cate_solar.png',
-                                        //           width: 24, height: 24),
-                                        // ),
-                                        // Tab(
-                                        //   text: "สินค้าอื่นๆ",
-                                        //   icon: state.selectedTabIndex == 3
-                                        //       ? Image.asset('assets/images/category/icon_active_cate_other.png',
-                                        //           width: 24, height: 24)
-                                        //       : Image.asset('assets/images/category/icon_cate_other.png',
-                                        //           width: 24, height: 24),
-                                        // ),
                                       ]),
                                 ),
                               ),
