@@ -166,7 +166,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       if (response.statusCode == 200) {
         var province = response.data['items'] as List;
 
-        // var items = provinceDataMock['items'] as List;
+        // var province = provinceDataMock['items'] as List;
         List<DropdownAddressModel> listProvice = [];
         for (int i = 0; i < province.length; i++) {
           listProvice.add(DropdownAddressModel.fromJson(province[i]));
