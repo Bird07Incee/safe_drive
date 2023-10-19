@@ -81,6 +81,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
             productList.category!.isEmpty) {
           emit(state.copyWith(hideCategory: true));
         }
+        emit(state.copyWith(
+            productList: productList,
+            productListStatus: GetProductListStatus.success));
       } catch (e) {
         emit(state.copyWith(productListStatus: GetProductListStatus.error));
       }
