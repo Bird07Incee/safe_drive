@@ -37,7 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(state.copyWith(authStatus: AuthStatus.success));
           } else {
             print("term and con not accept");
-            await Navigator.pushNamed(event.context, Routes.termAndCon.toStringPath());
+            await Navigator.pushNamed(
+                event.context, Routes.termAndCon.toStringPath());
             loadOneTrustCookieScript();
             emit(state.copyWith(authStatus: AuthStatus.success));
           }
