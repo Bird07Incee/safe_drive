@@ -189,8 +189,7 @@ class ShippingAddressScreen extends StatelessWidget {
                                     fieldName: item.fieldName,
                                     listForm: state.listFormWidget,
                                     listResult: state.formResult,
-                                  filterRefId: state.formResult!.where((element) => element.fieldName == item.matchField).first.id
-                                );
+                                    filterRefId: field.id);
 
                                 setState(() {});
                                 //test
