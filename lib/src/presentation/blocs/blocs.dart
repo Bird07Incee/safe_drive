@@ -29,12 +29,13 @@ final List<BlocProvider> blocs = [
       create: (_) => ViewImgDetailPageSwitchBloc()),
   BlocProvider<ProductListBloc>(create: (_) => ProductListBloc()),
   BlocProvider<ProductOptionBloc>(create: (_) => ProductOptionBloc()),
-  BlocProvider<ShowMoreTagLineCubit>(create: (_) => ShowMoreTagLineCubit()),
   BlocProvider<ProductDetailBloc>(
       create: (_) =>
           ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
-  BlocProvider<ShippingAddressBloc>(create: (_) => ShippingAddressBloc())
-  BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
+  BlocProvider<ShippingAddressBloc>(create: (_) => ShippingAddressBloc()),
+  BlocProvider<ProductDetailBloc>(
+      create: (_) =>
+          ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<ActiveImagesIndexCubit>(create: (_) => ActiveImagesIndexCubit()),
   BlocProvider<OrderSuccessBloc>(create: (_) => OrderSuccessBloc()),
 ];
