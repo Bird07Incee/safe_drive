@@ -103,28 +103,28 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           .options!
           .isEmpty) {
         emit(state.copyWith(status: ShippingAddressStatus.fetching));
-        var response =
-            await fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
-        if (response.statusCode == 200) {
-          // var items = districtDataMock['items'] as List;
-          var items = response.data['items'] as List;
-          List<DropdownAddressModel> listDistrict = [];
-          for (int i = 0; i < items.length; i++) {
-            listDistrict.add(DropdownAddressModel.fromJson(items[i]));
-          }
-
-          listForm
-              .where((element) => element.fieldName == getDistrict)
-              .first
-              .options!
-              .addAll(listDistrict);
-
-          emit(state.copyWith(
-              status: ShippingAddressStatus.success,
-              formWidgetModel: listForm,
-              formResultModel: listResult));
+        // var response =
+        //     await fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
+        // if (response.statusCode == 200) {
+        var items = districtDataMock['items'] as List;
+        // var items = response.data['items'] as List;
+        List<DropdownAddressModel> listDistrict = [];
+        for (int i = 0; i < items.length; i++) {
+          listDistrict.add(DropdownAddressModel.fromJson(items[i]));
         }
+
+        listForm
+            .where((element) => element.fieldName == getDistrict)
+            .first
+            .options!
+            .addAll(listDistrict);
+
+        emit(state.copyWith(
+            status: ShippingAddressStatus.success,
+            formWidgetModel: listForm,
+            formResultModel: listResult));
       }
+      // }
     } else if (fieldName == getDistrict) {
       var listClearDataSelectedProvince = [getSubDistrict, getZipcode];
       for (int i = 0; i < listClearDataSelectedProvince.length; i++) {
@@ -157,26 +157,26 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           .options!
           .isEmpty) {
         emit(state.copyWith(status: ShippingAddressStatus.fetching));
-        var response =
-            await fetchDataFromApi(getSubDistrictAPIPath, refId: filterRefId!);
-        if (response.statusCode == 200) {
-          // var items = subDistrictDataMock['items'] as List;
-          var items = response.data['items'] as List;
-          for (int i = 0; i < items.length; i++) {
-            listSubDistrict.add(DropdownAddressModel.fromJson(items[i]));
-          }
-
-          listForm
-              .where((element) => element.fieldName == getSubDistrict)
-              .first
-              .options!
-              .addAll(listSubDistrict);
-          // Navigator.pop(context);
-          emit(state.copyWith(
-              status: ShippingAddressStatus.success,
-              formWidgetModel: listForm,
-              formResultModel: listResult));
+        // var response =
+        //     await fetchDataFromApi(getSubDistrictAPIPath, refId: filterRefId!);
+        // if (response.statusCode == 200) {
+        var items = subDistrictDataMock['items'] as List;
+        // var items = response.data['items'] as List;
+        for (int i = 0; i < items.length; i++) {
+          listSubDistrict.add(DropdownAddressModel.fromJson(items[i]));
         }
+
+        listForm
+            .where((element) => element.fieldName == getSubDistrict)
+            .first
+            .options!
+            .addAll(listSubDistrict);
+        // Navigator.pop(context);
+        emit(state.copyWith(
+            status: ShippingAddressStatus.success,
+            formWidgetModel: listForm,
+            formResultModel: listResult));
+        // }
       }
     } else if (fieldName == getSubDistrict) {
       listForm!
@@ -239,99 +239,99 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
     emit(state.copyWith(status: ShippingAddressStatus.loading));
 
     try {
-      var response = await fetchDataFromApi(getProvinceAPIPath);
-      if (response.statusCode == 200) {
-        var province = response.data['items'] as List;
+      // var response = await fetchDataFromApi(getProvinceAPIPath);
+      // if (response.statusCode == 200) {
+      //   var province = response.data['items'] as List;
 
-        // var province = provinceDataMock['items'] as List;
-        List<DropdownAddressModel> listProvice = [];
-        for (int i = 0; i < province.length; i++) {
-          listProvice.add(DropdownAddressModel.fromJson(province[i]));
-        }
+      var province = provinceDataMock['items'] as List;
+      List<DropdownAddressModel> listProvice = [];
+      for (int i = 0; i < province.length; i++) {
+        listProvice.add(DropdownAddressModel.fromJson(province[i]));
+      }
 
-        List<FormWidgetModel> listFormWidget = [
-          FormWidgetModel(
-            label: 'ชื่อ นามสกุล',
+      List<FormWidgetModel> listFormWidget = [
+        FormWidgetModel(
+          label: 'ชื่อ นามสกุล',
+          controller: TextEditingController(),
+          fieldName: 'name',
+          formType: 'textField',
+          required: true,
+          maxLength: 250,
+          maxLines: 1,
+        ),
+        FormWidgetModel(
+            label: 'เบอร์โทรศัพท์',
             controller: TextEditingController(),
-            fieldName: 'name',
+            fieldName: 'phone',
+            keyboardType: TextInputType.number,
+            formType: 'textField',
+            listInputFormatter: [
+              LengthLimitingTextInputFormatter(12),
+              FilteringTextInputFormatter.allow(RegExp(r"[0-9-]")),
+              FilteringTextInputFormatter.deny(RegExp(
+                  r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
+            ],
+            required: true,
+            maxLines: 1),
+        FormWidgetModel(
+            label: 'อีเมล',
+            controller: TextEditingController(),
+            fieldName: 'email',
             formType: 'textField',
             required: true,
             maxLength: 250,
-            maxLines: 1,
-          ),
-          FormWidgetModel(
-              label: 'เบอร์โทรศัพท์',
-              controller: TextEditingController(),
-              fieldName: 'phone',
-              keyboardType: TextInputType.number,
-              formType: 'textField',
-              listInputFormatter: [
-                LengthLimitingTextInputFormatter(12),
-                FilteringTextInputFormatter.allow(RegExp(r"[0-9-]")),
-                FilteringTextInputFormatter.deny(RegExp(
-                    r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
-              ],
-              required: true,
-              maxLines: 1),
-          FormWidgetModel(
-              label: 'อีเมล',
-              controller: TextEditingController(),
-              fieldName: 'email',
-              formType: 'textField',
-              required: true,
-              maxLength: 250,
-              maxLines: 1),
-          FormWidgetModel(
-              label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
-              controller: TextEditingController(),
-              fieldName: 'address',
-              formType: 'textField',
-              required: true,
-              isShowCounter: true,
-              maxLength: 250,
-              maxLines: null),
-          FormWidgetModel(
-            label: 'จังหวัด',
+            maxLines: 1),
+        FormWidgetModel(
+            label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
             controller: TextEditingController(),
-            fieldName: getProvince,
-            formType: 'selectDropdown',
-            options: listProvice,
-          ),
-          FormWidgetModel(
-            label: 'เขต/อำเภอ',
-            controller: TextEditingController(),
-            fieldName: getDistrict,
-            formType: 'selectDropdown',
-            matchField: getProvince,
-            options: [],
-          ),
-          FormWidgetModel(
-            label: 'แขวง/ตำบล',
-            controller: TextEditingController(),
-            fieldName: getSubDistrict,
-            formType: 'selectDropdown',
-            matchField: getDistrict,
-            options: [],
-          ),
-          FormWidgetModel(
-            label: 'รหัสไปรษณีย์',
-            controller: TextEditingController(),
-            fieldName: getZipcode,
-            formType: 'selectDropdown',
-            matchField: getSubDistrict,
-            options: [],
-          ),
-        ];
-        List<FormWidgetResultModel> listResult = [];
-        for (int i = 0; i < listFormWidget.length; i++) {
-          listResult.add(FormWidgetResultModel(
-              id: '', fieldName: listFormWidget[i].fieldName, value: ''));
-        }
-        emit(state.copyWith(
-            status: ShippingAddressStatus.success,
-            formWidgetModel: listFormWidget,
-            formResultModel: listResult));
+            fieldName: 'address',
+            formType: 'textField',
+            required: true,
+            isShowCounter: true,
+            maxLength: 250,
+            maxLines: null),
+        FormWidgetModel(
+          label: 'จังหวัด',
+          controller: TextEditingController(),
+          fieldName: getProvince,
+          formType: 'selectDropdown',
+          options: listProvice,
+        ),
+        FormWidgetModel(
+          label: 'เขต/อำเภอ',
+          controller: TextEditingController(),
+          fieldName: getDistrict,
+          formType: 'selectDropdown',
+          matchField: getProvince,
+          options: [],
+        ),
+        FormWidgetModel(
+          label: 'แขวง/ตำบล',
+          controller: TextEditingController(),
+          fieldName: getSubDistrict,
+          formType: 'selectDropdown',
+          matchField: getDistrict,
+          options: [],
+        ),
+        FormWidgetModel(
+          label: 'รหัสไปรษณีย์',
+          controller: TextEditingController(),
+          fieldName: getZipcode,
+          formType: 'selectDropdown',
+          matchField: getSubDistrict,
+          options: [],
+        ),
+      ];
+      List<FormWidgetResultModel> listResult = [];
+      for (int i = 0; i < listFormWidget.length; i++) {
+        listResult.add(FormWidgetResultModel(
+            id: '', fieldName: listFormWidget[i].fieldName, value: ''));
       }
+      emit(state.copyWith(
+          status: ShippingAddressStatus.success,
+          formWidgetModel: listFormWidget,
+          formResultModel: listResult));
+      // }
     } catch (e) {
       emit(state.copyWith(status: ShippingAddressStatus.error));
     }
