@@ -3,7 +3,6 @@ import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
@@ -51,15 +50,15 @@ _setUpLineLIFF() {
     // localStorage.addAll({"LineLogin": 'true'});
   }
   String lineId = Environment().getValue("LIFF_ID");
-  FlutterLineLiff().init(
-      //TODO: config LIFF for prod
-      config: Config(liffId: lineId),
-      successCallback: () {
-        print('successCallback');
-      },
-      errorCallback: (error) {
-        print('init error: ${error.name}, ${error.message}, ${error.stack}');
-      });
+  // FlutterLineLiff().init(
+  //     //TODO: config LIFF for prod
+  //     config: Config(liffId: lineId),
+  //     successCallback: () {
+  //       print('successCallback');
+  //     },
+  //     errorCallback: (error) {
+  //       print('init error: ${error.name}, ${error.message}, ${error.stack}');
+  //     });
 }
 
 _setUpDatadog() {

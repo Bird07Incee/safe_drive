@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
 class DioUtilityService with HeaderUtil {
@@ -25,7 +24,8 @@ class DioUtilityService with HeaderUtil {
           throw Exception("Getting path \"$path\" error");
         }
       } else {
-        throw Exception("Getting service error with response ${response.statusCode}");
+        throw Exception(
+            "Getting service error with response ${response.statusCode}");
       }
     } on DioError catch (e) {
       if (e.error != null) {
@@ -57,7 +57,8 @@ class DioUtilityService with HeaderUtil {
         }
       } else {
         print("Posting service error with response ${response.statusCode}");
-        throw Exception("Posting service error with response ${response.statusCode}");
+        throw Exception(
+            "Posting service error with response ${response.statusCode}");
       }
     } on DioError catch (e) {
       print("dio error ${e.error}");
@@ -74,7 +75,7 @@ class DioUtilityService with HeaderUtil {
 class DioClient {
   static final Dio client = Dio();
   Dio get dioClient {
-    client.interceptors.add(DioInterceptor());
+    // client.interceptors.add(DioInterceptor());
     return client;
   }
 }

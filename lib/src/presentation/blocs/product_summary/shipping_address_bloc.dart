@@ -23,6 +23,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       DioUtilityRepository(service: DioUtilityService(dio: DioClient.client));
   final String getProvinceAPIPath = "/ecommerce/v1/data/province";
   final String getDistrictAPIPath = "/ecommerce/v1/data/district";
+  final String getSubDistrictAPIPath = "/ecommerce/v1/data/subdistrict";
   List<DropdownAddressModel> listSubDistrict = [];
   List<String> listZipCode = [];
 
@@ -45,23 +46,27 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       listResult.where((element) => element.fieldName == 'district').first.id =
           '';
 
-      // var response = fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
       if (listForm
           .where((element) => element.fieldName == 'district')
           .first
           .options!
           .isEmpty) {
-        var items = districtDataMock['items'] as List;
-        List<DropdownAddressModel> listDistrict = [];
-        for (int i = 0; i < items.length; i++) {
-          listDistrict.add(DropdownAddressModel.fromJson(items[i]));
-        }
+        var response =
+            fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
+        if (response.statusCode == 200) {
+          // var items = districtDataMock['items'] as List;
+          var items = response.data['items'] as List;
+          List<DropdownAddressModel> listDistrict = [];
+          for (int i = 0; i < items.length; i++) {
+            listDistrict.add(DropdownAddressModel.fromJson(items[i]));
+          }
 
-        listForm
-            .where((element) => element.fieldName == 'district')
-            .first
-            .options!
-            .addAll(listDistrict);
+          listForm
+              .where((element) => element.fieldName == 'district')
+              .first
+              .options!
+              .addAll(listDistrict);
+        }
       }
     } else if (fieldName == 'district') {
       listForm!
@@ -93,17 +98,21 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           .first
           .options!
           .isEmpty) {
-        var items = subDistrictDataMock['items'] as List;
+        var response =
+            fetchDataFromApi(getSubDistrictAPIPath, refId: filterRefId!);
+        if (response.statusCode == 200) {
+          // var items = subDistrictDataMock['items'] as List;
+          var items = response.data['items'] as List;
+          for (int i = 0; i < items.length; i++) {
+            listSubDistrict.add(DropdownAddressModel.fromJson(items[i]));
+          }
 
-        for (int i = 0; i < items.length; i++) {
-          listSubDistrict.add(DropdownAddressModel.fromJson(items[i]));
+          listForm
+              .where((element) => element.fieldName == 'subDistrict')
+              .first
+              .options!
+              .addAll(listSubDistrict);
         }
-
-        listForm
-            .where((element) => element.fieldName == 'subDistrict')
-            .first
-            .options!
-            .addAll(listSubDistrict);
       }
     } else if (fieldName == 'subDistrict') {
       listForm!
@@ -265,17 +274,14 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
-    await Future.delayed(Duration(seconds: 3));
-    // "{\"uid\":\"e959b083b3166422fb8717c6fe7e19e0cc6042dcb53976b26cb0c67085f636bf9fa8bef968f675d85619e150b1b2c91e6edf9859880ea63b38a5d18bca1b2be6\",\"access_token\":\"AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQH4nKVAp/gozm61a0mypo4DAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAynz3WmZaoMeGvYH4oCARCAggEHqA//8Lht7diWVyNlsaQGZNK1GVAqVXY1cBFN0p18t0EwzSNucJelmHFb6KGWvMztYNZbIaWFUw7LRpQfHUdl0hsd8atswL/LMQr3fDl6DCXeY/bo/K55is1gr9NYNASQfmLmLc16Nyjlvyu8A7HpH3yrxWtsX9g3PpoDJav7QQkFhtarnnwze9GTUJ4cXbU9nqhdG2teJPv/XFnqzQTucs0p2y+BNWSWM9q0+QSGj4r+LkwY7yy8AzlWMZU+s2H3lYqpNT5NBbevTgivXXYmE6YUvj+1FzC9boIkiyAPZCyDmVYH2FFfug/u/dP3tAjiBDHXqgMVxSm/lTRdi5u7iGoE7XHMqZY=\",\"refresh_token\":\"AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQGoZ4kJPpvz6OMAAAl4Ju/RAAAAcjBwBgkqhkiG9w0BBwagYzBhAgEAMFwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMhmG428hvR2jYE9KwAgEQgC8oYsKjK4WQzdcwG9ed0S9pCefIYEeo4EBRZ48uOQRWpXdZZ/I/l/kQG0aZ964vkg==\",\"expires_in\":2592000,\"tc_version\":\"1\",\"tc_accept\":\"false\"}"
-    // const accessToken =
-    //     "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQGoZ4kJPpvz6OMAAAl4Ju/RAAAAcjBwBgkqhkiG9w0BBwagYzBhAgEAMFwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMhmG428hvR2jYE9KwAgEQgC8oYsKjK4WQzdcwG9ed0S9pCefIYEeo4EBRZ48uOQRWpXdZZ/I/l/kQG0aZ964vkg==";
-    Map<String, dynamic> queryParams = {};
-    if (path.contains('district')) {
-      queryParams = {'province': refId};
-    } else if (path.contains('subdistrict')) {
-      queryParams = {'district': refId};
+    Map<String, Object> queryParams = {};
+    if (refId.isNotEmpty) {
+      if (path.contains('district')) {
+        queryParams = {'province': refId};
+      } else if (path.contains('subdistrict')) {
+        queryParams = {'district': refId};
+      }
     }
-
     Response response = await dioUtilityRepository.getByURL(
         "$baseUrl$inventoryApiPath$path", queryParams,
         headers: {"Authorization": "Bearer $accessToken"});
