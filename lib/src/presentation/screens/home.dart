@@ -288,8 +288,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       ),
                                       GestureDetector(
                                         onTap: () => launchUrl(
-                                            Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html"),
-                                            webOnlyWindowName: "_self"),
+                                            Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
                                         child: Text(
                                           HomeConst().privacyPolicy,
                                           style: AlvaStyles().headingSize10w600(sugarRed),
