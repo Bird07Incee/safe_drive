@@ -357,6 +357,15 @@ class TextInputWidgetState extends State<TextInputWidget> {
                       'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
                 }
 
+                if (widget.required && widget.isAllowAutoAddEmailFormat) {
+                  String errorText = _validateEmail(value!) ?? '';
+                  if (errorText.isEmpty) {
+                    return null;
+                  } else {
+                    return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
+                  }
+                }
+
                 return null;
               },
             ),

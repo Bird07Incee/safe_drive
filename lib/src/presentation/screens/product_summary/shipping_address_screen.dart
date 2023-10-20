@@ -25,7 +25,7 @@ class ShippingAddressScreen extends StatelessWidget {
       if (state.status.isInitial) {
         // ctx.read<ShippingAddressBloc>().setFormData();
       }
-      if (state.status.isSuccess) {
+      if (state.status.isSuccess || state.status.isFetching) {
         return RootPageCondition(
             child: AlvaRootWidget(
                 appBar: AppBar(
@@ -107,6 +107,7 @@ class ShippingAddressScreen extends StatelessWidget {
   }
 
   Widget buildBodyWidget(BuildContext ctx, ShippingAddressState state) {
+    final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
     return Container(
         padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 96),
         color: whitePure,
@@ -120,11 +121,9 @@ class ShippingAddressScreen extends StatelessWidget {
             ),
             StatefulBuilder(builder: (context, setState) {
               return Form(
-                  key: state.mainFormKey,
+                  key: myBloc.mainFormKey,
                   onChanged: () {
-                    if (state.mainFormKey!.currentState!.validate()) {
-                      state.isAllowSubmit = true;
-                    }
+                    myBloc.validateToActiveSubmitButton();
                   },
                   child: Column(
                       children: state.listFormWidget!.map(
@@ -153,6 +152,13 @@ class ShippingAddressScreen extends StatelessWidget {
                           maxLength: item.maxLength,
                           maxLines: item.maxLines,
                           showCounter: item.isShowCounter,
+                          onFocusChange: () {
+                            state.formResult!
+                                .where((element) =>
+                                    element.fieldName == item.fieldName)
+                                .first
+                                .value = item.controller!.text;
+                          },
                           isAllowAutoAddPhoneFormat:
                               item.fieldName == 'phone' ? true : false,
                           isAllowAutoAddEmailFormat:
@@ -194,11 +200,13 @@ class ShippingAddressScreen extends StatelessWidget {
 
                             final myBloc =
                                 BlocProvider.of<ShippingAddressBloc>(ctx);
-                            myBloc.updateDropdownSelected(
+
+                            myBloc.updateDropdownSelected(ctx,
                                 id: field.id,
                                 fieldName: item.fieldName,
                                 listForm: state.listFormWidget,
-                                listResult: state.formResult);
+                                listResult: state.formResult,
+                                filterRefId: field.id);
 
                             setState(() {});
                             //test
