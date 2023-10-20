@@ -59,25 +59,25 @@ class InquiryData {
         sellerTel = json['seller_tel'] ?? "";
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['refId'] = this.refId;
-    data['payment_card'] = this.paymentCard;
-    data['payment_date'] = this.paymentDate;
-    data['payment_time'] = this.paymentTime;
-    data['payment_medthod'] = this.paymentMedthod;
-    data['payment_period'] = this.paymentPeriod;
-    data['payment_merchant'] = this.paymentMerchant;
-    data['product_asset'] = this.productAsset;
-    data['product_id'] = this.productId;
-    data['product_name'] = this.productName;
-    data['product_attr'] = this.productAttr;
-    data['product_price'] = this.productPrice;
-    data['customer_name'] = this.customerName;
-    data['customer_tel'] = this.customerTel;
-    data['customer_email'] = this.customerEmail;
-    data['customer_address'] = this.customerAddress;
-    data['seller_address'] = this.sellerAddress;
-    data['seller_tel'] = this.sellerTel;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['refId'] = refId;
+    data['payment_card'] = paymentCard;
+    data['payment_date'] = paymentDate;
+    data['payment_time'] = paymentTime;
+    data['payment_medthod'] = paymentMedthod;
+    data['payment_period'] = paymentPeriod;
+    data['payment_merchant'] = paymentMerchant;
+    data['product_asset'] = productAsset;
+    data['product_id'] = productId;
+    data['product_name'] = productName;
+    data['product_attr'] = productAttr;
+    data['product_price'] = productPrice;
+    data['customer_name'] = customerName;
+    data['customer_tel'] = customerTel;
+    data['customer_email'] = customerEmail;
+    data['customer_address'] = customerAddress;
+    data['seller_address'] = sellerAddress;
+    data['seller_tel'] = sellerTel;
     return data;
   }
 }

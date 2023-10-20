@@ -24,8 +24,7 @@ class DioUtilityService with HeaderUtil {
           throw Exception("Getting path \"$path\" error");
         }
       } else {
-        throw Exception(
-            "Getting service error with response ${response.statusCode}");
+        throw Exception("Getting service error with response ${response.statusCode}");
       }
     } on DioError catch (e) {
       if (e.error != null) {
@@ -57,8 +56,7 @@ class DioUtilityService with HeaderUtil {
         }
       } else {
         print("Posting service error with response ${response.statusCode}");
-        throw Exception(
-            "Posting service error with response ${response.statusCode}");
+        throw Exception("Posting service error with response ${response.statusCode}");
       }
     } on DioError catch (e) {
       print("dio error ${e.error}");

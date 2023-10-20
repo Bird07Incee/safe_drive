@@ -10,11 +10,9 @@ class HomeConst {
   String lineOAURL = 'https://line.me/R/ti/p/@018qbfet';
   String termsAndConditions = 'ข้อตกลงและเงื่อนไข';
   String privacyPolicy = 'ประกาศความคุ้มครองข้อมูลส่วนบุคคล';
-  String askInformation =
-      'สอบถามข้อมูลอื่นๆ เกี่ยวกับสินค้า หรือ ติดตามสถานะการจัดส่งสินค้า';
+  String askInformation = 'สอบถามข้อมูลอื่นๆ เกี่ยวกับสินค้า หรือ ติดตามสถานะการจัดส่งสินค้า';
   String pleaseContact = 'กรุณาติดต่อ  081-123-4567';
-  String warningWord =
-      'ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา';
+  String warningWord = 'ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา';
 }
 
 class ErrorConst {

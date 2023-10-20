@@ -239,16 +239,13 @@ class TextInputWidgetState extends State<TextInputWidget> {
           SizedBox(height: showOutsideLabel ? 4 : 0),
           Focus(
             child: TextFormField(
-              autovalidateMode: widget.required
-                  ? (widget.autoValidateMode ??
-                      AutovalidateMode.onUserInteraction)
-                  : null,
+              autovalidateMode:
+                  widget.required ? (widget.autoValidateMode ?? AutovalidateMode.onUserInteraction) : null,
               textCapitalization: widget.textCapitalization,
               readOnly: widget.readOnly,
               inputFormatters: widget.inputFormatters ??
                   [
-                    FilteringTextInputFormatter.allow(RegExp(
-                        r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
+                    FilteringTextInputFormatter.allow(RegExp(r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
                         '"'
                         "]")),
                     FilteringTextInputFormatter.deny(RegExp(
@@ -261,8 +258,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
               controller: widget.controller,
               obscureText: !widget.isPasswordField ? false : !passwordVisible,
               textAlign: widget.textAlign ?? TextAlign.left,
-              maxLength:
-                  widget.isAllowAutoAddPhoneFormat ? 12 : widget.maxLength,
+              maxLength: widget.isAllowAutoAddPhoneFormat ? 12 : widget.maxLength,
               textInputAction: widget.textInputAction,
               style: AlvaStyles().heading3Size16Bold(),
               decoration: InputDecoration(
@@ -288,8 +284,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
                         children: [
                           Text(
                             !showOutsideLabel ? widget.label ?? '' : '',
-                            style: AlvaStyles()
-                                .bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW),
+                            style: AlvaStyles().bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW),
                           ),
                         ],
                       )
@@ -309,9 +304,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      color: widget.readOnly ? spaceGrey : BlueFantasy,
-                      width: 2),
+                  borderSide: BorderSide(color: widget.readOnly ? spaceGrey : BlueFantasy, width: 2),
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
                 enabledBorder: UnderlineInputBorder(
@@ -330,13 +323,10 @@ class TextInputWidgetState extends State<TextInputWidget> {
                   widget.onChanged?.call();
                 } else {
                   // เช็ค Limit Length text ภาษาไทย
-                  if (widget.maxLength != null &&
-                      text.isNotEmpty &&
-                      text.length > widget.maxLength!) {
-                    widget.controller!.text = text.substring(
-                        0, text.length - (text.length - widget.maxLength!));
-                    widget.controller!.selection = TextSelection.fromPosition(
-                        TextPosition(offset: widget.controller!.text.length));
+                  if (widget.maxLength != null && text.isNotEmpty && text.length > widget.maxLength!) {
+                    widget.controller!.text = text.substring(0, text.length - (text.length - widget.maxLength!));
+                    widget.controller!.selection =
+                        TextSelection.fromPosition(TextPosition(offset: widget.controller!.text.length));
                   }
                   if (widget.isAllowAutoAddEmailFormat) {
                     _validateEmail(text);
@@ -353,8 +343,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
                 }
 
                 if (widget.required == true && validator.isBlank) {
-                  return widget.errRequiredMessage ??
-                      'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
+                  return widget.errRequiredMessage ?? 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
                 }
 
                 if (widget.required && widget.isAllowAutoAddEmailFormat) {
@@ -422,8 +411,7 @@ class Validator {
 
 class PhoneNumberFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     final newText = _formatPhoneNumber(newValue.text);
     return TextEditingValue(
       text: newText,
