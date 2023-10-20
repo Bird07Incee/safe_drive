@@ -171,7 +171,6 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
               .first
               .options!
               .addAll(listSubDistrict);
-          // Navigator.pop(context);
           emit(state.copyWith(
               status: ShippingAddressStatus.success,
               formWidgetModel: listForm,
