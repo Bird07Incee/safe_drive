@@ -1,0 +1,19 @@
+name: domain
+description: Domain Module
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+  flutter: ">=3.13.6"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
