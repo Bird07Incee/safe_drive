@@ -49,6 +49,26 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `SafeDrive`
+  String get appName {
+    return Intl.message(
+      'SafeDrive',
+      name: 'appName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get empty {
+    return Intl.message(
+      '',
+      name: 'empty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
