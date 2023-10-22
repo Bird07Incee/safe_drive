@@ -20,6 +20,14 @@ dependencies:
   go_router: ^11.1.2
   convert: ^3.1.1 #Require
   # Libs
+  flutter_secure_storage: 6.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  encrypt: ^5.0.1
+
+  # Modules
+  data:
+    path: "../data"
 
 dev_dependencies:
   flutter_test:
