@@ -1,5 +1,5 @@
 import 'package:commons/commons.dart';
-import 'package:commons/src/ui/listener/base_state_listenner.dart';
+import 'package:commons/src/ui/listener/base_state_listener.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseStatefulWidget<T extends BaseViewModel>
