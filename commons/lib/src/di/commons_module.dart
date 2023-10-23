@@ -1,9 +1,10 @@
 import 'package:commons/commons.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 final inject = GetIt.instance;
 
 Future diCommonModule() async {
+  await Hive.initFlutter();
   await _diEncrypted();
   await _storage();
 }
@@ -21,10 +22,10 @@ Future<void> _storage() async {
 
 class AppHive {
   static registerAdapter<T>(
-      TypeAdapter<T> adapter, {
-        bool internal = false,
-        bool override = false,
-      }) {
+    TypeAdapter<T> adapter, {
+    bool internal = false,
+    bool override = false,
+  }) {
     if (!Hive.isAdapterRegistered(adapter.typeId)) {
       Hive.registerAdapter(
         adapter,
