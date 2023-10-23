@@ -1,4 +1,3 @@
-import 'package:auth/auth.dart';
 import 'package:commons/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:safe_drive/src/routers/app_routers.dart';
@@ -35,7 +34,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
       restorationScopeId: 'app',
       routeInformationProvider: AppRouter.router.routeInformationProvider,
       routeInformationParser: AppRouter.router.routeInformationParser,

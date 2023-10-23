@@ -13,6 +13,8 @@ dependencies:
 
   commons:
     path: '../../commons'
+  components:
+    path: '../../components'
 
 dev_dependencies:
   flutter_test:

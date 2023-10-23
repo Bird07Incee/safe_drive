@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # Modules
+  commons:
+    path: "../commons"
 
 dev_dependencies:
   flutter_test:

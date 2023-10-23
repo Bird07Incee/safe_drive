@@ -1,6 +1,6 @@
+import 'package:auth/auth.dart';
 import 'package:commons/commons.dart';
 import 'package:flutter/material.dart';
-import 'package:safe_drive/src/app.dart';
 import 'package:safe_drive/src/routers/extensions.dart';
 
 class HomePlatform {
@@ -8,7 +8,7 @@ class HomePlatform {
     return Future.value();
   }
 
-  static Page homePage(BuildContext context, GoRouterState state) {
-    return const MyHomePage().page();
+  static Page loginPage(BuildContext context, GoRouterState state) {
+    return const LoginScreen().page();
   }
 }

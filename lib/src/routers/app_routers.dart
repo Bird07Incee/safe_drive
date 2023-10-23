@@ -4,7 +4,7 @@ import 'package:safe_drive/src/routers/screen.dart';
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: Get.key,
-    initialLocation: Routes.home,
+    initialLocation: Routes.loginScreen,
     routes: AppRouterPlatform.routers,
   );
 }
@@ -12,9 +12,9 @@ class AppRouter {
 class AppRouterPlatform {
   static final routers = <RouteBase>[
     GoRoute(
-      path: Routes.home,
+      path: Routes.loginScreen,
       redirect: HomePlatform.middleware,
-      pageBuilder: HomePlatform.homePage,
+      pageBuilder: HomePlatform.loginPage,
     ),
   ];
 }
