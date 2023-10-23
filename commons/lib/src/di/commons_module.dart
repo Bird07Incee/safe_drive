@@ -1,5 +1,5 @@
 import 'package:commons/commons.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 final inject = GetIt.instance;
 
@@ -13,6 +13,7 @@ _diEncrypted() {
 }
 
 Future<void> _storage() async {
+  await Hive.initFlutter('hive_database');
   final storage = inject<EncryptStorage>();
   await storage.generateSecureKey();
   await storage.newStorage(dbName: DBNAME.IMAGES_DB);
@@ -21,10 +22,10 @@ Future<void> _storage() async {
 
 class AppHive {
   static registerAdapter<T>(
-      TypeAdapter<T> adapter, {
-        bool internal = false,
-        bool override = false,
-      }) {
+    TypeAdapter<T> adapter, {
+    bool internal = false,
+    bool override = false,
+  }) {
     if (!Hive.isAdapterRegistered(adapter.typeId)) {
       Hive.registerAdapter(
         adapter,

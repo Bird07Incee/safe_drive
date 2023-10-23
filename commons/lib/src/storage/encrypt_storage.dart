@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:commons/src/constants/constants.dart';
+import 'package:commons/commons.dart';
 import 'package:convert/convert.dart';
 import 'package:data/data.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
