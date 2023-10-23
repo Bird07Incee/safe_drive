@@ -1,3 +1,4 @@
+import 'package:auth/auth.dart';
 import 'package:commons/commons.dart';
 import 'package:flutter/material.dart';
 
@@ -32,18 +33,17 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const LoginScreen(),
       restorationScopeId: 'app',
     );
   }
 }
-
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }
