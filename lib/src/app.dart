@@ -1,6 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:commons/commons.dart';
 import 'package:flutter/material.dart';
+import 'package:safe_drive/src/routers/app_routers.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   }
 
   MaterialApp _buildMaterialApp() {
-    return MaterialApp(
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => S.of(context).appName,
       localizationsDelegates: const [
         S.delegate,
@@ -35,6 +37,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const LoginScreen(),
       restorationScopeId: 'app',
+      routeInformationProvider: AppRouter.router.routeInformationProvider,
+      routeInformationParser: AppRouter.router.routeInformationParser,
+      routerDelegate: AppRouter.router.routerDelegate,
     );
   }
 }
