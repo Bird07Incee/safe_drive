@@ -4,7 +4,6 @@ import 'package:hive_flutter/adapters.dart';
 final inject = GetIt.instance;
 
 Future diCommonModule() async {
-  await Hive.initFlutter();
   await _diEncrypted();
   await _storage();
 }
@@ -14,6 +13,7 @@ _diEncrypted() {
 }
 
 Future<void> _storage() async {
+  await Hive.initFlutter('hive_database');
   final storage = inject<EncryptStorage>();
   await storage.generateSecureKey();
   await storage.newStorage(dbName: DBNAME.IMAGES_DB);
