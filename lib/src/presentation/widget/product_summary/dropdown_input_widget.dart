@@ -58,8 +58,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
     return GestureDetector(
         onTap: () async {
           if (!widget.disable) {
-            List<DropdownAddressModel> items =
-                widget.options!.map((e) => e as DropdownAddressModel).toList();
+            List<DropdownAddressModel> items = widget.options!.map((e) => e as DropdownAddressModel).toList();
             await showModalBottomSheet(
                 isScrollControlled: true,
                 shape: RoundedRectangleBorder(
@@ -83,8 +82,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                               height: 8,
                             ),
                             Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                               color: cloudSoftDeepWhite,
                               child: SizedBox(
                                 height: 4,
@@ -96,8 +94,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                             ),
                             Text(
                               widget.label!,
-                              style: AlvaStyles()
-                                  .headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
+                              style: AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
                             ),
                             SizedBox(
                               height: 16,
@@ -107,10 +104,8 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: () {
-                                      if (widget.textEditingController !=
-                                          null) {
-                                        widget.textEditingController!.text =
-                                            items[index].nameTh!;
+                                      if (widget.textEditingController != null) {
+                                        widget.textEditingController!.text = items[index].nameTh!;
                                         if (widget.onChanged != null) {
                                           widget.onChanged!(items[index]);
                                         }
@@ -118,14 +113,12 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                       }
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 12, horizontal: 4),
+                                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 4),
                                       child: Text(items[index].nameTh!),
                                     ),
                                   );
                                 },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
+                                separatorBuilder: (BuildContext context, int index) {
                                   return Divider();
                                 },
                                 itemCount: widget.options!.length,
@@ -194,13 +187,9 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      !showOutsideLabel
-                                          ? widget.label ?? ''
-                                          : '',
+                                      !showOutsideLabel ? widget.label ?? '' : '',
                                       style: AlvaStyles().bodySize12W600(
-                                          widget.disable
-                                              ? cloudSoftDeepWhite
-                                              : BTN_SELECTED_TEXT_COLOR_NEW),
+                                          widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
                                     ),
                                   ],
                                 )
@@ -208,21 +197,15 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                           suffixIcon: widget.options!.length == 1
                               ? null
                               : Icon(Icons.keyboard_arrow_down_outlined,
-                                  size: 24,
-                                  color: widget.disable
-                                      ? cloudSoftDeepWhite
-                                      : blackInBlack),
+                                  size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
                           fillColor: cloudSoftDeepWhite,
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: blackInBlack),
-                            borderRadius:
-                                BorderRadius.circular(widget.borderRadius),
+                            borderRadius: BorderRadius.circular(widget.borderRadius),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: blackInBlack, width: 2),
-                            borderRadius:
-                                BorderRadius.circular(widget.borderRadius),
+                            borderSide: BorderSide(color: blackInBlack, width: 2),
+                            borderRadius: BorderRadius.circular(widget.borderRadius),
                           ),
                           disabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -232,8 +215,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                         : cloudSoftDeepWhite
                                     : blackInBlack,
                                 width: 1),
-                            borderRadius:
-                                BorderRadius.circular(widget.borderRadius),
+                            borderRadius: BorderRadius.circular(widget.borderRadius),
                           ),
                         ),
                       ),

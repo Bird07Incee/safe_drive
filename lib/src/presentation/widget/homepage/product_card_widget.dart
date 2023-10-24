@@ -259,9 +259,8 @@ class ProductCardWidget extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Visibility(
-                                      visible: products[index].promotionTag.isEmpty ? false : true,
-                                      child: promos(products[index])
-                                    ),
+                                        visible: products[index].promotionTag.isEmpty ? false : true,
+                                        child: promos(products[index])),
                                     const SizedBox(
                                       height: 16,
                                     ),

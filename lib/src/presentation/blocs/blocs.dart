@@ -19,23 +19,16 @@ final List<BlocProvider> blocs = [
   BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
   BlocProvider<CheckBrowserBloc>(create: (_) => CheckBrowserBloc()),
   BlocProvider<ConnectivityStatusBloc>(create: (_) => ConnectivityStatusBloc()),
-  BlocProvider<ScrollProductDetailBloc>(
-      create: (_) => ScrollProductDetailBloc()),
-  BlocProvider<ProductDetailCarouselScrollControllerBloc>(
-      create: (_) => ProductDetailCarouselScrollControllerBloc()),
+  BlocProvider<ScrollProductDetailBloc>(create: (_) => ScrollProductDetailBloc()),
+  BlocProvider<ProductDetailCarouselScrollControllerBloc>(create: (_) => ProductDetailCarouselScrollControllerBloc()),
   BlocProvider<ImgGalleryZoomBloc>(create: (_) => ImgGalleryZoomBloc()),
   BlocProvider<PreviousScaleBloc>(create: (_) => PreviousScaleBloc()),
-  BlocProvider<ViewImgDetailPageSwitchBloc>(
-      create: (_) => ViewImgDetailPageSwitchBloc()),
+  BlocProvider<ViewImgDetailPageSwitchBloc>(create: (_) => ViewImgDetailPageSwitchBloc()),
   BlocProvider<ProductListBloc>(create: (_) => ProductListBloc()),
   BlocProvider<ProductOptionBloc>(create: (_) => ProductOptionBloc()),
-  BlocProvider<ProductDetailBloc>(
-      create: (_) =>
-          ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
+  BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<ShippingAddressBloc>(create: (_) => ShippingAddressBloc()),
-  BlocProvider<ProductDetailBloc>(
-      create: (_) =>
-          ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
+  BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<ActiveImagesIndexCubit>(create: (_) => ActiveImagesIndexCubit()),
   BlocProvider<OrderSuccessBloc>(create: (_) => OrderSuccessBloc()),
 ];

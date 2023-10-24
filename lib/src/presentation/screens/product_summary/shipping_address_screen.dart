@@ -25,8 +25,7 @@ class ShippingAddressScreen extends StatelessWidget {
             appBar: AppBar(
               title: AlvaText(
                   title: AppStrings().shippingAddressTitle,
-                  textStyle: AlvaStyles()
-                      .headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
               titleSpacing: 0,
               elevation: 0.7,
               leadingWidth: 60,
@@ -38,8 +37,7 @@ class ShippingAddressScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.arrow_back_ios_rounded)),
             ),
-            bottomSheet: BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
-                builder: (ctx, state) {
+            bottomSheet: BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
               return Container(
                 decoration: BoxDecoration(
                   color: whitePure,
@@ -53,30 +51,23 @@ class ShippingAddressScreen extends StatelessWidget {
                 ),
                 width: MediaQuery.of(context).size.width,
                 height: 96,
-                padding: const EdgeInsets.only(
-                    left: 16, right: 16, bottom: 32, top: 16),
+                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
                 child: Row(
                   children: [
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8)),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
                         height: 48,
                         child: OutlinedButton(
                           onPressed: () {
                             if (state.isAllowSubmit) {}
                           },
                           style: AlvaStyles().outlineNoneBorderButtonStyle(
-                              state.isAllowSubmit
-                                  ? YellowKrungsri
-                                  : cloudSoftDeepWhite,
-                              Colors.transparent,
+                              state.isAllowSubmit ? YellowKrungsri : cloudSoftDeepWhite, Colors.transparent,
                               isRadius8: true),
                           child: Text("ยืนยัน",
-                              style: AlvaStyles().headingSize16w700(
-                                  state.isAllowSubmit
-                                      ? BTN_SELECTED_TEXT_COLOR_NEW
-                                      : smockGrey)),
+                              style: AlvaStyles()
+                                  .headingSize16w700(state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
                         ),
                       ),
                     )
@@ -89,8 +80,7 @@ class ShippingAddressScreen extends StatelessWidget {
   }
 
   Widget buildBodyWidget() {
-    return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
-        builder: (ctx, state) {
+    return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
       if (state.status.isInitial) {
         // ctx.read<ShippingAddressBloc>().setFormData();
       }
@@ -130,8 +120,7 @@ class ShippingAddressScreen extends StatelessWidget {
                           if (item.formType == formTypeTextField) {
                             input = TextInputWidget(
                               inputFormatters: item.listInputFormatter,
-                              autoValidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                              autoValidateMode: AutovalidateMode.onUserInteraction,
                               controller: item.controller,
                               label: item.label,
                               outsideLabel: true,
@@ -142,17 +131,14 @@ class ShippingAddressScreen extends StatelessWidget {
                               maxLength: item.maxLength,
                               maxLines: item.maxLines,
                               showCounter: item.isShowCounter,
-                              isAllowAutoAddPhoneFormat:
-                                  item.fieldName == 'phone' ? true : false,
-                              isAllowAutoAddEmailFormat:
-                                  item.fieldName == 'email' ? true : false,
+                              isAllowAutoAddPhoneFormat: item.fieldName == 'phone' ? true : false,
+                              isAllowAutoAddEmailFormat: item.fieldName == 'email' ? true : false,
                             );
                           } else if (item.formType == formTypeDropdown) {
                             bool isDisable = true;
                             if (item.matchField != null) {
                               if (state.formResult!
-                                      .where((element) =>
-                                          element.fieldName == item.matchField)
+                                      .where((element) => element.fieldName == item.matchField)
                                       .first
                                       .value!
                                       .isNotEmpty &&
@@ -166,8 +152,7 @@ class ShippingAddressScreen extends StatelessWidget {
                             input = DropDownInputWidget(
                               disable: isDisable,
                               textEditingController: item.controller,
-                              autoValidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                              autoValidateMode: AutovalidateMode.onUserInteraction,
                               label: item.label,
                               marginBottom: 15,
                               required: required,
@@ -175,15 +160,12 @@ class ShippingAddressScreen extends StatelessWidget {
                               options: item.options!,
                               onChanged: (value) async {
                                 DropdownAddressModel model = value;
-                                var field = state.formResult!
-                                    .where((element) =>
-                                        item.fieldName == element.fieldName)
-                                    .first;
+                                var field =
+                                    state.formResult!.where((element) => item.fieldName == element.fieldName).first;
                                 field.id = model.id;
                                 field.value = model.nameTh;
 
-                                final myBloc =
-                                    BlocProvider.of<ShippingAddressBloc>(ctx);
+                                final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
                                 myBloc.updateDropdownSelected(
                                     id: field.id,
                                     fieldName: item.fieldName,
