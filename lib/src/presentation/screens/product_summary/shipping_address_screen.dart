@@ -6,6 +6,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
+import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_summary/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -20,8 +21,7 @@ class ShippingAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
-        builder: (ctx, state) {
+    return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
       if (state.status.isInitial) {
         // ctx.read<ShippingAddressBloc>().setFormData();
       }
@@ -29,10 +29,7 @@ class ShippingAddressScreen extends StatelessWidget {
         return RootPageCondition(
             child: AlvaRootWidget(
                 appBar: AppBar(
-                  title: AlvaText(
-                      title: AppStrings().shippingAddressTitle,
-                      textStyle: AlvaStyles()
-                          .headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  title: AlvaText(title: AppStrings().shippingAddressTitle, textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 0,
                   elevation: 0.7,
                   leadingWidth: 60,
@@ -44,46 +41,46 @@ class ShippingAddressScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.arrow_back_ios_rounded)),
                 ),
-                bottomSheet:
-                    BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
-                        builder: (ctx, state) {
+                bottomSheet: BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
                   return Container(
                     decoration: BoxDecoration(
                       color: whitePure,
                       boxShadow: [
-                        BoxShadow(
-                            color: const Color(0xff000000).withOpacity(0.04),
-                            spreadRadius: 0,
-                            blurRadius: 16,
-                            offset: const Offset(0, -4)),
+                        BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
                       ],
                     ),
                     width: MediaQuery.of(context).size.width,
                     height: 96,
-                    padding: const EdgeInsets.only(
-                        left: 16, right: 16, bottom: 32, top: 16),
+                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
                     child: Row(
                       children: [
                         Expanded(
                           child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8)),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
                             height: 48,
                             child: OutlinedButton(
-                              onPressed: () {
-                                if (state.isAllowSubmit) {}
+                              onPressed: () async {
+                                if (state.isAllowSubmit) {
+                                  var listFormResult = state.formResult;
+                                  if (listFormResult!.isNotEmpty) {
+                                    ShippingAddressModel model = ShippingAddressModel(
+                                        fullName: listFormResult.where((element) => element.fieldName == 'name').first.value!,
+                                        mobileNumber: listFormResult.where((element) => element.fieldName == 'phone').first.value!,
+                                        emailAddress: listFormResult.where((element) => element.fieldName == 'email').first.value!,
+                                        fullAddress: listFormResult.where((element) => element.fieldName == 'address').first.value!,
+                                        province: listFormResult.where((element) => element.fieldName == 'province').first.value!,
+                                        district: listFormResult.where((element) => element.fieldName == 'district').first.value!,
+                                        subDistrict: listFormResult.where((element) => element.fieldName == 'subdistrict').first.value!,
+                                        zipCode: listFormResult.where((element) => element.fieldName == 'zipcode').first.value!);
+                                    Navigator.pop(context, model);
+                                  }
+                                }
                               },
                               style: AlvaStyles().outlineNoneBorderButtonStyle(
-                                  state.isAllowSubmit
-                                      ? YellowKrungsri
-                                      : cloudSoftDeepWhite,
-                                  Colors.transparent,
+                                  state.isAllowSubmit ? YellowKrungsri : cloudSoftDeepWhite, Colors.transparent,
                                   isRadius8: true),
                               child: Text("ยืนยัน",
-                                  style: AlvaStyles().headingSize16w700(
-                                      state.isAllowSubmit
-                                          ? BTN_SELECTED_TEXT_COLOR_NEW
-                                          : smockGrey)),
+                                  style: AlvaStyles().headingSize16w700(state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
                             ),
                           ),
                         )
@@ -113,9 +110,7 @@ class ShippingAddressScreen extends StatelessWidget {
         color: whitePure,
         child: ListView(
           children: [
-            AlvaText(
-                title: AppStrings().shippingAddressDescription,
-                textStyle: AlvaStyles().headingSize12w400(spaceGrey123)),
+            AlvaText(title: AppStrings().shippingAddressDescription, textStyle: AlvaStyles().headingSize12w400(spaceGrey123)),
             SizedBox(
               height: 24,
             ),
@@ -153,26 +148,15 @@ class ShippingAddressScreen extends StatelessWidget {
                           maxLines: item.maxLines,
                           showCounter: item.isShowCounter,
                           onFocusChange: () {
-                            state.formResult!
-                                .where((element) =>
-                                    element.fieldName == item.fieldName)
-                                .first
-                                .value = item.controller!.text;
+                            state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
                           },
-                          isAllowAutoAddPhoneFormat:
-                              item.fieldName == 'phone' ? true : false,
-                          isAllowAutoAddEmailFormat:
-                              item.fieldName == 'email' ? true : false,
+                          isAllowAutoAddPhoneFormat: item.fieldName == 'phone' ? true : false,
+                          isAllowAutoAddEmailFormat: item.fieldName == 'email' ? true : false,
                         );
                       } else if (item.formType == formTypeDropdown) {
                         bool isDisable = true;
                         if (item.matchField != null) {
-                          if (state.formResult!
-                                  .where((element) =>
-                                      element.fieldName == item.matchField)
-                                  .first
-                                  .value!
-                                  .isNotEmpty &&
+                          if (state.formResult!.where((element) => element.fieldName == item.matchField).first.value!.isNotEmpty &&
                               item.options!.length > 1) {
                             isDisable = false;
                           }
@@ -191,15 +175,11 @@ class ShippingAddressScreen extends StatelessWidget {
                           options: item.options!,
                           onChanged: (value) async {
                             DropdownAddressModel model = value;
-                            var field = state.formResult!
-                                .where((element) =>
-                                    item.fieldName == element.fieldName)
-                                .first;
+                            var field = state.formResult!.where((element) => item.fieldName == element.fieldName).first;
                             field.id = model.id;
                             field.value = model.nameTh;
 
-                            final myBloc =
-                                BlocProvider.of<ShippingAddressBloc>(ctx);
+                            final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
 
                             myBloc.updateDropdownSelected(ctx,
                                 id: field.id,
