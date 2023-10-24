@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
@@ -20,6 +22,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_b
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -56,11 +59,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
-  showLoading(BuildContext context) {
-    GeneralDialog().showLoadingDialog(context: context);
-    Future.delayed(const Duration(seconds: 10)).then((value) => Navigator.pop(context));
-  }
-
   bool isMorePageToLoad(ProductList productList) {
     bool isMore = false;
 
@@ -69,6 +67,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
 
     return isMore;
+  }
+
+  Future<void> _checkTermAndConAcceptedVersion(BuildContext context) async {
+    final nav = Navigator.of(context);
+    bool tc = await TermAndConHelper().isTermAndConAccepted();
+    if (!tc) {
+      nav.pushNamed(Routes.termAndCon.toStringPath());
+    }
   }
 
   @override
@@ -83,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               listener: (context, state) {
                 // TODO: implement listener
                 if (state.authStatus == AuthStatus.success) {
+                  _checkTermAndConAcceptedVersion(context);
                   context.read<ProductListBloc>().add(const GetProductList());
                 }
               },

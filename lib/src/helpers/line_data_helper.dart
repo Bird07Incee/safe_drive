@@ -120,4 +120,9 @@ class LineDataHelper {
     var data = await getSocialData();
     return data["refresh_token"] ?? '';
   }
+
+  Future<String> getTAndC() async {
+    var data = await getSocialData();
+    return data["tc_version"] ?? '';
+  }
 }
