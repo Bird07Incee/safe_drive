@@ -5,6 +5,7 @@ import 'package:intl/intl.dart' as intl;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 // import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
@@ -40,6 +41,27 @@ class ProductCardWidget extends StatelessWidget {
     temp += "</p>";
 
     return temp;
+  }
+
+  Widget promos(Product p) {
+    List<InlineSpan> l = [];
+    int len = p.promotionTag.length;
+    for (var i = 0; i < len; i++) {
+      l.add(TextSpan(text: p.promotionTag[i], style: AlvaStyles().headingSize10w500(spaceGrey)));
+      if (i != len - 1) {
+        l.add(WidgetSpan(
+          child: Container(
+            width: 1,
+            height: 16,
+            margin: EdgeInsets.only(left: 6, right: 6),
+            color: cloudSoftDeepWhite,
+          ),
+        ));
+      }
+    }
+    return RichText(
+      text: TextSpan(children: l),
+    );
   }
 
   @override
@@ -238,35 +260,7 @@ class ProductCardWidget extends StatelessWidget {
                                     ),
                                     Visibility(
                                       visible: products[index].promotionTag.isEmpty ? false : true,
-                                      child: Row(
-                                        children: products[index]
-                                            .promotionTag
-                                            .map((tag) => Row(
-                                                  children: [
-                                                    Container(
-                                                      margin: const EdgeInsets.symmetric(vertical: 4),
-                                                      child: Text(
-                                                        tag,
-                                                        style: AlvaStyles().headingSize10w500(spaceGrey),
-                                                      ),
-                                                    ),
-
-                                                    // add srperator exclude tail
-                                                    if (products[index].promotionTag.indexOf(tag) !=
-                                                        products[index].promotionTag.length - 1)
-                                                      const Text(
-                                                        "| ",
-                                                        style: TextStyle(color: cloudSoftDeepWhite),
-                                                      )
-                                                    // const VerticalDivider(
-                                                    //   width: 8,
-                                                    //   thickness: 100,
-                                                    //   color: Colors.grey,
-                                                    // )
-                                                  ],
-                                                ))
-                                            .toList(),
-                                      ),
+                                      child: promos(products[index])
                                     ),
                                     const SizedBox(
                                       height: 16,
@@ -313,8 +307,11 @@ class ProductCardWidget extends StatelessWidget {
                                         },
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 16,
+                                    Visibility(
+                                      visible: products[index].tagline == "" ? false : true,
+                                      child: const SizedBox(
+                                        height: 16,
+                                      ),
                                     ),
                                     Visibility(
                                       visible: products[index].discountPrice != 0,
