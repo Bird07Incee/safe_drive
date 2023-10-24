@@ -63,16 +63,19 @@ class ShippingAddressScreen extends StatelessWidget {
                                 if (state.isAllowSubmit) {
                                   var listFormResult = state.formResult;
                                   if (listFormResult!.isNotEmpty) {
-                                    ShippingAddressModel model = ShippingAddressModel(
-                                        fullName: listFormResult.where((element) => element.fieldName == 'name').first.value!,
-                                        mobileNumber: listFormResult.where((element) => element.fieldName == 'phone').first.value!,
-                                        emailAddress: listFormResult.where((element) => element.fieldName == 'email').first.value!,
-                                        fullAddress: listFormResult.where((element) => element.fieldName == 'address').first.value!,
-                                        province: listFormResult.where((element) => element.fieldName == 'province').first.value!,
-                                        district: listFormResult.where((element) => element.fieldName == 'district').first.value!,
-                                        subDistrict: listFormResult.where((element) => element.fieldName == 'subdistrict').first.value!,
-                                        zipCode: listFormResult.where((element) => element.fieldName == 'zipcode').first.value!);
-                                    Navigator.pop(context, model);
+                                    state.copyWith(
+                                        address: ShippingAddressModel(
+                                            fullName: listFormResult.where((element) => element.fieldName == 'name').first.value!,
+                                            mobileNumber: listFormResult.where((element) => element.fieldName == 'phone').first.value!,
+                                            emailAddress: listFormResult.where((element) => element.fieldName == 'email').first.value!,
+                                            fullAddress: listFormResult.where((element) => element.fieldName == 'address').first.value!,
+                                            province: listFormResult.where((element) => element.fieldName == 'province').first.value!,
+                                            district: listFormResult.where((element) => element.fieldName == 'district').first.value!,
+                                            subDistrict: listFormResult.where((element) => element.fieldName == 'subdistrict').first.value!,
+                                            zipCode: listFormResult.where((element) => element.fieldName == 'zipcode').first.value!));
+                                    if (!state.addressModel.isEmpty) {
+                                      Navigator.pop(context);
+                                    }
                                   }
                                 }
                               },
