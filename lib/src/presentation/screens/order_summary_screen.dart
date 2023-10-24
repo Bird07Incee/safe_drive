@@ -21,7 +21,6 @@ class OrderSummaryScreen extends StatelessWidget {
 
   void onBack(BuildContext context) {
     var stack = CurrentRouteObserver.instance.stack;
-    print('route stack : $stack');
     if (stack.contains(Routes.initial.toStringPath())) {
       Navigator.pop(context);
     } else {
@@ -158,8 +157,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 ? GestureDetector(
                                                     behavior: HitTestBehavior.translucent,
                                                     onTap: () {
-                                                      //TODO: Go add address
-                                                      context.read<ShippingAddressBloc>().mockAddress();
+                                                      // context.read<ShippingAddressBloc>().mockAddress();
+                                                      Navigator.pushNamed(context, Routes.shippingAddress.toStringPath());
                                                     },
                                                     child: Container(
                                                       width: maxWidth - 32,
@@ -220,7 +219,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                       ),
                                                       GestureDetector(
                                                         onTap: () {
-                                                          //TODO: Go to edit address
+                                                          Navigator.pushNamed(context, Routes.shippingAddress.toStringPath());
                                                         },
                                                         child: Container(
                                                           width: 24,
