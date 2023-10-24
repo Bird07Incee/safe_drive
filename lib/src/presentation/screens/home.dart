@@ -89,7 +89,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               listener: (context, state) {
                 // TODO: implement listener
                 if (state.authStatus == AuthStatus.success) {
-                  _checkTermAndConAcceptedVersion(context);
                   context.read<ProductListBloc>().add(const GetProductList());
                 }
               },
@@ -98,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   builder: (context, state) {
                     // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
                     if (state.productListStatus == GetProductListStatus.success) {
+                      _checkTermAndConAcceptedVersion(context);
                       return Container(
                         color: cloudyWhite,
                         child: ListView(
