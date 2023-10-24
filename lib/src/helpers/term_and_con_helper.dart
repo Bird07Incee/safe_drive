@@ -5,7 +5,7 @@ class TermAndConHelper {
   Future<bool> isTermAndConAccepted() async {
     String acceptedVersion = await PreferencesHelper.getString("tcVersion");
     String currentVersion = await LineDataHelper().getTAndC();
-    return acceptedVersion == currentVersion;
+    return (acceptedVersion == currentVersion && currentVersion.isNotEmpty);
   }
 
   void setTermAndConToAccept() async {
