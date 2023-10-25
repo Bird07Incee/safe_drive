@@ -186,7 +186,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             myBloc.updateStepOneVariables(
                                               groupValueRadio:
                                                   widget.arguments!.product.productionOptionals[index].label,
-                                              price: widget.arguments!.product.productionOptionals[index].price,
+                                              price: widget.arguments!.product.productionOptionals[index].price + widget.arguments!.product.price,
                                               indexSelect: index,
                                             );
                                             myBloc.updateStepTwoVariables(
@@ -270,8 +270,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               } else {
                                                                 myBloc.updateStepOneVariables(
                                                                   groupValueRadio: value.toString(),
-                                                                  price: widget.arguments!.product
-                                                                      .productionOptionals[index].price,
+                                                                  price: widget.arguments!.product.productionOptionals[index].price + widget.arguments!.product.price,
                                                                   indexSelect: index,
                                                                 );
                                                                 myBloc.updateStepTwoVariables(
