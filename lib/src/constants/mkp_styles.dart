@@ -28,6 +28,8 @@ const spaceGrey = Color(0xff5A5A5A);
 
 const spaceGrey123 = Color(0xff7b7b7b);
 
+const grey300 = Color(0xff9c9c9c);
+
 const whiteFalse = Color(0xffFAFCFF);
 
 const cloudyWhite = Color(0xffF3F3F3);

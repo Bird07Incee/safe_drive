@@ -184,7 +184,7 @@ class ShippingAddressScreen extends StatelessWidget {
 
                             final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
 
-                            myBloc.updateDropdownSelected(ctx,
+                            await myBloc.updateDropdownSelected(ctx,
                                 id: field.id,
                                 fieldName: item.fieldName,
                                 listForm: state.listFormWidget,

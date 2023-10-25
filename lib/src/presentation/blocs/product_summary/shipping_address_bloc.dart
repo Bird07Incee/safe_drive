@@ -60,16 +60,9 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       var listClearDataSelectedProvince = [getDistrict, getSubDistrict, getZipcode];
       for (int i = 0; i < listClearDataSelectedProvince.length; i++) {
         listForm!.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.controller!.clear();
-        listForm
-            .where((element) => element.fieldName == listClearDataSelectedProvince[i])
-            .first
-            .options!
-            .clear();
+        listForm.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.options!.clear();
         listResult!.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.id = '';
-        listResult
-            .where((element) => element.fieldName == listClearDataSelectedProvince[i])
-            .first
-            .value = '';
+        listResult.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.value = '';
       }
       if (listForm!.where((element) => element.fieldName == getDistrict).first.options!.isEmpty) {
         emit(state.copyWith(status: ShippingAddressStatus.fetching));
@@ -82,11 +75,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
             listDistrict.add(DropdownAddressModel.fromJson(items[i]));
           }
 
-          listForm
-              .where((element) => element.fieldName == getDistrict)
-              .first
-              .options!
-              .addAll(listDistrict);
+          listForm.where((element) => element.fieldName == getDistrict).first.options!.addAll(listDistrict);
 
           emit(state.copyWith(status: ShippingAddressStatus.success, formWidgetModel: listForm, formResultModel: listResult));
         }
@@ -95,16 +84,9 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       var listClearDataSelectedProvince = [getSubDistrict, getZipcode];
       for (int i = 0; i < listClearDataSelectedProvince.length; i++) {
         listForm!.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.controller!.clear();
-        listForm
-            .where((element) => element.fieldName == listClearDataSelectedProvince[i])
-            .first
-            .options!
-            .clear();
+        listForm.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.options!.clear();
         listResult!.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.id = '';
-        listResult
-            .where((element) => element.fieldName == listClearDataSelectedProvince[i])
-            .first
-            .value = '';
+        listResult.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.value = '';
       }
       if (listForm!.where((element) => element.fieldName == getSubDistrict).first.options!.isEmpty) {
         emit(state.copyWith(status: ShippingAddressStatus.fetching));
@@ -116,34 +98,15 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
             listSubDistrict.add(DropdownAddressModel.fromJson(items[i]));
           }
 
-          listForm
-              .where((element) => element.fieldName == getSubDistrict)
-              .first
-              .options!
-              .addAll(listSubDistrict);
+          listForm.where((element) => element.fieldName == getSubDistrict).first.options!.addAll(listSubDistrict);
           emit(state.copyWith(status: ShippingAddressStatus.success, formWidgetModel: listForm, formResultModel: listResult));
         }
       }
     } else if (fieldName == getSubDistrict) {
-      listForm!
-          .where((element) => element.fieldName == getZipcode)
-          .first
-          .controller!
-          .clear();
-      listForm
-          .where((element) => element.fieldName == getZipcode)
-          .first
-          .options!
-          .clear();
-      if (listResult!
-          .where((element) => element.fieldName == getSubDistrict)
-          .first
-          .value!
-          .isNotEmpty) {
-        var subDistrict = listForm
-            .where((element) => element.fieldName == getSubDistrict)
-            .first
-            .options;
+      listForm!.where((element) => element.fieldName == getZipcode).first.controller!.clear();
+      listForm.where((element) => element.fieldName == getZipcode).first.options!.clear();
+      if (listResult!.where((element) => element.fieldName == getSubDistrict).first.value!.isNotEmpty) {
+        var subDistrict = listForm.where((element) => element.fieldName == getSubDistrict).first.options;
 
         for (int i = 0; i < subDistrict!.length; i++) {
           if (!listZipCode.contains(subDistrict[i].zipCode)) {
@@ -151,26 +114,11 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           }
         }
         if (listZipCode.length > 1) {
-          listForm
-              .where((element) => element.fieldName == getZipcode)
-              .first
-              .options!
-              .addAll(listZipCode);
+          listForm.where((element) => element.fieldName == getZipcode).first.options!.addAll(listZipCode);
         } else if (listZipCode.length == 1) {
-          listForm
-              .where((element) => element.fieldName == getZipcode)
-              .first
-              .options!
-              .addAll(listZipCode);
-          listForm
-              .where((element) => element.fieldName == getZipcode)
-              .first
-              .controller!
-              .text = listZipCode.first;
-          listResult
-              .where((element) => element.fieldName == getZipcode)
-              .first
-              .value = listZipCode.first;
+          listForm.where((element) => element.fieldName == getZipcode).first.options!.addAll(listZipCode);
+          listForm.where((element) => element.fieldName == getZipcode).first.controller!.text = listZipCode.first;
+          listResult.where((element) => element.fieldName == getZipcode).first.value = listZipCode.first;
         }
       }
     }
@@ -207,14 +155,13 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
 
         List<FormWidgetModel> listFormWidget = [
           FormWidgetModel(
-            label: 'ชื่อ นามสกุล',
-            controller: TextEditingController(),
-            fieldName: 'name',
-            formType: 'textField',
-            required: true,
-            maxLength: 250,
-            maxLines: 1,
-          ),
+              label: 'ชื่อ นามสกุล',
+              controller: TextEditingController(),
+              fieldName: 'name',
+              formType: 'textField',
+              required: true,
+              maxLength: 250,
+              maxLines: null),
           FormWidgetModel(
               label: 'เบอร์โทรศัพท์',
               controller: TextEditingController(),
@@ -228,7 +175,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
                     RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
               ],
               required: true,
-              maxLines: 1),
+              maxLines: null),
           FormWidgetModel(
               label: 'อีเมล',
               controller: TextEditingController(),
@@ -236,7 +183,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
               formType: 'textField',
               required: true,
               maxLength: 250,
-              maxLines: 1),
+              maxLines: null),
           FormWidgetModel(
               label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
               controller: TextEditingController(),

@@ -113,13 +113,15 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                       }
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+                                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                                       child: Text(items[index].nameTh!),
                                     ),
                                   );
                                 },
                                 separatorBuilder: (BuildContext context, int index) {
-                                  return Divider();
+                                  return Divider(
+                                    height: 0,
+                                  );
                                 },
                                 itemCount: widget.options!.length,
                               ),
@@ -151,7 +153,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                     ? blackInBlack
                                     : cloudSoftDeepWhite
                                 : blackInBlack,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w500,
                             fontSize: 12,
                             fontFamily: fontFamily,
                           ),
@@ -188,32 +190,30 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                   children: [
                                     Text(
                                       !showOutsideLabel ? widget.label ?? '' : '',
-                                      style: AlvaStyles().bodySize12W600(
-                                          widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
+                                      style: AlvaStyles().bodySize12W600(widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
                                     ),
                                   ],
                                 )
                               : null,
                           suffixIcon: widget.options!.length == 1
                               ? null
-                              : Icon(Icons.keyboard_arrow_down_outlined,
-                                  size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
+                              : Icon(Icons.keyboard_arrow_down_outlined, size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
                           fillColor: cloudSoftDeepWhite,
                           border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: blackInBlack),
+                            borderSide: BorderSide(color: grey300),
                             borderRadius: BorderRadius.circular(widget.borderRadius),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: blackInBlack, width: 2),
+                            borderSide: BorderSide(color: grey300, width: 2),
                             borderRadius: BorderRadius.circular(widget.borderRadius),
                           ),
                           disabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: widget.disable
                                     ? widget.options!.length == 1
-                                        ? blackInBlack
+                                        ? grey300
                                         : cloudSoftDeepWhite
-                                    : blackInBlack,
+                                    : grey300,
                                 width: 1),
                             borderRadius: BorderRadius.circular(widget.borderRadius),
                           ),

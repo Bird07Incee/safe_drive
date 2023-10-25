@@ -228,19 +228,14 @@ class TextInputWidgetState extends State<TextInputWidget> {
               textAlign: TextAlign.left,
               text: TextSpan(
                 text: widget.label ?? '',
-                style: TextStyle(
-                    color: widget.labelColor ?? Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    fontFamily: fontFamily),
+                style: TextStyle(color: widget.labelColor ?? Colors.black, fontWeight: FontWeight.w500, fontSize: 12, fontFamily: fontFamily),
               ),
             ),
           ),
           SizedBox(height: showOutsideLabel ? 4 : 0),
           Focus(
             child: TextFormField(
-              autovalidateMode:
-                  widget.required ? (widget.autoValidateMode ?? AutovalidateMode.onUserInteraction) : null,
+              autovalidateMode: widget.required ? (widget.autoValidateMode ?? AutovalidateMode.onUserInteraction) : null,
               textCapitalization: widget.textCapitalization,
               readOnly: widget.readOnly,
               inputFormatters: widget.inputFormatters ??
@@ -248,8 +243,8 @@ class TextInputWidgetState extends State<TextInputWidget> {
                     FilteringTextInputFormatter.allow(RegExp(r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
                         '"'
                         "]")),
-                    FilteringTextInputFormatter.deny(RegExp(
-                        r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
+                    FilteringTextInputFormatter.deny(
+                        RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
                   ],
               focusNode: focusNode,
               initialValue: widget.initialValue,
@@ -300,7 +295,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
                         ? spaceGrey
                         : Colors.white,
                 border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: blackInBlack),
+                  borderSide: BorderSide(color: grey300),
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
                 focusedBorder: UnderlineInputBorder(
@@ -308,7 +303,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: blackInBlack, width: 1),
+                  borderSide: BorderSide(color: grey300, width: 1),
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
               ),
@@ -325,8 +320,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
                   // เช็ค Limit Length text ภาษาไทย
                   if (widget.maxLength != null && text.isNotEmpty && text.length > widget.maxLength!) {
                     widget.controller!.text = text.substring(0, text.length - (text.length - widget.maxLength!));
-                    widget.controller!.selection =
-                        TextSelection.fromPosition(TextPosition(offset: widget.controller!.text.length));
+                    widget.controller!.selection = TextSelection.fromPosition(TextPosition(offset: widget.controller!.text.length));
                   }
                   if (widget.isAllowAutoAddEmailFormat) {
                     _validateEmail(text);
