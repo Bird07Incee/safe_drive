@@ -22,9 +22,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   @override
   Widget build(BuildContext context) {
     final myBloc = BlocProvider.of<ProductOptionBloc>(context);
-    int mainPrice = widget.arguments!.product.discountPrice == 0
-        ? widget.arguments!.product.price
-        : widget.arguments!.product.discountPrice;
+    int mainPrice = widget.arguments!.product.price;
     resetAllState() {
       myBloc.updateStepOneVariables(
         groupValueRadio: "",
