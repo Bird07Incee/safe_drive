@@ -1,15 +1,46 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/inquiry_data.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
+import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 part 'order_success_event.dart';
 part 'order_success_state.dart';
 
 class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
   OrderSuccessBloc() : super(OrderSuccessState()) {
+    on<GetOrderSuccess>(_onGetOrderSuccess);
     on<GetOrderSuccessMock>(_onGetOrderSuccessMock);
+  }
+
+  _onGetOrderSuccess(GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {
+    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
+    LineDataHelper lineDataHelper = LineDataHelper();
+    // final baseUrl = Environment().getValue("BFF_BASE_URL");
+    // final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    String accessToken = await lineDataHelper.getLineAccessToken();
+
+    var payload = {"caller": "mkp", "invoiceNo": event.invoiceNo};
+
+    emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
+
+    try {
+      Response response = await dioUtilityRepository.postByURL(
+          "https://api.marketplace.ksauto.net/mercury-mocker-dev/query/inquiry-success", payload,
+          headers: {"Authorization": "Bearer $accessToken"});
+
+      final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
+
+      emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
+      ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+    } catch (e) {
+      emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
+    }
   }
 
   _onGetOrderSuccessMock(GetOrderSuccessMock event, Emitter<OrderSuccessState> emit) async {

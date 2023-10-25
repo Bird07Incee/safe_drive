@@ -12,3 +12,10 @@ class GetOrderSuccessMock extends OrderSuccessEvent {
 
   final BuildContext context;
 }
+
+class GetOrderSuccess extends OrderSuccessEvent {
+  const GetOrderSuccess(this.context, this.invoiceNo);
+
+  final BuildContext context;
+  final String invoiceNo;
+}

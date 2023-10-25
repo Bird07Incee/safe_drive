@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/inquiry_data.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -24,7 +25,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     // TODO: implement initState
     super.initState();
 
-    context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
+    context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, "abcd1234"));
   }
 
   @override
@@ -190,7 +191,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("${orderSuccessData.productPrice} บาท",
+                                        Text("${int.parse(orderSuccessData.productPrice ?? "0").toDecimalFormat()} บาท",
                                             style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                         SizedBox(
                                           height: 4,
