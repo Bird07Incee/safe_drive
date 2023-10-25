@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/main.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Future<void> _checkTermAndConAcceptedVersion(BuildContext context) async {
     final nav = Navigator.of(context);
     bool tc = await TermAndConHelper().isTermAndConAccepted();
-    if (!tc) {
+    if (!tc  && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
       nav.pushNamed(Routes.termAndCon.toStringPath());
     }
   }
