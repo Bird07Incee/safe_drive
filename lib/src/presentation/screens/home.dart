@@ -93,7 +93,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 }
               },
               builder: (context, state) {
-                return BlocBuilder<ProductListBloc, ProductListState>(
+                return BlocConsumer<ProductListBloc, ProductListState>(
+                  listener: (context, state) {
+                    if (state.productListStatus == GetProductListStatus.success) {
+                      _checkTermAndConAcceptedVersion(context);
+                    }
+                  },
                   builder: (context, state) {
                     // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
                     if (state.productListStatus == GetProductListStatus.success) {
