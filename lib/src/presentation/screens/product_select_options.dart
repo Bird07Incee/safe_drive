@@ -22,6 +22,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   @override
   Widget build(BuildContext context) {
     final myBloc = BlocProvider.of<ProductOptionBloc>(context);
+    int mainPrice = widget.arguments!.product.discountPrice == 0
+        ? widget.arguments!.product.price
+        : widget.arguments!.product.discountPrice;
     resetAllState() {
       myBloc.updateStepOneVariables(
         groupValueRadio: "",
@@ -186,7 +189,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             myBloc.updateStepOneVariables(
                                               groupValueRadio:
                                                   widget.arguments!.product.productionOptionals[index].label,
-                                              price: widget.arguments!.product.productionOptionals[index].price + widget.arguments!.product.price,
+                                              price: widget.arguments!.product.productionOptionals[index].price +
+                                                  mainPrice,
                                               indexSelect: index,
                                             );
                                             myBloc.updateStepTwoVariables(
@@ -270,7 +274,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               } else {
                                                                 myBloc.updateStepOneVariables(
                                                                   groupValueRadio: value.toString(),
-                                                                  price: widget.arguments!.product.productionOptionals[index].price + widget.arguments!.product.price,
+                                                                  price: widget.arguments!.product
+                                                                          .productionOptionals[index].price +
+                                                                      mainPrice,
                                                                   indexSelect: index,
                                                                 );
                                                                 myBloc.updateStepTwoVariables(
