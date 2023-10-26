@@ -31,7 +31,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
   GlobalKey<FormState>? mainFormKey = GlobalKey<FormState>();
 
   List<DropdownAddressModel> listSubDistrict = [];
-  List<String> listZipCode = [];
+  List<DropdownAddressModel> listZipCode = [];
 
   validateToActiveSubmitButton() {
     bool isAllowSubmit = true;
@@ -124,19 +124,23 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       listForm!.where((element) => element.fieldName == getZipcode).first.controller!.clear();
       listForm.where((element) => element.fieldName == getZipcode).first.options!.clear();
       if (listResult!.where((element) => element.fieldName == getSubDistrict).first.value!.isNotEmpty) {
-        var subDistrict = listForm.where((element) => element.fieldName == getSubDistrict).first.options;
-
-        for (int i = 0; i < subDistrict!.length; i++) {
-          if (!listZipCode.contains(subDistrict[i].zipCode)) {
-            listZipCode.add(subDistrict[i].zipCode!);
+        var selected = listResult.where((element) => element.fieldName == getSubDistrict).first.value!;
+        var subDistrict = (listForm.where((element) => element.fieldName == getSubDistrict).first.options as List)
+            .map((item) => item as DropdownAddressModel)
+            .toList();
+        for (int i = 0; i < subDistrict.length; i++) {
+          if (subDistrict[i].nameTh == selected) {
+            // if (!listZipCode[i].zipCode!.contains(subDistrict[i].zipCode)) {
+            listZipCode.add(DropdownAddressModel(id: i.toString(), zipCode: subDistrict[i].zipCode!));
+            // }
           }
         }
         if (listZipCode.length > 1) {
           listForm.where((element) => element.fieldName == getZipcode).first.options!.addAll(listZipCode);
         } else if (listZipCode.length == 1) {
           listForm.where((element) => element.fieldName == getZipcode).first.options!.addAll(listZipCode);
-          listForm.where((element) => element.fieldName == getZipcode).first.controller!.text = listZipCode.first;
-          listResult.where((element) => element.fieldName == getZipcode).first.value = listZipCode.first;
+          listForm.where((element) => element.fieldName == getZipcode).first.controller!.text = listZipCode.first.zipCode!;
+          listResult.where((element) => element.fieldName == getZipcode).first.value = listZipCode.first.zipCode!;
         }
       }
     }

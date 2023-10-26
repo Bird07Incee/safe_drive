@@ -136,17 +136,19 @@ class ShippingAddressScreen extends StatelessWidget {
                           outsideLabel: true,
                           marginBottom: 15,
                           required: required,
-                          textInputAction: TextInputAction.next,
+                          textInputAction: item.fieldName != 'address' ? TextInputAction.next : TextInputAction.done,
                           keyboardType: item.textInputType,
                           maxLength: item.maxLength,
                           maxLines: item.maxLines,
                           showCounter: item.isShowCounter,
                           focusNode: item.focusNode,
                           onEditingCompleted: () {
-                            int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
-                            if (state.listFormWidget![index].focusNode != null) {
-                              if (state.listFormWidget![index].controller!.text.isEmpty) {
-                                FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
+                            if (item.fieldName != 'address') {
+                              int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
+                              if (state.listFormWidget![index].focusNode != null) {
+                                if (state.listFormWidget![index].controller!.text.isEmpty) {
+                                  FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
+                                }
                               }
                             }
                           },

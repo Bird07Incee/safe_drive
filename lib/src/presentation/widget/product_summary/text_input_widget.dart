@@ -157,8 +157,6 @@ class TextInputWidgetState extends State<TextInputWidget> {
 
   @override
   void dispose() {
-    focusNode!.dispose();
-
     super.dispose();
   }
 
