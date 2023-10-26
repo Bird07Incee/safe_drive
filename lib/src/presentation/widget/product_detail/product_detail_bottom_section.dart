@@ -12,7 +12,6 @@ import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
-import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class PDBottomSection extends StatefulWidget {
   const PDBottomSection({super.key});
@@ -280,12 +279,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                 buildAsync: true,
                                 customStylesBuilder: (element) {
-                                  return {
-                                    'font-family': 'Krungsri Condensed',
-                                    'font-size': '14px',
-                                    'max-lines': '5',
-                                    'text-overflow': 'ellipsis'
-                                  };
+                                  return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'max-lines': '5', 'text-overflow': 'ellipsis'};
                                 },
                                 factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
@@ -296,8 +290,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               data.isNotEmpty
                   ? _tabController.index == 1
                       ? LayoutBuilder(builder: (context, constraints) {
-                          final span =
-                              TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
+                          final span = TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
                           final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
                           tp.layout(maxWidth: constraints.maxWidth);
                           final numLines = tp.computeLineMetrics().length;
@@ -320,12 +313,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                                     isPressedReadMore = !isPressedReadMore;
                                                   }));
                                                 },
-                                                style: AlvaStyles().outlineNoneBorderButtonStyle(
-                                                    Colors.transparent, Colors.transparent),
+                                                style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, Colors.transparent),
                                                 child: AlvaText(
-                                                  title: isPressedReadMore
-                                                      ? AppStrings().btnHideDescription
-                                                      : AppStrings().btnReadMore,
+                                                  title: isPressedReadMore ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
                                                   textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
                                                   disableSelectableText: true,
                                                 ),
@@ -342,8 +332,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         }));
   }
 
-  Widget buildDetailCardWidget(BuildContext context, Product product,
-      {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget(BuildContext context, Product product, {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
@@ -391,8 +380,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 size: 16,
                               ),
                               const SizedBox(width: 8),
-                              Text("ติดต่อ ${product.merchantMobile}",
-                                  style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                              Text("ติดต่อ ${product.merchantMobile}", style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
                         ),

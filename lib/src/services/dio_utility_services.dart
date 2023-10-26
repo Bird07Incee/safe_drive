@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
 class DioUtilityService with HeaderUtil {
@@ -74,7 +73,7 @@ class DioUtilityService with HeaderUtil {
 class DioClient {
   static final Dio client = Dio();
   Dio get dioClient {
-    client.interceptors.add(DioInterceptor());
+    // client.interceptors.add(DioInterceptor());
     return client;
   }
 }

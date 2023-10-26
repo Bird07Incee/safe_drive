@@ -1,6 +1,6 @@
 part of 'shipping_address_bloc.dart';
 
-class ShippingAddressEvent {
+class ShippingAddressEvent extends Equatable {
   const ShippingAddressEvent();
 
   @override
@@ -8,10 +8,10 @@ class ShippingAddressEvent {
 }
 
 class SetFormWidget extends ShippingAddressEvent {
-  SetFormWidget({required this.listForm, required this.listResult});
+  const SetFormWidget({required this.listForm, required this.listResult});
   final List<FormWidgetModel> listForm;
-  List<FormWidgetResultModel> listResult;
+  final List<FormWidgetResultModel> listResult;
 
   @override
-  List<Object> get props => [listForm];
+  List<Object> get props => [listForm, listResult];
 }

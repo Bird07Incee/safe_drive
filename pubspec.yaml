@@ -94,6 +94,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/
     - assets/images/category/
     - assets/images/wall_charges/
     - assets/homepage/

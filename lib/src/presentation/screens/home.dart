@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
@@ -17,7 +18,6 @@ import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart
 // import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 // import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
-import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_banner.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
@@ -94,11 +94,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 }
               },
               builder: (context, state) {
-                return BlocBuilder<ProductListBloc, ProductListState>(
+                return BlocConsumer<ProductListBloc, ProductListState>(
+                  listener: (context, state) {
+                    if (state.productListStatus == GetProductListStatus.success) {
+                      _checkTermAndConAcceptedVersion(context);
+                    }
+                  },
                   builder: (context, state) {
                     // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
                     if (state.productListStatus == GetProductListStatus.success) {
-                      _checkTermAndConAcceptedVersion(context);
                       return Container(
                         color: cloudyWhite,
                         child: ListView(

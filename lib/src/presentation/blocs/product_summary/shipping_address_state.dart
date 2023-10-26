@@ -1,12 +1,13 @@
 part of 'shipping_address_bloc.dart';
 
-enum ShippingAddressStatus { initial, loading, success, error }
+enum ShippingAddressStatus { initial, loading, success, error, fetching }
 
 extension AddressStatusX on ShippingAddressStatus {
   bool get isInitial => this == ShippingAddressStatus.initial;
   bool get isLoading => this == ShippingAddressStatus.loading;
   bool get isSuccess => this == ShippingAddressStatus.success;
   bool get isError => this == ShippingAddressStatus.error;
+  bool get isFetching => this == ShippingAddressStatus.fetching;
 }
 
 class ShippingAddressState extends Equatable {

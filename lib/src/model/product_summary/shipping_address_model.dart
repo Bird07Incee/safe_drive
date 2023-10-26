@@ -1,8 +1,10 @@
+import 'package:equatable/equatable.dart';
+
 extension AddressX on ShippingAddressModel {
-  bool get isEmpty => this != ShippingAddressModel.empty;
+  bool get isEmpty => this == ShippingAddressModel.empty;
 }
 
-class ShippingAddressModel {
+class ShippingAddressModel extends Equatable {
   final String fullName;
   final String mobileNumber;
   final String emailAddress;
@@ -32,4 +34,9 @@ class ShippingAddressModel {
     subDistrict: '',
     zipCode: '',
   );
+
+  @override
+  // TODO: implement props
+  List<Object?> get props =>
+      [fullName, mobileNumber, emailAddress, fullAddress, province, district, subDistrict, zipCode];
 }

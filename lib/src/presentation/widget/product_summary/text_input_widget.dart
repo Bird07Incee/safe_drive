@@ -39,9 +39,11 @@ class TextInputWidget extends StatefulWidget {
   final int? maxLength;
   bool readOnly;
   final String? suffixText;
+  final FocusNode? focusNode;
 
   final TextInputAction? textInputAction;
   final Function? onFieldSubmitted;
+  final Function? onEditingCompleted;
   final Function? onChanged;
 
   bool disabled;
@@ -77,6 +79,7 @@ class TextInputWidget extends StatefulWidget {
     this.keyboardType,
     this.isPasswordField = false,
     this.controller,
+    this.focusNode,
     this.maxLines = 1,
     this.prefixIcon,
     this.outsideLabel = false,
@@ -91,6 +94,7 @@ class TextInputWidget extends StatefulWidget {
     this.readOnly = false,
     this.textInputAction,
     this.onFieldSubmitted,
+    this.onEditingCompleted,
     this.onChanged,
     this.suffixText,
     this.disabled = false,
@@ -117,6 +121,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
   bool passwordVisible = false;
   FocusNode? focusNode;
   var phoneNumberFormatter = PhoneNumberFormatter();
+  var textFormField = TextFormField();
   String _formattedText = '';
 
   @override
@@ -124,9 +129,13 @@ class TextInputWidgetState extends State<TextInputWidget> {
     super.initState();
     final keyboardVisibilityController = KeyboardVisibilityController();
     focusNode = FocusNode();
+    if (widget.focusNode != null) focusNode = widget.focusNode;
     focusNode!.addListener(() {
       if (widget.onFocus != null) {
         widget.onFocus!();
+      }
+      if (widget.isAllowAutoAddEmailFormat && !focusNode!.hasFocus) {
+        textFormField.validator!;
       }
     });
 
@@ -148,8 +157,6 @@ class TextInputWidgetState extends State<TextInputWidget> {
 
   @override
   void dispose() {
-    focusNode!.dispose();
-
     super.dispose();
   }
 
@@ -215,6 +222,127 @@ class TextInputWidgetState extends State<TextInputWidget> {
       return null;
     }
 
+    textFormField = TextFormField(
+      autovalidateMode: widget.required ? (widget.autoValidateMode ?? AutovalidateMode.onUserInteraction) : null,
+      textCapitalization: widget.textCapitalization,
+      readOnly: widget.readOnly,
+      inputFormatters: widget.inputFormatters ??
+          [
+            FilteringTextInputFormatter.allow(RegExp(r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
+                '"'
+                "]")),
+            FilteringTextInputFormatter.deny(
+                RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
+          ],
+      focusNode: focusNode,
+      initialValue: widget.initialValue,
+      minLines: widget.minLines ?? 1,
+      maxLines: widget.maxLines,
+      controller: widget.controller,
+      obscureText: !widget.isPasswordField ? false : !passwordVisible,
+      textAlign: widget.textAlign ?? TextAlign.left,
+      maxLength: widget.isAllowAutoAddPhoneFormat ? 12 : widget.maxLength,
+      textInputAction: widget.textInputAction,
+      style: AlvaStyles().heading3Size16Bold(),
+      decoration: InputDecoration(
+        counterText: "",
+        errorText: widget.errRequiredMessage,
+        errorStyle: AlvaStyles().bodySize12W400(RedWordShow),
+        suffixStyle: TextStyle(
+          color: Colors.grey,
+          fontSize: textSize(14, context),
+        ),
+        suffixText: widget.suffixText,
+        filled: widget.filled == true ? widget.filled : widget.disabled,
+        contentPadding: EdgeInsets.only(
+          left: 0,
+          right: 0,
+          top: widget.padding,
+          bottom: widget.padding,
+        ),
+        isDense: true,
+        label: !showOutsideLabel && widget.label != null
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    !showOutsideLabel ? widget.label ?? '' : '',
+                    style: AlvaStyles().bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW),
+                  ),
+                ],
+              )
+            : null,
+        hintText: widget.placeholder,
+        // labelText: !showOutsideLabel ? widget.label : null,
+        alignLabelWithHint: widget.alignLabelWithHint ?? false,
+        suffixIcon: renderSuffix(),
+        prefixIcon: widget.prefixIcon,
+        fillColor: widget.disabled
+            ? spaceGrey
+            : widget.readOnly
+                ? spaceGrey
+                : Colors.white,
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: grey300),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: widget.readOnly ? spaceGrey : BlueFantasy, width: 2),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: grey300, width: 1),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+        ),
+      ),
+      keyboardType: widget.keyboardType,
+      onFieldSubmitted: (text) {
+        if (widget.onFieldSubmitted != null) {
+          widget.onFieldSubmitted?.call();
+        }
+      },
+      onEditingComplete: () {
+        if (widget.onEditingCompleted != null) {
+          widget.onEditingCompleted?.call();
+        }
+      },
+      onChanged: (text) async {
+        if (widget.onChanged != null && text.isNotEmpty) {
+          widget.onChanged?.call();
+        } else {
+          // เช็ค Limit Length text ภาษาไทย
+          if (widget.maxLength != null && text.isNotEmpty && text.length > widget.maxLength!) {
+            widget.controller!.text = text.substring(0, text.length - (text.length - widget.maxLength!));
+            widget.controller!.selection = TextSelection.fromPosition(TextPosition(offset: widget.controller!.text.length));
+          }
+        }
+        setState(() {});
+      },
+      validator: (value) {
+        var validator = Validator();
+        validator.value = value;
+
+        if (widget.validator != null) {
+          return widget.validator!(value);
+        }
+
+        if (widget.required == true && validator.isBlank) {
+          return widget.errRequiredMessage ?? 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
+        }
+
+        if (widget.required && widget.isAllowAutoAddEmailFormat) {
+          String errorText = _validateEmail(value!) ?? '';
+          if (errorText.isEmpty) {
+            return null;
+          } else {
+            return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
+          }
+        }
+
+        return null;
+      },
+    );
+
     return Container(
       margin: EdgeInsets.only(
         bottom: widget.marginBottom,
@@ -228,130 +356,16 @@ class TextInputWidgetState extends State<TextInputWidget> {
               textAlign: TextAlign.left,
               text: TextSpan(
                 text: widget.label ?? '',
-                style: TextStyle(
-                    color: widget.labelColor ?? Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    fontFamily: fontFamily),
+                style: TextStyle(color: widget.labelColor ?? Colors.black, fontWeight: FontWeight.w500, fontSize: 12, fontFamily: fontFamily),
               ),
             ),
           ),
           SizedBox(height: showOutsideLabel ? 4 : 0),
           Focus(
-            child: TextFormField(
-              autovalidateMode:
-                  widget.required ? (widget.autoValidateMode ?? AutovalidateMode.onUserInteraction) : null,
-              textCapitalization: widget.textCapitalization,
-              readOnly: widget.readOnly,
-              inputFormatters: widget.inputFormatters ??
-                  [
-                    FilteringTextInputFormatter.allow(RegExp(r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
-                        '"'
-                        "]")),
-                    FilteringTextInputFormatter.deny(RegExp(
-                        r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
-                  ],
-              focusNode: focusNode,
-              initialValue: widget.initialValue,
-              minLines: widget.minLines ?? 1,
-              maxLines: widget.maxLines,
-              controller: widget.controller,
-              obscureText: !widget.isPasswordField ? false : !passwordVisible,
-              textAlign: widget.textAlign ?? TextAlign.left,
-              maxLength: widget.isAllowAutoAddPhoneFormat ? 12 : widget.maxLength,
-              textInputAction: widget.textInputAction,
-              style: AlvaStyles().heading3Size16Bold(),
-              decoration: InputDecoration(
-                counterText: "",
-                errorText: widget.errRequiredMessage,
-                errorStyle: AlvaStyles().bodySize12W400(RedWordShow),
-                suffixStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: textSize(14, context),
-                ),
-                suffixText: widget.suffixText,
-                filled: widget.filled == true ? widget.filled : widget.disabled,
-                contentPadding: EdgeInsets.only(
-                  left: 0,
-                  right: 0,
-                  top: widget.padding,
-                  bottom: widget.padding,
-                ),
-                isDense: true,
-                label: !showOutsideLabel && widget.label != null
-                    ? Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            !showOutsideLabel ? widget.label ?? '' : '',
-                            style: AlvaStyles().bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW),
-                          ),
-                        ],
-                      )
-                    : null,
-                hintText: widget.placeholder,
-                // labelText: !showOutsideLabel ? widget.label : null,
-                alignLabelWithHint: widget.alignLabelWithHint ?? false,
-                suffixIcon: renderSuffix(),
-                prefixIcon: widget.prefixIcon,
-                fillColor: widget.disabled
-                    ? spaceGrey
-                    : widget.readOnly
-                        ? spaceGrey
-                        : Colors.white,
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: blackInBlack),
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: widget.readOnly ? spaceGrey : BlueFantasy, width: 2),
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: blackInBlack, width: 1),
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
-                ),
-              ),
-              keyboardType: widget.keyboardType,
-              onFieldSubmitted: (text) {
-                if (widget.onFieldSubmitted != null) {
-                  widget.onFieldSubmitted?.call();
-                }
-              },
-              onChanged: (text) async {
-                if (widget.onChanged != null && text.isNotEmpty) {
-                  widget.onChanged?.call();
-                } else {
-                  // เช็ค Limit Length text ภาษาไทย
-                  if (widget.maxLength != null && text.isNotEmpty && text.length > widget.maxLength!) {
-                    widget.controller!.text = text.substring(0, text.length - (text.length - widget.maxLength!));
-                    widget.controller!.selection =
-                        TextSelection.fromPosition(TextPosition(offset: widget.controller!.text.length));
-                  }
-                  if (widget.isAllowAutoAddEmailFormat) {
-                    _validateEmail(text);
-                  }
-                }
-                setState(() {});
-              },
-              validator: (value) {
-                var validator = Validator();
-                validator.value = value;
-
-                if (widget.validator != null) {
-                  return widget.validator!(value);
-                }
-
-                if (widget.required == true && validator.isBlank) {
-                  return widget.errRequiredMessage ?? 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
-                }
-
-                return null;
-              },
-            ),
+            child: textFormField,
             onFocusChange: (isFocus) {
               if (widget.onFocusChange != null) {
-                widget.onFocusChange?.call();
+                widget.onFocusChange?.call(isFocus);
               }
             },
           ),
@@ -422,7 +436,11 @@ class PhoneNumberFormatter extends TextInputFormatter {
     } else if (formatted.length <= 6) {
       return '${formatted.substring(0, 3)}-${formatted.substring(3)}';
     } else {
-      return '${formatted.substring(0, 3)}-${formatted.substring(3, 6)}-${formatted.substring(6, formatted.length)}';
+      if (formatted.length == 9) {
+        return '${formatted.substring(0, 2)}-${formatted.substring(2, 5)}-${formatted.substring(5, formatted.length)}';
+      } else {
+        return '${formatted.substring(0, 3)}-${formatted.substring(3, 6)}-${formatted.substring(6, formatted.length)}';
+      }
     }
   }
 }
