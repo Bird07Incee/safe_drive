@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
-import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_summary/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -15,6 +15,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/dropdown_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/text_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class ShippingAddressScreen extends StatelessWidget {
   const ShippingAddressScreen({Key? key}) : super(key: key);
@@ -61,21 +62,14 @@ class ShippingAddressScreen extends StatelessWidget {
                             child: OutlinedButton(
                               onPressed: () async {
                                 if (state.isAllowSubmit) {
-                                  var listFormResult = state.formResult;
-                                  if (listFormResult!.isNotEmpty) {
-                                    state.copyWith(
-                                        address: ShippingAddressModel(
-                                            fullName: listFormResult.where((element) => element.fieldName == 'name').first.value!,
-                                            mobileNumber: listFormResult.where((element) => element.fieldName == 'phone').first.value!,
-                                            emailAddress: listFormResult.where((element) => element.fieldName == 'email').first.value!,
-                                            fullAddress: listFormResult.where((element) => element.fieldName == 'address').first.value!,
-                                            province: listFormResult.where((element) => element.fieldName == 'province').first.value!,
-                                            district: listFormResult.where((element) => element.fieldName == 'district').first.value!,
-                                            subDistrict: listFormResult.where((element) => element.fieldName == 'subdistrict').first.value!,
-                                            zipCode: listFormResult.where((element) => element.fieldName == 'zipcode').first.value!));
-                                    if (!state.addressModel.isEmpty) {
-                                      Navigator.pop(context);
-                                    }
+                                  final navigator = Navigator.of(context);
+                                  final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                                  myBloc.onSubmitPressed();
+                                  var stack = CurrentRouteObserver.instance.stack;
+                                  if (stack.contains(Routes.orderSummary.toStringPath())) {
+                                    navigator.pop();
+                                  } else {
+                                    navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
                                   }
                                 }
                               },
@@ -121,37 +115,48 @@ class ShippingAddressScreen extends StatelessWidget {
               return Form(
                   key: myBloc.mainFormKey,
                   onChanged: () {
-                    myBloc.validateToActiveSubmitButton();
+                    bool isAllowSubmit = myBloc.validateToActiveSubmitButton();
+                    if (isAllowSubmit) {
+                      setState(() {});
+                    }
                   },
                   child: Column(
                       children: state.listFormWidget!.map(
                     (FormWidgetModel item) {
                       bool required = true;
 
-                      // if (item.checkRequiredField != null &&
-                      //     item.checkRequiredFieldMatchValue != null) {
-                      //   required = item.checkRequiredFieldMatchValue!.contains(
-                      //       state.listFormWidget!.entireFormMap[item.checkRequiredField]);
-                      // }
-
                       Widget input = Container();
 
                       if (item.formType == formTypeTextField) {
                         input = TextInputWidget(
                           inputFormatters: item.listInputFormatter,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          autoValidateMode: AutovalidateMode.disabled,
                           controller: item.controller,
                           label: item.label,
                           outsideLabel: true,
                           marginBottom: 15,
                           required: required,
-                          textInputAction: TextInputAction.done,
+                          textInputAction: TextInputAction.next,
                           keyboardType: item.textInputType,
                           maxLength: item.maxLength,
                           maxLines: item.maxLines,
                           showCounter: item.isShowCounter,
-                          onFocusChange: () {
-                            state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
+                          focusNode: item.focusNode,
+                          onEditingCompleted: () {
+                            int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
+                            if (state.listFormWidget![index].focusNode != null) {
+                              if (state.listFormWidget![index].controller!.text.isEmpty) {
+                                FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
+                              }
+                            }
+                          },
+                          onFocusChange: (bool isFocus) {
+                            if (!isFocus) {
+                              myBloc.validateToActiveSubmitButton();
+                              setState(() {
+                                state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
+                              });
+                            }
                           },
                           isAllowAutoAddPhoneFormat: item.fieldName == 'phone' ? true : false,
                           isAllowAutoAddEmailFormat: item.fieldName == 'email' ? true : false,

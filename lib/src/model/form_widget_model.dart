@@ -26,6 +26,7 @@ class FormWidgetModel {
   final String? textControllerValue;
   final bool isShowCounter;
   final List<TextInputFormatter>? listInputFormatter;
+  final FocusNode? focusNode;
 
   const FormWidgetModel(
       {this.label = '',
@@ -47,7 +48,8 @@ class FormWidgetModel {
       this.checkRequiredFieldMatchValue,
       this.textControllerValue,
       this.isShowCounter = false,
-      this.listInputFormatter});
+      this.listInputFormatter,
+      this.focusNode});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

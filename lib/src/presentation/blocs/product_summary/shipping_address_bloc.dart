@@ -50,6 +50,24 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       emit(ShippingAddressState(
           listFormWidget: state.listFormWidget, formResult: state.formResult, status: ShippingAddressStatus.success, isAllowSubmit: false));
     }
+    return isAllowSubmit;
+  }
+
+  onSubmitPressed() {
+    if (mainFormKey!.currentState!.validate()) {
+      emit(state.copyWith(
+          status: ShippingAddressStatus.success,
+          address: ShippingAddressModel(
+            fullName: state.formResult!.where((element) => element.fieldName == 'name').first.value!,
+            mobileNumber: state.formResult!.where((element) => element.fieldName == 'phone').first.value!,
+            emailAddress: state.formResult!.where((element) => element.fieldName == 'email').first.value!,
+            fullAddress: state.formResult!.where((element) => element.fieldName == 'address').first.value!,
+            province: state.formResult!.where((element) => element.fieldName == 'province').first.value!,
+            district: state.formResult!.where((element) => element.fieldName == 'district').first.value!,
+            subDistrict: state.formResult!.where((element) => element.fieldName == 'subdistrict').first.value!,
+            zipCode: state.formResult!.where((element) => element.fieldName == 'zipcode').first.value!,
+          )));
+    }
   }
 
   updateDropdownSelected(BuildContext context,
@@ -122,7 +140,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
         }
       }
     }
-
+    validateToActiveSubmitButton();
     emit(state.copyWith(status: ShippingAddressStatus.success, formWidgetModel: listForm, formResultModel: listResult));
   }
 
@@ -157,6 +175,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           FormWidgetModel(
               label: 'ชื่อ นามสกุล',
               controller: TextEditingController(),
+              focusNode: FocusNode(),
               fieldName: 'name',
               formType: 'textField',
               required: true,
@@ -165,6 +184,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           FormWidgetModel(
               label: 'เบอร์โทรศัพท์',
               controller: TextEditingController(),
+              focusNode: FocusNode(),
               fieldName: 'phone',
               keyboardType: TextInputType.number,
               formType: 'textField',
@@ -179,6 +199,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           FormWidgetModel(
               label: 'อีเมล',
               controller: TextEditingController(),
+              focusNode: FocusNode(),
               fieldName: 'email',
               formType: 'textField',
               required: true,
@@ -187,6 +208,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           FormWidgetModel(
               label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
               controller: TextEditingController(),
+              focusNode: FocusNode(),
               fieldName: 'address',
               formType: 'textField',
               required: true,
