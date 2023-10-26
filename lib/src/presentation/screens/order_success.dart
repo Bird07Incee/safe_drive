@@ -4,13 +4,13 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
-import 'package:marketplace_line_oa/src/model/inquiry_data.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
+import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 class OrderSuccessScreen extends StatefulWidget {
   const OrderSuccessScreen({super.key});
@@ -20,12 +20,33 @@ class OrderSuccessScreen extends StatefulWidget {
 }
 
 class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
+  late RouteSettings? settings;
+  String invoiceNo = "";
+
+  void loadInvoice() {
+    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    if (settings != null) {
+      var uriData = Uri.parse(settings!.name!);
+      var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+      invoiceNo = (routingData["invoiceNo"] == null) ? "" : routingData["invoiceNo"];
+      if (invoiceNo != "") {
+        context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
+      } else {
+        context.read<OrderSuccessBloc>().add(SetOrderStatus(GetOrderSuccessDataStatus.error));
+      }
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
 
-    context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, "abcd1234"));
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loadInvoice();
   }
 
   @override
@@ -330,6 +351,15 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       ),
                     ))
               ],
+            );
+          } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.error) {
+            return ErrorScreen(
+              title: ErrorConst().titleNS,
+              subTitle: ErrorConst().subTitleNS,
+              titleBtn: ErrorConst().titleBtnNS,
+              onTap: () {
+                loadInvoice();
+              },
             );
           } else {
             return const LoadingScreen();

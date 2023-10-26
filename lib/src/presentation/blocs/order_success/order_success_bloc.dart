@@ -16,6 +16,11 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
   OrderSuccessBloc() : super(OrderSuccessState()) {
     on<GetOrderSuccess>(_onGetOrderSuccess);
     on<GetOrderSuccessMock>(_onGetOrderSuccessMock);
+    on<SetOrderStatus>(_onSetOrderStatus);
+  }
+
+  _onSetOrderStatus(SetOrderStatus event, Emitter<OrderSuccessState> emit) {
+    emit(state.copyWith(orderSuccessStatus: event.status));
   }
 
   _onGetOrderSuccess(GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {
