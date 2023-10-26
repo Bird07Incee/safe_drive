@@ -65,14 +65,13 @@ class OrderSummaryScreen extends StatelessWidget {
       },
       child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, state) {
-          if (!state.status.isSuccess) {
-            //TODO: remove mock product
-            context.read<ProductDetailBloc>().add(GetProductByID());
-            context.read<ProductOptionBloc>().updateStepOneVariables(groupValueRadio: "สีขาว", price: 0);
-            context
-                .read<ProductOptionBloc>()
-                .updateStepTwoVariables(groupValueRadio: "ความยาวสาย 3 เมตร", price: 99999999);
-          }
+          // if (!state.status.isSuccess) {
+          //   context.read<ProductDetailBloc>().add(GetProductByID());
+          //   context.read<ProductOptionBloc>().updateStepOneVariables(groupValueRadio: "สีขาว", price: 0);
+          //   context
+          //       .read<ProductOptionBloc>()
+          //       .updateStepTwoVariables(groupValueRadio: "ความยาวสาย 3 เมตร", price: 99999999);
+          // }
           int showPrice = state.product.discountPrice > 0 ? state.product.discountPrice : state.product.price;
           return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
             listener: (context, state) {
