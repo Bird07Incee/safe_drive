@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Future<void> _checkTermAndConAcceptedVersion(BuildContext context) async {
     final nav = Navigator.of(context);
     bool tc = await TermAndConHelper().isTermAndConAccepted();
-    if (!tc  && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
+    if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
       nav.pushNamed(Routes.termAndCon.toStringPath());
     }
   }

@@ -360,7 +360,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     Container(
                                                       margin: EdgeInsets.fromLTRB(0, 14, 0, 0),
                                                       child: Text(
-                                                          "${widget.arguments!.product.productionOptionals[index].price.toDecimalFormat()} บาท",
+                                                          "${(widget.arguments!.product.productionOptionals[index].price + mainPrice).toDecimalFormat()} บาท",
                                                           style: AlvaStyles().headingSize12w400(spaceGrey)),
                                                     ),
                                                   ],
