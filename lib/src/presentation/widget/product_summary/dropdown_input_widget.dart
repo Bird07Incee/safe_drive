@@ -22,6 +22,7 @@ class DropDownInputWidget extends StatefulWidget {
   final AutovalidateMode? autoValidateMode;
   final String? errRequiredMessage;
   final TextEditingController? textEditingController;
+  final bool isDisableDropdownSuffixButton;
 
   const DropDownInputWidget(
       {Key? key,
@@ -41,7 +42,8 @@ class DropDownInputWidget extends StatefulWidget {
       this.disable = false,
       this.autoValidateMode,
       this.errRequiredMessage,
-      this.textEditingController})
+      this.textEditingController,
+      this.isDisableDropdownSuffixButton = false})
       : super(key: key);
 
   @override
@@ -195,7 +197,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                   ],
                                 )
                               : null,
-                          suffixIcon: widget.options!.length == 1
+                          suffixIcon: widget.options!.length == 1 && widget.isDisableDropdownSuffixButton
                               ? null
                               : Icon(Icons.keyboard_arrow_down_outlined, size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
                           fillColor: cloudSoftDeepWhite,
@@ -220,76 +222,6 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                         ),
                       ),
                     )
-                    // DropdownButtonFormField(
-                    //   autovalidateMode:
-                    //   autoValidateMode ?? AutovalidateMode.onUserInteraction,
-                    //   icon: icon ?? const Icon(Icons.keyboard_arrow_down),
-                    //   isExpanded: isExpanded,
-                    //   isDense: true,
-                    //   style: TextStyle(
-                    //     fontSize: fontSize,
-                    //   ),
-                    //   value: value,
-                    //   onChanged: (dynamic v) {
-                    //     if (onChanged != null) {
-                    //       onChanged!(v);
-                    //     }
-                    //   },
-                    //   items: options,
-                    //   decoration: InputDecoration(
-                    //     contentPadding: const EdgeInsets.all(10),
-                    //     label: !showOutsideLabel && label != null
-                    //         ? Row(
-                    //       mainAxisSize: MainAxisSize.min,
-                    //       children: [
-                    //         Text(!showOutsideLabel ? label ?? '' : ''),
-                    //         if (required)
-                    //           const Text(
-                    //             ' *',
-                    //             style: TextStyle(
-                    //               color: Colors.red,
-                    //             ),
-                    //           ),
-                    //       ],
-                    //     )
-                    //         : null,
-                    //     hintText: '',
-                    //     fillColor: disable ? spaceGrey : Colors.white,
-                    //     filled: false,
-                    //     border: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(borderRadius),
-                    //       borderSide: BorderSide(
-                    //         color: borderColor ?? blackInBlack,
-                    //         width: 1,
-                    //       ),
-                    //     ),
-                    //     focusedBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(borderRadius),
-                    //       borderSide: BorderSide(
-                    //         color: Theme.of(context).primaryColor,
-                    //         width: 1,
-                    //       ),
-                    //     ),
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(borderRadius),
-                    //       borderSide: BorderSide(
-                    //         color: borderColor ??blackInBlack,
-                    //         width: 1,
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   validator: (dynamic value) {
-                    //     if (required == true && value == null) {
-                    //       return 'กรุณาเลือก ${label ?? ''}';
-                    //     }
-                    //
-                    //     if (validator != null) {
-                    //       return validator!(value);
-                    //     }
-                    //
-                    //     return null;
-                    //   },
-                    // ),
                   ],
                 ),
               ],

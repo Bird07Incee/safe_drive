@@ -167,8 +167,12 @@ class ShippingAddressScreen extends StatelessWidget {
                         bool isDisable = true;
                         if (item.matchField != null) {
                           if (state.formResult!.where((element) => element.fieldName == item.matchField).first.value!.isNotEmpty &&
-                              item.options!.length > 1) {
-                            isDisable = false;
+                              item.options!.isNotEmpty) {
+                            if (item.options!.length > 1) {
+                              isDisable = false;
+                            } else if (item.fieldName != 'zipcode') {
+                              isDisable = false;
+                            }
                           }
                         } else {
                           isDisable = false;
@@ -183,6 +187,7 @@ class ShippingAddressScreen extends StatelessWidget {
                           required: required,
                           value: item.value,
                           options: item.options!,
+                          isDisableDropdownSuffixButton: item.fieldName == 'zipcode' ? true : false,
                           onChanged: (value) async {
                             DropdownAddressModel model = value;
                             var field = state.formResult!.where((element) => item.fieldName == element.fieldName).first;
