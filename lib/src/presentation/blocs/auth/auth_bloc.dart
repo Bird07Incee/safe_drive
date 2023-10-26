@@ -22,10 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(const AuthState()) {
     on<UserAuthEventLogin>((event, emit) async {
       await liff.ready.then((_) async {
-        // waiting for change
         bool isLogin = await PreferencesHelper.isContains('LineLogin');
-        int exp = await LineDataHelper().getTokenExp();
-        bool isExpired = exp < DateTime.now().millisecond * 1000;
         if (!isLogin) {
           String url = Environment().getValue("LINE_REDIRECT_URL");
           window.open(url, '_self');
