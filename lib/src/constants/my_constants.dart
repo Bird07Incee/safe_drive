@@ -38,11 +38,6 @@ class LoaderConst {
   String iconLoading = 'assets/images/icon_loading.png';
 }
 
-const acceptButtonTH = "ตกลง";
-const cancelButtonTH = "ยกเลิก";
-
-const paymentTextTH = "กรุณากด ”ยืนยัน” เพื่อทำการชำระเงิน";
-
 // assets data
 const List assetsCarouselItem = ["assets/homepage/HeroBanner.png"];
 

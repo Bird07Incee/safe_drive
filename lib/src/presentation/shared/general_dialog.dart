@@ -1,9 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
-import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_c_p_i_loader.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
 typedef OnTap = Function();
 
@@ -17,19 +18,42 @@ class GeneralDialog {
     return _showGeneralLoading(context, key: key ?? const Key("loading"), canBack: false);
   }
 
-  showNoContentAlert({Key? key, required BuildContext context, double? padding}) {
-    return _showGeneralAlert(
-      context,
-      Container(
-        constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
-        child: AlvaText(
-          title: paymentTextTH,
-          textStyle: AlvaStyles().body1(),
+  showBackFromSummaryDialog({Key? key, required BuildContext context, bool? canBack}) {
+    _showGeneralAlert(
+        context,
+        Container(
+          constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
+          child: Text(
+              "โปรดทราบ ข้อมูลที่อยู่ของคุณจะถูกลบ และคุณจำเป็นต้องกรอกที่อยู่จัดส่งใหม่ อีกครั้ง เพื่อดำเนินการต่อ",
+              style: AlvaStyles()
+                  .headingSize14w400(Colors.black)
+                  .copyWith(color: Colors.black, fontSize: 14)
+                  .copyWith(height: 24 / 14)),
         ),
-      ),
-      key: key ?? const Key("payment_alert"),
-      contentPadding: const EdgeInsets.all(24),
-    );
+        title: Text("ระบบจะนำคุณกลับไปยังหน้าข้อมูลสินค้า",
+            style: AlvaStyles()
+                .headingSize18(Colors.black)
+                .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
+                .copyWith(height: 24 / 14)),
+        key: key ?? const Key("back_from_summary_dialog"),
+        contentPadding: const EdgeInsets.all(24),
+        actionPadding: const EdgeInsets.only(right: 8, bottom: 16));
+  }
+
+  showConfirmOrderDialog({Key? key, required BuildContext context, bool? canBack}) {
+    _showGeneralAlert(
+        context,
+        Container(
+          constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
+          child: Text('กรุณากด "ยืนยัน" เพื่อทำการชำระเงิน',
+              style: AlvaStyles()
+                  .headingSize14w400(Colors.black)
+                  .copyWith(color: Colors.black, fontSize: 14)
+                  .copyWith(height: 24 / 14)),
+        ),
+        key: key ?? const Key("back_from_summary_dialog"),
+        contentPadding: const EdgeInsets.all(24),
+        actionPadding: const EdgeInsets.only(right: 8, bottom: 16));
   }
 
   _showGeneralLoading(BuildContext context, {Key? key, bool? canBack}) {
@@ -54,26 +78,34 @@ class GeneralDialog {
   }
 
   _showGeneralAlert(BuildContext context, Widget body,
-      {Key? key, EdgeInsetsGeometry? contentPadding, EdgeInsetsGeometry? actionPadding}) {
+      {Key? key,
+      Widget? title,
+      EdgeInsetsGeometry? contentPadding,
+      EdgeInsetsGeometry? actionPadding,
+      bool platformSpecific = false}) {
     Widget acceptButton = TextButton(
-      child: AlvaText(
-        title: acceptButtonTH,
-        textStyle: AlvaStyles().heading2(btnBlue),
+      child: Text(
+        "ยืนยัน",
+        style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
       ),
       onPressed: () {
         Navigator.pop(context);
-        onAccept ?? onAccept!();
+        if (onAccept != null) {
+          onAccept!();
+        }
       },
     );
 
     Widget cancelButton = TextButton(
-      child: AlvaText(
-        title: cancelButtonTH,
-        textStyle: AlvaStyles().heading2(btnBlue),
+      child: Text(
+        "ยกเลิก",
+        style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
       ),
       onPressed: () {
         Navigator.pop(context);
-        onCancel ?? onCancel!();
+        if (onCancel != null) {
+          onCancel!();
+        }
       },
     );
 
@@ -81,6 +113,7 @@ class GeneralDialog {
       contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(24, 24, 24, 8),
       actionsPadding: actionPadding ?? const EdgeInsets.symmetric(horizontal: 8),
       key: key,
+      title: title,
       content: body,
       actions: [
         onCancel != null ? cancelButton : const SizedBox(),
@@ -90,9 +123,22 @@ class GeneralDialog {
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
     );
 
+    if (platformSpecific) {
+      if (Platform.isIOS) {
+        List<Widget> actions = onCancel != null ? [CupertinoDialogAction(child: cancelButton)] : [];
+        actions.add(CupertinoDialogAction(child: acceptButton));
+
+        alert = CupertinoAlertDialog(
+          key: key,
+          content: body,
+          actions: actions,
+        );
+      }
+    }
+
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) => alert,
     );
   }

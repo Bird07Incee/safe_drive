@@ -15,3 +15,11 @@ class SelectPaymentType extends OrderSummaryEvent {
   @override
   List<Object?> get props => [paymentType];
 }
+
+class CreateOrder extends OrderSummaryEvent {
+  const CreateOrder({required this.requestModel});
+  final CreateOrderRequestModel requestModel;
+
+  @override
+  List<Object?> get props => [requestModel];
+}
