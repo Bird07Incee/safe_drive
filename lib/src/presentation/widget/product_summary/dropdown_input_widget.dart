@@ -192,14 +192,16 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                   children: [
                                     Text(
                                       !showOutsideLabel ? widget.label ?? '' : '',
-                                      style: AlvaStyles().bodySize12W600(widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
+                                      style: AlvaStyles().bodySize12W600(
+                                          widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
                                     ),
                                   ],
                                 )
                               : null,
                           suffixIcon: widget.options!.length == 1 && widget.isDisableDropdownSuffixButton
                               ? null
-                              : Icon(Icons.keyboard_arrow_down_outlined, size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
+                              : Icon(Icons.keyboard_arrow_down_outlined,
+                                  size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
                           fillColor: cloudSoftDeepWhite,
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: grey300),

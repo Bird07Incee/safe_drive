@@ -234,8 +234,8 @@ class TextInputWidgetState extends State<TextInputWidget> {
             FilteringTextInputFormatter.allow(RegExp(r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
                 '"'
                 "]")),
-            FilteringTextInputFormatter.deny(
-                RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
+            FilteringTextInputFormatter.deny(RegExp(
+                r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
           ],
       focusNode: focusNode,
       initialValue: widget.initialValue,
@@ -319,7 +319,8 @@ class TextInputWidgetState extends State<TextInputWidget> {
           // เช็ค Limit Length text ภาษาไทย
           if (widget.maxLength != null && text.isNotEmpty && text.length > widget.maxLength!) {
             widget.controller!.text = text.substring(0, text.length - (text.length - widget.maxLength!));
-            widget.controller!.selection = TextSelection.fromPosition(TextPosition(offset: widget.controller!.text.length));
+            widget.controller!.selection =
+                TextSelection.fromPosition(TextPosition(offset: widget.controller!.text.length));
           }
         }
         setState(() {});
@@ -368,7 +369,11 @@ class TextInputWidgetState extends State<TextInputWidget> {
               textAlign: TextAlign.left,
               text: TextSpan(
                 text: widget.label ?? '',
-                style: TextStyle(color: widget.labelColor ?? Colors.black, fontWeight: FontWeight.w500, fontSize: 12, fontFamily: fontFamily),
+                style: TextStyle(
+                    color: widget.labelColor ?? Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    fontFamily: fontFamily),
               ),
             ),
           ),

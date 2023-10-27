@@ -10,7 +10,8 @@ SnackBar getMkpToast(String text) {
       )),
       backgroundColor: Colors.black,
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.symmetric(vertical: 100, horizontal: 80),
+      margin: EdgeInsets.symmetric(vertical: 104, horizontal: 80),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      duration: Duration(seconds: 3));
+      duration: Duration(milliseconds: 2750));
 }

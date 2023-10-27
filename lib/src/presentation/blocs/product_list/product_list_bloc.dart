@@ -56,8 +56,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     emit(state.copyWith(productListStatus: GetProductListStatus.loading));
 
     try {
-      // ProductList productList = await _getProductWithNoCategory();
-      final productList = ProductList.fromJson(mockProductListResponse);
+      ProductList productList = await _getProductWithNoCategory();
 
       if (productList.products!.length == 1 || productList.category!.isEmpty) {
         emit(state.copyWith(hideCategory: true));
@@ -72,6 +71,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         if (productList.products!.length == 1 || productList.category!.isEmpty) {
           emit(state.copyWith(hideCategory: true));
         }
+        emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
       } catch (e) {
         emit(state.copyWith(productListStatus: GetProductListStatus.error));
       }

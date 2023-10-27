@@ -8,6 +8,8 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
@@ -101,7 +103,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   builder: (context, state) {
                     // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
                     if (state.productListStatus == GetProductListStatus.success) {
-                      _checkTermAndConAcceptedVersion(context);
                       return Container(
                         color: cloudyWhite,
                         child: ListView(
@@ -186,30 +187,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             fit: BoxFit.fitWidth),
                                                       ),
                                                     )),
-                                        // Tab(
-                                        //   text: "วอลชาร์จ",
-                                        //   icon: state.selectedTabIndex == 1
-                                        //       ? Image.asset('assets/images/category/icon_active_cate_wallcharge.png',
-                                        //           width: 24, height: 24)
-                                        //       : Image.asset('assets/images/category/icon_cate_wallcharge.png',
-                                        //           width: 24, height: 24),
-                                        // ),
-                                        // Tab(
-                                        //   text: "โซลาร์เซลล์",
-                                        //   icon: state.selectedTabIndex == 2
-                                        //       ? Image.asset('assets/images/category/icon_active_cate_solar.png',
-                                        //           width: 24, height: 24)
-                                        //       : Image.asset('assets/images/category/icon_cate_solar.png',
-                                        //           width: 24, height: 24),
-                                        // ),
-                                        // Tab(
-                                        //   text: "สินค้าอื่นๆ",
-                                        //   icon: state.selectedTabIndex == 3
-                                        //       ? Image.asset('assets/images/category/icon_active_cate_other.png',
-                                        //           width: 24, height: 24)
-                                        //       : Image.asset('assets/images/category/icon_cate_other.png',
-                                        //           width: 24, height: 24),
-                                        // ),
                                       ]),
                                 ),
                               ),
@@ -322,9 +299,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         color: sugarRed,
                                       ),
                                       GestureDetector(
-                                        onTap: () => launchUrl(
-                                            Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html"),
-                                            webOnlyWindowName: "_self"),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            "https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
                                         child: Text(
                                           HomeConst().privacyPolicy,
                                           style: AlvaStyles().headingSize10w600(sugarRed),

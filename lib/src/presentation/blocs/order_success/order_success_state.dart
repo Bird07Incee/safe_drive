@@ -3,7 +3,7 @@ part of 'order_success_bloc.dart';
 enum GetOrderSuccessDataStatus { initial, loading, success, error }
 
 const defaultInquiryData = {
-  "refId": "",
+  "invoiceNo": "",
   "payment_card": "",
   "payment_date": "",
   "payment_time": "",
@@ -27,7 +27,7 @@ class OrderSuccessState extends Equatable {
   const OrderSuccessState(
       {this.orderSuccessStatus = GetOrderSuccessDataStatus.initial,
       this.orderSuccessData = const InquiryData(
-          refId: "",
+          invoiceNo: "",
           paymentCard: "",
           paymentDate: "",
           paymentTime: "",

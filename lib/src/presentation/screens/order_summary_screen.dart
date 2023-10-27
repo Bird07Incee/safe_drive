@@ -258,14 +258,15 @@ class OrderSummaryScreen extends StatelessWidget {
                                                           children: [
                                                             shippingState.addressModel.fullName.isNotEmpty
                                                                 ? SizedBox(
-                                                                  width: maxWidth - 32 - 16 - 24,
-                                                                  child: AlvaTextMaxLinesOverflow(
-                                                                      maxLines: 5,
-                                                                      title: shippingState.addressModel.fullName,
-                                                                      textStyle: AlvaStyles()
-                                                                          .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                          .copyWith(height: 2)),
-                                                                )
+                                                                    width: maxWidth - 32 - 16 - 24,
+                                                                    child: AlvaTextMaxLinesOverflow(
+                                                                        maxLines: 5,
+                                                                        title: shippingState.addressModel.fullName,
+                                                                        textStyle: AlvaStyles()
+                                                                            .headingSize12w500(
+                                                                                BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                            .copyWith(height: 2)),
+                                                                  )
                                                                 : SizedBox.shrink(),
                                                             shippingState.addressModel.mobileNumber.isNotEmpty
                                                                 ? AlvaText(
@@ -283,14 +284,15 @@ class OrderSummaryScreen extends StatelessWidget {
                                                                 : SizedBox.shrink(),
                                                             shippingState.addressModel.fullAddress.isNotEmpty
                                                                 ? SizedBox(
-                                                                  width: maxWidth - 32 - 16 - 24,
-                                                                  child: AlvaTextMaxLinesOverflow(
-                                                                      maxLines: 5,
-                                                                      title: shippingState.addressModel.fullAddress,
-                                                                      textStyle: AlvaStyles()
-                                                                          .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                          .copyWith(height: 2)),
-                                                                )
+                                                                    width: maxWidth - 32 - 16 - 24,
+                                                                    child: AlvaTextMaxLinesOverflow(
+                                                                        maxLines: 5,
+                                                                        title: shippingState.addressModel.fullAddress,
+                                                                        textStyle: AlvaStyles()
+                                                                            .headingSize12w500(
+                                                                                BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                            .copyWith(height: 2)),
+                                                                  )
                                                                 : SizedBox.shrink(),
                                                             SizedBox(
                                                               width: maxWidth - 32 - 16 - 24,

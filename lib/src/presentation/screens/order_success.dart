@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 class OrderSuccessScreen extends StatefulWidget {
   const OrderSuccessScreen({super.key});
@@ -17,12 +20,46 @@ class OrderSuccessScreen extends StatefulWidget {
 }
 
 class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
+  late RouteSettings? settings;
+  String invoiceNo = "";
+
+  void loadInvoice() {
+    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    if (settings != null) {
+      var uriData = Uri.parse(settings!.name!);
+      var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+      invoiceNo = (routingData["invoiceNo"] == null) ? "" : routingData["invoiceNo"];
+      if (invoiceNo != "") {
+        context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
+        // context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
+      } else {
+        context.read<OrderSuccessBloc>().add(SetOrderStatus(GetOrderSuccessDataStatus.error));
+      }
+    }
+  }
+
+  String safeDecimalFormat(String price) {
+    String result = "";
+
+    try {
+      result = int.parse(price).toDecimalFormat();
+    } catch (e) {
+      result = "0";
+    }
+
+    return result;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
 
-    context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loadInvoice();
   }
 
   @override
@@ -41,7 +78,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
               children: [
                 Container(
                     width: maxWidth,
-                    height: maxHeight - 88,
+                    height: maxHeight - 96,
                     color: cloudyWhite,
                     child: ListView(
                       children: [
@@ -63,7 +100,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                   style: AlvaStyles().headingSize14w600(blackGoMunTo),
                                 ),
                                 Text(
-                                  "หมายเลขอ้างอิง: ${orderSuccessData.refId}",
+                                  "หมายเลขอ้างอิง: ${orderSuccessData.invoiceNo}",
                                   style: AlvaStyles().headingSize12w400(blackGoMunTo),
                                 )
                               ],
@@ -130,12 +167,22 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         ClipRRect(
-                                            borderRadius: BorderRadius.circular(4),
-                                            child: Image.asset(
-                                              'assets/mocking/product.png',
+                                          borderRadius: BorderRadius.circular(4),
+                                          child: FadeInImage(
+                                            width: 132,
+                                            height: 74,
+                                            placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                            // Replace with your placeholder image path
+                                            image: NetworkImage(orderSuccessData.productAsset!),
+                                            fit: BoxFit.fitWidth,
+                                            imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                              'assets/homepage/img_default.png',
+                                              fit: BoxFit.fitWidth,
                                               width: 132,
                                               height: 74,
-                                            )),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -174,13 +221,21 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 children: [
                                   SizedBox(
                                       width: (maxWidth / 2) - 32,
-                                      child: Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo))),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 4,
+                                          ),
+                                          Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo)),
+                                        ],
+                                      )),
                                   SizedBox(
                                     width: (maxWidth / 2) - 32,
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("${orderSuccessData.productPrice} บาท",
+                                        Text("${safeDecimalFormat(orderSuccessData.productPrice ?? "0")} บาท",
                                             style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                         SizedBox(
                                           height: 4,
@@ -294,7 +349,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                     )),
                 Container(
                     width: maxWidth,
-                    height: 88,
+                    height: 96,
                     padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -319,6 +374,15 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       ),
                     ))
               ],
+            );
+          } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.error) {
+            return ErrorScreen(
+              title: ErrorConst().titleNS,
+              subTitle: ErrorConst().subTitleNS,
+              titleBtn: ErrorConst().titleBtnNS,
+              onTap: () {
+                loadInvoice();
+              },
             );
           } else {
             return const LoadingScreen();

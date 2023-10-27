@@ -22,6 +22,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   @override
   Widget build(BuildContext context) {
     final myBloc = BlocProvider.of<ProductOptionBloc>(context);
+    int mainPrice = widget.arguments!.product.price;
     resetAllState() {
       myBloc.updateStepOneVariables(
         groupValueRadio: "",
@@ -186,7 +187,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             myBloc.updateStepOneVariables(
                                               groupValueRadio:
                                                   widget.arguments!.product.productionOptionals[index].label,
-                                              price: widget.arguments!.product.productionOptionals[index].price,
+                                              price: widget.arguments!.product.productionOptionals[index].price +
+                                                  mainPrice,
                                               indexSelect: index,
                                             );
                                             myBloc.updateStepTwoVariables(
@@ -271,7 +273,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 myBloc.updateStepOneVariables(
                                                                   groupValueRadio: value.toString(),
                                                                   price: widget.arguments!.product
-                                                                      .productionOptionals[index].price,
+                                                                          .productionOptionals[index].price +
+                                                                      mainPrice,
                                                                   indexSelect: index,
                                                                 );
                                                                 myBloc.updateStepTwoVariables(
@@ -357,7 +360,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     Container(
                                                       margin: EdgeInsets.fromLTRB(0, 14, 0, 0),
                                                       child: Text(
-                                                          "${widget.arguments!.product.productionOptionals[index].price.toDecimalFormat()} บาท",
+                                                          "${(widget.arguments!.product.productionOptionals[index].price + mainPrice).toDecimalFormat()} บาท",
                                                           style: AlvaStyles().headingSize12w400(spaceGrey)),
                                                     ),
                                                   ],
