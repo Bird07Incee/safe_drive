@@ -201,10 +201,9 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
               focusNode: FocusNode(),
               fieldName: 'name',
               listInputFormatter: [
-                FilteringTextInputFormatter.deny(RegExp(r"[ 0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
+                FilteringTextInputFormatter.deny(RegExp(r"[0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
                     '"'
                     "]")),
-                FilteringTextInputFormatter.deny(RegExp(r"[0-9-]")),
                 FilteringTextInputFormatter.deny(
                     RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
               ],
