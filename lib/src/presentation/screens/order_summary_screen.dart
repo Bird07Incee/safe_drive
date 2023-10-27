@@ -28,6 +28,7 @@ class OrderSummaryScreen extends StatelessWidget {
   void onBack(BuildContext context) {
     GeneralDialog(
             onAccept: () {
+              context.read<ShippingAddressBloc>().onClearShippingData();
               context.read<ProductOptionBloc>().updateStepOneVariables(
                     groupValueRadio: "",
                     price: 0,
@@ -83,7 +84,7 @@ class OrderSummaryScreen extends StatelessWidget {
                 if (state.orderResponseModel.paymentURL != null && state.orderResponseModel.paymentURL!.isNotEmpty) {
                   window.open(state.orderResponseModel.paymentURL!, '_self');
                 }
-              } else {
+              } else if (state.orderStatus.isError) {
                 Navigator.pop(context);
               }
             },
@@ -131,8 +132,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   child: Container(
                                     color: Colors.white,
                                     height: maxHeight,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                    child: ListView(
                                       children: [
                                         Container(
                                           padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
@@ -188,7 +188,16 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     width: maxWidth - 32 - 16 - 76,
                                                     child: AlvaTextMaxLinesOverflow(
                                                         maxLines: 1,
-                                                        title: productOptions,
+                                                        title: step1,
+                                                        textStyle: AlvaStyles()
+                                                            .headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                            .copyWith(height: 1.6)),
+                                                  ),
+                                                  SizedBox(
+                                                    width: maxWidth - 32 - 16 - 76,
+                                                    child: AlvaTextMaxLinesOverflow(
+                                                        maxLines: 1,
+                                                        title: step2,
                                                         textStyle: AlvaStyles()
                                                             .headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)
                                                             .copyWith(height: 1.6)),
@@ -248,11 +257,15 @@ class OrderSummaryScreen extends StatelessWidget {
                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             shippingState.addressModel.fullName.isNotEmpty
-                                                                ? AlvaText(
-                                                                    title: shippingState.addressModel.fullName,
-                                                                    textStyle: AlvaStyles()
-                                                                        .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                        .copyWith(height: 2))
+                                                                ? SizedBox(
+                                                                  width: maxWidth - 32 - 16 - 24,
+                                                                  child: AlvaTextMaxLinesOverflow(
+                                                                      maxLines: 5,
+                                                                      title: shippingState.addressModel.fullName,
+                                                                      textStyle: AlvaStyles()
+                                                                          .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                          .copyWith(height: 2)),
+                                                                )
                                                                 : SizedBox.shrink(),
                                                             shippingState.addressModel.mobileNumber.isNotEmpty
                                                                 ? AlvaText(
@@ -269,18 +282,26 @@ class OrderSummaryScreen extends StatelessWidget {
                                                                         .copyWith(height: 2))
                                                                 : SizedBox.shrink(),
                                                             shippingState.addressModel.fullAddress.isNotEmpty
-                                                                ? AlvaText(
-                                                                    title: shippingState.addressModel.fullAddress,
-                                                                    textStyle: AlvaStyles()
-                                                                        .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                        .copyWith(height: 2))
+                                                                ? SizedBox(
+                                                                  width: maxWidth - 32 - 16 - 24,
+                                                                  child: AlvaTextMaxLinesOverflow(
+                                                                      maxLines: 5,
+                                                                      title: shippingState.addressModel.fullAddress,
+                                                                      textStyle: AlvaStyles()
+                                                                          .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                          .copyWith(height: 2)),
+                                                                )
                                                                 : SizedBox.shrink(),
-                                                            AlvaText(
-                                                                title:
-                                                                    "${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}",
-                                                                textStyle: AlvaStyles()
-                                                                    .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                    .copyWith(height: 2)),
+                                                            SizedBox(
+                                                              width: maxWidth - 32 - 16 - 24,
+                                                              child: AlvaTextMaxLinesOverflow(
+                                                                  maxLines: 5,
+                                                                  title:
+                                                                      "${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}",
+                                                                  textStyle: AlvaStyles()
+                                                                      .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                      .copyWith(height: 2)),
+                                                            ),
                                                           ],
                                                         ),
                                                         GestureDetector(
@@ -330,35 +351,19 @@ class OrderSummaryScreen extends StatelessWidget {
                                             children: [
                                               Row(
                                                 children: [
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      if (!orderState.paymentType.isFullPayment) {
-                                                        context.read<OrderSummaryBloc>().add(
-                                                            SelectPaymentType(paymentType: PaymentType.fullPayment));
-                                                      }
-                                                    },
-                                                    child: Container(
-                                                      width: 18,
-                                                      height: 18,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(36),
-                                                          border: Border.all(
-                                                              width: 2,
-                                                              color: orderState.paymentType.isFullPayment
-                                                                  ? BlueFantasy
-                                                                  : spaceGrey123)),
-                                                      child: Center(
-                                                        child: Container(
-                                                          width: 10,
-                                                          height: 10,
-                                                          decoration: BoxDecoration(
-                                                            color: orderState.paymentType.isFullPayment
-                                                                ? BlueFantasy
-                                                                : spaceGrey123,
-                                                            borderRadius: BorderRadius.circular(36),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                  SizedBox(
+                                                    width: 24,
+                                                    height: 24,
+                                                    child: Radio(
+                                                      value: "CC",
+                                                      groupValue: orderState.paymentType.isFullPayment ? "CC" : "",
+                                                      toggleable: true,
+                                                      onChanged: (value) {
+                                                        if (!orderState.paymentType.isFullPayment) {
+                                                          context.read<OrderSummaryBloc>().add(
+                                                              SelectPaymentType(paymentType: PaymentType.fullPayment));
+                                                        }
+                                                      },
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -385,35 +390,19 @@ class OrderSummaryScreen extends StatelessWidget {
                                             children: [
                                               Row(
                                                 children: [
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      if (!orderState.paymentType.isInstallment) {
-                                                        context.read<OrderSummaryBloc>().add(
-                                                            SelectPaymentType(paymentType: PaymentType.installment));
-                                                      }
-                                                    },
-                                                    child: Container(
-                                                      width: 18,
-                                                      height: 18,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(36),
-                                                          border: Border.all(
-                                                              width: 2,
-                                                              color: orderState.paymentType.isInstallment
-                                                                  ? BlueFantasy
-                                                                  : spaceGrey123)),
-                                                      child: Center(
-                                                        child: Container(
-                                                          width: 10,
-                                                          height: 10,
-                                                          decoration: BoxDecoration(
-                                                            color: orderState.paymentType.isInstallment
-                                                                ? BlueFantasy
-                                                                : spaceGrey123,
-                                                            borderRadius: BorderRadius.circular(36),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                  SizedBox(
+                                                    width: 24,
+                                                    height: 24,
+                                                    child: Radio(
+                                                      value: "IPP",
+                                                      groupValue: orderState.paymentType.isInstallment ? "IPP" : "",
+                                                      toggleable: true,
+                                                      onChanged: (value) {
+                                                        if (!orderState.paymentType.isInstallment) {
+                                                          context.read<OrderSummaryBloc>().add(
+                                                              SelectPaymentType(paymentType: PaymentType.installment));
+                                                        }
+                                                      },
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -488,7 +477,6 @@ class OrderSummaryScreen extends StatelessWidget {
                                                           child: GestureDetector(
                                                               key: const Key("clear_search_box"),
                                                               onTap: () {
-                                                                saleCodeController.clear();
                                                                 saleCodeNode.requestFocus();
                                                               },
                                                               child: Container(
@@ -512,8 +500,6 @@ class OrderSummaryScreen extends StatelessWidget {
                                                       : null,
                                                   contentPadding: const EdgeInsets.only(bottom: 12),
                                                   counterText: "",
-                                                  filled: true,
-                                                  fillColor: Colors.white,
                                                   hintMaxLines: 1,
                                                   enabledBorder: UnderlineInputBorder(
                                                     borderSide: const BorderSide(
@@ -538,7 +524,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 32,
+                                          height: 160,
                                         )
                                       ],
                                     ),
@@ -576,7 +562,7 @@ class OrderSummaryScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 1000),
                                   child: showDetail
                                       ? Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
