@@ -24,7 +24,7 @@ class ShippingAddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
       if (state.status.isInitial) {
-        // ctx.read<ShippingAddressBloc>().setFormData();
+        ctx.read<ShippingAddressBloc>().setFormData();
       }
       if (state.status.isSuccess || state.status.isFetching) {
         return RootPageCondition(

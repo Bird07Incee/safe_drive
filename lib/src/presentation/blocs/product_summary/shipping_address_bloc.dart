@@ -15,9 +15,7 @@ part 'shipping_address_event.dart';
 part 'shipping_address_state.dart';
 
 class ShippingAddressBloc extends Cubit<ShippingAddressState> {
-  ShippingAddressBloc() : super(ShippingAddressState()) {
-    setFormData();
-  }
+  ShippingAddressBloc() : super(ShippingAddressState());
 
   final DioUtilityRepository dioUtilityRepository =
       DioUtilityRepository(service: DioUtilityService(dio: DioClient.client));
@@ -58,6 +56,15 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           isAllowSubmit: false));
     }
     return isAllowSubmit;
+  }
+
+  onClearShippingData() {
+    emit(state.copyWith(
+        status: ShippingAddressStatus.initial,
+        address: ShippingAddressModel.empty,
+        formResultModel: [],
+        formWidgetModel: [],
+        allowSubmit: false));
   }
 
   onSubmitPressed() {
