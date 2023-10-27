@@ -33,7 +33,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
   List<DropdownAddressModel> listSubDistrict = [];
   List<DropdownAddressModel> listZipCode = [];
 
-  validateAnyFieldInForm({FormWidgetModel? item, bool? isFocus}) {
+  validateAnyFieldInForm({FormWidgetModel? item, bool? isFocus}) async {
     if (!isFocus!) {
       if (item!.fieldName == 'name') {
         state.listFormWidget!.where((element) => element.fieldName == 'name').first.controller!.text =
@@ -43,10 +43,10 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       } else if (item.fieldName == 'email') {
         emailValidationKey!.currentState!.validate();
       }
-      validateToActiveSubmitButton();
+      bool isAllowSubmit = await validateToActiveSubmitButton();
 
       state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
-      emit(state.copyWith(formResultModel: state.formResult!));
+      emit(state.copyWith(formResultModel: state.formResult!, allowSubmit: isAllowSubmit));
     }
   }
 
@@ -200,6 +200,14 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
               controller: TextEditingController(),
               focusNode: FocusNode(),
               fieldName: 'name',
+              listInputFormatter: [
+                FilteringTextInputFormatter.deny(RegExp(r"[ 0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
+                    '"'
+                    "]")),
+                FilteringTextInputFormatter.deny(RegExp(r"[0-9-]")),
+                FilteringTextInputFormatter.deny(
+                    RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
+              ],
               formType: 'textField',
               required: true,
               maxLength: 250,
@@ -226,7 +234,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
               fieldName: 'email',
               formType: 'textField',
               required: true,
-              maxLength: 250,
+              maxLength: 320,
               maxLines: null),
           FormWidgetModel(
               label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',

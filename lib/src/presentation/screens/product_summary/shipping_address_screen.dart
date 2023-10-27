@@ -166,17 +166,9 @@ class ShippingAddressScreen extends StatelessWidget {
                                 }
                                 setState(() {});
                               },
-                              onFocusChange: (bool isFocus) {
+                              onFocusChange: (bool isFocus) async {
                                 if (!isFocus) {
-                                  myBloc.validateAnyFieldInForm(item: item, isFocus: isFocus);
-                                  // if (item.fieldName == 'email') {
-                                  //   myBloc.emailValidationKey!.currentState!.validate();
-                                  // }
-                                  // myBloc.validateToActiveSubmitButton();
-                                  //
-                                  // setState(() {
-                                  //   state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
-                                  // });
+                                  await myBloc.validateAnyFieldInForm(item: item, isFocus: isFocus);
                                 }
                               },
                               isAllowAutoAddPhoneFormat: item.fieldName == 'phone' ? true : false,
