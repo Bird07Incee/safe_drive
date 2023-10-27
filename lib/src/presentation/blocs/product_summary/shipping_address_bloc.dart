@@ -216,7 +216,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
               controller: TextEditingController(),
               focusNode: FocusNode(),
               fieldName: 'phone',
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.phone,
               formType: 'textField',
               listInputFormatter: [
                 LengthLimitingTextInputFormatter(12),
