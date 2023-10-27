@@ -167,12 +167,22 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         ClipRRect(
-                                            borderRadius: BorderRadius.circular(4),
-                                            child: Image.asset(
-                                              'assets/mocking/product.png',
+                                          borderRadius: BorderRadius.circular(4),
+                                          child: FadeInImage(
+                                            width: 132,
+                                            height: 74,
+                                            placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                            // Replace with your placeholder image path
+                                            image: NetworkImage(orderSuccessData.productAsset!),
+                                            fit: BoxFit.fitWidth,
+                                            imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                              'assets/homepage/img_default.png',
+                                              fit: BoxFit.fitWidth,
                                               width: 132,
                                               height: 74,
-                                            )),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),

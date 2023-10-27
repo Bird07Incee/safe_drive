@@ -6,6 +6,7 @@ Map<String, dynamic> envConfig = {
     "BFF_SOCIAL_BASE_URL": "/mercury-social-dev",
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-dev",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-dev",
+    "INQUIRY_URL": "/v1/inquiry",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
   },
@@ -16,6 +17,7 @@ Map<String, dynamic> envConfig = {
     "BFF_SOCIAL_BASE_URL": "/mercury-social-qa",
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-qa",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-qa",
+    "INQUIRY_URL": "/v1/inquiry",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Wdam3RjL&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
   },
@@ -27,6 +29,7 @@ Map<String, dynamic> envConfig = {
     "BFF_SOCIAL_BASE_URL": "/mercury-social-int",
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-int",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-int",
+    "INQUIRY_URL": "/v1/inquiry",
     //TODO: config redirect url int
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
@@ -39,6 +42,7 @@ Map<String, dynamic> envConfig = {
     "BFF_SOCIAL_BASE_URL": "/mercury-social-uat",
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-uat",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-uat",
+    "INQUIRY_URL": "/v1/inquiry",
     //TODO: config redirect url uat
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
@@ -51,6 +55,7 @@ Map<String, dynamic> envConfig = {
     "BFF_SOCIAL_BASE_URL": "/mercury-social-prod",
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-prod",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-prod",
+    "INQUIRY_URL": "/v1/inquiry",
     //TODO: config redirect url prod
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"

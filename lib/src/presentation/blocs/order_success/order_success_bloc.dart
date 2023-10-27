@@ -26,17 +26,16 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
   _onGetOrderSuccess(GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {
     DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
-    // final baseUrl = Environment().getValue("BFF_BASE_URL");
-    // final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    final baseUrl = Environment().getValue("BFF_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final inquriyPath = Environment().getValue("INQUIRY_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
+    String uid = await lineDataHelper.getLineUid();
 
-    var payload = {"invoiceNo": event.invoiceNo};
-
+    var payload = {"invoiceNo": event.invoiceNo, "uid": uid};
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
-
     try {
-      Response response = await dioUtilityRepository.postByURL(
-          "https://api.marketplace.ksauto.net/mercury-mocker-dev/query/inquiry-success", payload,
+      Response response = await dioUtilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
           headers: {"Authorization": "Bearer $accessToken"});
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
