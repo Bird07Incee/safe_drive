@@ -30,7 +30,9 @@ class ShippingAddressScreen extends StatelessWidget {
         return RootPageCondition(
             child: AlvaRootWidget(
                 appBar: AppBar(
-                  title: AlvaText(title: AppStrings().shippingAddressTitle, textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  title: AlvaText(
+                      title: AppStrings().shippingAddressTitle,
+                      textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 0,
                   elevation: 0.7,
                   leadingWidth: 60,
@@ -47,7 +49,11 @@ class ShippingAddressScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: whitePure,
                       boxShadow: [
-                        BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
+                        BoxShadow(
+                            color: const Color(0xff000000).withOpacity(0.04),
+                            spreadRadius: 0,
+                            blurRadius: 16,
+                            offset: const Offset(0, -4)),
                       ],
                     ),
                     width: MediaQuery.of(context).size.width,
@@ -77,7 +83,8 @@ class ShippingAddressScreen extends StatelessWidget {
                                   state.isAllowSubmit ? YellowKrungsri : cloudSoftDeepWhite, Colors.transparent,
                                   isRadius8: true),
                               child: Text("ยืนยัน",
-                                  style: AlvaStyles().headingSize16w700(state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
+                                  style: AlvaStyles().headingSize16w700(
+                                      state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
                             ),
                           ),
                         )
@@ -107,7 +114,9 @@ class ShippingAddressScreen extends StatelessWidget {
         color: whitePure,
         child: ListView(
           children: [
-            AlvaText(title: AppStrings().shippingAddressDescription, textStyle: AlvaStyles().headingSize12w400(spaceGrey123)),
+            AlvaText(
+                title: AppStrings().shippingAddressDescription,
+                textStyle: AlvaStyles().headingSize12w400(spaceGrey123)),
             SizedBox(
               height: 24,
             ),
@@ -144,7 +153,9 @@ class ShippingAddressScreen extends StatelessWidget {
                           focusNode: item.focusNode,
                           onEditingCompleted: () {
                             if (item.fieldName != 'address') {
-                              int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
+                              int index =
+                                  state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) +
+                                      1;
                               if (state.listFormWidget![index].focusNode != null) {
                                 if (state.listFormWidget![index].controller!.text.isEmpty) {
                                   FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
@@ -156,7 +167,8 @@ class ShippingAddressScreen extends StatelessWidget {
                             if (!isFocus) {
                               myBloc.validateToActiveSubmitButton();
                               setState(() {
-                                state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
+                                state.formResult!.where((element) => element.fieldName == item.fieldName).first.value =
+                                    item.controller!.text;
                               });
                             }
                           },
@@ -166,7 +178,11 @@ class ShippingAddressScreen extends StatelessWidget {
                       } else if (item.formType == formTypeDropdown) {
                         bool isDisable = true;
                         if (item.matchField != null) {
-                          if (state.formResult!.where((element) => element.fieldName == item.matchField).first.value!.isNotEmpty &&
+                          if (state.formResult!
+                                  .where((element) => element.fieldName == item.matchField)
+                                  .first
+                                  .value!
+                                  .isNotEmpty &&
                               item.options!.isNotEmpty) {
                             if (item.options!.length > 1) {
                               isDisable = false;

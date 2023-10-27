@@ -30,7 +30,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     // final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
 
-    var payload = {"caller": "mkp", "invoiceNo": event.invoiceNo};
+    var payload = {"invoiceNo": event.invoiceNo};
 
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
 
@@ -50,7 +50,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
 
   _onGetOrderSuccessMock(GetOrderSuccessMock event, Emitter<OrderSuccessState> emit) async {
     final mockJson = {
-      "refId": "REF00005678",
+      "invoiceNo": "REF00005678",
       "payment_card": "987654******1234",
       "payment_date": "1 กันยายน 2566",
       "payment_time": "09:54:22",
@@ -67,7 +67,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
         "ทดสอบ2",
         "qwijdoiqjwdwefopkwepofjmoweinfoweinfoiwenfionwe"
       ],
-      "product_price": "56,640",
+      "product_price": "56640",
       "customer_name": "กรุงศรี ออโต้",
       "customer_tel": "081-234-5678",
       "customer_email": "k_auto@krungsri.com",

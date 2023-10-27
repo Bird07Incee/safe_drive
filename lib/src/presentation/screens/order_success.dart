@@ -31,10 +31,23 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
       invoiceNo = (routingData["invoiceNo"] == null) ? "" : routingData["invoiceNo"];
       if (invoiceNo != "") {
         context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
+        // context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
       } else {
         context.read<OrderSuccessBloc>().add(SetOrderStatus(GetOrderSuccessDataStatus.error));
       }
     }
+  }
+
+  String safeDecimalFormat(String price) {
+    String result = "";
+
+    try {
+      result = int.parse(price).toDecimalFormat();
+    } catch (e) {
+      result = "0";
+    }
+
+    return result;
   }
 
   @override
@@ -87,7 +100,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                   style: AlvaStyles().headingSize14w600(blackGoMunTo),
                                 ),
                                 Text(
-                                  "หมายเลขอ้างอิง: ${orderSuccessData.refId}",
+                                  "หมายเลขอ้างอิง: ${orderSuccessData.invoiceNo}",
                                   style: AlvaStyles().headingSize12w400(blackGoMunTo),
                                 )
                               ],
@@ -212,7 +225,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("${int.parse(orderSuccessData.productPrice ?? "0").toDecimalFormat()} บาท",
+                                        Text("${safeDecimalFormat(orderSuccessData.productPrice ?? "0")} บาท",
                                             style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                         SizedBox(
                                           height: 4,
