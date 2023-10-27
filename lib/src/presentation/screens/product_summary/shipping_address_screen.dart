@@ -38,6 +38,8 @@ class ShippingAddressScreen extends StatelessWidget {
                   automaticallyImplyLeading: false,
                   leading: IconButton(
                       onPressed: () {
+                        final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                        myBloc.onClearShippingData();
                         Navigator.pop(context);
                       },
                       icon: const Icon(Icons.arrow_back_ios_rounded)),
@@ -108,6 +110,7 @@ class ShippingAddressScreen extends StatelessWidget {
         child: ListView(
           children: [
             AlvaText(title: AppStrings().shippingAddressDescription, textStyle: AlvaStyles().headingSize12w400(spaceGrey123)),
+            AlvaText(title: "ก่อนดำเนินการต่อ", textStyle: AlvaStyles().headingSize12w400(spaceGrey123)),
             SizedBox(
               height: 24,
             ),
@@ -128,41 +131,57 @@ class ShippingAddressScreen extends StatelessWidget {
                       Widget input = Container();
 
                       if (item.formType == formTypeTextField) {
-                        input = TextInputWidget(
-                          inputFormatters: item.listInputFormatter,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          controller: item.controller,
-                          label: item.label,
-                          outsideLabel: true,
-                          marginBottom: 15,
-                          required: required,
-                          textInputAction: item.fieldName != 'address' ? TextInputAction.next : TextInputAction.done,
-                          keyboardType: item.textInputType,
-                          maxLength: item.maxLength,
-                          maxLines: item.maxLines,
-                          showCounter: item.isShowCounter,
-                          focusNode: item.focusNode,
-                          onEditingCompleted: () {
-                            if (item.fieldName != 'address') {
-                              int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
-                              if (state.listFormWidget![index].focusNode != null) {
-                                if (state.listFormWidget![index].controller!.text.isEmpty) {
-                                  FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
+                        input = Form(
+                            key: item.fieldName == 'email'
+                                ? myBloc.emailValidationKey
+                                : item.fieldName == 'phone'
+                                    ? myBloc.phoneValidationKey
+                                    : null,
+                            child: TextInputWidget(
+                              inputFormatters: item.listInputFormatter,
+                              autoValidateMode: AutovalidateMode.disabled,
+                              controller: item.controller,
+                              label: item.label,
+                              outsideLabel: true,
+                              marginBottom: 15,
+                              required: required,
+                              textInputAction: item.fieldName == 'address' ? TextInputAction.done : TextInputAction.next,
+                              keyboardType: item.textInputType,
+                              maxLength: item.maxLength,
+                              maxLines: item.maxLines,
+                              showCounter: item.isShowCounter,
+                              focusNode: item.focusNode,
+                              onEditingCompleted: () {
+                                if (item.fieldName != 'address') {
+                                  int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
+                                  if (state.listFormWidget![index].focusNode != null) {
+                                    if (state.listFormWidget![index].controller!.text.isEmpty) {
+                                      FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
+                                    } else {
+                                      FocusScope.of(context).unfocus();
+                                    }
+                                  }
+                                } else {
+                                  FocusScope.of(context).unfocus();
                                 }
-                              }
-                            }
-                          },
-                          onFocusChange: (bool isFocus) {
-                            if (!isFocus) {
-                              myBloc.validateToActiveSubmitButton();
-                              setState(() {
-                                state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
-                              });
-                            }
-                          },
-                          isAllowAutoAddPhoneFormat: item.fieldName == 'phone' ? true : false,
-                          isAllowAutoAddEmailFormat: item.fieldName == 'email' ? true : false,
-                        );
+                                setState(() {});
+                              },
+                              onFocusChange: (bool isFocus) {
+                                if (!isFocus) {
+                                  myBloc.validateAnyFieldInForm(item: item, isFocus: isFocus);
+                                  // if (item.fieldName == 'email') {
+                                  //   myBloc.emailValidationKey!.currentState!.validate();
+                                  // }
+                                  // myBloc.validateToActiveSubmitButton();
+                                  //
+                                  // setState(() {
+                                  //   state.formResult!.where((element) => element.fieldName == item.fieldName).first.value = item.controller!.text;
+                                  // });
+                                }
+                              },
+                              isAllowAutoAddPhoneFormat: item.fieldName == 'phone' ? true : false,
+                              isAllowAutoAddEmailFormat: item.fieldName == 'email' ? true : false,
+                            ));
                       } else if (item.formType == formTypeDropdown) {
                         bool isDisable = true;
                         if (item.matchField != null) {
