@@ -240,9 +240,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     height: 48,
                     child: OutlinedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
-                            arguments: ProductDetailArgs(product: pdState.product));
+                        if (pdState.product.productionOptionals.isNotEmpty) {
+                          Navigator.pushNamed(
+                              context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
+                              arguments: ProductDetailArgs(product: pdState.product));
+                        } else {
+                          Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
+                        }
                       },
                       style: AlvaStyles()
                           .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),

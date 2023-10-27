@@ -92,9 +92,9 @@ class OrderSummaryScreen extends StatelessWidget {
               late CreateOrderRequestModel requestModel;
               if (orderState.orderStatus.isError) {
                 return ErrorScreen(
-                  title: ErrorConst().titleBrowser,
-                  subTitle: ErrorConst().subTitleBrowser,
-                  titleBtn: ErrorConst().titleBtnBrowser,
+                  title: ErrorConst().titleNS,
+                  subTitle: ErrorConst().subTitleNS,
+                  titleBtn: ErrorConst().titleBtnNS,
                   onTap: () {
                     context.read<OrderSummaryBloc>().add(CreateOrder(requestModel: requestModel));
                   },
@@ -106,6 +106,7 @@ class OrderSummaryScreen extends StatelessWidget {
                     builder: (context, shippingState) {
                       bool validated = !shippingState.addressModel.isEmpty && !orderState.paymentType.isNone;
                       return Scaffold(
+                          resizeToAvoidBottomInset: false,
                           body: Stack(
                             children: [
                               AlvaRootWidget(
@@ -346,82 +347,115 @@ class OrderSummaryScreen extends StatelessWidget {
                                                   .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   .copyWith(height: 24 / 14)),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 24,
-                                                    height: 24,
-                                                    child: Radio(
-                                                      value: "CC",
-                                                      groupValue: orderState.paymentType.isFullPayment ? "CC" : "",
-                                                      toggleable: true,
-                                                      onChanged: (value) {
-                                                        if (!orderState.paymentType.isFullPayment) {
-                                                          context.read<OrderSummaryBloc>().add(
-                                                              SelectPaymentType(paymentType: PaymentType.fullPayment));
-                                                        }
-                                                      },
+                                        GestureDetector(
+                                          onTap: () {
+                                            if (!orderState.paymentType.isFullPayment) {
+                                              context.read<OrderSummaryBloc>().add(
+                                                  SelectPaymentType(paymentType: PaymentType.fullPayment));
+                                            }
+                                          },
+                                          child: Container(
+                                            key: const Key("select_payment_type_cc"),
+                                            width: maxWidth,
+                                            height: 48,
+                                            padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 24,
+                                                      height: 24,
+                                                      child: Radio(
+                                                        value: "CC",
+                                                        groupValue: orderState.paymentType.isFullPayment ? "CC" : "",
+                                                        toggleable: true,
+                                                        onChanged: (value) {
+                                                          if (!orderState.paymentType.isFullPayment) {
+                                                            context.read<OrderSummaryBloc>().add(
+                                                                SelectPaymentType(paymentType: PaymentType.fullPayment));
+                                                          }
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  AlvaText(
-                                                      title: "ชำระเต็มจำนวน",
-                                                      textStyle: AlvaStyles()
-                                                          .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                          .copyWith(height: 24 / 14)),
-                                                ],
-                                              ),
-                                              AlvaText(
-                                                  title: "บัตรเครดิต/เดบิต",
-                                                  textStyle:
-                                                      AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
-                                            ],
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    SizedBox(
+                                                      width: maxWidth - 32 - 24 - 16 - 85,
+                                                      child: Text(
+                                                          "ชำระเต็มจำนวน",
+                                                          style: AlvaStyles()
+                                                              .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                              .copyWith(height: 24 / 14)),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: 85,
+                                                  child: Text(
+                                                      "บัตรเครดิต/เดบิต",
+                                                      style:
+                                                          AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 28),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 24,
-                                                    height: 24,
-                                                    child: Radio(
-                                                      value: "IPP",
-                                                      groupValue: orderState.paymentType.isInstallment ? "IPP" : "",
-                                                      toggleable: true,
-                                                      onChanged: (value) {
-                                                        if (!orderState.paymentType.isInstallment) {
-                                                          context.read<OrderSummaryBloc>().add(
-                                                              SelectPaymentType(paymentType: PaymentType.installment));
-                                                        }
-                                                      },
+                                        GestureDetector(
+                                          onTap: () {
+                                            if (!orderState.paymentType.isInstallment) {
+                                              context.read<OrderSummaryBloc>().add(
+                                                  SelectPaymentType(paymentType: PaymentType.installment));
+                                            }
+                                          },
+                                          child: Container(
+                                            key: const Key("select_payment_type_ipp"),
+                                            width: maxWidth,
+                                            height: 48,
+                                            padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
+                                            margin: const EdgeInsets.only(bottom: 16),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 24,
+                                                      height: 24,
+                                                      child: Radio(
+                                                        value: "IPP",
+                                                        groupValue: orderState.paymentType.isInstallment ? "IPP" : "",
+                                                        toggleable: true,
+                                                        onChanged: (value) {
+                                                          if (!orderState.paymentType.isInstallment) {
+                                                            context.read<OrderSummaryBloc>().add(
+                                                                SelectPaymentType(paymentType: PaymentType.installment));
+                                                          }
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  AlvaText(
-                                                      title: "ผ่อนชำระ",
-                                                      textStyle: AlvaStyles()
-                                                          .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                          .copyWith(height: 24 / 14)),
-                                                ],
-                                              ),
-                                              AlvaText(
-                                                  title: "เฉพาะบัตรเครดิตในเครือกรุงศรี",
-                                                  textStyle:
-                                                      AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
-                                            ],
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    SizedBox(
+                                                      width: maxWidth - 32 - 24 - 16 - 148,
+                                                      child: Text("ผ่อนชำระ",
+                                                          style: AlvaStyles()
+                                                              .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                              .copyWith(height: 24 / 14)),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: 148,
+                                                  child: Text("เฉพาะบัตรเครดิตในเครือกรุงศรี",
+                                                      style:
+                                                          AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         Container(
@@ -559,7 +593,7 @@ class OrderSummaryScreen extends StatelessWidget {
                               ],
                             ),
                             width: maxWidth,
-                            height: showDetail ? 321 + (step2.isNotEmpty ? 32 : 0) : 160,
+                            height: showDetail ? 321 + (step2.isNotEmpty ? 32 : 0) - (step1.isEmpty ? 32 : 0): 160,
                             padding: const EdgeInsets.only(bottom: 32),
                             child: Column(
                               children: [
@@ -580,7 +614,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                             .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
                                                             .copyWith(height: 24 / 14)))),
                                             Padding(
-                                              padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                                              padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 0),
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
@@ -608,7 +642,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 : SizedBox.shrink(),
                                             step1.isNotEmpty
                                                 ? Padding(
-                                                    padding: const EdgeInsets.only(left: 16, right: 16),
+                                                    padding: EdgeInsets.only(left: 16, right: 16, bottom: step2.isEmpty ? 16 : 0),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
