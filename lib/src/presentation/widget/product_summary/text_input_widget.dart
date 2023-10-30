@@ -223,6 +223,9 @@ class TextInputWidgetState extends State<TextInputWidget> {
     }
 
     textFormField = TextFormField(
+      cursorHeight: 20,
+      cursorColor: BTN_SELECTED_TEXT_COLOR_NEW,
+      cursorWidth: 1.5,
       autovalidateMode: widget.required ? (widget.autoValidateMode ?? AutovalidateMode.onUserInteraction) : null,
       textCapitalization: widget.textCapitalization,
       readOnly: widget.readOnly,
@@ -303,6 +306,9 @@ class TextInputWidgetState extends State<TextInputWidget> {
       },
       onEditingComplete: () {
         if (widget.onEditingCompleted != null) {
+          if (widget.controller!.text.isNotEmpty) {
+            textFormField.validator!.call(widget.controller!.text);
+          }
           widget.onEditingCompleted?.call();
         }
       },
@@ -334,6 +340,12 @@ class TextInputWidgetState extends State<TextInputWidget> {
         if (widget.required && widget.isAllowAutoAddEmailFormat) {
           String errorText = _validateEmail(value!) ?? '';
           if (errorText.isEmpty) {
+            return null;
+          } else {
+            return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
+          }
+        } else if (widget.required && widget.isAllowAutoAddPhoneFormat) {
+          if (value![0] == '0') {
             return null;
           } else {
             return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
