@@ -127,10 +127,10 @@ class _RootPageState extends State<RootPage> {
       onGenerateInitialRoutes: (initialRoute) => [generateRoute(RouteSettings(name: initialRoute))],
       onGenerateRoute: (settings) => generateRoute(settings),
       theme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 172, 204, 229),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
-      ),
+          primaryColor: const Color.fromARGB(255, 172, 204, 229),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 172, 204, 229),
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: Color(0xff2c2626)),
+          bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent)),
       navigatorObservers: [DatadogNavigationObserver(datadogSdk: DatadogSdk.instance), CurrentRouteObserver.instance],
     );
   }
