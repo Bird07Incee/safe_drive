@@ -62,9 +62,13 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
             ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
             break;
+          } else if (status == "fail") {
+            emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
           }
           tick++;
         }
+      } else {
+        emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
       }
     } catch (e) {
       emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
