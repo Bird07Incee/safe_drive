@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -39,9 +41,31 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
           headers: {"Authorization": "Bearer $accessToken"});
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
+      String status = response.data["status"] ?? "";
 
-      emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
-      ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+      if (status == "success") {
+        emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
+        ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+      } else if (status == "pending") {
+        int tick = 0;
+        while (true) {
+          if (tick == 90) {
+            emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
+            break;
+          }
+          await Future.delayed(Duration(seconds: 8));
+          Response response = await dioUtilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
+              headers: {"Authorization": "Bearer $accessToken"});
+          final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
+          String status = response.data["status"] ?? "";
+          if (status == "success") {
+            emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
+            ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+            break;
+          }
+          tick++;
+        }
+      }
     } catch (e) {
       emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
     }

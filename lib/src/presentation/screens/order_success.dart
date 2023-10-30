@@ -10,6 +10,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 class OrderSuccessScreen extends StatefulWidget {
@@ -363,7 +364,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        print("test");
+                        Navigator.pushReplacementNamed(context, Routes.initial.toStringPath());
                       },
                       child: Container(
                         height: 48,
