@@ -74,9 +74,8 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                 builder: (_) {
                   return SingleChildScrollView(
                       physics: NeverScrollableScrollPhysics(),
-                      child: Container(
+                      child: SizedBox(
                         height: MediaQuery.of(context).size.height - 32,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -115,14 +114,17 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                       }
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                                       child: Text(items[index].nameTh!),
                                     ),
                                   );
                                 },
                                 separatorBuilder: (BuildContext context, int index) {
-                                  return Divider(
-                                    height: 0,
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 16),
+                                    child: Divider(
+                                      height: 0,
+                                    ),
                                   );
                                 },
                                 itemCount: widget.options!.length,
@@ -192,16 +194,14 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                                   children: [
                                     Text(
                                       !showOutsideLabel ? widget.label ?? '' : '',
-                                      style: AlvaStyles().bodySize12W600(
-                                          widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
+                                      style: AlvaStyles().bodySize12W600(widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
                                     ),
                                   ],
                                 )
                               : null,
                           suffixIcon: widget.options!.length == 1 && widget.isDisableDropdownSuffixButton
                               ? null
-                              : Icon(Icons.keyboard_arrow_down_outlined,
-                                  size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
+                              : Icon(Icons.keyboard_arrow_down_outlined, size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
                           fillColor: cloudSoftDeepWhite,
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: grey300),
