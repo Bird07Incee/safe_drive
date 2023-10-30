@@ -308,7 +308,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         ),
                                                         GestureDetector(
                                                           onTap: () {
-                                                            saleCodeNode.unfocus();
+                                                            FocusManager.instance.primaryFocus?.unfocus();
                                                             Navigator.pushNamed(
                                                                 context, Routes.shippingAddress.toStringPath());
                                                           },
@@ -349,7 +349,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            saleCodeNode.unfocus();
+                                            FocusManager.instance.primaryFocus?.unfocus();
                                             if (!orderState.paymentType.isFullPayment) {
                                               context
                                                   .read<OrderSummaryBloc>()
@@ -406,7 +406,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            saleCodeNode.unfocus();
+                                            FocusManager.instance.primaryFocus?.unfocus();
                                             if (!orderState.paymentType.isInstallment) {
                                               context
                                                   .read<OrderSummaryBloc>()
@@ -500,7 +500,6 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     context.read<ShowSaleCodeCubit>().show(false);
                                                   }
                                                 },
-                                                focusNode: saleCodeNode,
                                                 maxLines: 1,
                                                 maxLength: 50,
                                                 style: AlvaStyles()
@@ -553,6 +552,9 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
+                                                onFieldSubmitted: (value) {
+                                                  FocusManager.instance.primaryFocus?.unfocus();
+                                                },
                                               );
                                             },
                                           ),
@@ -719,7 +721,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              saleCodeNode.unfocus();
+                                              FocusManager.instance.primaryFocus?.unfocus();
                                               context.read<ShowSummaryDetailCubit>().toggle();
                                             },
                                             child: Container(
