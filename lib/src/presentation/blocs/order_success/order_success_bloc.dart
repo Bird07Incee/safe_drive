@@ -96,12 +96,12 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
       ],
       "product_price": "56640",
       "customer_name": "กรุงศรี ออโต้",
-      "customer_tel": "081-234-5678",
+      "customer_tel": "0812345678",
       "customer_email": "k_auto@krungsri.com",
       "customer_address": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
       "seller_address":
           "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
-      "seller_tel": "091-862-0511"
+      "seller_tel": "0918620511"
     };
 
     final InquiryData mock = InquiryData.fromJson(mockJson);

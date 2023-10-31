@@ -12,6 +12,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
+import 'package:marketplace_line_oa/src/utils/phone_number_formatter.dart';
 
 class OrderSuccessScreen extends StatefulWidget {
   const OrderSuccessScreen({super.key});
@@ -31,8 +32,8 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       invoiceNo = (routingData["invoiceNo"] == null) ? "" : routingData["invoiceNo"];
       if (invoiceNo != "") {
-        context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
-        // context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
+        // context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
+        context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
       } else {
         context.read<OrderSuccessBloc>().add(SetOrderStatus(GetOrderSuccessDataStatus.error));
       }
@@ -271,7 +272,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             ),
                             ProductAttribute(
                               attributeKey: "เบอร์โทรติดต่อ",
-                              attributevalue: orderSuccessData.customerTel!,
+                              attributevalue: phoneNumberFormatter(orderSuccessData.customerTel!),
                               maxWidth: maxWidth,
                             ),
                             ProductAttribute(
@@ -310,7 +311,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               height: 4,
                             ),
                             Text(
-                              orderSuccessData.sellerTel!,
+                              phoneNumberFormatter(orderSuccessData.sellerTel!),
                               style: AlvaStyles().headingSize16w600(blackGoMunTo),
                             ),
                           ]),
