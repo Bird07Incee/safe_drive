@@ -9,24 +9,24 @@ import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/inquiry_data.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
-import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 part 'order_success_event.dart';
 part 'order_success_state.dart';
 
 class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
-  OrderSuccessBloc() : super(OrderSuccessState()) {
+  OrderSuccessBloc({required this.utilityRepository}) : super(OrderSuccessState()) {
     on<GetOrderSuccess>(_onGetOrderSuccess);
     on<GetOrderSuccessMock>(_onGetOrderSuccessMock);
     on<SetOrderStatus>(_onSetOrderStatus);
   }
+
+  final DioUtilityRepository utilityRepository;
 
   _onSetOrderStatus(SetOrderStatus event, Emitter<OrderSuccessState> emit) {
     emit(state.copyWith(orderSuccessStatus: event.status));
   }
 
   _onGetOrderSuccess(GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {
-    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
@@ -37,7 +37,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     var payload = {"invoiceNo": event.invoiceNo, "uid": uid};
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
     try {
-      Response response = await dioUtilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
+      Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
           headers: {"Authorization": "Bearer $accessToken"});
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
@@ -54,7 +54,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             break;
           }
           await Future.delayed(Duration(seconds: 8));
-          Response response = await dioUtilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
+          Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
               headers: {"Authorization": "Bearer $accessToken"});
           final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
           String status = response.data["status"] ?? "";

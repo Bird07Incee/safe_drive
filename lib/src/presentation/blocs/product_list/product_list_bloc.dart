@@ -8,7 +8,6 @@ import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
-import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 import '../../../model/product_list.dart';
 
@@ -16,13 +15,14 @@ part 'product_list_event.dart';
 part 'product_list_state.dart';
 
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
-  ProductListBloc() : super(const ProductListState()) {
+  ProductListBloc({required this.utilityRepository}) : super(const ProductListState()) {
     on<GetProductListMock>(_onGetProductListMock);
     on<GetProductList>(_onGetProductList);
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
     on<SetSelectTabIndex>(_onSetSelectTabIndex);
   }
+  final DioUtilityRepository utilityRepository;
 
   _onGetProductListMock(GetProductListMock event, Emitter<ProductListState> emit) async {
     await DefaultAssetBundle.of(event.context).loadString('assets/mocking/json/product_list.json').then((value) {
@@ -42,8 +42,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
       String accessToken = await lineDataHelper.getLineAccessToken();
-      DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
-      Response response = await dioUtilityRepository.postByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {},
+      Response response = await utilityRepository.postByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {},
           headers: {"Authorization": "Bearer $accessToken"});
       final productList = ProductList.fromJson(response.data);
       return productList;
@@ -79,7 +78,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   }
 
   _onGetProductListByCategory(GetProductListByCategory event, Emitter<ProductListState> emit) async {
-    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
@@ -93,7 +91,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     GeneralDialog().showLoadingDialog(context: event.context);
 
     try {
-      Response response = await dioUtilityRepository.getByURL(
+      Response response = await utilityRepository.getByURL(
           "$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
           headers: {"Authorization": "Bearer $accessToken"});
 
@@ -112,7 +110,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   }
 
   _onGetProductListByPage(GetProductListByPage event, Emitter<ProductListState> emit) async {
-    DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
@@ -126,7 +123,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     GeneralDialog().showLoadingDialog(context: event.context);
 
     try {
-      Response response = await dioUtilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params,
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params,
           headers: {"Authorization": "Bearer $accessToken"});
 
       var currentProductList = ProductList.fromJson(response.data);
