@@ -6,6 +6,7 @@ extension FormWidgetX on FormWidgetModel {
 }
 
 class FormWidgetModel {
+  final GlobalKey<FormState>? key;
   final String label;
   final TextEditingController? controller;
   final String fieldName;
@@ -29,7 +30,8 @@ class FormWidgetModel {
   final FocusNode? focusNode;
 
   const FormWidgetModel(
-      {this.label = '',
+      {this.key,
+      this.label = '',
       this.controller,
       this.fieldName = '',
       this.formType = '',

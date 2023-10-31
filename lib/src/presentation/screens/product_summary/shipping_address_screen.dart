@@ -6,6 +6,7 @@ import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
+import 'package:marketplace_line_oa/src/model/product_summary/args/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_summary/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -24,9 +25,13 @@ class ShippingAddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
       if (state.status.isInitial) {
-        ctx.read<ShippingAddressBloc>().setFormData();
-      }
-      if (state.status.isSuccess || state.status.isFetching) {
+        ShippingAddressArgs args = ShippingAddressArgs();
+        if (ModalRoute.of(context)!.settings.arguments != null) {
+          args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
+        }
+        ctx.read<ShippingAddressBloc>().setFormData(isFromEditing: args.isFromEditing);
+        return const LoadingScreen();
+      } else if (state.status.isSuccess || state.status.isFetching) {
         return RootPageCondition(
             child: AlvaRootWidget(
                 appBar: AppBar(
@@ -41,7 +46,11 @@ class ShippingAddressScreen extends StatelessWidget {
                   leading: IconButton(
                       onPressed: () {
                         final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
-                        myBloc.onClearShippingData();
+                        ShippingAddressArgs args = ShippingAddressArgs();
+                        if (ModalRoute.of(context)!.settings.arguments != null) {
+                          args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
+                        }
+                        if (!args.isFromEditing) myBloc.onClearShippingData();
                         Navigator.pop(context);
                       },
                       icon: const Icon(Icons.arrow_back_ios_rounded)),
@@ -141,11 +150,7 @@ class ShippingAddressScreen extends StatelessWidget {
 
                       if (item.formType == formTypeTextField) {
                         input = Form(
-                            key: item.fieldName == 'email'
-                                ? myBloc.emailValidationKey
-                                : item.fieldName == 'phone'
-                                    ? myBloc.phoneValidationKey
-                                    : null,
+                            key: item.key,
                             child: TextInputWidget(
                               inputFormatters: item.listInputFormatter,
                               autoValidateMode: AutovalidateMode.disabled,

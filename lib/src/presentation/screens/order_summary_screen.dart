@@ -40,8 +40,7 @@ class OrderSummaryScreen extends StatelessWidget {
                     price: 0,
                     indexSelect: 0,
                   );
-              Navigator.popUntil(
-                  context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
+              Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
             },
             onCancel: () {})
         .showBackFromSummaryDialog(context: context);
@@ -113,9 +112,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   appBar: AppBar(
                                     title: AlvaText(
                                         title: "สรุปรายการสั่งซื้อ",
-                                        textStyle: AlvaStyles()
-                                            .headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                            .copyWith(height: 24 / 18)),
+                                        textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18)),
                                     titleSpacing: 0,
                                     elevation: 0.4,
                                     leadingWidth: 60,
@@ -138,9 +135,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                           padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
                                           child: AlvaText(
                                               title: "รายละเอียดสินค้า",
-                                              textStyle: AlvaStyles()
-                                                  .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                  .copyWith(height: 24 / 14)),
+                                              textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 24),
@@ -155,20 +150,16 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         ? ClipRRect(
                                                             borderRadius: BorderRadius.circular(4),
                                                             child: FadeInImage(
-                                                              placeholder: AssetImage(
-                                                                  ProductSelectOptionsConst().imgDefaultPath),
+                                                              placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
                                                               image: NetworkImage(state.product.productionAssets.first),
                                                               fit: BoxFit.fitWidth,
                                                               imageErrorBuilder: (context, error, stackTrace) =>
-                                                                  Image.asset(
-                                                                      ProductSelectOptionsConst().imgDefaultPath,
-                                                                      fit: BoxFit.fitWidth),
+                                                                  Image.asset(ProductSelectOptionsConst().imgDefaultPath, fit: BoxFit.fitWidth),
                                                             ),
                                                           )
                                                         : ClipRRect(
                                                             borderRadius: BorderRadius.circular(4),
-                                                            child:
-                                                                Image.asset(ProductSelectOptionsConst().imgDefaultPath),
+                                                            child: Image.asset(ProductSelectOptionsConst().imgDefaultPath),
                                                           ),
                                                   ),
                                                 ],
@@ -181,26 +172,20 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 children: [
                                                   AlvaText(
                                                       title: state.product.productName,
-                                                      textStyle: AlvaStyles()
-                                                          .headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                          .copyWith(height: 2)),
+                                                      textStyle: AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                   SizedBox(
                                                     width: maxWidth - 32 - 16 - 76,
                                                     child: AlvaTextMaxLinesOverflow(
                                                         maxLines: 1,
                                                         title: step1,
-                                                        textStyle: AlvaStyles()
-                                                            .headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                            .copyWith(height: 1.6)),
+                                                        textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
                                                   ),
                                                   SizedBox(
                                                     width: maxWidth - 32 - 16 - 76,
                                                     child: AlvaTextMaxLinesOverflow(
                                                         maxLines: 1,
                                                         title: step2,
-                                                        textStyle: AlvaStyles()
-                                                            .headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                            .copyWith(height: 1.6)),
+                                                        textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
                                                   ),
                                                 ],
                                               )
@@ -210,16 +195,13 @@ class OrderSummaryScreen extends StatelessWidget {
                                         Container(
                                           width: maxWidth,
                                           height: 1,
-                                          decoration: BoxDecoration(
-                                              border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
+                                          decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
                                         ),
                                         Container(
                                           padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
                                           child: AlvaText(
                                               title: "ที่อยู่ในการจัดส่งสินค้า",
-                                              textStyle: AlvaStyles()
-                                                  .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                  .copyWith(height: 24 / 14)),
+                                              textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                         ),
                                         Container(
                                             padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 24),
@@ -227,8 +209,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 ? GestureDetector(
                                                     behavior: HitTestBehavior.translucent,
                                                     onTap: () {
-                                                      Navigator.pushNamed(
-                                                          context, Routes.shippingAddress.toStringPath());
+                                                      Navigator.pushNamed(context, Routes.shippingAddress.toStringPath());
                                                     },
                                                     child: Container(
                                                       width: maxWidth - 32,
@@ -246,8 +227,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                   )
                                                 : Container(
                                                     padding: EdgeInsets.only(bottom: 8),
-                                                    decoration: BoxDecoration(
-                                                        border: Border(bottom: BorderSide(width: 1, color: grey300))),
+                                                    decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: grey300))),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -262,8 +242,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                                         maxLines: 5,
                                                                         title: shippingState.addressModel.fullName,
                                                                         textStyle: AlvaStyles()
-                                                                            .headingSize12w500(
-                                                                                BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                            .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
                                                                             .copyWith(height: 2)),
                                                                   )
                                                                 : SizedBox.shrink(),
@@ -288,8 +267,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                                         maxLines: 5,
                                                                         title: shippingState.addressModel.fullAddress,
                                                                         textStyle: AlvaStyles()
-                                                                            .headingSize12w500(
-                                                                                BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                            .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
                                                                             .copyWith(height: 2)),
                                                                   )
                                                                 : SizedBox.shrink(),
@@ -308,15 +286,12 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         GestureDetector(
                                                           onTap: () {
                                                             FocusManager.instance.primaryFocus?.unfocus();
-                                                            Navigator.pushNamed(
-                                                                context, Routes.shippingAddress.toStringPath());
+                                                            Navigator.pushNamed(context, Routes.shippingAddress.toStringPath());
                                                           },
                                                           child: Container(
                                                             width: 24,
                                                             height: 24,
-                                                            decoration: BoxDecoration(
-                                                                color: cloudyWhite,
-                                                                borderRadius: BorderRadius.circular(36)),
+                                                            decoration: BoxDecoration(color: cloudyWhite, borderRadius: BorderRadius.circular(36)),
                                                             child: Center(
                                                               child: SizedBox(
                                                                 width: 10,
@@ -335,24 +310,19 @@ class OrderSummaryScreen extends StatelessWidget {
                                         Container(
                                           width: maxWidth,
                                           height: 1,
-                                          decoration: BoxDecoration(
-                                              border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
+                                          decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
                                         ),
                                         Container(
                                           padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
                                           child: AlvaText(
                                               title: "ช่องทางการชำระเงิน",
-                                              textStyle: AlvaStyles()
-                                                  .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                  .copyWith(height: 24 / 14)),
+                                              textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                         ),
                                         GestureDetector(
                                           onTap: () {
                                             FocusManager.instance.primaryFocus?.unfocus();
                                             if (!orderState.paymentType.isFullPayment) {
-                                              context
-                                                  .read<OrderSummaryBloc>()
-                                                  .add(SelectPaymentType(paymentType: PaymentType.fullPayment));
+                                              context.read<OrderSummaryBloc>().add(SelectPaymentType(paymentType: PaymentType.fullPayment));
                                             }
                                           },
                                           child: Container(
@@ -374,8 +344,9 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         toggleable: true,
                                                         onChanged: (value) {
                                                           if (!orderState.paymentType.isFullPayment) {
-                                                            context.read<OrderSummaryBloc>().add(SelectPaymentType(
-                                                                paymentType: PaymentType.fullPayment));
+                                                            context
+                                                                .read<OrderSummaryBloc>()
+                                                                .add(SelectPaymentType(paymentType: PaymentType.fullPayment));
                                                           }
                                                         },
                                                       ),
@@ -386,18 +357,15 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     SizedBox(
                                                       width: maxWidth - 32 - 24 - 16 - 85,
                                                       child: Text("ชำระเต็มจำนวน",
-                                                          style: AlvaStyles()
-                                                              .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                              .copyWith(height: 24 / 14)),
+                                                          style:
+                                                              AlvaStyles().headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                                     ),
                                                   ],
                                                 ),
                                                 SizedBox(
                                                   width: 85,
-                                                  child: Text("บัตรเครดิต/เดบิต",
-                                                      style: AlvaStyles()
-                                                          .headingSize12w400(spaceGrey)
-                                                          .copyWith(height: 2)),
+                                                  child:
+                                                      Text("บัตรเครดิต/เดบิต", style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
                                                 ),
                                               ],
                                             ),
@@ -407,9 +375,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                           onTap: () {
                                             FocusManager.instance.primaryFocus?.unfocus();
                                             if (!orderState.paymentType.isInstallment) {
-                                              context
-                                                  .read<OrderSummaryBloc>()
-                                                  .add(SelectPaymentType(paymentType: PaymentType.installment));
+                                              context.read<OrderSummaryBloc>().add(SelectPaymentType(paymentType: PaymentType.installment));
                                             }
                                           },
                                           child: Container(
@@ -432,8 +398,9 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         toggleable: true,
                                                         onChanged: (value) {
                                                           if (!orderState.paymentType.isInstallment) {
-                                                            context.read<OrderSummaryBloc>().add(SelectPaymentType(
-                                                                paymentType: PaymentType.installment));
+                                                            context
+                                                                .read<OrderSummaryBloc>()
+                                                                .add(SelectPaymentType(paymentType: PaymentType.installment));
                                                           }
                                                         },
                                                       ),
@@ -444,18 +411,15 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     SizedBox(
                                                       width: maxWidth - 32 - 24 - 16 - 148,
                                                       child: Text("ผ่อนชำระ",
-                                                          style: AlvaStyles()
-                                                              .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                              .copyWith(height: 24 / 14)),
+                                                          style:
+                                                              AlvaStyles().headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                                     ),
                                                   ],
                                                 ),
                                                 SizedBox(
                                                   width: 148,
                                                   child: Text("เฉพาะบัตรเครดิตในเครือกรุงศรี",
-                                                      style: AlvaStyles()
-                                                          .headingSize12w400(spaceGrey)
-                                                          .copyWith(height: 2)),
+                                                      style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
                                                 ),
                                               ],
                                             ),
@@ -464,8 +428,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                         Container(
                                           width: maxWidth,
                                           height: 1,
-                                          decoration: BoxDecoration(
-                                              border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
+                                          decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
                                         ),
                                         Container(
                                           padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
@@ -473,14 +436,10 @@ class OrderSummaryScreen extends StatelessWidget {
                                             children: [
                                               AlvaText(
                                                   title: "รหัสการขาย",
-                                                  textStyle: AlvaStyles()
-                                                      .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                      .copyWith(height: 24 / 14)),
+                                                  textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                               AlvaText(
                                                   title: "(ถ้ามี)",
-                                                  textStyle: AlvaStyles()
-                                                      .headingSize14w400(spaceGrey123)
-                                                      .copyWith(height: 24 / 14)),
+                                                  textStyle: AlvaStyles().headingSize14w400(spaceGrey123).copyWith(height: 24 / 14)),
                                             ],
                                           ),
                                         ),
@@ -501,9 +460,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 },
                                                 maxLines: 1,
                                                 maxLength: 50,
-                                                style: AlvaStyles()
-                                                    .headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                    .copyWith(height: 26 / 16),
+                                                style: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 26 / 16),
                                                 cursorColor: BTN_SELECTED_TEXT_COLOR_NEW,
                                                 cursorWidth: 1,
                                                 cursorHeight: 20,
@@ -519,9 +476,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                                               child: Container(
                                                                 width: 24,
                                                                 height: 24,
-                                                                decoration: BoxDecoration(
-                                                                    color: cloudyWhite,
-                                                                    borderRadius: BorderRadius.circular(36)),
+                                                                decoration:
+                                                                    BoxDecoration(color: cloudyWhite, borderRadius: BorderRadius.circular(36)),
                                                                 child: Center(
                                                                   child: SizedBox(
                                                                     width: 10,
@@ -583,14 +539,10 @@ class OrderSummaryScreen extends StatelessWidget {
                             constraints: BoxConstraints(minHeight: 160),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
                               boxShadow: [
                                 BoxShadow(
-                                    color: const Color(0xff000000).withOpacity(0.04),
-                                    spreadRadius: 0,
-                                    blurRadius: 16,
-                                    offset: const Offset(0, -4)),
+                                    color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
                               ],
                             ),
                             padding: const EdgeInsets.only(bottom: 32),
@@ -608,20 +560,15 @@ class OrderSummaryScreen extends StatelessWidget {
                                           children: [
                                             Container(
                                                 padding: EdgeInsets.only(top: 16, bottom: 16),
-                                                decoration: BoxDecoration(
-                                                    border: Border(bottom: BorderSide(width: 1, color: cloudWhite))),
+                                                decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudWhite))),
                                                 child: Center(
                                                     child: AlvaText(
                                                         title: "รายการสั่งซื้อ",
-                                                        textStyle: AlvaStyles()
-                                                            .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                            .copyWith(height: 24 / 14)))),
+                                                        textStyle:
+                                                            AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)))),
                                             Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 16,
-                                                  right: 16,
-                                                  top: 16,
-                                                  bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 0),
+                                              padding:
+                                                  EdgeInsets.only(left: 16, right: 16, top: 16, bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 0),
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
@@ -630,15 +577,11 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     child: AlvaTextMaxLinesOverflow(
                                                         title: state.product.productName,
                                                         maxLines: 1,
-                                                        textStyle: AlvaStyles()
-                                                            .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                            .copyWith(height: 2)),
+                                                        textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                   ),
                                                   AlvaText(
                                                       title: "${showPrice.toDecimalFormat()} บาท",
-                                                      textStyle: AlvaStyles()
-                                                          .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                          .copyWith(height: 2)),
+                                                      textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                 ],
                                               ),
                                             ),
@@ -649,8 +592,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 : SizedBox.shrink(),
                                             step1.isNotEmpty
                                                 ? Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 16, right: 16, bottom: step2.isEmpty ? 16 : 0),
+                                                    padding: EdgeInsets.only(left: 16, right: 16, bottom: step2.isEmpty ? 16 : 0),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
@@ -659,15 +601,13 @@ class OrderSummaryScreen extends StatelessWidget {
                                                           child: AlvaTextMaxLinesOverflow(
                                                               title: step1,
                                                               maxLines: 1,
-                                                              textStyle: AlvaStyles()
-                                                                  .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                  .copyWith(height: 2)),
+                                                              textStyle:
+                                                                  AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                         ),
                                                         AlvaText(
                                                             title: "${step1price.toDecimalFormat()} บาท",
-                                                            textStyle: AlvaStyles()
-                                                                .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                .copyWith(height: 2)),
+                                                            textStyle:
+                                                                AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                       ],
                                                     ),
                                                   )
@@ -688,15 +628,13 @@ class OrderSummaryScreen extends StatelessWidget {
                                                           child: AlvaTextMaxLinesOverflow(
                                                               title: step2,
                                                               maxLines: 1,
-                                                              textStyle: AlvaStyles()
-                                                                  .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                  .copyWith(height: 2)),
+                                                              textStyle:
+                                                                  AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                         ),
                                                         AlvaText(
                                                             title: "${step2price.toDecimalFormat()} บาท",
-                                                            textStyle: AlvaStyles()
-                                                                .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                .copyWith(height: 2)),
+                                                            textStyle:
+                                                                AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                       ],
                                                     ),
                                                   )
@@ -726,16 +664,12 @@ class OrderSummaryScreen extends StatelessWidget {
                                             child: Container(
                                               width: 24,
                                               height: 24,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(36), color: YellowKrungsri),
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(36), color: YellowKrungsri),
                                               child: Center(
                                                 child: SizedBox(
                                                   width: 10,
                                                   height: 10,
-                                                  child: Image.asset(
-                                                      showDetail
-                                                          ? 'assets/icons/arrow_down.png'
-                                                          : 'assets/icons/arrow_up.png',
+                                                  child: Image.asset(showDetail ? 'assets/icons/arrow_down.png' : 'assets/icons/arrow_up.png',
                                                       fit: BoxFit.contain),
                                                 ),
                                               ),
@@ -748,9 +682,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                               children: [
                                                 AlvaText(
                                                     title: "ยอดรวมสุทธิ",
-                                                    textStyle: AlvaStyles()
-                                                        .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                        .copyWith(height: 24 / 14)),
+                                                    textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                                 AlvaText(
                                                     title: "(ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว)",
                                                     textStyle: AlvaStyles().body1().copyWith(
@@ -766,9 +698,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                       ),
                                       AlvaText(
                                           title: "${(showPrice + step1price + step2price).toDecimalFormat()} บาท",
-                                          textStyle: AlvaStyles()
-                                              .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                              .copyWith(height: 24 / 14)),
+                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                     ],
                                   ),
                                 ),
@@ -786,10 +716,9 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     onAccept: () async {
                                                       final orderBloc = context.read<OrderSummaryBloc>();
                                                       ProductionOptionals step1SelectedOption =
-                                                          state.product.productionOptionals[
-                                                              selectOptionBloc.stepOneIndexSelect ?? 0];
-                                                      Level2 step2SelectedOption = step1SelectedOption
-                                                          .level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
+                                                          state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0];
+                                                      Level2 step2SelectedOption =
+                                                          step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
                                                       requestModel = CreateOrderRequestModel(
                                                         uid: await LineDataHelper().getLineUid(),
                                                         products: [
@@ -809,16 +738,14 @@ class OrderSummaryScreen extends StatelessWidget {
                                                                       : null))
                                                         ],
                                                         paymentInfo: PaymentInfo(
-                                                            channel:
-                                                                orderState.paymentType.isFullPayment ? "CC" : "IPP",
+                                                            channel: orderState.paymentType.isFullPayment ? "CC" : "IPP",
                                                             staffCode: saleCodeController.text),
                                                         shippingInfo: ShippingInfo(
                                                             name: shippingState.addressModel.fullName,
                                                             address:
                                                                 '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}'),
                                                         email: shippingState.addressModel.emailAddress,
-                                                        mobilePhone:
-                                                            shippingState.addressModel.mobileNumber.replaceAll('-', ''),
+                                                        mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
                                                       );
                                                       debugPrint(requestModel.toJson().toString());
                                                       orderBloc.add(CreateOrder(requestModel: requestModel));
@@ -827,12 +754,10 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 .showConfirmOrderDialog(context: context);
                                           }
                                         : null,
-                                    style: AlvaStyles().outlineNoneBorderButtonStyle(
-                                        validated ? YellowKrungsri : cloudDeepWhite, Colors.transparent,
+                                    style: AlvaStyles().outlineNoneBorderButtonStyle(validated ? YellowKrungsri : cloudDeepWhite, Colors.transparent,
                                         isRadius8: true),
-                                    child: Text("ชำระเงิน",
-                                        style: AlvaStyles()
-                                            .headingSize16w700(validated ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
+                                    child:
+                                        Text("ชำระเงิน", style: AlvaStyles().headingSize16w700(validated ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
                                   ),
                                 ),
                               ],
