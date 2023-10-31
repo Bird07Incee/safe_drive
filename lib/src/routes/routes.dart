@@ -134,9 +134,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case "/shippingAddress":
       return MaterialPageRoute(builder: (_) => ShippingAddressScreen(), settings: settings);
     case "/orderSummary":
-      return MaterialPageRoute(builder: (_) => const OrderSummaryScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => OrderSummaryScreen(), settings: settings);
     default:
-      print("case default");
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }
 }

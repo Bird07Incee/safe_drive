@@ -4,7 +4,6 @@ class ImgGalleryZoomEvent extends Equatable {
   const ImgGalleryZoomEvent();
 
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 

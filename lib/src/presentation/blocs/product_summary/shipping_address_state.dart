@@ -11,19 +11,17 @@ extension AddressStatusX on ShippingAddressStatus {
 }
 
 class ShippingAddressState extends Equatable {
-  ShippingAddressState(
+  const ShippingAddressState(
       {this.status = ShippingAddressStatus.initial,
       this.addressModel = ShippingAddressModel.empty,
       this.listFormWidget,
       this.formResult,
-      this.mainFormKey,
       this.isAllowSubmit = false});
   final ShippingAddressModel addressModel;
   final ShippingAddressStatus status;
   final List<FormWidgetModel>? listFormWidget;
-  bool isAllowSubmit;
-  List<FormWidgetResultModel>? formResult;
-  GlobalKey<FormState>? mainFormKey = GlobalKey<FormState>();
+  final bool isAllowSubmit;
+  final List<FormWidgetResultModel>? formResult;
 
   @override
   List<Object> get props => [status, addressModel, isAllowSubmit];

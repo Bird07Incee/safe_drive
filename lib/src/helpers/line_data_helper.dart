@@ -74,14 +74,14 @@ import 'dart:convert';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 
 class LineDataHelper {
-  void lineDataGrabber(String key, String value) {
+  Future<void> lineDataGrabber(String key, String value) async {
     switch (key) {
       case "code":
-        PreferencesHelper.setString("code", value);
+        await PreferencesHelper.setString("code", value);
         break;
       case "liff.state":
         String code = value.split("&")[0].replaceAll("?code=", "");
-        PreferencesHelper.setString("code", code);
+        await PreferencesHelper.setString("code", code);
         break;
       default:
         break;

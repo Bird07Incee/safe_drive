@@ -8,8 +8,6 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
-import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';

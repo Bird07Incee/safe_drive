@@ -14,6 +14,10 @@ void main() {
       bloc.close();
     });
 
+    test("ViewImgDetailPageSwitchEvent supports comparisons", (){
+      expect(ViewImgDetailPageSwitchEvent().props, ViewImgDetailPageSwitchEvent().props);
+    });
+
     test('initial state should be false', () {
       expect(bloc.state, false);
     });
@@ -27,7 +31,5 @@ void main() {
       },
       expect: () => [true],
     );
-
-    // You can write similar blocTest cases for other scenarios and actions.
   });
 }

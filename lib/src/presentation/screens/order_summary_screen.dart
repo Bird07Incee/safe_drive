@@ -23,7 +23,8 @@ import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:universal_html/html.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
-  const OrderSummaryScreen({super.key});
+  OrderSummaryScreen({super.key});
+  final TextEditingController saleCodeController = TextEditingController();
 
   void onBack(BuildContext context) {
     GeneralDialog(
@@ -54,7 +55,6 @@ class OrderSummaryScreen extends StatelessWidget {
     String step2 = selectOptionBloc.stepTwoGroupValueRadio;
     int step2price = selectOptionBloc.stepTwoPrice ?? 0;
     final FocusNode saleCodeNode = FocusNode();
-    final TextEditingController saleCodeController = TextEditingController();
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
@@ -79,7 +79,6 @@ class OrderSummaryScreen extends StatelessWidget {
                 GeneralDialog().showLoadingDialog(context: context);
               } else if (state.orderStatus.isSuccess) {
                 Navigator.pop(context);
-                print('orderesponse model : ${state.orderResponseModel.paymentURL}');
                 if (state.orderResponseModel.paymentURL != null && state.orderResponseModel.paymentURL!.isNotEmpty) {
                   window.open(state.orderResponseModel.paymentURL!, '_self');
                 }
@@ -818,10 +817,10 @@ class OrderSummaryScreen extends StatelessWidget {
                                                             address:
                                                                 '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}'),
                                                         email: shippingState.addressModel.emailAddress,
-                                                        mobilePhone: shippingState.addressModel.mobileNumber
-                                                            .replaceAll('-', ''),
+                                                        mobilePhone:
+                                                            shippingState.addressModel.mobileNumber.replaceAll('-', ''),
                                                       );
-                                                      print(requestModel.toJson());
+                                                      debugPrint(requestModel.toJson().toString());
                                                       orderBloc.add(CreateOrder(requestModel: requestModel));
                                                     },
                                                     onCancel: () {})

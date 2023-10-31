@@ -65,7 +65,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     scrollController.addListener(() {
       var pixelScreen = scrollController.position.pixels;
-      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(pixelScreen, context, "0"));
+      context
+          .read<ScrollProductDetailBloc>()
+          .add(ProductDetailScrollAction(pixelScreen, MediaQuery.of(context).size.width, "0"));
     });
   }
 
@@ -141,14 +143,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   void onBack() {
     var stack = CurrentRouteObserver.instance.stack;
-    print('route stack : $stack');
     if (stack.contains(Routes.initial.toStringPath())) {
       Navigator.pop(context);
     } else {
       Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
     }
     context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
-    context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, context, "1"));
+    context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, MediaQuery.of(context).size.width, "1"));
   }
 
   WillPopScope productDetailPage(PageController pageController, ScrollProductDetailState stateAppBar,

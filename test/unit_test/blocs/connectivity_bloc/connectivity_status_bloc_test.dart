@@ -16,6 +16,10 @@ void main() {
       connectivityStatusBloc.close();
     });
 
+    test("ConnectivityStatusEvent supports comparisons", (){
+      expect(ConnectivityStatusEvent(connectivityResult: ConnectivityResult.mobile).props, ConnectivityStatusEvent(connectivityResult: ConnectivityResult.mobile).props);
+    });
+
     test('initial state is ConnectivityStatusInitial', () {
       expect(connectivityStatusBloc.state, equals(ConnectivityStatusInitial()));
     });

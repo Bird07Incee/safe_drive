@@ -113,11 +113,11 @@ class ProductCardWidget extends StatelessWidget {
                               context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
 
                               context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
+                              final ctx = context.read<ProductDetailCarouselScrollControllerBloc>();
                               await Navigator.pushNamed(
                                   context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
 
-                              int detailPage =
-                                  context.read<ProductDetailCarouselScrollControllerBloc>().state.page as int;
+                              int detailPage = ctx.state.page as int;
                               pageViewController.jumpToPage(detailPage);
                             },
                             child: Stack(

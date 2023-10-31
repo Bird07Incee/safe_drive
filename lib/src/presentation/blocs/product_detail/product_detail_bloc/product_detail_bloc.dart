@@ -37,7 +37,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   }
 
   _onSetProduct(SetProduct event, Emitter<ProductDetailState> emit) async {
-    print('state in bloc: ${event.product.productName}');
     emit(state.copyWith(status: ProductDetailStatus.loading));
     emit(state.copyWith(status: ProductDetailStatus.success, product: event.product));
   }

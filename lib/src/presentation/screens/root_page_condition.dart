@@ -32,7 +32,7 @@ class _RootPageConditionState extends State<RootPageCondition> {
   }
 
   initFunction() {
-    context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
+    context.read<CheckBrowserBloc>().add(GetBrowserClient());
   }
 
   @override

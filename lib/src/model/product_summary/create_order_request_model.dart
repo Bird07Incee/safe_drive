@@ -1,12 +1,12 @@
 class CreateOrderRequestModel {
-  String? uid;
-  List<OrderProduct>? products;
-  PaymentInfo? paymentInfo;
-  ShippingInfo? shippingInfo;
-  String? email;
-  String? mobilePhone;
+  final String? uid;
+  final List<OrderProduct>? products;
+  final PaymentInfo? paymentInfo;
+  final ShippingInfo? shippingInfo;
+  final String? email;
+  final String? mobilePhone;
 
-  CreateOrderRequestModel(
+  const CreateOrderRequestModel(
       {required this.uid,
       required this.products,
       required this.paymentInfo,
@@ -30,15 +30,23 @@ class CreateOrderRequestModel {
     data['mobilePhone'] = mobilePhone;
     return data;
   }
+
+  static const empty = CreateOrderRequestModel(
+      uid: '',
+      products: [OrderProduct.empty],
+      paymentInfo: PaymentInfo.empty,
+      shippingInfo: ShippingInfo.empty,
+      email: "",
+      mobilePhone: "");
 }
 
 class OrderProduct {
-  String? productId;
-  int? qty;
-  int? unitPrice;
-  Optional? optional;
+  final String? productId;
+  final int? qty;
+  final int? unitPrice;
+  final Optional? optional;
 
-  OrderProduct({required this.productId, required this.qty, required this.unitPrice, required this.optional});
+  const OrderProduct({required this.productId, required this.qty, required this.unitPrice, required this.optional});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -50,15 +58,17 @@ class OrderProduct {
     }
     return data;
   }
+
+  static const empty = OrderProduct(productId: "", qty: 0, unitPrice: 0, optional: Optional.empty);
 }
 
 class Optional {
-  String? productId;
-  int? qty;
-  int? unitPrice;
-  SubOptional? subOptional;
+  final String? productId;
+  final int? qty;
+  final int? unitPrice;
+  final SubOptional? subOptional;
 
-  Optional({required this.productId, required this.qty, required this.unitPrice, required this.subOptional});
+  const Optional({required this.productId, required this.qty, required this.unitPrice, required this.subOptional});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -70,14 +80,16 @@ class Optional {
     }
     return data;
   }
+
+  static const empty = Optional(productId: "", qty: 0, unitPrice: 0, subOptional: SubOptional.empty);
 }
 
 class SubOptional {
-  String? productId;
-  int? qty;
-  int? unitPrice;
+  final String? productId;
+  final int? qty;
+  final int? unitPrice;
 
-  SubOptional({required this.productId, required this.qty, required this.unitPrice});
+  const SubOptional({required this.productId, required this.qty, required this.unitPrice});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -86,13 +98,15 @@ class SubOptional {
     data['unitPrice'] = unitPrice;
     return data;
   }
+
+  static const empty = SubOptional(productId: "", qty: 0, unitPrice: 0);
 }
 
 class PaymentInfo {
-  String? channel;
-  String? staffCode;
+  final String? channel;
+  final String? staffCode;
 
-  PaymentInfo({required this.channel, required this.staffCode});
+  const PaymentInfo({required this.channel, required this.staffCode});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -100,13 +114,15 @@ class PaymentInfo {
     data['staffCode'] = staffCode;
     return data;
   }
+
+  static const empty = PaymentInfo(channel: "", staffCode: "");
 }
 
 class ShippingInfo {
-  String? name;
-  String? address;
+  final String? name;
+  final String? address;
 
-  ShippingInfo({required this.name, required this.address});
+  const ShippingInfo({required this.name, required this.address});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -114,4 +130,6 @@ class ShippingInfo {
     data['address'] = address;
     return data;
   }
+
+  static const empty = ShippingInfo(name: "", address: "");
 }

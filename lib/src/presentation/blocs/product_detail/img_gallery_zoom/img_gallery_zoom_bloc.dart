@@ -5,16 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'img_gallery_zoom_event.dart';
 
 class ImgGalleryZoomBloc extends Bloc<ImgGalleryZoomEvent, TransformationController> {
-  ImgGalleryZoomBloc() : super(TransformationController()) {
-    final transformationController = TransformationController();
+  final TransformationController? transformationController;
+  ImgGalleryZoomBloc({this.transformationController}) : super(TransformationController()) {
+    final ctrl = transformationController ?? TransformationController();
     on<ZoomImageAction>((event, emit) {
-      if (transformationController.value != Matrix4.identity()) {
-        transformationController.value = Matrix4.identity();
-        emit(transformationController);
+      if (ctrl.value != Matrix4.identity()) {
+        ctrl.value = Matrix4.identity();
+        emit(ctrl);
       } else {
-        transformationController.value = Matrix4.identity() * 2
+        ctrl.value = Matrix4.identity() * 2.0
           ..translate(-(event.details.localPosition.dx / 2), -(event.details.localPosition.dy / 1.9));
-        emit(transformationController);
+        emit(ctrl);
       }
     });
   }

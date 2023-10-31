@@ -6,6 +6,5 @@ class PreviousScaleEvent extends Equatable {
   const PreviousScaleEvent({required this.previousScale});
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [];
+  List<Object?> get props => [previousScale];
 }

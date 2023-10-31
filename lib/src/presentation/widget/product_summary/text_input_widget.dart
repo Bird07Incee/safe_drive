@@ -37,7 +37,7 @@ class TextInputWidget extends StatefulWidget {
   final bool? alignLabelWithHint;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
-  bool readOnly;
+  final bool readOnly;
   final String? suffixText;
   final FocusNode? focusNode;
 
@@ -46,7 +46,7 @@ class TextInputWidget extends StatefulWidget {
   final Function? onEditingCompleted;
   final Function? onChanged;
 
-  bool disabled;
+  final bool disabled;
   final TextCapitalization textCapitalization;
   final String? errRequiredMessage;
 
@@ -64,7 +64,7 @@ class TextInputWidget extends StatefulWidget {
   final bool isAllowAutoAddPhoneFormat;
   final bool isAllowAutoAddEmailFormat;
 
-  TextInputWidget({
+  const TextInputWidget({
     Key? key,
     this.onTapSuffix,
     this.marginBottom = 0,

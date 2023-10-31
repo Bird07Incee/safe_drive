@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 // ignore: avoid_web_libraries_in_flutter
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/term_and_con/term_and_con_section.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
+import 'package:universal_html/html.dart';
 
 class TermAndConScreen extends StatefulWidget {
   const TermAndConScreen({super.key});
@@ -61,7 +61,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       bool isCodeVerify = accessToken != "";
       if (!isCodeVerify) {
         String lineCode = await lineDataHelper.getLineCode();
-        print('accessToken : $accessToken, code: $lineCode');
+        debugPrint('accessToken : $accessToken, code: $lineCode');
         Response response =
             await dioUtilityRepository.postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
         if (response.statusCode == 200) {

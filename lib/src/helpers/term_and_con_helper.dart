@@ -8,8 +8,8 @@ class TermAndConHelper {
     return (acceptedVersion == currentVersion && currentVersion.isNotEmpty);
   }
 
-  void setTermAndConToAccept() async {
+  Future<void> setTermAndConToAccept() async {
     String tcVersion = await LineDataHelper().getTAndC();
-    PreferencesHelper.setString("tcVersion", tcVersion);
+    await PreferencesHelper.setString("tcVersion", tcVersion);
   }
 }

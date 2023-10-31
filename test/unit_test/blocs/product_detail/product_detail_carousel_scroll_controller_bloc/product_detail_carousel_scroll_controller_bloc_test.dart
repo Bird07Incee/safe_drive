@@ -15,6 +15,10 @@ void main() {
       bloc.close();
     });
 
+    test("ProductDetailCarouselScrollControllerEvent supports comparisons", (){
+      expect(const ProductDetailCarouselScrollControllerEvent().props, const ProductDetailCarouselScrollControllerEvent().props);
+    });
+
     test('initial state should be a PageController', () {
       expect(bloc.state, isA<PageController>());
     });

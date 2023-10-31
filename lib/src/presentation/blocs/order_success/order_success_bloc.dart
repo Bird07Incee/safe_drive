@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/inquiry_data.dart';
@@ -31,6 +31,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
     final inquriyPath = Environment().getValue("INQUIRY_URL");
+    final ctx = ScaffoldMessenger.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
 
@@ -45,7 +46,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
 
       if (status == "success") {
         emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
-        ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+        ctx.showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
       } else if (status == "pending") {
         int tick = 0;
         while (true) {
@@ -60,7 +61,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
           String status = response.data["status"] ?? "";
           if (status == "success") {
             emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
-            ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+            ctx.showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
             break;
           } else if (status == "fail") {
             emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
@@ -108,10 +109,12 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
 
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
 
+    final ctx = ScaffoldMessenger.of(event.context);
+
     await Future.delayed(Duration(seconds: 2));
 
     emit(state.copyWith(orderSuccessData: mock, orderSuccessStatus: GetOrderSuccessDataStatus.success));
 
-    ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+    ctx.showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
   }
 }

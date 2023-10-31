@@ -77,7 +77,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                             ? OutlinedButton(
                                 onPressed: () {
-                                  print('1');
                                   Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
                                 },
                                 style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
@@ -87,7 +86,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                               )
                             : OutlinedButton(
                                 onPressed: () {
-                                  print('2');
                                   Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
                                 },
                                 style:

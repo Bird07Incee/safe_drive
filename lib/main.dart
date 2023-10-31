@@ -40,9 +40,7 @@ _configureApp() {
 _setUpLineLIFF() {
   LineDataHelper lineDataHelper = LineDataHelper();
   if (Uri.base.queryParameters.isNotEmpty) {
-    print("params:");
     Uri.base.queryParameters.forEach((key, value) {
-      print("$key=$value");
       lineDataHelper.lineDataGrabber(key, value);
     });
     // waiting for change
@@ -55,10 +53,10 @@ _setUpLineLIFF() {
       //TODO: config LIFF for prod
       config: Config(liffId: lineId),
       successCallback: () {
-        print('successCallback');
+        debugPrint('successCallback');
       },
       errorCallback: (error) {
-        print('init error: ${error.name}, ${error.message}, ${error.stack}');
+        debugPrint('init error: ${error.name}, ${error.message}, ${error.stack}');
       });
 }
 
@@ -104,7 +102,7 @@ class _RootPageState extends State<RootPage> {
   @override
   void initState() {
     super.initState();
-    context.read<CheckBrowserBloc>().add(GetBrowserClient(context: context));
+    context.read<CheckBrowserBloc>().add(GetBrowserClient());
     initConnectivity();
     Connectivity().onConnectivityChanged.listen((result) {
       context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: result));

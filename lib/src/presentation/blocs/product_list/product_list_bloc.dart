@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
@@ -63,7 +63,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } catch (e) {
-      print('re-load product list after refresh token');
+      debugPrint('re-load product list after refresh token');
       try {
         ProductList productList = await _getProductWithNoCategory();
 
@@ -81,6 +81,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    final Function func = GeneralDialog().showLoadingDialog(context: event.context);
+    final nav = Navigator.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
     var category = {};
 
@@ -88,7 +90,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       category = {"categoryId": event.categoryId};
     }
 
-    GeneralDialog().showLoadingDialog(context: event.context);
+    func.call();
 
     try {
       Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
@@ -98,13 +100,13 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
 
       if (!event.context.mounted) return;
-      Navigator.of(event.context).pop();
+      nav.pop();
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
 
       if (!event.context.mounted) return;
-      Navigator.of(event.context).pop();
+      nav.pop();
     }
   }
 
@@ -112,6 +114,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    final Function func = GeneralDialog().showLoadingDialog(context: event.context);
+    final nav = Navigator.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
     var params = {"page": event.page.toString(), "itemPersPage": 10};
 
@@ -119,7 +123,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       params["categoryId"] = event.categoryId;
     }
 
-    GeneralDialog().showLoadingDialog(context: event.context);
+    func.call();
 
     try {
       Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params,
@@ -139,13 +143,13 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       emit(state.copyWith(productList: nextProduct, productListStatus: GetProductListStatus.success));
 
       if (!event.context.mounted) return;
-      Navigator.of(event.context).pop();
+      nav.pop();
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
 
       if (!event.context.mounted) return;
-      Navigator.of(event.context).pop();
+      nav.pop();
     }
   }
 }

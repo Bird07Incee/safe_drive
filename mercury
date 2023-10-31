@@ -177,12 +177,12 @@ task_test_coverage() {
   if runs_inside_gocd; then
     flutter_app flutter test --coverage test
     flutter_app flutter test --machine --coverage test > coverage.output
-    flutter_app perl bin/lcov --remove coverage/lcov.info 'lib/views/*' 'lib/shared/pages/widgets/*' 'lib/configs/routes/*' 'lib/core/*' 'lib/core/dio_utils/*' 'lib/core/interceptors/*' 'lib/core/analytic_manager/*' 'lib/core/base/*' 'lib/core/dio/*' 'lib/core/dio/dio_utils/*' 'lib/core/dio/interceptors/*' 'lib/core/feature/*' 'lib/core/providers/*' 'lib/core/pages/widgets/*'  -o coverage/new_lcov.info
+    flutter_app perl bin/lcov --remove coverage/lcov.info 'lib/src/presentation/screens/*' 'lib/src/presentation/shared/*' 'lib/src/presentation/widget/*' 'lib/src/routes/*' 'lib/src/constants/*' -o coverage/new_lcov.info
     flutter_app perl bin/genhtml coverage/new_lcov.info -o coverage coverage/new_lcov.info >coverage_result.log
   else
     flutter test --coverage test
     flutter test --machine --coverage test > coverage.output
-    perl bin/lcov --remove coverage/lcov.info 'lib/views/*' 'lib/shared/pages/widgets/*' 'lib/configs/routes/*' 'lib/core/*' 'lib/core/analytic_manager/*' 'lib/core/base/*' 'lib/core/dio/*' 'lib/core/dio_utils/*' 'lib/core/interceptors/*' 'lib/core/dio/dio_utils/*' 'lib/core/dio/interceptors/*' 'lib/core/feature/*' 'lib/core/providers/*' 'lib/core/pages/widgets/*'  -o coverage/new_lcov.info
+    perl bin/lcov --remove coverage/lcov.info 'lib/src/presentation/screens/*' 'lib/src/presentation/shared/*' 'lib/src/presentation/widget/*' 'lib/src/routes/*' 'lib/src/constants/*' -o coverage/new_lcov.info
     perl bin/genhtml coverage/new_lcov.info -o coverage coverage/new_lcov.info >coverage_result.log
   fi
   echo "[INFO] Checking coverage..."

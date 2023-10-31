@@ -5,15 +5,15 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 void main() {
   group("ProductDetail state", (){
     test("SetProduct supports comparisons", (){
-      expect(const SetProduct(product: Product.empty), const SetProduct(product: Product.empty));
+      expect(const SetProduct(product: Product.empty).props, const SetProduct(product: Product.empty).props);
     });
 
     test("GetProductById supports comparisons", (){
-      expect(const GetProductByID(pid: 'test'), const GetProductByID(pid: 'test'));
+      expect(const GetProductByID(pid: 'test').props, const GetProductByID(pid: 'test').props);
     });
 
     test("SetClickFromImage supports comparisons", (){
-      expect(const SetClickFromImage(isClickFromImage: true), const SetClickFromImage(isClickFromImage: true));
+      expect(const SetClickFromImage(isClickFromImage: true).props, const SetClickFromImage(isClickFromImage: true).props);
     });
   });
 }

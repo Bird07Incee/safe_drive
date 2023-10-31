@@ -56,11 +56,9 @@ class DioUtilityService with HeaderUtil {
           throw Exception("Posting path \"$path\" error");
         }
       } else {
-        print("Posting service error with response ${response.statusCode}");
         throw Exception("Posting service error with response ${response.statusCode}");
       }
     } on DioError catch (e) {
-      print("dio error ${e.error}");
       if (e.error != null) {
         if (!isRecursion && e.response?.statusCode == 401) {
           //handle token

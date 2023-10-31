@@ -14,6 +14,10 @@ void main() {
       previousScaleBloc.close();
     });
 
+    test("PreviousScaleEvent supports comparisons", (){
+      expect(const PreviousScaleEvent(previousScale: 1.0).props, const PreviousScaleEvent(previousScale: 1.0).props);
+    });
+
     test('initial state should be 0.5', () {
       expect(previousScaleBloc.state, 0.5);
     });

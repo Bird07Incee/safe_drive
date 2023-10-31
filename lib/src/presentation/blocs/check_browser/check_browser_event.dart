@@ -6,7 +6,4 @@ class CheckBrowserEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetBrowserClient extends CheckBrowserEvent {
-  const GetBrowserClient({required this.context});
-  final BuildContext context;
-}
+class GetBrowserClient extends CheckBrowserEvent {}
