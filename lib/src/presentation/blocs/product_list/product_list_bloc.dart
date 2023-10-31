@@ -91,8 +91,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     GeneralDialog().showLoadingDialog(context: event.context);
 
     try {
-      Response response = await utilityRepository.getByURL(
-          "$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
           headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);
