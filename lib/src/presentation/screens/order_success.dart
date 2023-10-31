@@ -210,7 +210,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 ],
                               ),
                               SizedBox(
-                                height: 16,
+                                height: 8,
                               ),
                               Divider(
                                 color: cloudSoftDeepWhite,
