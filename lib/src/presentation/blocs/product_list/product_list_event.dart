@@ -7,30 +7,26 @@ class ProductListEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetProductListMock extends ProductListEvent {
-  const GetProductListMock(this.context);
-
-  final BuildContext context;
-}
-
 class GetProductList extends ProductListEvent {
   const GetProductList();
 }
 
 class GetProductListByCategory extends ProductListEvent {
-  const GetProductListByCategory(this.categoryId, this.context);
+  const GetProductListByCategory(this.categoryId, this.context, {this.bypassContext = false});
 
   final String categoryId;
   final BuildContext context;
+  final bool bypassContext;
 }
 
 class GetProductListByPage extends ProductListEvent {
-  const GetProductListByPage(this.productList, this.page, this.categoryId, this.context);
+  const GetProductListByPage(this.productList, this.page, this.categoryId, this.context, {this.bypassContext = false});
 
   final ProductList productList;
   final int page;
   final String categoryId;
   final BuildContext context;
+  final bool bypassContext;
 }
 
 class SetSelectTabIndex extends ProductListEvent {

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ProductList {
+class ProductList extends Equatable {
   const ProductList({
     required this.productAllItems,
     required this.productPage,
@@ -23,9 +23,13 @@ class ProductList {
         productAllItems = json['productAllItems'] != null ? json['productAllItems'] as int? : 0,
         productPage = json['productPage'] != null ? json['productPage'] as int? : 0,
         productCountItems = json['productCountItems'] != null ? json['productCountItems'] as int? : 0;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [productAllItems, productPage, productCountItems, banner, category, products];
 }
 
-class Banner {
+class Banner extends Equatable {
   Banner({
     required this.image,
     required this.route,
@@ -40,6 +44,10 @@ class Banner {
   factory Banner.fromJson(Map<String, dynamic> json) {
     return Banner(image: json['image'] ?? '', route: json['route'] ?? '', url: json['url'] ?? '', seqNo: json['seqNo'] ?? '');
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [image, route, url, seqNo];
 }
 
 extension ProductX on Product {

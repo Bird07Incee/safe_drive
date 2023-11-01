@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -16,21 +14,12 @@ part 'product_list_state.dart';
 
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   ProductListBloc({required this.utilityRepository}) : super(const ProductListState()) {
-    on<GetProductListMock>(_onGetProductListMock);
     on<GetProductList>(_onGetProductList);
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
     on<SetSelectTabIndex>(_onSetSelectTabIndex);
   }
   final DioUtilityRepository utilityRepository;
-
-  _onGetProductListMock(GetProductListMock event, Emitter<ProductListState> emit) async {
-    await DefaultAssetBundle.of(event.context).loadString('assets/mocking/json/product_list.json').then((value) {
-      final jsonObj = json.decode(value);
-      final productList = ProductList.fromJson(jsonObj);
-      emit(state.copyWith(productList: productList));
-    });
-  }
 
   _onSetSelectTabIndex(SetSelectTabIndex event, Emitter<ProductListState> emit) {
     emit(state.copyWith(selectedTabIndex: event.selectedTabIndex));
@@ -81,8 +70,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
-    final Function func = GeneralDialog().showLoadingDialog(context: event.context);
-    final nav = Navigator.of(event.context);
+    // final nav = Navigator.of(event.context);
+    // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
     var category = {};
 
@@ -90,7 +79,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       category = {"categoryId": event.categoryId};
     }
 
-    func.call();
+    if (event.bypassContext == false) {
+      // ignore: use_build_context_synchronously
+      GeneralDialog().showLoadingDialog(context: event.context);
+    }
 
     try {
       Response response = await utilityRepository
@@ -99,14 +91,18 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       final productList = ProductList.fromJson(response.data);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
 
-      if (!event.context.mounted) return;
-      nav.pop();
+      if (event.bypassContext == false) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(event.context);
+      }
     } catch (e) {
       debugPrint(e.toString());
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
 
-      if (!event.context.mounted) return;
-      nav.pop();
+      if (event.bypassContext == false) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(event.context);
+      }
     }
   }
 
@@ -114,8 +110,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
-    final Function func = GeneralDialog().showLoadingDialog(context: event.context);
-    final nav = Navigator.of(event.context);
+    // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
+    // final nav = Navigator.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
     var params = {"page": event.page.toString(), "itemPersPage": 10};
 
@@ -123,7 +119,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       params["categoryId"] = event.categoryId;
     }
 
-    func.call();
+    if (event.bypassContext == false) {
+      // ignore: use_build_context_synchronously
+      GeneralDialog().showLoadingDialog(context: event.context);
+    }
 
     try {
       Response response = await utilityRepository
@@ -142,14 +141,18 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       emit(state.copyWith(productList: nextProduct, productListStatus: GetProductListStatus.success));
 
-      if (!event.context.mounted) return;
-      nav.pop();
+      if (event.bypassContext == false) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(event.context);
+      }
     } catch (e) {
       debugPrint(e.toString());
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
 
-      if (!event.context.mounted) return;
-      nav.pop();
+      if (event.bypassContext == false) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(event.context);
+      }
     }
   }
 }
