@@ -124,7 +124,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
         listResult.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.value = '';
       }
       if (listForm!.where((element) => element.fieldName == getDistrict).first.options!.isEmpty) {
-        emit(state.copyWith(status: ShippingAddressStatus.fetching));
+        emit(state.copyWith(stateStatus: ShippingAddressStatus.fetching));
         var response = await fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
         if (response.statusCode == 200) {
           // var items = districtDataMock['items'] as List;
@@ -140,7 +140,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           });
           listForm.where((element) => element.fieldName == getDistrict).first.options!.addAll(listDistrict);
 
-          emit(state.copyWith(status: ShippingAddressStatus.success, formWidgetModel: listForm, formResultModel: listResult));
+          emit(state.copyWith(stateStatus: ShippingAddressStatus.success, formWidgetModel: listForm, formResultModel: listResult));
         }
       }
     } else if (fieldName == getDistrict) {
@@ -152,7 +152,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
         listResult.where((element) => element.fieldName == listClearDataSelectedProvince[i]).first.value = '';
       }
       if (listForm!.where((element) => element.fieldName == getSubDistrict).first.options!.isEmpty) {
-        emit(state.copyWith(status: ShippingAddressStatus.fetching));
+        emit(state.copyWith(stateStatus: ShippingAddressStatus.fetching));
         var response = await fetchDataFromApi(getSubDistrictAPIPath, refId: filterRefId!);
         if (response.statusCode == 200) {
           // var items = subDistrictDataMock['items'] as List;
@@ -167,7 +167,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
             return firstConsonantA.compareTo(firstConsonantB);
           });
           listForm.where((element) => element.fieldName == getSubDistrict).first.options!.addAll(listSubDistrict);
-          emit(state.copyWith(status: ShippingAddressStatus.success, formWidgetModel: listForm, formResultModel: listResult));
+          emit(state.copyWith(stateStatus: ShippingAddressStatus.success, formWidgetModel: listForm, formResultModel: listResult));
         }
       }
     } else if (fieldName == getSubDistrict) {
@@ -221,100 +221,100 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           return firstConsonantA.compareTo(firstConsonantB);
         });
 
-      List<FormWidgetModel> listFormWidget = [
-        FormWidgetModel(
-            key: nameValidationKey,
-            label: 'ชื่อ นามสกุล',
+        List<FormWidgetModel> listFormWidget = [
+          FormWidgetModel(
+              key: nameValidationKey,
+              label: 'ชื่อ นามสกุล',
+              controller: TextEditingController(),
+              focusNode: FocusNode(),
+              fieldName: 'name',
+              listInputFormatter: [
+                FilteringTextInputFormatter.deny(RegExp(r"[0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
+                    '"'
+                    "]")),
+                FilteringTextInputFormatter.deny(
+                    RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
+              ],
+              formType: 'textField',
+              required: true,
+              maxLength: 250,
+              maxLines: null),
+          FormWidgetModel(
+              key: phoneValidationKey,
+              label: 'เบอร์โทรศัพท์',
+              controller: TextEditingController(),
+              focusNode: FocusNode(),
+              fieldName: 'phone',
+              keyboardType: TextInputType.phone,
+              formType: 'textField',
+              listInputFormatter: [
+                LengthLimitingTextInputFormatter(12),
+                FilteringTextInputFormatter.allow(RegExp(r"[0-9-]")),
+                FilteringTextInputFormatter.deny(
+                    RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
+              ],
+              required: true,
+              maxLines: null),
+          FormWidgetModel(
+              key: emailValidationKey,
+              label: 'อีเมล',
+              controller: TextEditingController(),
+              focusNode: FocusNode(),
+              fieldName: 'email',
+              formType: 'textField',
+              required: true,
+              maxLength: 320,
+              maxLines: null),
+          FormWidgetModel(
+              key: addressValidationKey,
+              label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
+              controller: TextEditingController(),
+              focusNode: FocusNode(),
+              fieldName: 'address',
+              formType: 'textField',
+              required: true,
+              isShowCounter: true,
+              maxLength: 250,
+              maxLines: null),
+          FormWidgetModel(
+            label: 'จังหวัด',
             controller: TextEditingController(),
-            focusNode: FocusNode(),
-            fieldName: 'name',
-            listInputFormatter: [
-              FilteringTextInputFormatter.deny(RegExp(r"[0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
-                  '"'
-                  "]")),
-              FilteringTextInputFormatter.deny(
-                  RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
-            ],
-            formType: 'textField',
-            required: true,
-            maxLength: 250,
-            maxLines: null),
-        FormWidgetModel(
-            key: phoneValidationKey,
-            label: 'เบอร์โทรศัพท์',
+            fieldName: getProvince,
+            formType: 'selectDropdown',
+            options: listProvice,
+          ),
+          FormWidgetModel(
+            label: 'เขต/อำเภอ',
             controller: TextEditingController(),
-            focusNode: FocusNode(),
-            fieldName: 'phone',
-            keyboardType: TextInputType.phone,
-            formType: 'textField',
-            listInputFormatter: [
-              LengthLimitingTextInputFormatter(12),
-              FilteringTextInputFormatter.allow(RegExp(r"[0-9-]")),
-              FilteringTextInputFormatter.deny(
-                  RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
-            ],
-            required: true,
-            maxLines: null),
-        FormWidgetModel(
-            key: emailValidationKey,
-            label: 'อีเมล',
+            fieldName: getDistrict,
+            formType: 'selectDropdown',
+            matchField: getProvince,
+            options: [],
+          ),
+          FormWidgetModel(
+            label: 'แขวง/ตำบล',
             controller: TextEditingController(),
-            focusNode: FocusNode(),
-            fieldName: 'email',
-            formType: 'textField',
-            required: true,
-            maxLength: 320,
-            maxLines: null),
-        FormWidgetModel(
-            key: addressValidationKey,
-            label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
+            fieldName: getSubDistrict,
+            formType: 'selectDropdown',
+            matchField: getDistrict,
+            options: [],
+          ),
+          FormWidgetModel(
+            label: 'รหัสไปรษณีย์',
             controller: TextEditingController(),
-            focusNode: FocusNode(),
-            fieldName: 'address',
-            formType: 'textField',
-            required: true,
-            isShowCounter: true,
-            maxLength: 250,
-            maxLines: null),
-        FormWidgetModel(
-          label: 'จังหวัด',
-          controller: TextEditingController(),
-          fieldName: getProvince,
-          formType: 'selectDropdown',
-          options: listProvice,
-        ),
-        FormWidgetModel(
-          label: 'เขต/อำเภอ',
-          controller: TextEditingController(),
-          fieldName: getDistrict,
-          formType: 'selectDropdown',
-          matchField: getProvince,
-          options: [],
-        ),
-        FormWidgetModel(
-          label: 'แขวง/ตำบล',
-          controller: TextEditingController(),
-          fieldName: getSubDistrict,
-          formType: 'selectDropdown',
-          matchField: getDistrict,
-          options: [],
-        ),
-        FormWidgetModel(
-          label: 'รหัสไปรษณีย์',
-          controller: TextEditingController(),
-          fieldName: getZipcode,
-          formType: 'selectDropdown',
-          matchField: getSubDistrict,
-          options: [],
-        ),
-      ];
-      List<FormWidgetResultModel> listResult = [];
-      for (int i = 0; i < listFormWidget.length; i++) {
-        listResult.add(FormWidgetResultModel(id: '', fieldName: listFormWidget[i].fieldName, value: ''));
+            fieldName: getZipcode,
+            formType: 'selectDropdown',
+            matchField: getSubDistrict,
+            options: [],
+          ),
+        ];
+        List<FormWidgetResultModel> listResult = [];
+        for (int i = 0; i < listFormWidget.length; i++) {
+          listResult.add(FormWidgetResultModel(id: '', fieldName: listFormWidget[i].fieldName, value: ''));
+        }
+        emit(state.copyWith(
+            stateStatus: ShippingAddressStatus.success, formWidgetModel: listFormWidget, formResultModel: listResult, isEditing: isFromEditing));
       }
-      emit(state.copyWith(
-          stateStatus: ShippingAddressStatus.success, formWidgetModel: listFormWidget, formResultModel: listResult, isEditing: isFromEditing));
-      // }
     } catch (e) {
       emit(state.copyWith(stateStatus: ShippingAddressStatus.error));
     }
