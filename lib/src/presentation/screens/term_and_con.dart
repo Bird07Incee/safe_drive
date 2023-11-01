@@ -62,8 +62,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       if (!isCodeVerify) {
         String lineCode = await lineDataHelper.getLineCode();
         debugPrint('accessToken : $accessToken, code: $lineCode');
-        Response response =
-            await dioUtilityRepository.postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
+        Response response = await dioUtilityRepository.postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
         if (response.statusCode == 200) {
           isCodeVerify = true;
           lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
@@ -76,9 +75,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       if (isCodeVerify) {
         String accessToken = await lineDataHelper.getLineAccessToken();
         String lineUid = await lineDataHelper.getLineUid();
-        Response responseTerm = await dioUtilityRepository.postByURL(
-            "$baseUrl$socialApiPath/accept/termandcond", {"uid": lineUid},
-            headers: {"Authorization": "Bearer $accessToken"});
+        Response responseTerm = await dioUtilityRepository
+            .postByURL("$baseUrl$socialApiPath/accept/termandcond", {"uid": lineUid}, headers: {"Authorization": "Bearer $accessToken"});
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
           //stamp version
@@ -125,9 +123,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
             child: Column(
               children: [
                 AppBar(
-                  title: AlvaText(
-                      title: "ข้อกำหนดและเงื่อนไข",
-                      textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  title: AlvaText(title: "ข้อกำหนดและเงื่อนไข", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 16,
                   leadingWidth: 60,
                   centerTitle: false,
@@ -145,11 +141,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
-                      BoxShadow(
-                          color: const Color(0xff000000).withOpacity(0.04),
-                          spreadRadius: 0,
-                          blurRadius: 16,
-                          offset: const Offset(0, -4)),
+                      BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
                     ],
                   ),
                   child: Padding(
@@ -172,9 +164,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                                border: Border.all(
-                                    color: scrollFinished ? const Color(0xffffd400) : const Color(0xffdedede),
-                                    width: 2)),
+                                border: Border.all(color: scrollFinished ? const Color(0xffffd400) : const Color(0xffdedede), width: 2)),
                             child: Center(
                                 child: Text(
                               "ไม่ยอมรับ",
@@ -197,9 +187,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                             decoration: BoxDecoration(
                                 color: scrollFinished ? const Color(0xffffd400) : const Color(0xffdedede),
                                 borderRadius: const BorderRadius.all(Radius.circular(8))),
-                            child: Center(
-                                child: Text("ยอมรับ",
-                                    style: scrollFinished ? AlvaStyles().heading3() : AlvaStyles().heading3Muted())),
+                            child: Center(child: Text("ยอมรับ", style: scrollFinished ? AlvaStyles().heading3() : AlvaStyles().heading3Muted())),
                           ),
                         )
                       ],

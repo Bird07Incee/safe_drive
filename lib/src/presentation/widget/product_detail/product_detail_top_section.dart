@@ -65,9 +65,7 @@ class PDTopSection extends StatelessWidget {
                                     : state.product.productionAssets.length + 1,
                                 controller: carouselarguments,
                                 onPageChanged: (val) {
-                                  context
-                                      .read<ProductDetailCarouselScrollControllerBloc>()
-                                      .add(CarouselScrollAction(index: val));
+                                  context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: val));
                                   if (val == state.product.productionAssets.length && val != 1) {
                                     carouselarguments.jumpToPage(0);
                                   }
@@ -77,18 +75,15 @@ class PDTopSection extends StatelessWidget {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          context
-                                              .read<ViewImgDetailPageSwitchBloc>()
-                                              .add(SwitchPageAction(statePage: true));
+                                          context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                           context
                                               .read<ProductDetailCarouselScrollControllerBloc>()
                                               .add(CarouselScrollAction(index: carouselarguments.initialPage));
-                                          context
-                                              .read<PreviousScaleBloc>()
-                                              .add(const PreviousScaleEvent(previousScale: 0.5));
+                                          context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                                           if (zoomarguments.value != Matrix4.identity()) {
-                                            context.read<ImgGalleryZoomBloc>().add(
-                                                ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
+                                            context
+                                                .read<ImgGalleryZoomBloc>()
+                                                .add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
                                           }
                                         },
                                         child: AspectRatio(
@@ -130,8 +125,7 @@ class PDTopSection extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: AlvaText(
-                                      title:
-                                          "${carouselarguments.initialPage + 1}/${state.product.productionAssets.length}",
+                                      title: "${carouselarguments.initialPage + 1}/${state.product.productionAssets.length}",
                                       textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW)),
                                 ),
                               ),
@@ -151,8 +145,7 @@ class PDTopSection extends StatelessWidget {
                             visible: state.product.percentDiscountPrice > 0,
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                              decoration: const BoxDecoration(
-                                  color: BlueFantasy, borderRadius: BorderRadius.only(bottomRight: Radius.circular(8))),
+                              decoration: const BoxDecoration(color: BlueFantasy, borderRadius: BorderRadius.only(bottomRight: Radius.circular(8))),
                               child: AlvaText(
                                 title: "ถูกลง ${state.product.percentDiscountPrice} %",
                                 textStyle: AlvaStyles().headingSize12w600(Colors.white),
@@ -236,8 +229,7 @@ class PDTopSection extends StatelessWidget {
                                 },
                                 textStyle: AlvaStyles().headingSize10w400(spaceGrey),
                                 customStylesBuilder: (element) {
-                                  if (element.attributes['style'] != null &&
-                                      element.attributes['style'].toString().contains('color')) {
+                                  if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
                                     if (element.attributes['style'].toString().contains('9c9c9c')) {
                                       element.attributes['style'] = 'color:#9c9c9c';
                                     } else {
@@ -275,8 +267,7 @@ class PDTopSection extends StatelessWidget {
                                 AlvaText(
                                   title: state.product.price.toDecimalFormat(),
                                   textStyle: AlvaStyles()
-                                      .headingSize22w700(
-                                          state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                      .headingSize22w700(state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
                                       .copyWith(height: 1.454),
                                 ),
                                 Padding(
@@ -284,8 +275,7 @@ class PDTopSection extends StatelessWidget {
                                   child: AlvaText(
                                     title: ' บาท',
                                     textStyle: AlvaStyles()
-                                        .headingSize18w700(
-                                            state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                        .headingSize18w700(state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
                                         .copyWith(height: 1.454),
                                   ),
                                 ),

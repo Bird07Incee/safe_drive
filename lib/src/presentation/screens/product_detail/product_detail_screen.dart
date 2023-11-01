@@ -65,9 +65,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     scrollController.addListener(() {
       var pixelScreen = scrollController.position.pixels;
-      context
-          .read<ScrollProductDetailBloc>()
-          .add(ProductDetailScrollAction(pixelScreen, MediaQuery.of(context).size.width, "0"));
+      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(pixelScreen, MediaQuery.of(context).size.width, "0"));
     });
   }
 
@@ -152,8 +150,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, MediaQuery.of(context).size.width, "1"));
   }
 
-  WillPopScope productDetailPage(PageController pageController, ScrollProductDetailState stateAppBar,
-      BuildContext context, ProductDetailState pdState) {
+  WillPopScope productDetailPage(
+      PageController pageController, ScrollProductDetailState stateAppBar, BuildContext context, ProductDetailState pdState) {
     return WillPopScope(
       onWillPop: () async {
         onBack();
@@ -179,24 +177,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       AlvaTextMaxLinesOverflow(
                           title: pdState.product.productName,
                           maxLines: 1,
-                          textStyle: AlvaStyles()
-                              .headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)
-                              .copyWith(fontWeight: FontWeight.w500, height: 1.17)),
+                          textStyle: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(fontWeight: FontWeight.w500, height: 1.17)),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           AlvaText(
                               title: pdState.product.price.toDecimalFormat(),
-                              textStyle: AlvaStyles().heading1().copyWith(
-                                  color: pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW,
-                                  height: 1.33)),
+                              textStyle: AlvaStyles()
+                                  .heading1()
+                                  .copyWith(color: pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW, height: 1.33)),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 1),
                             child: AlvaText(
                                 title: ' บาท',
                                 textStyle: AlvaStyles()
-                                    .heading2(
-                                        pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                    .heading2(pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
                                     .copyWith(height: 1.33)),
                           ),
                         ],
@@ -206,8 +201,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                   centerTitle: false,
                 )
               : AppBar(
-                  title: AlvaText(
-                      title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  title: AlvaText(title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 0,
                   leadingWidth: 60,
                   centerTitle: false,
@@ -223,11 +217,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
             decoration: BoxDecoration(
               color: whitePure,
               boxShadow: [
-                BoxShadow(
-                    color: const Color(0xff000000).withOpacity(0.04),
-                    spreadRadius: 0,
-                    blurRadius: 16,
-                    offset: const Offset(0, -4)),
+                BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
               ],
             ),
             width: maxWidth,
@@ -242,15 +232,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     child: OutlinedButton(
                       onPressed: () {
                         if (pdState.product.productionOptionals.isNotEmpty) {
-                          Navigator.pushNamed(
-                              context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
+                          Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
                               arguments: ProductDetailArgs(product: pdState.product));
                         } else {
                           Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
                         }
                       },
-                      style: AlvaStyles()
-                          .outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
+                      style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
                       child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                     ),
                   ),
@@ -285,17 +273,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     );
   }
 
-  Widget viewImagePage(PageController pageController, BuildContext context, TransformationController zoomState,
-      double previousState, ProductDetailState pdState) {
+  Widget viewImagePage(
+      PageController pageController, BuildContext context, TransformationController zoomState, double previousState, ProductDetailState pdState) {
     backButtontoDetail() {
       if (pdState.clickFromImage == true) {
         Navigator.pop(context);
       }
       log("backButtontoDetail");
       context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
-      context
-          .read<ProductDetailCarouselScrollControllerBloc>()
-          .add(CarouselScrollAction(index: pageController.initialPage));
+      context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: pageController.initialPage));
       context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
       if (zoomState.value != Matrix4.identity()) {
         context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: customTapDownDetails(const Offset(100, 100))));
@@ -337,21 +323,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         _scale = previousState * details.scale;
                       },
                       onInteractionEnd: (ScaleEndDetails details) {
-                        context
-                            .read<PreviousScaleBloc>()
-                            .add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
+                        context.read<PreviousScaleBloc>().add(PreviousScaleEvent(previousScale: _scale.clamp(0.5, 5.0)));
                       },
                       child: AspectRatio(
                         aspectRatio: 16.0 / 9.0,
                         child: PageView.builder(
                             itemCount: imageLen == 1 ? 1 : imageLen + 1,
-                            physics:
-                                previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
+                            physics: previousState == 0.5 ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
                             controller: pageController,
                             onPageChanged: (val) {
-                              context
-                                  .read<ProductDetailCarouselScrollControllerBloc>()
-                                  .add(CarouselScrollAction(index: val));
+                              context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: val));
 
                               if (val == imageLen && val != 1) {
                                 pageController.jumpToPage(0);
@@ -366,9 +347,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                   child: FadeInImage(
                                     placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                                     image: NetworkImage(
-                                      i == imageLen
-                                          ? pdState.product.productionAssets[0]
-                                          : pdState.product.productionAssets[i],
+                                      i == imageLen ? pdState.product.productionAssets[0] : pdState.product.productionAssets[i],
                                     ),
                                     // image: NetworkImage(
                                     //   i == imageDataLength

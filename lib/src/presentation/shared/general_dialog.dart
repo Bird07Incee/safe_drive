@@ -23,12 +23,8 @@ class GeneralDialog {
         context,
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
-          child: Text(
-              "โปรดทราบ ข้อมูลที่อยู่ของคุณจะถูกลบ และคุณจำเป็นต้องกรอกที่อยู่จัดส่งใหม่ อีกครั้ง เพื่อดำเนินการต่อ",
-              style: AlvaStyles()
-                  .headingSize14w400(Colors.black)
-                  .copyWith(color: Colors.black, fontSize: 14)
-                  .copyWith(height: 24 / 14)),
+          child: Text("โปรดทราบ ข้อมูลที่อยู่ของคุณจะถูกลบ และคุณจำเป็นต้องกรอกที่อยู่จัดส่งใหม่ อีกครั้ง เพื่อดำเนินการต่อ",
+              style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
         ),
         title: Text("ระบบจะนำคุณกลับไปยังหน้าข้อมูลสินค้า",
             style: AlvaStyles()
@@ -46,10 +42,7 @@ class GeneralDialog {
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
           child: Text('กรุณากด "ยืนยัน" เพื่อทำการชำระเงิน',
-              style: AlvaStyles()
-                  .headingSize14w400(Colors.black)
-                  .copyWith(color: Colors.black, fontSize: 14)
-                  .copyWith(height: 24 / 14)),
+              style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
         ),
         key: key ?? const Key("back_from_summary_dialog"),
         contentPadding: const EdgeInsets.all(24),
@@ -78,11 +71,7 @@ class GeneralDialog {
   }
 
   _showGeneralAlert(BuildContext context, Widget body,
-      {Key? key,
-      Widget? title,
-      EdgeInsetsGeometry? contentPadding,
-      EdgeInsetsGeometry? actionPadding,
-      bool platformSpecific = false}) {
+      {Key? key, Widget? title, EdgeInsetsGeometry? contentPadding, EdgeInsetsGeometry? actionPadding, bool platformSpecific = false}) {
     Widget acceptButton = TextButton(
       child: Text(
         "ยืนยัน",

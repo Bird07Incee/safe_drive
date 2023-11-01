@@ -50,8 +50,7 @@ class ErrorScreen extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      AlvaText(
-                          title: subTitle!, textStyle: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      AlvaText(title: subTitle!, textStyle: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
                       const SizedBox(
                         height: 32,
                       ),

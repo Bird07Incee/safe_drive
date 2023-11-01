@@ -68,8 +68,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       children: [
                         Expanded(
                             child: AlvaText(
-                                title: state.product.merchantFullName,
-                                textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)))
+                                title: state.product.merchantFullName, textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)))
                       ],
                     ),
                     const SizedBox(
@@ -77,10 +76,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     ),
                     Row(
                       children: [
-                        Expanded(
-                            child: AlvaText(
-                                title: state.product.merchantAddress,
-                                textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
+                        Expanded(child: AlvaText(title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
                       ],
                     ),
                   ],
@@ -157,12 +153,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     buildAsync: true,
                     customStylesBuilder: (element) {
                       if (element.localName == 'strong') {
-                        return {
-                          'font-family': 'Krungsri Condensed',
-                          'font-size': '12px',
-                          'line-height': '24px',
-                          'font-weight': 'Bold'
-                        };
+                        return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
                       }
                       return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
                     },
@@ -273,12 +264,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                 buildAsync: true,
                                 customStylesBuilder: (element) {
-                                  return {
-                                    'font-family': 'Krungsri Condensed',
-                                    'font-size': '14px',
-                                    'max-lines': '5',
-                                    'text-overflow': 'ellipsis'
-                                  };
+                                  return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'max-lines': '5', 'text-overflow': 'ellipsis'};
                                 },
                                 factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
@@ -289,8 +275,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               data.isNotEmpty
                   ? _tabController.index == 1
                       ? LayoutBuilder(builder: (context, constraints) {
-                          final span =
-                              TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
+                          final span = TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
                           final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
                           tp.layout(maxWidth: constraints.maxWidth);
                           final numLines = tp.computeLineMetrics().length;
@@ -313,12 +298,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                                     isPressedReadMore = !isPressedReadMore;
                                                   }));
                                                 },
-                                                style: AlvaStyles().outlineNoneBorderButtonStyle(
-                                                    Colors.transparent, Colors.transparent),
+                                                style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, Colors.transparent),
                                                 child: AlvaText(
-                                                  title: isPressedReadMore
-                                                      ? AppStrings().btnHideDescription
-                                                      : AppStrings().btnReadMore,
+                                                  title: isPressedReadMore ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
                                                   textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
                                                   disableSelectableText: true,
                                                 ),
@@ -335,8 +317,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         }));
   }
 
-  Widget buildDetailCardWidget(BuildContext context, Product product,
-      {Key? titleKey, String? title, Widget? bodyPage}) {
+  Widget buildDetailCardWidget(BuildContext context, Product product, {Key? titleKey, String? title, Widget? bodyPage}) {
     return Container(
         decoration: BoxDecoration(
           color: whitePure,
@@ -384,8 +365,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 size: 16,
                               ),
                               const SizedBox(width: 8),
-                              Text("ติดต่อ ${product.merchantMobile}",
-                                  style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                              Text("ติดต่อ ${product.merchantMobile}", style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                             ],
                           ),
                         ),

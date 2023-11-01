@@ -79,8 +79,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<DioUtilityRepository>(
-            create: (context) => DioUtilityRepository(service: DioUtilityService())),
+        RepositoryProvider<DioUtilityRepository>(create: (context) => DioUtilityRepository(service: DioUtilityService())),
       ],
       child: MultiBlocProvider(
         providers: blocs,
@@ -110,8 +109,9 @@ class _RootPageState extends State<RootPage> {
   }
 
   Future<void> initConnectivity() async {
-    await Connectivity().checkConnectivity().then(
-        (value) => context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: value)));
+    await Connectivity()
+        .checkConnectivity()
+        .then((value) => context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: value)));
   }
 
   @override

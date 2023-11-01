@@ -84,8 +84,7 @@ class ProductCardWidget extends StatelessWidget {
                     onTap: () {
                       context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                       context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
-                      Navigator.pushNamed(
-                          context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
+                      Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 16),
@@ -106,16 +105,13 @@ class ProductCardWidget extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
-                              context
-                                  .read<ProductDetailCarouselScrollControllerBloc>()
-                                  .add(CarouselScrollAction(index: activeIndex[index] - 1));
+                              context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));
                               context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                               context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
 
                               context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                               final ctx = context.read<ProductDetailCarouselScrollControllerBloc>();
-                              await Navigator.pushNamed(
-                                  context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
+                              await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
 
                               int detailPage = ctx.state.page as int;
                               pageViewController.jumpToPage(detailPage);
@@ -125,8 +121,7 @@ class ProductCardWidget extends StatelessWidget {
                                 AspectRatio(
                                   aspectRatio: 16.0 / 9.0,
                                   child: ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+                                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                                     child: PageView.builder(
                                         itemCount: products?[index].productionAssets.length == 1
                                             ? products![index].productionAssets.length
@@ -153,9 +148,8 @@ class ProductCardWidget extends StatelessWidget {
                                                         : products[index].productionAssets[i],
                                                   ),
                                                   fit: BoxFit.fitWidth,
-                                                  imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                                                      'assets/homepage/img_default.png',
-                                                      fit: BoxFit.fitWidth),
+                                                  imageErrorBuilder: (context, error, stackTrace) =>
+                                                      Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
                                                 ),
                                               )
                                             ],
@@ -257,9 +251,7 @@ class ProductCardWidget extends StatelessWidget {
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    Visibility(
-                                        visible: products[index].promotionTag.isEmpty ? false : true,
-                                        child: promos(products[index])),
+                                    Visibility(visible: products[index].promotionTag.isEmpty ? false : true, child: promos(products[index])),
                                     const SizedBox(
                                       height: 16,
                                     ),
@@ -357,9 +349,7 @@ class ProductCardWidget extends StatelessWidget {
                                         ),
                                         Container(
                                           height: 40,
-                                          decoration: const BoxDecoration(
-                                              color: YellowKrungsri,
-                                              borderRadius: BorderRadius.all(Radius.circular(8))),
+                                          decoration: const BoxDecoration(color: YellowKrungsri, borderRadius: BorderRadius.all(Radius.circular(8))),
                                           child: Row(
                                             children: [
                                               const SizedBox(

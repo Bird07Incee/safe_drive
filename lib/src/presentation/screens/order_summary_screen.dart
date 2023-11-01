@@ -551,9 +551,9 @@ class OrderSummaryScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 AnimatedSize(
-                                  alignment: Alignment(0, -5),
+                                  alignment: Alignment(0, -3),
                                   curve: Curves.easeOutCirc,
-                                  duration: const Duration(milliseconds: 300),
+                                  duration: const Duration(milliseconds: 500),
                                   child: showDetail
                                       ? Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,

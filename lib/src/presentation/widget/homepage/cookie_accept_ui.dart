@@ -46,8 +46,7 @@ class CookieAcceptUI extends StatelessWidget {
                         // Navigator.pushNamed(context, "cookieSetting");
                       },
                       style: AlvaStyles().outlineButtonStyle(Colors.transparent, sugarRed, 0),
-                      child: AlvaText(
-                          title: "การตั้งค่าคุกกี้", textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      child: AlvaText(title: "การตั้งค่าคุกกี้", textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
                     ),
                   ),
                   const SizedBox(

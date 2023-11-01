@@ -37,6 +37,5 @@ class ShippingAddressModel extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object?> get props =>
-      [fullName, mobileNumber, emailAddress, fullAddress, province, district, subDistrict, zipCode];
+  List<Object?> get props => [fullName, mobileNumber, emailAddress, fullAddress, province, district, subDistrict, zipCode];
 }

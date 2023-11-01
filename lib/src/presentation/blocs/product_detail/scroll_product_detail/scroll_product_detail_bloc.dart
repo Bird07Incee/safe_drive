@@ -11,8 +11,7 @@ class ScrollProductDetailBloc extends Bloc<ScrollProductDetailEvent, ScrollProdu
   void _scrollingProcess(ProductDetailScrollAction event, Emitter<ScrollProductDetailState> emit) {
     if (!state.appBarCarDetailStatus && event.pixels > ((event.maxWidth - 32.0) / 16) * 9 + 270) {
       emit(state.copyWith(appBarCarDetailStatus: true));
-    } else if (state.appBarCarDetailStatus && event.pixels < ((event.maxWidth - 32.0) / 16) * 9 + 270 ||
-        event.isPopNavigator == "1") {
+    } else if (state.appBarCarDetailStatus && event.pixels < ((event.maxWidth - 32.0) / 16) * 9 + 270 || event.isPopNavigator == "1") {
       emit(state.copyWith(appBarCarDetailStatus: false));
     }
   }

@@ -8,15 +8,7 @@ class SocialToken {
   String? tcAccept;
   String? pdpaAccept;
 
-  SocialToken(
-      {this.uid,
-      this.accessToken,
-      this.refreshToken,
-      this.expiresIn,
-      this.tcVersion,
-      this.pdpaVersion,
-      this.tcAccept,
-      this.pdpaAccept});
+  SocialToken({this.uid, this.accessToken, this.refreshToken, this.expiresIn, this.tcVersion, this.pdpaVersion, this.tcAccept, this.pdpaAccept});
 
   SocialToken.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];

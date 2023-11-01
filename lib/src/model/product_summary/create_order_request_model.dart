@@ -32,12 +32,7 @@ class CreateOrderRequestModel {
   }
 
   static const empty = CreateOrderRequestModel(
-      uid: '',
-      products: [OrderProduct.empty],
-      paymentInfo: PaymentInfo.empty,
-      shippingInfo: ShippingInfo.empty,
-      email: "",
-      mobilePhone: "");
+      uid: '', products: [OrderProduct.empty], paymentInfo: PaymentInfo.empty, shippingInfo: ShippingInfo.empty, email: "", mobilePhone: "");
 }
 
 class OrderProduct {

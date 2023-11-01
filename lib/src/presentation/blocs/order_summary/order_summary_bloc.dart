@@ -28,9 +28,8 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
 
     try {
       String path = "/v1/create";
-      Response response = await utilityRepository.postByURL(
-          "$baseUrl$transactionApiPath$path", event.requestModel.toJson(),
-          headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository
+          .postByURL("$baseUrl$transactionApiPath$path", event.requestModel.toJson(), headers: {"Authorization": "Bearer $accessToken"});
 
       final o = OrderResponseModel.fromJson(response.data);
       emit(state.copyWith(orderStatus: OrderStatus.success, orderResponseModel: o));

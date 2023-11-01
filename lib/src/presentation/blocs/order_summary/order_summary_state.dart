@@ -19,15 +19,12 @@ extension OrderStatusX on OrderStatus {
 
 class OrderSummaryState extends Equatable {
   const OrderSummaryState(
-      {this.paymentType = PaymentType.none,
-      this.orderStatus = OrderStatus.initial,
-      this.orderResponseModel = OrderResponseModel.empty});
+      {this.paymentType = PaymentType.none, this.orderStatus = OrderStatus.initial, this.orderResponseModel = OrderResponseModel.empty});
   final PaymentType paymentType;
   final OrderStatus orderStatus;
   final OrderResponseModel orderResponseModel;
 
-  OrderSummaryState copyWith(
-      {PaymentType? paymentType, OrderStatus? orderStatus, OrderResponseModel? orderResponseModel}) {
+  OrderSummaryState copyWith({PaymentType? paymentType, OrderStatus? orderStatus, OrderResponseModel? orderResponseModel}) {
     return OrderSummaryState(
         paymentType: paymentType ?? this.paymentType,
         orderStatus: orderStatus ?? this.orderStatus,

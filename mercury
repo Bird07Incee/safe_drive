@@ -212,9 +212,9 @@ task_test_coverage() {
 help__fmt="Fix lint format"
 task_fmt() {
   if runs_inside_gocd; then
-    flutter_app dart format lib -l 120
+    flutter_app dart format lib -l 150
   else
-    dart format lib -l 120
+    dart format lib -l 150
   fi
 }
 

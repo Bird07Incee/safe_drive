@@ -88,11 +88,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 onPressed: () {
                                   Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
                                 },
-                                style:
-                                    AlvaStyles().outlineNoneBorderButtonStyle(cloudSoftDeepWhite, Colors.transparent),
-                                child: AlvaText(
-                                    title: ProductSelectOptionsConst().continueText,
-                                    textStyle: AlvaStyles().headingSize16w700(smockGrey)),
+                                style: AlvaStyles().outlineNoneBorderButtonStyle(cloudSoftDeepWhite, Colors.transparent),
+                                child:
+                                    AlvaText(title: ProductSelectOptionsConst().continueText, textStyle: AlvaStyles().headingSize16w700(smockGrey)),
                               ),
                       ),
                     )
@@ -101,8 +99,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
               ),
               appBar: AppBar(
                 title: AlvaText(
-                    title: ProductSelectOptionsConst().selectProdText,
-                    textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    title: ProductSelectOptionsConst().selectProdText, textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                 titleSpacing: 0,
                 leadingWidth: 60,
                 elevation: 0,
@@ -152,8 +149,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                     itemBuilder: (BuildContext context, int index) {
                                       return GestureDetector(
                                         onTap: () {
-                                          if (prodOptState.stepOneGroupValueRadio ==
-                                              widget.arguments!.product.productionOptionals[index].label) {
+                                          if (prodOptState.stepOneGroupValueRadio == widget.arguments!.product.productionOptionals[index].label) {
                                             myBloc.updateStepOneVariables(
                                               groupValueRadio: "",
                                               price: 0,
@@ -183,10 +179,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                             myBloc.updateLastOption(0);
                                           } else {
                                             myBloc.updateStepOneVariables(
-                                              groupValueRadio:
-                                                  widget.arguments!.product.productionOptionals[index].label,
-                                              price: widget.arguments!.product.productionOptionals[index].price +
-                                                  mainPrice,
+                                              groupValueRadio: widget.arguments!.product.productionOptionals[index].label,
+                                              price: widget.arguments!.product.productionOptionals[index].price + mainPrice,
                                               indexSelect: index,
                                             );
                                             myBloc.updateStepTwoVariables(
@@ -210,8 +204,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                               indexSelect: myBloc.state.stepFiveIndexSelect,
                                             );
                                             myBloc.updateSelectCurrentOption(1);
-                                            if (widget
-                                                .arguments!.product.productionOptionals[index].level2.isNotEmpty) {
+                                            if (widget.arguments!.product.productionOptionals[index].level2.isNotEmpty) {
                                               myBloc.updateLastOption(2);
                                             } else {
                                               myBloc.updateLastOption(1);
@@ -234,8 +227,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                           width: 24,
                                                           height: 24,
                                                           child: Radio(
-                                                            value: widget
-                                                                .arguments!.product.productionOptionals[index].label,
+                                                            value: widget.arguments!.product.productionOptionals[index].label,
                                                             groupValue: prodOptState.stepOneGroupValueRadio,
                                                             toggleable: true,
                                                             onChanged: (value) {
@@ -270,9 +262,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               } else {
                                                                 myBloc.updateStepOneVariables(
                                                                   groupValueRadio: value.toString(),
-                                                                  price: widget.arguments!.product
-                                                                          .productionOptionals[index].price +
-                                                                      mainPrice,
+                                                                  price: widget.arguments!.product.productionOptionals[index].price + mainPrice,
                                                                   indexSelect: index,
                                                                 );
                                                                 myBloc.updateStepTwoVariables(
@@ -296,8 +286,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   indexSelect: myBloc.state.stepFiveIndexSelect,
                                                                 );
                                                                 myBloc.updateSelectCurrentOption(1);
-                                                                if (widget.arguments!.product.productionOptionals[index]
-                                                                    .level2.isNotEmpty) {
+                                                                if (widget.arguments!.product.productionOptionals[index].level2.isNotEmpty) {
                                                                   myBloc.updateLastOption(2);
                                                                 } else {
                                                                   myBloc.updateLastOption(1);
@@ -320,18 +309,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                       child: ClipRRect(
                                                                         borderRadius: BorderRadius.circular(4),
                                                                         child: FadeInImage(
-                                                                          placeholder: AssetImage(
-                                                                              ProductSelectOptionsConst()
-                                                                                  .imgDefaultPath),
-                                                                          image: NetworkImage(widget.arguments!.product
-                                                                              .productionOptionals[index].image),
+                                                                          placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
+                                                                          image: NetworkImage(
+                                                                              widget.arguments!.product.productionOptionals[index].image),
                                                                           fit: BoxFit.fitWidth,
-                                                                          imageErrorBuilder: (context, error,
-                                                                                  stackTrace) =>
-                                                                              Image.asset(
-                                                                                  ProductSelectOptionsConst()
-                                                                                      .imgDefaultPath,
-                                                                                  fit: BoxFit.fitWidth),
+                                                                          imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                              ProductSelectOptionsConst().imgDefaultPath,
+                                                                              fit: BoxFit.fitWidth),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -346,10 +330,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     Expanded(
                                                       child: Container(
                                                         margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
-                                                        child: Text(
-                                                            widget.arguments!.product.productionOptionals[index].label,
-                                                            style: AlvaStyles()
-                                                                .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                        child: Text(widget.arguments!.product.productionOptionals[index].label,
+                                                            style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -382,8 +364,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       prodOptState.stepOneGroupValueRadio == ""
                                           ? Expanded(
                                               child: AlvaTextMaxLinesOverflow(
-                                                  title:
-                                                      "ตัวเลือก${widget.arguments!.product.productionOptionals[0].levelName}",
+                                                  title: "ตัวเลือก${widget.arguments!.product.productionOptionals[0].levelName}",
                                                   maxLines: 1,
                                                   textStyle: AlvaStyles().bodySize14W600(cloudSoftDeepWhite)),
                                             )
@@ -409,8 +390,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                         ],
                       ),
                       prodOptState.stepOneGroupValueRadio == "" ||
-                              widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2
-                                  .isEmpty
+                              widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2.isEmpty
                           ? Container()
                           : Column(
                               children: [
@@ -424,12 +404,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width - 32,
                                         child: AlvaTextMaxLinesOverflow(
-                                          title: widget
-                                              .arguments!
-                                              .product
-                                              .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                              .level2[0]
-                                              .levelName,
+                                          title: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[0].levelName,
                                           maxLines: 1,
                                           textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW),
                                         ),
@@ -444,18 +419,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
-                                        itemCount: widget.arguments!.product
-                                            .productionOptionals[prodOptState.stepOneIndexSelect!].level2.length,
+                                        itemCount: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2.length,
                                         itemBuilder: (BuildContext context, int index) {
                                           return GestureDetector(
                                             onTap: () {
                                               if (prodOptState.stepTwoGroupValueRadio ==
                                                   widget
-                                                      .arguments!
-                                                      .product
-                                                      .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                      .level2[index]
-                                                      .label) {
+                                                      .arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[index].label) {
                                                 myBloc.updateStepTwoVariables(
                                                   groupValueRadio: "",
                                                   price: 0,
@@ -481,17 +451,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                               } else {
                                                 myBloc.updateStepTwoVariables(
                                                   groupValueRadio: widget
-                                                      .arguments!
-                                                      .product
-                                                      .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                      .level2[index]
-                                                      .label,
+                                                      .arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[index].label,
                                                   price: widget
-                                                      .arguments!
-                                                      .product
-                                                      .productionOptionals[myBloc.state.stepOneIndexSelect!]
-                                                      .level2[index]
-                                                      .price,
+                                                      .arguments!.product.productionOptionals[myBloc.state.stepOneIndexSelect!].level2[index].price,
                                                   indexSelect: index,
                                                 );
                                                 myBloc.updateStepTreeVariables(
@@ -510,13 +472,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                   indexSelect: myBloc.state.stepFiveIndexSelect,
                                                 );
                                                 myBloc.updateSelectCurrentOption(2);
-                                                if (widget
-                                                    .arguments!
-                                                    .product
-                                                    .productionOptionals[myBloc.state.stepOneIndexSelect!]
-                                                    .level2[index]
-                                                    .level3
-                                                    .isNotEmpty) {
+                                                if (widget.arguments!.product.productionOptionals[myBloc.state.stepOneIndexSelect!].level2[index]
+                                                    .level3.isNotEmpty) {
                                                   myBloc.updateLastOption(3);
                                                 } else {
                                                   myBloc.updateLastOption(2);
@@ -539,13 +496,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               width: 24,
                                                               height: 24,
                                                               child: Radio(
-                                                                value: widget
-                                                                    .arguments!
-                                                                    .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
-                                                                    .level2[index]
-                                                                    .label,
+                                                                value: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                    .level2[index].label,
                                                                 groupValue: prodOptState.stepTwoGroupValueRadio,
                                                                 toggleable: true,
                                                                 onChanged: (value) {
@@ -575,13 +527,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   } else {
                                                                     myBloc.updateStepTwoVariables(
                                                                       groupValueRadio: value.toString(),
-                                                                      price: widget
-                                                                          .arguments!
-                                                                          .product
-                                                                          .productionOptionals[
-                                                                              myBloc.state.stepOneIndexSelect!]
-                                                                          .level2[index]
-                                                                          .price,
+                                                                      price: widget.arguments!.product
+                                                                          .productionOptionals[myBloc.state.stepOneIndexSelect!].level2[index].price,
                                                                       indexSelect: index,
                                                                     );
                                                                     myBloc.updateStepTreeVariables(
@@ -603,8 +550,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                     if (widget
                                                                         .arguments!
                                                                         .product
-                                                                        .productionOptionals[
-                                                                            myBloc.state.stepOneIndexSelect!]
+                                                                        .productionOptionals[myBloc.state.stepOneIndexSelect!]
                                                                         .level2[index]
                                                                         .level3
                                                                         .isNotEmpty) {
@@ -616,13 +562,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 },
                                                               ),
                                                             ),
-                                                            widget
-                                                                        .arguments!
-                                                                        .product
-                                                                        .productionOptionals[
-                                                                            prodOptState.stepOneIndexSelect!]
-                                                                        .level2[index]
-                                                                        .image ==
+                                                            widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                        .level2[index].image ==
                                                                     ""
                                                                 ? SizedBox.shrink()
                                                                 : Row(
@@ -637,25 +578,19 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                           child: ClipRRect(
                                                                             borderRadius: BorderRadius.circular(4),
                                                                             child: FadeInImage(
-                                                                              placeholder: AssetImage(
-                                                                                  ProductSelectOptionsConst()
-                                                                                      .imgDefaultPath),
+                                                                              placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
                                                                               image: NetworkImage(
                                                                                 widget
                                                                                     .arguments!
                                                                                     .product
-                                                                                    .productionOptionals[prodOptState
-                                                                                        .stepOneIndexSelect!]
+                                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                                     .level2[index]
                                                                                     .image,
                                                                               ),
                                                                               fit: BoxFit.fitWidth,
-                                                                              imageErrorBuilder:
-                                                                                  (context, error, stackTrace) =>
-                                                                                      Image.asset(
-                                                                                          ProductSelectOptionsConst()
-                                                                                              .imgDefaultPath,
-                                                                                          fit: BoxFit.fitWidth),
+                                                                              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                  ProductSelectOptionsConst().imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -670,15 +605,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                           child: Container(
                                                             margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
                                                             child: Text(
-                                                                widget
-                                                                    .arguments!
-                                                                    .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
-                                                                    .level2[index]
-                                                                    .label,
-                                                                style: AlvaStyles()
-                                                                    .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                                widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                    .level2[index].label,
+                                                                style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                           ),
                                                         ),
                                                         SizedBox(width: 16),
@@ -743,8 +672,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                               ],
                             ),
                       prodOptState.stepTwoGroupValueRadio == "" ||
-                              widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
-                                  .level2[prodOptState.stepTwoIndexSelect!].level3.isEmpty
+                              widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!]
+                                  .level3.isEmpty
                           ? Container()
                           : Column(
                               children: [
@@ -758,13 +687,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width - 32,
                                         child: AlvaTextMaxLinesOverflow(
-                                            title: widget
-                                                .arguments!
-                                                .product
-                                                .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                .level2[prodOptState.stepTwoIndexSelect!]
-                                                .level3[0]
-                                                .levelName,
+                                            title: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                .level2[prodOptState.stepTwoIndexSelect!].level3[0].levelName,
                                             maxLines: 1,
                                             textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                                       ),
@@ -778,24 +702,14 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
-                                        itemCount: widget
-                                            .arguments!
-                                            .product
-                                            .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                            .level2[prodOptState.stepTwoIndexSelect!]
-                                            .level3
-                                            .length,
+                                        itemCount: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                            .level2[prodOptState.stepTwoIndexSelect!].level3.length,
                                         itemBuilder: (BuildContext context, int index) {
                                           return GestureDetector(
                                             onTap: () {
                                               if (prodOptState.stepTreeGroupValueRadio ==
-                                                  widget
-                                                      .arguments!
-                                                      .product
-                                                      .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                      .level3[index]
-                                                      .label) {
+                                                  widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                      .level2[prodOptState.stepTwoIndexSelect!].level3[index].label) {
                                                 myBloc.updateStepTreeVariables(
                                                   groupValueRadio: "",
                                                   price: 0,
@@ -815,20 +729,10 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                 myBloc.updateLastOption(3);
                                               } else {
                                                 myBloc.updateStepTreeVariables(
-                                                  groupValueRadio: widget
-                                                      .arguments!
-                                                      .product
-                                                      .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                                      .level2[prodOptState.stepTwoIndexSelect!]
-                                                      .level3[index]
-                                                      .label,
-                                                  price: widget
-                                                      .arguments!
-                                                      .product
-                                                      .productionOptionals[myBloc.state.stepOneIndexSelect!]
-                                                      .level2[myBloc.state.stepTwoIndexSelect!]
-                                                      .level3[index]
-                                                      .price,
+                                                  groupValueRadio: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                      .level2[prodOptState.stepTwoIndexSelect!].level3[index].label,
+                                                  price: widget.arguments!.product.productionOptionals[myBloc.state.stepOneIndexSelect!]
+                                                      .level2[myBloc.state.stepTwoIndexSelect!].level3[index].price,
                                                   indexSelect: index,
                                                 );
                                                 myBloc.updateStepFourVariables(
@@ -842,14 +746,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                   indexSelect: myBloc.state.stepFiveIndexSelect,
                                                 );
                                                 myBloc.updateSelectCurrentOption(3);
-                                                if (widget
-                                                    .arguments!
-                                                    .product
-                                                    .productionOptionals[myBloc.state.stepOneIndexSelect!]
-                                                    .level2[myBloc.state.stepTwoIndexSelect!]
-                                                    .level3[index]
-                                                    .level4
-                                                    .isNotEmpty) {
+                                                if (widget.arguments!.product.productionOptionals[myBloc.state.stepOneIndexSelect!]
+                                                    .level2[myBloc.state.stepTwoIndexSelect!].level3[index].level4.isNotEmpty) {
                                                   myBloc.updateLastOption(4);
                                                 } else {
                                                   myBloc.updateLastOption(3);
@@ -872,14 +770,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                               width: 24,
                                                               height: 24,
                                                               child: Radio(
-                                                                value: widget
-                                                                    .arguments!
-                                                                    .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
-                                                                    .level2[prodOptState.stepTwoIndexSelect!]
-                                                                    .level3[index]
-                                                                    .label,
+                                                                value: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                    .level2[prodOptState.stepTwoIndexSelect!].level3[index].label,
                                                                 groupValue: prodOptState.stepTreeGroupValueRadio,
                                                                 toggleable: true,
                                                                 onChanged: (value) {
@@ -907,8 +799,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                       price: widget
                                                                           .arguments!
                                                                           .product
-                                                                          .productionOptionals[
-                                                                              myBloc.state.stepOneIndexSelect!]
+                                                                          .productionOptionals[myBloc.state.stepOneIndexSelect!]
                                                                           .level2[myBloc.state.stepTwoIndexSelect!]
                                                                           .level3[index]
                                                                           .price,
@@ -928,8 +819,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                     if (widget
                                                                         .arguments!
                                                                         .product
-                                                                        .productionOptionals[
-                                                                            myBloc.state.stepOneIndexSelect!]
+                                                                        .productionOptionals[myBloc.state.stepOneIndexSelect!]
                                                                         .level2[myBloc.state.stepTwoIndexSelect!]
                                                                         .level3[index]
                                                                         .level4
@@ -942,14 +832,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 },
                                                               ),
                                                             ),
-                                                            widget
-                                                                        .arguments!
-                                                                        .product
-                                                                        .productionOptionals[
-                                                                            prodOptState.stepOneIndexSelect!]
-                                                                        .level2[prodOptState.stepTwoIndexSelect!]
-                                                                        .level3[index]
-                                                                        .image ==
+                                                            widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                        .level2[prodOptState.stepTwoIndexSelect!].level3[index].image ==
                                                                     ""
                                                                 ? SizedBox.shrink()
                                                                 : Row(
@@ -964,27 +848,20 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                           child: ClipRRect(
                                                                             borderRadius: BorderRadius.circular(4),
                                                                             child: FadeInImage(
-                                                                              placeholder: AssetImage(
-                                                                                  ProductSelectOptionsConst()
-                                                                                      .imgDefaultPath),
+                                                                              placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
                                                                               image: NetworkImage(
                                                                                 widget
                                                                                     .arguments!
                                                                                     .product
-                                                                                    .productionOptionals[prodOptState
-                                                                                        .stepOneIndexSelect!]
-                                                                                    .level2[prodOptState
-                                                                                        .stepTwoIndexSelect!]
+                                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                                    .level2[prodOptState.stepTwoIndexSelect!]
                                                                                     .level3[index]
                                                                                     .image,
                                                                               ),
                                                                               fit: BoxFit.fitWidth,
-                                                                              imageErrorBuilder:
-                                                                                  (context, error, stackTrace) =>
-                                                                                      Image.asset(
-                                                                                          ProductSelectOptionsConst()
-                                                                                              .imgDefaultPath,
-                                                                                          fit: BoxFit.fitWidth),
+                                                                              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                  ProductSelectOptionsConst().imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -998,16 +875,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                           child: Container(
                                                             margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
                                                             child: Text(
-                                                                widget
-                                                                    .arguments!
-                                                                    .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
-                                                                    .level2[prodOptState.stepTwoIndexSelect!]
-                                                                    .level3[index]
-                                                                    .label,
-                                                                style: AlvaStyles()
-                                                                    .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                                widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                    .level2[prodOptState.stepTwoIndexSelect!].level3[index].label,
+                                                                style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                           ),
                                                         ),
                                                         SizedBox(width: 16),
@@ -1075,14 +945,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                               ],
                             ),
                       prodOptState.stepTreeGroupValueRadio == "" ||
-                              widget
-                                  .arguments!
-                                  .product
-                                  .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                  .level2[prodOptState.stepTwoIndexSelect!]
-                                  .level3[prodOptState.stepTreeIndexSelect!]
-                                  .level4
-                                  .isEmpty
+                              widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!]
+                                  .level3[prodOptState.stepTreeIndexSelect!].level4.isEmpty
                           ? Container()
                           : Column(
                               children: [
@@ -1119,14 +983,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       ListView.builder(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
-                                        itemCount: widget
-                                            .arguments!
-                                            .product
-                                            .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                            .level2[prodOptState.stepTwoIndexSelect!]
-                                            .level3[prodOptState.stepTreeIndexSelect!]
-                                            .level4
-                                            .length,
+                                        itemCount: widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!]
+                                            .level2[prodOptState.stepTwoIndexSelect!].level3[prodOptState.stepTreeIndexSelect!].level4.length,
                                         itemBuilder: (BuildContext context, int index) {
                                           return GestureDetector(
                                             onTap: () {
@@ -1213,8 +1071,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 value: widget
                                                                     .arguments!
                                                                     .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                     .level2[prodOptState.stepTwoIndexSelect!]
                                                                     .level3[prodOptState.stepTreeIndexSelect!]
                                                                     .level4[index]
@@ -1242,8 +1099,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                       price: widget
                                                                           .arguments!
                                                                           .product
-                                                                          .productionOptionals[
-                                                                              prodOptState.stepOneIndexSelect!]
+                                                                          .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                           .level2[prodOptState.stepTwoIndexSelect!]
                                                                           .level3[prodOptState.stepTreeIndexSelect!]
                                                                           .level4[index]
@@ -1259,8 +1115,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                     if (widget
                                                                         .arguments!
                                                                         .product
-                                                                        .productionOptionals[
-                                                                            prodOptState.stepOneIndexSelect!]
+                                                                        .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                         .level2[prodOptState.stepTwoIndexSelect!]
                                                                         .level3[prodOptState.stepTreeIndexSelect!]
                                                                         .level4[index]
@@ -1277,8 +1132,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             widget
                                                                         .arguments!
                                                                         .product
-                                                                        .productionOptionals[
-                                                                            prodOptState.stepOneIndexSelect!]
+                                                                        .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                         .level2[prodOptState.stepTwoIndexSelect!]
                                                                         .level3[prodOptState.stepTreeIndexSelect!]
                                                                         .level4[index]
@@ -1297,30 +1151,22 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                           child: ClipRRect(
                                                                             borderRadius: BorderRadius.circular(4),
                                                                             child: FadeInImage(
-                                                                              placeholder: AssetImage(
-                                                                                  ProductSelectOptionsConst()
-                                                                                      .imgDefaultPath),
+                                                                              placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
                                                                               // Replace with your placeholder image path
                                                                               image: NetworkImage(
                                                                                 widget
                                                                                     .arguments!
                                                                                     .product
-                                                                                    .productionOptionals[prodOptState
-                                                                                        .stepOneIndexSelect!]
-                                                                                    .level2[prodOptState
-                                                                                        .stepTwoIndexSelect!]
-                                                                                    .level3[prodOptState
-                                                                                        .stepTreeIndexSelect!]
+                                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                                    .level2[prodOptState.stepTwoIndexSelect!]
+                                                                                    .level3[prodOptState.stepTreeIndexSelect!]
                                                                                     .level4[index]
                                                                                     .image,
                                                                               ),
                                                                               fit: BoxFit.fitWidth,
-                                                                              imageErrorBuilder:
-                                                                                  (context, error, stackTrace) =>
-                                                                                      Image.asset(
-                                                                                          ProductSelectOptionsConst()
-                                                                                              .imgDefaultPath,
-                                                                                          fit: BoxFit.fitWidth),
+                                                                              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                  ProductSelectOptionsConst().imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -1340,14 +1186,12 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 widget
                                                                     .arguments!
                                                                     .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                     .level2[prodOptState.stepTwoIndexSelect!]
                                                                     .level3[prodOptState.stepTreeIndexSelect!]
                                                                     .level4[index]
                                                                     .label,
-                                                                style: AlvaStyles()
-                                                                    .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                                style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                           ),
                                                         ),
                                                         SizedBox(width: 16),
@@ -1415,15 +1259,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                               ],
                             ),
                       prodOptState.stepFourGroupValueRadio == "" ||
-                              widget
-                                  .arguments!
-                                  .product
-                                  .productionOptionals[prodOptState.stepOneIndexSelect!]
-                                  .level2[prodOptState.stepTwoIndexSelect!]
-                                  .level3[prodOptState.stepTreeIndexSelect!]
-                                  .level4[prodOptState.stepFourIndexSelect!]
-                                  .level5
-                                  .isEmpty
+                              widget.arguments!.product.productionOptionals[prodOptState.stepOneIndexSelect!].level2[prodOptState.stepTwoIndexSelect!]
+                                  .level3[prodOptState.stepTreeIndexSelect!].level4[prodOptState.stepFourIndexSelect!].level5.isEmpty
                           ? Container()
                           : Column(
                               children: [
@@ -1538,8 +1375,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 value: widget
                                                                     .arguments!
                                                                     .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                     .level2[prodOptState.stepTwoIndexSelect!]
                                                                     .level3[prodOptState.stepTreeIndexSelect!]
                                                                     .level4[prodOptState.stepFourIndexSelect!]
@@ -1563,8 +1399,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                       price: widget
                                                                           .arguments!
                                                                           .product
-                                                                          .productionOptionals[
-                                                                              prodOptState.stepOneIndexSelect!]
+                                                                          .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                           .level2[prodOptState.stepTwoIndexSelect!]
                                                                           .level3[prodOptState.stepTreeIndexSelect!]
                                                                           .level4[prodOptState.stepFourIndexSelect!]
@@ -1581,8 +1416,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                             widget
                                                                         .arguments!
                                                                         .product
-                                                                        .productionOptionals[
-                                                                            prodOptState.stepOneIndexSelect!]
+                                                                        .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                         .level2[prodOptState.stepTwoIndexSelect!]
                                                                         .level3[prodOptState.stepTreeIndexSelect!]
                                                                         .level4[prodOptState.stepFourIndexSelect!]
@@ -1602,32 +1436,23 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                           child: ClipRRect(
                                                                             borderRadius: BorderRadius.circular(4),
                                                                             child: FadeInImage(
-                                                                              placeholder: AssetImage(
-                                                                                  ProductSelectOptionsConst()
-                                                                                      .imgDefaultPath),
+                                                                              placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
                                                                               // Replace with your placeholder image path
                                                                               image: NetworkImage(
                                                                                 widget
                                                                                     .arguments!
                                                                                     .product
-                                                                                    .productionOptionals[prodOptState
-                                                                                        .stepOneIndexSelect!]
-                                                                                    .level2[prodOptState
-                                                                                        .stepTwoIndexSelect!]
-                                                                                    .level3[prodOptState
-                                                                                        .stepTreeIndexSelect!]
-                                                                                    .level4[prodOptState
-                                                                                        .stepFourIndexSelect!]
+                                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
+                                                                                    .level2[prodOptState.stepTwoIndexSelect!]
+                                                                                    .level3[prodOptState.stepTreeIndexSelect!]
+                                                                                    .level4[prodOptState.stepFourIndexSelect!]
                                                                                     .level5[index]
                                                                                     .image,
                                                                               ),
                                                                               fit: BoxFit.fitWidth,
-                                                                              imageErrorBuilder:
-                                                                                  (context, error, stackTrace) =>
-                                                                                      Image.asset(
-                                                                                          ProductSelectOptionsConst()
-                                                                                              .imgDefaultPath,
-                                                                                          fit: BoxFit.fitWidth),
+                                                                              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                  ProductSelectOptionsConst().imgDefaultPath,
+                                                                                  fit: BoxFit.fitWidth),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -1647,15 +1472,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 widget
                                                                     .arguments!
                                                                     .product
-                                                                    .productionOptionals[
-                                                                        prodOptState.stepOneIndexSelect!]
+                                                                    .productionOptionals[prodOptState.stepOneIndexSelect!]
                                                                     .level2[prodOptState.stepTwoIndexSelect!]
                                                                     .level3[prodOptState.stepTreeIndexSelect!]
                                                                     .level4[prodOptState.stepFourIndexSelect!]
                                                                     .level5[index]
                                                                     .label,
-                                                                style: AlvaStyles()
-                                                                    .bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                                                style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW)),
                                                           ),
                                                         ),
                                                         SizedBox(width: 16),

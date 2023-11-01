@@ -94,8 +94,7 @@ class UnbreakableText extends StatelessWidget {
       children: [
         for (var i = 0; i < textList.length; i++) ...[
           TextSpan(text: textList[i]),
-          if (i + 1 != textList.length)
-            WidgetSpan(alignment: PlaceholderAlignment.middle, child: Text(pattern!, style: style)),
+          if (i + 1 != textList.length) WidgetSpan(alignment: PlaceholderAlignment.middle, child: Text(pattern!, style: style)),
         ],
       ],
     ));

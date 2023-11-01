@@ -4,8 +4,7 @@ enum GetProductListStatus { initial, loading, loadingTranparent, success, error 
 
 class ProductListState extends Equatable {
   const ProductListState({
-    this.productList = const ProductList(
-        productAllItems: 0, productPage: 0, productCountItems: 0, banner: [], category: [], products: []),
+    this.productList = const ProductList(productAllItems: 0, productPage: 0, productCountItems: 0, banner: [], category: [], products: []),
     this.productListStatus = GetProductListStatus.initial,
     this.selectedTabIndex = 0,
     this.hideCategory = false,

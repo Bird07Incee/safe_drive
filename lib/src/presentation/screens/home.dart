@@ -132,8 +132,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         if (index == 0) {
                                           context.read<ProductListBloc>().add(GetProductListByCategory("", context));
                                         } else {
-                                          context.read<ProductListBloc>().add(GetProductListByCategory(
-                                              state.productList.category![index - 1]["categoryId"], context));
+                                          context
+                                              .read<ProductListBloc>()
+                                              .add(GetProductListByCategory(state.productList.category![index - 1]["categoryId"], context));
                                         }
                                         scrollController.animateTo(
                                             //go to top of scroll
@@ -146,10 +147,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         Tab(
                                           text: "ทั้งหมด",
                                           icon: state.selectedTabIndex == 0
-                                              ? Image.asset('assets/images/category/icon_active_cate_all.png',
-                                                  width: 24, height: 24)
-                                              : Image.asset('assets/images/category/icon_cate_all.png',
-                                                  width: 24, height: 24),
+                                              ? Image.asset('assets/images/category/icon_active_cate_all.png', width: 24, height: 24)
+                                              : Image.asset('assets/images/category/icon_cate_all.png', width: 24, height: 24),
                                         ),
                                         for (int i = 0; i < state.productList.category!.length; i++)
                                           Tab(
@@ -159,30 +158,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       width: 24,
                                                       height: 24,
                                                       child: FadeInImage(
-                                                        placeholder: const AssetImage(
-                                                            'assets/images/category/icon_active_cate_other.png'),
+                                                        placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
                                                         // Replace with your placeholder image path
-                                                        image:
-                                                            NetworkImage(state.productList.category![i]["img_active"]),
+                                                        image: NetworkImage(state.productList.category![i]["img_active"]),
                                                         fit: BoxFit.fitWidth,
-                                                        imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                                                            'assets/images/category/icon_active_cate_other.png',
-                                                            fit: BoxFit.fitWidth),
+                                                        imageErrorBuilder: (context, error, stackTrace) =>
+                                                            Image.asset('assets/images/category/icon_active_cate_other.png', fit: BoxFit.fitWidth),
                                                       ),
                                                     )
                                                   : SizedBox(
                                                       width: 24,
                                                       height: 24,
                                                       child: FadeInImage(
-                                                        placeholder: const AssetImage(
-                                                            'assets/images/category/icon_cate_other.png'),
+                                                        placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
                                                         // Replace with your placeholder image path
-                                                        image: NetworkImage(
-                                                            state.productList.category![i]["img_inactive"]),
+                                                        image: NetworkImage(state.productList.category![i]["img_inactive"]),
                                                         fit: BoxFit.fitWidth,
-                                                        imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                                                            'assets/images/category/icon_cate_other.png',
-                                                            fit: BoxFit.fitWidth),
+                                                        imageErrorBuilder: (context, error, stackTrace) =>
+                                                            Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
                                                       ),
                                                     )),
                                       ]),
@@ -207,8 +200,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     child: GestureDetector(
                                       onTap: () {
                                         if (state.selectedTabIndex == 0) {
-                                          context.read<ProductListBloc>().add(GetProductListByPage(
-                                              state.productList, state.productList.productPage! + 1, "", context));
+                                          context
+                                              .read<ProductListBloc>()
+                                              .add(GetProductListByPage(state.productList, state.productList.productPage! + 1, "", context));
                                         } else {
                                           context.read<ProductListBloc>().add(GetProductListByPage(
                                               state.productList,
@@ -226,17 +220,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             width: 100,
                                             height: 32,
                                             margin: EdgeInsets.symmetric(vertical: 4),
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(Radius.circular(16)),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: whitePure.withOpacity(0.4),
-                                                    spreadRadius: 0,
-                                                    blurRadius: 8,
-                                                    offset: const Offset(0, 2),
-                                                  ),
-                                                ]),
+                                            decoration:
+                                                BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [
+                                              BoxShadow(
+                                                color: whitePure.withOpacity(0.4),
+                                                spreadRadius: 0,
+                                                blurRadius: 8,
+                                                offset: const Offset(0, 2),
+                                              ),
+                                            ]),
                                             child: Row(
                                               children: [
                                                 const SizedBox(
@@ -297,8 +289,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         color: sugarRed,
                                       ),
                                       GestureDetector(
-                                        onTap: () => launchUrl(Uri.parse(
-                                            "https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
+                                        onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
                                         child: Text(
                                           HomeConst().privacyPolicy,
                                           style: AlvaStyles().headingSize10w600(sugarRed),
@@ -352,8 +343,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           if (state.selectedTabIndex == 0) {
                             context.read<ProductListBloc>().add(const GetProductList());
                           } else {
-                            context.read<ProductListBloc>().add(GetProductListByCategory(
-                                state.productList.category![state.selectedTabIndex - 1]["categoryId"], context));
+                            context
+                                .read<ProductListBloc>()
+                                .add(GetProductListByCategory(state.productList.category![state.selectedTabIndex - 1]["categoryId"], context));
                           }
                         },
                       );

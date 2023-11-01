@@ -54,7 +54,6 @@ class OrderSuccessState extends Equatable {
 
   OrderSuccessState copyWith({GetOrderSuccessDataStatus? orderSuccessStatus, InquiryData? orderSuccessData}) {
     return OrderSuccessState(
-        orderSuccessData: orderSuccessData ?? this.orderSuccessData,
-        orderSuccessStatus: orderSuccessStatus ?? this.orderSuccessStatus);
+        orderSuccessData: orderSuccessData ?? this.orderSuccessData, orderSuccessStatus: orderSuccessStatus ?? this.orderSuccessStatus);
   }
 }

@@ -26,9 +26,7 @@ class ReadTermAndConScreen extends StatelessWidget {
             child: Column(
               children: [
                 AppBar(
-                  title: AlvaText(
-                      title: "ข้อกำหนดและเงื่อนไข",
-                      textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  title: AlvaText(title: "ข้อกำหนดและเงื่อนไข", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 0,
                   leadingWidth: 60,
                   centerTitle: false,
@@ -39,11 +37,7 @@ class ReadTermAndConScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.arrow_back_ios_rounded)),
                 ),
-                Container(
-                    width: maxWidth,
-                    height: maxHeight,
-                    color: const Color(0xfff3f3f3),
-                    child: ListView(children: const [TermAndConSection()]))
+                Container(width: maxWidth, height: maxHeight, color: const Color(0xfff3f3f3), child: ListView(children: const [TermAndConSection()]))
               ],
             )),
       ),

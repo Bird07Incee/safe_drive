@@ -242,8 +242,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                         SizedBox(
                                           height: 4,
                                         ),
-                                        Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว",
-                                            style: AlvaStyles().headingSize12w400Cordia(spaceGrey))
+                                        Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey))
                                       ],
                                     ),
                                   )
@@ -356,11 +355,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
-                        BoxShadow(
-                            color: const Color(0xff000000).withOpacity(0.04),
-                            spreadRadius: 0,
-                            blurRadius: 16,
-                            offset: const Offset(0, -4)),
+                        BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
                       ],
                     ),
                     child: GestureDetector(
@@ -370,8 +365,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       child: Container(
                         height: 48,
                         width: (maxWidth - 40) / 2,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
+                        decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
                         child: Center(child: Text("กลับสู่หน้าหลัก", style: AlvaStyles().heading3())),
                       ),
                     ))

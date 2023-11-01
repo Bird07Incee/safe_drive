@@ -38,8 +38,8 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     var payload = {"invoiceNo": event.invoiceNo, "uid": uid};
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
     try {
-      Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
-          headers: {"Authorization": "Bearer $accessToken"});
+      Response response =
+          await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken"});
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
       String status = response.data["status"] ?? "";
@@ -55,8 +55,8 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             break;
           }
           await Future.delayed(Duration(seconds: 8));
-          Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload,
-              headers: {"Authorization": "Bearer $accessToken"});
+          Response response = await utilityRepository
+              .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken"});
           final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
           String status = response.data["status"] ?? "";
           if (status == "success") {
@@ -88,20 +88,13 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
       "product_asset": "image url",
       "product_id": "PM12345678",
       "product_name": "Pulsar Max",
-      "product_attr": [
-        "สีดำ",
-        "ความยาวสาย 3 เมตร",
-        "ทดสอบ1",
-        "ทดสอบ2",
-        "qwijdoiqjwdwefopkwepofjmoweinfoweinfoiwenfionwe"
-      ],
+      "product_attr": ["สีดำ", "ความยาวสาย 3 เมตร", "ทดสอบ1", "ทดสอบ2", "qwijdoiqjwdwefopkwepofjmoweinfoweinfoiwenfionwe"],
       "product_price": "56640",
       "customer_name": "กรุงศรี ออโต้",
       "customer_tel": "0812345678",
       "customer_email": "k_auto@krungsri.com",
       "customer_address": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
-      "seller_address":
-          "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
+      "seller_address": "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
       "seller_tel": "0918620511"
     };
 
