@@ -6,6 +6,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/model/product_summary/args/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/create_order_request_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/order_summary_bloc.dart';
@@ -286,7 +287,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         GestureDetector(
                                                           onTap: () {
                                                             FocusManager.instance.primaryFocus?.unfocus();
-                                                            Navigator.pushNamed(context, Routes.shippingAddress.toStringPath());
+                                                            Navigator.pushNamed(context, Routes.shippingAddress.toStringPath(),arguments: ShippingAddressArgs(isFromEditing: true));
                                                           },
                                                           child: Container(
                                                             width: 24,
