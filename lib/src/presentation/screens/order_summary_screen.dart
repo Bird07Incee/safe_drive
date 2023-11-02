@@ -102,7 +102,7 @@ class OrderSummaryScreen extends StatelessWidget {
                 builder: (context, showDetail) {
                   return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(
                     builder: (context, shippingState) {
-                      bool validated = !shippingState.addressModel.isEmpty && !orderState.paymentType.isNone;
+                      bool validated = shippingState.addressModel != ShippingAddressModel.empty && !orderState.paymentType.isNone;
                       return Scaffold(
                           resizeToAvoidBottomInset: false,
                           backgroundColor: Colors.white,
@@ -206,7 +206,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                         ),
                                         Container(
                                             padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 24),
-                                            child: shippingState.addressModel.isEmpty
+                                            child: shippingState.addressModel == ShippingAddressModel.empty
                                                 ? GestureDetector(
                                                     behavior: HitTestBehavior.translucent,
                                                     onTap: () {
@@ -287,7 +287,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         GestureDetector(
                                                           onTap: () {
                                                             FocusManager.instance.primaryFocus?.unfocus();
-                                                            Navigator.pushNamed(context, Routes.shippingAddress.toStringPath(),arguments: ShippingAddressArgs(isFromEditing: true));
+                                                            Navigator.pushNamed(context, Routes.shippingAddress.toStringPath(),
+                                                                arguments: ShippingAddressArgs(isFromEditing: true));
                                                           },
                                                           child: Container(
                                                             width: 24,

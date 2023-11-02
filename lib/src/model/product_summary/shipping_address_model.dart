@@ -1,9 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-extension AddressX on ShippingAddressModel {
-  bool get isEmpty => this == ShippingAddressModel.empty;
-}
-
 class ShippingAddressModel extends Equatable {
   final String fullName;
   final String mobileNumber;
