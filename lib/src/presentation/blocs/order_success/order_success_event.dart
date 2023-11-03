@@ -7,17 +7,18 @@ class OrderSuccessEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetOrderSuccessMock extends OrderSuccessEvent {
-  const GetOrderSuccessMock(this.context);
+// class GetOrderSuccessMock extends OrderSuccessEvent {
+//   const GetOrderSuccessMock(this.context);
 
-  final BuildContext context;
-}
+//   final BuildContext context;
+// }
 
 class GetOrderSuccess extends OrderSuccessEvent {
-  const GetOrderSuccess(this.context, this.invoiceNo);
+  const GetOrderSuccess(this.context, this.invoiceNo, {this.bypassContext = false});
 
   final BuildContext context;
   final String invoiceNo;
+  final bool bypassContext;
 }
 
 class SetOrderStatus extends OrderSuccessEvent {

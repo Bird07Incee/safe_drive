@@ -1,4 +1,6 @@
-class InquiryData {
+import 'package:equatable/equatable.dart';
+
+class InquiryData extends Equatable {
   const InquiryData(
       {required this.invoiceNo,
       required this.paymentCard,
@@ -80,4 +82,27 @@ class InquiryData {
     data['seller_tel'] = sellerTel;
     return data;
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        invoiceNo,
+        paymentCard,
+        paymentDate,
+        paymentTime,
+        paymentMedthod,
+        paymentPeriod,
+        paymentMerchant,
+        productAsset,
+        productId,
+        productName,
+        productAttr,
+        productPrice,
+        customerName,
+        customerTel,
+        customerEmail,
+        customerAddress,
+        sellerAddress,
+        sellerTel,
+      ];
 }
