@@ -22,8 +22,8 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
   final String getSubDistrict = "subdistrict";
   final String getZipcode = "zipcode";
   final String getProvinceAPIPath = "/ecommerce/v1/data/province";
-  final String getDistrictAPIPath = "/ecommerce/v1/data/district";
-  final String getSubDistrictAPIPath = "/ecommerce/v1/data/subdistrict";
+  // final String getDistrictAPIPath = "/ecommerce/v1/data/district";
+  // final String getSubDistrictAPIPath = "/ecommerce/v1/data/subdistrict";
 
   GlobalKey<FormState>? mainFormKey = GlobalKey<FormState>();
   GlobalKey<FormState>? nameValidationKey = GlobalKey<FormState>();
@@ -135,7 +135,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       }
       if (listForm!.where((element) => element.fieldName == getDistrict).first.options!.isEmpty) {
         emit(state.copyWith(stateStatus: ShippingAddressStatus.fetching));
-        var response = await fetchDataFromApi(getDistrictAPIPath, refId: filterRefId!);
+        var response = await fetchDataFromApi(getProvinceAPIPath, refId: filterRefId!);
         if (response.statusCode == 200) {
           // var items = districtDataMock['items'] as List;
           var items = response.data['items'] as List;
@@ -166,7 +166,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       }
       if (listForm!.where((element) => element.fieldName == getSubDistrict).first.options!.isEmpty) {
         emit(state.copyWith(stateStatus: ShippingAddressStatus.fetching));
-        var response = await fetchDataFromApi(getSubDistrictAPIPath, refId: filterRefId!);
+        var response = await fetchDataFromApi(getProvinceAPIPath, refId: filterRefId!);
         if (response.statusCode == 200) {
           // var items = subDistrictDataMock['items'] as List;
           var items = response.data['items'] as List;
