@@ -135,7 +135,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       }
       if (listForm!.where((element) => element.fieldName == getDistrict).first.options!.isEmpty) {
         emit(state.copyWith(stateStatus: ShippingAddressStatus.fetching));
-        var response = await fetchDataFromApi(getProvinceAPIPath, refId: filterRefId!);
+        var response = await fetchDataFromApi(getProvinceAPIPath, refId: filterRefId!, isDistrict: true);
         if (response.statusCode == 200) {
           // var items = districtDataMock['items'] as List;
           var items = response.data['items'] as List;
@@ -166,7 +166,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       }
       if (listForm!.where((element) => element.fieldName == getSubDistrict).first.options!.isEmpty) {
         emit(state.copyWith(stateStatus: ShippingAddressStatus.fetching));
-        var response = await fetchDataFromApi(getProvinceAPIPath, refId: filterRefId!);
+        var response = await fetchDataFromApi(getProvinceAPIPath, refId: filterRefId!, isSubDistrict: true);
         if (response.statusCode == 200) {
           // var items = subDistrictDataMock['items'] as List;
           var items = response.data['items'] as List;
@@ -349,16 +349,16 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
     return listResult;
   }
 
-  fetchDataFromApi(String path, {String refId = ""}) async {
+  fetchDataFromApi(String path, {String refId = "", bool isDistrict = false, bool isSubDistrict = false}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     Map<String, Object> queryParams = {};
     if (refId.isNotEmpty) {
-      if (path.contains(getDistrict) && !path.contains(getSubDistrict)) {
+      if (isDistrict) {
         queryParams = {getProvince: refId};
-      } else if (path.contains(getSubDistrict)) {
+      } else if (isSubDistrict) {
         queryParams = {getDistrict: refId};
       }
     }
