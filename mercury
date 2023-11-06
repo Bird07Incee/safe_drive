@@ -6,7 +6,7 @@ set -o pipefail
 
 # source: git@gitlab.tools.buk0.com:tools/go-helpers/gosonar.git
 # source gosonar
-SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:4.7.0"
+SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:5.0.1"
 
 ECR_URL="688318228301.dkr.ecr.ap-southeast-1.amazonaws.com"
 FLUTTER_IMAGE="${ECR_URL}/marketplace/flutter:latest"
