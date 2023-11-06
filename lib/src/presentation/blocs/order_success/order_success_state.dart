@@ -1,6 +1,6 @@
 part of 'order_success_bloc.dart';
 
-enum GetOrderSuccessDataStatus { initial, loading, success, error }
+enum GetOrderSuccessDataStatus { initial, loading, success, cancel, error }
 
 const defaultInquiryData = {
   "invoiceNo": "",

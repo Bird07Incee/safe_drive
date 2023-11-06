@@ -3,6 +3,7 @@ import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/order_cancel.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/order_success.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/order_summary_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
@@ -22,7 +23,8 @@ enum Routes {
   selectOptions,
   shippingAddress,
   orderSummary,
-  orderSuccess
+  orderSuccess,
+  orderCancel
 }
 
 extension TypeCoverter on Routes {
@@ -48,6 +50,8 @@ extension TypeCoverter on Routes {
         return '/orderSummary';
       case Routes.orderSuccess:
         return '/orderSuccess';
+      case Routes.orderCancel:
+        return '/orderCancel';
     }
   }
 }
@@ -135,6 +139,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => ShippingAddressScreen(), settings: settings);
     case "/orderSummary":
       return MaterialPageRoute(builder: (_) => OrderSummaryScreen(), settings: settings);
+    case "/orderCancel":
+      return MaterialPageRoute(builder: (_) => OrderCancelScreen(), settings: settings);
     default:
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }

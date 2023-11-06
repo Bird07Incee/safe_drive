@@ -69,10 +69,12 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             }
             break;
           } else if (status == "fail") {
-            emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
+            emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
           }
           tick++;
         }
+      } else if (status == "fail") {
+        emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
       } else {
         emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
       }
