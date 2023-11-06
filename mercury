@@ -260,9 +260,12 @@ sonar_app() {
   docker_run $@
 }
 
+help__securityScanSonar="Run Security Scan Sonar"
 task_securityScanSonar() {
-  DOCKER_ARGS="${DOCKER_ARGS} -e SONAR_HOST_URL=https://sonarqube.tools.buk0.com \
-  -e SONAR_LOGIN=3ad23e205297c7f0e12a014686c2d1521851c6aa"
+  echo -n "SONAR_HOST_URL ${SONAR_HOST_URL}"
+  echo -n "SONAR_LOGIN ${SONAR_TOKEN}"
+  DOCKER_ARGS="${DOCKER_ARGS} -e SONAR_HOST_URL=${SONAR_HOST_URL} \
+  -e SONAR_LOGIN=${SONAR_TOKEN}"
   sonar_app
 }
 
