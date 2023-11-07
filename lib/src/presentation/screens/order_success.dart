@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/order_cancel.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
@@ -380,6 +381,8 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                 loadInvoice();
               },
             );
+          } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.cancel) {
+            return OrderCancelScreen();
           } else {
             return const LoadingScreen();
           }
