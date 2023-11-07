@@ -106,7 +106,10 @@ class ShippingAddressScreen extends StatelessWidget {
           title: ErrorConst().titleNS,
           subTitle: ErrorConst().subTitleNS,
           titleBtn: ErrorConst().titleBtnNS,
-          onTap: () {},
+          onTap: () {
+            final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+            myBloc.onClearShippingData();
+          },
         );
       } else {
         return const LoadingScreen();
