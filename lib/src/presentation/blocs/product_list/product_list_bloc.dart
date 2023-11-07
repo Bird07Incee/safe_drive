@@ -93,7 +93,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
-        Navigator.of(event.context);
+        Navigator.pop(event.context);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -101,7 +101,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
-        Navigator.of(event.context);
+        Navigator.pop(event.context);
       }
     }
   }
@@ -143,7 +143,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
-        Navigator.of(event.context);
+        Navigator.pop(event.context);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -151,7 +151,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
-        Navigator.of(event.context);
+        Navigator.pop(event.context);
       }
     }
   }
