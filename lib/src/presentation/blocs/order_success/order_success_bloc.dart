@@ -44,13 +44,13 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
       String status = response.data["status"] ?? "";
 
-      if (status == "success") {
+      if (status == "Complete") {
         emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
 
         if (!event.bypassContext) {
           ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
         }
-      } else if (status == "pending") {
+      } else if (status == "Pending") {
         int tick = 0;
         while (true) {
           if (tick == 90) {
@@ -62,18 +62,18 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
               .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken"});
           final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
           String status = response.data["status"] ?? "";
-          if (status == "success") {
+          if (status == "Complete") {
             emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
             if (!event.bypassContext) {
               ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
             }
             break;
-          } else if (status == "fail") {
+          } else if (status == "Fail") {
             emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
           }
           tick++;
         }
-      } else if (status == "fail") {
+      } else if (status == "Fail") {
         emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
       } else {
         emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));

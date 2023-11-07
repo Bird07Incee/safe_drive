@@ -19,7 +19,7 @@ class MockBuildContext extends Mock implements BuildContext {}
 void main() {
   late DioUtilityRepository utilityRepository;
   Map<String,dynamic> mockResponse = {
-    "status": "success",
+    "status": "Complete",
     "rawData": {
       "invoiceNo": "1234",
       "payment_card": "987654******1234",
