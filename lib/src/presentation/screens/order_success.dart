@@ -117,7 +117,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                           child: Column(children: [
                             ProductAttribute(
                               attributeKey: "ชำระเงินโดย",
-                              attributevalue: orderSuccessData.paymentCard!,
+                              attributevalue: orderSuccessData.cardNo!,
                               maxWidth: maxWidth,
                             ),
                             ProductAttribute(
@@ -132,17 +132,17 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             ),
                             ProductAttribute(
                               attributeKey: "ช่องทางการชำระเงิน",
-                              attributevalue: orderSuccessData.paymentMedthod!,
+                              attributevalue: orderSuccessData.paymentGateway!,
                               maxWidth: maxWidth,
                             ),
                             ProductAttribute(
                               attributeKey: "รูปแบบการชำระเงิน",
-                              attributevalue: orderSuccessData.paymentPeriod!,
+                              attributevalue: orderSuccessData.paymentChannel!,
                               maxWidth: maxWidth,
                             ),
                             ProductAttribute(
                               attributeKey: "ผู้รับเงิน",
-                              attributevalue: orderSuccessData.paymentMerchant!,
+                              attributevalue: orderSuccessData.merchantFullName!,
                               maxWidth: maxWidth,
                             ),
                           ]),
@@ -176,7 +176,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                             height: 74,
                                             placeholder: const AssetImage('assets/homepage/img_default.png'),
                                             // Replace with your placeholder image path
-                                            image: NetworkImage(orderSuccessData.productAsset!),
+                                            image: NetworkImage(orderSuccessData.productImagePath!),
                                             fit: BoxFit.fitWidth,
                                             imageErrorBuilder: (context, error, stackTrace) => Image.asset(
                                               'assets/homepage/img_default.png',
@@ -199,12 +199,11 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                           style: AlvaStyles().headingSize14w600(blackGoMunTo),
                                           overflow: TextOverflow.ellipsis,
                                         ),
-                                        for (final attr in orderSuccessData.productAttr!)
-                                          Text(
-                                            attr,
-                                            style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
+                                        Text(
+                                          orderSuccessData.productOption!,
+                                          style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
+                                          overflow: TextOverflow.ellipsis,
+                                        )
                                       ],
                                     ),
                                   ),
@@ -238,7 +237,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("${safeDecimalFormat(orderSuccessData.productPrice ?? "0")} บาท",
+                                        Text("${safeDecimalFormat(orderSuccessData.amount ?? "0")} บาท",
                                             style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                         SizedBox(
                                           height: 4,
@@ -267,12 +266,12 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                           child: Column(children: [
                             ProductAttribute(
                               attributeKey: "ชื่อผู้รับสินค้า",
-                              attributevalue: orderSuccessData.customerName!,
+                              attributevalue: orderSuccessData.customerFullname!,
                               maxWidth: maxWidth,
                             ),
                             ProductAttribute(
                               attributeKey: "เบอร์โทรติดต่อ",
-                              attributevalue: phoneNumberFormatter(orderSuccessData.customerTel!),
+                              attributevalue: phoneNumberFormatter(orderSuccessData.customerMobile!),
                               maxWidth: maxWidth,
                             ),
                             ProductAttribute(
@@ -302,7 +301,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                           child: Column(children: [
                             Center(
                               child: Text(
-                                orderSuccessData.sellerAddress!,
+                                orderSuccessData.merchantAddress!,
                                 style: AlvaStyles().headingSize12w400(spaceGrey),
                                 textAlign: TextAlign.center,
                               ),
@@ -311,7 +310,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               height: 4,
                             ),
                             Text(
-                              phoneNumberFormatter(orderSuccessData.sellerTel!),
+                              phoneNumberFormatter(orderSuccessData.merchantMobile!),
                               style: AlvaStyles().headingSize16w600(blackGoMunTo),
                             ),
                           ]),

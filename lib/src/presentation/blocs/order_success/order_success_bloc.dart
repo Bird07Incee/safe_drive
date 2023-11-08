@@ -84,26 +84,26 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
   }
 
   // _onGetOrderSuccessMock(GetOrderSuccessMock event, Emitter<OrderSuccessState> emit) async {
-  //   final mockJson = {
-  //     "invoiceNo": "REF00005678",
-  //     "payment_card": "987654******1234",
-  //     "payment_date": "1 กันยายน 2566",
-  //     "payment_time": "09:54:22",
-  //     "payment_medthod": "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
-  //     "payment_period": "ผ่อนชำระ 6 เดือน",
-  //     "payment_merchant": "บริษัท อินโนพาวเวอร์ จำกัด",
-  //     "product_asset": "image url",
-  //     "product_id": "PM12345678",
-  //     "product_name": "Pulsar Max",
-  //     "product_attr": ["สีดำ", "ความยาวสาย 3 เมตร", "ทดสอบ1", "ทดสอบ2", "qwijdoiqjwdwefopkwepofjmoweinfoweinfoiwenfionwe"],
-  //     "product_price": "56640",
-  //     "customer_name": "กรุงศรี ออโต้",
-  //     "customer_tel": "0812345678",
-  //     "customer_email": "k_auto@krungsri.com",
-  //     "customer_address": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
-  //     "seller_address": "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
-  //     "seller_tel": "0918620511"
-  //   };
+  // final mockJson = {
+  //   "invoiceNo": "qweqwe",
+  //   "cardNo": "987654******1234",
+  //   "paymentDate": "1 ตุลาคม 2566",
+  //   "paymentTime": "09:54:22",
+  //   "paymentGateway": "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
+  //   "paymentChannel": "ผ่อนชำระ 6 เดือน",
+  //   "productImagePath": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+  //   "productId": "PM12345678",
+  //   "productName": "Pulsar Max from mercury-mocker",
+  //   "productOption": "สีดำ ความยาวสาย 3 เมตร",
+  //   "amount": "56640",
+  //   "customerFullname": "กรุงศรี ออโต้",
+  //   "customerMobile": "0812345678",
+  //   "customerEmail": "k_auto@krungsri.com",
+  //   "customerAddress": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+  //   "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+  //   "merchantAddress": "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
+  //   "merchantMobile": "0918620511"
+  // };
 
   //   final InquiryData mock = InquiryData.fromJson(mockJson);
 

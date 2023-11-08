@@ -3,83 +3,83 @@ import 'package:equatable/equatable.dart';
 class InquiryData extends Equatable {
   const InquiryData(
       {required this.invoiceNo,
-      required this.paymentCard,
+      required this.cardNo,
       required this.paymentDate,
       required this.paymentTime,
-      required this.paymentMedthod,
-      required this.paymentPeriod,
-      required this.paymentMerchant,
-      required this.productAsset,
+      required this.paymentGateway,
+      required this.paymentChannel,
+      required this.merchantFullName,
+      required this.productImagePath,
       required this.productId,
       required this.productName,
-      required this.productAttr,
-      required this.productPrice,
-      required this.customerName,
-      required this.customerTel,
+      required this.productOption,
+      required this.amount,
+      required this.customerFullname,
+      required this.customerMobile,
       required this.customerEmail,
       required this.customerAddress,
-      required this.sellerAddress,
-      required this.sellerTel});
+      required this.merchantAddress,
+      required this.merchantMobile});
 
   final String? invoiceNo;
-  final String? paymentCard;
+  final String? cardNo;
   final String? paymentDate;
   final String? paymentTime;
-  final String? paymentMedthod;
-  final String? paymentPeriod;
-  final String? paymentMerchant;
-  final String? productAsset;
+  final String? paymentGateway;
+  final String? paymentChannel;
+  final String? merchantFullName;
+  final String? productImagePath;
   final String? productId;
   final String? productName;
-  final List<String>? productAttr;
-  final String? productPrice;
-  final String? customerName;
-  final String? customerTel;
+  final String? productOption;
+  final String? amount;
+  final String? customerFullname;
+  final String? customerMobile;
   final String? customerEmail;
   final String? customerAddress;
-  final String? sellerAddress;
-  final String? sellerTel;
+  final String? merchantAddress;
+  final String? merchantMobile;
 
   InquiryData.fromJson(Map<String, dynamic> json)
       : invoiceNo = json['invoiceNo'] ?? "",
-        paymentCard = json['payment_card'] ?? "",
-        paymentDate = json['payment_date'] ?? "",
-        paymentTime = json['payment_time'] ?? "",
-        paymentMedthod = json['payment_medthod'] ?? "",
-        paymentPeriod = json['payment_period'] ?? "",
-        paymentMerchant = json['payment_merchant'] ?? "",
-        productAsset = json['product_asset'] ?? "",
-        productId = json['product_id'] ?? "",
-        productName = json['product_name'] ?? "",
-        productAttr = json['product_attr'].cast<String>() ?? [],
-        productPrice = json['product_price'] ?? "",
-        customerName = json['customer_name'] ?? "",
-        customerTel = json['customer_tel'] ?? "",
-        customerEmail = json['customer_email'] ?? "",
-        customerAddress = json['customer_address'] ?? "",
-        sellerAddress = json['seller_address'] ?? "",
-        sellerTel = json['seller_tel'] ?? "";
+        cardNo = json['cardNo'] ?? "",
+        paymentDate = json['paymentDate'] ?? "",
+        paymentTime = json['paymentTime'] ?? "",
+        paymentGateway = json['paymentGateway'] ?? "",
+        paymentChannel = json['paymentChannel'] ?? "",
+        merchantFullName = json['merchantFullName'] ?? "",
+        productImagePath = json['productImagePath'] ?? "",
+        productId = json['productId'] ?? "",
+        productName = json['productName'] ?? "",
+        productOption = json['productOption'] ?? "",
+        amount = json['amount'] ?? "",
+        customerFullname = json['customerFullname'] ?? "",
+        customerMobile = json['customerMobile'] ?? "",
+        customerEmail = json['customerEmail'] ?? "",
+        customerAddress = json['customerAddress'] ?? "",
+        merchantAddress = json['merchantAddress'] ?? "",
+        merchantMobile = json['merchantMobile'] ?? "";
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['invoiceNo'] = invoiceNo;
-    data['payment_card'] = paymentCard;
-    data['payment_date'] = paymentDate;
-    data['payment_time'] = paymentTime;
-    data['payment_medthod'] = paymentMedthod;
-    data['payment_period'] = paymentPeriod;
-    data['payment_merchant'] = paymentMerchant;
-    data['product_asset'] = productAsset;
-    data['product_id'] = productId;
-    data['product_name'] = productName;
-    data['product_attr'] = productAttr;
-    data['product_price'] = productPrice;
-    data['customer_name'] = customerName;
-    data['customer_tel'] = customerTel;
-    data['customer_email'] = customerEmail;
-    data['customer_address'] = customerAddress;
-    data['seller_address'] = sellerAddress;
-    data['seller_tel'] = sellerTel;
+    data['cardNo'] = cardNo;
+    data['paymentDate'] = paymentDate;
+    data['paymentTime'] = paymentTime;
+    data['paymentGateway'] = paymentGateway;
+    data['paymentChannel'] = paymentChannel;
+    data['merchantFullName'] = merchantFullName;
+    data['productImagePath'] = productImagePath;
+    data['productId'] = productId;
+    data['productName'] = productName;
+    data['productOption'] = productOption;
+    data['amount'] = amount;
+    data['customerFullname'] = customerFullname;
+    data['customerMobile'] = customerMobile;
+    data['customerEmail'] = customerEmail;
+    data['customerAddress'] = customerAddress;
+    data['merchantAddress'] = merchantAddress;
+    data['merchantMobile'] = merchantMobile;
     return data;
   }
 
@@ -87,22 +87,22 @@ class InquiryData extends Equatable {
   // TODO: implement props
   List<Object?> get props => [
         invoiceNo,
-        paymentCard,
+        cardNo,
         paymentDate,
         paymentTime,
-        paymentMedthod,
-        paymentPeriod,
-        paymentMerchant,
-        productAsset,
+        paymentGateway,
+        paymentChannel,
+        merchantFullName,
+        productImagePath,
         productId,
         productName,
-        productAttr,
-        productPrice,
-        customerName,
-        customerTel,
+        productOption,
+        amount,
+        customerFullname,
+        customerMobile,
         customerEmail,
         customerAddress,
-        sellerAddress,
-        sellerTel,
+        merchantAddress,
+        merchantMobile,
       ];
 }

@@ -4,23 +4,23 @@ enum GetOrderSuccessDataStatus { initial, loading, success, cancel, error }
 
 const defaultInquiryData = {
   "invoiceNo": "",
-  "payment_card": "",
-  "payment_date": "",
-  "payment_time": "",
-  "payment_medthod": "",
-  "payment_period": "",
-  "payment_merchant": "",
-  "product_asset": "",
-  "product_id": "",
-  "product_name": "",
-  "product_attr": [],
-  "product_price": "",
-  "customer_name": "",
-  "customer_tel": "",
-  "customer_email": "",
-  "customer_address": "",
-  "seller_address": "",
-  "seller_tel": ""
+  "cardNo": "",
+  "paymentDate": "",
+  "paymentTime": "",
+  "paymentGateway": "",
+  "paymentChannel": "",
+  "merchantFullName": "",
+  "productImagePath": "",
+  "productId": "",
+  "productName": "",
+  "productOption": "",
+  "amount": "",
+  "customerFullname": "",
+  "customerMobile": "",
+  "customerEmail": "",
+  "customerAddress": "",
+  "merchantAddress": "",
+  "merchantMobile": ""
 };
 
 class OrderSuccessState extends Equatable {
@@ -28,23 +28,23 @@ class OrderSuccessState extends Equatable {
       {this.orderSuccessStatus = GetOrderSuccessDataStatus.initial,
       this.orderSuccessData = const InquiryData(
           invoiceNo: "",
-          paymentCard: "",
+          cardNo: "",
           paymentDate: "",
           paymentTime: "",
-          paymentMedthod: "",
-          paymentPeriod: "",
-          paymentMerchant: "",
-          productAsset: "",
+          paymentGateway: "",
+          paymentChannel: "",
+          merchantFullName: "",
+          productImagePath: "",
           productId: "",
           productName: "",
-          productAttr: [],
-          productPrice: "",
-          customerName: "",
-          customerTel: "",
+          productOption: "",
+          amount: "",
+          customerFullname: "",
+          customerMobile: "",
           customerEmail: "",
           customerAddress: "",
-          sellerAddress: "",
-          sellerTel: "")});
+          merchantAddress: "",
+          merchantMobile: "")});
 
   final GetOrderSuccessDataStatus orderSuccessStatus;
   final InquiryData orderSuccessData;
