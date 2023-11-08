@@ -18,13 +18,13 @@ import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 late DdSdkConfiguration configuration;
 void main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   _configureApp();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    usePathUrlStrategy();
     // runApp(const MyApp());
     await DatadogSdk.runApp(configuration, () async {
       runApp(const MyApp());
