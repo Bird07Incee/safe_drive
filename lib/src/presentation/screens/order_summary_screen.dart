@@ -67,10 +67,14 @@ class OrderSummaryScreen extends StatelessWidget {
         builder: (context, state) {
           // if (!state.status.isSuccess) {
           //   context.read<ProductDetailBloc>().add(GetProductByID());
-          //   context.read<ProductOptionBloc>().updateStepOneVariables(groupValueRadio: "สีขาว", price: 0);
-          //   context
-          //       .read<ProductOptionBloc>()
-          //       .updateStepTwoVariables(groupValueRadio: "ความยาวสาย 3 เมตร", price: 99999999);
+          //   context.read<ProductOptionBloc>().updateStepOneVariables(
+          //       groupValueRadio:
+          //           "5เมตร สีขาวhkerhckjfshdjkhfgksdjhfgkjshdlkfjghlskdjfhglksjhdfkjghslkdfhglkhsldkfhlgkhsldfhgjsdhfgjhslkdfghlksjhfglkshldfghljkshdkfghlsjkdhfjgklhsjlkdfhgjlkshljkdfhglwkercmnwltkenhvtksduhnlkh",
+          //       price: 50000,
+          //       indexSelect: 1);
+          //   // context
+          //   //     .read<ProductOptionBloc>()
+          //   //     .updateStepTwoVariables(groupValueRadio: "ความยาวสาย 3 เมตร", price: 99999999);
           // }
           int showPrice = state.product.discountPrice > 0 ? state.product.discountPrice : state.product.price;
           return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
@@ -139,14 +143,15 @@ class OrderSummaryScreen extends StatelessWidget {
                                               textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 24),
+                                          padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 16),
                                           child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
                                                   SizedBox(
-                                                    height: 42,
-                                                    width: 76,
+                                                    height: 40,
+                                                    width: 72,
                                                     child: state.product.productionAssets.isNotEmpty
                                                         ? ClipRRect(
                                                             borderRadius: BorderRadius.circular(4),
@@ -171,22 +176,25 @@ class OrderSummaryScreen extends StatelessWidget {
                                               Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  AlvaText(
-                                                      title: state.product.productName,
-                                                      textStyle: AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                   SizedBox(
-                                                    width: maxWidth - 32 - 16 - 76,
+                                                    width: maxWidth - 32 - 16 - 72,
                                                     child: AlvaTextMaxLinesOverflow(
                                                         maxLines: 1,
-                                                        title: step1,
-                                                        textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
+                                                        title: state.product.productName,
+                                                        textStyle:
+                                                            AlvaStyles().headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                                   ),
-                                                  SizedBox(
-                                                    width: maxWidth - 32 - 16 - 76,
-                                                    child: AlvaTextMaxLinesOverflow(
-                                                        maxLines: 1,
-                                                        title: step2,
-                                                        textStyle: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(top: 4),
+                                                    child: SizedBox(
+                                                      width: maxWidth - 32 - 16 - 72,
+                                                      child: AlvaTextMaxLinesOverflow(
+                                                          maxLines: 5,
+                                                          title:
+                                                              "${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].levelName}: $step1",
+                                                          textStyle:
+                                                              AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
+                                                    ),
                                                   ),
                                                 ],
                                               )
@@ -553,7 +561,7 @@ class OrderSummaryScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 AnimatedSize(
-                                  alignment: Alignment(0, -3),
+                                  alignment: Alignment(0, -5),
                                   curve: Curves.easeOutCirc,
                                   duration: const Duration(milliseconds: 500),
                                   child: showDetail
@@ -570,16 +578,18 @@ class OrderSummaryScreen extends StatelessWidget {
                                                             AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)))),
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(left: 16, right: 16, top: 16, bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 0),
+                                                  EdgeInsets.only(left: 16, right: 16, top: 16, bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 4),
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  SizedBox(
-                                                    width: maxWidth - 32 - 16 - 79,
+                                                  Flexible(
                                                     child: AlvaTextMaxLinesOverflow(
                                                         title: state.product.productName,
                                                         maxLines: 1,
-                                                        textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                        textStyle: AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 16,
                                                   ),
                                                   AlvaText(
                                                       title: "${showPrice.toDecimalFormat()} บาท",
@@ -587,30 +597,22 @@ class OrderSummaryScreen extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            step1.isNotEmpty
-                                                ? SizedBox(
-                                                    height: 8,
-                                                  )
-                                                : SizedBox.shrink(),
+                                            // step1.isNotEmpty
+                                            //     ? SizedBox(
+                                            //         height: 8,
+                                            //       )
+                                            //     : SizedBox.shrink(),
                                             step1.isNotEmpty
                                                 ? Padding(
                                                     padding: EdgeInsets.only(left: 16, right: 16, bottom: step2.isEmpty ? 16 : 0),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: maxWidth - 32 - 16 - 79,
-                                                          child: AlvaTextMaxLinesOverflow(
-                                                              title: step1,
-                                                              maxLines: 1,
-                                                              textStyle:
-                                                                  AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                                        ),
-                                                        AlvaText(
-                                                            title: "${step1price.toDecimalFormat()} บาท",
-                                                            textStyle:
-                                                                AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                                      ],
+                                                    child: SizedBox(
+                                                      width: maxWidth - 32,
+                                                      child: AlvaTextMaxLinesOverflow(
+                                                          title:
+                                                              "${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].levelName}: ${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].label}",
+                                                          maxLines: 5,
+                                                          textStyle:
+                                                              AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
                                                     ),
                                                   )
                                                 : SizedBox.shrink(),
