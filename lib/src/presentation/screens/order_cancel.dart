@@ -64,9 +64,6 @@ class OrderCancelScreen extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
-                    ],
                   ),
                   child: GestureDetector(
                     onTap: () {
