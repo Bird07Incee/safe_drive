@@ -14,6 +14,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_i
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
+import 'package:marketplace_line_oa/src/utils/get_display_price.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -327,23 +328,20 @@ class ProductCardWidget extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              intl.NumberFormat.decimalPattern().format(products[index].price),
+                                              intl.NumberFormat.decimalPattern()
+                                                  .format(getDisplayPrice(products[index].price, products[index].productionOptionals)),
                                               style: products[index].discountPrice == 0
                                                   ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   : AlvaStyles().headingSize22(RedWordShow),
                                             ),
-                                            Column(
-                                              children: [
-                                                const SizedBox(
-                                                  width: 2,
-                                                ),
-                                                Text(
-                                                  "บาท",
-                                                  style: products[index].discountPrice == 0
-                                                      ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                      : AlvaStyles().headingSize18(RedWordShow),
-                                                ),
-                                              ],
+                                            const SizedBox(
+                                              width: 2,
+                                            ),
+                                            Text(
+                                              "บาท",
+                                              style: products[index].discountPrice == 0
+                                                  ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                  : AlvaStyles().headingSize18(RedWordShow),
                                             ),
                                           ],
                                         ),
