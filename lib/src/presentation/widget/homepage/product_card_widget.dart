@@ -191,7 +191,7 @@ class ProductCardWidget extends StatelessWidget {
                                   ),
                                 )),
                                 Visibility(
-                                  visible: products[index].percentDiscountPrice != 0,
+                                  visible: products[index].percentDiscountPrice != 0 && products[index].productionOptionals.isEmpty,
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                                     decoration: const BoxDecoration(
@@ -330,7 +330,7 @@ class ProductCardWidget extends StatelessWidget {
                                             Text(
                                               intl.NumberFormat.decimalPattern()
                                                   .format(getDisplayPrice(products[index].price, products[index].productionOptionals)),
-                                              style: products[index].discountPrice == 0 && products[index].productionOptionals.isNotEmpty
+                                              style: products[index].discountPrice == 0 || products[index].productionOptionals.isNotEmpty
                                                   ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   : AlvaStyles().headingSize22(RedWordShow),
                                             ),
@@ -339,7 +339,7 @@ class ProductCardWidget extends StatelessWidget {
                                             ),
                                             Text(
                                               "บาท",
-                                              style: products[index].discountPrice == 0 && products[index].productionOptionals.isNotEmpty
+                                              style: products[index].discountPrice == 0 || products[index].productionOptionals.isNotEmpty
                                                   ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   : AlvaStyles().headingSize18(RedWordShow),
                                             ),
