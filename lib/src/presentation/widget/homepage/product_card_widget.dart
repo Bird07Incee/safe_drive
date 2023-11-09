@@ -312,7 +312,7 @@ class ProductCardWidget extends StatelessWidget {
                                             style: AlvaStyles().bodySize14W400MutedLine(),
                                           ),
                                           const SizedBox(
-                                            width: 1,
+                                            width: 2,
                                           ),
                                           Text(
                                             "บาท",
@@ -335,7 +335,7 @@ class ProductCardWidget extends StatelessWidget {
                                             Column(
                                               children: [
                                                 const SizedBox(
-                                                  height: 2,
+                                                  width: 2,
                                                 ),
                                                 Text(
                                                   "บาท",

@@ -43,7 +43,7 @@ class AlvaStyles {
   TextStyle headingSize18(Color color) => TextStyle(
         fontFamily: fontFamily,
         fontSize: 18,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.bold,
         color: color,
       );
 
