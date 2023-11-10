@@ -13,6 +13,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/utils/get_display_price.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -142,7 +143,7 @@ class PDTopSection extends StatelessWidget {
                             ),
                           )),
                           Visibility(
-                            visible: state.product.percentDiscountPrice > 0,
+                            visible: state.product.percentDiscountPrice != 0 && state.product.productionOptionals.isEmpty,
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                               decoration: const BoxDecoration(color: BlueFantasy, borderRadius: BorderRadius.only(bottomRight: Radius.circular(8))),
@@ -247,7 +248,7 @@ class PDTopSection extends StatelessWidget {
                                   return null;
                                 }),
                             Visibility(
-                              visible: state.product.discountPrice > 0,
+                              visible: state.product.discountPrice != 0 && state.product.productionOptionals.isEmpty,
                               child: Row(
                                 children: [
                                   AlvaText(
@@ -265,9 +266,11 @@ class PDTopSection extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 AlvaText(
-                                  title: state.product.price.toDecimalFormat(),
+                                  title: getDisplayPrice(state.product.price, state.product.productionOptionals).toDecimalFormat(),
                                   textStyle: AlvaStyles()
-                                      .headingSize22w700(state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                      .headingSize22w700(state.product.discountPrice == 0 || state.product.productionOptionals.isNotEmpty
+                                          ? BTN_SELECTED_TEXT_COLOR_NEW
+                                          : RedWordShow)
                                       .copyWith(height: 1.454),
                                 ),
                                 Padding(
@@ -275,7 +278,9 @@ class PDTopSection extends StatelessWidget {
                                   child: AlvaText(
                                     title: ' บาท',
                                     textStyle: AlvaStyles()
-                                        .headingSize18w700(state.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                        .headingSize18w700(state.product.discountPrice == 0 || state.product.productionOptionals.isNotEmpty
+                                            ? BTN_SELECTED_TEXT_COLOR_NEW
+                                            : RedWordShow)
                                         .copyWith(height: 1.454),
                                   ),
                                 ),
