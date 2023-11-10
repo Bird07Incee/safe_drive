@@ -193,6 +193,15 @@ void main() {
       },
     );
 
+    group("ProductDetailBloc OrderSummaryEvent", () {
+      blocTest<OrderSummaryBloc, OrderSummaryState>("set initial OrderSummaryEvent",
+          build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
+          act: (bloc) => bloc.add(const InitialOrderState()),
+          expect: () => <OrderSummaryState>[
+            OrderSummaryState()
+          ]);
+    });
+
     group("OrderSummaryBloc CreateOrder", () {
       blocTest<OrderSummaryBloc, OrderSummaryState>("create order case success",
           setUp: () {

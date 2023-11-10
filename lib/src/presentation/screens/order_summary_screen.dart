@@ -49,7 +49,9 @@ class OrderSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<OrderSummaryBloc>().add(InitialOrderState()); //initial state
     final selectOptionBloc = BlocProvider.of<ProductOptionBloc>(context).state;
+    late CreateOrderRequestModel requestModel;
     String step1 = selectOptionBloc.stepOneGroupValueRadio;
     int step1price = selectOptionBloc.stepOnePrice ?? 0;
     String step2 = selectOptionBloc.stepTwoGroupValueRadio;
@@ -91,7 +93,6 @@ class OrderSummaryScreen extends StatelessWidget {
               }
             },
             builder: (context, orderState) {
-              late CreateOrderRequestModel requestModel;
               if (orderState.orderStatus.isError) {
                 return ErrorScreen(
                   title: ErrorConst().titleNS,

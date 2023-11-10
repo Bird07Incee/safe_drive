@@ -23,3 +23,7 @@ class CreateOrder extends OrderSummaryEvent {
   @override
   List<Object?> get props => [requestModel];
 }
+
+class InitialOrderState extends OrderSummaryEvent {
+  const InitialOrderState();
+}

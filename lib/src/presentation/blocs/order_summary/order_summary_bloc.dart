@@ -12,6 +12,9 @@ part 'order_summary_state.dart';
 
 class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
   OrderSummaryBloc({required this.utilityRepository}) : super(OrderSummaryState()) {
+    on<InitialOrderState>((event, emit) {
+      emit(state.copyWith(paymentType: PaymentType.none, orderStatus: OrderStatus.initial, orderResponseModel: OrderResponseModel.empty));
+    });
     on<SelectPaymentType>((event, emit) {
       emit(state.copyWith(paymentType: event.paymentType));
     });
