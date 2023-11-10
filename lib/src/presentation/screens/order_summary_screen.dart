@@ -722,10 +722,11 @@ class OrderSummaryScreen extends StatelessWidget {
                                             GeneralDialog(
                                                     onAccept: () async {
                                                       final orderBloc = context.read<OrderSummaryBloc>();
-                                                      ProductionOptionals step1SelectedOption =
-                                                          state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0];
-                                                      Level2 step2SelectedOption =
-                                                          step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
+                                                      ProductionOptionals step1SelectedOption = state.product.productionOptionals.isEmpty
+                                                          ? ProductionOptionals.fromJson({})
+                                                          : state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0];
+                                                      // Level2 step2SelectedOption =
+                                                      //     step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
                                                       requestModel = CreateOrderRequestModel(
                                                         uid: await LineDataHelper().getLineUid(),
                                                         products: [
@@ -733,16 +734,12 @@ class OrderSummaryScreen extends StatelessWidget {
                                                               productId: state.product.productId,
                                                               qty: 1,
                                                               unitPrice: showPrice,
-                                                              optional: Optional(
-                                                                  productId: step1SelectedOption.subProductId,
-                                                                  qty: 1,
-                                                                  unitPrice: step1SelectedOption.price,
-                                                                  subOptional: step2.isNotEmpty
-                                                                      ? SubOptional(
-                                                                          productId: step2SelectedOption.subProductId,
-                                                                          qty: 1,
-                                                                          unitPrice: step2SelectedOption.price)
-                                                                      : null))
+                                                              optional: state.product.productionOptionals.isEmpty
+                                                                  ? null
+                                                                  : Optional(
+                                                                      productId: step1SelectedOption.subProductId,
+                                                                      qty: 1,
+                                                                      unitPrice: step1SelectedOption.price))
                                                         ],
                                                         paymentInfo: PaymentInfo(
                                                             channel: orderState.paymentType.isFullPayment ? "CC" : "IPP",

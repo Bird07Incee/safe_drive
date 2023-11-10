@@ -41,7 +41,7 @@ class OrderProduct {
   final int? unitPrice;
   final Optional? optional;
 
-  const OrderProduct({required this.productId, required this.qty, required this.unitPrice, required this.optional});
+  const OrderProduct({required this.productId, required this.qty, required this.unitPrice, this.optional});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -63,7 +63,7 @@ class Optional {
   final int? unitPrice;
   final SubOptional? subOptional;
 
-  const Optional({required this.productId, required this.qty, required this.unitPrice, required this.subOptional});
+  const Optional({required this.productId, required this.qty, required this.unitPrice, this.subOptional});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
