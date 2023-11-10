@@ -25,6 +25,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/product_detail/produ
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
+import 'package:marketplace_line_oa/src/utils/get_display_price.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -182,7 +183,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           AlvaText(
-                              title: pdState.product.price.toDecimalFormat(),
+                              title: getDisplayPrice(pdState.product.price,pdState.product.productionOptionals).toDecimalFormat(),
                               textStyle: AlvaStyles().heading1().copyWith(
                                   color: pdState.product.discountPrice == 0 || pdState.product.productionOptionals.isNotEmpty
                                       ? BTN_SELECTED_TEXT_COLOR_NEW
