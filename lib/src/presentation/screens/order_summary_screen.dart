@@ -595,7 +595,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     width: 16,
                                                   ),
                                                   AlvaText(
-                                                      title: "${showPrice.toDecimalFormat()} บาท",
+                                                      title: "${(step1price != 0 ? step1price : showPrice).toDecimalFormat()} บาท",
                                                       textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                 ],
                                               ),
@@ -704,7 +704,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                         ],
                                       ),
                                       AlvaText(
-                                          title: "${(showPrice + step1price + step2price).toDecimalFormat()} บาท",
+                                          title: "${(step1price != 0 ? step1price : showPrice).toDecimalFormat()} บาท",
                                           textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                     ],
                                   ),
