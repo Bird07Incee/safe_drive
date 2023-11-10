@@ -257,9 +257,9 @@ sonar_app() {
 help__securityScanSonar="Run Security Scan Sonar"
 task_securityScanSonar() {
   echo -n "SONAR_HOST_URL ${SONAR_HOST_URL}"
-  echo -n "SONAR_LOGIN ${SONAR_TOKEN}"
+  echo -n "SONAR_TOKEN ${SONAR_TOKEN}"
   DOCKER_ARGS="${DOCKER_ARGS} -e SONAR_HOST_URL=${SONAR_HOST_URL} \
-  -e SONAR_LOGIN=${SONAR_TOKEN}"
+  -e SONAR_TOKEN=${SONAR_TOKEN}"
   sonar_app
 }
 
