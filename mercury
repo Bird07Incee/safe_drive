@@ -28,41 +28,16 @@ docker_ensure_volume() {
 
 docker_run() {
   (
-  local AWS_ACCESS_KEY_ID_prev="${AWS_ACCESS_KEY_ID}"
-  local AWS_SECRET_ACCESS_KEY_prev="${AWS_SECRET_ACCESS_KEY}"
-  local AWS_SESSION_TOKEN_prev="${AWS_SESSION_TOKEN}"
-
-  if runs_inside_gocd ; then
-    aws ecr get-login --no-include-email --region ap-southeast-1 | bash
-  else #for new aws cli
-    aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin ${ECR_URL}
-  fi
-
-  if [[ -z "${DOCKER_IMAGE}" ]]; then
-    echo -n "Building toolchain container; this might take a while..."
-    DOCKER_IMAGE=$(docker build -f ${DOCKERFILE} . -q)
-    echo " Done."
-  else
-    docker pull ${DOCKER_IMAGE}
-  fi
-
-  export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID_prev}"
-  export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY_prev}"
-  export AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN_prev}"
-
-  if runs_inside_gocd; then
-    local args="-v godata:/godata -w $(pwd)"
-  else
-    local args="-it -v $(pwd):/workspace -w /workspace"
-  fi
   echo -n "Running the task in the docker ${DOCKER_IMAGE}"
-  DOCKER_ARGS="${DOCKER_ARGS} -v ${HOME}/.aws:/root/.aws"
+  if runs_inside_gocd; then
+    DOCKER_ARGS="${DOCKER_ARGS} -v /var/run/secrets/eks.amazonaws.com/serviceaccount/:/var/run/secrets/eks.amazonaws.com/serviceaccount/ -v $(pwd):$(pwd) -w $(pwd)"
+  else
+    DOCKER_ARGS="${DOCKER_ARGS} -it -v $(pwd):/workspace:cached -w /workspace"
+  fi
   docker run --rm \
-             --hostname $(hostname) \
-             --env-file <(env | grep GO_) \
-             --env-file <(env | grep AWS_) \
-             --env-file <(env | grep SUPERAPP_) \
-             ${args} ${DOCKER_ARGS} ${DOCKER_IMAGE} "$@"
+              --env-file <(env | grep AWS_) \
+              --env-file <(env | grep TF_) \
+             ${DOCKER_ARGS} ${DOCKER_IMAGE} "$@"
   )
 }
 
@@ -241,17 +216,32 @@ task_publish() {
     fi
 }
 
+docker_ecr_pull() {
+  (
+  if ! runs_inside_gocd; then
+    local agent_role_name=$(is_func "_get_agent_role_name" && _get_agent_role_name || echo ${_DEFAULT_AGENT_ROLE_NAME:-""})
+    assume_role $(is_func "_account_id_for_name" && _account_id_for_name tools) "${agent_role_name}"
+  fi
+  echo -n "Pull docker ${DOCKER_IMAGE}"
+
+  local REPO_URL="688318228301.dkr.ecr.ap-southeast-1.amazonaws.com"
+  aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin ${REPO_URL}
+
+  docker pull ${DOCKER_IMAGE}
+  )
+}
+
+sn() {
+  DOCKER_IMAGE="${SONAR_SCANNER_CLI_DOCKER_IMAGE}"
+  DOCKER_ARGS="${DOCKER_ARGS} ${docker_user_args}"
+  docker_ecr_pull
+  docker_run "$@"
+}
 
 sonar_app() {
-  DOCKER_IMAGE="${SONAR_SCANNER_CLI_DOCKER_IMAGE}"
-
-  DOCKER_ARGS="$DOCKER_ARGS -v /var/run/secrets/eks.amazonaws.com/serviceaccount/:/var/run/secrets/eks.amazonaws.com/serviceaccount/ -v $(pwd):$(pwd) -w $(pwd)"
-  for mod in $(env | grep NON_); do
-    DOCKER_ARGS="${DOCKER_ARGS} -e ${mod}"
-  done
-  echo "${DOCKER_ARGS}"
-
-  docker_run $@
+  sn "$@"
+  local exit=$?
+  return $exit
 }
 
 help__securityScanSonar="Run Security Scan Sonar"
