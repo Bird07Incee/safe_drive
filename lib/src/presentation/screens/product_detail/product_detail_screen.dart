@@ -183,15 +183,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         children: [
                           AlvaText(
                               title: pdState.product.price.toDecimalFormat(),
-                              textStyle: AlvaStyles()
-                                  .heading1()
-                                  .copyWith(color: pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW, height: 1.33)),
+                              textStyle: AlvaStyles().heading1().copyWith(
+                                  color: pdState.product.discountPrice == 0 || pdState.product.productionOptionals.isNotEmpty
+                                      ? BTN_SELECTED_TEXT_COLOR_NEW
+                                      : RedWordShow,
+                                  height: 1.33)),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 1),
                             child: AlvaText(
                                 title: ' บาท',
                                 textStyle: AlvaStyles()
-                                    .heading2(pdState.product.discountPrice > 0 ? RedWordShow : BTN_SELECTED_TEXT_COLOR_NEW)
+                                    .heading2(pdState.product.discountPrice == 0 || pdState.product.productionOptionals.isNotEmpty
+                                        ? BTN_SELECTED_TEXT_COLOR_NEW
+                                        : RedWordShow)
                                     .copyWith(height: 1.33)),
                           ),
                         ],
