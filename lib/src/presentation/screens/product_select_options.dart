@@ -23,7 +23,6 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
     final myBloc = BlocProvider.of<ProductOptionBloc>(context);
-    int mainPrice = widget.arguments!.product.price;
     resetAllState() {
       myBloc.updateStepOneVariables(
         groupValueRadio: "",
@@ -182,7 +181,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                         } else {
                                           myBloc.updateStepOneVariables(
                                             groupValueRadio: widget.arguments!.product.productionOptionals[index].label,
-                                            price: widget.arguments!.product.productionOptionals[index].price + mainPrice,
+                                            price: widget.arguments!.product.productionOptionals[index].price,
                                             indexSelect: index,
                                           );
                                           myBloc.updateStepTwoVariables(
@@ -261,7 +260,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                       } else {
                                                         myBloc.updateStepOneVariables(
                                                           groupValueRadio: value.toString(),
-                                                          price: widget.arguments!.product.productionOptionals[index].price + mainPrice,
+                                                          price: widget.arguments!.product.productionOptionals[index].price,
                                                           indexSelect: index,
                                                         );
                                                         myBloc.updateStepTwoVariables(
