@@ -252,7 +252,7 @@ class PDTopSection extends StatelessWidget {
                               child: Row(
                                 children: [
                                   AlvaText(
-                                    title: state.product.discountPrice.toDecimalFormat(),
+                                    title: state.product.price.toDecimalFormat(),
                                     textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
                                   ),
                                   AlvaText(
@@ -266,7 +266,9 @@ class PDTopSection extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 AlvaText(
-                                  title: getDisplayPrice(state.product.price, state.product.productionOptionals).toDecimalFormat(),
+                                  title: state.product.discountPrice == 0
+                                      ? getDisplayPrice(state.product.price, state.product.productionOptionals).toDecimalFormat()
+                                      : getDisplayPrice(state.product.discountPrice, state.product.productionOptionals).toDecimalFormat(),
                                   textStyle: AlvaStyles()
                                       .headingSize22w700(state.product.discountPrice == 0 || state.product.productionOptionals.isNotEmpty
                                           ? BTN_SELECTED_TEXT_COLOR_NEW

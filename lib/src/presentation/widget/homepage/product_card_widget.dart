@@ -309,7 +309,7 @@ class ProductCardWidget extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           Text(
-                                            intl.NumberFormat.decimalPattern().format(products[index].discountPrice),
+                                            intl.NumberFormat.decimalPattern().format(products[index].price),
                                             style: AlvaStyles().bodySize14W400MutedLine(),
                                           ),
                                           const SizedBox(
@@ -328,8 +328,11 @@ class ProductCardWidget extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              intl.NumberFormat.decimalPattern()
-                                                  .format(getDisplayPrice(products[index].price, products[index].productionOptionals)),
+                                              products[index].discountPrice == 0
+                                                  ? intl.NumberFormat.decimalPattern()
+                                                      .format(getDisplayPrice(products[index].price, products[index].productionOptionals))
+                                                  : intl.NumberFormat.decimalPattern()
+                                                      .format(getDisplayPrice(products[index].discountPrice, products[index].productionOptionals)),
                                               style: products[index].discountPrice == 0 || products[index].productionOptionals.isNotEmpty
                                                   ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   : AlvaStyles().headingSize22(RedWordShow),

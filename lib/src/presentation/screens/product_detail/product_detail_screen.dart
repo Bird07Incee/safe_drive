@@ -183,7 +183,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           AlvaText(
-                              title: getDisplayPrice(pdState.product.price,pdState.product.productionOptionals).toDecimalFormat(),
+                              title: pdState.product.discountPrice == 0
+                                  ? getDisplayPrice(pdState.product.price, pdState.product.productionOptionals).toDecimalFormat()
+                                  : getDisplayPrice(pdState.product.discountPrice, pdState.product.productionOptionals).toDecimalFormat(),
                               textStyle: AlvaStyles().heading1().copyWith(
                                   color: pdState.product.discountPrice == 0 || pdState.product.productionOptionals.isNotEmpty
                                       ? BTN_SELECTED_TEXT_COLOR_NEW
