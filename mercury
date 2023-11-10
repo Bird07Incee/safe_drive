@@ -6,7 +6,7 @@ set -o pipefail
 
 # source: git@gitlab.tools.buk0.com:tools/go-helpers/gosonar.git
 # source gosonar
-SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:5.0.1"
+SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:4.7.0"
 
 ECR_URL="688318228301.dkr.ecr.ap-southeast-1.amazonaws.com"
 FLUTTER_IMAGE="${ECR_URL}/marketplace/flutter:latest"
@@ -222,12 +222,6 @@ help__dependency_check="Run dependency check from sonarqube"
 task_dependency_check() {
   flutter_app flutter pub get
   flutter_app flutter pub run dependency_validator
-}
-
-help__security_scan="Run dependency check from sonarqube"
-task_security_scan() {
-  export SONAR_LOGIN="fb824b9adc7e381f29b7b0b60b38cfdde9750104" 
-  task_sonarScan
 }
 
 help__publish="Create new tag on git withb gocd counter ver"

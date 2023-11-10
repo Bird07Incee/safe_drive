@@ -30,7 +30,7 @@ class ProductList extends Equatable {
 }
 
 class Banner extends Equatable {
-  Banner({
+  const Banner({
     required this.image,
     required this.route,
     required this.url,
