@@ -64,9 +64,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
             },
             child: AlvaRootWidget(
               titlePage: titleWebPage,
-              bottomSheet: SizedBox(
+              bottomSheet: Container(
                 width: maxWidth,
                 height: 96,
+                padding: const EdgeInsets.only(bottom: 32, top: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
+                  ],
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -81,17 +88,13 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                   Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
                                 },
                                 style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
-                                child: AlvaText(
-                                    title: ProductSelectOptionsConst().continueText,
-                                    textStyle: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                                child: Text(ProductSelectOptionsConst().continueText,
+                                    style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                               )
                             : OutlinedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
-                                },
+                                onPressed: () {},
                                 style: AlvaStyles().outlineNoneBorderButtonStyle(cloudSoftDeepWhite, Colors.transparent),
-                                child:
-                                    AlvaText(title: ProductSelectOptionsConst().continueText, textStyle: AlvaStyles().headingSize16w700(smockGrey)),
+                                child: Text(ProductSelectOptionsConst().continueText, style: AlvaStyles().headingSize16w700(smockGrey)),
                               ),
                       ),
                     )
@@ -310,7 +313,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         width: maxWidth - 32 - 24 - 72 - 32,
                                                         child: Text(
                                                             "${(widget.arguments!.product.productionOptionals[index].price).toDecimalFormat()} บาท",
-                                                            style: AlvaStyles().headingSize14w700(spaceGrey).copyWith(height: 24 / 14)),
+                                                            style: AlvaStyles()
+                                                                .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                .copyWith(height: 24 / 14)),
                                                       ),
                                                     ],
                                                   ),
@@ -326,11 +331,17 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                       child: FadeInImage(
                                                         placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
                                                         image: NetworkImage(widget.arguments!.product.productionOptionals[index].image == ""
-                                                            ? widget.arguments!.product.productionOptionals[index].image
-                                                            : widget.arguments!.product.productionAssets.first),
+                                                            ? widget.arguments!.product.productionAssets.first
+                                                            : widget.arguments!.product.productionOptionals[index].image),
                                                         fit: BoxFit.fitWidth,
-                                                        imageErrorBuilder: (context, error, stackTrace) =>
-                                                            Image.asset(ProductSelectOptionsConst().imgDefaultPath, fit: BoxFit.fitWidth),
+                                                        imageErrorBuilder: (context, error, stackTrace) => Container(
+                                                          height: 40,
+                                                          width: 72,
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(4),
+                                                          ),
+                                                          child: Image.asset(ProductSelectOptionsConst().imgDefaultPath, fit: BoxFit.fill),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),

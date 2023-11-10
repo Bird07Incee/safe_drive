@@ -184,18 +184,21 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         textStyle:
                                                             AlvaStyles().headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                                   ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(top: 4),
-                                                    child: SizedBox(
-                                                      width: maxWidth - 32 - 16 - 72,
-                                                      child: AlvaTextMaxLinesOverflow(
-                                                          maxLines: 5,
-                                                          title:
-                                                              "${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].levelName}: $step1",
-                                                          textStyle:
-                                                              AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
-                                                    ),
-                                                  ),
+                                                  state.product.productionOptionals.isEmpty
+                                                      ? SizedBox.shrink()
+                                                      : Padding(
+                                                          padding: const EdgeInsets.only(top: 4),
+                                                          child: SizedBox(
+                                                            width: maxWidth - 32 - 16 - 72,
+                                                            child: AlvaTextMaxLinesOverflow(
+                                                                maxLines: 5,
+                                                                title:
+                                                                    "${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].levelName}: $step1",
+                                                                textStyle: AlvaStyles()
+                                                                    .headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                    .copyWith(height: 1.6)),
+                                                          ),
+                                                        ),
                                                 ],
                                               )
                                             ],

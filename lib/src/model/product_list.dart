@@ -502,63 +502,19 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 0,
           "subProductId": "P001-1",
-          "quantity": 200,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 0,
-              "subProductId": "P001-11",
-              "quantity": 100
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 500,
-              "subProductId": "P001-12",
-              "quantity": 100
-            }
-          ]
+          "quantity": 200
         },
         {
           "label": "สีขาว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 2000,
           "subProductId": "P001-2",
-          "quantity": 250,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 0,
-              "subProductId": "P001-21",
-              "quantity": 50
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 500,
-              "subProductId": "P001-22",
-              "quantity": 80
-            },
-            {
-              "label": "10 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 700,
-              "subProductId": "P001-23",
-              "quantity": 120
-            }
-          ]
+          "quantity": 250
         }
       ]
     },
@@ -608,63 +564,19 @@ const mockProductListResponse = {
         {
           "label":
               "Wallbox Pulsar Max เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ทได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวัน เอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่ เพราะ Pulsar Max มีความสามารถในการชาร์จเร็ว และยังสามารถบริหารจัดการพลังงานได้อย่างง่ายดายอีกด้วย",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 10000,
           "subProductId": "P002-1",
-          "quantity": 200,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-              "price": 0,
-              "subProductId": "P002-11",
-              "quantity": 100
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-              "price": 500,
-              "subProductId": "P002-12",
-              "quantity": 100
-            }
-          ]
+          "quantity": 200
         },
         {
-          "label": "สีขาว",
-          "levelName": "สี",
+          "label": "5 เมตร สีขาว",
+          "levelName": "ความยาวสายและสี",
           "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
           "price": 0,
           "subProductId": "P002-2",
-          "quantity": 250,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-              "price": 0,
-              "subProductId": "P002-21",
-              "quantity": 50
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-              "price": 500,
-              "subProductId": "P002-22",
-              "quantity": 80
-            },
-            {
-              "label": "10 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-              "price": 700,
-              "subProductId": "P002-23",
-              "quantity": 120
-            }
-          ]
+          "quantity": 250
         }
       ]
     },
@@ -712,64 +624,36 @@ const mockProductListResponse = {
       "merchantEmail": "",
       "productionOptionals": [
         {
-          "label": "สีดำ",
-          "levelName": "สี",
+          "label": "5เมตร สีดำ",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-          "price": 0,
-          "subProductId": "P001-1",
-          "quantity": 200,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 0,
-              "subProductId": "P002-11",
-              "quantity": 100
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 500,
-              "subProductId": "P002-12",
-              "quantity": 100
-            }
-          ]
+          "price": 50000,
+          "subProductId": "P003-1",
+          "quantity": 200
         },
         {
-          "label": "สีขาว",
-          "levelName": "สี",
+          "label": "5เมตร สีขาว",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-          "price": 0,
-          "subProductId": "P002-2",
-          "quantity": 250,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 0,
-              "subProductId": "P001-21",
-              "quantity": 50
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 500,
-              "subProductId": "P002-22",
-              "quantity": 80
-            },
-            {
-              "label": "10 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 700,
-              "subProductId": "P002-23",
-              "quantity": 120
-            }
-          ]
+          "price": 50000,
+          "subProductId": "P003-2",
+          "quantity": 250
+        },
+        {
+          "label": "10เมตร สีดำ",
+          "levelName": "ความยาวสายและสี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+          "price": 55000,
+          "subProductId": "P003-3",
+          "quantity": 200
+        },
+        {
+          "label": "10เมตร สีขาว",
+          "levelName": "ความยาวสายและสี",
+          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+          "price": 55000,
+          "subProductId": "P003-4",
+          "quantity": 250
         }
       ]
     },
@@ -798,7 +682,7 @@ const mockProductListResponse = {
       "remark": "<h1>Remark cate 3 Palsar Max EV3</h1>",
       "currency": "THB",
       "price": 56640,
-      "discountPrice": 0,
+      "discountPrice": 55000,
       "percentDiscountPrice": 5,
       "productionAssets": [
         "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
@@ -814,33 +698,13 @@ const mockProductListResponse = {
       "merchantEmail": "",
       "productionOptionals": [
         {
-          "label": "สีดำ",
-          "levelName": "สี",
+          "label": "10เมตร สีดำ",
+          "levelName": "ความยาวสายและสี",
           "image":
               "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
-          "price": 0,
-          "subProductId": "P003-1",
-          "quantity": 200,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
-              "price": 0,
-              "subProductId": "P003-11",
-              "quantity": 100
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image":
-                  "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/WallBox_Home_Garage_Outoor_Stucco_Pulsar_Max_1889.jpg",
-              "price": 0,
-              "subProductId": "P003-12",
-              "quantity": 100
-            }
-          ]
+          "price": 55000,
+          "subProductId": "P004-1",
+          "quantity": 200
         }
       ]
     },
@@ -881,42 +745,7 @@ const mockProductListResponse = {
       "merchantLogo": "Url",
       "merchantMobile": "091-862-5011",
       "merchantEmail": "",
-      "productionOptionals": [
-        {
-          "label": "สีขาว",
-          "levelName": "สี",
-          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
-          "price": 0,
-          "subProductId": "P004-1",
-          "quantity": 250,
-          "level2": [
-            {
-              "label": "3 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
-              "price": 0,
-              "subProductId": "P004-2",
-              "quantity": 50
-            },
-            {
-              "label": "5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
-              "price": 500,
-              "subProductId": "P004-3",
-              "quantity": 80
-            },
-            {
-              "label": "10 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
-              "price": 700,
-              "subProductId": "P004-4",
-              "quantity": 120
-            }
-          ]
-        }
-      ]
+      "productionOptionals": []
     },
     {
       "appId": "Marketplace-mini-app",
@@ -963,63 +792,19 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_1-1",
-          "quantity": 200,
-          "level2": [
-            {
-              "label": "3.1 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 0,
-              "subProductId": "PV_QQZ5W1QWKQC8_1-11",
-              "quantity": 100
-            },
-            {
-              "label": "5.1 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 500,
-              "subProductId": "PV_QQZ5W1QWKQC8_1-12",
-              "quantity": 100
-            }
-          ]
+          "quantity": 200
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_1-2",
-          "quantity": 250,
-          "level2": [
-            {
-              "label": "3.5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 0,
-              "subProductId": "PV_QQZ5W1QWKQC8_1-21",
-              "quantity": 50
-            },
-            {
-              "label": "5.5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 500,
-              "subProductId": "PV_QQZ5W1QWKQC8_1-22",
-              "quantity": 80
-            },
-            {
-              "label": "10.5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 700,
-              "subProductId": "PV_QQZ5W1QWKQC8_1-23",
-              "quantity": 120
-            }
-          ]
+          "quantity": 250
         }
       ]
     },
@@ -1068,63 +853,19 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 10000,
           "subProductId": "PV_QQZ5W1QWKQC8_2-1",
-          "quantity": 200,
-          "level2": [
-            {
-              "label": "3.1 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 0,
-              "subProductId": "PV_QQZ5W1QWKQC8_2-11",
-              "quantity": 100
-            },
-            {
-              "label": "5.1 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-              "price": 500,
-              "subProductId": "PV_QQZ5W1QWKQC8_2-12",
-              "quantity": 100
-            }
-          ]
+          "quantity": 200
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 5000,
           "subProductId": "PV_QQZ5W1QWKQC8_2-2",
-          "quantity": 250,
-          "level2": [
-            {
-              "label": "3.5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 0,
-              "subProductId": "PV_QQZ5W1QWKQC8_2-21",
-              "quantity": 50
-            },
-            {
-              "label": "5.5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 500,
-              "subProductId": "PV_QQZ5W1QWKQC8_2-22",
-              "quantity": 80
-            },
-            {
-              "label": "10.5 เมตร",
-              "levelName": "ความยาวสาย",
-              "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-              "price": 700,
-              "subProductId": "PV_QQZ5W1QWKQC8_2-23",
-              "quantity": 120
-            }
-          ]
+          "quantity": 250
         }
       ]
     },
@@ -1174,7 +915,7 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_3-1",
@@ -1200,7 +941,7 @@ const mockProductListResponse = {
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_3-2",
@@ -1279,7 +1020,7 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_4-1",
@@ -1297,7 +1038,7 @@ const mockProductListResponse = {
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_4-2",
@@ -1360,7 +1101,7 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 500,
           "subProductId": "PV_QQZ5W1QWKQC8_5-1",
@@ -1378,7 +1119,7 @@ const mockProductListResponse = {
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 500,
           "subProductId": "PV_QQZ5W1QWKQC8_5-2",
@@ -1441,7 +1182,7 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 1000,
           "subProductId": "PV_QQZ5W1QWKQC8_6-1",
@@ -1459,7 +1200,7 @@ const mockProductListResponse = {
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 2000,
           "subProductId": "PV_QQZ5W1QWKQC8_6-2",
@@ -1522,7 +1263,7 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_7-1",
@@ -1540,7 +1281,7 @@ const mockProductListResponse = {
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_7-2",
@@ -1603,7 +1344,7 @@ const mockProductListResponse = {
       "productionOptionals": [
         {
           "label": "สีดำ",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_8-1",
@@ -1621,7 +1362,7 @@ const mockProductListResponse = {
         },
         {
           "label": "สีเขียว",
-          "levelName": "สี",
+          "levelName": "ความยาวสายและสี",
           "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
           "price": 0,
           "subProductId": "PV_QQZ5W1QWKQC8_8-2",
@@ -1650,27 +1391,28 @@ const mockProductResponse = {
   "refundDay": 7,
   "postDate": "2023‐09‐01T02:49:06−07:00",
   "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-  "categoryId": ["CT_9P2UW6F426C6", "CT_371KNH5QXG6O"],
-  "productId": "PV_QQZ5W1QWKQC801",
+  "categoryId": ["CT_371KNH5QXG6O"],
+  "productId": "PV_KH73Y1L00NLA03",
   "quantity": 100,
-  "productName": "Palsar Max Aom",
+  "productName":
+      "Palsar Max version2hkerhckjfshdjkhfgksdjhfgkjshdlkfjghlskdjfhglksjhdfkjghslkdfhglkhsldkfhlgkhsldfhgjsdhfgjhslkdfghlksjhfglkshldfghl",
   "productStatus": "Available",
   "commissionAmount": 2000,
   "serviceFee": 0,
   "shippingFee": 0,
   "tagline":
       "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-  "promotionTag": ["ติดตั้งฟรี"],
-  "description": "<p>Decription cate1 Innopower 1</p>",
+  "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
+  "description": "<h1>Desc cate 2 Palsar Max version2</h1></h1>",
   "technicalSpec":
       "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
-  "remark": "<h1>Remark cate1 Innopower 1</h1>",
+  "remark": "<h1>Remark cate 2 Palsar Max version2</h1></h1>",
   "currency": "THB",
-  "price": 56640,
-  "discountPrice": 59000,
+  "price": 100000,
+  "discountPrice": 50000,
   "percentDiscountPrice": 5,
   "productionAssets": [
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_BLACK_MONOCHROME_2_2.png",
+    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
     "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
     "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
     "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
@@ -1686,94 +1428,37 @@ const mockProductResponse = {
   "merchantEmail": "",
   "productionOptionals": [
     {
-      "label": "สีดำ",
-      "levelName": "สี",
+      "label": "5เมตร สีดำ",
+      "levelName": "ความยาวสายและสี",
       "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-      "price": 56640,
-      "subProductId": "P001-1",
-      "quantity": 200,
-      "level2": [
-        {
-          "label": "3 เมตร",
-          "levelName": "ความยาวสาย",
-          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-          "price": 0,
-          "subProductId": "P001-11",
-          "quantity": 100
-        },
-        {
-          "label": "5 เมตร",
-          "levelName": "ความยาวสาย",
-          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-          "price": 500,
-          "subProductId": "P001-12",
-          "quantity": 100
-        }
-      ]
+      "price": 50000,
+      "subProductId": "P003-1",
+      "quantity": 200
     },
     {
-      "label": "สีขาว",
-      "levelName": "สี",
+      "label":
+          "5เมตร สีขาวhkerhckjfshdjkhfgksdjhfgkjshdlkfjghlskdjfhglksjhdfkjghslkdfhglkhsldkfhlgkhsldfhgjsdhfgjhslkdfghlksjhfglkshldfghljkshdkfghlsjkdhfjgklhsjlkdfhgjlkshljkdfhglwkercmnwltkenhvtksduhnlkh",
+      "levelName": "ความยาวสายและสี",
       "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-      "price": 57640,
-      "subProductId": "P001-2",
-      "quantity": 250,
-      "level2": [
-        {
-          "label": "3 เมตร",
-          "levelName": "ความยาวสาย",
-          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-          "price": 0,
-          "subProductId": "P001-21",
-          "quantity": 50
-        },
-        {
-          "label": "5 เมตร",
-          "levelName": "ความยาวสาย",
-          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-          "price": 500,
-          "subProductId": "P001-22",
-          "quantity": 80
-        },
-        {
-          "label": "10 เมตร",
-          "levelName": "ความยาวสาย",
-          "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-          "price": 700,
-          "subProductId": "P001-23",
-          "quantity": 120,
-          "level3": [
-            {
-              "label": "สายธรรมดา",
-              "levelName": "รูปแบบสาย",
-              "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-              "price": 100,
-              "subProductId": "P001-231",
-              "quantity": 120,
-              "level4": [
-                {
-                  "label": "สายธรรมดา",
-                  "levelName": "รูปแบบสาย",
-                  "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                  "price": 200,
-                  "subProductId": "P001-2311",
-                  "quantity": 120,
-                  "level5": [
-                    {
-                      "label": "สายธรรมดา",
-                      "levelName": "รูปแบบสาย",
-                      "image": "https://app.qa.channel.buk0.com/zm5-files/MARKETPLACE01/1/20230831124649109144.JPG",
-                      "price": 300,
-                      "subProductId": "P001-23111",
-                      "quantity": 120
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "price": 50000,
+      "subProductId": "P003-2",
+      "quantity": 250
+    },
+    {
+      "label": "10เมตร สีดำ",
+      "levelName": "ความยาวสายและสี",
+      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
+      "price": 55000,
+      "subProductId": "P003-3",
+      "quantity": 200
+    },
+    {
+      "label": "10เมตร สีขาว",
+      "levelName": "ความยาวสายและสี",
+      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
+      "price": 55000,
+      "subProductId": "P003-4",
+      "quantity": 250
     }
   ]
 };
