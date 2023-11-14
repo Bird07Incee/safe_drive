@@ -332,7 +332,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                         image: NetworkImage(widget.arguments!.product.productionOptionals[index].image == ""
                                                             ? widget.arguments!.product.productionAssets.first
                                                             : widget.arguments!.product.productionOptionals[index].image),
-                                                        fit: BoxFit.fitWidth,
+                                                        fit: BoxFit.cover,
                                                         imageErrorBuilder: (context, error, stackTrace) => Container(
                                                           height: 40,
                                                           width: 72,
