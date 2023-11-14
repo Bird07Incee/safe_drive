@@ -202,7 +202,6 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                         Text(
                                           orderSuccessData.productOption!,
                                           style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
-                                          overflow: TextOverflow.ellipsis,
                                         )
                                       ],
                                     ),
