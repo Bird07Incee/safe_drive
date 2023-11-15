@@ -78,7 +78,7 @@ class DioClient {
   Dio get dioClient {
     client.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
-        initAdapter();
+        //initAdapter();
         return handler.next(options);
       },
     ));
@@ -88,6 +88,7 @@ class DioClient {
   }
 
   void initAdapter() {
+    log("initAdapter ");
     String selfHash = "37e2a47da812dd09f8f44ad4002087866378fdf834eb28c441f4e3edc605b639";
     client.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {

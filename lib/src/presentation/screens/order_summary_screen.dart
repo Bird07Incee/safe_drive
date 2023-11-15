@@ -158,7 +158,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                             borderRadius: BorderRadius.circular(4),
                                                             child: FadeInImage(
                                                               placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
-                                                              image: NetworkImage(step1.isNotEmpty
+                                                              image: NetworkImage(step1.isNotEmpty && state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].image.isNotEmpty
                                                                   ? state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].image
                                                                   : state.product.productionAssets.first),
                                                               fit: BoxFit.cover,
