@@ -25,8 +25,6 @@ import 'package:universal_html/html.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
   OrderSummaryScreen({super.key});
-  final TextEditingController saleCodeController = TextEditingController();
-
   void onBack(BuildContext context) {
     GeneralDialog(
             onAccept: () {
@@ -55,8 +53,9 @@ class OrderSummaryScreen extends StatelessWidget {
     String step1 = selectOptionBloc.stepOneGroupValueRadio;
     int step1price = selectOptionBloc.stepOnePrice ?? 0;
     String step2 = selectOptionBloc.stepTwoGroupValueRadio;
-    int step2price = selectOptionBloc.stepTwoPrice ?? 0;
+    // int step2price = selectOptionBloc.stepTwoPrice ?? 0;
     final FocusNode saleCodeNode = FocusNode();
+    String staffCode = "";
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
@@ -468,8 +467,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                             builder: (context, showEditForm) {
                                               return TextFormField(
                                                 key: const Key("sale_code_box"),
-                                                controller: saleCodeController,
                                                 onChanged: (text) {
+                                                  staffCode = text;
                                                   if (text != "") {
                                                     context.read<ShowSaleCodeCubit>().show(true);
                                                   } else {
@@ -533,8 +532,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 160,
-                                        )
+                                          height: 160 + MediaQuery.of(context).viewInsets.bottom,
+                                        ),
                                       ],
                                     ),
                                   )),
@@ -748,8 +747,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                                       unitPrice: step1SelectedOption.price))
                                                         ],
                                                         paymentInfo: PaymentInfo(
-                                                            channel: orderState.paymentType.isFullPayment ? "CC" : "IPP",
-                                                            staffCode: saleCodeController.text),
+                                                            channel: orderState.paymentType.isFullPayment ? "CC" : "IPP", staffCode: staffCode),
                                                         shippingInfo: ShippingInfo(
                                                             name: shippingState.addressModel.fullName,
                                                             address:
