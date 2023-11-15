@@ -1,9 +1,12 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
-import 'package:universal_io/io.dart';
 
 class DioUtilityService with HeaderUtil {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? DioClient().dioClient;
@@ -29,7 +32,7 @@ class DioUtilityService with HeaderUtil {
       } else {
         throw Exception("Getting service error with response ${response.statusCode}");
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.error != null) {
         if (!isRecursion && e.response?.statusCode == 401) {
           //handle token
@@ -59,7 +62,7 @@ class DioUtilityService with HeaderUtil {
       } else {
         throw Exception("Posting service error with response ${response.statusCode}");
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.error != null) {
         if (!isRecursion && e.response?.statusCode == 401) {
           //handle token
@@ -85,26 +88,15 @@ class DioClient {
   }
 
   void initAdapter() {
-    String pemString = """
-  -----BEGIN CERTIFICATE-----
-MIIB8jCCAXigAwIBAgITBmyf18G7EEwpQ+Vxe3ssyBrBDjAKBggqhkjOPQQDAzA5
-MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6b24g
-Um9vdCBDQSA0MB4XDTE1MDUyNjAwMDAwMFoXDTQwMDUyNjAwMDAwMFowOTELMAkG
-A1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJvb3Qg
-Q0EgNDB2MBAGByqGSM49AgEGBSuBBAAiA2IABNKrijdPo1MN/sGKe0uoe0ZLY7Bi
-9i0b2whxIdIA6GO9mif78DluXeo9pcmBqqNbIJhFXRbb/egQbeOc4OO9X4Ri83Bk
-M6DLJC9wuoihKqB1+IGuYgbEgds5bimwHvouXKNCMEAwDwYDVR0TAQH/BAUwAwEB
-/zAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0OBBYEFNPsxzplbszh2naaVvuc84ZtV+WB
-MAoGCCqGSM49BAMDA2gAMGUCMDqLIfG9fhGt0O9Yli/W651+kI0rz2ZVwyzjKKlw
-CkcO8DdZEv8tmZQoTipPNU0zWgIxAOp1AE47xDqUEpHJWEadIRNyp4iciuRMStuW
-1KyLa2tJElMzrdfkviT8tQp21KW8EA==
------END CERTIFICATE-----
-""";
+    String selfHash = "37e2a47da812dd09f8f44ad4002087866378fdf834eb28c441f4e3edc605b639";
     client.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
         final client = HttpClient();
         client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-          return cert.pem == pemString; // Verify the certificate.
+          log("cert.pem : ${cert.pem}");
+          var b = utf8.encode(cert.pem);
+          var hostHash = sha256.convert(b).toString();
+          return hostHash == selfHash; // Verify the certificate.
         };
         return client;
       },

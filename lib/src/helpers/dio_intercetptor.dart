@@ -15,12 +15,12 @@ class DioInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     await _onErrorHandler(err, handler);
     handler.next(err);
   }
 
-  Future<void> _onErrorHandler(DioError err, ErrorInterceptorHandler handler) async {
+  Future<void> _onErrorHandler(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == html.HttpStatus.unauthorized) {
       await InterceptorHandler().refreshToken();
     }
