@@ -78,12 +78,13 @@ class ShippingAddressScreen extends StatelessWidget {
                                     final navigator = Navigator.of(context);
                                     final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
                                     myBloc.onSubmitPressed();
-                                    var stack = CurrentRouteObserver.instance.stack;
-                                    if (stack.contains(Routes.orderSummary.toStringPath())) {
-                                      navigator.pop();
-                                    } else {
-                                      navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
-                                    }
+                                    navigator.pop();
+                                    // var stack = CurrentRouteObserver.instance.stack;
+                                    // if (stack.contains(Routes.orderSummary.toStringPath())) {
+                                    //   navigator.pop();
+                                    // } else {
+                                    //   navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
+                                    // }
                                   }
                                 },
                                 style: AlvaStyles().outlineNoneBorderButtonStyle(
