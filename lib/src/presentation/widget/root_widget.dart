@@ -22,6 +22,8 @@ class AlvaRootWidget extends StatelessWidget {
           body: child,
           appBar: appBar,
           bottomSheet: bottomSheet,
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
         ));
   }
 }

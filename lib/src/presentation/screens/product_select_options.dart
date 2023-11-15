@@ -91,7 +91,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                     style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                               )
                             : OutlinedButton(
-                                onPressed: () {},
+                                onPressed: null,
                                 style: AlvaStyles().outlineNoneBorderButtonStyle(cloudSoftDeepWhite, Colors.transparent),
                                 child: Text(ProductSelectOptionsConst().continueText, style: AlvaStyles().headingSize16w700(smockGrey)),
                               ),
@@ -300,8 +300,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                     children: [
                                                       Padding(
                                                         padding: const EdgeInsets.only(bottom: 4),
-                                                        child: Text(widget.arguments!.product.productionOptionals[index].label,
-                                                            style: AlvaStyles().bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                        child: SizedBox(
+                                                          width: maxWidth - 32 - 24 - 72,
+                                                          child: Text(widget.arguments!.product.productionOptionals[index].label,
+                                                              style: AlvaStyles().bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                        ),
                                                       ),
                                                       Padding(
                                                         padding: const EdgeInsets.only(bottom: 4),

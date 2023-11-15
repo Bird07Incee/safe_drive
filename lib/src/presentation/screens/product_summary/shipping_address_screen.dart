@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
@@ -16,7 +15,6 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/dropdown_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/text_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
-import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class ShippingAddressScreen extends StatelessWidget {
   const ShippingAddressScreen({Key? key}) : super(key: key);
