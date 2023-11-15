@@ -158,7 +158,9 @@ class OrderSummaryScreen extends StatelessWidget {
                                                             borderRadius: BorderRadius.circular(4),
                                                             child: FadeInImage(
                                                               placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
-                                                              image: NetworkImage(step1.isNotEmpty && state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].image.isNotEmpty
+                                                              image: NetworkImage(step1.isNotEmpty &&
+                                                                      state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0]
+                                                                          .image.isNotEmpty
                                                                   ? state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].image
                                                                   : state.product.productionAssets.first),
                                                               fit: BoxFit.cover,
@@ -598,7 +600,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     width: 16,
                                                   ),
                                                   AlvaText(
-                                                      title: "${(step1price != 0 ? step1price : showPrice).toDecimalFormat()} บาท",
+                                                      title:
+                                                          "${(state.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
                                                       textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
                                                 ],
                                               ),
@@ -622,33 +625,33 @@ class OrderSummaryScreen extends StatelessWidget {
                                                     ),
                                                   )
                                                 : SizedBox.shrink(),
-                                            step2.isNotEmpty
-                                                ? SizedBox(
-                                                    height: 8,
-                                                  )
-                                                : SizedBox.shrink(),
-                                            step2.isNotEmpty
-                                                ? Padding(
-                                                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: maxWidth - 32 - 16 - 79,
-                                                          child: AlvaTextMaxLinesOverflow(
-                                                              title: step2,
-                                                              maxLines: 1,
-                                                              textStyle:
-                                                                  AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                                        ),
-                                                        AlvaText(
-                                                            title: "${step2price.toDecimalFormat()} บาท",
-                                                            textStyle:
-                                                                AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                                      ],
-                                                    ),
-                                                  )
-                                                : SizedBox.shrink(),
+                                            // step2.isNotEmpty
+                                            //     ? SizedBox(
+                                            //         height: 8,
+                                            //       )
+                                            //     : SizedBox.shrink(),
+                                            // step2.isNotEmpty
+                                            //     ? Padding(
+                                            //         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                                            //         child: Row(
+                                            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            //           children: [
+                                            //             SizedBox(
+                                            //               width: maxWidth - 32 - 16 - 79,
+                                            //               child: AlvaTextMaxLinesOverflow(
+                                            //                   title: step2,
+                                            //                   maxLines: 1,
+                                            //                   textStyle:
+                                            //                       AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                            //             ),
+                                            //             AlvaText(
+                                            //                 title: "${step2price.toDecimalFormat()} บาท",
+                                            //                 textStyle:
+                                            //                     AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                            //           ],
+                                            //         ),
+                                            //       )
+                                            //     : SizedBox.shrink(),
                                             Container(
                                               height: 16,
                                               color: backgroundNo2,
@@ -707,7 +710,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                         ],
                                       ),
                                       AlvaText(
-                                          title: "${(step1price != 0 ? step1price : showPrice).toDecimalFormat()} บาท",
+                                          title: "${(state.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
                                           textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                     ],
                                   ),
@@ -736,7 +739,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                                           OrderProduct(
                                                               productId: state.product.productId,
                                                               qty: 1,
-                                                              unitPrice: showPrice,
+                                                              unitPrice: state.product.productionOptionals.isNotEmpty ? step1price : showPrice,
                                                               optional: state.product.productionOptionals.isEmpty
                                                                   ? null
                                                                   : Optional(
