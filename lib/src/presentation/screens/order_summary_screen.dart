@@ -482,6 +482,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                               return TextFormField(
                                                 key: const Key("sale_code_box"),
                                                 controller: staffCode,
+                                                onTap: () {
+                                                  setState(() {});
+                                                },
                                                 onChanged: (text) {
                                                   if (text != "") {
                                                     context.read<ShowSaleCodeCubit>().show(true);
@@ -752,7 +755,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                           onAccept: () async {
                                                             final orderBloc = context.read<OrderSummaryBloc>();
                                                             ProductionOptionals step1SelectedOption = state.product.productionOptionals.isEmpty
-                                                                ? ProductionOptionals.fromJson(const{})
+                                                                ? ProductionOptionals.fromJson(const {})
                                                                 : state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0];
                                                             // Level2 step2SelectedOption =
                                                             //     step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
