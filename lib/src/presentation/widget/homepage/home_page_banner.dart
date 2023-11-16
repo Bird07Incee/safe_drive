@@ -38,7 +38,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                 return GestureDetector(
                   onTap: () {
                     if (itemBannerLength != 0) {
-                      launchUrl(Uri.parse(widget.banners[i]["url"]));
+                      launchUrl(Uri.parse(widget.banners[i].url));
                     }
                   },
                   child: AspectRatio(
@@ -49,7 +49,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                           : FadeInImage(
                               placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                               image: NetworkImage(
-                                i == itemBannerLength ? widget.banners[0]["image"] : widget.banners[i]["image"],
+                                i == itemBannerLength ? widget.banners[0].image : widget.banners[i].image,
                               ),
                               fit: BoxFit.fitWidth,
                               imageErrorBuilder: (context, error, stackTrace) =>
