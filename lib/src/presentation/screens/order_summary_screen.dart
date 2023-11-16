@@ -23,8 +23,24 @@ import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:universal_html/html.dart';
 
-class OrderSummaryScreen extends StatelessWidget {
-  OrderSummaryScreen({super.key});
+class OrderSummaryScreen extends StatefulWidget {
+  const OrderSummaryScreen({super.key});
+
+  @override
+  State<OrderSummaryScreen> createState() => _OrderSummaryScreenState();
+}
+
+class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
+  late CreateOrderRequestModel requestModel;
+  final FocusNode saleCodeNode = FocusNode();
+  String staffCode = "";
+
+  @override
+  void initState() {
+    context.read<OrderSummaryBloc>().add(InitialOrderState());
+    super.initState();
+  }
+
   void onBack(BuildContext context) {
     GeneralDialog(
             onAccept: () {
@@ -47,15 +63,12 @@ class OrderSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<OrderSummaryBloc>().add(InitialOrderState()); //initial state
     final selectOptionBloc = BlocProvider.of<ProductOptionBloc>(context).state;
-    late CreateOrderRequestModel requestModel;
     String step1 = selectOptionBloc.stepOneGroupValueRadio;
     int step1price = selectOptionBloc.stepOnePrice ?? 0;
     String step2 = selectOptionBloc.stepTwoGroupValueRadio;
     // int step2price = selectOptionBloc.stepTwoPrice ?? 0;
-    final FocusNode saleCodeNode = FocusNode();
-    String staffCode = "";
+
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
@@ -108,7 +121,7 @@ class OrderSummaryScreen extends StatelessWidget {
                     builder: (context, shippingState) {
                       bool validated = shippingState.addressModel != ShippingAddressModel.empty && !orderState.paymentType.isNone;
                       return Scaffold(
-                          resizeToAvoidBottomInset: false,
+                          resizeToAvoidBottomInset: true,
                           backgroundColor: Colors.white,
                           body: Stack(
                             children: [
