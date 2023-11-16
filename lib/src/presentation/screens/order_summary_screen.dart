@@ -752,7 +752,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                           onAccept: () async {
                                                             final orderBloc = context.read<OrderSummaryBloc>();
                                                             ProductionOptionals step1SelectedOption = state.product.productionOptionals.isEmpty
-                                                                ? ProductionOptionals.fromJson({})
+                                                                ? ProductionOptionals.fromJson(const{})
                                                                 : state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0];
                                                             // Level2 step2SelectedOption =
                                                             //     step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
