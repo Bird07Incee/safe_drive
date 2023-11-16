@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
+import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
@@ -79,6 +80,7 @@ class DioClient {
     client.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
         //initAdapter();
+        await _setupCertificate();
         return handler.next(options);
       },
     ));
@@ -102,5 +104,20 @@ class DioClient {
         return client;
       },
     );
+  }
+
+  static Future<void> _setupCertificate() async {
+    String path = 'assets/raw/AWSRootCA4.pem';
+    ByteData data = await rootBundle.load(path);
+    SecurityContext clientContext = SecurityContext(withTrustedRoots: false);
+    clientContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+
+    (client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+      HttpClient httpClient = HttpClient(context: clientContext);
+      httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) {
+        return false;
+      };
+      return httpClient;
+    };
   }
 }
