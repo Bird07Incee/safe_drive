@@ -30,7 +30,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
               itemCount: itemBannerLength == 1 ? itemBannerLength : itemBannerLength + 1,
               controller: widget.pageControllerState,
               onPageChanged: (val) {
-                if (val == itemBannerLength && val != 1) {
+                if (val == 5 && val != 1) {
                   widget.pageControllerState.jumpToPage(0);
                 }
               },
@@ -69,7 +69,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: SmoothPageIndicator(
                   controller: widget.pageControllerState,
-                  count: itemBannerLength <= carouselShowLimit ? itemBannerLength : carouselShowLimit,
+                  count: itemBannerLength <= 5 ? itemBannerLength : 5,
                   effect: const ExpandingDotsEffect(
                     expansionFactor: 2,
                     dotHeight: 6,
