@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
