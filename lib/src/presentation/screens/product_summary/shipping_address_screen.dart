@@ -30,75 +30,73 @@ class ShippingAddressScreen extends StatelessWidget {
         ctx.read<ShippingAddressBloc>().setFormData(isFromEditing: args.isFromEditing);
         return const LoadingScreen();
       } else if (state.status.isSuccess || state.status.isFetching) {
-        return IgnorePointer(
-          ignoring: state.status.isFetching,
-          child: RootPageCondition(
-              child: AlvaRootWidget(
-                  appBar: AppBar(
-                    title: AlvaText(title: AppStrings().shippingAddressTitle, textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                    titleSpacing: 0,
-                    elevation: 0.7,
-                    leadingWidth: 60,
-                    centerTitle: false,
-                    automaticallyImplyLeading: false,
-                    leading: IconButton(
-                        onPressed: () {
-                          final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
-                          ShippingAddressArgs args = ShippingAddressArgs();
-                          if (ModalRoute.of(context)!.settings.arguments != null) {
-                            args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
-                          }
-                          if (!args.isFromEditing) myBloc.onClearShippingData();
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_rounded)),
+        return RootPageCondition(
+          child: AlvaRootWidget(
+              appBar: AppBar(
+                title: AlvaText(title: AppStrings().shippingAddressTitle, textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                titleSpacing: 0,
+                elevation: 0.7,
+                leadingWidth: 60,
+                centerTitle: false,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                    onPressed: () async {
+                      final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                      ShippingAddressArgs args = ShippingAddressArgs();
+                      if (ModalRoute.of(context)!.settings.arguments != null) {
+                        args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
+                      }
+                      if (!args.isFromEditing) myBloc.onClearShippingData();
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_rounded)),
+              ),
+              bottomSheet: BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: whitePure,
+                    boxShadow: [
+                      BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
+                    ],
                   ),
-                  bottomSheet: BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: whitePure,
-                        boxShadow: [
-                          BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
-                        ],
-                      ),
-                      width: MediaQuery.of(context).size.width,
-                      height: 96,
-                      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                              height: 48,
-                              child: OutlinedButton(
-                                onPressed: () async {
-                                  if (state.isAllowSubmit) {
-                                    final navigator = Navigator.of(context);
-                                    final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
-                                    myBloc.onSubmitPressed();
-                                    navigator.pop();
-                                    // var stack = CurrentRouteObserver.instance.stack;
-                                    // if (stack.contains(Routes.orderSummary.toStringPath())) {
-                                    //   navigator.pop();
-                                    // } else {
-                                    //   navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
-                                    // }
-                                  }
-                                },
-                                style: AlvaStyles().outlineNoneBorderButtonStyle(
-                                    state.isAllowSubmit ? YellowKrungsri : cloudSoftDeepWhite, Colors.transparent,
-                                    isRadius8: true),
-                                child: Text("ยืนยัน",
-                                    style: AlvaStyles().headingSize16w700(state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  }),
-                  titlePage: titleWebPage,
-                  child: buildBodyWidget(ctx, state))),
+                  width: MediaQuery.of(context).size.width,
+                  height: 96,
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                          height: 48,
+                          child: OutlinedButton(
+                            onPressed: () async {
+                              if (state.isAllowSubmit) {
+                                final navigator = Navigator.of(context);
+                                final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                                myBloc.onSubmitPressed();
+                                navigator.pop();
+                                // var stack = CurrentRouteObserver.instance.stack;
+                                // if (stack.contains(Routes.orderSummary.toStringPath())) {
+                                //   navigator.pop();
+                                // } else {
+                                //   navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
+                                // }
+                              }
+                            },
+                            style: AlvaStyles().outlineNoneBorderButtonStyle(
+                                state.isAllowSubmit ? YellowKrungsri : cloudSoftDeepWhite, Colors.transparent,
+                                isRadius8: true),
+                            child:
+                                Text("ยืนยัน", style: AlvaStyles().headingSize16w700(state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
+              titlePage: titleWebPage,
+              child: buildBodyWidget(ctx, state)),
         );
       } else if (state.status.isError) {
         return ErrorScreen(
@@ -107,7 +105,7 @@ class ShippingAddressScreen extends StatelessWidget {
           titleBtn: ErrorConst().titleBtnNS,
           onTap: () {
             final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
-            myBloc.onClearShippingData();
+            myBloc.onSetInitial();
           },
         );
       } else {
@@ -199,35 +197,37 @@ class ShippingAddressScreen extends StatelessWidget {
                           isDisable = false;
                         }
 
-                        input = DropDownInputWidget(
-                          disable: isDisable,
-                          textEditingController: item.controller,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          label: item.label,
-                          marginBottom: 15,
-                          required: required,
-                          value: item.value,
-                          options: item.options!,
-                          isDisableDropdownSuffixButton: item.fieldName == 'zipcode' ? true : false,
-                          onChanged: (value) async {
-                            DropdownAddressModel model = value;
-                            var field = state.formResult!.where((element) => item.fieldName == element.fieldName).first;
-                            field.id = model.id;
-                            field.value = model.nameTh;
+                        input = IgnorePointer(
+                            ignoring: state.status.isFetching,
+                            child: DropDownInputWidget(
+                              disable: isDisable,
+                              textEditingController: item.controller,
+                              autoValidateMode: AutovalidateMode.onUserInteraction,
+                              label: item.label,
+                              marginBottom: 15,
+                              required: required,
+                              value: item.value,
+                              options: item.options!,
+                              isDisableDropdownSuffixButton: item.fieldName == 'zipcode' ? true : false,
+                              onChanged: (value) async {
+                                DropdownAddressModel model = value;
+                                var field = state.formResult!.where((element) => item.fieldName == element.fieldName).first;
+                                field.id = model.id;
+                                field.value = model.nameTh;
 
-                            final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                                final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
 
-                            await myBloc.updateDropdownSelected(
-                                id: field.id,
-                                fieldName: item.fieldName,
-                                listForm: state.listFormWidget,
-                                listResult: state.formResult,
-                                filterRefId: field.id);
+                                await myBloc.updateDropdownSelected(
+                                    id: field.id,
+                                    fieldName: item.fieldName,
+                                    listForm: state.listFormWidget,
+                                    listResult: state.formResult,
+                                    filterRefId: field.id);
 
-                            setState(() {});
-                            //test
-                          },
-                        );
+                                setState(() {});
+                                //test
+                              },
+                            ));
                       }
 
                       return input;
