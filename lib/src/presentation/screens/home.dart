@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             HomepageTopSection(maxWidth: maxWidth),
                             HomePageBanner(
                               pageControllerState: pageController,
-                              banners: state.productList.banner ?? [],
+                              banners: state.productList.banner!,
                             ),
                             StickyHeader(
                               header: Visibility(
