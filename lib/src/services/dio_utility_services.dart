@@ -111,13 +111,22 @@ class DioClient {
     ByteData data = await rootBundle.load(path);
     SecurityContext clientContext = SecurityContext(withTrustedRoots: false);
     clientContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+    client.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        HttpClient httpClient = HttpClient(context: clientContext);
+        httpClient.badCertificateCallback = ((X509Certificate cert, String host, int port) => false);
+        return httpClient;
+      },
+    );
 
-    (client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
-      HttpClient httpClient = HttpClient(context: clientContext);
-      httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) {
-        return false;
-      };
-      return httpClient;
-    };
+    // old version code is notwork
+
+    // (client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+    //   HttpClient httpClient = HttpClient(context: clientContext);
+    //   httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) {
+    //     return false;
+    //   };
+    //   return httpClient;
+    // };
   }
 }
