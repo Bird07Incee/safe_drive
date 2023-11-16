@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePageBanner extends StatefulWidget {
   final PageController pageControllerState;
+  final List banners;
 
   const HomePageBanner({
     super.key,
-    required this.maxWidth,
     required this.pageControllerState,
+    required this.banners,
   });
-
-  final double maxWidth;
 
   @override
   State<HomePageBanner> createState() => _HomePageBannerState();
 }
 
 class _HomePageBannerState extends State<HomePageBanner> {
-  bool errorCase = true;
-  final liff = fll.FlutterLineLiff();
   @override
   Widget build(BuildContext context) {
-    int itemBannerLength = errorCase ? assetsCarouselItem.length : carouselOver20Item.length;
+    int itemBannerLength = widget.banners.length;
     return Stack(
       children: [
         AspectRatio(
@@ -41,27 +37,19 @@ class _HomePageBannerState extends State<HomePageBanner> {
               itemBuilder: (ctx, i) {
                 return GestureDetector(
                   onTap: () {
-                    GeneralDialog().showLoadingDialog(context: context);
-                    Future.delayed(const Duration(seconds: 2)).then((value) => Navigator.pop(context));
-                  },
-                  onLongPress: () {
-                    setState(() {
-                      if (errorCase) {
-                        errorCase = false;
-                      } else {
-                        errorCase = true;
-                      }
-                    });
+                    if (widget.banners.isNotEmpty) {
+                      launchUrl(Uri.parse(widget.banners[i]["url"]));
+                    }
                   },
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
                     child: SizedBox(
-                      child: errorCase
+                      child: widget.banners.isEmpty
                           ? Image.asset(ProductDetailConst().imgHeroBannerPath, fit: BoxFit.fitWidth)
                           : FadeInImage(
                               placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                               image: NetworkImage(
-                                i == carouselOver20Item.length ? carouselOver20Item[0] : carouselOver20Item[i],
+                                i == itemBannerLength ? widget.banners[0]["image"] : widget.banners[i]["image"],
                               ),
                               fit: BoxFit.fitWidth,
                               imageErrorBuilder: (context, error, stackTrace) =>
