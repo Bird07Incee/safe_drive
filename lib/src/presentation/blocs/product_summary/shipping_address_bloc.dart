@@ -78,14 +78,18 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           phoneValidationKey!.currentState!.validate() &&
           emailValidationKey!.currentState!.validate() &&
           addressValidationKey!.currentState!.validate()) {
-        emit(ShippingAddressState(
-            listFormWidget: state.listFormWidget, formResult: state.formResult, status: ShippingAddressStatus.success, isAllowSubmit: true));
+        emit(state.copyWith(
+            formWidgetModel: state.listFormWidget, formResultModel: state.formResult, stateStatus: ShippingAddressStatus.success, allowSubmit: true));
       }
     } else {
-      emit(ShippingAddressState(
-          listFormWidget: state.listFormWidget, formResult: state.formResult, status: ShippingAddressStatus.success, isAllowSubmit: false));
+      emit(state.copyWith(
+          formWidgetModel: state.listFormWidget, formResultModel: state.formResult, stateStatus: ShippingAddressStatus.success, allowSubmit: false));
     }
     return isAllowSubmit;
+  }
+
+  onSetInitialState() {
+    emit(state.copyWith(stateStatus: ShippingAddressStatus.initial));
   }
 
   onClearShippingData() {
