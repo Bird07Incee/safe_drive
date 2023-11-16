@@ -30,7 +30,13 @@ class _HomePageBannerState extends State<HomePageBanner> {
               itemCount: itemBannerLength == 1 ? itemBannerLength : itemBannerLength + 1,
               controller: widget.pageControllerState,
               onPageChanged: (val) {
-                if (val == 5 && val != 1) {
+                var max = itemBannerLength;
+
+                if (max > 5) {
+                  max = 5;
+                }
+
+                if (val == max && val != 1) {
                   widget.pageControllerState.jumpToPage(0);
                 }
               },
