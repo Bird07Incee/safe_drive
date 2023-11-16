@@ -105,7 +105,7 @@ class ShippingAddressScreen extends StatelessWidget {
           titleBtn: ErrorConst().titleBtnNS,
           onTap: () {
             final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
-            myBloc.onClearShippingData();
+            myBloc.onSetInitialState();
           },
         );
       } else {
