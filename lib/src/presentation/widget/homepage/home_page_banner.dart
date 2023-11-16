@@ -37,14 +37,14 @@ class _HomePageBannerState extends State<HomePageBanner> {
               itemBuilder: (ctx, i) {
                 return GestureDetector(
                   onTap: () {
-                    if (widget.banners.isNotEmpty) {
+                    if (itemBannerLength != 0) {
                       launchUrl(Uri.parse(widget.banners[i]["url"]));
                     }
                   },
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
                     child: SizedBox(
-                      child: widget.banners.isEmpty
+                      child: itemBannerLength == 0
                           ? Image.asset(ProductDetailConst().imgHeroBannerPath, fit: BoxFit.fitWidth)
                           : FadeInImage(
                               placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
