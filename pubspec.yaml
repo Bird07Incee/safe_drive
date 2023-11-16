@@ -100,6 +100,7 @@ flutter:
     - assets/mocking/product_innopower/
     - assets/mocking/product_innopower/commander/
     - assets/mocking/product_innopower/pulsar_max/
+    - assets/raw/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
