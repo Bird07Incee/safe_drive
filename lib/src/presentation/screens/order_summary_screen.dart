@@ -33,7 +33,7 @@ class OrderSummaryScreen extends StatefulWidget {
 class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   late CreateOrderRequestModel requestModel;
   final FocusNode saleCodeNode = FocusNode();
-  String staffCode = "";
+  final TextEditingController staffCode = TextEditingController();
 
   @override
   void initState() {
@@ -67,6 +67,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     String step1 = selectOptionBloc.stepOneGroupValueRadio;
     int step1price = selectOptionBloc.stepOnePrice ?? 0;
     String step2 = selectOptionBloc.stepTwoGroupValueRadio;
+    double btmInset = MediaQuery.of(context).viewInsets.bottom;
     // int step2price = selectOptionBloc.stepTwoPrice ?? 0;
 
     double maxWidth = MediaQuery.of(context).size.width;
@@ -480,8 +481,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                             builder: (context, showEditForm) {
                                               return TextFormField(
                                                 key: const Key("sale_code_box"),
+                                                controller: staffCode,
                                                 onChanged: (text) {
-                                                  staffCode = text;
                                                   if (text != "") {
                                                     context.read<ShowSaleCodeCubit>().show(true);
                                                   } else {
@@ -545,7 +546,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 160 + MediaQuery.of(context).viewInsets.bottom,
+                                          height: 160 + btmInset,
                                         ),
                                       ],
                                     ),
@@ -564,226 +565,239 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                   : SizedBox.shrink()
                             ],
                           ),
-                          bottomSheet: Container(
-                            width: maxWidth,
-                            constraints: BoxConstraints(minHeight: 160),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
-                              ],
-                            ),
-                            padding: const EdgeInsets.only(bottom: 32),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                AnimatedSize(
-                                  alignment: Alignment(0, -5),
-                                  curve: Curves.easeOutCirc,
-                                  duration: const Duration(milliseconds: 500),
-                                  child: showDetail
-                                      ? Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                                padding: EdgeInsets.only(top: 16, bottom: 16),
-                                                decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudWhite))),
-                                                child: Center(
-                                                    child: AlvaText(
-                                                        title: "รายการสั่งซื้อ",
-                                                        textStyle:
-                                                            AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)))),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 16, right: 16, top: 16, bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 4),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Flexible(
-                                                    child: AlvaTextMaxLinesOverflow(
-                                                        title: state.product.productName,
-                                                        maxLines: 1,
-                                                        textStyle: AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  AlvaText(
-                                                      title:
-                                                          "${(state.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
-                                                      textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                                ],
-                                              ),
-                                            ),
-                                            // step1.isNotEmpty
-                                            //     ? SizedBox(
-                                            //         height: 8,
-                                            //       )
-                                            //     : SizedBox.shrink(),
-                                            step1.isNotEmpty
-                                                ? Padding(
-                                                    padding: EdgeInsets.only(left: 16, right: 16, bottom: step2.isEmpty ? 16 : 0),
-                                                    child: SizedBox(
-                                                      width: maxWidth - 32,
-                                                      child: AlvaTextMaxLinesOverflow(
-                                                          title:
-                                                              "${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].levelName}: ${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].label}",
-                                                          maxLines: 5,
-                                                          textStyle:
-                                                              AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
-                                                    ),
-                                                  )
-                                                : SizedBox.shrink(),
-                                            // step2.isNotEmpty
-                                            //     ? SizedBox(
-                                            //         height: 8,
-                                            //       )
-                                            //     : SizedBox.shrink(),
-                                            // step2.isNotEmpty
-                                            //     ? Padding(
-                                            //         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                                            //         child: Row(
-                                            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            //           children: [
-                                            //             SizedBox(
-                                            //               width: maxWidth - 32 - 16 - 79,
-                                            //               child: AlvaTextMaxLinesOverflow(
-                                            //                   title: step2,
-                                            //                   maxLines: 1,
-                                            //                   textStyle:
-                                            //                       AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                            //             ),
-                                            //             AlvaText(
-                                            //                 title: "${step2price.toDecimalFormat()} บาท",
-                                            //                 textStyle:
-                                            //                     AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
-                                            //           ],
-                                            //         ),
-                                            //       )
-                                            //     : SizedBox.shrink(),
-                                            Container(
-                                              height: 16,
-                                              color: backgroundNo2,
-                                            ),
-                                          ],
-                                        )
-                                      : SizedBox.shrink(),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              FocusManager.instance.primaryFocus?.unfocus();
-                                              context.read<ShowSummaryDetailCubit>().toggle();
-                                            },
-                                            child: Container(
-                                              width: 24,
-                                              height: 24,
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(36), color: YellowKrungsri),
-                                              child: Center(
-                                                child: SizedBox(
-                                                  width: 10,
-                                                  height: 10,
-                                                  child: Image.asset(showDetail ? 'assets/icons/arrow_down.png' : 'assets/icons/arrow_up.png',
-                                                      fit: BoxFit.contain),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 16),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                AlvaText(
-                                                    title: "ยอดรวมสุทธิ",
-                                                    textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
-                                                AlvaText(
-                                                    title: "(ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว)",
-                                                    textStyle: AlvaStyles().body1().copyWith(
-                                                          fontWeight: FontWeight.w400,
-                                                          fontSize: 8,
-                                                          color: BTN_SELECTED_TEXT_COLOR_NEW,
-                                                          height: 2,
-                                                        )),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      AlvaText(
-                                          title: "${(state.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
-                                          textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
+                          bottomSheet: btmInset == 0
+                              ? Container(
+                                  width: maxWidth,
+                                  constraints: BoxConstraints(minHeight: 160),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: const Color(0xff000000).withOpacity(0.04),
+                                          spreadRadius: 0,
+                                          blurRadius: 16,
+                                          offset: const Offset(0, -4)),
                                     ],
                                   ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                                  height: 48,
-                                  width: maxWidth - 32,
-                                  child: OutlinedButton(
-                                    onPressed: validated
-                                        ? () {
-                                            if (showDetail) {
-                                              context.read<ShowSummaryDetailCubit>().toggle();
-                                            }
-                                            GeneralDialog(
-                                                    onAccept: () async {
-                                                      final orderBloc = context.read<OrderSummaryBloc>();
-                                                      ProductionOptionals step1SelectedOption = state.product.productionOptionals.isEmpty
-                                                          ? ProductionOptionals.fromJson({})
-                                                          : state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0];
-                                                      // Level2 step2SelectedOption =
-                                                      //     step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
-                                                      requestModel = CreateOrderRequestModel(
-                                                        uid: await LineDataHelper().getLineUid(),
-                                                        products: [
-                                                          OrderProduct(
-                                                              productId: state.product.productId,
-                                                              qty: 1,
-                                                              unitPrice: state.product.productionOptionals.isNotEmpty ? step1price : showPrice,
-                                                              optional: state.product.productionOptionals.isEmpty
-                                                                  ? null
-                                                                  : Optional(
-                                                                      productId: step1SelectedOption.subProductId,
-                                                                      qty: 1,
-                                                                      unitPrice: step1SelectedOption.price))
-                                                        ],
-                                                        paymentInfo: PaymentInfo(
-                                                            channel: orderState.paymentType.isFullPayment ? "CC" : "IPP", staffCode: staffCode),
-                                                        shippingInfo: ShippingInfo(
-                                                            name: shippingState.addressModel.fullName,
-                                                            address:
-                                                                '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}'),
-                                                        email: shippingState.addressModel.emailAddress,
-                                                        mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
-                                                      );
-                                                      debugPrint(requestModel.toJson().toString());
-                                                      orderBloc.add(CreateOrder(requestModel: requestModel));
-                                                    },
-                                                    onCancel: () {})
-                                                .showConfirmOrderDialog(context: context);
-                                          }
-                                        : null,
-                                    style: AlvaStyles().outlineNoneBorderButtonStyle(validated ? YellowKrungsri : cloudDeepWhite, Colors.transparent,
-                                        isRadius8: true),
-                                    child:
-                                        Text("ชำระเงิน", style: AlvaStyles().headingSize16w700(validated ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
+                                  padding: const EdgeInsets.only(bottom: 32),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      AnimatedSize(
+                                        alignment: Alignment(0, -5),
+                                        curve: Curves.easeOutCirc,
+                                        duration: const Duration(milliseconds: 500),
+                                        child: showDetail
+                                            ? Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      padding: EdgeInsets.only(top: 16, bottom: 16),
+                                                      decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudWhite))),
+                                                      child: Center(
+                                                          child: AlvaText(
+                                                              title: "รายการสั่งซื้อ",
+                                                              textStyle: AlvaStyles()
+                                                                  .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                  .copyWith(height: 24 / 14)))),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16, right: 16, top: 16, bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 4),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Flexible(
+                                                          child: AlvaTextMaxLinesOverflow(
+                                                              title: state.product.productName,
+                                                              maxLines: 1,
+                                                              textStyle:
+                                                                  AlvaStyles().headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        AlvaText(
+                                                            title:
+                                                                "${(state.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
+                                                            textStyle:
+                                                                AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  // step1.isNotEmpty
+                                                  //     ? SizedBox(
+                                                  //         height: 8,
+                                                  //       )
+                                                  //     : SizedBox.shrink(),
+                                                  step1.isNotEmpty
+                                                      ? Padding(
+                                                          padding: EdgeInsets.only(left: 16, right: 16, bottom: step2.isEmpty ? 16 : 0),
+                                                          child: SizedBox(
+                                                            width: maxWidth - 32,
+                                                            child: AlvaTextMaxLinesOverflow(
+                                                                title:
+                                                                    "${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].levelName}: ${state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0].label}",
+                                                                maxLines: 5,
+                                                                textStyle: AlvaStyles()
+                                                                    .headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                    .copyWith(height: 1.6)),
+                                                          ),
+                                                        )
+                                                      : SizedBox.shrink(),
+                                                  // step2.isNotEmpty
+                                                  //     ? SizedBox(
+                                                  //         height: 8,
+                                                  //       )
+                                                  //     : SizedBox.shrink(),
+                                                  // step2.isNotEmpty
+                                                  //     ? Padding(
+                                                  //         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                                                  //         child: Row(
+                                                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  //           children: [
+                                                  //             SizedBox(
+                                                  //               width: maxWidth - 32 - 16 - 79,
+                                                  //               child: AlvaTextMaxLinesOverflow(
+                                                  //                   title: step2,
+                                                  //                   maxLines: 1,
+                                                  //                   textStyle:
+                                                  //                       AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                  //             ),
+                                                  //             AlvaText(
+                                                  //                 title: "${step2price.toDecimalFormat()} บาท",
+                                                  //                 textStyle:
+                                                  //                     AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2)),
+                                                  //           ],
+                                                  //         ),
+                                                  //       )
+                                                  //     : SizedBox.shrink(),
+                                                  Container(
+                                                    height: 16,
+                                                    color: backgroundNo2,
+                                                  ),
+                                                ],
+                                              )
+                                            : SizedBox.shrink(),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 16),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    FocusManager.instance.primaryFocus?.unfocus();
+                                                    context.read<ShowSummaryDetailCubit>().toggle();
+                                                  },
+                                                  child: Container(
+                                                    width: 24,
+                                                    height: 24,
+                                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(36), color: YellowKrungsri),
+                                                    child: Center(
+                                                      child: SizedBox(
+                                                        width: 10,
+                                                        height: 10,
+                                                        child: Image.asset(showDetail ? 'assets/icons/arrow_down.png' : 'assets/icons/arrow_up.png',
+                                                            fit: BoxFit.contain),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 16),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      AlvaText(
+                                                          title: "ยอดรวมสุทธิ",
+                                                          textStyle:
+                                                              AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
+                                                      AlvaText(
+                                                          title: "(ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว)",
+                                                          textStyle: AlvaStyles().body1().copyWith(
+                                                                fontWeight: FontWeight.w400,
+                                                                fontSize: 8,
+                                                                color: BTN_SELECTED_TEXT_COLOR_NEW,
+                                                                height: 2,
+                                                              )),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            AlvaText(
+                                                title:
+                                                    "${(state.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
+                                                textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                                        height: 48,
+                                        width: maxWidth - 32,
+                                        child: OutlinedButton(
+                                          onPressed: validated
+                                              ? () {
+                                                  if (showDetail) {
+                                                    context.read<ShowSummaryDetailCubit>().toggle();
+                                                  }
+                                                  GeneralDialog(
+                                                          onAccept: () async {
+                                                            final orderBloc = context.read<OrderSummaryBloc>();
+                                                            ProductionOptionals step1SelectedOption = state.product.productionOptionals.isEmpty
+                                                                ? ProductionOptionals.fromJson({})
+                                                                : state.product.productionOptionals[selectOptionBloc.stepOneIndexSelect ?? 0];
+                                                            // Level2 step2SelectedOption =
+                                                            //     step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
+                                                            requestModel = CreateOrderRequestModel(
+                                                              uid: await LineDataHelper().getLineUid(),
+                                                              products: [
+                                                                OrderProduct(
+                                                                    productId: state.product.productId,
+                                                                    qty: 1,
+                                                                    unitPrice: state.product.productionOptionals.isNotEmpty ? step1price : showPrice,
+                                                                    optional: state.product.productionOptionals.isEmpty
+                                                                        ? null
+                                                                        : Optional(
+                                                                            productId: step1SelectedOption.subProductId,
+                                                                            qty: 1,
+                                                                            unitPrice: step1SelectedOption.price))
+                                                              ],
+                                                              paymentInfo: PaymentInfo(
+                                                                  channel: orderState.paymentType.isFullPayment ? "CC" : "IPP",
+                                                                  staffCode: staffCode.text),
+                                                              shippingInfo: ShippingInfo(
+                                                                  name: shippingState.addressModel.fullName,
+                                                                  address:
+                                                                      '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}'),
+                                                              email: shippingState.addressModel.emailAddress,
+                                                              mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
+                                                            );
+                                                            debugPrint(requestModel.toJson().toString());
+                                                            orderBloc.add(CreateOrder(requestModel: requestModel));
+                                                          },
+                                                          onCancel: () {})
+                                                      .showConfirmOrderDialog(context: context);
+                                                }
+                                              : null,
+                                          style: AlvaStyles().outlineNoneBorderButtonStyle(
+                                              validated ? YellowKrungsri : cloudDeepWhite, Colors.transparent,
+                                              isRadius8: true),
+                                          child: Text("ชำระเงิน",
+                                              style: AlvaStyles().headingSize16w700(validated ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ));
+                                )
+                              : SizedBox.shrink());
                     },
                   );
                 },
