@@ -80,7 +80,7 @@ class DioClient {
     client.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
         //initAdapter();
-        await _setupCertificate();
+        //await _setupCertificate();
         return handler.next(options);
       },
     ));
@@ -91,7 +91,7 @@ class DioClient {
 
   void initAdapter() {
     log("initAdapter ");
-    String selfHash = "37e2a47da812dd09f8f44ad4002087866378fdf834eb28c441f4e3edc605b639";
+    String selfHash = "076c0c9749e7b0fed7294a2ba9f22803d5148ea3132ea9d1327dfb652cdb5fde";
     client.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
         final client = HttpClient();
