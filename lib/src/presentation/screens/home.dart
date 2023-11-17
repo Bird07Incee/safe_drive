@@ -39,9 +39,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+    super.initState();
     // Timer(const Duration(seconds: 1), () {
     //   final checkBrowserState = context.read<CheckBrowserBloc>().state;
     //   final env = Environment().getValue("ENVIRONMENT_NAME");
@@ -84,278 +83,272 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return RootPageCondition(
         child: AlvaRootWidget(
             titlePage: titleWebPage,
-            child: BlocConsumer<AuthBloc, AuthState>(
+            child: BlocConsumer<ProductListBloc, ProductListState>(
               listener: (context, state) {
-                // TODO: implement listener
-                if (state.authStatus == AuthStatus.success) {
-                  context.read<ProductListBloc>().add(const GetProductList());
+                if (state.productListStatus == GetProductListStatus.success) {
+                  _checkTermAndConAcceptedVersion(context);
                 }
               },
               builder: (context, state) {
-                return BlocConsumer<ProductListBloc, ProductListState>(
-                  listener: (context, state) {
-                    if (state.productListStatus == GetProductListStatus.success) {
-                      _checkTermAndConAcceptedVersion(context);
-                    }
-                  },
-                  builder: (context, state) {
-                    // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
-                    if (state.productListStatus == GetProductListStatus.success) {
-                      return Container(
-                        color: cloudyWhite,
-                        child: ListView(
-                          controller: scrollController,
-                          children: [
-                            HomepageTopSection(maxWidth: maxWidth),
-                            HomePageBanner(
-                              pageControllerState: pageController,
-                              banners: state.productList.banner!,
-                            ),
-                            StickyHeader(
-                              header: Visibility(
-                                visible: state.hideCategory ? false : true,
-                                child: Container(
-                                  width: maxWidth,
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                                  color: Colors.white,
-                                  child: TabBar(
-                                      controller: tabController,
-                                      labelColor: Colors.black,
-                                      indicatorColor: BlueFantasy,
-                                      padding: EdgeInsets.only(right: 8),
-                                      labelPadding: EdgeInsets.symmetric(horizontal: 24),
-                                      isScrollable: true,
-                                      labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
-                                      unselectedLabelColor: const Color(0xffDEDEDE),
-                                      onTap: (int index) {
-                                        context.read<ProductListBloc>().add(SetSelectTabIndex(index));
-                                        if (index == 0) {
-                                          context.read<ProductListBloc>().add(GetProductListByCategory("", context));
-                                        } else {
-                                          context
-                                              .read<ProductListBloc>()
-                                              .add(GetProductListByCategory(state.productList.category![index - 1]["categoryId"], context));
-                                        }
-                                        scrollController.animateTo(
-                                            //go to top of scroll
-                                            0, //scroll offset to go
-                                            duration: Duration(milliseconds: 500), //duration of scroll
-                                            curve: Curves.fastOutSlowIn //scroll type
-                                            );
-                                      },
-                                      tabs: [
-                                        Tab(
-                                          text: "ทั้งหมด",
-                                          icon: state.selectedTabIndex == 0
-                                              ? Image.asset('assets/images/category/icon_active_cate_all.png', width: 24, height: 24)
-                                              : Image.asset('assets/images/category/icon_cate_all.png', width: 24, height: 24),
-                                        ),
-                                        for (int i = 0; i < state.productList.category!.length; i++)
-                                          Tab(
-                                              text: state.productList.category![i]["categoryTh"],
-                                              icon: state.selectedTabIndex == (i + 1)
-                                                  ? SizedBox(
-                                                      width: 24,
-                                                      height: 24,
-                                                      child: FadeInImage(
-                                                        placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
-                                                        // Replace with your placeholder image path
-                                                        image: NetworkImage(state.productList.category![i]["img_active"]),
-                                                        fit: BoxFit.fitWidth,
-                                                        imageErrorBuilder: (context, error, stackTrace) =>
-                                                            Image.asset('assets/images/category/icon_active_cate_other.png', fit: BoxFit.fitWidth),
-                                                      ),
-                                                    )
-                                                  : SizedBox(
-                                                      width: 24,
-                                                      height: 24,
-                                                      child: FadeInImage(
-                                                        placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
-                                                        // Replace with your placeholder image path
-                                                        image: NetworkImage(state.productList.category![i]["img_inactive"]),
-                                                        fit: BoxFit.fitWidth,
-                                                        imageErrorBuilder: (context, error, stackTrace) =>
-                                                            Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
-                                                      ),
-                                                    )),
-                                      ]),
-                                ),
-                              ),
-                              content: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: maxWidth - 32,
-                                        child: ProductCardWidget(
-                                          maxWidth: maxWidth,
-                                          // productList: state.productList,
-                                        ),
+                return BlocConsumer<AuthBloc, AuthState>(listener: (context, stateAuth) {
+                  if (stateAuth.authStatus == AuthStatus.success && state.productListStatus == GetProductListStatus.initial) {
+                    context.read<ProductListBloc>().add(const GetProductList());
+                  }
+                }, builder: (context, stateAuth) {
+                  // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
+                  if (state.productListStatus == GetProductListStatus.success) {
+                    return Container(
+                      color: cloudyWhite,
+                      child: ListView(
+                        controller: scrollController,
+                        children: [
+                          HomepageTopSection(maxWidth: maxWidth),
+                          HomePageBanner(
+                            pageControllerState: pageController,
+                            banners: state.productList.banner!,
+                          ),
+                          StickyHeader(
+                            header: Visibility(
+                              visible: state.hideCategory ? false : true,
+                              child: Container(
+                                width: maxWidth,
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                color: Colors.white,
+                                child: TabBar(
+                                    controller: tabController,
+                                    labelColor: Colors.black,
+                                    indicatorColor: BlueFantasy,
+                                    padding: EdgeInsets.only(right: 8),
+                                    labelPadding: EdgeInsets.symmetric(horizontal: 24),
+                                    isScrollable: true,
+                                    labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
+                                    unselectedLabelColor: const Color(0xffDEDEDE),
+                                    onTap: (int index) {
+                                      context.read<ProductListBloc>().add(SetSelectTabIndex(index));
+                                      if (index == 0) {
+                                        context.read<ProductListBloc>().add(GetProductListByCategory("", context));
+                                      } else {
+                                        context
+                                            .read<ProductListBloc>()
+                                            .add(GetProductListByCategory(state.productList.category![index - 1]["categoryId"], context));
+                                      }
+                                      scrollController.animateTo(
+                                          //go to top of scroll
+                                          0, //scroll offset to go
+                                          duration: Duration(milliseconds: 500), //duration of scroll
+                                          curve: Curves.fastOutSlowIn //scroll type
+                                          );
+                                    },
+                                    tabs: [
+                                      Tab(
+                                        text: "ทั้งหมด",
+                                        icon: state.selectedTabIndex == 0
+                                            ? Image.asset('assets/images/category/icon_active_cate_all.png', width: 24, height: 24)
+                                            : Image.asset('assets/images/category/icon_cate_all.png', width: 24, height: 24),
                                       ),
-                                    ],
-                                  ),
-                                  Visibility(
-                                    visible: isMorePageToLoad(state.productList),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        if (state.selectedTabIndex == 0) {
-                                          context
-                                              .read<ProductListBloc>()
-                                              .add(GetProductListByPage(state.productList, state.productList.productPage! + 1, "", context));
-                                        } else {
-                                          context.read<ProductListBloc>().add(GetProductListByPage(
-                                              state.productList,
-                                              state.productList.productPage! + 1,
-                                              state.productList.category![state.selectedTabIndex - 1]["categoryId"],
-                                              context));
-                                        }
-                                      },
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 16,
-                                          ),
-                                          Container(
-                                            width: 100,
-                                            height: 32,
-                                            margin: EdgeInsets.symmetric(vertical: 4),
-                                            decoration:
-                                                BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [
-                                              BoxShadow(
-                                                color: whitePure.withOpacity(0.4),
-                                                spreadRadius: 0,
-                                                blurRadius: 8,
-                                                offset: const Offset(0, 2),
-                                              ),
-                                            ]),
-                                            child: Row(
-                                              children: [
-                                                const SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Text(
-                                                  'โหลดเพิ่มเติม',
-                                                  style: AlvaStyles().bodySize12W600(spaceGrey),
-                                                ),
-                                                const SizedBox(
-                                                  width: 16,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 16,
-                                          ),
-                                        ],
+                                      for (int i = 0; i < state.productList.category!.length; i++)
+                                        Tab(
+                                            text: state.productList.category![i]["categoryTh"],
+                                            icon: state.selectedTabIndex == (i + 1)
+                                                ? SizedBox(
+                                                    width: 24,
+                                                    height: 24,
+                                                    child: FadeInImage(
+                                                      placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
+                                                      // Replace with your placeholder image path
+                                                      image: NetworkImage(state.productList.category![i]["img_active"]),
+                                                      fit: BoxFit.fitWidth,
+                                                      imageErrorBuilder: (context, error, stackTrace) =>
+                                                          Image.asset('assets/images/category/icon_active_cate_other.png', fit: BoxFit.fitWidth),
+                                                    ),
+                                                  )
+                                                : SizedBox(
+                                                    width: 24,
+                                                    height: 24,
+                                                    child: FadeInImage(
+                                                      placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
+                                                      // Replace with your placeholder image path
+                                                      image: NetworkImage(state.productList.category![i]["img_inactive"]),
+                                                      fit: BoxFit.fitWidth,
+                                                      imageErrorBuilder: (context, error, stackTrace) =>
+                                                          Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
+                                                    ),
+                                                  )),
+                                    ]),
+                              ),
+                            ),
+                            content: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: maxWidth - 32,
+                                      child: ProductCardWidget(
+                                        maxWidth: maxWidth,
+                                        // productList: state.productList,
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                SizedBox(
-                                  height: 40,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      AlvaText(
-                                        title: HomeConst().warningWord,
-                                        textStyle: AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW),
-                                      ),
-                                    ],
-                                  ),
+                                  ],
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  color: cloudDeepWhite,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      AlvaText(
-                                          title: HomeConst().termsAndConditions,
-                                          textStyle: AlvaStyles().headingSize10w600(sugarRed),
-                                          onTapfunction: () {
-                                            Navigator.pushNamed(context, '/readTermAndCon');
-                                          }),
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(horizontal: 8),
-                                        width: 1,
-                                        height: 16,
-                                        color: sugarRed,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
-                                        child: Text(
-                                          HomeConst().privacyPolicy,
-                                          style: AlvaStyles().headingSize10w600(sugarRed),
+                                Visibility(
+                                  visible: isMorePageToLoad(state.productList),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      if (state.selectedTabIndex == 0) {
+                                        context
+                                            .read<ProductListBloc>()
+                                            .add(GetProductListByPage(state.productList, state.productList.productPage! + 1, "", context));
+                                      } else {
+                                        context.read<ProductListBloc>().add(GetProductListByPage(
+                                            state.productList,
+                                            state.productList.productPage! + 1,
+                                            state.productList.category![state.selectedTabIndex - 1]["categoryId"],
+                                            context));
+                                      }
+                                    },
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 16,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  color: spaceGrey,
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 16,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          AlvaText(
-                                            title: HomeConst().askInformation,
-                                            textStyle: AlvaStyles().headingSize10w600(whiteFalse),
+                                        Container(
+                                          width: 100,
+                                          height: 32,
+                                          margin: EdgeInsets.symmetric(vertical: 4),
+                                          decoration:
+                                              BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [
+                                            BoxShadow(
+                                              color: whitePure.withOpacity(0.4),
+                                              spreadRadius: 0,
+                                              blurRadius: 8,
+                                              offset: const Offset(0, 2),
+                                            ),
+                                          ]),
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 16,
+                                              ),
+                                              Text(
+                                                'โหลดเพิ่มเติม',
+                                                style: AlvaStyles().bodySize12W600(spaceGrey),
+                                              ),
+                                              const SizedBox(
+                                                width: 16,
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          AlvaText(
-                                            title: HomeConst().pleaseContact,
-                                            textStyle: AlvaStyles().headingSize12w700(whiteFalse),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 32,
-                                      ),
-                                    ],
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
-                          ],
-                        ),
-                      );
-                    } else if (state.productListStatus == GetProductListStatus.error) {
-                      return ErrorScreen(
-                        title: ErrorConst().titleNS,
-                        subTitle: ErrorConst().subTitleNS,
-                        titleBtn: ErrorConst().titleBtnNS,
-                        onTap: () {
-                          if (state.selectedTabIndex == 0) {
-                            context.read<ProductListBloc>().add(const GetProductList());
-                          } else {
-                            context
-                                .read<ProductListBloc>()
-                                .add(GetProductListByCategory(state.productList.category![state.selectedTabIndex - 1]["categoryId"], context));
-                          }
-                        },
-                      );
-                    } else if (state.productListStatus == GetProductListStatus.loadingTranparent) {
-                      return const LoadingScreen();
-                    } else {
-                      return const LoadingScreen();
-                    }
-                  },
-                );
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 40,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    AlvaText(
+                                      title: HomeConst().warningWord,
+                                      textStyle: AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                color: cloudDeepWhite,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    AlvaText(
+                                        title: HomeConst().termsAndConditions,
+                                        textStyle: AlvaStyles().headingSize10w600(sugarRed),
+                                        onTapfunction: () {
+                                          Navigator.pushNamed(context, '/readTermAndCon');
+                                        }),
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                                      width: 1,
+                                      height: 16,
+                                      color: sugarRed,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
+                                      child: Text(
+                                        HomeConst().privacyPolicy,
+                                        style: AlvaStyles().headingSize10w600(sugarRed),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                color: spaceGrey,
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AlvaText(
+                                          title: HomeConst().askInformation,
+                                          textStyle: AlvaStyles().headingSize10w600(whiteFalse),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AlvaText(
+                                          title: HomeConst().pleaseContact,
+                                          textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 32,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  } else if (state.productListStatus == GetProductListStatus.loading) {
+                    return const LoadingScreen();
+                  } else {
+                    return ErrorScreen(
+                      title: ErrorConst().titleNS,
+                      subTitle: ErrorConst().subTitleNS,
+                      titleBtn: ErrorConst().titleBtnNS,
+                      onTap: () {
+                        if (state.selectedTabIndex == 0) {
+                          context.read<ProductListBloc>().add(const GetProductList());
+                        } else {
+                          context
+                              .read<ProductListBloc>()
+                              .add(GetProductListByCategory(state.productList.category![state.selectedTabIndex - 1]["categoryId"], context));
+                        }
+                      },
+                    );
+                  }
+                });
               },
             )));
   }
