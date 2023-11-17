@@ -43,7 +43,7 @@ class ShippingAddressScreen extends StatelessWidget {
                   automaticallyImplyLeading: false,
                   leading: IconButton(
                       onPressed: () async {
-                        final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                        final myBloc = ctx.read<ShippingAddressBloc>();
                         ShippingAddressArgs args = ShippingAddressArgs();
                         if (ModalRoute.of(context)!.settings.arguments != null) {
                           args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
@@ -73,7 +73,7 @@ class ShippingAddressScreen extends StatelessWidget {
                             child: OutlinedButton(
                               onPressed: () async {
                                 if (state.isAllowSubmit) {
-                                  final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                                  final myBloc = ctx.read<ShippingAddressBloc>();
                                   myBloc.onSubmitPressed();
                                   Navigator.pop(context);
                                   // var stack = CurrentRouteObserver.instance.stack;
@@ -106,7 +106,7 @@ class ShippingAddressScreen extends StatelessWidget {
           subTitle: ErrorConst().subTitleNS,
           titleBtn: ErrorConst().titleBtnNS,
           onTap: () {
-            final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+            final myBloc = ctx.read<ShippingAddressBloc>();
             myBloc.onSetInitialState();
           },
         );
@@ -117,7 +117,7 @@ class ShippingAddressScreen extends StatelessWidget {
   }
 
   Widget buildBodyWidget(BuildContext ctx, ShippingAddressState state) {
-    final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+    final myBloc = ctx.read<ShippingAddressBloc>();
     return Container(
         padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 96),
         color: whitePure,
@@ -217,7 +217,7 @@ class ShippingAddressScreen extends StatelessWidget {
                                 field.id = model.id;
                                 field.value = model.nameTh;
 
-                                final myBloc = BlocProvider.of<ShippingAddressBloc>(ctx);
+                                final myBloc = ctx.read<ShippingAddressBloc>();
 
                                 await myBloc.updateDropdownSelected(
                                     id: field.id,
