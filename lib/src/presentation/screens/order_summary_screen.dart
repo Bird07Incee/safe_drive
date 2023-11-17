@@ -66,10 +66,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     String step1 = "";
     int step1price = 0;
     String step2 = "";
-    final selectedProduct = BlocProvider.of<ProductDetailBloc>(context).state;
+    final selectedProduct = context.read<ProductDetailBloc>().state;
     late ProductOptionState selectOptionBloc;
     if (selectedProduct.product.productionOptionals.isNotEmpty) {
-      selectOptionBloc = BlocProvider.of<ProductOptionBloc>(context).state;
+      selectOptionBloc = context.read<ProductOptionBloc>().state;
       step1 = selectOptionBloc.stepOneGroupValueRadio;
       step1price = selectOptionBloc.stepOnePrice ?? 0;
       step2 = selectOptionBloc.stepTwoGroupValueRadio;

@@ -21,6 +21,7 @@ class ShippingAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double btmInset = MediaQuery.of(context).viewInsets.bottom;
     return BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
       if (state.status.isInitial) {
         ShippingAddressArgs args = ShippingAddressArgs();
@@ -31,74 +32,73 @@ class ShippingAddressScreen extends StatelessWidget {
         return const LoadingScreen();
       } else if (state.status.isSuccess || state.status.isFetching) {
         return RootPageCondition(
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: AlvaRootWidget(
-                appBar: AppBar(
-                  title: AlvaText(title: AppStrings().shippingAddressTitle, textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                  titleSpacing: 0,
-                  elevation: 0.7,
-                  leadingWidth: 60,
-                  centerTitle: false,
-                  automaticallyImplyLeading: false,
-                  leading: IconButton(
-                      onPressed: () async {
-                        final myBloc = ctx.read<ShippingAddressBloc>();
-                        ShippingAddressArgs args = ShippingAddressArgs();
-                        if (ModalRoute.of(context)!.settings.arguments != null) {
-                          args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
-                        }
-                        if (!args.isFromEditing) myBloc.onClearShippingData();
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_rounded)),
-                ),
-                bottomSheet: BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: whitePure,
-                      boxShadow: [
-                        BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
-                      ],
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    height: 96,
-                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                            height: 48,
-                            child: OutlinedButton(
-                              onPressed: () async {
-                                if (state.isAllowSubmit) {
-                                  final myBloc = ctx.read<ShippingAddressBloc>();
-                                  myBloc.onSubmitPressed();
-                                  Navigator.pop(context);
-                                  // var stack = CurrentRouteObserver.instance.stack;
-                                  // if (stack.contains(Routes.orderSummary.toStringPath())) {
-                                  //   navigator.pop();
-                                  // } else {
-                                  //   navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
-                                  // }
-                                }
-                              },
-                              style: AlvaStyles().outlineNoneBorderButtonStyle(
-                                  state.isAllowSubmit ? YellowKrungsri : cloudSoftDeepWhite, Colors.transparent,
-                                  isRadius8: true),
-                              child: Text("ยืนยัน",
-                                  style: AlvaStyles().headingSize16w700(state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                }),
-                titlePage: titleWebPage,
-                child: buildBodyWidget(ctx, state)),
-          ),
+          child: AlvaRootWidget(
+              appBar: AppBar(
+                title: AlvaText(title: AppStrings().shippingAddressTitle, textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                titleSpacing: 0,
+                elevation: 0.7,
+                leadingWidth: 60,
+                centerTitle: false,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                    onPressed: () async {
+                      final myBloc = ctx.read<ShippingAddressBloc>();
+                      ShippingAddressArgs args = ShippingAddressArgs();
+                      if (ModalRoute.of(context)!.settings.arguments != null) {
+                        args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
+                      }
+                      if (!args.isFromEditing) myBloc.onClearShippingData();
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_rounded)),
+              ),
+              bottomSheet: btmInset == 0
+                  ? BlocBuilder<ShippingAddressBloc, ShippingAddressState>(builder: (ctx, state) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: whitePure,
+                          boxShadow: [
+                            BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
+                          ],
+                        ),
+                        width: MediaQuery.of(context).size.width,
+                        height: 96,
+                        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                                height: 48,
+                                child: OutlinedButton(
+                                  onPressed: () async {
+                                    if (state.isAllowSubmit) {
+                                      final myBloc = ctx.read<ShippingAddressBloc>();
+                                      myBloc.onSubmitPressed();
+                                      Navigator.pop(context);
+                                      // var stack = CurrentRouteObserver.instance.stack;
+                                      // if (stack.contains(Routes.orderSummary.toStringPath())) {
+                                      //   navigator.pop();
+                                      // } else {
+                                      //   navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
+                                      // }
+                                    }
+                                  },
+                                  style: AlvaStyles().outlineNoneBorderButtonStyle(
+                                      state.isAllowSubmit ? YellowKrungsri : cloudSoftDeepWhite, Colors.transparent,
+                                      isRadius8: true),
+                                  child: Text("ยืนยัน",
+                                      style: AlvaStyles().headingSize16w700(state.isAllowSubmit ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    })
+                  : SizedBox.shrink(),
+              titlePage: titleWebPage,
+              child: buildBodyWidget(ctx, state)),
         );
       } else if (state.status.isError) {
         return ErrorScreen(
@@ -161,6 +161,9 @@ class ShippingAddressScreen extends StatelessWidget {
                               maxLines: item.maxLines,
                               showCounter: item.isShowCounter,
                               focusNode: item.focusNode,
+                              onFocus: () {
+                                setState(() {});
+                              },
                               onEditingCompleted: () {
                                 if (item.fieldName != 'address') {
                                   int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
