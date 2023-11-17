@@ -330,7 +330,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ],
                       ),
                     );
-                  } else if (state.productListStatus == GetProductListStatus.loading) {
+                  } else if (state.productListStatus == GetProductListStatus.initial || state.productListStatus == GetProductListStatus.loading) {
                     return const LoadingScreen();
                   } else {
                     return ErrorScreen(
