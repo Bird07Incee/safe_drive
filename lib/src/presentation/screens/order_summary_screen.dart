@@ -63,10 +63,18 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final selectOptionBloc = BlocProvider.of<ProductOptionBloc>(context).state;
-    String step1 = selectOptionBloc.stepOneGroupValueRadio;
-    int step1price = selectOptionBloc.stepOnePrice ?? 0;
-    String step2 = selectOptionBloc.stepTwoGroupValueRadio;
+    String step1 = "";
+    int step1price = 0;
+    String step2 = "";
+    final selectedProduct = BlocProvider.of<ProductDetailBloc>(context).state;
+    late ProductOptionState selectOptionBloc;
+    if (selectedProduct.product.productionOptionals.isNotEmpty) {
+      selectOptionBloc = BlocProvider.of<ProductOptionBloc>(context).state;
+      step1 = selectOptionBloc.stepOneGroupValueRadio;
+      step1price = selectOptionBloc.stepOnePrice ?? 0;
+      step2 = selectOptionBloc.stepTwoGroupValueRadio;
+    }
+
     double btmInset = MediaQuery.of(context).viewInsets.bottom;
     // int step2price = selectOptionBloc.stepTwoPrice ?? 0;
 
