@@ -35,11 +35,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   PageController pageController = PageController(initialPage: 0, keepPage: false);
   ScrollController scrollController = ScrollController();
+  bool isNotLogin = true;
   // late TabController tabController;
 
   @override
   void initState() {
-    context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
     super.initState();
     // Timer(const Duration(seconds: 1), () {
     //   final checkBrowserState = context.read<CheckBrowserBloc>().state;
@@ -96,6 +96,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   }
                 }, builder: (context, stateAuth) {
                   // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
+                  if (stateAuth.authStatus == AuthStatus.initial && isNotLogin) {
+                    isNotLogin = false;
+                    context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
+                  }
                   if (state.productListStatus == GetProductListStatus.success) {
                     return Container(
                       color: cloudyWhite,
