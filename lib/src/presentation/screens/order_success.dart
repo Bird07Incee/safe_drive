@@ -61,8 +61,8 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
 
   @override
   void didChangeDependencies() {
-    super.didChangeDependencies();
     loadInvoice();
+    super.didChangeDependencies();
   }
 
   @override
@@ -236,7 +236,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("${safeDecimalFormat(orderSuccessData.amount ?? "0")} บาท",
+                                        Text("${safeDecimalFormat(orderSuccessData.amount!)} บาท",
                                             style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                         SizedBox(
                                           height: 4,
