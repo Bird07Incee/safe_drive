@@ -25,6 +25,7 @@ class OrderSuccessScreen extends StatefulWidget {
 class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
   late RouteSettings? settings;
   String invoiceNo = "";
+  late double maxWidth, maxHeight;
 
   void loadInvoice() {
     settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
@@ -32,12 +33,14 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       invoiceNo = (routingData["invoiceNo"] == null) ? "" : routingData["invoiceNo"];
-      if (invoiceNo != "") {
+      OrderSuccessState state = context.read<OrderSuccessBloc>().state;
+      if (invoiceNo != "" && state.orderSuccessStatus == GetOrderSuccessDataStatus.initial) {
         context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
         // context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
-      } else {
-        context.read<OrderSuccessBloc>().add(SetOrderStatus(GetOrderSuccessDataStatus.error));
       }
+      // else {
+      //   context.read<OrderSuccessBloc>().add(SetOrderStatus(GetOrderSuccessDataStatus.error));
+      // }
     }
   }
 
@@ -53,11 +56,11 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     return result;
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  // }
 
   @override
   void didChangeDependencies() {
@@ -67,8 +70,8 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final maxWidth = MediaQuery.of(context).size.width;
-    final maxHeight = MediaQuery.of(context).size.height;
+    maxWidth = MediaQuery.of(context).size.width;
+    maxHeight = MediaQuery.of(context).size.height;
 
     return RootPageCondition(
         child: AlvaRootWidget(
