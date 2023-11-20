@@ -72,8 +72,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   @override
   void didChangeDependencies() {
-    super.didChangeDependencies();
     loadProduct();
+    super.didChangeDependencies();
   }
 
   loadProduct() {
@@ -242,7 +242,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                           Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
                               arguments: ProductDetailArgs(product: pdState.product));
                         } else {
-                          Navigator.pushNamed(context, Routes.orderSummary.toStringPath());
+                          Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
                         }
                       },
                       style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
