@@ -295,7 +295,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                       ? GestureDetector(
                                                           behavior: HitTestBehavior.translucent,
                                                           onTap: () {
-                                                            Navigator.pushNamed(context, Routes.shippingAddress.toStringPath());
+                                                            Navigator.pushNamed(
+                                                                context, '${Routes.shippingAddress.toStringPath()}?pid=$pid&opt_lv1=$optLv1');
                                                           },
                                                           child: Container(
                                                             width: maxWidth - 32,

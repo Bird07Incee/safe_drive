@@ -11,6 +11,12 @@ void refreshRoute({required BuildContext context, required String currentRoute, 
       Navigator.pushNamed(context, '/');
       Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
       break;
+    case "address":
+      Navigator.pushNamed(context, '/');
+      Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
+      Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?$queryParams');
+      Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?$queryParams');
+      break;
     default:
       break;
   }

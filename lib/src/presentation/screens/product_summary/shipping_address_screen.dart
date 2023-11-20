@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/args/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_summary/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -15,9 +16,32 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/dropdown_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/text_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
+import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
-class ShippingAddressScreen extends StatelessWidget {
+class ShippingAddressScreen extends StatefulWidget {
   const ShippingAddressScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ShippingAddressScreen> createState() => _ShippingAddressScreenState();
+}
+
+class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
+  late RouteSettings? settings;
+  late Uri uriData;
+  late RoutingData routingData;
+  String pid = '';
+  int optLv1 = 0;
+
+  loadProduct() {
+    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    if (settings != null) {
+      uriData = Uri.parse(settings!.name!);
+      routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+      pid = (routingData["pid"] == null) ? "" : routingData["pid"];
+      optLv1 = (routingData["opt_lv1"] == null) ? 0 : int.parse(routingData["opt_lv1"]);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +72,10 @@ class ShippingAddressScreen extends StatelessWidget {
                         args = ModalRoute.of(context)!.settings.arguments as ShippingAddressArgs;
                       }
                       if (!args.isFromEditing) myBloc.onClearShippingData();
+                      ProductDetailState pdState = context.read<ProductDetailBloc>().state;
+                      if (pdState.status.isInitial && pid != "") {
+                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid?opt_lv1=$optLv1");
+                      }
                       Navigator.pop(context);
                     },
                     icon: const Icon(Icons.arrow_back_ios_rounded)),
@@ -75,13 +103,11 @@ class ShippingAddressScreen extends StatelessWidget {
                                     if (state.isAllowSubmit) {
                                       final myBloc = ctx.read<ShippingAddressBloc>();
                                       myBloc.onSubmitPressed();
+                                      ProductDetailState pdState = context.read<ProductDetailBloc>().state;
+                                      if (pdState.status.isInitial && pid != "") {
+                                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid?opt_lv1=$optLv1");
+                                      }
                                       Navigator.pop(context);
-                                      // var stack = CurrentRouteObserver.instance.stack;
-                                      // if (stack.contains(Routes.orderSummary.toStringPath())) {
-                                      //   navigator.pop();
-                                      // } else {
-                                      //   navigator.popAndPushNamed(Routes.orderSummary.toStringPath());
-                                      // }
                                     }
                                   },
                                   style: AlvaStyles().outlineNoneBorderButtonStyle(
@@ -96,7 +122,7 @@ class ShippingAddressScreen extends StatelessWidget {
                         ),
                       );
                     })
-                  : SizedBox.shrink(),
+                  : null,
               titlePage: titleWebPage,
               child: buildBodyWidget(ctx, state)),
         );
@@ -117,9 +143,10 @@ class ShippingAddressScreen extends StatelessWidget {
   }
 
   Widget buildBodyWidget(BuildContext ctx, ShippingAddressState state) {
+    double btmInset = MediaQuery.of(ctx).viewInsets.bottom;
     final myBloc = ctx.read<ShippingAddressBloc>();
     return Container(
-        padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 96),
+        padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: btmInset == 0 ? 96 : 0),
         color: whitePure,
         child: ListView(
           children: [
