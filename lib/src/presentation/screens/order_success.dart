@@ -140,7 +140,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             ),
                             ProductAttribute(
                               attributeKey: "รูปแบบการชำระเงิน",
-                              attributevalue: orderSuccessData.paymentChannel!,
+                              attributevalue: orderSuccessData.paymentChannelText!,
                               maxWidth: maxWidth,
                             ),
                             ProductAttribute(
@@ -303,7 +303,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                           child: Column(children: [
                             Center(
                               child: Text(
-                                orderSuccessData.merchantAddress!,
+                                orderSuccessData.merchantAddress!.replaceAll("\n", ""),
                                 style: AlvaStyles().headingSize12w400(spaceGrey),
                                 textAlign: TextAlign.center,
                               ),

@@ -19,7 +19,9 @@ class InquiryData extends Equatable {
       required this.customerEmail,
       required this.customerAddress,
       required this.merchantAddress,
-      required this.merchantMobile});
+      required this.merchantMobile,
+      required this.installmentPeriod,
+      required this.paymentChannelText});
 
   final String? invoiceNo;
   final String? cardNo;
@@ -39,6 +41,8 @@ class InquiryData extends Equatable {
   final String? customerAddress;
   final String? merchantAddress;
   final String? merchantMobile;
+  final String? installmentPeriod;
+  final String? paymentChannelText;
 
   InquiryData.fromJson(Map<String, dynamic> json)
       : invoiceNo = json['invoiceNo'] ?? "",
@@ -58,7 +62,9 @@ class InquiryData extends Equatable {
         customerEmail = json['customerEmail'] ?? "",
         customerAddress = json['customerAddress'] ?? "",
         merchantAddress = json['merchantAddress'] ?? "",
-        merchantMobile = json['merchantMobile'] ?? "";
+        merchantMobile = json['merchantMobile'] ?? "",
+        installmentPeriod = json['installmentPeriod'] ?? "",
+        paymentChannelText = json['paymentChannelText'] ?? "";
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -80,6 +86,8 @@ class InquiryData extends Equatable {
     data['customerAddress'] = customerAddress;
     data['merchantAddress'] = merchantAddress;
     data['merchantMobile'] = merchantMobile;
+    data['installmentPeriod'] = installmentPeriod;
+    data['paymentChannelText'] = paymentChannelText;
     return data;
   }
 
@@ -104,5 +112,7 @@ class InquiryData extends Equatable {
         customerAddress,
         merchantAddress,
         merchantMobile,
+        installmentPeriod,
+        paymentChannelText
       ];
 }

@@ -20,7 +20,9 @@ const defaultInquiryData = {
   "customerEmail": "",
   "customerAddress": "",
   "merchantAddress": "",
-  "merchantMobile": ""
+  "merchantMobile": "",
+  "installmentPeriod": "",
+  "paymentChannelText": ""
 };
 
 class OrderSuccessState extends Equatable {
@@ -44,7 +46,9 @@ class OrderSuccessState extends Equatable {
           customerEmail: "",
           customerAddress: "",
           merchantAddress: "",
-          merchantMobile: "")});
+          merchantMobile: "",
+          installmentPeriod: "",
+          paymentChannelText: "")});
 
   final GetOrderSuccessDataStatus orderSuccessStatus;
   final InquiryData orderSuccessData;
