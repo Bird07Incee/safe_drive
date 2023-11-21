@@ -80,6 +80,13 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           addressValidationKey!.currentState!.validate()) {
         emit(state.copyWith(
             formWidgetModel: state.listFormWidget, formResultModel: state.formResult, stateStatus: ShippingAddressStatus.success, allowSubmit: true));
+      } else {
+        isAllowSubmit = false;
+        emit(state.copyWith(
+            formWidgetModel: state.listFormWidget,
+            formResultModel: state.formResult,
+            stateStatus: ShippingAddressStatus.success,
+            allowSubmit: false));
       }
     } else {
       emit(state.copyWith(

@@ -165,10 +165,8 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
               return Form(
                   key: myBloc.mainFormKey,
                   onChanged: () {
-                    bool isAllowSubmit = myBloc.validateToActiveSubmitButton();
-                    if (isAllowSubmit) {
-                      setState(() {});
-                    }
+                    myBloc.validateToActiveSubmitButton();
+                    setState(() {});
                   },
                   child: Column(
                       children: state.listFormWidget!.map(
