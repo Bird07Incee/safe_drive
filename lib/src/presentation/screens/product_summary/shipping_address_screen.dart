@@ -33,6 +33,12 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   String pid = '';
   int optLv1 = 0;
 
+  @override
+  void didChangeDependencies() {
+    loadProduct();
+    super.didChangeDependencies();
+  }
+
   loadProduct() {
     settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (settings != null) {
