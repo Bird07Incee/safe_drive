@@ -345,7 +345,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
             return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
           }
         } else if (widget.required && widget.isAllowAutoAddPhoneFormat) {
-          if (value![0] == '0') {
+          if (value![0] == '0' && value.length == 10) {
             return null;
           } else {
             return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
@@ -449,11 +449,7 @@ class PhoneNumberFormatter extends TextInputFormatter {
     } else if (formatted.length <= 6) {
       return '${formatted.substring(0, 3)}-${formatted.substring(3)}';
     } else {
-      if (formatted.length == 9) {
-        return '${formatted.substring(0, 2)}-${formatted.substring(2, 5)}-${formatted.substring(5, formatted.length)}';
-      } else {
-        return '${formatted.substring(0, 3)}-${formatted.substring(3, 6)}-${formatted.substring(6, formatted.length)}';
-      }
+      return '${formatted.substring(0, 3)}-${formatted.substring(3, 6)}-${formatted.substring(6, formatted.length)}';
     }
   }
 }
