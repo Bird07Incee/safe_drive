@@ -48,7 +48,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     String result = "";
 
     try {
-      result = int.parse(price).toDecimalFormat();
+      result = double.parse(price).round().toDecimalFormat();
     } catch (e) {
       result = "0";
     }
