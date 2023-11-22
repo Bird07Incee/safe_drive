@@ -39,7 +39,7 @@ class Banner extends Equatable {
   final String image;
   final String route;
   final String url;
-  final String seqNo;
+  final int seqNo;
 
   factory Banner.fromJson(Map<String, dynamic> json) {
     return Banner(image: json['image'] ?? '', route: json['route'] ?? '', url: json['url'] ?? '', seqNo: json['seqNo'] ?? '');
