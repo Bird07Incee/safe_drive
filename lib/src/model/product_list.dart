@@ -416,21 +416,21 @@ const mockProductListResponse = {
       "image": "https://dev-app.marketplace.ksauto.net/assets/assets/homepage/HeroBanner.png",
       "route": "HeroBanner",
       "url": "http://",
-      "seqNo": "1"
+      "seqNo": 1
     },
     {
       "bannerId": "BN2",
       "image": "https://dev-app.marketplace.ksauto.net/assets/assets/homepage/banner.png",
       "route": "Banner",
       "url": "http://",
-      "seqNo": "2"
+      "seqNo": 2
     },
     {
       "bannerId": "BN3",
       "image": "https://dev-app.marketplace.ksauto.net/assets/assets/homepage/banner.png",
       "route": "Banner2",
       "url": "http://",
-      "seqNo": "3"
+      "seqNo": 3
     }
   ],
   "category": [
