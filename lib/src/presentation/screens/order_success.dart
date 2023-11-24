@@ -44,17 +44,17 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     }
   }
 
-  String safeDecimalFormat(String price) {
-    String result = "";
+  // String safeDecimalFormat(String price) {
+  //   String result = "";
 
-    try {
-      result = double.parse(price).round().toDecimalFormat();
-    } catch (e) {
-      result = "0";
-    }
+  //   try {
+  //     result = double.parse(price).round().toDecimalFormat();
+  //   } catch (e) {
+  //     result = "0";
+  //   }
 
-    return result;
-  }
+  //   return result;
+  // }
 
   // @override
   // void initState() {
@@ -239,8 +239,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("${safeDecimalFormat(orderSuccessData.amount!)} บาท",
-                                            style: AlvaStyles().headingSize14w600(blackGoMunTo)),
+                                        Text("${orderSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                         SizedBox(
                                           height: 4,
                                         ),
