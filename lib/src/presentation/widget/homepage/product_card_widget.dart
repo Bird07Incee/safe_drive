@@ -246,6 +246,10 @@ class ProductCardWidget extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Visibility(
+                                      visible: products[index].productionAssets.length == 1 ? true : false,
+                                      child: SizedBox(height: 16),
+                                    ),
                                     Text(
                                       products[index].productName,
                                       style: AlvaStyles().headingSize22Height32(),
