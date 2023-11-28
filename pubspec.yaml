@@ -54,6 +54,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.4.1
   email_validator: ^2.1.17
   crypto: ^3.0.3
+  universal_io: ^2.2.2
 
 dev_dependencies:
   flutter_test:
