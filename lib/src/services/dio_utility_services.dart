@@ -108,10 +108,11 @@ class DioClient {
     client.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
         // final SecurityContext scontext = SecurityContext();
-        final secContext = SecurityContext.defaultContext;
+        // final secContext = SecurityContext.defaultContext;
         debugPrint("createHttpClient");
-        secContext.setTrustedCertificatesBytes(certificate);
-        HttpClient client = HttpClient(context: secContext);
+        // secContext.setTrustedCertificatesBytes(certificate);
+        // HttpClient client = HttpClient(context: secContext);
+        HttpClient client = HttpClient();
         client.badCertificateCallback = (X509Certificate cert, String host, int port) {
           debugPrint("cert.pem : ${cert.pem}");
           debugPrint("cert.pem SAH : ${calculateSHA256(cert.pem)}");
