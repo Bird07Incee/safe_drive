@@ -105,24 +105,34 @@ class DioClient {
     // final certificate =  calculateSHA256(stringCertificateBytes);
     debugPrint("setupCertificate");
     debugPrint("certificate $certificate");
-  //   client.httpClientAdapter = IOHttpClientAdapter(
-  //     createHttpClient: () {
-  //       // final SecurityContext scontext = SecurityContext();
-  //       // final secContext = SecurityContext.defaultContext;
-  //       debugPrint("createHttpClient");
-  //       // secContext.setTrustedCertificatesBytes(certificate);
-  //       // HttpClient client = HttpClient(context: secContext);
-  //       HttpClient client = HttpClient();
-  //       client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-  //         debugPrint("cert.pem : ${cert.pem}");
-  //         debugPrint("cert.pem SAH : ${calculateSHA256(cert.pem)}");
-  //         // debugPrint("certificate.pem SAH : ${calculateSHA256(certificate)}");
-  //         return false; // Verify the certificate.
-  //       };
-  //       debugPrint("client $client");
-  //       return client;
-  //     },
-  //   );
+    const PEM = stringCertificateBytes; // root certificate content
+    client.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        final client = HttpClient();
+        client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+          return cert.pem == PEM; // Verify the certificate.
+        };
+        return client;
+      },
+    );
+    //   client.httpClientAdapter = IOHttpClientAdapter(
+    //     createHttpClient: () {
+    //       // final SecurityContext scontext = SecurityContext();
+    //       // final secContext = SecurityContext.defaultContext;
+    //       debugPrint("createHttpClient");
+    //       // secContext.setTrustedCertificatesBytes(certificate);
+    //       // HttpClient client = HttpClient(context: secContext);
+    //       HttpClient client = HttpClient();
+    //       client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+    //         debugPrint("cert.pem : ${cert.pem}");
+    //         debugPrint("cert.pem SAH : ${calculateSHA256(cert.pem)}");
+    //         // debugPrint("certificate.pem SAH : ${calculateSHA256(certificate)}");
+    //         return false; // Verify the certificate.
+    //       };
+    //       debugPrint("client $client");
+    //       return client;
+    //     },
+    //   );
   }
 }
 
