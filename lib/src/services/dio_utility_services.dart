@@ -110,6 +110,7 @@ class DioClient {
       createHttpClient: () {
         final client = HttpClient();
         client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+          debugPrint("cert.pem : ${cert.pem}");
           return cert.pem == PEM; // Verify the certificate.
         };
         return client;
