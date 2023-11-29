@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:crypto/crypto.dart';
+import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
@@ -86,7 +84,8 @@ class DioClient {
   Dio get dioClient {
     client.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
-        await setupCertificate();
+        // initAdapter();
+        // await setupCertificate();
         return handler.next(options);
       },
     ));
@@ -95,45 +94,28 @@ class DioClient {
     return client;
   }
 
+  void initAdapter() {
+    String selfHash = "076c0c9749e7b0fed7294a2ba9f22803d5148ea3132ea9d1327dfb652cdb5fde";
+    client.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        final client = HttpClient();
+        client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+          var b = utf8.encode(cert.pem);
+          var hostHash = sha256.convert(b).toString();
+          return hostHash == selfHash; // Verify the certificate.
+        };
+        return client;
+      },
+    );
+  }
+
   Future<Uint8List> loadAWSRootCA4Certificate(String pem) async {
     final derCertificate = pem.codeUnits;
     return Uint8List.fromList(derCertificate);
   }
 
   Future<void> setupCertificate() async {
-    final certificate = await loadAWSRootCA4Certificate(stringCertificateBytes);
-    // final certificate =  calculateSHA256(stringCertificateBytes);
-    debugPrint("setupCertificate");
-    debugPrint("certificate $certificate");
-    const PEM = stringCertificateBytes; // root certificate content
-    client.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        final client = HttpClient();
-        client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-          debugPrint("cert.pem : ${cert.pem}");
-          return cert.pem == PEM; // Verify the certificate.
-        };
-        return client;
-      },
-    );
-    //   client.httpClientAdapter = IOHttpClientAdapter(
-    //     createHttpClient: () {
-    //       // final SecurityContext scontext = SecurityContext();
-    //       // final secContext = SecurityContext.defaultContext;
-    //       debugPrint("createHttpClient");
-    //       // secContext.setTrustedCertificatesBytes(certificate);
-    //       // HttpClient client = HttpClient(context: secContext);
-    //       HttpClient client = HttpClient();
-    //       client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-    //         debugPrint("cert.pem : ${cert.pem}");
-    //         debugPrint("cert.pem SAH : ${calculateSHA256(cert.pem)}");
-    //         // debugPrint("certificate.pem SAH : ${calculateSHA256(certificate)}");
-    //         return false; // Verify the certificate.
-    //       };
-    //       debugPrint("client $client");
-    //       return client;
-    //     },
-    //   );
+    client.httpClientAdapter = BrowserHttpClientAdapter(withCredentials: true);
   }
 }
 
