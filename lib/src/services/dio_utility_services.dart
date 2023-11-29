@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
@@ -87,8 +86,7 @@ class DioClient {
   Dio get dioClient {
     client.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
-        // initAdapter();
-        // await setupCertificate();
+        await setupCertificate();
         return handler.next(options);
       },
     ));
@@ -97,44 +95,27 @@ class DioClient {
     return client;
   }
 
-  void initAdapter() {
-    log("initAdapter ");
-    String selfHash = "076c0c9749e7b0fed7294a2ba9f22803d5148ea3132ea9d1327dfb652cdb5fde";
-    client.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        final client = HttpClient();
-        client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-          log("cert.pem : ${cert.pem}");
-          var b = utf8.encode(cert.pem);
-          var hostHash = sha256.convert(b).toString();
-          return hostHash == selfHash; // Verify the certificate.
-        };
-        return client;
-      },
-    );
-  }
-
   Future<Uint8List> loadAWSRootCA4Certificate(String pem) async {
     final derCertificate = pem.codeUnits;
     return Uint8List.fromList(derCertificate);
   }
 
   Future<void> setupCertificate() async {
-    // final certificate = await loadAWSRootCA4Certificate(stringCertificateBytes);
-    final certificate =  calculateSHA256(stringCertificateBytes);
+    final certificate = await loadAWSRootCA4Certificate(stringCertificateBytes);
+    // final certificate =  calculateSHA256(stringCertificateBytes);
     debugPrint("setupCertificate");
     debugPrint("certificate $certificate");
     client.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
         // final SecurityContext scontext = SecurityContext();
+        final secContext = SecurityContext.defaultContext;
         debugPrint("createHttpClient");
-        // scontext.setTrustedCertificatesBytes(certificate);
-        HttpClient client = HttpClient();
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) {
-              debugPrint("cert.pem : ${cert.pem}");
-              debugPrint("cert.pem SAH : ${calculateSHA256(cert.pem)}");
-              debugPrint("certificate.pem SAH : ${calculateSHA256(certificate)}");
+        secContext.setTrustedCertificatesBytes(certificate);
+        HttpClient client = HttpClient(context: secContext);
+        client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+          debugPrint("cert.pem : ${cert.pem}");
+          debugPrint("cert.pem SAH : ${calculateSHA256(cert.pem)}");
+          // debugPrint("certificate.pem SAH : ${calculateSHA256(certificate)}");
           return false; // Verify the certificate.
         };
         debugPrint("client $client");
@@ -143,6 +124,7 @@ class DioClient {
     );
   }
 }
+
 const stringCertificateBytes = '''
 -----BEGIN CERTIFICATE-----
 MIIB8jCCAXigAwIBAgITBmyf18G7EEwpQ+Vxe3ssyBrBDjAKBggqhkjOPQQDAzA5
