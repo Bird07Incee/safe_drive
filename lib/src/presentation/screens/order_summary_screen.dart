@@ -42,10 +42,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   late Uri uriData;
   late RoutingData routingData;
   String pid = '';
-  int optLv1 = 0;
+  int? optLv1;
   bool isAppReloaded = false;
   var currentRoute = CurrentRouteObserver.instance.name;
-  bool isLoaded = false;
 
   @override
   void initState() {
@@ -56,8 +55,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (!isLoaded) {
-      isLoaded = true;
+    if (!isAppReloaded) {
       loadProduct();
     }
   }
@@ -77,13 +75,15 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   }
 
   loadSelectOption(Product product) {
-    optLv1 = (routingData["opt_lv1"] == null) ? 0 : int.parse(routingData["opt_lv1"]);
+    optLv1 = (routingData["opt_lv1"] == null) ? null : int.parse(routingData["opt_lv1"]);
     final option = BlocProvider.of<ProductOptionBloc>(context);
-    option.updateStepOneVariables(
-      groupValueRadio: product.productionOptionals[optLv1].label,
-      price: product.productionOptionals[optLv1].price,
-      indexSelect: optLv1,
-    );
+    if (optLv1 != null) {
+      option.updateStepOneVariables(
+        groupValueRadio: product.productionOptionals[optLv1!].label,
+        price: product.productionOptionals[optLv1!].price,
+        indexSelect: optLv1,
+      );
+    }
   }
 
   void onBack(BuildContext context) {
@@ -127,7 +127,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
-          if (state.status.isSuccess && currentRoute.contains(Routes.orderSummary.toStringPath())) {
+          if (state.status.isSuccess && currentRoute.contains(Routes.orderSummary.toStringPath()) && optLv1 != null) {
             loadSelectOption(state.product);
           }
         },
