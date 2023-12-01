@@ -85,7 +85,7 @@ class DioClient {
     client.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
         // initAdapter();
-        await setupCertificate();
+        // await setupCertificate();
         return handler.next(options);
       },
     ));
