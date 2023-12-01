@@ -31,7 +31,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   late Uri uriData;
   late RoutingData routingData;
   String pid = '';
-  int? optLv1 = null;
+  int? optLv1;
 
   @override
   void didChangeDependencies() {

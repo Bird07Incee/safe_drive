@@ -52,6 +52,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   double _scale = 1.0;
   String pid = '';
   GlobalKey stickyKey = GlobalKey();
+  bool isLoaded = false;
 
   @override
   void dispose() {
@@ -72,8 +73,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   @override
   void didChangeDependencies() {
-    loadProduct();
     super.didChangeDependencies();
+    if (!isLoaded) {
+      loadProduct();
+      isLoaded = true;
+    }
   }
 
   loadProduct() {
@@ -82,8 +86,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       pid = (routingData["pid"] == null) ? "" : routingData["pid"];
-      ProductDetailState pdState = context.read<ProductDetailBloc>().state;
-      if (pdState.status.isInitial && pid != "") {
+      if (pid != "") {
         context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
       }
     }
