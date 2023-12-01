@@ -73,319 +73,325 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     maxHeight = MediaQuery.of(context).size.height;
 
     return RootPageCondition(
-        child: AlvaRootWidget(
-      titlePage: titleWebPage,
-      child: BlocBuilder<OrderSuccessBloc, OrderSuccessState>(
-        builder: (context, state) {
-          var orderSuccessData = state.orderSuccessData;
-          if (state.orderSuccessStatus == GetOrderSuccessDataStatus.success) {
-            return Column(
-              children: [
-                Container(
-                    width: maxWidth,
-                    height: maxHeight - 96,
-                    color: cloudyWhite,
-                    child: ListView(
-                      children: [
-                        Container(
-                          width: maxWidth,
-                          height: 76,
-                          padding: EdgeInsets.all(16),
-                          color: successGreen,
-                          child: Row(children: [
-                            SizedBox(width: 32, height: 32, child: Image.asset('assets/images/order_success.png')),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "ชำระเงินสำเร็จ",
-                                  style: AlvaStyles().headingSize14w600(blackGoMunTo),
-                                ),
-                                Text(
-                                  "หมายเลขอ้างอิง: ${orderSuccessData.invoiceNo}",
-                                  style: AlvaStyles().headingSize12w400(blackGoMunTo),
-                                )
-                              ],
-                            )
-                          ]),
-                        ),
-                        Container(
-                          width: maxWidth,
-                          padding: EdgeInsets.all(16),
-                          color: Colors.white,
-                          child: Column(children: [
-                            ProductAttribute(
-                              attributeKey: "ชำระเงินโดย",
-                              attributevalue: orderSuccessData.cardNo!,
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "วันที่ชำระเงิน",
-                              attributevalue: orderSuccessData.paymentDate!,
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "เวลาที่ชำระเงิน",
-                              attributevalue: orderSuccessData.paymentTime!,
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "ช่องทางการชำระเงิน",
-                              attributevalue: orderSuccessData.paymentGateway!,
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "รูปแบบการชำระเงิน",
-                              attributevalue: orderSuccessData.paymentChannelText!,
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "ผู้รับเงิน",
-                              attributevalue: orderSuccessData.merchantFullName!,
-                              maxWidth: maxWidth,
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          width: maxWidth,
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(
-                            "รหัสสินค้า: ${orderSuccessData.productId}",
-                            style: AlvaStyles().headingSize12w600(blackGoMunTo),
-                          ),
-                        ),
-                        Container(
-                          width: maxWidth,
-                          padding: EdgeInsets.all(16),
-                          color: Colors.white,
-                          child: Column(
-                            children: [
-                              Row(
+        child: WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacementNamed(context, Routes.initial.toStringPath());
+        return false;
+      },
+      child: AlvaRootWidget(
+        titlePage: titleWebPage,
+        child: BlocBuilder<OrderSuccessBloc, OrderSuccessState>(
+          builder: (context, state) {
+            var orderSuccessData = state.orderSuccessData;
+            if (state.orderSuccessStatus == GetOrderSuccessDataStatus.success) {
+              return Column(
+                children: [
+                  Container(
+                      width: maxWidth,
+                      height: maxHeight - 96,
+                      color: cloudyWhite,
+                      child: ListView(
+                        children: [
+                          Container(
+                            width: maxWidth,
+                            height: 76,
+                            padding: EdgeInsets.all(16),
+                            color: successGreen,
+                            child: Row(children: [
+                              SizedBox(width: 32, height: 32, child: Image.asset('assets/images/order_success.png')),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(
-                                    width: (maxWidth / 2) - 32,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(4),
-                                          child: FadeInImage(
-                                            width: 132,
-                                            height: 74,
-                                            placeholder: const AssetImage('assets/homepage/img_default.png'),
-                                            // Replace with your placeholder image path
-                                            image: NetworkImage(orderSuccessData.productImagePath!),
-                                            fit: BoxFit.fitWidth,
-                                            imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                                              'assets/homepage/img_default.png',
-                                              fit: BoxFit.fitWidth,
+                                  Text(
+                                    "ชำระเงินสำเร็จ",
+                                    style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                                  ),
+                                  Text(
+                                    "หมายเลขอ้างอิง: ${orderSuccessData.invoiceNo}",
+                                    style: AlvaStyles().headingSize12w400(blackGoMunTo),
+                                  )
+                                ],
+                              )
+                            ]),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.all(16),
+                            color: Colors.white,
+                            child: Column(children: [
+                              ProductAttribute(
+                                attributeKey: "ชำระเงินโดย",
+                                attributevalue: orderSuccessData.cardNo!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "วันที่ชำระเงิน",
+                                attributevalue: orderSuccessData.paymentDate!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "เวลาที่ชำระเงิน",
+                                attributevalue: orderSuccessData.paymentTime!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "ช่องทางการชำระเงิน",
+                                attributevalue: orderSuccessData.paymentGateway!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "รูปแบบการชำระเงิน",
+                                attributevalue: orderSuccessData.paymentChannelText!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "ผู้รับเงิน",
+                                attributevalue: orderSuccessData.merchantFullName!,
+                                maxWidth: maxWidth,
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            child: Text(
+                              "รหัสสินค้า: ${orderSuccessData.productId}",
+                              style: AlvaStyles().headingSize12w600(blackGoMunTo),
+                            ),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.all(16),
+                            color: Colors.white,
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: (maxWidth / 2) - 32,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(4),
+                                            child: FadeInImage(
                                               width: 132,
                                               height: 74,
+                                              placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                              // Replace with your placeholder image path
+                                              image: NetworkImage(orderSuccessData.productImagePath!),
+                                              fit: BoxFit.fitWidth,
+                                              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                                'assets/homepage/img_default.png',
+                                                fit: BoxFit.fitWidth,
+                                                width: 132,
+                                                height: 74,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: (maxWidth / 2) - 32,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          orderSuccessData.productName!,
-                                          style: AlvaStyles().headingSize14w600(blackGoMunTo),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        Text(
-                                          orderSuccessData.productOption!,
-                                          style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Divider(
-                                color: cloudSoftDeepWhite,
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
+                                    SizedBox(
                                       width: (maxWidth / 2) - 32,
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          Text(
+                                            orderSuccessData.productName!,
+                                            style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Text(
+                                            orderSuccessData.productOption!,
+                                            style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Divider(
+                                  color: cloudSoftDeepWhite,
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                        width: (maxWidth / 2) - 32,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo)),
+                                          ],
+                                        )),
+                                    SizedBox(
+                                      width: (maxWidth / 2) - 32,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("${orderSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo)),
+                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey))
                                         ],
-                                      )),
-                                  SizedBox(
-                                    width: (maxWidth / 2) - 32,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("${orderSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey))
-                                      ],
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            child: Text(
+                              "ที่อยู่ในการจัดส่งสินค้า",
+                              style: AlvaStyles().headingSize12w600(blackGoMunTo),
+                            ),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.all(16),
+                            color: Colors.white,
+                            child: Column(children: [
+                              ProductAttribute(
+                                attributeKey: "ชื่อผู้รับสินค้า",
+                                attributevalue: orderSuccessData.customerFullname!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "เบอร์โทรติดต่อ",
+                                attributevalue: phoneNumberFormatter(orderSuccessData.customerMobile!),
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "อีเมล",
+                                attributevalue: orderSuccessData.customerEmail!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "ที่อยู่",
+                                attributevalue: orderSuccessData.customerAddress!,
+                                maxWidth: maxWidth,
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            child: Text(
+                              "ข้อมูลติดต่อผู้ขาย",
+                              style: AlvaStyles().headingSize12w600(blackGoMunTo),
+                            ),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.all(16),
+                            color: Colors.white,
+                            child: Column(children: [
+                              Center(
+                                child: Text(
+                                  orderSuccessData.merchantAddress!.replaceAll("\n", ""),
+                                  style: AlvaStyles().headingSize12w400(spaceGrey),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                phoneNumberFormatter(orderSuccessData.merchantMobile!),
+                                style: AlvaStyles().headingSize16w600(blackGoMunTo),
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            color: spaceGrey,
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AlvaText(
+                                      title: HomeConst().askInformation,
+                                      textStyle: AlvaStyles().headingSize10w600(whiteFalse),
                                     ),
-                                  )
-                                ],
-                              )
-                            ],
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AlvaText(
+                                      title: HomeConst().pleaseContact,
+                                      textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: maxWidth,
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(
-                            "ที่อยู่ในการจัดส่งสินค้า",
-                            style: AlvaStyles().headingSize12w600(blackGoMunTo),
-                          ),
-                        ),
-                        Container(
-                          width: maxWidth,
-                          padding: EdgeInsets.all(16),
-                          color: Colors.white,
-                          child: Column(children: [
-                            ProductAttribute(
-                              attributeKey: "ชื่อผู้รับสินค้า",
-                              attributevalue: orderSuccessData.customerFullname!,
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "เบอร์โทรติดต่อ",
-                              attributevalue: phoneNumberFormatter(orderSuccessData.customerMobile!),
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "อีเมล",
-                              attributevalue: orderSuccessData.customerEmail!,
-                              maxWidth: maxWidth,
-                            ),
-                            ProductAttribute(
-                              attributeKey: "ที่อยู่",
-                              attributevalue: orderSuccessData.customerAddress!,
-                              maxWidth: maxWidth,
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          width: maxWidth,
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(
-                            "ข้อมูลติดต่อผู้ขาย",
-                            style: AlvaStyles().headingSize12w600(blackGoMunTo),
-                          ),
-                        ),
-                        Container(
-                          width: maxWidth,
-                          padding: EdgeInsets.all(16),
-                          color: Colors.white,
-                          child: Column(children: [
-                            Center(
-                              child: Text(
-                                orderSuccessData.merchantAddress!.replaceAll("\n", ""),
-                                style: AlvaStyles().headingSize12w400(spaceGrey),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              phoneNumberFormatter(orderSuccessData.merchantMobile!),
-                              style: AlvaStyles().headingSize16w600(blackGoMunTo),
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          color: spaceGrey,
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AlvaText(
-                                    title: HomeConst().askInformation,
-                                    textStyle: AlvaStyles().headingSize10w600(whiteFalse),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AlvaText(
-                                    title: HomeConst().pleaseContact,
-                                    textStyle: AlvaStyles().headingSize12w700(whiteFalse),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )),
-                Container(
-                    width: maxWidth,
-                    height: 96,
-                    padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
-                      ],
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(context, Routes.initial.toStringPath());
-                      },
-                      child: Container(
-                        height: 48,
-                        width: (maxWidth - 40) / 2,
-                        decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
-                        child: Center(child: Text("กลับสู่หน้าหลัก", style: AlvaStyles().heading3())),
+                        ],
+                      )),
+                  Container(
+                      width: maxWidth,
+                      height: 96,
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
+                        ],
                       ),
-                    ))
-              ],
-            );
-          } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.error) {
-            return ErrorScreen(
-              title: ErrorConst().titleNS,
-              subTitle: ErrorConst().subTitleNS,
-              titleBtn: ErrorConst().titleBtnNS,
-              onTap: () {
-                loadInvoice();
-              },
-            );
-          } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.cancel) {
-            return OrderCancelScreen();
-          } else {
-            return const LoadingScreen();
-          }
-        },
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, Routes.initial.toStringPath());
+                        },
+                        child: Container(
+                          height: 48,
+                          width: (maxWidth - 40) / 2,
+                          decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
+                          child: Center(child: Text("กลับสู่หน้าหลัก", style: AlvaStyles().heading3())),
+                        ),
+                      ))
+                ],
+              );
+            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.error) {
+              return ErrorScreen(
+                title: ErrorConst().titleNS,
+                subTitle: ErrorConst().subTitleNS,
+                titleBtn: ErrorConst().titleBtnNS,
+                onTap: () {
+                  loadInvoice();
+                },
+              );
+            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.cancel) {
+              return OrderCancelScreen();
+            } else {
+              return const LoadingScreen();
+            }
+          },
+        ),
       ),
     ));
   }
