@@ -75,8 +75,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!isLoaded) {
-      loadProduct();
       isLoaded = true;
+      loadProduct();
     }
   }
 
@@ -86,7 +86,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       pid = (routingData["pid"] == null) ? "" : routingData["pid"];
-      if (pid != "") {
+      ProductDetailState pdState = context.read<ProductDetailBloc>().state;
+      if (pdState.status.isInitial && pid != "") {
         context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
       }
     }

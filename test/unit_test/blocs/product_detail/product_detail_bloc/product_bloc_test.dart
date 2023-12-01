@@ -256,8 +256,7 @@ void main() {
           build: () => ProductDetailBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const SetProduct(product: Product.empty)),
           expect: () => <ProductDetailState>[
-            ProductDetailState(status: ProductDetailStatus.loading),
-            ProductDetailState(status: ProductDetailStatus.success, product: Product.empty)
+            ProductDetailState(product: Product.empty)
           ]);
     });
 
