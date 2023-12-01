@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -43,6 +44,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   String pid = '';
   int optLv1 = 0;
   bool isAppReloaded = false;
+  var currentRoute = CurrentRouteObserver.instance.name;
+  bool isLoaded = false;
 
   @override
   void initState() {
@@ -52,8 +55,11 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
 
   @override
   void didChangeDependencies() {
-    loadProduct();
     super.didChangeDependencies();
+    if(!isLoaded) {
+      isLoaded = true;
+      loadProduct();
+    }
   }
 
   loadProduct() {
@@ -121,7 +127,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
-          if (state.status.isSuccess) {
+          if (state.status.isSuccess && currentRoute.contains(Routes.orderSummary.toStringPath())) {
             loadSelectOption(state.product);
           }
         },
@@ -140,16 +146,18 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
           int showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
           return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
             listener: (context, state) {
-              if (state.orderStatus.isLoading) {
-                GeneralDialog().showLoadingDialog(context: context);
-              } else if (state.orderStatus.isSuccess) {
-                Navigator.pop(context);
-                if (state.orderResponseModel.paymentURL != null && state.orderResponseModel.paymentURL!.isNotEmpty) {
-                  window.open(state.orderResponseModel.paymentURL!, '_self');
-                }
-              } else if (state.orderStatus.isError) {
-                Navigator.pop(context);
-              }
+             if (currentRoute.contains(Routes.orderSummary.toStringPath())) {
+               if (state.orderStatus.isLoading) {
+                 GeneralDialog().showLoadingDialog(context: context);
+               } else if (state.orderStatus.isSuccess) {
+                 Navigator.pop(context);
+                 if (state.orderResponseModel.paymentURL != null && state.orderResponseModel.paymentURL!.isNotEmpty) {
+                   window.open(state.orderResponseModel.paymentURL!, '_self');
+                 }
+               } else if (state.orderStatus.isError) {
+                 Navigator.pop(context);
+               }
+             }
             },
             builder: (context, orderState) {
               if (orderState.orderStatus.isError) {

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:crypto/crypto.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +19,7 @@ import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
-late DdSdkConfiguration configuration;
+late DatadogConfiguration configuration;
 void main() async {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +29,8 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]).then((_) async {
     // runApp(const MyApp());
-    await DatadogSdk.runApp(configuration, () async {
-      runApp(const MyApp());
+    DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
+      return runApp(const MyApp());
     });
   });
 }
@@ -52,23 +55,21 @@ _setUpLineLIFF() {
   FlutterLineLiff().init(
       //TODO: config LIFF for prod
       config: Config(liffId: lineId),
-      successCallback: () {
-        debugPrint('successCallback');
-      },
+      successCallback: () {},
       errorCallback: (error) {
         debugPrint('init error: ${error.name}, ${error.message}, ${error.stack}');
       });
 }
 
 _setUpDatadog() {
-  configuration = DdSdkConfiguration(
+  DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
+  configuration = DatadogConfiguration(
     clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
     env: const String.fromEnvironment('SET_ENV', defaultValue: 'dev'),
     site: DatadogSite.us1,
-    trackingConsent: TrackingConsent.granted,
     nativeCrashReportEnabled: true,
-    loggingConfiguration: LoggingConfiguration(),
-    rumConfiguration: RumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
+    loggingConfiguration: DatadogLoggingConfiguration(),
+    rumConfiguration: DatadogRumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
   );
 }
 

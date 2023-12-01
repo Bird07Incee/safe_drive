@@ -64,7 +64,6 @@ class Product extends Equatable {
     required this.postDate,
     required this.lastUpdateDate,
     required this.categoryId,
-    required this.category,
     required this.productId,
     required this.quantity,
     required this.productName,
@@ -97,7 +96,6 @@ class Product extends Equatable {
   final String postDate;
   final String lastUpdateDate;
   final List<String> categoryId;
-  final String category;
   final String productId;
   final int quantity;
   final String productName;
@@ -131,7 +129,6 @@ class Product extends Equatable {
       postDate: '',
       lastUpdateDate: '',
       categoryId: [],
-      category: '',
       productId: '',
       quantity: 0,
       productName: '',
@@ -167,7 +164,6 @@ class Product extends Equatable {
         postDate: json['postDate'] ?? '',
         lastUpdateDate: json['lastUpdateDate'] ?? '',
         categoryId: json['categoryId'] != null ? List.castFrom<dynamic, String>(json['categoryId']) : [],
-        category: json['category'] ?? '',
         productId: json['productId'] ?? '',
         quantity: json['quantity'] ?? 0,
         productName: json['productName'] ?? '',
@@ -209,7 +205,6 @@ class Product extends Equatable {
         postDate,
         lastUpdateDate,
         categoryId,
-        category,
         productId,
         quantity,
         productName,

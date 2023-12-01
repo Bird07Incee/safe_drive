@@ -20,7 +20,7 @@ import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 class ShippingAddressScreen extends StatefulWidget {
-  const ShippingAddressScreen({Key? key}) : super(key: key);
+  const ShippingAddressScreen({super.key});
 
   @override
   State<ShippingAddressScreen> createState() => _ShippingAddressScreenState();
@@ -80,7 +80,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                       if (!args.isFromEditing) myBloc.onClearShippingData();
                       ProductDetailState pdState = context.read<ProductDetailBloc>().state;
                       if (pdState.status.isInitial && pid != "") {
-                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid?opt_lv1=$optLv1");
+                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid&opt_lv1=$optLv1");
                       }
                       Navigator.pop(context);
                     },
@@ -111,7 +111,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                       myBloc.onSubmitPressed();
                                       ProductDetailState pdState = context.read<ProductDetailBloc>().state;
                                       if (pdState.status.isInitial && pid != "") {
-                                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid?opt_lv1=$optLv1");
+                                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid&opt_lv1=$optLv1");
                                       }
                                       Navigator.pop(context);
                                     }
