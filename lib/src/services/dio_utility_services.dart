@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-import 'package:dio/browser.dart';
+// import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +8,7 @@ import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 import 'package:universal_io/io.dart';
 
-class DioUtilityService with HeaderUtil {
+class DioUtilityService {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? DioClient().dioClient;
   final Dio _dioClient;
 
@@ -114,9 +114,9 @@ class DioClient {
     return Uint8List.fromList(derCertificate);
   }
 
-  Future<void> setupCertificate() async {
-    client.httpClientAdapter = BrowserHttpClientAdapter(withCredentials: true);
-  }
+  // Future<void> setupCertificate() async {
+  //   client.httpClientAdapter = BrowserHttpClientAdapter(withCredentials: true);
+  // }
 }
 
 const stringCertificateBytes = '''

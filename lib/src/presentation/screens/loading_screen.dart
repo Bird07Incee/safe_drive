@@ -5,7 +5,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_c_p_i_loader.da
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
 class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
+  const LoadingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

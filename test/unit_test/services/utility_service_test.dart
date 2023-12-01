@@ -102,14 +102,14 @@ void main() async {
     });
 
     test('throws [ErrorGettingHomeConfig] on non-200 response for utility service', () async {
-      final dioError = DioError(
+      final dioError = DioException(
         error: {'message': 'Error'},
         requestOptions: RequestOptions(path: "http://www.mockurl.com/"),
         response: Response(
           statusCode: 404,
           requestOptions: RequestOptions(path: "http://www.mockurl.com/"),
         ),
-        type: DioErrorType.badResponse,
+        type: DioExceptionType.badResponse,
       );
 
       dioAdapter.onGet(
@@ -125,7 +125,7 @@ void main() async {
       final service = DioUtilityService(dio: dioClient);
       expect(
         () async => await service.getByURL("http://www.mockurl.com/", {}),
-        throwsA(isA<DioError>()),
+        throwsA(isA<DioException>()),
       );
     });
 
@@ -201,14 +201,14 @@ void main() async {
     });
 
     test('throws [ErrorGettingHomeConfig] on non-200 response for utility service', () async {
-      final dioError = DioError(
+      final dioError = DioException(
         error: {'message': 'Error'},
         requestOptions: RequestOptions(path: "http://www.mockurl.com/"),
         response: Response(
           statusCode: 404,
           requestOptions: RequestOptions(path: "http://www.mockurl.com/"),
         ),
-        type: DioErrorType.badResponse,
+        type: DioExceptionType.badResponse,
       );
 
       dioAdapter.onPost(
@@ -225,7 +225,7 @@ void main() async {
       final service = DioUtilityService(dio: dioClient);
       expect(
         () async => await service.postByURL("http://www.mockurl.com/", {}),
-        throwsA(isA<DioError>()),
+        throwsA(isA<DioException>()),
       );
     });
 

@@ -25,7 +25,7 @@ class DropDownInputWidget extends StatefulWidget {
   final bool isDisableDropdownSuffixButton;
 
   const DropDownInputWidget(
-      {Key? key,
+      {super.key,
       this.label,
       this.options = const [],
       this.value,
@@ -43,8 +43,7 @@ class DropDownInputWidget extends StatefulWidget {
       this.autoValidateMode,
       this.errRequiredMessage,
       this.textEditingController,
-      this.isDisableDropdownSuffixButton = false})
-      : super(key: key);
+      this.isDisableDropdownSuffixButton = false});
 
   @override
   State<DropDownInputWidget> createState() => _DropDownInputWidgetState();
