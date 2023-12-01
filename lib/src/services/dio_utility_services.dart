@@ -1,12 +1,8 @@
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
 // import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
-import 'package:universal_io/io.dart';
 
 class DioUtilityService {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? DioClient().dioClient;
@@ -75,11 +71,11 @@ class DioUtilityService {
 
 class DioClient {
   static final Dio client = Dio();
-  String calculateSHA256(String input) {
-    final bytes = utf8.encode(input);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
-  }
+  // String calculateSHA256(String input) {
+  //   final bytes = utf8.encode(input);
+  //   final digest = sha256.convert(bytes);
+  //   return digest.toString();
+  // }
 
   Dio get dioClient {
     client.interceptors.add(InterceptorsWrapper(
@@ -94,20 +90,20 @@ class DioClient {
     return client;
   }
 
-  void initAdapter() {
-    String selfHash = "076c0c9749e7b0fed7294a2ba9f22803d5148ea3132ea9d1327dfb652cdb5fde";
-    client.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        final client = HttpClient();
-        client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-          var b = utf8.encode(cert.pem);
-          var hostHash = sha256.convert(b).toString();
-          return hostHash == selfHash; // Verify the certificate.
-        };
-        return client;
-      },
-    );
-  }
+  // void initAdapter() {
+  //   String selfHash = "076c0c9749e7b0fed7294a2ba9f22803d5148ea3132ea9d1327dfb652cdb5fde";
+  //   client.httpClientAdapter = IOHttpClientAdapter(
+  //     createHttpClient: () {
+  //       final client = HttpClient();
+  //       client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+  //         var b = utf8.encode(cert.pem);
+  //         var hostHash = sha256.convert(b).toString();
+  //         return hostHash == selfHash; // Verify the certificate.
+  //       };
+  //       return client;
+  //     },
+  //   );
+  // }
 
   Future<Uint8List> loadAWSRootCA4Certificate(String pem) async {
     final derCertificate = pem.codeUnits;
