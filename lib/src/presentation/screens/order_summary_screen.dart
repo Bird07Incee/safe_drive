@@ -127,7 +127,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
-          if (state.status.isSuccess && currentRoute.contains(Routes.orderSummary.toStringPath()) && optLv1 != null) {
+          if (state.status.isSuccess && currentRoute.contains(Routes.orderSummary.toStringPath())) {
             loadSelectOption(state.product);
           }
         },
