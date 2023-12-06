@@ -857,7 +857,18 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                     shippingInfo: ShippingInfo(
                                                                         name: shippingState.addressModel.fullName,
                                                                         address:
-                                                                            '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}'),
+                                                                            '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}',
+                                                                        firstName: shippingState.addressModel.fullName,
+                                                                        lastName: "", //TODO: waiting for UI
+                                                                        mobileNo: shippingState.addressModel.mobileNumber,
+                                                                        houseNo: "",
+                                                                        lane: "",
+                                                                        street: "",
+                                                                        subDistrict: shippingState.addressModel.subDistrict,
+                                                                        district: shippingState.addressModel.district,
+                                                                        province: shippingState.addressModel.province,
+                                                                        postalCode: shippingState.addressModel.zipCode,
+                                                                        email: shippingState.addressModel.emailAddress),
                                                                     email: shippingState.addressModel.emailAddress,
                                                                     mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
                                                                   );
