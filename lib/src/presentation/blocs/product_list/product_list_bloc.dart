@@ -32,7 +32,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
       String accessToken = await lineDataHelper.getLineAccessToken();
       Response response =
-          await utilityRepository.postByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken"});
+          await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken"});
       final productList = ProductList.fromJson(response.data);
       return productList;
     } catch (e) {
