@@ -36,7 +36,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   }
 
   _onSetProduct(SetProduct event, Emitter<ProductDetailState> emit) async {
-    emit(state.copyWith(product: event.product));
+    emit(state.copyWith(product: event.product, status:  ProductDetailStatus.initial));
   }
 
   _onSetClickFromImage(SetClickFromImage event, Emitter<ProductDetailState> emit) async {
