@@ -26,7 +26,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
 
     try {
       String path = "/ecommerce/v1/products${event.pid != '' ? '?pid=${event.pid}' : ''}";
-      Response response = await utilityRepository.postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer $accessToken"});
 
       final p = Product.fromJson(response.data);
       emit(state.copyWith(status: ProductDetailStatus.success, product: p));
