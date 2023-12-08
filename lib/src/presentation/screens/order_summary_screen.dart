@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -41,8 +42,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   late Uri uriData;
   late RoutingData routingData;
   String pid = '';
-  int optLv1 = 0;
+  int? optLv1;
   bool isAppReloaded = false;
+  var currentRoute = CurrentRouteObserver.instance.name;
 
   @override
   void initState() {
@@ -52,8 +54,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
 
   @override
   void didChangeDependencies() {
-    loadProduct();
     super.didChangeDependencies();
+    if (!isAppReloaded) {
+      loadProduct();
+    }
   }
 
   loadProduct() {
@@ -71,13 +75,15 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   }
 
   loadSelectOption(Product product) {
-    optLv1 = (routingData["opt_lv1"] == null) ? 0 : int.parse(routingData["opt_lv1"]);
+    optLv1 = (routingData["opt_lv1"] == null) ? null : int.parse(routingData["opt_lv1"]);
     final option = BlocProvider.of<ProductOptionBloc>(context);
-    option.updateStepOneVariables(
-      groupValueRadio: product.productionOptionals[optLv1].label,
-      price: product.productionOptionals[optLv1].price,
-      indexSelect: optLv1,
-    );
+    if (optLv1 != null) {
+      option.updateStepOneVariables(
+        groupValueRadio: product.productionOptionals[optLv1!].label,
+        price: product.productionOptionals[optLv1!].price,
+        indexSelect: optLv1,
+      );
+    }
   }
 
   void onBack(BuildContext context) {
@@ -121,7 +127,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
-          if (state.status.isSuccess) {
+          if (state.status.isSuccess && currentRoute.contains(Routes.orderSummary.toStringPath())) {
             loadSelectOption(state.product);
           }
         },
@@ -140,15 +146,17 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
           int showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
           return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
             listener: (context, state) {
-              if (state.orderStatus.isLoading) {
-                GeneralDialog().showLoadingDialog(context: context);
-              } else if (state.orderStatus.isSuccess) {
-                Navigator.pop(context);
-                if (state.orderResponseModel.paymentURL != null && state.orderResponseModel.paymentURL!.isNotEmpty) {
-                  window.open(state.orderResponseModel.paymentURL!, '_self');
+              if (currentRoute.contains(Routes.orderSummary.toStringPath())) {
+                if (state.orderStatus.isLoading) {
+                  GeneralDialog().showLoadingDialog(context: context);
+                } else if (state.orderStatus.isSuccess) {
+                  Navigator.pop(context);
+                  if (state.orderResponseModel.paymentURL != null && state.orderResponseModel.paymentURL!.isNotEmpty) {
+                    window.open(state.orderResponseModel.paymentURL!, '_self');
+                  }
+                } else if (state.orderStatus.isError) {
+                  Navigator.pop(context);
                 }
-              } else if (state.orderStatus.isError) {
-                Navigator.pop(context);
               }
             },
             builder: (context, orderState) {
@@ -295,8 +303,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                       ? GestureDetector(
                                                           behavior: HitTestBehavior.translucent,
                                                           onTap: () {
-                                                            Navigator.pushNamed(
-                                                                context, '${Routes.shippingAddress.toStringPath()}?pid=$pid&opt_lv1=$optLv1');
+                                                            Navigator.pushNamed(context,
+                                                                '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}');
                                                           },
                                                           child: Container(
                                                             width: maxWidth - 32,
@@ -849,7 +857,18 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                     shippingInfo: ShippingInfo(
                                                                         name: shippingState.addressModel.fullName,
                                                                         address:
-                                                                            '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}'),
+                                                                            '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}',
+                                                                        firstName: shippingState.addressModel.fullName,
+                                                                        lastName: "", //TODO: waiting for UI
+                                                                        mobileNo: shippingState.addressModel.mobileNumber,
+                                                                        houseNo: "",
+                                                                        lane: "",
+                                                                        street: "",
+                                                                        subDistrict: shippingState.addressModel.subDistrict,
+                                                                        district: shippingState.addressModel.district,
+                                                                        province: shippingState.addressModel.province,
+                                                                        postalCode: shippingState.addressModel.zipCode,
+                                                                        email: shippingState.addressModel.emailAddress),
                                                                     email: shippingState.addressModel.emailAddress,
                                                                     mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
                                                                   );

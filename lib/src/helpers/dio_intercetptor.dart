@@ -27,7 +27,7 @@ class DioInterceptor extends Interceptor {
   }
 
   //ignore on error condition
-  // bool _shouldInvokeCallbackFromOnError(DioError err) =>
+  // bool _shouldInvokeCallbackFromOnError(DioException err) =>
   //     NetworkErrorHandler.shouldInvokeErrorHandlerCallback &&
   //         !err.requestOptions.uri.toString().contains('checkcampaign') &&
   //         !(err.message ?? '').contains('cancel');

@@ -3,7 +3,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 
 class AlvaCPILoader extends StatefulWidget {
   // circular progress indicator
-  const AlvaCPILoader({Key? key}) : super(key: key);
+  const AlvaCPILoader({super.key});
 
   @override
   State<AlvaCPILoader> createState() => _AlvaCPILoaderState();

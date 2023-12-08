@@ -15,7 +15,7 @@ import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 class ProductSelectOptions extends StatefulWidget {
-  const ProductSelectOptions({Key? key}) : super(key: key);
+  const ProductSelectOptions({super.key});
   @override
   State<ProductSelectOptions> createState() => _ProductSelectOptionsState();
 }

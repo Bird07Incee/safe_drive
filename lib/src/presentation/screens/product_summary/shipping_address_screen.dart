@@ -20,7 +20,7 @@ import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 class ShippingAddressScreen extends StatefulWidget {
-  const ShippingAddressScreen({Key? key}) : super(key: key);
+  const ShippingAddressScreen({super.key});
 
   @override
   State<ShippingAddressScreen> createState() => _ShippingAddressScreenState();
@@ -31,7 +31,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   late Uri uriData;
   late RoutingData routingData;
   String pid = '';
-  int optLv1 = 0;
+  int? optLv1;
 
   @override
   void didChangeDependencies() {
@@ -45,7 +45,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
       uriData = Uri.parse(settings!.name!);
       routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       pid = (routingData["pid"] == null) ? "" : routingData["pid"];
-      optLv1 = (routingData["opt_lv1"] == null) ? 0 : int.parse(routingData["opt_lv1"]);
+      optLv1 = (routingData["opt_lv1"] == null) ? null : int.parse(routingData["opt_lv1"]);
     }
   }
 
@@ -80,7 +80,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                       if (!args.isFromEditing) myBloc.onClearShippingData();
                       ProductDetailState pdState = context.read<ProductDetailBloc>().state;
                       if (pdState.status.isInitial && pid != "") {
-                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid?opt_lv1=$optLv1");
+                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}");
                       }
                       Navigator.pop(context);
                     },
@@ -111,7 +111,10 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                       myBloc.onSubmitPressed();
                                       ProductDetailState pdState = context.read<ProductDetailBloc>().state;
                                       if (pdState.status.isInitial && pid != "") {
-                                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid?opt_lv1=$optLv1");
+                                        refreshRoute(
+                                            context: context,
+                                            currentRoute: "address",
+                                            queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}");
                                       }
                                       Navigator.pop(context);
                                     }

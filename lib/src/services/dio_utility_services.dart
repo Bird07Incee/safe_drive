@@ -1,16 +1,10 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'package:crypto/crypto.dart';
+// import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
-import 'package:universal_io/io.dart';
 
-class DioUtilityService with HeaderUtil {
+class DioUtilityService {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? DioClient().dioClient;
   final Dio _dioClient;
 
@@ -77,16 +71,17 @@ class DioUtilityService with HeaderUtil {
 
 class DioClient {
   static final Dio client = Dio();
-  String calculateSHA256(String input) {
-    final bytes = utf8.encode(input);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
-  }
+  // String calculateSHA256(String input) {
+  //   final bytes = utf8.encode(input);
+  //   final digest = sha256.convert(bytes);
+  //   return digest.toString();
+  // }
 
   Dio get dioClient {
     client.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
-        await setupCertificate();
+        // initAdapter();
+        // await setupCertificate();
         return handler.next(options);
       },
     ));
@@ -95,35 +90,29 @@ class DioClient {
     return client;
   }
 
+  // void initAdapter() {
+  //   String selfHash = "076c0c9749e7b0fed7294a2ba9f22803d5148ea3132ea9d1327dfb652cdb5fde";
+  //   client.httpClientAdapter = IOHttpClientAdapter(
+  //     createHttpClient: () {
+  //       final client = HttpClient();
+  //       client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+  //         var b = utf8.encode(cert.pem);
+  //         var hostHash = sha256.convert(b).toString();
+  //         return hostHash == selfHash; // Verify the certificate.
+  //       };
+  //       return client;
+  //     },
+  //   );
+  // }
+
   Future<Uint8List> loadAWSRootCA4Certificate(String pem) async {
     final derCertificate = pem.codeUnits;
     return Uint8List.fromList(derCertificate);
   }
 
-  Future<void> setupCertificate() async {
-    final certificate = await loadAWSRootCA4Certificate(stringCertificateBytes);
-    // final certificate =  calculateSHA256(stringCertificateBytes);
-    debugPrint("setupCertificate");
-    debugPrint("certificate $certificate");
-  //   client.httpClientAdapter = IOHttpClientAdapter(
-  //     createHttpClient: () {
-  //       // final SecurityContext scontext = SecurityContext();
-  //       // final secContext = SecurityContext.defaultContext;
-  //       debugPrint("createHttpClient");
-  //       // secContext.setTrustedCertificatesBytes(certificate);
-  //       // HttpClient client = HttpClient(context: secContext);
-  //       HttpClient client = HttpClient();
-  //       client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-  //         debugPrint("cert.pem : ${cert.pem}");
-  //         debugPrint("cert.pem SAH : ${calculateSHA256(cert.pem)}");
-  //         // debugPrint("certificate.pem SAH : ${calculateSHA256(certificate)}");
-  //         return false; // Verify the certificate.
-  //       };
-  //       debugPrint("client $client");
-  //       return client;
-  //     },
-  //   );
-  }
+  // Future<void> setupCertificate() async {
+  //   client.httpClientAdapter = BrowserHttpClientAdapter(withCredentials: true);
+  // }
 }
 
 const stringCertificateBytes = '''
@@ -138,6 +127,6 @@ M6DLJC9wuoihKqB1+IGuYgbEgds5bimwHvouXKNCMEAwDwYDVR0TAQH/BAUwAwEB
 /zAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0OBBYEFNPsxzplbszh2naaVvuc84ZtV+WB
 MAoGCCqGSM49BAMDA2gAMGUCMDqLIfG9fhGt0O9Yli/W651+kI0rz2ZVwyzjKKlw
 CkcO8DdZEv8tmZQoTipPNU0zWgIxAOp1AE47xDqUEpHJWEadIRNyp4iciuRMStuW
-1KyLa2tJElMzrdfkviT8tQp21KW8EA==
+==
 -----END CERTIFICATE-----
 ''';

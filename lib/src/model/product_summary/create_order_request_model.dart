@@ -116,15 +116,78 @@ class PaymentInfo {
 class ShippingInfo {
   final String? name;
   final String? address;
+  final String? firstName;
+  final String? lastName;
+  final String? mobileNo;
+  final String? houseNo;
+  final String? lane;
+  final String? street;
+  final String? subDistrict;
+  final String? district;
+  final String? province;
+  final String? postalCode;
+  final String? email;
 
-  const ShippingInfo({required this.name, required this.address});
+  // var address = {
+  //   "first_name": "คุณ สมหมาย",
+  //   "last_name": "ประกายดาว",
+  //   "mobile_no": "0842215679",
+  //   "address": "หมู่บ้านxxxxxxxxxxx",
+  //   "house_no": "บ้านเลขที่ 2",
+  //   "lane": "3",
+  //   "street": "ถนน สุขุมวิท",
+  //   "sub_district": "แขวงคลองเตย ",
+  //   "district": "เขตคลองเตย",
+  //   "province": "กรุงเทพมหานคร ",
+  //   "postal_code": "10110",
+  //   "email: "ka@ka.com"
+  // };
+
+  const ShippingInfo(
+      {required this.name,
+      required this.address,
+      this.firstName,
+      this.lastName,
+      this.mobileNo,
+      this.houseNo,
+      this.lane,
+      this.street,
+      this.subDistrict,
+      this.district,
+      this.province,
+      this.postalCode,
+      this.email});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['address'] = address;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['mobile_no'] = mobileNo;
+    data['house_no'] = houseNo;
+    data['lane'] = lane;
+    data['street'] = street;
+    data['sub_district'] = subDistrict;
+    data['district'] = district;
+    data['province'] = province;
+    data['postal_code'] = postalCode;
+    data['email'] = email;
     return data;
   }
 
-  static const empty = ShippingInfo(name: "", address: "");
+  static const empty = ShippingInfo(
+      name: "",
+      address: "",
+      firstName: "",
+      lastName: "",
+      mobileNo: "",
+      houseNo: "",
+      lane: "",
+      street: "",
+      subDistrict: "",
+      district: "",
+      province: "",
+      postalCode: "",
+      email: "");
 }

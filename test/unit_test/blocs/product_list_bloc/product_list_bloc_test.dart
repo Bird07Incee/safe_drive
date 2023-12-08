@@ -60,10 +60,10 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products";
             when((){
-              return utilityRepository.postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
                   (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "POST", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
                 return Response(requestOptions: option, data: mockProductListResponse, statusCode: 200, statusMessage: "OK");
               },
             );
@@ -82,10 +82,10 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products";
             when((){
-              return utilityRepository.postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
                   (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "POST", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
                 return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
               },
             );

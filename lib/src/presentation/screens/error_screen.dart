@@ -6,7 +6,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
 class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({Key? key, this.title, this.subTitle, this.titleBtn, this.onTap}) : super(key: key);
+  const ErrorScreen({super.key, this.title, this.subTitle, this.titleBtn, this.onTap});
   final String? title;
   final String? subTitle;
   final String? titleBtn;

@@ -65,7 +65,7 @@ class TextInputWidget extends StatefulWidget {
   final bool isAllowAutoAddEmailFormat;
 
   const TextInputWidget({
-    Key? key,
+    super.key,
     this.onTapSuffix,
     this.marginBottom = 0,
     this.onFocus,
@@ -111,7 +111,7 @@ class TextInputWidget extends StatefulWidget {
     this.digitForCheck,
     this.isAllowAutoAddPhoneFormat = false,
     this.isAllowAutoAddEmailFormat = false,
-  }) : super(key: key);
+  });
 
   @override
   TextInputWidgetState createState() => TextInputWidgetState();

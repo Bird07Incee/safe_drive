@@ -29,7 +29,7 @@ import 'package:marketplace_line_oa/src/utils/get_display_price.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({Key? key}) : super(key: key);
+  const ProductDetailScreen({super.key});
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -52,6 +52,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   double _scale = 1.0;
   String pid = '';
   GlobalKey stickyKey = GlobalKey();
+  bool isLoaded = false;
 
   @override
   void dispose() {
@@ -72,8 +73,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   @override
   void didChangeDependencies() {
-    loadProduct();
     super.didChangeDependencies();
+    if (!isLoaded) {
+      isLoaded = true;
+      loadProduct();
+    }
   }
 
   loadProduct() {

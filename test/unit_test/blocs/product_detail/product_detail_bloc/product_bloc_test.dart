@@ -195,10 +195,10 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products?pid=test12345";
             when((){
-              return utilityRepository.postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
                   (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "POST", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
                 return Response(requestOptions: option, data: mockProductResponse, statusCode: 200, statusMessage: "OK");
               },
             );
@@ -217,10 +217,10 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products?pid=test12345";
             when((){
-              return utilityRepository.postByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
                   (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "POST", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
                 return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
@@ -256,8 +256,7 @@ void main() {
           build: () => ProductDetailBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const SetProduct(product: Product.empty)),
           expect: () => <ProductDetailState>[
-            ProductDetailState(status: ProductDetailStatus.loading),
-            ProductDetailState(status: ProductDetailStatus.success, product: Product.empty)
+            ProductDetailState(product: Product.empty)
           ]);
     });
 

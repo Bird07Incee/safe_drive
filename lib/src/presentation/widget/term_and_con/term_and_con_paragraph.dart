@@ -48,10 +48,10 @@ class SafetyText extends StatelessWidget {
 
   const SafetyText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.pattern,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +80,10 @@ class UnbreakableText extends StatelessWidget {
 
   const UnbreakableText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.pattern,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
