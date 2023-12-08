@@ -316,17 +316,18 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 height: 4,
                               ),
                               GestureDetector(
-                              onTap: () {
-                              RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
+                                onTap: () {
+                                  RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
 
-                              // Extracting the phone number using RegExp
-                              String phoneNumber = regExp.stringMatch(orderSuccessData.merchantMobile!) ?? '';
-                              callPhone(phoneNumber);
-                              },
-                              child: Text(
-                                phoneNumberFormatter(orderSuccessData.merchantMobile!),
-                                style: AlvaStyles().headingSize16w600(blackGoMunTo),
-                              ),),
+                                  // Extracting the phone number using RegExp
+                                  String phoneNumber = regExp.stringMatch(orderSuccessData.merchantMobile!) ?? '';
+                                  callPhone(phoneNumber);
+                                },
+                                child: Text(
+                                  phoneNumberFormatter(orderSuccessData.merchantMobile!),
+                                  style: AlvaStyles().headingSize16w600(blackGoMunTo),
+                                ),
+                              ),
                             ]),
                           ),
                           Container(
@@ -345,23 +346,24 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                     ),
                                   ],
                                 ),
-                            GestureDetector(
-                              onTap: () {
-                                RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
+                                GestureDetector(
+                                  onTap: () {
+                                    RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
 
-                                // Extracting the phone number using RegExp
-                                String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
-                                callPhone(phoneNumber);
-                              },
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    AlvaText(
-                                      title: HomeConst().pleaseContact,
-                                      textStyle: AlvaStyles().headingSize12w700(whiteFalse),
-                                    ),
-                                  ],
-                                ),),
+                                    // Extracting the phone number using RegExp
+                                    String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
+                                    callPhone(phoneNumber);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AlvaText(
+                                        title: HomeConst().pleaseContact,
+                                        textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 const SizedBox(
                                   height: 16,
                                 ),
