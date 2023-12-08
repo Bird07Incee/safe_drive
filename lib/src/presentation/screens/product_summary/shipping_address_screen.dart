@@ -32,11 +32,15 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   late RoutingData routingData;
   String pid = '';
   int? optLv1;
+  bool isLoaded = false;
 
   @override
   void didChangeDependencies() {
-    loadProduct();
     super.didChangeDependencies();
+    if (!isLoaded) {
+      isLoaded = true;
+      loadProduct();
+    }
   }
 
   loadProduct() {

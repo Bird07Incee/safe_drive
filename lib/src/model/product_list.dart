@@ -91,7 +91,7 @@ class Product extends Equatable {
   final String appId;
   final String channelId;
   final String merchantId;
-  final String paymentChannelCode;
+  final List<String> paymentChannelCode;
   final int refundDay;
   final String postDate;
   final String lastUpdateDate;
@@ -124,7 +124,7 @@ class Product extends Equatable {
       appId: '',
       channelId: '',
       merchantId: '',
-      paymentChannelCode: '',
+      paymentChannelCode: [],
       refundDay: 0,
       postDate: '',
       lastUpdateDate: '',
@@ -159,7 +159,7 @@ class Product extends Equatable {
         appId: json['appId'] ?? '',
         channelId: json['channelId'] ?? '',
         merchantId: json['merchantId'] ?? '',
-        paymentChannelCode: json['paymentChannelCode'] ?? '',
+        paymentChannelCode: json['paymentChannelCode'] != null ? List.castFrom<dynamic, String>(json['paymentChannelCode']) : [],
         refundDay: json['refundDay'] ?? 0,
         postDate: json['postDate'] ?? '',
         lastUpdateDate: json['lastUpdateDate'] ?? '',

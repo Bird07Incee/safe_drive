@@ -43,8 +43,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   late RoutingData routingData;
   String pid = '';
   int? optLv1;
-  bool isAppReloaded = false;
   var currentRoute = CurrentRouteObserver.instance.name;
+  bool isLoaded = false;
 
   @override
   void initState() {
@@ -55,7 +55,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (!isAppReloaded) {
+    if (!isLoaded) {
+      isLoaded = true;
       loadProduct();
     }
   }
@@ -66,16 +67,15 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       uriData = Uri.parse(settings!.name!);
       routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       pid = (routingData["pid"] == null) ? "" : routingData["pid"];
+      optLv1 = (routingData["opt_lv1"] == null) ? null : int.parse(routingData["opt_lv1"]);
       ProductDetailState pdState = context.read<ProductDetailBloc>().state;
       if (pdState.status.isInitial && pid != "") {
-        isAppReloaded = true;
         context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
       }
     }
   }
 
   loadSelectOption(Product product) {
-    optLv1 = (routingData["opt_lv1"] == null) ? null : int.parse(routingData["opt_lv1"]);
     final option = BlocProvider.of<ProductOptionBloc>(context);
     if (optLv1 != null) {
       option.updateStepOneVariables(
@@ -100,7 +100,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     price: 0,
                     indexSelect: 0,
                   );
-              if (isAppReloaded) {
+              if (isLoaded) {
                 refreshRoute(context: context, currentRoute: "summary", queryParams: "pid=$pid");
               }
               Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
@@ -303,6 +303,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                       ? GestureDetector(
                                                           behavior: HitTestBehavior.translucent,
                                                           onTap: () {
+                                                            print(optLv1);
                                                             Navigator.pushNamed(context,
                                                                 '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}');
                                                           },
@@ -381,7 +382,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                               GestureDetector(
                                                                 onTap: () {
                                                                   FocusManager.instance.primaryFocus?.unfocus();
-                                                                  Navigator.pushNamed(context, Routes.shippingAddress.toStringPath(),
+                                                                  Navigator.pushNamed(context,
+                                                                      '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}',
                                                                       arguments: ShippingAddressArgs(isFromEditing: true));
                                                                 },
                                                                 child: Container(
