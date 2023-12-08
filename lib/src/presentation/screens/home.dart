@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/main.dart';
@@ -8,6 +9,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
+import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
@@ -314,14 +316,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        AlvaText(
-                                          title: HomeConst().pleaseContact,
-                                          textStyle: AlvaStyles().headingSize12w700(whiteFalse),
-                                        ),
-                                      ],
+                                    GestureDetector(
+                                      onTap: () {
+                                        RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
+
+                                        // Extracting the phone number using RegExp
+                                        String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
+                                        callPhone(phoneNumber);
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          AlvaText(
+                                            title: HomeConst().pleaseContact,
+                                            textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 32,

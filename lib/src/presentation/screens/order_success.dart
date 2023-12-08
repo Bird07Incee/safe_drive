@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -310,9 +310,18 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             SizedBox(
                               height: 4,
                             ),
-                            Text(
-                              phoneNumberFormatter(orderSuccessData.merchantMobile!),
-                              style: AlvaStyles().headingSize16w600(blackGoMunTo),
+                            GestureDetector(
+                              onTap: () {
+                                RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
+
+                                // Extracting the phone number using RegExp
+                                String phoneNumber = regExp.stringMatch(phoneNumberFormatter(orderSuccessData.merchantMobile!)) ?? '';
+                                callPhone(phoneNumber);
+                              },
+                              child: Text(
+                                phoneNumberFormatter(orderSuccessData.merchantMobile!),
+                                style: AlvaStyles().headingSize16w600(blackGoMunTo),
+                              ),
                             ),
                           ]),
                         ),
@@ -332,14 +341,23 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AlvaText(
-                                    title: HomeConst().pleaseContact,
-                                    textStyle: AlvaStyles().headingSize12w700(whiteFalse),
-                                  ),
-                                ],
+                              GestureDetector(
+                                onTap: () {
+                                  RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
+
+                                  // Extracting the phone number using RegExp
+                                  String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
+                                  callPhone(phoneNumber);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AlvaText(
+                                      title: HomeConst().pleaseContact,
+                                      textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                    ),
+                                  ],
+                                ),
                               ),
                               const SizedBox(
                                 height: 16,
