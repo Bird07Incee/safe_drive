@@ -327,9 +327,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          AlvaText(
-                                            title: HomeConst().pleaseContact,
-                                            textStyle: AlvaStyles().headingSize12w700(whiteFalse),
+                                          Text(
+                                            HomeConst().pleaseContact,
+                                            style: AlvaStyles().headingSize12w700(whiteFalse),
                                           ),
                                         ],
                                       ),
