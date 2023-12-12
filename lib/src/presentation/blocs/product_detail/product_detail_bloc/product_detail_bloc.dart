@@ -25,9 +25,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     emit(state.copyWith(status: ProductDetailStatus.loading));
 
     try {
-      String path = "/ecommerce/v1/products${event.pid != '' ? '?pid=${event.pid}' : ''}";
-      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer $accessToken"});
-
+      String path = "/ecommerce/v1/products";
+      Response response =
+          await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": event.pid}, headers: {"Authorization": "Bearer $accessToken"});
       final p = Product.fromJson(response.data);
       emit(state.copyWith(status: ProductDetailStatus.success, product: p));
     } catch (e) {
@@ -36,7 +36,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   }
 
   _onSetProduct(SetProduct event, Emitter<ProductDetailState> emit) async {
-    emit(state.copyWith(product: event.product, status:  ProductDetailStatus.initial));
+    emit(state.copyWith(product: event.product, status: ProductDetailStatus.initial));
   }
 
   _onSetClickFromImage(SetClickFromImage event, Emitter<ProductDetailState> emit) async {
