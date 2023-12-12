@@ -303,7 +303,6 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                       ? GestureDetector(
                                                           behavior: HitTestBehavior.translucent,
                                                           onTap: () {
-                                                            print(optLv1);
                                                             Navigator.pushNamed(context,
                                                                 '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}');
                                                           },
