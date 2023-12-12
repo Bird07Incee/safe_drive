@@ -17,7 +17,7 @@ void main() {
   //   "appId": 0,
   //   "channelId": 0,
   //   "merchantId": 0,
-  //   "paymentChannelCode": "",
+  //   "paymentChannelCode": [],
   //   "refundDay": 7,
   //   "postDate": "2023‐09‐01T02:49:06−07:00",
   //   "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
@@ -193,9 +193,9 @@ void main() {
             SharedPreferences.setMockInitialValues({});
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
-            String path = "/ecommerce/v1/products?pid=test12345";
+            String path = "/ecommerce/v1/products";
             when((){
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": "test12345"}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
                   (_) async {
                 RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
@@ -215,13 +215,13 @@ void main() {
             SharedPreferences.setMockInitialValues({});
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
-            String path = "/ecommerce/v1/products?pid=test12345";
+            String path = "/ecommerce/v1/products";
             when((){
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": "test12345"}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
                   (_) async {
                 RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
-                return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
+                return Response(requestOptions: option, data: <String, dynamic>{}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
           },
@@ -256,7 +256,7 @@ void main() {
           build: () => ProductDetailBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const SetProduct(product: Product.empty)),
           expect: () => <ProductDetailState>[
-            ProductDetailState(product: Product.empty)
+            ProductDetailState(product: Product.empty, status: ProductDetailStatus.initial)
           ]);
     });
 
