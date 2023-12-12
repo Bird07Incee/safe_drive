@@ -345,7 +345,8 @@ class TextInputWidgetState extends State<TextInputWidget> {
             return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
           }
         } else if (widget.required && widget.isAllowAutoAddPhoneFormat) {
-          if (value![0] == '0' && value.replaceAll('-', '').length == 10) {
+          String prefixNumber = value!.substring(0, 2);
+          if (['06', '08', '09'].contains(prefixNumber) && value.replaceAll('-', '').length == 10) {
             return null;
           } else {
             return 'กรุณาระบุ${widget.label ?? ''}ให้ถูกต้อง';
