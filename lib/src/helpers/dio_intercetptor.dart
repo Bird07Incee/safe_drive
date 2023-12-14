@@ -21,7 +21,7 @@ class DioInterceptor extends Interceptor {
   }
 
   Future<void> _onErrorHandler(DioException err, ErrorInterceptorHandler handler) async {
-    if (err.response?.statusCode == html.HttpStatus.unauthorized) {
+    if (err.response?.statusCode == html.HttpStatus.unauthorized && !err.requestOptions.uri.toString().contains('/line/token')) {
       await InterceptorHandler().refreshToken();
     }
   }

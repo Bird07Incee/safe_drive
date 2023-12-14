@@ -856,7 +856,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                         channel: orderState.paymentType.isFullPayment ? "CC" : "IPP",
                                                                         staffCode: staffCode.text),
                                                                     shippingInfo: ShippingInfo(
-                                                                        name: shippingState.addressModel.fullName,
+                                                                        fullName: shippingState.addressModel.fullName,
                                                                         address:
                                                                             '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}',
                                                                         firstName: shippingState.addressModel.fullName,

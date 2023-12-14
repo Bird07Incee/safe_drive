@@ -114,7 +114,7 @@ class PaymentInfo {
 }
 
 class ShippingInfo {
-  final String? name;
+  final String? fullName;
   final String? address;
   final String? firstName;
   final String? lastName;
@@ -144,7 +144,7 @@ class ShippingInfo {
   // };
 
   const ShippingInfo(
-      {required this.name,
+      {required this.fullName,
       required this.address,
       this.firstName,
       this.lastName,
@@ -160,24 +160,24 @@ class ShippingInfo {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
+    data['fullName'] = fullName;
     data['address'] = address;
-    data['first_name'] = firstName;
-    data['last_name'] = lastName;
-    data['mobile_no'] = mobileNo;
-    data['house_no'] = houseNo;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['mobileNo'] = mobileNo;
+    data['houseNo'] = houseNo;
     data['lane'] = lane;
     data['street'] = street;
-    data['sub_district'] = subDistrict;
+    data['subDistrict'] = subDistrict;
     data['district'] = district;
     data['province'] = province;
-    data['postal_code'] = postalCode;
+    data['postalCode'] = postalCode;
     data['email'] = email;
     return data;
   }
 
   static const empty = ShippingInfo(
-      name: "",
+      fullName: "",
       address: "",
       firstName: "",
       lastName: "",
