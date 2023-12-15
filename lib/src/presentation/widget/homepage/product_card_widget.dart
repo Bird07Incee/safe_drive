@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:intl/intl.dart' as intl;
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 // import 'package:marketplace_line_oa/src/model/product_list.dart';
@@ -14,7 +14,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_i
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
-import 'package:marketplace_line_oa/src/utils/get_display_price.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -313,7 +312,7 @@ class ProductCardWidget extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           Text(
-                                            intl.NumberFormat.decimalPattern().format(products[index].price),
+                                            products[index].price.toDecimalFormat(),
                                             style: AlvaStyles().bodySize14W400MutedLine(),
                                           ),
                                           const SizedBox(
@@ -333,11 +332,9 @@ class ProductCardWidget extends StatelessWidget {
                                           children: [
                                             Text(
                                               products[index].discountPrice == 0
-                                                  ? intl.NumberFormat.decimalPattern()
-                                                      .format(getDisplayPrice(products[index].price, products[index].productionOptionals))
-                                                  : intl.NumberFormat.decimalPattern()
-                                                      .format(getDisplayPrice(products[index].discountPrice, products[index].productionOptionals)),
-                                              style: products[index].discountPrice == 0 || products[index].productionOptionals.isNotEmpty
+                                                  ? products[index].price.toDecimalFormat()
+                                                  : products[index].discountPrice.toDecimalFormat(),
+                                              style: products[index].discountPrice == 0
                                                   ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   : AlvaStyles().headingSize22(RedWordShow),
                                             ),
@@ -346,7 +343,7 @@ class ProductCardWidget extends StatelessWidget {
                                             ),
                                             Text(
                                               "บาท",
-                                              style: products[index].discountPrice == 0 || products[index].productionOptionals.isNotEmpty
+                                              style: products[index].discountPrice == 0
                                                   ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
                                                   : AlvaStyles().headingSize18(RedWordShow),
                                             ),

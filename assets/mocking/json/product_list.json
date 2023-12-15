@@ -46,7 +46,6 @@
   "products": [
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -186,7 +185,6 @@
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -323,7 +321,6 @@
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -462,7 +459,6 @@
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -534,7 +530,6 @@
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,

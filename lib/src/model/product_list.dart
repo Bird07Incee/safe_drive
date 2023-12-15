@@ -57,7 +57,6 @@ extension ProductX on Product {
 class Product extends Equatable {
   const Product({
     required this.appId,
-    required this.channelId,
     required this.merchantId,
     required this.paymentChannelCode,
     required this.refundDay,
@@ -89,7 +88,6 @@ class Product extends Equatable {
     required this.productionOptionals,
   });
   final String appId;
-  final String channelId;
   final String merchantId;
   final List<String> paymentChannelCode;
   final int refundDay;
@@ -122,7 +120,6 @@ class Product extends Equatable {
 
   static const empty = Product(
       appId: '',
-      channelId: '',
       merchantId: '',
       paymentChannelCode: [],
       refundDay: 0,
@@ -158,7 +155,6 @@ class Product extends Equatable {
     List<String> productAssets = json['productionAssets'] != null ? List.castFrom<dynamic, String>(json['productionAssets']) : [];
     return Product(
         appId: json['appId'] ?? '',
-        channelId: json['channelId'] ?? '',
         merchantId: json['merchantId'] ?? '',
         paymentChannelCode: json['paymentChannelCode'] != null ? List.castFrom<dynamic, String>(json['paymentChannelCode']) : [],
         refundDay: json['refundDay'] ?? 0,
@@ -199,7 +195,6 @@ class Product extends Equatable {
   // TODO: implement props
   List<Object?> get props => [
         appId,
-        channelId,
         merchantId,
         paymentChannelCode,
         refundDay,
@@ -455,7 +450,6 @@ const mockProductListResponse = {
   "products": [
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -516,7 +510,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -578,7 +571,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "0004234232",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -655,7 +647,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -706,7 +697,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 7,
@@ -745,7 +735,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -806,7 +795,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -867,7 +855,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -973,7 +960,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -1054,7 +1040,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -1135,7 +1120,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -1216,7 +1200,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -1297,7 +1280,6 @@ const mockProductListResponse = {
     },
     {
       "appId": "Marketplace-mini-app",
-      "channelId": "LINE",
       "merchantId": "764764000013086",
       "paymentChannelCode": [],
       "refundDay": 14,
@@ -1381,7 +1363,6 @@ const mockProductListResponse = {
 
 const mockProductResponse = {
   "appId": "Marketplace-mini-app",
-  "channelId": "LINE",
   "merchantId": "0004234232",
   "paymentChannelCode": ["cc", "ipp"],
   "refundDay": 7,

@@ -25,7 +25,6 @@ import 'package:marketplace_line_oa/src/presentation/widget/product_detail/produ
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
-import 'package:marketplace_line_oa/src/utils/get_display_price.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -188,21 +187,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                         children: [
                           AlvaText(
                               title: pdState.product.discountPrice == 0
-                                  ? getDisplayPrice(pdState.product.price, pdState.product.productionOptionals).toDecimalFormat()
-                                  : getDisplayPrice(pdState.product.discountPrice, pdState.product.productionOptionals).toDecimalFormat(),
-                              textStyle: AlvaStyles().heading1().copyWith(
-                                  color: pdState.product.discountPrice == 0 || pdState.product.productionOptionals.isNotEmpty
-                                      ? BTN_SELECTED_TEXT_COLOR_NEW
-                                      : RedWordShow,
-                                  height: 1.33)),
+                                  ? pdState.product.price.toDecimalFormat()
+                                  : pdState.product.discountPrice.toDecimalFormat(),
+                              textStyle: AlvaStyles()
+                                  .heading1()
+                                  .copyWith(color: pdState.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow, height: 1.33)),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 1),
                             child: AlvaText(
                                 title: ' บาท',
                                 textStyle: AlvaStyles()
-                                    .heading2(pdState.product.discountPrice == 0 || pdState.product.productionOptionals.isNotEmpty
-                                        ? BTN_SELECTED_TEXT_COLOR_NEW
-                                        : RedWordShow)
+                                    .heading2(pdState.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow)
                                     .copyWith(height: 1.33)),
                           ),
                         ],

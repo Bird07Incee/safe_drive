@@ -470,61 +470,65 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                   ),
                                                 ),
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  FocusManager.instance.primaryFocus?.unfocus();
-                                                  if (!orderState.paymentType.isInstallment) {
-                                                    context.read<OrderSummaryBloc>().add(SelectPaymentType(paymentType: PaymentType.installment));
-                                                  }
-                                                },
-                                                child: Container(
-                                                  key: const Key("select_payment_type_ipp"),
-                                                  width: maxWidth,
-                                                  height: 48,
-                                                  padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
-                                                  margin: const EdgeInsets.only(bottom: 16),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 24,
-                                                            height: 24,
-                                                            child: Radio(
-                                                              value: "IPP",
-                                                              groupValue: orderState.paymentType.isInstallment ? "IPP" : "",
-                                                              toggleable: true,
-                                                              onChanged: (value) {
-                                                                if (!orderState.paymentType.isInstallment) {
-                                                                  context
-                                                                      .read<OrderSummaryBloc>()
-                                                                      .add(SelectPaymentType(paymentType: PaymentType.installment));
-                                                                }
-                                                              },
+                                              productState.product.paymentChannelCode.contains("IPP")
+                                                  ? GestureDetector(
+                                                      onTap: () {
+                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                        if (!orderState.paymentType.isInstallment) {
+                                                          context
+                                                              .read<OrderSummaryBloc>()
+                                                              .add(SelectPaymentType(paymentType: PaymentType.installment));
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                        key: const Key("select_payment_type_ipp"),
+                                                        width: maxWidth,
+                                                        height: 48,
+                                                        padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
+                                                        margin: const EdgeInsets.only(bottom: 16),
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 24,
+                                                                  height: 24,
+                                                                  child: Radio(
+                                                                    value: "IPP",
+                                                                    groupValue: orderState.paymentType.isInstallment ? "IPP" : "",
+                                                                    toggleable: true,
+                                                                    onChanged: (value) {
+                                                                      if (!orderState.paymentType.isInstallment) {
+                                                                        context
+                                                                            .read<OrderSummaryBloc>()
+                                                                            .add(SelectPaymentType(paymentType: PaymentType.installment));
+                                                                      }
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 16,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: maxWidth - 32 - 24 - 16 - 148,
+                                                                  child: Text("ผ่อนชำระ",
+                                                                      style: AlvaStyles()
+                                                                          .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                          .copyWith(height: 24 / 14)),
+                                                                ),
+                                                              ],
                                                             ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          SizedBox(
-                                                            width: maxWidth - 32 - 24 - 16 - 148,
-                                                            child: Text("ผ่อนชำระ",
-                                                                style: AlvaStyles()
-                                                                    .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                    .copyWith(height: 24 / 14)),
-                                                          ),
-                                                        ],
+                                                            SizedBox(
+                                                              width: 148,
+                                                              child: Text("เฉพาะบัตรเครดิตในเครือกรุงศรี",
+                                                                  style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 148,
-                                                        child: Text("เฉพาะบัตรเครดิตในเครือกรุงศรี",
-                                                            style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
+                                                    )
+                                                  : SizedBox.shrink(),
                                               Container(
                                                 width: maxWidth,
                                                 height: 1,

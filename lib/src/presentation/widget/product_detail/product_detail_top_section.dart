@@ -13,7 +13,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
-import 'package:marketplace_line_oa/src/utils/get_display_price.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -267,12 +266,10 @@ class PDTopSection extends StatelessWidget {
                               children: [
                                 AlvaText(
                                   title: state.product.discountPrice == 0
-                                      ? getDisplayPrice(state.product.price, state.product.productionOptionals).toDecimalFormat()
-                                      : getDisplayPrice(state.product.discountPrice, state.product.productionOptionals).toDecimalFormat(),
+                                      ? state.product.price.toDecimalFormat()
+                                      : state.product.discountPrice.toDecimalFormat(),
                                   textStyle: AlvaStyles()
-                                      .headingSize22w700(state.product.discountPrice == 0 || state.product.productionOptionals.isNotEmpty
-                                          ? BTN_SELECTED_TEXT_COLOR_NEW
-                                          : RedWordShow)
+                                      .headingSize22w700(state.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow)
                                       .copyWith(height: 1.454),
                                 ),
                                 Padding(
@@ -280,9 +277,7 @@ class PDTopSection extends StatelessWidget {
                                   child: AlvaText(
                                     title: ' บาท',
                                     textStyle: AlvaStyles()
-                                        .headingSize18w700(state.product.discountPrice == 0 || state.product.productionOptionals.isNotEmpty
-                                            ? BTN_SELECTED_TEXT_COLOR_NEW
-                                            : RedWordShow)
+                                        .headingSize18w700(state.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow)
                                         .copyWith(height: 1.454),
                                   ),
                                 ),
