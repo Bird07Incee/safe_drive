@@ -24,6 +24,11 @@ class DioInterceptor extends Interceptor {
     if (err.response?.statusCode == html.HttpStatus.unauthorized && !err.requestOptions.uri.toString().contains('/line/token')) {
       await InterceptorHandler().refreshToken();
     }
+
+    ///Handle case renew error
+    else if (err.response?.statusCode != 200 && err.requestOptions.uri.toString().contains('/line/token')) {
+      await InterceptorHandler().reloadApp();
+    }
   }
 
   //ignore on error condition
