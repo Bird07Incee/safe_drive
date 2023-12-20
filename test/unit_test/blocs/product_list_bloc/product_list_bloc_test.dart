@@ -60,7 +60,7 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products";
             when((){
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"source":"LINE"}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
                   (_) async {
                 RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
@@ -148,7 +148,7 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products";
-            var params = {"page": "2", "itemPersPage": 10,"categoryId" : "1234"};
+            var params = {"page": "2", "itemPersPage": 10,"categoryId" : "1234","source"  : "LINE"};
             when((){
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", params, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
