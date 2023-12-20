@@ -109,6 +109,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                             ? OutlinedButton(
                                 onPressed: () {
+                                  resetAllState();
                                   Navigator.pushNamed(
                                       context, '${Routes.orderSummary.toStringPath()}?pid=$pid&opt_lv1=${prodOptState.stepOneIndexSelect}');
                                 },
