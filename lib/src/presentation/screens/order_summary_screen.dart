@@ -866,7 +866,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                         firstName: shippingState.addressModel.fullName,
                                                                         lastName: "", //TODO: waiting for UI
                                                                         mobileNo: shippingState.addressModel.mobileNumber,
-                                                                        houseNo: "",
+                                                                        houseNo: shippingState.addressModel.fullAddress,
                                                                         lane: "",
                                                                         street: "",
                                                                         subDistrict: shippingState.addressModel.subDistrict,
