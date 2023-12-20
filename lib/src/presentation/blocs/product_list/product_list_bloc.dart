@@ -76,7 +76,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     var category = {"source": "LINE"};
 
     if (event.categoryId.isNotEmpty) {
-      category = {"categoryId": event.categoryId};
+      category = {"categoryId": event.categoryId, "source": "LINE"};
     }
 
     if (event.bypassContext == false) {
