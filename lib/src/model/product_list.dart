@@ -179,7 +179,7 @@ class Product extends Equatable {
         percentDiscountPrice: json['percentDiscountPrice'] ?? 0,
         productionAssets: json['productionAssets'] != null
             ? productAssets.length > 20
-                ? productAssets.sublist(0, 19)
+                ? productAssets.sublist(0, 20)
                 : productAssets
             : [],
         merchantFullName: json['merchantFullName'] ?? '',

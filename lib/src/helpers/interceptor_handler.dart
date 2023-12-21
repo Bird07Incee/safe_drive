@@ -27,4 +27,10 @@ class InterceptorHandler {
       html.window.open(url, '_self');
     }
   }
+
+  Future<void> reloadApp() async {
+    PreferencesHelper.clear();
+    String url = Environment().getValue("LINE_REDIRECT_URL");
+    html.window.open(url, '_self');
+  }
 }

@@ -84,6 +84,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
           child: WillPopScope(
             onWillPop: () async {
               resetAllState();
+              Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
               return true;
             },
             child: AlvaRootWidget(
@@ -138,7 +139,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                     key: Key(ProductSelectOptionsConst().backButtonKey),
                     onPressed: () {
                       resetAllState();
-                      Navigator.pop(context);
+                      Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
                     },
                     icon: const Icon(Icons.arrow_back_ios)),
               ),

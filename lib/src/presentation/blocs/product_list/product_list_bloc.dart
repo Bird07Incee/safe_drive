@@ -31,8 +31,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
       String accessToken = await lineDataHelper.getLineAccessToken();
-      Response response =
-          await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository
+          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {"source": "LINE"}, headers: {"Authorization": "Bearer $accessToken"});
       final productList = ProductList.fromJson(response.data);
       return productList;
     } catch (e) {
@@ -73,10 +73,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     // final nav = Navigator.of(event.context);
     // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
-    var category = {};
+    var category = {"source": "LINE"};
 
     if (event.categoryId.isNotEmpty) {
-      category = {"categoryId": event.categoryId};
+      category = {"categoryId": event.categoryId, "source": "LINE"};
     }
 
     if (event.bypassContext == false) {
@@ -113,7 +113,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
     // final nav = Navigator.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
-    var params = {"page": event.page.toString(), "itemPersPage": 10};
+    var params = {"page": event.page.toString(), "itemPersPage": 10, "source": "LINE"};
 
     if (event.categoryId.isNotEmpty) {
       params["categoryId"] = event.categoryId;
