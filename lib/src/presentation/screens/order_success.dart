@@ -34,7 +34,8 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       invoiceNo = (routingData["invoiceNo"] == null) ? "" : routingData["invoiceNo"];
       OrderSuccessState state = context.read<OrderSuccessBloc>().state;
-      if (invoiceNo != "" && state.orderSuccessStatus == GetOrderSuccessDataStatus.initial) {
+      if (invoiceNo != "" &&
+          (state.orderSuccessStatus == GetOrderSuccessDataStatus.initial || state.orderSuccessStatus == GetOrderSuccessDataStatus.error)) {
         context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
         // context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
       }
