@@ -5,6 +5,7 @@ class CreateOrderRequestModel {
   final ShippingInfo? shippingInfo;
   final String? email;
   final String? mobilePhone;
+  final String? source;
 
   const CreateOrderRequestModel(
       {required this.uid,
@@ -12,7 +13,8 @@ class CreateOrderRequestModel {
       required this.paymentInfo,
       required this.shippingInfo,
       required this.email,
-      required this.mobilePhone});
+      required this.mobilePhone,
+      required this.source});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -28,11 +30,18 @@ class CreateOrderRequestModel {
     }
     data['email'] = email;
     data['mobilePhone'] = mobilePhone;
+    data['source'] = source;
     return data;
   }
 
   static const empty = CreateOrderRequestModel(
-      uid: '', products: [OrderProduct.empty], paymentInfo: PaymentInfo.empty, shippingInfo: ShippingInfo.empty, email: "", mobilePhone: "");
+      uid: '',
+      products: [OrderProduct.empty],
+      paymentInfo: PaymentInfo.empty,
+      shippingInfo: ShippingInfo.empty,
+      email: "",
+      mobilePhone: "",
+      source: "");
 }
 
 class OrderProduct {

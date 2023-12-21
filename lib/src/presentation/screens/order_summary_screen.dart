@@ -841,42 +841,42 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                   // Level2 step2SelectedOption =
                                                                   //     step1SelectedOption.level2[selectOptionBloc.stepTwoIndexSelect ?? 0];
                                                                   requestModel = CreateOrderRequestModel(
-                                                                    uid: await LineDataHelper().getLineUid(),
-                                                                    products: [
-                                                                      OrderProduct(
-                                                                          productId: productState.product.productId,
-                                                                          qty: 1,
-                                                                          unitPrice: productState.product.productionOptionals.isNotEmpty
-                                                                              ? step1price
-                                                                              : showPrice,
-                                                                          optional: productState.product.productionOptionals.isEmpty
-                                                                              ? null
-                                                                              : Optional(
-                                                                                  productId: step1SelectedOption.subProductId,
-                                                                                  qty: 1,
-                                                                                  unitPrice: step1SelectedOption.price))
-                                                                    ],
-                                                                    paymentInfo: PaymentInfo(
-                                                                        channel: orderState.paymentType.isFullPayment ? "CC" : "IPP",
-                                                                        staffCode: staffCode.text),
-                                                                    shippingInfo: ShippingInfo(
-                                                                        fullName: shippingState.addressModel.fullName,
-                                                                        address:
-                                                                            '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}',
-                                                                        firstName: shippingState.addressModel.fullName,
-                                                                        lastName: "", //TODO: waiting for UI
-                                                                        mobileNo: shippingState.addressModel.mobileNumber,
-                                                                        houseNo: shippingState.addressModel.fullAddress,
-                                                                        lane: "",
-                                                                        street: "",
-                                                                        subDistrict: shippingState.addressModel.subDistrict,
-                                                                        district: shippingState.addressModel.district,
-                                                                        province: shippingState.addressModel.province,
-                                                                        postalCode: shippingState.addressModel.zipCode,
-                                                                        email: shippingState.addressModel.emailAddress),
-                                                                    email: shippingState.addressModel.emailAddress,
-                                                                    mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
-                                                                  );
+                                                                      uid: await LineDataHelper().getLineUid(),
+                                                                      products: [
+                                                                        OrderProduct(
+                                                                            productId: productState.product.productId,
+                                                                            qty: 1,
+                                                                            unitPrice: productState.product.productionOptionals.isNotEmpty
+                                                                                ? step1price
+                                                                                : showPrice,
+                                                                            optional: productState.product.productionOptionals.isEmpty
+                                                                                ? null
+                                                                                : Optional(
+                                                                                    productId: step1SelectedOption.subProductId,
+                                                                                    qty: 1,
+                                                                                    unitPrice: step1SelectedOption.price))
+                                                                      ],
+                                                                      paymentInfo: PaymentInfo(
+                                                                          channel: orderState.paymentType.isFullPayment ? "CC" : "IPP",
+                                                                          staffCode: staffCode.text),
+                                                                      shippingInfo: ShippingInfo(
+                                                                          fullName: shippingState.addressModel.fullName,
+                                                                          address:
+                                                                              '${shippingState.addressModel.fullAddress} ${shippingState.addressModel.subDistrict} ${shippingState.addressModel.district} ${shippingState.addressModel.province} ${shippingState.addressModel.zipCode}',
+                                                                          firstName: shippingState.addressModel.fullName,
+                                                                          lastName: "", //TODO: waiting for UI
+                                                                          mobileNo: shippingState.addressModel.mobileNumber,
+                                                                          houseNo: shippingState.addressModel.fullAddress,
+                                                                          lane: "",
+                                                                          street: "",
+                                                                          subDistrict: shippingState.addressModel.subDistrict,
+                                                                          district: shippingState.addressModel.district,
+                                                                          province: shippingState.addressModel.province,
+                                                                          postalCode: shippingState.addressModel.zipCode,
+                                                                          email: shippingState.addressModel.emailAddress),
+                                                                      email: shippingState.addressModel.emailAddress,
+                                                                      mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
+                                                                      source: "LINE");
                                                                   debugPrint(requestModel.toJson().toString());
                                                                   orderBloc.add(CreateOrder(requestModel: requestModel));
                                                                 },
