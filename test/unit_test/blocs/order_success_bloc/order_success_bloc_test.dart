@@ -103,7 +103,7 @@ void main() {
           when(() {
             return utilityRepository.postByURL(
                 "$baseUrl$transactionApiPath$inquriyPath", payload,
-                headers: {"Authorization": "Bearer "});
+                headers: {"Authorization": "Bearer ", "source": "LINE"});
           }).thenAnswer(
             (_) async {
               RequestOptions option = RequestOptions(

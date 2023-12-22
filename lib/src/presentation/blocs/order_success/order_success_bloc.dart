@@ -38,8 +38,8 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     var payload = {"invoiceNo": event.invoiceNo, "uid": uid};
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
     try {
-      Response response =
-          await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository
+          .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
       String status = response.data["status"] ?? "";
@@ -60,7 +60,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
           }
           await Future.delayed(Duration(seconds: 8));
           Response response = await utilityRepository
-              .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken"});
+              .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
           final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
           String status = response.data["status"] ?? "";
           if (status == "Complete") {
