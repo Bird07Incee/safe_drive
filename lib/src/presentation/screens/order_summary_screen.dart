@@ -875,8 +875,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                           postalCode: shippingState.addressModel.zipCode,
                                                                           email: shippingState.addressModel.emailAddress),
                                                                       email: shippingState.addressModel.emailAddress,
-                                                                      mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''),
-                                                                      source: "LINE");
+                                                                      mobilePhone: shippingState.addressModel.mobileNumber.replaceAll('-', ''));
                                                                   debugPrint(requestModel.toJson().toString());
                                                                   orderBloc.add(CreateOrder(requestModel: requestModel));
                                                                 },

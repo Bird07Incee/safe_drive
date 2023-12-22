@@ -60,7 +60,7 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products";
             when((){
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"source":"LINE"}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer ","source": "LINE"});
             }).thenAnswer(
                   (_) async {
                 RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
@@ -105,7 +105,7 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products";
             when((){
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"categoryId": "1234", "source": "LINE"}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"categoryId": "1234"}, headers: {"Authorization": "Bearer ","source": "LINE"});
             }).thenAnswer(
                   (_) async {
                 RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
@@ -148,9 +148,9 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
             String path = "/ecommerce/v1/products";
-            var params = {"page": "2", "itemPersPage": 10,"categoryId" : "1234","source"  : "LINE"};
+            var params = {"page": "2", "itemPersPage": 10,"categoryId" : "1234"};
             when((){
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", params, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", params, headers: {"Authorization": "Bearer ","source": "LINE"});
             }).thenAnswer(
                   (_) async {
                 RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
