@@ -66,7 +66,7 @@ _setUpDatadog() {
     site: DatadogSite.us1,
     nativeCrashReportEnabled: true,
     loggingConfiguration: DatadogLoggingConfiguration(),
-    rumConfiguration: DatadogRumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee'),
+    rumConfiguration: DatadogRumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee', traceSampleRate: 100),
   );
 }
 

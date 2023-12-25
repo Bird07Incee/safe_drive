@@ -1,3 +1,4 @@
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 
 class AlvaRootWidget extends StatelessWidget {
@@ -15,14 +16,17 @@ class AlvaRootWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Title(
-        color: Colors.black,
-        title: titlePage,
-        child: Scaffold(
-          body: child,
-          appBar: appBar,
-          bottomSheet: bottomSheet,
-          backgroundColor: Colors.white,
-        ));
+    return RumUserActionDetector(
+      rum: DatadogSdk.instance.rum,
+      child: Title(
+          color: Colors.black,
+          title: titlePage,
+          child: Scaffold(
+            body: child,
+            appBar: appBar,
+            bottomSheet: bottomSheet,
+            backgroundColor: Colors.white,
+          )),
+    );
   }
 }

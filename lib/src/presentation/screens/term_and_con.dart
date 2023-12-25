@@ -1,5 +1,6 @@
 import 'dart:convert';
 // ignore: avoid_web_libraries_in_flutter
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart' as fll;
@@ -66,6 +67,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         if (response.statusCode == 200) {
           isCodeVerify = true;
           lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
+          String lineUid = await lineDataHelper.getLineUid();
+          DatadogSdk.instance.setUserInfo(id: lineUid, name: "Merphy");
         } else if (response.statusCode == 400) {
           PreferencesHelper.clear();
           String url = Environment().getValue("LINE_REDIRECT_URL");
@@ -79,6 +82,9 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
             .postByURL("$baseUrl$socialApiPath/accept/termandcond", {"uid": lineUid}, headers: {"Authorization": "Bearer $accessToken"});
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
+          int tokenExp = await lineDataHelper.getTokenExp();
+          String termAndConVersion = await lineDataHelper.getTAndC();
+          DatadogSdk.instance.setUserInfo(id: lineUid, name: "Merphy", extraInfo: {"tokenExp": tokenExp, "TnCVersion": termAndConVersion});
           //stamp version
           if (!mounted) return;
           Navigator.of(context).pop();
