@@ -153,7 +153,7 @@ class Product extends Equatable {
   factory Product.fromJson(Map<String, dynamic> json) {
     if (json.isEmpty) return Product.empty;
     List<String> productAssets = json['productionAssets'] != null ? List.castFrom<dynamic, String>(json['productionAssets']) : [];
-    String oDescription = """<p>Wallbox Pulsar Plus is an intelligent charging system for electric cars and plug-in hybrids. A free application for mobile devices available to him will allow you to block access and read the history of energy consumption.<br /> The Pulsar Plus system has a small size, compact design, which uses the latest technologies to ensure maximum charging efficiency. Thanks to the possibility of remote configuration, Pulsar Plus easily adapts to any electrical installation. The ability to control via a mobile device will protect the station against unauthorized use. Thanks to this, it will be perfect for public garage halls. Pulsar Plus is equipped with an integrated protection against DC leakage as standard, thanks to which it meets the latest and most stringent standards for devices of this type.</p> <p><strong>ภาพรวมข้อมูลผลิตภัณฑ์</strong><br /> สี : ขาว<br /> ประเภทของเครื่องชาร์จ : Mode 3<br /> ขนาด : 166 x 163 x 82 มิลลิเมตร (ไม่รวมสายชาร์จ)<br /> นํ้าหนัก : 1 กิโลกรัม (ไม่รวมสายชาร์จ)<br /> ความยาวสายชาร์จ : 5 เมตร (7 เมตร เพิ่มเติม )</p> <p><strong>การเชื่อมต่อกับผู้ใช้งาน</strong><br /> การเชื่อมต่อ : Wi-Fi / Bluetooth<br /> การเข้าใช้งาน : myWallbox App&amp;Portal<br /> การใช้งานเครื่องชาร์จ : myWallbox App&amp;Portal<br /> การแสดงสถานะเครื่องชาร์จ : ไฟ LED / myWallboxmApp&amp;Portal<br /> คุณสมบัติที่มากับเครื่อง : Power Sharing<br /> คุณสมบัติเพิ่มเติมที่สามารถใช้ร่วมกับเครื่องชาร์จได้ : Power Boost/Dynamic Power Sharing / MID Meter<br /> การอนุญาตให้เชื่อมต่อ เครื่องชาร์จ : myWallbox App / OCPP 1.6j</p>""";
+
     return Product(
         appId: json['appId'] ?? '',
         merchantId: json['merchantId'] ?? '',
@@ -169,10 +169,10 @@ class Product extends Equatable {
         commissionAmount: json['commissionAmount'] ?? 0,
         serviceFee: json['serviceFee'] ?? 0,
         shippingFee: json['shippingFee'] ?? 0,
-        tagline: json['tagline'] != null ? json['tagline'].toString() : "",
+        tagline: json['tagline'] != null ? json['tagline'].toString().replaceAll("<br />", "\n") : "",
         promotionTag: json['promotionTag'] != null ? List.castFrom<dynamic, String>(json['promotionTag']) : [],
-        description: oDescription,
-        technicalSpec: json['technicalSpec'] != null ? json['technicalSpec'].toString() : "",
+        description: json['description'] != null ? json['description'].toString().replaceAll("<br />", "\n") : "",
+        technicalSpec: json['technicalSpec'] != null ? json['technicalSpec'].toString().replaceAll("<br />", "\n") : "",
         remark: json['remark'] ?? '',
         currency: json['currency'] ?? '',
         price: json['price'] ?? 0,
