@@ -275,14 +275,15 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               data.isNotEmpty
                   ? _tabController.index == 1
                       ? LayoutBuilder(builder: (context, constraints) {
+                          data = data.replaceAll("<br/>", "\n");
                           final span = TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
                           final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
                           tp.layout(maxWidth: constraints.maxWidth);
                           final numLines = tp.computeLineMetrics().length;
                           return Container(
-                              padding: numLines >= 5 ? null : EdgeInsets.only(top: 16),
+                              padding: numLines > 5 ? null : EdgeInsets.only(top: 16),
                               child: Visibility(
-                                  visible: numLines >= 5,
+                                  visible: numLines > 5,
                                   child: Padding(
                                       padding: EdgeInsets.symmetric(vertical: 16),
                                       child: Row(
