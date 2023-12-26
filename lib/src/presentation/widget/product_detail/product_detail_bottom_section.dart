@@ -176,7 +176,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (_tabController.index == 0) {
             data = product.technicalSpec;
           } else {
-            data = product.description;
+            final replaceInnerTagP =
+                product.description.substring(3, product.description.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "");
+            data = "<p>$replaceInnerTagP<p/>";
           }
           return Column(
             children: [
@@ -263,8 +265,17 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                             ? HtmlWidget(
                                 data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                 buildAsync: true,
-                                customStylesBuilder: (element) {
-                                  return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'max-lines': '5', 'text-overflow': 'ellipsis'};
+                                customWidgetBuilder: (element) {
+                                  if (element.localName == 'p' || element.localName == 'span') {
+                                    String text = element.text;
+                                    return Text(
+                                      text,
+                                      maxLines: 5,
+                                      style: TextStyle(fontSize: 14, fontFamily: 'Krungsri Condensed', overflow: TextOverflow.ellipsis),
+                                      overflow: TextOverflow.ellipsis,
+                                    );
+                                  }
+                                  return null;
                                 },
                                 factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
