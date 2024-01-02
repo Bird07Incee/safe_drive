@@ -176,9 +176,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (_tabController.index == 0) {
             data = product.technicalSpec;
           } else {
-            final replaceInnerTagP =
-                product.description.substring(3, product.description.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "");
-            data = "<p>$replaceInnerTagP<p/>";
+            final replaceInnerTagP = product.description.isNotEmpty
+                ? product.description.substring(3, product.description.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
+                : "";
+            data = product.description.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
           }
           return Column(
             children: [

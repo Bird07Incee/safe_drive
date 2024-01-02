@@ -45,9 +45,10 @@ class PDTopSection extends StatelessWidget {
     double maxWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       builder: (context, state) {
-        final replaceInnerTagP =
-            state.product.tagline.substring(3, state.product.tagline.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "");
-        final tagline = "<p>$replaceInnerTagP<p/>";
+        final replaceInnerTagP = state.product.tagline.isNotEmpty
+            ? state.product.tagline.substring(3, state.product.tagline.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
+            : "";
+        final tagline = state.product.tagline.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
         return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
           builder: (context, zoomarguments) {
             return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
