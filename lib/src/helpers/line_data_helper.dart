@@ -77,7 +77,9 @@ class LineDataHelper {
   Future<void> lineDataGrabber(String key, String value) async {
     switch (key) {
       case "code":
-        await PreferencesHelper.setString("code", value);
+        if (value.isNotEmpty) {
+          await PreferencesHelper.setString("code", value);
+        }
         break;
       case "liff.state":
         String code = value.split("&")[0].replaceAll("?code=", "");
