@@ -54,7 +54,7 @@ _setUpLineLIFF() {
       config: Config(liffId: lineId),
       successCallback: () {},
       errorCallback: (error) {
-        debugPrint('init error: ${error.name}, ${error.message}, ${error.stack}');
+        // debugPrint('init error: ${error.name}, ${error.message}, ${error.stack}');
       });
 }
 

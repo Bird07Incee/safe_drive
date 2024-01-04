@@ -52,7 +52,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } catch (e) {
-      debugPrint('re-load product list after refresh token');
+      // debugPrint('re-load product list after refresh token');
       try {
         ProductList productList = await _getProductWithNoCategory();
 
@@ -96,7 +96,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         Navigator.pop(event.context);
       }
     } catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
 
       if (event.bypassContext == false) {
@@ -146,7 +146,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         Navigator.pop(event.context);
       }
     } catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
 
       if (event.bypassContext == false) {

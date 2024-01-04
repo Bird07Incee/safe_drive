@@ -62,7 +62,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       bool isCodeVerify = accessToken != "";
       if (!isCodeVerify) {
         String lineCode = await lineDataHelper.getLineCode();
-        debugPrint('accessToken : $accessToken, code: $lineCode');
+        // debugPrint('accessToken : $accessToken, code: $lineCode');
         Response response = await dioUtilityRepository.postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
         if (response.statusCode == 200) {
           isCodeVerify = true;
