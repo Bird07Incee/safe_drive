@@ -67,7 +67,7 @@ class OrderCancelScreen extends StatelessWidget {
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.initial.toStringPath());
+                      Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                     },
                     child: Container(
                       height: 48,

@@ -77,7 +77,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     return RootPageCondition(
         child: WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacementNamed(context, Routes.initial.toStringPath());
+        Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
         return false;
       },
       child: AlvaRootWidget(
@@ -385,7 +385,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, Routes.initial.toStringPath());
+                          Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                         },
                         child: Container(
                           height: 48,
