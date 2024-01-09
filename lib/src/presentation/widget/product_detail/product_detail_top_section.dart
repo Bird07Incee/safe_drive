@@ -212,26 +212,23 @@ class PDTopSection extends StatelessWidget {
                                 customWidgetBuilder: (element) {
                                   if (element.localName == 'p' || element.localName == 'span') {
                                     String text = element.text;
-                                    return Padding(
-                                      padding: const EdgeInsets.only(left: 0, bottom: 16.0),
-                                      child: ReadMoreText(
-                                        text,
-                                        trimLines: 3,
-                                        preDataText: null,
-                                        postDataText: null,
-                                        style: AlvaStyles().headingSize10w400(spaceGrey),
-                                        lessStyle: AlvaStyles().headingSize10w700(BlueFantasy),
-                                        moreStyle: AlvaStyles().headingSize10w700(BlueFantasy),
-                                        postDataTextStyle: AlvaStyles().headingSize10w400(spaceGrey),
-                                        trimMode: TrimMode.Line,
-                                        trimCollapsedText: ' อ่านต่อ ',
-                                        trimExpandedText: '  ซ่อนรายละเอียด',
-                                      ),
+                                    return ReadMoreText(
+                                      text,
+                                      trimLines: 3,
+                                      preDataText: null,
+                                      postDataText: null,
+                                      style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12),
+                                      lessStyle: AlvaStyles().headingSize10w700(BlueFantasy),
+                                      moreStyle: AlvaStyles().headingSize10w700(BlueFantasy),
+                                      postDataTextStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12),
+                                      trimMode: TrimMode.Line,
+                                      trimCollapsedText: ' อ่านต่อ ',
+                                      trimExpandedText: '  ซ่อนรายละเอียด',
                                     );
                                   }
                                   return null;
                                 },
-                                textStyle: AlvaStyles().headingSize10w400(spaceGrey),
+                                textStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12),
                                 customStylesBuilder: (element) {
                                   if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
                                     if (element.attributes['style'].toString().contains('9c9c9c')) {

@@ -259,54 +259,63 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                             ? HtmlWidget(
                                 data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                 buildAsync: true,
+                                customStylesBuilder: (element) {
+                                  return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'line-height': '24px', 'color': '#2c2626'};
+                                },
                                 factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
                             : Container(),
                         !isPressedReadMore
-                            ? HtmlWidget(
-                                data.isNotEmpty ? data : AppStrings().noDataFromSeller,
-                                buildAsync: true,
-                                customStylesBuilder: (element) {
-                                  if (element.localName == "table") {
-                                    return {'width': '100%'};
-                                  }
-                                  if (element.localName == "td") {
-                                    return {
-                                      'width': '50%',
-                                      'vertical-align': 'top;',
-                                      'padding-top': '8px;',
-                                      'padding-bottom': '8px;',
-                                      'font-size': '14px',
-                                      'line-height': '24px',
-                                      'color': '#2c2626'
-                                    };
-                                  }
-                                  if (element.localName == "th" || element.localName == "thead") {
+                            ? SizedBox(
+                                width: MediaQuery.of(context).size.width - 32,
+                                height: _tabController.index == 1 ? 120 : null,
+                                child: HtmlWidget(
+                                  data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+                                  buildAsync: true,
+                                  customStylesBuilder: (element) {
+                                    if (element.localName == "table") {
+                                      return {'width': '100%'};
+                                    }
+                                    if (element.localName == "td") {
+                                      return {
+                                        'width': '50%',
+                                        'vertical-align': 'top;',
+                                        'padding-top': '8px;',
+                                        'padding-bottom': '8px;',
+                                        'font-size': '14px',
+                                        'line-height': '24px',
+                                        'color': '#2c2626'
+                                      };
+                                    }
+                                    if (element.localName == "th" || element.localName == "thead") {
+                                      return null;
+                                    }
+                                    if (element.localName == "p") {
+                                      return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'line-height': '24px', 'color': '#2c2626'};
+                                    }
                                     return null;
-                                  }
-                                  return null;
-                                },
-                                customWidgetBuilder: (element) {
-                                  if (_tabController.index == 1 && (element.localName == 'p' || element.localName == 'span')) {
-                                    String text = element.text;
-                                    return Text(
-                                      text,
-                                      maxLines: 5,
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'Krungsri Condensed',
-                                          overflow: TextOverflow.ellipsis,
-                                          height: 24 / 14,
-                                          color: BTN_SELECTED_TEXT_COLOR_NEW),
-                                      overflow: TextOverflow.ellipsis,
-                                    );
-                                  }
-                                  if (element.localName == "th" || element.localName == "thead") {
-                                    return SizedBox.shrink();
-                                  }
-                                  return null;
-                                },
-                                factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                                  },
+                                  customWidgetBuilder: (element) {
+                                    // if (_tabController.index == 1 && (element.localName == 'p' || element.localName == 'span')) {
+                                    //   String text = element.text;
+                                    //   return Text(
+                                    //     text,
+                                    //     style: TextStyle(
+                                    //         fontSize: 14,
+                                    //         fontFamily: 'Krungsri Condensed',
+                                    //         overflow: TextOverflow.ellipsis,
+                                    //         height: 24 / 14,
+                                    //         color: BTN_SELECTED_TEXT_COLOR_NEW),
+                                    //     overflow: TextOverflow.ellipsis,
+                                    //   );
+                                    // }
+                                    if (element.localName == "th" || element.localName == "thead") {
+                                      return SizedBox.shrink();
+                                    }
+                                    return null;
+                                  },
+                                  factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                                ),
                               )
                             : Container(),
                       ],

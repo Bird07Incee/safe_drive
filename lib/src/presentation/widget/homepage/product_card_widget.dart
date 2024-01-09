@@ -281,7 +281,8 @@ class ProductCardWidget extends StatelessWidget {
                                             if (element.localName == "p") {
                                               return {
                                                 'font-family': 'Krungsri Condensed',
-                                                'font-size': '10px',
+                                                'font-size': '12px',
+                                                'line-height': '20px',
                                                 'font-weight': '400',
                                                 'color': '#5A5A5A',
                                                 'max-lines': '4',
@@ -297,7 +298,8 @@ class ProductCardWidget extends StatelessWidget {
                                             } else {
                                               return {
                                                 'font-family': 'Krungsri Condensed',
-                                                'font-size': '10px',
+                                                'font-size': '12px',
+                                                'line-height': '20px',
                                                 'font-weight': '400',
                                                 'color': '#5A5A5A',
                                                 'max-lines': '4',
