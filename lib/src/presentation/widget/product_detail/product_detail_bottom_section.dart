@@ -271,7 +271,15 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                     return {'width': '100%'};
                                   }
                                   if (element.localName == "td") {
-                                    return {'width': '50%', 'vertical-align': 'top;', 'padding-top': '8px;', 'padding-bottom': '8px;', 'font-size': '14px', 'line-height': '24px', 'color': '#2c2626'};
+                                    return {
+                                      'width': '50%',
+                                      'vertical-align': 'top;',
+                                      'padding-top': '8px;',
+                                      'padding-bottom': '8px;',
+                                      'font-size': '14px',
+                                      'line-height': '24px',
+                                      'color': '#2c2626'
+                                    };
                                   }
                                   if (element.localName == "th" || element.localName == "thead") {
                                     return null;
@@ -279,12 +287,17 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                   return null;
                                 },
                                 customWidgetBuilder: (element) {
-                                  if (element.localName == 'p' || element.localName == 'span') {
+                                  if (_tabController.index == 1 && (element.localName == 'p' || element.localName == 'span')) {
                                     String text = element.text;
                                     return Text(
                                       text,
                                       maxLines: 5,
-                                      style: TextStyle(fontSize: 14, fontFamily: 'Krungsri Condensed', overflow: TextOverflow.ellipsis, height: 24/14, color: grey300),
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Krungsri Condensed',
+                                          overflow: TextOverflow.ellipsis,
+                                          height: 24 / 14,
+                                          color: BTN_SELECTED_TEXT_COLOR_NEW),
                                       overflow: TextOverflow.ellipsis,
                                     );
                                   }
