@@ -57,6 +57,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
     bool showOutsideLabel = widget.outsideLabel && widget.label != null;
 
     return GestureDetector(
+        key: const Key("select_dropdown"),
         onTap: () async {
           if (!widget.disable) {
             List<DropdownAddressModel> items = widget.options!.map((e) => e as DropdownAddressModel).toList();

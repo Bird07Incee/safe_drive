@@ -302,6 +302,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                   child: shippingState.addressModel == ShippingAddressModel.empty
                                                       ? GestureDetector(
                                                           behavior: HitTestBehavior.translucent,
+                                                          key: const Key("set_address_button"),
                                                           onTap: () {
                                                             Navigator.pushNamed(context,
                                                                 '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}');
@@ -379,6 +380,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                 ],
                                                               ),
                                                               GestureDetector(
+                                                                key: const Key("edit_address_button"),
                                                                 onTap: () {
                                                                   FocusManager.instance.primaryFocus?.unfocus();
                                                                   Navigator.pushNamed(context,
@@ -417,6 +419,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                     textStyle: AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
                                               ),
                                               GestureDetector(
+                                                key: const Key("select_payment_type_CC"),
                                                 onTap: () {
                                                   FocusManager.instance.primaryFocus?.unfocus();
                                                   if (!orderState.paymentType.isFullPayment) {
@@ -472,6 +475,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                               ),
                                               productState.product.paymentChannelCode.contains("IPP")
                                                   ? GestureDetector(
+                                                      key: const Key("select_payment_type_IPP"),
                                                       onTap: () {
                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                         if (!orderState.paymentType.isInstallment) {
@@ -577,7 +581,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                             ? Container(
                                                                 margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                                                                 child: GestureDetector(
-                                                                    key: const Key("clear_search_box"),
+                                                                    key: const Key("staff_code"),
                                                                     onTap: () {
                                                                       saleCodeNode.requestFocus();
                                                                     },
@@ -630,6 +634,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                         )),
                                     showDetail
                                         ? GestureDetector(
+                                            key: const Key("show_more_summary_button"),
                                             onTap: () {
                                               context.read<ShowSummaryDetailCubit>().toggle();
                                             },
@@ -771,6 +776,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       GestureDetector(
+                                                        key: const Key("show_more_summary_button"),
                                                         onTap: () {
                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                           context.read<ShowSummaryDetailCubit>().toggle();

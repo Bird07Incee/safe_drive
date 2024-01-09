@@ -317,6 +317,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 height: 4,
                               ),
                               GestureDetector(
+                                key: const Key("call_to_merchant_button"),
                                 onTap: () {
                                   RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
 
@@ -348,6 +349,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                   ],
                                 ),
                                 GestureDetector(
+                                  key: const Key("call_button"),
                                   onTap: () {
                                     RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
 
@@ -384,6 +386,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                         ],
                       ),
                       child: GestureDetector(
+                        key: const Key("back_to_homepage_button"),
                         onTap: () {
                           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                         },

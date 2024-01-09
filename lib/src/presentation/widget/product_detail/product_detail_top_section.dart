@@ -78,6 +78,7 @@ class PDTopSection extends StatelessWidget {
                                   return Stack(
                                     children: [
                                       GestureDetector(
+                                        key: const Key("image_slide_action"),
                                         onTap: () {
                                           context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                           context

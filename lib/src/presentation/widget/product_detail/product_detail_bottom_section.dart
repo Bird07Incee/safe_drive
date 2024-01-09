@@ -230,6 +230,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 height: 16,
               ),
               GestureDetector(
+                key: const Key("read_more_product_detail"),
                 onHorizontalDragEnd: (details) async {
                   if (_tabController.index == 0) {
                     if (details.primaryVelocity! < 0) {
@@ -385,7 +386,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 ),
               ),
             ),
-            GestureDetector(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage)),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage),
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [

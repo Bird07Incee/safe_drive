@@ -179,6 +179,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                         itemCount: state.product.productionOptionals.length,
                                         itemBuilder: (BuildContext context, int index) {
                                           return GestureDetector(
+                                            key: Key("product_option_button_$index"),
                                             onTap: () {
                                               if (prodOptState.stepOneGroupValueRadio == state.product.productionOptionals[index].label) {
                                                 myBloc.updateStepOneVariables(

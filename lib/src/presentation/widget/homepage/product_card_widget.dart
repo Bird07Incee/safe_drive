@@ -84,6 +84,7 @@ class ProductCardWidget extends StatelessWidget {
                   return RumUserActionAnnotation(
                     description: "Tap product card",
                     child: GestureDetector(
+                      key: const Key("product_card"),
                       onTap: () {
                         context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                         context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
@@ -108,6 +109,7 @@ class ProductCardWidget extends StatelessWidget {
                             RumUserActionAnnotation(
                               description: "Tap see photos",
                               child: GestureDetector(
+                                key: const Key("see_photo"),
                                 onTap: () async {
                                   context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                   context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));

@@ -42,6 +42,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
               },
               itemBuilder: (ctx, i) {
                 return GestureDetector(
+                  key: const Key("home_banner"),
                   onTap: () {
                     if (itemBannerLength != 0) {
                       launchUrl(Uri.parse(widget.banners[i].url));
