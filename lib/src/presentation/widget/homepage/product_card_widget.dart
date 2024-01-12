@@ -189,11 +189,11 @@ class ProductCardWidget extends StatelessWidget {
                                     Positioned.fill(
                                         child: Align(
                                       alignment: Alignment.bottomRight,
-                                      child: Image.asset(
-                                        "assets/homepage/brand.png",
+                                      child: Image.network(
+                                        products[index].merchantLogo,
                                         height: 32,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                                        errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
                                       ),
                                     )),
                                     Visibility(
