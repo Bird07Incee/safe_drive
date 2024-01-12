@@ -216,7 +216,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                 //   FocusScope.of(context).unfocus();
                                 // }
                                 // FocusScope.of(context).unfocus();
-                                FocusScope.of(context).nextFocus();
                                 setState(() {});
                               },
                               onFocusChange: (bool isFocus) async {
