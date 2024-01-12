@@ -189,11 +189,16 @@ class ProductCardWidget extends StatelessWidget {
                                     Positioned.fill(
                                         child: Align(
                                       alignment: Alignment.bottomRight,
-                                      child: Image.network(
-                                        products[index].merchantLogo,
-                                        height: 32,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(16)),
+                                        ),
+                                        child: Image.network(
+                                          products[index].merchantLogo,
+                                          height: 32,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                        ),
                                       ),
                                     )),
                                     Visibility(
