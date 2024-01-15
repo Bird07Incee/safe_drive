@@ -28,7 +28,6 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
 
   _onGetOrderSuccess(GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
-    await Future.delayed(Duration(seconds: 1));
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
