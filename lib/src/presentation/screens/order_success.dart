@@ -399,7 +399,12 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       ))
                 ],
               );
-            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.error) {
+            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.initial ||
+                state.orderSuccessStatus == GetOrderSuccessDataStatus.loading) {
+              return const LoadingScreen();
+            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.cancel) {
+              return OrderCancelScreen();
+            } else {
               return ErrorScreen(
                 title: ErrorConst().titleNS,
                 subTitle: ErrorConst().subTitleNS,
@@ -408,10 +413,6 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                   loadInvoice();
                 },
               );
-            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.cancel) {
-              return OrderCancelScreen();
-            } else {
-              return const LoadingScreen();
             }
           },
         ),
