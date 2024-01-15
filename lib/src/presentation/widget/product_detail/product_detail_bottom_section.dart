@@ -81,84 +81,92 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     ),
                   ],
                 )),
-            Container(
-              height: 16,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: cloudWhite, // Replace with your color
-                    width: 2.0, // Adjust the border width as needed
-                  ),
-                ),
-              ),
-            ),
             Visibility(
               visible: state.product.promotionTag.isNotEmpty,
-              child: buildDetailCardWidget(context, state.product,
-                  titleKey: AppKeys().productDetailPromotionDetailTitleKey,
-                  title: AppStrings().promotionDetailTitle,
-                  bodyPage: Padding(
-                    padding: EdgeInsets.only(top: 8),
-                    child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.product.promotionTag.length > 3 ? 3 : state.product.promotionTag.length,
-                        itemBuilder: ((context, index) {
-                          return Padding(
-                              padding: EdgeInsets.only(top: index == 0 ? 0 : 8, bottom: 8),
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
+              child: Column(
+                children: [
+                  Container(
+                    height: 16,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: cloudWhite, // Replace with your color
+                          width: 2.0, // Adjust the border width as needed
+                        ),
+                      ),
+                    ),
+                  ),
+                  buildDetailCardWidget(context, state.product,
+                      titleKey: AppKeys().productDetailPromotionDetailTitleKey,
+                      title: AppStrings().promotionDetailTitle,
+                      bodyPage: Padding(
+                        padding: EdgeInsets.only(top: 8),
+                        child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: state.product.promotionTag.length > 3 ? 3 : state.product.promotionTag.length,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                  padding: EdgeInsets.only(top: index == 0 ? 0 : 8, bottom: 8),
+                                  child: Wrap(
+                                    crossAxisAlignment: WrapCrossAlignment.start,
                                     children: [
-                                      const Icon(
-                                        Icons.bookmark,
-                                        size: 16,
-                                        color: cloudSoftDeepWhite,
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Flexible(
-                                          child: AlvaText(
-                                              title: state.product.promotionTag[index],
-                                              textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Icon(
+                                            Icons.bookmark,
+                                            size: 16,
+                                            color: cloudSoftDeepWhite,
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Flexible(
+                                              child: AlvaText(
+                                                  title: state.product.promotionTag[index],
+                                                  textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
+                                        ],
+                                      )
                                     ],
-                                  )
-                                ],
-                              ));
-                        })),
-                  )),
-            ),
-            Container(
-              height: 16,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: cloudWhite, // Replace with your color
-                    width: 2.0, // Adjust the border width as needed
-                  ),
-                ),
+                                  ));
+                            })),
+                      )),
+                ],
               ),
             ),
             Visibility(
-              visible: state.product.promotionTag.isNotEmpty,
-              child: buildDetailCardWidget(context, state.product,
-                  titleKey: AppKeys().productDetailRemarkTitleKey,
-                  title: AppStrings().remarkTitle,
-                  bodyPage: HtmlWidget(
-                    remarkHtmlString ?? "",
-                    buildAsync: true,
-                    customStylesBuilder: (element) {
-                      if (element.localName == 'strong') {
-                        return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
-                      }
-                      return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
-                    },
-                    textStyle: TextStyle(fontWeight: FontWeight.w400),
-                  )),
+              visible: state.product.remark.isNotEmpty,
+              child: Column(
+                children: [
+                  Container(
+                    height: 16,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: cloudWhite, // Replace with your color
+                          width: 2.0, // Adjust the border width as needed
+                        ),
+                      ),
+                    ),
+                  ),
+                  buildDetailCardWidget(context, state.product,
+                      titleKey: AppKeys().productDetailRemarkTitleKey,
+                      title: AppStrings().remarkTitle,
+                      bodyPage: HtmlWidget(
+                        remarkHtmlString ?? "",
+                        buildAsync: false,
+                        customStylesBuilder: (element) {
+                          if (element.localName == 'strong') {
+                            return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
+                          }
+                          return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
+                        },
+                        textStyle: TextStyle(fontWeight: FontWeight.w400),
+                      )),
+                ],
+              ),
             ),
           ],
         );
@@ -230,6 +238,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 height: 16,
               ),
               GestureDetector(
+                key: const Key("read_more_product_detail"),
                 onHorizontalDragEnd: (details) async {
                   if (_tabController.index == 0) {
                     if (details.primaryVelocity! < 0) {
@@ -258,27 +267,64 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         isPressedReadMore
                             ? HtmlWidget(
                                 data.isNotEmpty ? data : AppStrings().noDataFromSeller,
-                                buildAsync: true,
+                                buildAsync: false,
+                                customStylesBuilder: (element) {
+                                  return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'line-height': '24px', 'color': '#2c2626'};
+                                },
                                 factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
                             : Container(),
                         !isPressedReadMore
-                            ? HtmlWidget(
-                                data.isNotEmpty ? data : AppStrings().noDataFromSeller,
-                                buildAsync: true,
-                                customWidgetBuilder: (element) {
-                                  if (element.localName == 'p' || element.localName == 'span') {
-                                    String text = element.text;
-                                    return Text(
-                                      text,
-                                      maxLines: 5,
-                                      style: TextStyle(fontSize: 14, fontFamily: 'Krungsri Condensed', overflow: TextOverflow.ellipsis),
-                                      overflow: TextOverflow.ellipsis,
-                                    );
-                                  }
-                                  return null;
-                                },
-                                factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                            ? SizedBox(
+                                width: MediaQuery.of(context).size.width - 32,
+                                height: _tabController.index == 1 ? 120 : null,
+                                child: HtmlWidget(
+                                  data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+                                  buildAsync: false,
+                                  customStylesBuilder: (element) {
+                                    if (element.localName == "table") {
+                                      return {'width': '100%'};
+                                    }
+                                    if (element.localName == "td") {
+                                      return {
+                                        'width': '50%',
+                                        'vertical-align': 'top;',
+                                        'padding-top': '8px;',
+                                        'padding-bottom': '8px;',
+                                        'font-size': '14px',
+                                        'line-height': '24px',
+                                        'color': '#2c2626'
+                                      };
+                                    }
+                                    if (element.localName == "th" || element.localName == "thead") {
+                                      return null;
+                                    }
+                                    if (element.localName == "p") {
+                                      return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'line-height': '24px', 'color': '#2c2626'};
+                                    }
+                                    return null;
+                                  },
+                                  customWidgetBuilder: (element) {
+                                    // if (_tabController.index == 1 && (element.localName == 'p' || element.localName == 'span')) {
+                                    //   String text = element.text;
+                                    //   return Text(
+                                    //     text,
+                                    //     style: TextStyle(
+                                    //         fontSize: 14,
+                                    //         fontFamily: 'Krungsri Condensed',
+                                    //         overflow: TextOverflow.ellipsis,
+                                    //         height: 24 / 14,
+                                    //         color: BTN_SELECTED_TEXT_COLOR_NEW),
+                                    //     overflow: TextOverflow.ellipsis,
+                                    //   );
+                                    // }
+                                    if (element.localName == "th" || element.localName == "thead") {
+                                      return SizedBox.shrink();
+                                    }
+                                    return null;
+                                  },
+                                  factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                                ),
                               )
                             : Container(),
                       ],
@@ -348,7 +394,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 ),
               ),
             ),
-            GestureDetector(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage)),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage),
             title == AppStrings().aboutSellerTitle
                 ? Column(
                     children: [

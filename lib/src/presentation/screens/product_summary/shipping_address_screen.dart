@@ -203,18 +203,19 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                 setState(() {});
                               },
                               onEditingCompleted: () {
-                                if (item.fieldName != 'address') {
-                                  int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
-                                  if (state.listFormWidget![index].focusNode != null) {
-                                    if (state.listFormWidget![index].controller!.text.isEmpty) {
-                                      FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
-                                    } else {
-                                      FocusScope.of(context).unfocus();
-                                    }
-                                  }
-                                } else {
-                                  FocusScope.of(context).unfocus();
-                                }
+                                // if (item.fieldName != 'address') {
+                                //   int index = state.listFormWidget!.indexWhere((element) => element.fieldName == item.fieldName) + 1;
+                                //   if (state.listFormWidget![index].focusNode != null) {
+                                //     if (state.listFormWidget![index].controller!.text.isEmpty) {
+                                //       FocusScope.of(context).requestFocus(state.listFormWidget![index].focusNode);
+                                //     } else {
+                                //       FocusScope.of(context).unfocus();
+                                //     }
+                                //   }
+                                // } else {
+                                //   FocusScope.of(context).unfocus();
+                                // }
+                                // FocusScope.of(context).unfocus();
                                 setState(() {});
                               },
                               onFocusChange: (bool isFocus) async {

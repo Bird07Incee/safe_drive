@@ -62,6 +62,7 @@ class OrderCancelScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   child: GestureDetector(
+                    key: const Key("back_to_home_page"),
                     onTap: () {
                       Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                     },

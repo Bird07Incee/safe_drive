@@ -84,6 +84,7 @@ class ProductCardWidget extends StatelessWidget {
                   return RumUserActionAnnotation(
                     description: "Tap product card",
                     child: GestureDetector(
+                      key: const Key("product_card"),
                       onTap: () {
                         context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                         context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
@@ -108,6 +109,7 @@ class ProductCardWidget extends StatelessWidget {
                             RumUserActionAnnotation(
                               description: "Tap see photos",
                               child: GestureDetector(
+                                key: const Key("see_photo"),
                                 onTap: () async {
                                   context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                   context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));
@@ -187,11 +189,16 @@ class ProductCardWidget extends StatelessWidget {
                                     Positioned.fill(
                                         child: Align(
                                       alignment: Alignment.bottomRight,
-                                      child: Image.asset(
-                                        "assets/homepage/brand.png",
-                                        height: 32,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(16)),
+                                        ),
+                                        child: Image.network(
+                                          products[index].merchantLogo,
+                                          height: 32,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                        ),
                                       ),
                                     )),
                                     Visibility(
@@ -281,7 +288,8 @@ class ProductCardWidget extends StatelessWidget {
                                             if (element.localName == "p") {
                                               return {
                                                 'font-family': 'Krungsri Condensed',
-                                                'font-size': '10px',
+                                                'font-size': '12px',
+                                                'line-height': '20px',
                                                 'font-weight': '400',
                                                 'color': '#5A5A5A',
                                                 'max-lines': '4',
@@ -297,7 +305,8 @@ class ProductCardWidget extends StatelessWidget {
                                             } else {
                                               return {
                                                 'font-family': 'Krungsri Condensed',
-                                                'font-size': '10px',
+                                                'font-size': '12px',
+                                                'line-height': '20px',
                                                 'font-weight': '400',
                                                 'color': '#5A5A5A',
                                                 'max-lines': '4',

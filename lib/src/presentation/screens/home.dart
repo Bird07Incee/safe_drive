@@ -200,6 +200,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 Visibility(
                                   visible: isMorePageToLoad(state.productList),
                                   child: GestureDetector(
+                                    key: const Key("load_more_button"),
                                     onTap: () {
                                       if (state.selectedTabIndex == 0) {
                                         context
@@ -291,6 +292,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       color: sugarRed,
                                     ),
                                     GestureDetector(
+                                      key: const Key("about_us_button"),
                                       onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
                                       child: Text(
                                         HomeConst().privacyPolicy,
@@ -317,6 +319,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       ],
                                     ),
                                     GestureDetector(
+                                      key: const Key("call_button"),
                                       onTap: () {
                                         RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
 

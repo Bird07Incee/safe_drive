@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -285,7 +283,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       if (pdState.clickFromImage == true) {
         Navigator.pop(context);
       }
-      log("backButtontoDetail");
       context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
       context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: pageController.initialPage));
       context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
@@ -311,6 +308,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                 children: [
                   Expanded(
                       child: GestureDetector(
+                    key: const Key("zoom_image"),
                     onDoubleTapDown: (TapDownDetails detail) {
                       context.read<ImgGalleryZoomBloc>().add(ZoomImageAction(details: detail));
                       if (previousState > 0.5) {
@@ -374,6 +372,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
               ),
             ),
             GestureDetector(
+              key: const Key("back_to_detail_button"),
               onTap: () {
                 backButtontoDetail();
               },

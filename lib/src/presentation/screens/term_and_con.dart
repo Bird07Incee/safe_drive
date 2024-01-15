@@ -155,6 +155,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                     child: Row(
                       children: [
                         GestureDetector(
+                          key: const Key("cancel_term_and_con_button"),
                           onTap: () {
                             if (scrollFinished) {
                               var localStorage = window.localStorage;
@@ -182,6 +183,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           width: 8,
                         ),
                         GestureDetector(
+                          key: const Key("accept_term_and_con_button"),
                           onTap: () async {
                             if (scrollFinished) {
                               acceptTermAndCond();
