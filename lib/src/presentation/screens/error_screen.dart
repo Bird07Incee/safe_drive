@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
 class ErrorScreen extends StatelessWidget {
@@ -49,7 +48,9 @@ class ErrorScreen extends StatelessWidget {
                             height: 8,
                           ),
                           Text(subTitle!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
-                          subTitleSec!.isNotEmpty ?Text(subTitleSec!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)):Container(),
+                          subTitleSec!.isNotEmpty
+                              ? Text(subTitleSec!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW))
+                              : Container(),
                           const SizedBox(
                             height: 4,
                           ),
@@ -69,7 +70,6 @@ class ErrorScreen extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () {
                       onTap!();
-
                     },
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.all(0),

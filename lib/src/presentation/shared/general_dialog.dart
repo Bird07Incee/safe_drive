@@ -23,9 +23,8 @@ class GeneralDialog {
         context,
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
-          child: Text (isConfirmPayment ? 'กด "ยืนยัน" เพื่อทำการชำระเงิน' : 'หากกด “ออกจากหน้านี้” จะต้องทำรายการสั่งซื้อใหม่',
-              style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14)
-                  .copyWith(height: 24 / 14)),
+          child: Text(isConfirmPayment ? 'กด "ยืนยัน" เพื่อทำการชำระเงิน' : 'หากกด “ออกจากหน้านี้” จะต้องทำรายการสั่งซื้อใหม่',
+              style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
         ),
         title: Text(isConfirmPayment ? "ชำระเงิน" : "คุณต้องการออกจากหน้านี้ใช่หรือไม่",
             style: AlvaStyles()
@@ -33,9 +32,10 @@ class GeneralDialog {
                 .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
                 .copyWith(height: 24 / 14)),
         key: key ?? const Key("back_from_summary_dialog"),
-       // contentPadding: const EdgeInsets.all(24),
+        // contentPadding: const EdgeInsets.all(24),
         contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
-        actionPadding: const EdgeInsets.only(left: 0, top: 8,right: 0, bottom: 8), isConfirmPayment: isConfirmPayment);
+        actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        isConfirmPayment: isConfirmPayment);
   }
 
   _showGeneralLoading(BuildContext context, {Key? key, bool? canBack}) {
@@ -60,21 +60,25 @@ class GeneralDialog {
   }
 
   _showGeneralAlert(BuildContext context, Widget body,
-      {Key? key, Widget? title, EdgeInsetsGeometry? contentPadding, EdgeInsetsGeometry? actionPadding, bool platformSpecific = false, bool isConfirmPayment = false}) {
+      {Key? key,
+      Widget? title,
+      EdgeInsetsGeometry? contentPadding,
+      EdgeInsetsGeometry? actionPadding,
+      bool platformSpecific = false,
+      bool isConfirmPayment = false}) {
     Widget acceptButton = TextButton(
       child: Text(
-        isConfirmPayment ?  "ยืนยัน" : "อยู่หน้านี้ต่อไป", //"ออกจากหน้านี้"
+        isConfirmPayment ? "ยืนยัน" : "อยู่หน้านี้ต่อไป", //"ออกจากหน้านี้"
         style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
       ),
-      style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(
-          EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
-
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
       ),
       onPressed: () {
         Navigator.pop(context);
         if (onAccept != null && isConfirmPayment == true) {
           onAccept!();
-        } else if (isConfirmPayment == false){
+        } else if (isConfirmPayment == false) {
           onCancel!();
         }
       },
@@ -85,14 +89,14 @@ class GeneralDialog {
         isConfirmPayment ? "ยกเลิก" : "ออกจากหน้านี้",
         style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
       ),
-      style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(
-          EdgeInsets.only(left: 16, right: 14, top: 8, bottom: 8)),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 16, right: 14, top: 8, bottom: 8)),
       ),
       onPressed: () {
         Navigator.pop(context);
         if (onCancel != null && isConfirmPayment == true) {
           onCancel!();
-        }else if (isConfirmPayment == false){
+        } else if (isConfirmPayment == false) {
           onAccept!();
         }
       },

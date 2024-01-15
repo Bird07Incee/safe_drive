@@ -6,7 +6,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_b
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
-import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RootPageCondition extends StatefulWidget {
@@ -45,8 +44,7 @@ class _RootPageConditionState extends State<RootPageCondition> {
             title: ErrorConst().titleNS,
             subTitle: ErrorConst().subTitleNS,
             titleBtn: ErrorConst().titleBtnNS,
-            onTap: () {
-            },
+            onTap: () {},
           );
         } else {
           return BlocBuilder<CheckBrowserBloc, CheckBrowserState>(

@@ -139,11 +139,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             .add(GetProductListByCategory(state.productList.category![index - 1]["categoryId"], context));
                                       }
                                       scrollController.animateTo(
-                                        //go to top of scroll
+                                          //go to top of scroll
                                           0, //scroll offset to go
                                           duration: Duration(milliseconds: 500), //duration of scroll
                                           curve: Curves.fastOutSlowIn //scroll type
-                                      );
+                                          );
                                     },
                                     tabs: [
                                       Tab(
@@ -157,29 +157,29 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             text: state.productList.category![i]["categoryTh"],
                                             icon: state.selectedTabIndex == (i + 1)
                                                 ? SizedBox(
-                                              width: 24,
-                                              height: 24,
-                                              child: FadeInImage(
-                                                placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
-                                                // Replace with your placeholder image path
-                                                image: NetworkImage(state.productList.category![i]["img_active"]),
-                                                fit: BoxFit.fitWidth,
-                                                imageErrorBuilder: (context, error, stackTrace) =>
-                                                    Image.asset('assets/images/category/icon_active_cate_other.png', fit: BoxFit.fitWidth),
-                                              ),
-                                            )
+                                                    width: 24,
+                                                    height: 24,
+                                                    child: FadeInImage(
+                                                      placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
+                                                      // Replace with your placeholder image path
+                                                      image: NetworkImage(state.productList.category![i]["img_active"]),
+                                                      fit: BoxFit.fitWidth,
+                                                      imageErrorBuilder: (context, error, stackTrace) =>
+                                                          Image.asset('assets/images/category/icon_active_cate_other.png', fit: BoxFit.fitWidth),
+                                                    ),
+                                                  )
                                                 : SizedBox(
-                                              width: 24,
-                                              height: 24,
-                                              child: FadeInImage(
-                                                placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
-                                                // Replace with your placeholder image path
-                                                image: NetworkImage(state.productList.category![i]["img_inactive"]),
-                                                fit: BoxFit.fitWidth,
-                                                imageErrorBuilder: (context, error, stackTrace) =>
-                                                    Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
-                                              ),
-                                            )),
+                                                    width: 24,
+                                                    height: 24,
+                                                    child: FadeInImage(
+                                                      placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
+                                                      // Replace with your placeholder image path
+                                                      image: NetworkImage(state.productList.category![i]["img_inactive"]),
+                                                      fit: BoxFit.fitWidth,
+                                                      imageErrorBuilder: (context, error, stackTrace) =>
+                                                          Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
+                                                    ),
+                                                  )),
                                     ]),
                               ),
                             ),
@@ -224,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           height: 32,
                                           margin: EdgeInsets.symmetric(vertical: 4),
                                           decoration:
-                                          BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [
+                                              BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [
                                             BoxShadow(
                                               color: whitePure.withOpacity(0.4),
                                               spreadRadius: 0,
