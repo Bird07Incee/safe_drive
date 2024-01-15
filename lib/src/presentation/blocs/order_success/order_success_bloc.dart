@@ -49,7 +49,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
 
         if (!event.bypassContext) {
           // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+          ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("หลักฐานการชำระเงิน ถูกจัดส่งไปยังอีเมลของคุณแล้ว"));
         }
       } else if (status == "Pending") {
         int tick = 0;
@@ -67,7 +67,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
             if (!event.bypassContext) {
               // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+              ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("หลักฐานการชำระเงิน ถูกจัดส่งไปยังอีเมลของคุณแล้ว"));
             }
             break;
           } else if (status == "Fail") {
@@ -86,38 +86,38 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     }
   }
 
-  // _onGetOrderSuccessMock(GetOrderSuccessMock event, Emitter<OrderSuccessState> emit) async {
-  // final mockJson = {
-  //   "invoiceNo": "qweqwe",
-  //   "cardNo": "987654******1234",
-  //   "paymentDate": "1 ตุลาคม 2566",
-  //   "paymentTime": "09:54:22",
-  //   "paymentGateway": "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
-  //   "paymentChannel": "ผ่อนชำระ 6 เดือน",
-  //   "productImagePath": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
-  //   "productId": "PM12345678",
-  //   "productName": "Pulsar Max from mercury-mocker",
-  //   "productOption": "สีดำ ความยาวสาย 3 เมตร",
-  //   "amount": "56640",
-  //   "customerFullname": "กรุงศรี ออโต้",
-  //   "customerMobile": "0812345678",
-  //   "customerEmail": "k_auto@krungsri.com",
-  //   "customerAddress": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
-  //   "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
-  //   "merchantAddress": "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
-  //   "merchantMobile": "0918620511"
-  // };
+// _onGetOrderSuccessMock(GetOrderSuccessMock event, Emitter<OrderSuccessState> emit) async {
+// final mockJson = {
+//   "invoiceNo": "qweqwe",
+//   "cardNo": "987654******1234",
+//   "paymentDate": "1 ตุลาคม 2566",
+//   "paymentTime": "09:54:22",
+//   "paymentGateway": "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
+//   "paymentChannel": "ผ่อนชำระ 6 เดือน",
+//   "productImagePath": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+//   "productId": "PM12345678",
+//   "productName": "Pulsar Max from mercury-mocker",
+//   "productOption": "สีดำ ความยาวสาย 3 เมตร",
+//   "amount": "56640",
+//   "customerFullname": "กรุงศรี ออโต้",
+//   "customerMobile": "0812345678",
+//   "customerEmail": "k_auto@krungsri.com",
+//   "customerAddress": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+//   "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+//   "merchantAddress": "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
+//   "merchantMobile": "0918620511"
+// };
 
-  //   final InquiryData mock = InquiryData.fromJson(mockJson);
+//   final InquiryData mock = InquiryData.fromJson(mockJson);
 
-  //   emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
+//   emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
 
-  //   final ctx = ScaffoldMessenger.of(event.context);
+//   final ctx = ScaffoldMessenger.of(event.context);
 
-  //   await Future.delayed(Duration(seconds: 2));
+//   await Future.delayed(Duration(seconds: 2));
 
-  //   emit(state.copyWith(orderSuccessData: mock, orderSuccessStatus: GetOrderSuccessDataStatus.success));
+//   emit(state.copyWith(orderSuccessData: mock, orderSuccessStatus: GetOrderSuccessDataStatus.success));
 
-  //   ctx.showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
-  // }
+//   ctx.showSnackBar(getMkpToast("จัดส่งให้ทางอีเมลของคุณ เรียบร้อยแล้ว"));
+// }
 }

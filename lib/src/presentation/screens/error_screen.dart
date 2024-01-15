@@ -6,9 +6,10 @@ import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 
 class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({super.key, this.title, this.subTitle, this.titleBtn, this.onTap});
+  const ErrorScreen({super.key, this.title, this.subTitle, this.titleBtn, this.onTap, this.subTitleSec = ""});
   final String? title;
   final String? subTitle;
+  final String? subTitleSec;
   final String? titleBtn;
   final void Function()? onTap;
 
@@ -21,55 +22,66 @@ class ErrorScreen extends StatelessWidget {
       onWillPop: () async => false,
       child: AlvaRootWidget(
           titlePage: titleWebPage,
-          child: Container(
-            color: whitePure,
-            height: maxHeight,
-            width: maxWidth,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 356,
-                  width: maxWidth - 30,
-                  child: Column(
-                    children: [
-                      // Image.asset(
-                      //   ErrorConst().imagePath,
-                      //   width: 96,
-                      //   height: 96,
-                      // ),
-                      const Icon(
-                        Icons.warning_amber_rounded,
-                        color: cloudSoftDeepWhite,
-                        size: 125,
+          child: Column(
+            children: [
+              Container(
+                color: whitePure,
+                height: maxHeight - 96,
+                width: maxWidth,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 356,
+                      width: maxWidth - 30,
+                      child: Column(
+                        children: [
+                          const Icon(
+                            Icons.warning_amber_rounded,
+                            color: cloudSoftDeepWhite,
+                            size: 125,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Text(title!, style: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(subTitle!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          subTitleSec!.isNotEmpty ?Text(subTitleSec!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)):Container(),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      AlvaText(title: title!, textStyle: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      AlvaText(title: subTitle!, textStyle: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      SizedBox(
-                        width: 160,
-                        height: 32,
-                        child: OutlinedButton(
-                          onPressed: () {
-                            onTap!();
-                          },
-                          style: AlvaStyles().outlineButtonStyle(Colors.transparent, sugarRed, 8),
-                          child: Text(titleBtn!, style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Container(
+                  width: maxWidth,
+                  height: 96,
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      onTap!();
+
+                    },
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.all(0),
+                    ),
+                    child: Container(
+                      height: 48,
+                      //  width: (maxWidth - 40) / 2,
+                      decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
+                      child: Center(child: Text(titleBtn!, style: AlvaStyles().heading3())),
+                    ),
+                  ))
+            ],
           )),
     );
   }

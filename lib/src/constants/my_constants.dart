@@ -11,19 +11,20 @@ class HomeConst {
   String termsAndConditions = 'ข้อตกลงและเงื่อนไข';
   String privacyPolicy = 'ประกาศความคุ้มครองข้อมูลส่วนบุคคล';
   String askInformation = 'สอบถามข้อมูลอื่นๆ เกี่ยวกับสินค้า หรือ ติดตามสถานะการจัดส่งสินค้า';
-  String pleaseContact = 'กรุณาติดต่อ  081-123-4567';
+  String pleaseContact = 'กรุณาติดต่อ  02-023-8858';
   String warningWord = 'ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา';
 }
 
 class ErrorConst {
   // network/server
-  String titleNS = 'ขออภัยไม่สามารถทำรายการได้ในขณะนี้';
-  String subTitleNS = 'กรุณากด “ลองอีกครั้ง” เพื่อโหลดใหม่';
+  String titleNS = 'ขออภัย';
+  String subTitleNS = 'ขณะนี้ไม่สามารถทำรายการได้';
   String titleBtnNS = 'ลองอีกครั้ง';
 
-  String titleBrowser = 'ขออภัยไม่รองรับการให้บริการบน บราวเซอร์นี้ี้';
-  String subTitleBrowser = 'กรุณากด “เปิดไลน์” เพื่อใช้บริการ';
-  String titleBtnBrowser = 'เปิดไลน์';
+  String titleBrowser = 'ขออภัย';
+  String subTitleBrowser = 'ไม่รองรับการใช้งานบนเบราว์เซอร์นี้';
+  String subTitleSecBrowser = 'ระบบจะทำการกลับไปที่ LINE เพื่อดำเนินการต่อไป';
+  String titleBtnBrowser = 'ตกลง';
 
   String imagePath = "assets/images/404_error.png";
 }
