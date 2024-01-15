@@ -38,7 +38,6 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     String uid = await lineDataHelper.getLineUid();
 
     var payload = {"invoiceNo": event.invoiceNo, "uid": uid};
-    emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
     try {
       Response response = await utilityRepository
           .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
