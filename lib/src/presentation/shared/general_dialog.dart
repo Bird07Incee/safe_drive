@@ -67,10 +67,6 @@ class GeneralDialog {
       bool platformSpecific = false,
       bool isConfirmPayment = false}) {
     Widget acceptButton = TextButton(
-      child: Text(
-        isConfirmPayment ? "ยืนยัน" : "อยู่หน้านี้ต่อไป", //"ออกจากหน้านี้"
-        style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
-      ),
       style: ButtonStyle(
         padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
       ),
@@ -82,13 +78,13 @@ class GeneralDialog {
           onCancel!();
         }
       },
+      child: Text(
+        isConfirmPayment ? "ยืนยัน" : "อยู่หน้านี้ต่อไป", //"ออกจากหน้านี้"
+        style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
+      ),
     );
 
     Widget cancelButton = TextButton(
-      child: Text(
-        isConfirmPayment ? "ยกเลิก" : "ออกจากหน้านี้",
-        style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
-      ),
       style: ButtonStyle(
         padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 16, right: 14, top: 8, bottom: 8)),
       ),
@@ -100,6 +96,10 @@ class GeneralDialog {
           onAccept!();
         }
       },
+      child: Text(
+        isConfirmPayment ? "ยกเลิก" : "ออกจากหน้านี้",
+        style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
+      ),
     );
 
     Widget alert = AlertDialog(
