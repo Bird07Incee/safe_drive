@@ -57,11 +57,13 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
   //   return result;
   // }
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    replacePageHistory();
+  }
 
   @override
   void didChangeDependencies() {
