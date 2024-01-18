@@ -39,12 +39,12 @@ class OrderCancelScreen extends StatelessWidget {
                           const SizedBox(
                             height: 16,
                           ),
-                          Text("ขออภัย", style: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
-                          Text("คุณทำรายการไม่สำเร็จ", style: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          Text("ขออภัย", style: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          Text("คุณทำรายการไม่สำเร็จ", style: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                           const SizedBox(
                             height: 8,
                           ),
-                          Text("กรุณาทำรายการใหม่อีกครั้ง", style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
+                          Text("กรุณาทำรายการใหม่อีกครั้ง", style: AlvaStyles().bodySize14w400(BTN_SELECTED_TEXT_COLOR_NEW)),
                           const SizedBox(
                             height: 4,
                           ),
