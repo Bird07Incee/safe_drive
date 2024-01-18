@@ -9,3 +9,4 @@ import 'package:js/js.dart';
 external void loadOneTrustCookieScript();
 external void jsAlert(val);
 external void callPhone(val);
+external void replacePageHistory();

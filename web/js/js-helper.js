@@ -7,5 +7,12 @@ function jsAlert(val) {
 }
 
 function callPhone(phoneNumber) {
-    window.location.href = "tel:"+phoneNumber;
+    window.location.href = "tel:" + phoneNumber;
+}
+
+function replacePageHistory() {
+    history.pushState(null, null, location.href);
+    history.back();
+    history.forward();
+    window.onpopstate = function () { history.go(1); };
 }

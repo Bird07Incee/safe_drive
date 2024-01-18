@@ -18,11 +18,11 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final DioUtilityRepository utilityRepository;
 
   _onGetProduct(GetProductByID event, Emitter<ProductDetailState> emit) async {
+    emit(state.copyWith(status: ProductDetailStatus.loading));
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
-    emit(state.copyWith(status: ProductDetailStatus.loading));
 
     try {
       String path = "/ecommerce/v1/products";

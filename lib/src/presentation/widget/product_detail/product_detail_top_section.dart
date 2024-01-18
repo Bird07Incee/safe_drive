@@ -139,10 +139,8 @@ class PDTopSection extends StatelessWidget {
                           Positioned.fill(
                               child: Align(
                             alignment: Alignment.bottomRight,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(16)),
-                              ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
                               child: Image.network(
                                 state.product.merchantLogo,
                                 height: 32,

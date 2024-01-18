@@ -25,7 +25,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-   // runApp(const MyApp());
+    // runApp(const MyApp());
     DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
       return runApp(const MyApp());
     });
@@ -50,7 +50,7 @@ _setUpLineLIFF() {
   }
   String lineId = Environment().getValue("LIFF_ID");
   FlutterLineLiff().init(
-    //TODO: config LIFF for prod
+      //TODO: config LIFF for prod
       config: Config(liffId: lineId),
       successCallback: () {},
       errorCallback: (error) {
