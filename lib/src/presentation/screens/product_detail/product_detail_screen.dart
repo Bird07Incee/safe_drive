@@ -130,7 +130,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
               subTitle: ErrorConst().subTitleNS,
               titleBtn: ErrorConst().titleBtnNS,
               onTap: () {
-                if (pdState.status.isInitial && pid != "") {
+                if (pdState.status.isInitial || pdState.status.isError && pid != "") {
                   context.read<ProductDetailBloc>().add(GetProductByID(pid: pid));
                 }
               },
