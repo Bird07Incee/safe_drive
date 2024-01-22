@@ -21,7 +21,12 @@ class TrackingListScreen extends StatelessWidget {
             leadingWidth: 60,
             centerTitle: false,
             automaticallyImplyLeading: false,
-            leading: IconButton(key: const Key("pop_navigator_to_home_page"), onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_rounded)),
+            leading: IconButton(
+                key: const Key("pop_navigator_to_home_page"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios_rounded)),
           ),
           child: Container(
             color: cloudDeepWhite,

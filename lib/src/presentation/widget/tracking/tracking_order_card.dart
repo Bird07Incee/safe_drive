@@ -110,7 +110,7 @@ class TrackingOrderCard extends StatelessWidget {
           ),
           Container(
             height: 40,
-            width: (maxWidth - 40) / 2,
+            width: (maxWidth - 35) / 2,
             decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: Center(child: Text("รายละเอียดการจัดส่ง", style: AlvaStyles().heading3())),
           ),
