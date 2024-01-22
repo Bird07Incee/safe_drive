@@ -10,6 +10,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/product_select_opti
 import 'package:marketplace_line_oa/src/presentation/screens/product_summary/shipping_address_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/tracking_list.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 enum Routes {
@@ -23,7 +24,8 @@ enum Routes {
   shippingAddress,
   orderSummary,
   orderSuccess,
-  orderCancel
+  orderCancel,
+  trackingList
 }
 
 extension TypeCoverter on Routes {
@@ -51,6 +53,8 @@ extension TypeCoverter on Routes {
         return '/orderSuccess';
       case Routes.orderCancel:
         return '/orderCancel';
+      case Routes.trackingList:
+        return '/trackingList';
     }
   }
 }
@@ -136,6 +140,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => OrderSummaryScreen(), settings: settings);
     case "/orderCancel":
       return MaterialPageRoute(builder: (_) => OrderCancelScreen(), settings: settings);
+    case "/trackingList":
+      return MaterialPageRoute(builder: (_) => TrackingListScreen(), settings: settings);
     default:
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }

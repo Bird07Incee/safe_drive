@@ -30,9 +30,25 @@ class HomepageTopSection extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              AlvaText(
-                title: HomeConst().titleTopSec,
-                textStyle: AlvaStyles().heading1(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AlvaText(
+                    title: HomeConst().titleTopSec,
+                    textStyle: AlvaStyles().heading1(),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/trackingList');
+                    },
+                    child: Container(
+                      height: 40,
+                      width: (maxWidth - 40) / 2,
+                      decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
+                      child: Center(child: Text("ตรวจสอบสถานะสินค้า", style: AlvaStyles().heading3())),
+                    ),
+                  ),
+                ],
               )
             ],
           ),

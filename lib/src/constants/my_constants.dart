@@ -4,7 +4,7 @@ const carouselShowLimit = 3;
 
 class HomeConst {
   String imageTopSecPath = 'assets/homepage/krungsri-auto-logo-2.20f3516 1.png';
-  String titleTopSec = 'วอลชาร์จรถไฟฟ้า';
+  String titleTopSec = 'PromptBuy';
   String bannerImagePath = 'assets/homepage/banner.png';
 
   String lineOAURL = 'https://line.me/R/ti/p/@018qbfet';

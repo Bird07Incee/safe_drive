@@ -23,6 +23,8 @@ class AlvaStyles {
 
   TextStyle headingSize12w400Cordia(Color color) => TextStyle(fontFamily: "Cordia UPC", fontSize: 12, fontWeight: FontWeight.w400, color: color);
 
+  TextStyle headingSize18w400Cordia(Color color) => TextStyle(fontFamily: "Cordia UPC", fontSize: 18, fontWeight: FontWeight.w400, color: color);
+
   TextStyle headingSize12w400(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: color);
 
   TextStyle headingSize12w600(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.bold, color: color);
@@ -72,6 +74,7 @@ class AlvaStyles {
   TextStyle headingSize14w500(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w500, color: color);
   TextStyle headingSize14w600(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w600, color: color);
   TextStyle headingSize14w700(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w700, color: color);
+  TextStyle headingSize14w800(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w800, color: color);
 
   TextStyle headingSize16w500(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w500, color: color);
   TextStyle headingSize16w600(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w600, color: color);
