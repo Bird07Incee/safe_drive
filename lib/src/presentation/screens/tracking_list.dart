@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/tracking_order/tracking_order_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/tracking/tracking_order_card.dart';
 
-class TrackingListScreen extends StatelessWidget {
+class TrackingListScreen extends StatefulWidget {
   const TrackingListScreen({super.key});
+
+  @override
+  State<TrackingListScreen> createState() => _TrackingListScreenState();
+}
+
+class _TrackingListScreenState extends State<TrackingListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<TrackingOrderBloc>().add(const GetTrackingOrderListFromJson());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +41,24 @@ class TrackingListScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.arrow_back_ios_rounded)),
           ),
-          child: Container(
-            color: cloudDeepWhite,
-            child: ListView(
-              children: [
-                Container(
-                  height: 8,
-                  color: Colors.white,
-                ),
-                TrackingOrderCard(),
-                TrackingOrderCard()
-              ],
-            ),
+          child: BlocBuilder<TrackingOrderBloc, TrackingOrderState>(
+            builder: (context, state) {
+              if (state.trackingOrderListStatus == GetTrackingOrderListStatus.success) {
+                return Container(
+                  color: cloudDeepWhite,
+                  child: ListView.builder(
+                    itemCount: state.trackingListData.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return TrackingOrderCard(
+                        order: state.trackingListData[index],
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return Text("loading....");
+              }
+            },
           )),
     );
   }

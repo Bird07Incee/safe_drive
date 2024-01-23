@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
 
 class TrackingOrderCard extends StatelessWidget {
-  const TrackingOrderCard({super.key});
+  const TrackingOrderCard({super.key, required this.order});
+
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class TrackingOrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "หมายเลขอ้างอิง: qwdoi213123oi12h",
+                "หมายเลขอ้างอิง: ${order.orderNo}",
                 style: AlvaStyles().headingSize12w400(spaceGrey123),
               ),
               Text(
@@ -55,8 +58,7 @@ class TrackingOrderCard extends StatelessWidget {
                         height: 74,
                         placeholder: const AssetImage('assets/homepage/img_default.png'),
                         // Replace with your placeholder image path
-                        image:
-                            NetworkImage("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ABC-2021-LOGO.svg/1200px-ABC-2021-LOGO.svg.png"),
+                        image: NetworkImage(order.products![0].productImageUrl!),
                         fit: BoxFit.fitWidth,
                         imageErrorBuilder: (context, error, stackTrace) => Image.asset(
                           'assets/homepage/img_default.png',
@@ -75,12 +77,12 @@ class TrackingOrderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Pulsar Max",
+                      order.products![0].productNameEn!,
                       style: AlvaStyles().headingSize14w600(blackGoMunTo),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      "ความยาวสายและสี",
+                      order.products![0].productDescription!,
                       style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
                     )
                   ],
@@ -95,7 +97,7 @@ class TrackingOrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("ราคารวม", style: AlvaStyles().headingSize18w400Cordia(spaceGrey123)),
-              Text("${"12,000"} บาท", style: AlvaStyles().headingSize14w800(blackGoMunTo)),
+              Text("${order.totalPrice} บาท", style: AlvaStyles().headingSize14w800(blackGoMunTo)),
             ],
           ),
           SizedBox(
