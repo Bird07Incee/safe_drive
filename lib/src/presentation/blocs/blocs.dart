@@ -6,6 +6,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_s
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/order_summary_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_sale_code_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_summary_detail_cubit.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
@@ -36,4 +37,5 @@ final List<BlocProvider> blocs = [
   BlocProvider<ShowSummaryDetailCubit>(create: (_) => ShowSummaryDetailCubit()),
   BlocProvider<ShippingAddressBloc>(create: (_) => ShippingAddressBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<ShowSaleCodeCubit>(create: (_) => ShowSaleCodeCubit()),
+  BlocProvider<ProductDetailDescriptionCubit>(create: (_) => ProductDetailDescriptionCubit()),
 ];

@@ -32,6 +32,46 @@ class ErrorConst {
 class ProductDetailConst {
   String imgDefaultPath = "assets/homepage/img_default.png";
   String imgHeroBannerPath = "assets/homepage/HeroBanner.png";
+
+  String htmlExampleBullet = '''
+<strong>✅Installation Package</strong>
+<ul>
+<li> ฟรี เดินสายไฟ ระยะ 20 เมตร / ท่อ uPVC ขาว 3/4″-1″ / เบรกเกอร์ 40A /</li>
+<li> อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</li>
+<li> อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</li>
+<li> อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</li>
+</ul>
+<strong>– ฟรี รับประกันสินค้า 3 ปี (หากเครื่องมีปัญหา จะเปลี่ยนเป็นเครื่องใหม่)</strong>
+''';
+  String htmlTagP = '''
+        <h1>This paragraphcontains</h1>
+<p>
+1.This paragraphcontains a lot of linesin the source  
+</p>
+<p>
+2.This paragraphcontains a lot of spacesin the source code paragraphcontains a lot of spacesin the source code paragraphcontains a lot of spacesin the source code paragraphcontains a lot of spacesin the source code 
+</p>
+<p>
+3.The number of lines in a paragraph depends on the size of
+</p>
+<p>
+3.The number of lines in a paragraph depends on the size of
+</p>
+<p>
+3.The number of lines in a paragraph depends on the size of depends on the size of
+</p>
+''';
+  String testData = '''<strong>Installation Package</strong>
+<p>– ฟรี เดินสายไฟ ระยะ 20 เมตร / ท่อ uPVC ขาว 3/4″-1″ / เบรกเกอร์ 40A /</p>
+<br><br>
+<strong>อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</strong>
+
+<p>– ฟรี รับประกันสินค้า 3 ปี (หากเครื่องมีปัญหา จะเปลี่ยนเป็นเครื่องใหม่)</p>
+
+''';
+  String testHtmlWithoutTag =
+      '''Installation Package<br><br>– ฟรี เดินสายไฟ ระยะ 20 เมตร / ท่อ uPVC ขาว 3/4″-1″ / เบรกเกอร์ 40A /<br><br>อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Boxุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box
+''';
 }
 
 class LoaderConst {
