@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
@@ -22,7 +22,8 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
             "productNameTh": "Pulsa Max Kook EV 2 Opt 1 Mer1",
             "productNameEn": "Pulsa Max Kook EV 2 Opt 1 Mer1",
             "productDescription": "ทดสอบ",
-            "productImageUrl": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+            "productImageUrl":
+                "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
             "productQty": 1,
             "price": 59000.0,
             "discountPrice": 40000.0,
