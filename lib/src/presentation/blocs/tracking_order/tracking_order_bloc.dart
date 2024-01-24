@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
@@ -7,41 +10,81 @@ part 'tracking_order_event.dart';
 part 'tracking_order_state.dart';
 
 class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
+  final DioUtilityRepository utilityRepository;
+
   TrackingOrderBloc({required this.utilityRepository}) : super(TrackingOrderState()) {
     on<TrackingOrderEvent>((event, emit) {
       // TODO: implement event handler
     });
 
-    on<GetTrackingOrderListFromJson>((event, emit) {
-      Order mockOrder = Order.fromJson({
-        "orderNo": "1234",
-        "shippingStatus": "pending",
-        "products": [
-          {
-            "productId": "PV_EGYJW5CE8Y8G",
-            "productNameTh": "Pulsa Max Kook EV 2 Opt 1 Mer1",
-            "productNameEn": "Pulsa Max Kook EV 2 Opt 1 Mer1",
-            "productDescription": "ทดสอบ",
-            "productImageUrl":
-                "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
-            "productQty": 1,
-            "price": 59000.0,
-            "discountPrice": 40000.0,
-            "currency": "Bath",
-            "channel": "LINE / GOAPP",
-            "createDate": "",
-            "lastUpdateDate": "วันที่ update status ของ shipping"
-          }
-        ],
-        "totalPrice": 59000.0,
-        "totalQty": 1
-      });
-
-      List<Order> mock = [mockOrder, mockOrder];
-
-      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: mock));
-    });
+    on<GetTrackingOrderListFromJson>(_onGetTrackingOrderListFromJson);
+    on<GetTrackingOrderList>(_onGetTrackingOrderList);
   }
 
-  final DioUtilityRepository utilityRepository;
+  _onGetTrackingOrderListFromJson(GetTrackingOrderListFromJson event, Emitter<TrackingOrderState> emit) {
+    Order mockOrder = Order.fromJson({
+      "orderNo": "1234",
+      "shippingStatus": "pending",
+      "products": [
+        {
+          "productId": "PV_EGYJW5CE8Y8G",
+          "productNameTh": "Pulsa Max Kook EV 2 Opt 1 Mer1",
+          "productNameEn": "Pulsa Max Kook EV 2 Opt 1 Mer1",
+          "productDescription": "ทดสอบ",
+          "productImageUrl":
+              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
+          "productQty": 1,
+          "price": 59000.0,
+          "discountPrice": 40000.0,
+          "currency": "Bath",
+          "channel": "LINE / GOAPP",
+          "createDate": "",
+          "lastUpdateDate": "วันที่ update status ของ shipping"
+        }
+      ],
+      "totalPrice": 59000.0,
+      "totalQty": 1
+    });
+
+    List<Order> mock = [mockOrder, mockOrder];
+
+    if (mock.isNotEmpty) {
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: mock));
+    } else {
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.empty, trackingListData: mock));
+    }
+  }
+
+  _onGetTrackingOrderList(GetTrackingOrderList event, Emitter<TrackingOrderState> emit) async {
+    emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.loading));
+    LineDataHelper lineDataHelper = LineDataHelper();
+    final baseUrl = Environment().getValue("BFF_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final trackingListPath = Environment().getValue("TRACKING_LIST_URL");
+    String accessToken = await lineDataHelper.getLineAccessToken();
+    String uid = await lineDataHelper.getLineUid();
+
+    var params = {"itemsPerPage": 10, "page": 1, "customerRef": uid};
+
+    try {
+      Response response = await utilityRepository
+          .getByURL("$baseUrl$transactionApiPath$trackingListPath", params, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
+
+      List ordersResponse = response.data["orders"];
+      List<Order> orderList = [];
+
+      for (var element in ordersResponse) {
+        Order temp = Order.fromJson(element);
+        orderList.add(temp);
+      }
+
+      if (orderList.isNotEmpty) {
+        emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: orderList));
+      } else {
+        emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.empty, trackingListData: orderList));
+      }
+    } catch (e) {
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.error));
+    }
+  }
 }

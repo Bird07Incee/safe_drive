@@ -10,3 +10,7 @@ class TrackingOrderEvent extends Equatable {
 class GetTrackingOrderListFromJson extends TrackingOrderEvent {
   const GetTrackingOrderListFromJson();
 }
+
+class GetTrackingOrderList extends TrackingOrderEvent {
+  const GetTrackingOrderList();
+}

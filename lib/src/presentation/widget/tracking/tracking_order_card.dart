@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
 
 class TrackingOrderCard extends StatelessWidget {
@@ -97,7 +98,7 @@ class TrackingOrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("ราคารวม", style: AlvaStyles().headingSize18w400Cordia(spaceGrey123)),
-              Text("${order.totalPrice} บาท", style: AlvaStyles().headingSize14w800(blackGoMunTo)),
+              Text("${order.totalPrice!.toDecimalFormat()} บาท", style: AlvaStyles().headingSize14w800(blackGoMunTo)),
             ],
           ),
           SizedBox(
