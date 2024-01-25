@@ -93,3 +93,24 @@ class Products {
     return data;
   }
 }
+
+class TrackingListPage {
+  final int? totalCountItems;
+  final int? currentPage;
+  final int? totalPage;
+
+  const TrackingListPage({required this.totalCountItems, required this.currentPage, required this.totalPage});
+
+  TrackingListPage.fromJson(Map<String, dynamic> json)
+      : totalCountItems = json['totalCountItems'] ?? 1,
+        currentPage = json['currentPage'] ?? 1,
+        totalPage = json['totalPage'] ?? 1;
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['totalCountItems'] = totalCountItems;
+    data['currentPage'] = currentPage;
+    data['totalPage'] = totalPage;
+    return data;
+  }
+}

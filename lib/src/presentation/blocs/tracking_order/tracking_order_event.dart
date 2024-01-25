@@ -11,6 +11,9 @@ class GetTrackingOrderListFromJson extends TrackingOrderEvent {
   const GetTrackingOrderListFromJson();
 }
 
-class GetTrackingOrderList extends TrackingOrderEvent {
-  const GetTrackingOrderList();
+class GetTrackingOrderListByPage extends TrackingOrderEvent {
+  const GetTrackingOrderListByPage(this.page, this.context);
+
+  final int page;
+  final BuildContext context;
 }

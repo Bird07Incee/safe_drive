@@ -389,12 +389,13 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                         key: const Key("back_to_homepage_button"),
                         onTap: () {
                           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+                          Navigator.pushNamed(context, '/trackingList');
                         },
                         child: Container(
                           height: 48,
                           width: (maxWidth - 40) / 2,
                           decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
-                          child: Center(child: Text("กลับสู่หน้าหลัก", style: AlvaStyles().heading3())),
+                          child: Center(child: Text("ตรวจสอบสถานะสินค้า", style: AlvaStyles().heading3())),
                         ),
                       ))
                 ],

@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 part 'tracking_order_event.dart';
@@ -18,7 +20,7 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     });
 
     on<GetTrackingOrderListFromJson>(_onGetTrackingOrderListFromJson);
-    on<GetTrackingOrderList>(_onGetTrackingOrderList);
+    on<GetTrackingOrderListByPage>(_onGetTrackingOrderListByPage);
   }
 
   _onGetTrackingOrderListFromJson(GetTrackingOrderListFromJson event, Emitter<TrackingOrderState> emit) {
@@ -55,8 +57,13 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     }
   }
 
-  _onGetTrackingOrderList(GetTrackingOrderList event, Emitter<TrackingOrderState> emit) async {
-    emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.loading));
+  _onGetTrackingOrderListByPage(GetTrackingOrderListByPage event, Emitter<TrackingOrderState> emit) async {
+    if (event.page == 1) {
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.loading));
+    } else {
+      GeneralDialog().showLoadingDialog(context: event.context);
+    }
+
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
@@ -64,13 +71,14 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
 
-    var params = {"itemsPerPage": 10, "page": 1, "customerRef": uid};
+    var params = {"itemsPerPage": 10, "page": event.page, "customerRef": uid};
 
     try {
       Response response = await utilityRepository
           .getByURL("$baseUrl$transactionApiPath$trackingListPath", params, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
 
       List ordersResponse = response.data["orders"];
+      TrackingListPage trackingListPage = TrackingListPage.fromJson(response.data);
       List<Order> orderList = [];
 
       for (var element in ordersResponse) {
@@ -79,7 +87,18 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
       }
 
       if (orderList.isNotEmpty) {
-        emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: orderList));
+        if (event.page != 1) {
+          var oldOrderList = state.trackingListData;
+          emit(state.copyWith(
+              trackingOrderListStatus: GetTrackingOrderListStatus.success,
+              trackingListData: oldOrderList + orderList,
+              trackingListPage: trackingListPage));
+          // ignore: use_build_context_synchronously
+          Navigator.pop(event.context);
+        } else {
+          emit(state.copyWith(
+              trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: orderList, trackingListPage: trackingListPage));
+        }
       } else {
         emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.empty, trackingListData: orderList));
       }
