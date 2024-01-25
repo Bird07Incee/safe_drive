@@ -51,10 +51,9 @@ class _PDTopSectionState extends State<PDTopSection> {
     double maxWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       builder: (context, state) {
-        final replaceInnerTagP = state.product.tagline.isNotEmpty
-            ? state.product.tagline.substring(3, state.product.tagline.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
-            : "";
+        final replaceInnerTagP = state.product.tagline.isNotEmpty ? state.product.tagline : "";
         var tagline = state.product.tagline.isNotEmpty ? replaceInnerTagP : "";
+        // print("tagline ${state.product.tagline.isNotEmpty}");
         // -----------process for unSupport emoji,icon in text-------------------
         RegExp emojiRegex = RegExp(
           r"[\u{1F600}-\u{1F64F}" // Emoticons
@@ -74,9 +73,45 @@ class _PDTopSectionState extends State<PDTopSection> {
         // -----------process for unSupport emoji,icon in text-------------------
         String? truncatedHtmlContent;
         int maxLines = 4;
+        int linesTwo = 0;
         List<String> lines;
         int lineFinal = 0;
         String? textString;
+
+        String removeHtmlForbiddenTagsTags(String input) {
+          List<String> forbiddenTags = [
+            'hr',
+            'img',
+            'input',
+            'meta',
+            'link',
+            'base',
+            'col',
+            'area',
+            'param',
+            'command',
+            'keygen',
+            'source',
+            'track',
+            'wbr',
+            'a',
+            '/a',
+            'nav',
+            '/nav',
+            'section',
+            '/section',
+            'article',
+            '/article'
+          ];
+
+          for (String tag in forbiddenTags) {
+            String ht = '<$tag[^>]*>';
+            RegExp tagRegex = RegExp(ht);
+            input = input.replaceAll(tagRegex, '');
+          }
+          return input;
+        }
+
         // Function for  delete the entire line of tags and do not want to show
         String removeTags(String html, List<String> tagsToRemove) {
           // Create a regular expression pattern for specified HTML tags
@@ -181,9 +216,14 @@ class _PDTopSectionState extends State<PDTopSection> {
         }
 
         // check empty html string input
+
         if (tagline != "") {
+          tagline = removeHtmlForbiddenTagsTags(tagline);
+          // tagline = removeInvalidWords(tagline);
+          // print("tagline ${tagline}");
           // check html tag in string input
           if (!containsHtmlTags(tagline)) {
+            // print("not containsHtmlTags");
             // insert <p> in title or first line
             tagline = insertPTag(tagline);
             // check expended content
@@ -222,7 +262,7 @@ class _PDTopSectionState extends State<PDTopSection> {
           } else {
             // This string contains html tags.
             // List of tags that you want to delete the entire line of tags and do not want to show
-            tagline = removeTags(tagline, ['table', 'th', 'tr', 'td', 'img']);
+            tagline = removeTags(tagline, ['table', 'th', 'tr', 'td', 'img', 'nav']);
             // The list of tags can be displayed as text and can be replaced with <p>.
             List<Map<String, String>> replacements = [
               {"<strong>": "<p>", "</strong>": "</p>"},
@@ -256,9 +296,11 @@ class _PDTopSectionState extends State<PDTopSection> {
 
             // The process of counting lines and checking how many characters each line has and maxLine should be set.
             for (int i = 0; i < lines.length; i++) {
+              // log("line[$i] ${lines[i].length}");
               if (lines.length - 1 >= 1) {
                 // If the first line is too long, then maxLine = 1.
                 if (lines[0].length >= 60) {
+                  // log(("case 1"));
                   maxLines = 1;
                 }
               }
@@ -266,29 +308,37 @@ class _PDTopSectionState extends State<PDTopSection> {
                 // If the second line is too long and the first line is not too long, then maxLine = 2.
                 if (lines[1].length >= 80 && lines[1].length <= 169 && lines[0].length <= 60) {
                   maxLines = 2;
+                  // log(("case 2"));
                   // If the second line is too long and the first line is not too long, then maxLine = 2.
                 } else if (lines[1].length >= 170 && lines[0].length <= 60) {
                   maxLines = 2;
+                  linesTwo == lines[1].length;
+                  // log(("case 2.1"));
                 }
               }
               if (lines.length - 1 >= 3) {
                 // If the third line is too long and the second line is not too long and the first line is not too long, then maxLine = 3
                 if (lines[2].length >= 100 && lines[2].length <= 169 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 3;
+                  // log(("case 3"));
                 } else if (lines[2].length >= 170 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 3;
+                  // log(("case 3.1"));
                 } else if (lines[2].length <= 10 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 2;
+                  // log(("case 3.2"));
                 }
               }
               if (lines.length - 1 >= 4) {
                 if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 3;
+                  // log(("case 4"));
                 } else if (lines[3].length <= 10 &&
                     lines[3].length >= 169 &&
                     lines[2].length <= 100 &&
                     lines[1].length <= 80 &&
                     lines[0].length <= 60) {
+                  // log(("case 4.2"));
                   maxLines = 2;
                 }
               }
@@ -299,6 +349,12 @@ class _PDTopSectionState extends State<PDTopSection> {
               //   }
               // }
             }
+            // process to count closest lines
+            for (int i = 0; i < lines.length; i++) {
+              if (lines[i].length > 10) {
+                lineFinal = lineFinal + 1;
+              }
+            }
             // process for substring. When the second line is found to be too long
             if (maxLines == 2) {
               for (int i = 0; i < lines.length; i++) {
@@ -307,6 +363,10 @@ class _PDTopSectionState extends State<PDTopSection> {
                   truncatedHtmlContent = [lines[0]].take(maxLines).join('\n');
                 } else if (i == 1) {
                   if (lines[1].length >= 170 && lines[0].length <= 60) {
+                    if (lineFinal == 2 && maxLines == 2) {
+                      lineFinal = 3;
+                      maxLines = 2;
+                    }
                     // Merge the second line into the variable truncatedHtmlContent.
                     truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 150)].take(maxLines).join('</'))}";
                   } else {
@@ -339,17 +399,16 @@ class _PDTopSectionState extends State<PDTopSection> {
               // Merge the second line into the variable when all three lines are not too long.
               truncatedHtmlContent = lines.take(maxLines).join('</');
             }
-            // process to count closest lines
-            for (int i = 0; i < lines.length; i++) {
-              if (lines[i].length > 10) {
-                lineFinal = lineFinal + 1;
-              }
-            }
+
             if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 60 && lines[1].length <= 80) {
               lineFinal = 4;
             }
           }
         }
+        // print("${tagline}");
+        // print("truncatedHtmlContent ${truncatedHtmlContent}");
+        // print("line two over flow ${linesTwo}:  ${(lineFinal == 2 && maxLines == 2 && linesTwo>=170)}");
+        // print("(lineFinal(${lineFinal}) <= maxLines(${maxLines}) && containsHtmlTags(tagline)(${containsHtmlTags(tagline)})) == ${(lineFinal <= maxLines && containsHtmlTags(tagline))}");
         return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
           builder: (context, zoomarguments) {
             return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
