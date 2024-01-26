@@ -44,10 +44,10 @@ class ProductDetailConst {
 <strong>– ฟรี รับประกันสินค้า 3 ปี (หากเครื่องมีปัญหา จะเปลี่ยนเป็นเครื่องใหม่)</strong>
 ''';
   String htmlTag = '''
-|column1|column2|
+  <p>|column1|column2| 
 |-|-|-|
 |Model|Pulsar MAX|
-|Cable Length|5 metres (7 metres optional)|
+|Cable Length|5 metres (7 metres optional)|</p>
 ''';
   String testData = '''<strong>Installation Package</strong>
 <p>– ฟรี เดินสายไฟ ระยะ 20 เมตร / ท่อ uPVC ขาว 3/4″-1″ / เบรกเกอร์ 40A /</p>
