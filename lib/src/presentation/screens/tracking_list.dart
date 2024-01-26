@@ -11,6 +11,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/tracking/tracking_order_card.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class TrackingListScreen extends StatefulWidget {
   const TrackingListScreen({super.key});
@@ -47,7 +48,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
       leading: IconButton(
           key: const Key("pop_navigator_to_home_page"),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           },
           icon: const Icon(Icons.arrow_back_ios_rounded)),
     );
@@ -59,69 +60,69 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
             return AlvaRootWidget(
                 titlePage: titleWebPage,
                 appBar: appBar,
-                child: Container(
-                  color: cloudyWhite,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: state.trackingListData.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return TrackingOrderCard(
-                              order: state.trackingListData[index],
-                            );
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 16,
+                        color: Colors.white,
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: state.trackingListData.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return TrackingOrderCard(
+                            order: state.trackingListData[index],
+                          );
+                        },
+                      ),
+                      Visibility(
+                        visible: isMorePageToLoad(state.trackingListPage),
+                        child: GestureDetector(
+                          onTap: () {
+                            context.read<TrackingOrderBloc>().add(GetTrackingOrderListByPage(state.trackingListPage.currentPage! + 1, context));
                           },
-                        ),
-                        Visibility(
-                          visible: isMorePageToLoad(state.trackingListPage),
-                          child: GestureDetector(
-                            onTap: () {
-                              context.read<TrackingOrderBloc>().add(GetTrackingOrderListByPage(state.trackingListPage.currentPage! + 1, context));
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 32,
-                                ),
-                                Container(
-                                  width: 100,
-                                  height: 32,
-                                  margin: EdgeInsets.symmetric(vertical: 4),
-                                  decoration:
-                                      BoxDecoration(color: Color(0xffe8e7e7), borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [
-                                    BoxShadow(
-                                      color: whitePure.withOpacity(0.4),
-                                      spreadRadius: 0,
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ]),
-                                  child: Row(
-                                    children: [
-                                      const SizedBox(
-                                        width: 16,
-                                      ),
-                                      Text(
-                                        'โหลดเพิ่มเติม',
-                                        style: AlvaStyles().bodySize12W600(blackGoMunTo),
-                                      ),
-                                      const SizedBox(
-                                        width: 16,
-                                      ),
-                                    ],
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 32,
+                              ),
+                              Container(
+                                width: 100,
+                                height: 32,
+                                margin: EdgeInsets.symmetric(vertical: 4),
+                                decoration: BoxDecoration(color: Color(0xffe8e7e7), borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [
+                                  BoxShadow(
+                                    color: whitePure.withOpacity(0.4),
+                                    spreadRadius: 0,
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
                                   ),
+                                ]),
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    Text(
+                                      'โหลดเพิ่มเติม',
+                                      style: AlvaStyles().bodySize12W600(blackGoMunTo),
+                                    ),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 32,
-                                ),
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                height: 32,
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ));
           } else if (state.trackingOrderListStatus == GetTrackingOrderListStatus.initial ||

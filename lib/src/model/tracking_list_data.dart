@@ -4,20 +4,22 @@ class Order {
   List<Products>? products;
   int? totalPrice;
   int? totalQty;
+  String? shippingStatusMessage;
 
-  Order({this.orderNo, this.shippingStatus, this.products, this.totalPrice, this.totalQty});
+  Order({this.orderNo, this.shippingStatus, this.products, this.totalPrice, this.totalQty, this.shippingStatusMessage});
 
   Order.fromJson(Map<String, dynamic> json) {
-    orderNo = json['orderNo'];
-    shippingStatus = json['shippingStatus'];
+    orderNo = json['orderNo'] ?? "";
+    shippingStatus = json['shippingStatus'] ?? "";
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
         products!.add(Products.fromJson(v));
       });
     }
-    totalPrice = json['totalPrice'];
-    totalQty = json['totalQty'];
+    totalPrice = json['totalPrice'] ?? "";
+    totalQty = json['totalQty'] ?? "";
+    shippingStatusMessage = json['shippingStatusMessage'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -29,6 +31,7 @@ class Order {
     }
     data['totalPrice'] = totalPrice;
     data['totalQty'] = totalQty;
+    data['shippingStatusMessage'] = shippingStatusMessage;
     return data;
   }
 }
@@ -62,18 +65,18 @@ class Products {
       this.lastUpdateDate});
 
   Products.fromJson(Map<String, dynamic> json) {
-    productId = json['productId'];
-    productNameTh = json['productNameTh'];
-    productNameEn = json['productNameEn'];
-    productDescription = json['productDescription'];
-    productImageUrl = json['productImageUrl'];
-    productQty = json['productQty'];
-    price = json['price'];
-    discountPrice = json['discountPrice'];
-    currency = json['currency'];
-    channel = json['channel'];
-    createDate = json['createDate'];
-    lastUpdateDate = json['lastUpdateDate'];
+    productId = json['productId'] ?? "";
+    productNameTh = json['productNameTh'] ?? "";
+    productNameEn = json['productNameEn'] ?? "";
+    productDescription = json['productDescription'] ?? "";
+    productImageUrl = json['productImageUrl'] ?? "";
+    productQty = json['productQty'] ?? "";
+    price = json['price'] ?? "";
+    discountPrice = json['discountPrice'] ?? "";
+    currency = json['currency'] ?? "";
+    channel = json['channel'] ?? "";
+    createDate = json['createDate'] ?? "";
+    lastUpdateDate = json['lastUpdateDate'] ?? "";
   }
 
   Map<String, dynamic> toJson() {

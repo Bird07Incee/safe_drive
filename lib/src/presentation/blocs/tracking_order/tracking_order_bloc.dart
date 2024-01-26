@@ -27,6 +27,7 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     Order mockOrder = Order.fromJson({
       "orderNo": "1234",
       "shippingStatus": "pending",
+      "shippingStatusMessage": "จัดส่งแล้วครับ",
       "products": [
         {
           "productId": "PV_EGYJW5CE8Y8G",
@@ -48,7 +49,7 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
       "totalQty": 1
     });
 
-    List<Order> mock = [mockOrder, mockOrder];
+    List<Order> mock = [mockOrder, mockOrder, mockOrder];
 
     if (mock.isNotEmpty) {
       emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: mock));

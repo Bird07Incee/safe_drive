@@ -386,10 +386,9 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                         ],
                       ),
                       child: GestureDetector(
-                        key: const Key("back_to_homepage_button"),
+                        key: const Key("back_to_tracking_list_button"),
                         onTap: () {
-                          Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
-                          Navigator.pushNamed(context, '/trackingList');
+                          Navigator.pushNamedAndRemoveUntil(context, Routes.trackingList.toStringPath(), (route) => false);
                         },
                         child: Container(
                           height: 48,
