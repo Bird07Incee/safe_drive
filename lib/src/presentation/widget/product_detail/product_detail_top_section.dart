@@ -79,6 +79,7 @@ class _PDTopSectionState extends State<PDTopSection> {
         List<String> lines;
         int lineFinal = 0;
         String? textString;
+        List<String> bigText = ['<h2>', '<h1>'];
 
         String removeHtmlForbiddenTagsTags(String input) {
           List<String> forbiddenTags = [
@@ -330,7 +331,6 @@ class _PDTopSectionState extends State<PDTopSection> {
                   maxLines = 2;
                   log(("case 3.2"));
                 }
-                List<String> bigText = ['<h2>', '<h1>'];
                 for (int i = 0; i < bigText.length; i++) {
                   if (lines[2].length <= 169 && lines[2].contains(bigText[i]) && lines[1].length <= 80 && lines[0].length <= 60) {
                     maxLines = 2;
@@ -350,20 +350,14 @@ class _PDTopSectionState extends State<PDTopSection> {
                   log(("case 4.2"));
                   maxLines = 2;
                 }
-
-                List<String> bigText = ['<h2>', '<h1>'];
                 for (int i = 0; i < bigText.length; i++) {
-                  if (lines[2].length <= 169 && lines[2].contains(bigText[i]) && lines[1].length <= 80 && lines[0].length <= 60) {
-                    maxLines = 2;
-                    log(("case 3.3"));
-                  }
                   if (lines[3].length <= 10 &&
                       lines[3].length >= 169 &&
                       lines[3].contains(bigText[i]) &&
                       lines[2].length <= 100 &&
                       lines[1].length <= 80 &&
                       lines[0].length <= 60) {
-                    log(("case 3.4"));
+                    log(("case 4.3"));
                     maxLines = 2;
                   }
                 }
