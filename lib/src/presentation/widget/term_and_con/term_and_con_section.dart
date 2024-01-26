@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/term_and_con/term_and_con_paragraph.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TermAndConSection extends StatelessWidget {
   const TermAndConSection({super.key});
@@ -8,7 +12,9 @@ class TermAndConSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.of(context).size.width;
 
-    return Column(children: [
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
       TermAndConParagraph(
           header: "บทนำ",
           text:
@@ -53,6 +59,19 @@ class TermAndConSection extends StatelessWidget {
           header: "การคืนและการยกเลิกคำสั่งซื้อ",
           text:
               "คำสั่งซื้อสามารถทำการยกเลิกได้ภายใน 7 วัน นับตั้งแต่วันที่ทำ รายการสั่งซื้อสำเร็จ โดยท่านต้องติดต่อกับร้านค้าพันธมิตรโดยตรง เพื่อทำการยกเลิก และแสดงหลักฐานในการสั่งซื้อกับพันธมิตรและการ ชำระเงิน กรุงศรี ออโต้จะพยายามรักษาผลประโยชน์ให้กับผู้ท่านอย่าง สูงสุด ภายใต้ข้อจำกัดที่กรุงศรี ออโต้มี"),
+      Container(
+        color: Colors.white,
+        width: maxWidth,
+        padding: const EdgeInsets.all(16.0),
+        child: GestureDetector(
+          key: const Key("about_us_button"),
+          onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
+          child: Text(
+            HomeConst().privacyPolicy,
+            style: AlvaStyles().headingSize12w500(BlueFantasy).copyWith(height: 20/12, decoration: TextDecoration.underline,),
+          ),
+        ),
+      ),
       Container(
         color: Colors.white,
         width: maxWidth,

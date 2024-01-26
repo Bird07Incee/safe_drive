@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -77,6 +79,7 @@ class _PDTopSectionState extends State<PDTopSection> {
         List<String> lines;
         int lineFinal = 0;
         String? textString;
+        List<String> bigText = ['<h2>', '<h1>'];
 
         String removeHtmlForbiddenTagsTags(String input) {
           List<String> forbiddenTags = [
@@ -296,11 +299,11 @@ class _PDTopSectionState extends State<PDTopSection> {
 
             // The process of counting lines and checking how many characters each line has and maxLine should be set.
             for (int i = 0; i < lines.length; i++) {
-              // log("line[$i] ${lines[i].length}");
+              // log("line[$i] ${lines[i].length} : ${lines[i]}");
               if (lines.length - 1 >= 1) {
                 // If the first line is too long, then maxLine = 1.
                 if (lines[0].length >= 60) {
-                  // log(("case 1"));
+                  log(("case 1"));
                   maxLines = 1;
                 }
               }
@@ -308,38 +311,55 @@ class _PDTopSectionState extends State<PDTopSection> {
                 // If the second line is too long and the first line is not too long, then maxLine = 2.
                 if (lines[1].length >= 80 && lines[1].length <= 169 && lines[0].length <= 60) {
                   maxLines = 2;
-                  // log(("case 2"));
+                  log(("case 2"));
                   // If the second line is too long and the first line is not too long, then maxLine = 2.
                 } else if (lines[1].length >= 170 && lines[0].length <= 60) {
                   maxLines = 2;
                   linesTwo == lines[1].length;
-                  // log(("case 2.1"));
+                  log(("case 2.1"));
                 }
               }
               if (lines.length - 1 >= 3) {
                 // If the third line is too long and the second line is not too long and the first line is not too long, then maxLine = 3
                 if (lines[2].length >= 100 && lines[2].length <= 169 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 3;
-                  // log(("case 3"));
+                  log(("case 3"));
                 } else if (lines[2].length >= 170 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 3;
-                  // log(("case 3.1"));
+                  log(("case 3.1"));
                 } else if (lines[2].length <= 10 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 2;
-                  // log(("case 3.2"));
+                  log(("case 3.2"));
+                }
+                for (int i = 0; i < bigText.length; i++) {
+                  if (lines[2].length <= 169 && lines[2].contains(bigText[i]) && lines[1].length <= 80 && lines[0].length <= 60) {
+                    maxLines = 2;
+                    log(("case 3.3"));
+                  }
                 }
               }
               if (lines.length - 1 >= 4) {
                 if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 60) {
                   maxLines = 3;
-                  // log(("case 4"));
+                  log(("case 4"));
                 } else if (lines[3].length <= 10 &&
                     lines[3].length >= 169 &&
                     lines[2].length <= 100 &&
                     lines[1].length <= 80 &&
                     lines[0].length <= 60) {
-                  // log(("case 4.2"));
+                  log(("case 4.2"));
                   maxLines = 2;
+                }
+                for (int i = 0; i < bigText.length; i++) {
+                  if (lines[3].length <= 10 &&
+                      lines[3].length >= 169 &&
+                      lines[3].contains(bigText[i]) &&
+                      lines[2].length <= 100 &&
+                      lines[1].length <= 80 &&
+                      lines[0].length <= 60) {
+                    log(("case 4.3"));
+                    maxLines = 2;
+                  }
                 }
               }
               // if (lines.length >= 5) {
@@ -401,6 +421,10 @@ class _PDTopSectionState extends State<PDTopSection> {
             }
 
             if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 60 && lines[1].length <= 80) {
+              lineFinal = 4;
+            }
+            if (maxLines == 1 && truncatedHtmlContent!.length >= 281) {
+              truncatedHtmlContent = truncatedHtmlContent.substring(0, 280);
               lineFinal = 4;
             }
           }
