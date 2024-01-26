@@ -423,6 +423,10 @@ class _PDTopSectionState extends State<PDTopSection> {
             if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 60 && lines[1].length <= 80) {
               lineFinal = 4;
             }
+            if (maxLines == 1 && truncatedHtmlContent!.length >= 281) {
+              truncatedHtmlContent = truncatedHtmlContent.substring(0, 280);
+              lineFinal = 4;
+            }
           }
         }
         // print("${tagline}");
