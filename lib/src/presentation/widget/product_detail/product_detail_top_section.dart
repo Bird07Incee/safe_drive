@@ -225,7 +225,7 @@ class _PDTopSectionState extends State<PDTopSection> {
           // print("tagline ${tagline}");
           // check html tag in string input
           if (!containsHtmlTags(tagline)) {
-            print("not containsHtmlTags");
+            // print("not containsHtmlTags");
             // insert <p> in title or first line
             tagline = insertPTag(tagline);
             // check expended content
