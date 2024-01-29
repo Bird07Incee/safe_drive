@@ -30,25 +30,83 @@ class ErrorConst {
 }
 
 class ProductDetailConst {
+  List<String> forbiddenTags = [
+    'hr',
+    'img',
+    'input',
+    'meta',
+    'link',
+    'base',
+    'col',
+    'area',
+    'param',
+    'command',
+    'keygen',
+    'source',
+    'track',
+    'wbr',
+    'a',
+    '/a',
+    'nav',
+    '/nav',
+    'section',
+    '/section',
+    'article',
+    '/article',
+    '/table',
+    'table',
+    '/thead',
+    'thead',
+    'tr',
+    '/tr',
+    'th',
+    '/th',
+    'tbody',
+    '/tbody',
+    'td',
+    '/td',
+  ];
+  // The list of tags can be displayed as text and can be replaced with <p>.
+  List<Map<String, String>> replacements = [
+    {"<strong>": "<p>", "</strong>": "</p>"},
+    {"<span>": "<p>", "</span>": "</p>"},
+    {"<em>": "<p>", "</em>": "</p>"},
+    {"<b>": "<p>", "</b>": "</p>"},
+    {"<i>": "<p>", "</i>": "</p>"},
+    {"<u>": "<p>", "</u>": "</p>"},
+    {"<s>": "<p>", "</s>": "</p>"},
+    {"<strike>": "<p>", "</strike>": "</p>"},
+    {"<sub>": "<p>", "</sub>": "</p>"},
+    {"<sup>": "<p>", "</sup>": "</p>"},
+    {"<a>": "<p>", "</a>": "</p>"},
+    {"<h3>": "<p>", "</h3>": "</p>"},
+    {"<h4>": "<p>", "</h4>": "</p>"},
+    {"<h5>": "<p>", "</h5>": "</p>"},
+    {"<h6>": "<p>", "</h6>": "</p>"},
+  ];
+  List<String> htmlTableTag = ['/table', 'table', '/thead', 'thead', 'tr', '/tr', 'th', '/th', 'tbody', '/tbody', 'td', '/td'];
   String imgDefaultPath = "assets/homepage/img_default.png";
   String imgHeroBannerPath = "assets/homepage/HeroBanner.png";
 
   String htmlExampleBullet = '''
-<strong>✅Installation Package</strong>
+<h1>✅ที่ชาร์จรถยนต์ไฟฟ้าสามารถแบ่งที่ชาร์จรถยนต์ไฟฟ้าสามารถแบ่งที่ชารถ</h1> 
 <ul>
 <li> ฟรี เดินสายไฟ ระยะ 20 เมตร / ท่อ uPVC ขาว 3/4″-1″ / เบรกเกอร์ 40A /</li>
 <li> อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</li>
-<li> อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</li>
+<li> อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</li> 
 <li> อุปกรณ์กันไฟดูด RCD Type A/ Plastic CB Box</li>
 </ul>
 <strong>– ฟรี รับประกันสินค้า 3 ปี (หากเครื่องมีปัญหา จะเปลี่ยนเป็นเครื่องใหม่)</strong>
 ''';
   String htmlTag = '''
-  <p>|column1|column2| 
-|-|-|-|
-|Model|Pulsar MAX|
-|Cable Length|5 metres (7 metres optional)|</p>
+<p>Pulsar Plus เล็กทรงพลัง</p>
+<p>เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์ เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวัน อีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่งเครื่องชาร์จได้อย่งเครื่องชาร์จได้อย่</p>
+
+
 ''';
+  // <h1>
+  // การชาร์จแบบปกติ (Normal Charge) เป็นการชาร์จไฟฟ้าด้วยไฟฟ้ากระแสสลับ (AC Charger) ผ่านอุปกรณ์อัดประจุไฟฟ้าที่ติดตั้งภายในรถยนต์ไฟฟ้า (On-Board Charger) กำลังไฟโดยทั่วไปจะอยู่ที่ 4.3 kW และ 6.6 kW สำหรับการชาร์จประจุไฟฟ้าแบบ 1 เฟส ไปจนถึง 11 kW และ 22 kW สำหรับระบบการชาร์จไฟฟ้าแบบ 3 เฟส ใช้เวลาในการชาร์จประมาณ 4-8 ชั่วโมง
+  // </h1>
   String testData = '''<strong>Installation Package</strong>
 <p>– ฟรี เดินสายไฟ ระยะ 20 เมตร / ท่อ uPVC ขาว 3/4″-1″ / เบรกเกอร์ 40A /</p>
 <br><br>
