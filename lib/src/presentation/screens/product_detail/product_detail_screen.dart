@@ -8,6 +8,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
@@ -280,6 +281,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   Widget viewImagePage(
       PageController pageController, BuildContext context, TransformationController zoomState, double previousState, ProductDetailState pdState) {
     backButtontoDetail() {
+      final myBloc = BlocProvider.of<ProductDetailDescriptionCubit>(context);
+
+      myBloc.updateToggleTapDescription(toggleDescription: false);
       if (pdState.clickFromImage == true) {
         Navigator.pop(context);
       }

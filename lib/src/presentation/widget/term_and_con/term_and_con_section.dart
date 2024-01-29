@@ -12,9 +12,7 @@ class TermAndConSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.of(context).size.width;
 
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       TermAndConParagraph(
           header: "บทนำ",
           text:
@@ -68,7 +66,10 @@ class TermAndConSection extends StatelessWidget {
           onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
           child: Text(
             HomeConst().privacyPolicy,
-            style: AlvaStyles().headingSize12w500(BlueFantasy).copyWith(height: 20/12, decoration: TextDecoration.underline,),
+            style: AlvaStyles().headingSize12w500(BlueFantasy).copyWith(
+                  height: 20 / 12,
+                  decoration: TextDecoration.underline,
+                ),
           ),
         ),
       ),

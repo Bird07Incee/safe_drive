@@ -56,6 +56,7 @@ class _PDTopSectionState extends State<PDTopSection> {
         final replaceInnerTagP = state.product.tagline.isNotEmpty ? state.product.tagline : "";
         var tagline = state.product.tagline.isNotEmpty ? replaceInnerTagP : "";
         // print("tagline ${state.product.tagline}");
+        // {"<br >": "<br>", "<br />": "<br/>"},
         // -----------process for unSupport emoji,icon in text-------------------
         RegExp emojiRegex = RegExp(
           r"[\u{1F600}-\u{1F64F}" // Emoticons
@@ -181,6 +182,7 @@ class _PDTopSectionState extends State<PDTopSection> {
 
         // Function for checking whether input has html tags or not, excluding <br>
         bool containsHtmlTags(String input) {
+          input = input.replaceAll("<br/>", "<br>");
           RegExp htmlTagRegExp = RegExp(r'<[^br/>]+>');
           return htmlTagRegExp.hasMatch(input);
         }
@@ -200,6 +202,8 @@ class _PDTopSectionState extends State<PDTopSection> {
           //     tagline = '''<h1>Table content is not supported</h1>''';
           //   }
           // }
+          tagline = tagline.replaceAll("<br >", "<br>");
+          tagline = tagline.replaceAll("<br />", "<br/>");
           tagline = removeHtmlForbiddenTagsTags(tagline);
           // tagline = removeInvalidWords(tagline);
           // print("taglinenamo ${tagline}");
@@ -420,6 +424,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                         truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
                           lines[1].substring(0, (lines[1].length * 0.9).round())
                         ].take(maxLines).join('</'))}";
+                        log("maxLines 2 step 2");
                       }
                     }
                   }

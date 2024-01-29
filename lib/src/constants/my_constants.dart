@@ -99,9 +99,14 @@ class ProductDetailConst {
 <strong>– ฟรี รับประกันสินค้า 3 ปี (หากเครื่องมีปัญหา จะเปลี่ยนเป็นเครื่องใหม่)</strong>
 ''';
   String htmlTag = '''
-<p>Pulsar Plus เล็กทรงพลัง</p>
-<p>เครื่องชาร์จรถยนต์ไฟฟ้าสไตล์มินิมอล ที่ทรงพลังในขนาดกะทัดรัด สามารถติดตั้งได้กับโรงจอดรถหลายสไตล์ เหมาะกับการชาร์จรถยนต์ไฟฟ้าที่บ้านทุกวัน อีกทั้งยังสามารถเพิ่มประสิทธิภาพการทำงานของเครื่องชาร์จได้อย่งเครื่องชาร์จได้อย่งเครื่องชาร์จได้อย่</p>
-
+<p><strong>More powerful easier smarter</strong>
+<br />
+A smart electric car charger designed to save you time, money, and energy every day.</p>
+<p>Adapt seamlessly to your electric car</p>
+<p><strong>More powerful easier smarter</strong> 
+<br />
+A smart electric car charger designed to save you time, money, and energy every day.</p>
+<p>Adapt seamlessly to your electric car</p>
 
 ''';
   // <h1>
