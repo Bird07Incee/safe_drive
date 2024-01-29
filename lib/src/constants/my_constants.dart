@@ -99,14 +99,18 @@ class ProductDetailConst {
 <strong>– ฟรี รับประกันสินค้า 3 ปี (หากเครื่องมีปัญหา จะเปลี่ยนเป็นเครื่องใหม่)</strong>
 ''';
   String htmlTag = '''
-<p><strong>More powerful easier smarter</strong>
-<br />
-A smart electric car charger designed to save you time, money, and energy every day.</p>
-<p>Adapt seamlessly to your electric car</p>
-<p><strong>More powerful easier smarter</strong> 
-<br />
-A smart electric car charger designed to save you time, money, and energy every day.</p>
-<p>Adapt seamlessly to your electric car</p>
+<section id="services">
+    <h2>My Tagline</h2>
+    <p>
+        This paragraph contains a lot of spaces in the source code, but the browser ignores it.
+    </p>
+    <p>
+        This paragraph contains a lot of spaces in the source code, but the browser ignores it.
+    </p>
+    <p>
+        This paragraph contains a lot of spaces in the source code, but the browser ignores it.
+    </p>
+</section>
 
 ''';
   // <h1>

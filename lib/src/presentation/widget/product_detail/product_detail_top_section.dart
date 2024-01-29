@@ -278,10 +278,20 @@ class _PDTopSectionState extends State<PDTopSection> {
                 if (lines[1].length >= 80 && lines[1].length <= 169 && lines[0].length <= 149) {
                   maxLines = 2;
                   log(("case 2"));
+                  log(("line ${lines.length} ${lines.length - 1 >= 3}"));
                   for (int i = 0; i < bigText.length; i++) {
                     if (lines[0].length >= 100 && lines[0].contains(bigText[i])) {
                       maxLines = 1;
                       log(("case 2.0.1"));
+                    } else if (lines[0].length <= 100 &&
+                        !(lines[0].contains(bigText[i])) &&
+                        lines[1].length >= 80 &&
+                        lines[1].length <= 115 &&
+                        lines.length - 1 >= 3 &&
+                        lines[2].length >= 80 &&
+                        lines[2].length <= 115) {
+                      maxLines = 3;
+                      log(("case 2.0.2"));
                     }
                   }
 
@@ -345,7 +355,14 @@ class _PDTopSectionState extends State<PDTopSection> {
                 for (int i = 0; i < bigText.length; i++) {
                   if (lines[3].contains(bigText[i]) && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
                     log(("case 4.3"));
-                    maxLines = 2;
+                    if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                        lines[1].contains("<p>") &&
+                        lines[2].contains("<p>") &&
+                        (lines[3].contains("<h1>") || lines[3].contains("<h2>"))) {
+                      maxLines = 4;
+                    } else {
+                      maxLines = 2;
+                    }
                   }
                 }
               }
