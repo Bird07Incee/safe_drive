@@ -12,7 +12,6 @@ class TrackingListNoProduct extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
-    var maxHeight = MediaQuery.of(context).size.height;
 
     return AlvaRootWidget(
       titlePage: titleWebPage,
