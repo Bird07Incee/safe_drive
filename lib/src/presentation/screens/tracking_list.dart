@@ -13,6 +13,8 @@ import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/tracking/tracking_order_card.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 
+import 'tracking_list_no_product.dart';
+
 class TrackingListScreen extends StatefulWidget {
   const TrackingListScreen({super.key});
 
@@ -129,9 +131,9 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
               state.trackingOrderListStatus == GetTrackingOrderListStatus.loading) {
             return AlvaRootWidget(titlePage: titleWebPage, child: const LoadingScreen());
           } else if (state.trackingOrderListStatus == GetTrackingOrderListStatus.empty) {
-            return AlvaRootWidget(titlePage: titleWebPage, appBar: appBar, child: const Text("empty!"));
+            return AlvaRootWidget(titlePage: titleWebPage, appBar: appBar, child: const TrackingListNoProduct());
           } else {
-            return ErrorScreen(
+           return ErrorScreen(
               title: ErrorConst().titleNS,
               subTitle: ErrorConst().subTitleNS,
               titleBtn: ErrorConst().titleBtnNS,

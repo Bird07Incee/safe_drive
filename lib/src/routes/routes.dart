@@ -11,6 +11,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/product_summary/shi
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/tracking_list.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/tracking_list_no_product.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 enum Routes {
@@ -25,7 +26,8 @@ enum Routes {
   orderSummary,
   orderSuccess,
   orderCancel,
-  trackingList
+  trackingList,
+  trackingListNoProduct
 }
 
 extension TypeCoverter on Routes {
@@ -55,6 +57,8 @@ extension TypeCoverter on Routes {
         return '/orderCancel';
       case Routes.trackingList:
         return '/trackingList';
+      case Routes.trackingListNoProduct:
+        return '/trackingListNoProduct';
     }
   }
 }
@@ -87,7 +91,8 @@ extension TypeCoverter on Routes {
 extension StringExtension on String {
   RoutingData get getRoutingData {
     var uriData = Uri.parse(this);
-    return RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+    return RoutingData(
+        route: uriData.path, queryParameters: uriData.queryParameters);
   }
 }
 
@@ -119,30 +124,46 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
   switch (routingData?.route) {
     case "/":
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const HomeScreen(), settings: settings);
     case "/termAndCon":
-      return MaterialPageRoute(builder: (_) => const TermAndConScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const TermAndConScreen(), settings: settings);
     case "/readTermAndCon":
-      return MaterialPageRoute(builder: (_) => const ReadTermAndConScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ReadTermAndConScreen(), settings: settings);
     case "/errorScreen":
-      return MaterialPageRoute(builder: (_) => const ErrorScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ErrorScreen(), settings: settings);
     case "/loadingScreen":
-      return MaterialPageRoute(builder: (_) => const LoadingScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const LoadingScreen(), settings: settings);
     case "/productDetail":
-      return MaterialPageRoute(builder: (_) => const ProductDetailScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const ProductDetailScreen(), settings: settings);
     case "/orderSuccess":
-      return MaterialPageRoute(builder: (_) => const OrderSuccessScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const OrderSuccessScreen(), settings: settings);
     case "/selectOptions":
-      return MaterialPageRoute(builder: (_) => ProductSelectOptions(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => ProductSelectOptions(), settings: settings);
     case "/shippingAddress":
-      return MaterialPageRoute(builder: (_) => ShippingAddressScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => ShippingAddressScreen(), settings: settings);
     case "/orderSummary":
-      return MaterialPageRoute(builder: (_) => OrderSummaryScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => OrderSummaryScreen(), settings: settings);
     case "/orderCancel":
-      return MaterialPageRoute(builder: (_) => OrderCancelScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => OrderCancelScreen(), settings: settings);
     case "/trackingList":
-      return MaterialPageRoute(builder: (_) => TrackingListScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => TrackingListScreen(), settings: settings);
+    case "/trackingListNoProduct":
+      return MaterialPageRoute(
+          builder: (_) => TrackingListNoProduct(), settings: settings);
     default:
-      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
+      return MaterialPageRoute(
+          builder: (_) => const HomeScreen(), settings: settings);
   }
 }
