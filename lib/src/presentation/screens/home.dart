@@ -321,11 +321,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     GestureDetector(
                                       key: const Key("call_button"),
                                       onTap: () {
-                                        RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
-
-                                        // Extracting the phone number using RegExp
-                                        String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
-                                        callPhone(phoneNumber);
+                                        callPhone(HomeConst().pleaseContactNumber);
                                       },
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
