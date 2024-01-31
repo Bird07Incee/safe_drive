@@ -319,10 +319,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               GestureDetector(
                                 key: const Key("call_to_merchant_button"),
                                 onTap: () {
-                                  RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
-
-                                  // Extracting the phone number using RegExp
-                                  String phoneNumber = regExp.stringMatch(orderSuccessData.merchantMobile!) ?? '';
+                                  String phoneNumber = orderSuccessData.merchantMobile!.replaceAll("-", "");
                                   callPhone(phoneNumber);
                                 },
                                 child: Text(
@@ -351,11 +348,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 GestureDetector(
                                   key: const Key("call_button"),
                                   onTap: () {
-                                    RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
-
-                                    // Extracting the phone number using RegExp
-                                    String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
-                                    callPhone(phoneNumber);
+                                    callPhone(HomeConst().pleaseContactNumber);
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

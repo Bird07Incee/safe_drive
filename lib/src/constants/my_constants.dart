@@ -12,6 +12,7 @@ class HomeConst {
   String privacyPolicy = 'ประกาศความคุ้มครองข้อมูลส่วนบุคคล';
   String askInformation = 'สอบถามข้อมูลอื่นๆ เกี่ยวกับสินค้า หรือ ติดตามสถานะการจัดส่งสินค้า';
   String pleaseContact = 'กรุณาติดต่อ  02-023-8858';
+  String pleaseContactNumber = '020238858';
   String warningWord = 'ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา';
 }
 

@@ -132,7 +132,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
           } else if (state.trackingOrderListStatus == GetTrackingOrderListStatus.empty) {
             return AlvaRootWidget(titlePage: titleWebPage, appBar: appBar, child: const TrackingListNoProduct());
           } else {
-           return ErrorScreen(
+            return ErrorScreen(
               title: ErrorConst().titleNS,
               subTitle: ErrorConst().subTitleNS,
               titleBtn: ErrorConst().titleBtnNS,
