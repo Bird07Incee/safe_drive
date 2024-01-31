@@ -54,7 +54,6 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
           },
           icon: const Icon(Icons.arrow_back_ios_rounded)),
     );
-
     return RootPageCondition(
       child: BlocBuilder<TrackingOrderBloc, TrackingOrderState>(
         builder: (context, state) {
