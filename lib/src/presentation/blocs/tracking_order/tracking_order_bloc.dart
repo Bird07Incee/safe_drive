@@ -49,7 +49,7 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
       "totalQty": 1
     });
 
-    List<Order> mock = [];
+    List<Order> mock = [mockOrder, mockOrder];
 
     if (mock.isNotEmpty) {
       emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: mock));
