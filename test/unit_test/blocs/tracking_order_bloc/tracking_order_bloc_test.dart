@@ -57,7 +57,7 @@ void main() {
     //       when(() {
     //         return utilityRepository.getByURL(
     //             "$baseUrl$transactionApiPath$path", {},
-    //             headers: {"Authorization": "Bearer ", "source": "LINE"});
+    //             headers: {"Authorization": "Bearer "});
     //       }).thenAnswer(
     //         (_) async {
     //           RequestOptions option = RequestOptions(

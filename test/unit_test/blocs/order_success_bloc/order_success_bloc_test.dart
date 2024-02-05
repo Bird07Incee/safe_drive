@@ -18,7 +18,7 @@ class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
   late DioUtilityRepository utilityRepository;
-  Map<String,dynamic> mockResponse = {
+  Map<String, dynamic> mockResponse = {
     "status": "Complete",
     "rawData": {
       "invoiceNo": "1234",
@@ -94,16 +94,15 @@ void main() {
           final transactionApiPath =
               Environment().getValue("BFF_TRANSACTION_BASE_URL");
           final inquriyPath = Environment().getValue("INQUIRY_URL");
-          final mock = {
-            "uid": "1234"
-          };
-          await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
+          final mock = {"uid": "1234"};
+          await LineDataHelper()
+              .saveSocialDataToLocalStorage(json.encode(mock));
           var payload = {"invoiceNo": "1234", "uid": "1234"};
 
           when(() {
             return utilityRepository.postByURL(
                 "$baseUrl$transactionApiPath$inquriyPath", payload,
-                headers: {"Authorization": "Bearer ", "source": "LINE"});
+                headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
               RequestOptions option = RequestOptions(
@@ -126,7 +125,8 @@ void main() {
               OrderSuccessState(
                   orderSuccessStatus: GetOrderSuccessDataStatus.loading),
               OrderSuccessState(
-                  orderSuccessStatus: GetOrderSuccessDataStatus.success, orderSuccessData: inquiryData)
+                  orderSuccessStatus: GetOrderSuccessDataStatus.success,
+                  orderSuccessData: inquiryData)
             ]);
 
     blocTest<OrderSuccessBloc, OrderSuccessState>("OrderSuccess error",
