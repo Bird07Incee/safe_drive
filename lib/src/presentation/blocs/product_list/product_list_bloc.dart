@@ -13,7 +13,8 @@ part 'product_list_event.dart';
 part 'product_list_state.dart';
 
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
-  ProductListBloc({required this.utilityRepository}) : super(const ProductListState()) {
+  ProductListBloc({required this.utilityRepository})
+      : super(const ProductListState()) {
     on<GetProductList>(_onGetProductList);
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
@@ -21,7 +22,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   }
   final DioUtilityRepository utilityRepository;
 
-  _onSetSelectTabIndex(SetSelectTabIndex event, Emitter<ProductListState> emit) {
+  _onSetSelectTabIndex(
+      SetSelectTabIndex event, Emitter<ProductListState> emit) {
     emit(state.copyWith(selectedTabIndex: event.selectedTabIndex));
   }
 
@@ -31,8 +33,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
       String accessToken = await lineDataHelper.getLineAccessToken();
-      Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL(
+          "$baseUrl$inventoryApiPath/ecommerce/v1/products", {},
+          headers: {"Authorization": "Bearer $accessToken"});
       final productList = ProductList.fromJson(response.data);
       return productList;
     } catch (e) {
@@ -40,7 +43,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
   }
 
-  _onGetProductList(GetProductList event, Emitter<ProductListState> emit) async {
+  _onGetProductList(
+      GetProductList event, Emitter<ProductListState> emit) async {
     emit(state.copyWith(productListStatus: GetProductListStatus.loading));
 
     try {
@@ -50,23 +54,29 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         emit(state.copyWith(hideCategory: true));
       }
 
-      emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+      emit(state.copyWith(
+          productList: productList,
+          productListStatus: GetProductListStatus.success));
     } catch (e) {
       // debugPrint('re-load product list after refresh token');
       try {
         ProductList productList = await _getProductWithNoCategory();
 
-        if (productList.products!.length == 1 || productList.category!.isEmpty) {
+        if (productList.products!.length == 1 ||
+            productList.category!.isEmpty) {
           emit(state.copyWith(hideCategory: true));
         }
-        emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+        emit(state.copyWith(
+            productList: productList,
+            productListStatus: GetProductListStatus.success));
       } catch (e) {
         emit(state.copyWith(productListStatus: GetProductListStatus.error));
       }
     }
   }
 
-  _onGetProductListByCategory(GetProductListByCategory event, Emitter<ProductListState> emit) async {
+  _onGetProductListByCategory(
+      GetProductListByCategory event, Emitter<ProductListState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
@@ -85,11 +95,14 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
 
     try {
-      Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL(
+          "$baseUrl$inventoryApiPath/ecommerce/v1/products", category,
+          headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);
-      emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+      emit(state.copyWith(
+          productList: productList,
+          productListStatus: GetProductListStatus.success));
 
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
@@ -106,7 +119,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
   }
 
-  _onGetProductListByPage(GetProductListByPage event, Emitter<ProductListState> emit) async {
+  _onGetProductListByPage(
+      GetProductListByPage event, Emitter<ProductListState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
@@ -125,8 +139,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
 
     try {
-      Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params, headers: {"Authorization": "Bearer $accessToken");
+      Response response = await utilityRepository.getByURL(
+          "$baseUrl$inventoryApiPath/ecommerce/v1/products", params,
+          headers: {"Authorization": "Bearer $accessToken"});
 
       var currentProductList = ProductList.fromJson(response.data);
       var oldProducts = state.productList.products;
@@ -139,7 +154,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           category: currentProductList.category,
           products: oldProducts! + currentProductList.products!);
 
-      emit(state.copyWith(productList: nextProduct, productListStatus: GetProductListStatus.success));
+      emit(state.copyWith(
+          productList: nextProduct,
+          productListStatus: GetProductListStatus.success));
 
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
