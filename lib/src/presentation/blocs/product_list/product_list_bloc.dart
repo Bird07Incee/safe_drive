@@ -32,7 +32,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
       String accessToken = await lineDataHelper.getLineAccessToken();
       Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
+          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken"});
       final productList = ProductList.fromJson(response.data);
       return productList;
     } catch (e) {
@@ -86,7 +86,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
     try {
       Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
+          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category, headers: {"Authorization": "Bearer $accessToken"});
 
       final productList = ProductList.fromJson(response.data);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
@@ -126,7 +126,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
     try {
       Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
+          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params, headers: {"Authorization": "Bearer $accessToken");
 
       var currentProductList = ProductList.fromJson(response.data);
       var oldProducts = state.productList.products;

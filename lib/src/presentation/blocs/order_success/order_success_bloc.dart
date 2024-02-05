@@ -14,7 +14,8 @@ part 'order_success_event.dart';
 part 'order_success_state.dart';
 
 class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
-  OrderSuccessBloc({required this.utilityRepository}) : super(OrderSuccessState()) {
+  OrderSuccessBloc({required this.utilityRepository})
+      : super(OrderSuccessState()) {
     on<GetOrderSuccess>(_onGetOrderSuccess);
     // on<GetOrderSuccessMock>(_onGetOrderSuccessMock);
     on<SetOrderStatus>(_onSetOrderStatus);
@@ -26,11 +27,13 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     emit(state.copyWith(orderSuccessStatus: event.status));
   }
 
-  _onGetOrderSuccess(GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {
+  _onGetOrderSuccess(
+      GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath =
+        Environment().getValue("BFF_TRANSACTION_BASE_URL");
     final inquriyPath = Environment().getValue("INQUIRY_URL");
     // final ctx = ScaffoldMessenger.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
@@ -38,48 +41,65 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
 
     var payload = {"invoiceNo": event.invoiceNo, "uid": uid};
     try {
-      Response response = await utilityRepository
-          .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
+      Response response = await utilityRepository.postByURL(
+          "$baseUrl$transactionApiPath$inquriyPath", payload,
+          headers: {"Authorization": "Bearer $accessToken"});
 
-      final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
+      final InquiryData inquiryData =
+          InquiryData.fromJson(response.data["rawData"]);
       String status = response.data["status"] ?? "";
 
       if (status == "Complete") {
-        emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
+        emit(state.copyWith(
+            orderSuccessData: inquiryData,
+            orderSuccessStatus: GetOrderSuccessDataStatus.success));
 
         if (!event.bypassContext) {
           // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("หลักฐานการชำระเงิน ถูกจัดส่งไปยังอีเมลของคุณแล้ว"));
+          ScaffoldMessenger.of(event.context).showSnackBar(
+              getMkpToast("หลักฐานการชำระเงิน ถูกจัดส่งไปยังอีเมลของคุณแล้ว"));
         }
       } else if (status == "Pending") {
         int tick = 0;
         while (true) {
           if (tick == 90) {
-            emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
+            emit(state.copyWith(
+                orderSuccessStatus: GetOrderSuccessDataStatus.error));
             break;
           }
           await Future.delayed(Duration(seconds: 8));
-          Response response = await utilityRepository
-              .postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken", "source": "LINE"});
-          final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
+          Response response = await utilityRepository.postByURL(
+              "$baseUrl$transactionApiPath$inquriyPath", payload,
+              headers: {
+                "Authorization": "Bearer $accessToken",
+              });
+          final InquiryData inquiryData =
+              InquiryData.fromJson(response.data["rawData"]);
           String status = response.data["status"] ?? "";
           if (status == "Complete") {
-            emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
+            emit(state.copyWith(
+                orderSuccessData: inquiryData,
+                orderSuccessStatus: GetOrderSuccessDataStatus.success));
             if (!event.bypassContext) {
               // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast("หลักฐานการชำระเงิน ถูกจัดส่งไปยังอีเมลของคุณแล้ว"));
+              ScaffoldMessenger.of(event.context).showSnackBar(getMkpToast(
+                  "หลักฐานการชำระเงิน ถูกจัดส่งไปยังอีเมลของคุณแล้ว"));
             }
             break;
           } else if (status == "Fail") {
-            emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
+            emit(state.copyWith(
+                orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
           }
           tick++;
         }
-        emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
+        emit(state.copyWith(
+            orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
       } else if (status == "Fail") {
-        emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
+        emit(state.copyWith(
+            orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
       } else {
-        emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
+        emit(state.copyWith(
+            orderSuccessStatus: GetOrderSuccessDataStatus.error));
       }
     } catch (e) {
       emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));

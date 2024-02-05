@@ -82,9 +82,11 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         String accessToken = await lineDataHelper.getLineAccessToken();
         String lineUid = await lineDataHelper.getLineUid();
         Response responseTerm = await dioUtilityRepository.postByURL(
-            "$baseUrl$socialApiPath/accept/termandcond",
-            {"uid": lineUid, "source": "LINE"},
-            headers: {"Authorization": "Bearer $accessToken"});
+            "$baseUrl$socialApiPath/accept/termandcond", {
+          "uid": lineUid
+        }, headers: {
+          "Authorization": "Bearer $accessToken"
+        });
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
           int tokenExp = await lineDataHelper.getTokenExp();
