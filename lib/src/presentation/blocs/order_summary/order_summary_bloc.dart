@@ -11,13 +11,9 @@ part 'order_summary_event.dart';
 part 'order_summary_state.dart';
 
 class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
-  OrderSummaryBloc({required this.utilityRepository})
-      : super(OrderSummaryState()) {
+  OrderSummaryBloc({required this.utilityRepository}) : super(OrderSummaryState()) {
     on<InitialOrderState>((event, emit) {
-      emit(state.copyWith(
-          paymentType: PaymentType.none,
-          orderStatus: OrderStatus.initial,
-          orderResponseModel: OrderResponseModel.empty));
+      emit(state.copyWith(paymentType: PaymentType.none, orderStatus: OrderStatus.initial, orderResponseModel: OrderResponseModel.empty));
     });
     on<SelectPaymentType>((event, emit) {
       emit(state.copyWith(paymentType: event.paymentType));
@@ -29,22 +25,18 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
   _onCreateOrder(CreateOrder event, Emitter<OrderSummaryState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath =
-        Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     emit(state.copyWith(orderStatus: OrderStatus.loading));
 
     try {
       String path = "/v1/create";
-      Response response = await utilityRepository.postByURL(
-          "$baseUrl$transactionApiPath$path", event.requestModel.toJson(),
-          headers: {
-            "Authorization": "Bearer $accessToken",
-          });
+      Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$path", event.requestModel.toJson(), headers: {
+        "Authorization": "Bearer $accessToken",
+      });
 
       final o = OrderResponseModel.fromJson(response.data);
-      emit(state.copyWith(
-          orderStatus: OrderStatus.success, orderResponseModel: o));
+      emit(state.copyWith(orderStatus: OrderStatus.success, orderResponseModel: o));
     } catch (e) {
       emit(state.copyWith(orderStatus: OrderStatus.error));
     }

@@ -32,8 +32,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   final _controller = ScrollController();
   bool scrollFinished = false;
   TermAndConHelper termAndConHelper = TermAndConHelper();
-  DioUtilityRepository dioUtilityRepository =
-      DioUtilityRepository(service: DioUtilityService());
+  DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
   LineDataHelper lineDataHelper = LineDataHelper();
   final liff = fll.FlutterLineLiff();
 
@@ -64,12 +63,10 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       if (!isCodeVerify) {
         String lineCode = await lineDataHelper.getLineCode();
         // debugPrint('accessToken : $accessToken, code: $lineCode');
-        Response response = await dioUtilityRepository
-            .postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
+        Response response = await dioUtilityRepository.postByURL("$baseUrl$socialApiPath/line/token", {"code": lineCode});
         if (response.statusCode == 200) {
           isCodeVerify = true;
-          lineDataHelper
-              .saveSocialDataToLocalStorage(json.encode(response.data));
+          lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
           String lineUid = await lineDataHelper.getLineUid();
           DatadogSdk.instance.setUserInfo(id: lineUid, name: "Merphy");
         } else if (response.statusCode == 400) {
@@ -81,23 +78,13 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
       if (isCodeVerify) {
         String accessToken = await lineDataHelper.getLineAccessToken();
         String lineUid = await lineDataHelper.getLineUid();
-        Response responseTerm = await dioUtilityRepository.postByURL(
-            "$baseUrl$socialApiPath/accept/termandcond", {
-          "uid": lineUid
-        }, headers: {
-          "Authorization": "Bearer $accessToken"
-        });
+        Response responseTerm = await dioUtilityRepository
+            .postByURL("$baseUrl$socialApiPath/accept/termandcond", {"uid": lineUid}, headers: {"Authorization": "Bearer $accessToken"});
         if (responseTerm.statusCode == 200) {
           termAndConHelper.setTermAndConToAccept();
           int tokenExp = await lineDataHelper.getTokenExp();
           String termAndConVersion = await lineDataHelper.getTAndC();
-          DatadogSdk.instance.setUserInfo(
-              id: lineUid,
-              name: "Merphy",
-              extraInfo: {
-                "tokenExp": tokenExp,
-                "TnCVersion": termAndConVersion
-              });
+          DatadogSdk.instance.setUserInfo(id: lineUid, name: "Merphy", extraInfo: {"tokenExp": tokenExp, "TnCVersion": termAndConVersion});
           //stamp version
           if (!mounted) return;
           Navigator.of(context).pop();
@@ -142,10 +129,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
             child: Column(
               children: [
                 AppBar(
-                  title: AlvaText(
-                      title: "ข้อกำหนดและเงื่อนไข",
-                      textStyle: AlvaStyles()
-                          .headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  title: AlvaText(title: "ข้อกำหนดและเงื่อนไข", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 16,
                   leadingWidth: 60,
                   centerTitle: false,
@@ -155,9 +139,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                     width: maxWidth,
                     height: maxHeight - (56 + 96),
                     color: const Color(0xfff3f3f3),
-                    child: ListView(
-                        controller: _controller,
-                        children: const [TermAndConSection()])),
+                    child: ListView(controller: _controller, children: const [TermAndConSection()])),
                 Container(
                   alignment: Alignment.topCenter,
                   width: maxWidth,
@@ -165,16 +147,11 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
-                      BoxShadow(
-                          color: const Color(0xff000000).withOpacity(0.04),
-                          spreadRadius: 0,
-                          blurRadius: 16,
-                          offset: const Offset(0, -4)),
+                      BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
                     ],
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 16),
+                    padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
                     child: Row(
                       children: [
                         GestureDetector(
@@ -193,19 +170,12 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                             width: (maxWidth - 40) / 2,
                             decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(8)),
-                                border: Border.all(
-                                    color: scrollFinished
-                                        ? const Color(0xffffd400)
-                                        : const Color(0xffdedede),
-                                    width: 2)),
+                                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                                border: Border.all(color: scrollFinished ? const Color(0xffffd400) : const Color(0xffdedede), width: 2)),
                             child: Center(
                                 child: Text(
                               "ไม่ยอมรับ",
-                              style: scrollFinished
-                                  ? AlvaStyles().heading3()
-                                  : AlvaStyles().heading3Muted(),
+                              style: scrollFinished ? AlvaStyles().heading3() : AlvaStyles().heading3Muted(),
                             )),
                           ),
                         ),
@@ -223,16 +193,9 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                             height: 48,
                             width: (maxWidth - 40) / 2,
                             decoration: BoxDecoration(
-                                color: scrollFinished
-                                    ? const Color(0xffffd400)
-                                    : const Color(0xffdedede),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(8))),
-                            child: Center(
-                                child: Text("ยอมรับ",
-                                    style: scrollFinished
-                                        ? AlvaStyles().heading3()
-                                        : AlvaStyles().heading3Muted())),
+                                color: scrollFinished ? const Color(0xffffd400) : const Color(0xffdedede),
+                                borderRadius: const BorderRadius.all(Radius.circular(8))),
+                            child: Center(child: Text("ยอมรับ", style: scrollFinished ? AlvaStyles().heading3() : AlvaStyles().heading3Muted())),
                           ),
                         )
                       ],

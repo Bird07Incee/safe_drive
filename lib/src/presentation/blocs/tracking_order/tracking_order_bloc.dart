@@ -14,8 +14,7 @@ part 'tracking_order_state.dart';
 class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
   final DioUtilityRepository utilityRepository;
 
-  TrackingOrderBloc({required this.utilityRepository})
-      : super(TrackingOrderState()) {
+  TrackingOrderBloc({required this.utilityRepository}) : super(TrackingOrderState()) {
     on<TrackingOrderEvent>((event, emit) {
       // TODO: implement event handler
     });
@@ -24,8 +23,7 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     on<GetTrackingOrderListByPage>(_onGetTrackingOrderListByPage);
   }
 
-  _onGetTrackingOrderListFromJson(
-      GetTrackingOrderListFromJson event, Emitter<TrackingOrderState> emit) {
+  _onGetTrackingOrderListFromJson(GetTrackingOrderListFromJson event, Emitter<TrackingOrderState> emit) {
     Order mockOrder = Order.fromJson({
       "orderNo": "1234",
       "shippingStatus": "pending",
@@ -54,29 +52,22 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     List<Order> mock = [mockOrder, mockOrder];
 
     if (mock.isNotEmpty) {
-      emit(state.copyWith(
-          trackingOrderListStatus: GetTrackingOrderListStatus.success,
-          trackingListData: mock));
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: mock));
     } else {
-      emit(state.copyWith(
-          trackingOrderListStatus: GetTrackingOrderListStatus.empty,
-          trackingListData: mock));
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.empty, trackingListData: mock));
     }
   }
 
-  _onGetTrackingOrderListByPage(GetTrackingOrderListByPage event,
-      Emitter<TrackingOrderState> emit) async {
+  _onGetTrackingOrderListByPage(GetTrackingOrderListByPage event, Emitter<TrackingOrderState> emit) async {
     if (event.page == 1) {
-      emit(state.copyWith(
-          trackingOrderListStatus: GetTrackingOrderListStatus.loading));
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.loading));
     } else {
       GeneralDialog().showLoadingDialog(context: event.context);
     }
 
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath =
-        Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
     final trackingListPath = Environment().getValue("TRACKING_LIST_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
@@ -84,13 +75,11 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     var params = {"itemsPerPage": 10, "page": event.page, "customerRef": uid};
 
     try {
-      Response response = await utilityRepository.getByURL(
-          "$baseUrl$transactionApiPath$trackingListPath", params,
-          headers: {"Authorization": "Bearer $accessToken"});
+      Response response =
+          await utilityRepository.getByURL("$baseUrl$transactionApiPath$trackingListPath", params, headers: {"Authorization": "Bearer $accessToken"});
 
       List ordersResponse = response.data["orders"];
-      TrackingListPage trackingListPage =
-          TrackingListPage.fromJson(response.data);
+      TrackingListPage trackingListPage = TrackingListPage.fromJson(response.data);
       List<Order> orderList = [];
 
       for (var element in ordersResponse) {
@@ -109,18 +98,13 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
           Navigator.pop(event.context);
         } else {
           emit(state.copyWith(
-              trackingOrderListStatus: GetTrackingOrderListStatus.success,
-              trackingListData: orderList,
-              trackingListPage: trackingListPage));
+              trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: orderList, trackingListPage: trackingListPage));
         }
       } else {
-        emit(state.copyWith(
-            trackingOrderListStatus: GetTrackingOrderListStatus.empty,
-            trackingListData: orderList));
+        emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.empty, trackingListData: orderList));
       }
     } catch (e) {
-      emit(state.copyWith(
-          trackingOrderListStatus: GetTrackingOrderListStatus.error));
+      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.error));
     }
   }
 }
