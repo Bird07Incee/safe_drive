@@ -14,11 +14,11 @@ part 'tracking_detail_state.dart';
 
 class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> {
   TrackingDetailBloc({required this.utilityRepository}) : super(const TrackingDetailState()) {
-    on<GetTrackingByID>(_onGetTrackingDetail);
+    on<GetTracking>(_onGetTrackingDetail);
   }
   final DioUtilityRepository utilityRepository;
 
-  _onGetTrackingDetail(GetTrackingByID event, Emitter<TrackingDetailState> emit) async {
+  _onGetTrackingDetail(GetTracking event, Emitter<TrackingDetailState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
@@ -27,18 +27,61 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
 
     try {
       String path = "/v1/trackingDetail";
-      Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {
-        "orderNo": event.orderNo,
-        "productId": event.productId
-      }, headers: {
-        "Authorization": "Bearer $accessToken",
-      });
+      // Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {
+      //   "orderNo": event.orderNo,
+      //   "productId": event.productId
+      // }, headers: {
+      //   "Authorization": "Bearer $accessToken",
+      // });
 
-      final t = TrackingResponseModel.fromJson(response.data);
-      emit(state.copyWith(status: TrackingDetailStatus.success, tracking: t.tracking));
+      //final t = TrackingResponseModel.fromJson(response.data);
+      final t = EX().pendingMock;
+      // final t = EX().pendingMock;
+      // final t = EX().pendingRefundRequestMock;
+      // final t = EX().pendingRefundSuccessMock;
+      // final t = EX().pendingRefundRejectedMock;
+      // final t = EX().preparedDeliveryMock;
+      // final t = EX().preparedSelfSuccessMock;
+      // final t = EX().preparedSelfFailedMock;
+      // final t = EX().preparedDeliveryRefundRequestMock;
+      // final t = EX().preparedDeliveryRefundSuccessMock;
+      // final t = EX().preparedDeliveryRefundRejectedMock;
+      // final t = EX().preparedSelfSuccessRefundRequestMock;
+      // final t = EX().preparedSelfSuccessRefundSuccessMock;
+      // final t = EX().preparedSelfSuccessRefundRejectMock;
+      // final t = EX().preparedSelfFailedRefundRequestMock;
+      // final t = EX().preparedSelfFailedRefundSuccessMock;
+      // final t = EX().preparedSelfFailedRefundRejectMock;
+      // final t = EX().shippedDeliveryMock;
+      // final t = EX().shippedSelfMock;
+      // final t = EX().shippedDeliveryRefundRequestMock;
+      // final t = EX().shippedDeliveryRefundSuccessMock;
+      // final t = EX().shippedDeliveryRefundRejectMock;
+      // final t = EX().shippedSelfRefundRequestMock;
+      // final t = EX().shippedSelfRefundSuccessMock;
+      // final t = EX().shippedSelfRefundRejectMock;
+      // final t = EX().shippedDeliveryFailMock;
+      // final t = EX().shippedSelfFailedMock;
+      // final t = EX().shippedDeliveryFailedRefundRequestMock;
+      // final t = EX().shippedDeliveryFailedRefundSuccessMock;
+      // final t = EX().shippedDeliveryFailedRefundRejectMock;
+      // final t = EX().shippedSelfFailedRefundRequestMock;
+      // final t = EX().shippedSelfFailedRefundSuccessMock;
+      // final t = EX().shippedSelfFailedRefundRejectMock;
+      // final t = EX().receivedDeliveryMock;
+      // final t = EX().receivedDeliveryRefundRequestMock;
+      // final t = EX().receivedDeliveryRefundSuccessMock;
+      // final t = EX().receivedDeliveryRefundRejectMock;
+      // final t = EX().receivedSelfMock;
+      // final t = EX().receivedSelfRefundRequestMock;
+      // final t = EX().receivedSelfRefundSuccessMock;
+      // final t = EX().receivedSelfRefundRejectMock;
+      await Future.delayed(Duration(seconds: 1));
+      emit(state.copyWith(status: TrackingDetailStatus.success, tracking: t));
     } catch (e) {
       emit(state.copyWith(status: TrackingDetailStatus.error));
     }
+
   }
 }
 

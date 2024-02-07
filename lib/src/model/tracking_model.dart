@@ -35,6 +35,9 @@ class EX {
 
   Map<String, dynamic> pendingRefundRequest = {
     "order_ref": "pendingRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundRequest", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -52,6 +55,9 @@ class EX {
 
   Map<String, dynamic> pendingRefundSuccess = {
     "order_ref": "pendingRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -73,6 +79,9 @@ class EX {
 
   Map<String, dynamic> pendingRefundRejected = {
     "order_ref": "pendingRefundRejected",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundRejected", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -91,6 +100,9 @@ class EX {
   ///Preparing
   Map<String, dynamic> preparedDelivery = {
     "order_ref": "preparedDelivery",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Preparing/Packed",
@@ -113,6 +125,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfSuccess = {
     "order_ref": "preparedSelfSuccess",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Preparing/Packed",
@@ -140,6 +155,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfFailed = {
     "order_ref": "preparedSelfFailed",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Preparing/Packed",
@@ -167,6 +185,9 @@ class EX {
 
   Map<String, dynamic> preparedDeliveryRefundRequest = {
     "order_ref": "preparedDeliveryRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -194,6 +215,9 @@ class EX {
 
   Map<String, dynamic> preparedDeliveryRefundSuccess = {
     "order_ref": "preparedDeliveryRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -221,6 +245,9 @@ class EX {
 
   Map<String, dynamic> preparedDeliveryRefundRejected = {
     "order_ref": "preparedDeliveryRefundRejected",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundRejected", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -244,6 +271,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfSuccessRefundRequest = {
     "order_ref": "preparedSelfSuccessRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -276,6 +306,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfSuccessRefundSuccess = {
     "order_ref": "preparedSelfSuccessRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -308,6 +341,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfSuccessRefundReject = {
     "order_ref": "preparedSelfSuccessRefundReject",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -336,6 +372,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfFailedRefundRequest = {
     "order_ref": "preparedSelfFailedRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -368,6 +407,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfFailedRefundSuccess = {
     "order_ref": "preparedSelfFailedRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -400,6 +442,9 @@ class EX {
 
   Map<String, dynamic> preparedSelfFailedRefundReject = {
     "order_ref": "preparingSelfFailed",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -427,10 +472,11 @@ class EX {
   };
 
   ///Shipped
-  /////"remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-  //   //"remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
   Map<String, dynamic> shippedDelivery = {
     "order_ref": "shippedDelivery",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Shipped",
@@ -471,6 +517,9 @@ class EX {
 
   Map<String, dynamic> shippedSelf = {
     "order_ref": "shippedSelf",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Shipped",
@@ -505,6 +554,9 @@ class EX {
 
   Map<String, dynamic> shippedDeliveryRefundRequest = {
     "order_ref": "shippedDeliveryRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -549,6 +601,9 @@ class EX {
 
   Map<String, dynamic> shippedDeliveryRefundSuccess = {
     "order_ref": "shippedDeliveryRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -593,6 +648,9 @@ class EX {
 
   Map<String, dynamic> shippedDeliveryRefundReject = {
     "order_ref": "shippedDeliveryRefundReject",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundReject",
@@ -637,6 +695,9 @@ class EX {
 
   Map<String, dynamic> shippedSelfRefundRequest = {
     "order_ref": "shippedSelfRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -676,6 +737,9 @@ class EX {
 
   Map<String, dynamic> shippedSelfRefundSuccess = {
     "order_ref": "shippedSelfRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -715,6 +779,9 @@ class EX {
 
   Map<String, dynamic> shippedSelfRefundReject = {
     "order_ref": "shippedSelfRefundReject",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -750,6 +817,9 @@ class EX {
 
   Map<String, dynamic> shippedDeliveryFail = {
     "order_ref": "shippedDelivery",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Shipped",
@@ -792,6 +862,9 @@ class EX {
 
   Map<String, dynamic> shippedSelfFailed = {
     "order_ref": "shippedSelf",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Shipped",
@@ -831,6 +904,9 @@ class EX {
 
   Map<String, dynamic> shippedDeliveryFailedRefundRequest = {
     "order_ref": "shippedDeliveryFailedRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -878,6 +954,9 @@ class EX {
 
   Map<String, dynamic> shippedDeliveryFailedRefundSuccess = {
     "order_ref": "shippedDeliveryFailedRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -925,6 +1004,9 @@ class EX {
 
   Map<String, dynamic> shippedDeliveryFailedRefundReject = {
     "order_ref": "shippedDeliveryFailedRefundReject",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -968,6 +1050,9 @@ class EX {
 
   Map<String, dynamic> shippedSelfFailedRefundRequest = {
     "order_ref": "shippedSelfFailedRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Refund",
@@ -1012,6 +1097,9 @@ class EX {
 
   Map<String, dynamic> shippedSelfFailedRefundSuccess = {
     "order_ref": "shippedSelfFailedRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -1056,6 +1144,9 @@ class EX {
 
   Map<String, dynamic> shippedSelfFailedRefundReject = {
     "order_ref": "shippedSelfFailedRefundReject",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -1097,6 +1188,9 @@ class EX {
   ///Received
   Map<String, dynamic> receivedDelivery = {
     "order_ref": "shippedDelivery",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Received",
@@ -1145,6 +1239,9 @@ class EX {
 
   Map<String, dynamic> receivedDeliveryRefundRequest = {
     "order_ref": "receivedDeliveryRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -1193,6 +1290,9 @@ class EX {
 
   Map<String, dynamic> receivedDeliveryRefundSuccess = {
     "order_ref": "receivedDeliveryRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -1241,6 +1341,9 @@ class EX {
 
   Map<String, dynamic> receivedDeliveryRefundReject = {
     "order_ref": "receivedDeliveryRefundReject",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -1285,6 +1388,9 @@ class EX {
 
   Map<String, dynamic> receivedSelf = {
     "order_ref": "shippedSelf",
+    "refund_day": 7,
+    "refundable": true,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "Received",
@@ -1328,6 +1434,9 @@ class EX {
 
   Map<String, dynamic> receivedSelfRefundRequest = {
     "order_ref": "receivedSelfRefundRequest",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundRequest",
@@ -1376,6 +1485,9 @@ class EX {
 
   Map<String, dynamic> receivedSelfRefundSuccess = {
     "order_ref": "receivedSelfRefundSuccess",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {
         "status_name": "RefundSuccess",
@@ -1424,6 +1536,9 @@ class EX {
 
   Map<String, dynamic> receivedSelfRefundReject = {
     "order_ref": "receivedSelfRefundReject",
+    "refund_day": 7,
+    "refundable": false,
+    "order_create_datetime": "datetime",
     "status": [
       {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
       {
@@ -1523,20 +1638,28 @@ extension ServiceTypeX on String {
 
 class TrackingModel extends Equatable {
   final String orderRef;
+  final int refundDay;
+  final bool refundable;
+  final String orderCreateDate;
   final List<Status> status;
 
-  const TrackingModel({required this.orderRef, required this.status});
+  const TrackingModel({required this.orderRef,required this.refundDay, required this.refundable, required this.orderCreateDate, required this.status});
 
-  static const empty = TrackingModel(orderRef: "", status: []);
+  static const empty = TrackingModel(orderRef: "", refundDay: 0, refundable: false, orderCreateDate: "", status: []);
 
   factory TrackingModel.fromJson(Map<String, dynamic> json) {
-    List<Status> status = json['status'] != null ? json['status'].map((e) => Status.fromJson(e)).toList() : [];
-
-    return TrackingModel(orderRef: json['order_ref'] ?? '', status: status);
+    var status = json['status'] != null ? json['status'].map<Status>((e) => Status.fromJson(e)).toList() : [];
+    return TrackingModel(
+        orderRef: json['order_ref'] ?? '',
+        refundDay: json['refund_day'] ?? 0,
+        refundable: json['refundable'] ?? false,
+        orderCreateDate: json['order_create_datetime'] ?? "",
+        status: status
+    );
   }
 
   @override
-  List<Object?> get props => [orderRef, status];
+  List<Object?> get props => [orderRef, refundDay, refundable, orderCreateDate, status];
 }
 
 class Status extends Equatable {

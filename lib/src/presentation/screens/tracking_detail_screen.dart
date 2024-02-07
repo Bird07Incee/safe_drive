@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/tracking_model.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/tracking_detail/tracking_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
@@ -17,21 +20,30 @@ class TrackingDetailScreen extends StatefulWidget {
   State<TrackingDetailScreen> createState() => _TrackingDetailState();
 }
 
-///TODO:
-///-
-
 class _TrackingDetailState extends State<TrackingDetailScreen> {
   late RouteSettings? settings;
-  String trackingNo = "";
+  String orderNo = "";
+  String productId = "";
+  bool isLoaded = false;
   late double maxWidth, maxHeight;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!isLoaded) {
+      isLoaded = true;
+      loadInvoice();
+    }
+  }
 
   void loadInvoice() {
     settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
-      trackingNo = (routingData["trackingNo"] == null) ? "" : routingData["trackingNo"];
-      print(trackingNo);
+      orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
+      productId = (routingData["productId"] == null) ? "" : routingData["productId"];
+      context.read<TrackingDetailBloc>().add(GetTracking(orderNo: orderNo, productId: productId));
     }
   }
 
@@ -426,220 +438,229 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
         child: WillPopScope(
-      onWillPop: () async {
-        onBack(context);
-        return false;
-      },
-      child: AlvaRootWidget(
-        titlePage: titleWebPage,
-        child: ListView(
-          children: [
-            ///appbar
-            Container(
-              width: maxWidth,
-              height: 56,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
-                    spreadRadius: 0,
-                    blurRadius: 16,
-                    offset: Offset(0, 4), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 48,
-                    height: 48,
-                    child: IconButton(
-                        key: const Key("back_btn_tracking"),
-                        onPressed: () {
-                          onBack(context);
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_rounded)),
-                  ),
-                  AlvaText(
-                      title: "รายละเอียดการจัดส่ง", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18)),
-                ],
-              ),
-            ),
-            statusReturn(),
-
-            ///Refund success
-            statusRefund(),
-
-            ///tracking timeline
-            Container(
-              width: maxWidth,
-              padding: EdgeInsets.only(left: 24, top: 16, bottom: 16, right: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  statusReceived(Status.empty),
-                  statusShipped(Status.empty),
-
-                  ///Preparing
-                  statusPreparing(Status.empty),
-
-                  ///Preparing self
-                  statusPending(Status.empty)
-                ],
-              ),
-            ),
-
-            ///bottomSheet
-            SizedBox(
-              width: maxWidth,
-              height: 56 + 68 + 72 + 88 + 16,
-              child: Column(
-                children: [
-                  Container(
-                    width: maxWidth,
-                    height: 16,
-                    color: backgroundNo2,
-                  ),
-                  Container(
-                    width: maxWidth,
-                    height: 56 + 68 + 72,
-                    color: Colors.white,
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Text(
-                            "ติดต่อผู้ขาย",
-                            style: AlvaStyles().headingSize12w700(Colors.black).copyWith(height: 2),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Text(
-                                "•",
-                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
-                              ),
-                            ),
-                            Text(
-                              "เกี่ยวกับสินค้า การจัดส่ง การคืนสินค้า และการคืนเงิน",
-                              style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+          onWillPop: () async {
+          onBack(context);
+          return false;
+        },
+          child: AlvaRootWidget(
+            titlePage: titleWebPage,
+            child: BlocBuilder<TrackingDetailBloc, TrackingDetailState>(
+              builder: (context, state) {
+                if(state.status.isSuccess) {
+                  return ListView(
+                    children: [
+                      ///appbar
+                      Container(
+                        width: maxWidth,
+                        height: 56,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              spreadRadius: 0,
+                              blurRadius: 16,
+                              offset: Offset(0, 4), // changes position of shadow
                             ),
                           ],
                         ),
-                        Row(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Text(
-                                "•",
-                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
-                              ),
+                            SizedBox(
+                              width: 48,
+                              height: 48,
+                              child: IconButton(
+                                  key: const Key("back_btn_tracking"),
+                                  onPressed: () {
+                                    onBack(context);
+                                  },
+                                  icon: const Icon(Icons.arrow_back_ios_rounded)),
                             ),
-                            Text(
-                              "การคืนสินค้า/คืนเงินหลังจาก X วัน กรุณาติดต่อผู้ขายโดยตรง",
-                              style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
-                            ),
+                            AlvaText(
+                                title: "รายละเอียดการจัดส่ง", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18)),
                           ],
                         ),
-                        SizedBox(
-                          height: 16.0,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ),
+                      statusReturn(),
+
+                      ///Refund success
+                      statusRefund(),
+
+                      ///tracking timeline
+                      Container(
+                        width: maxWidth,
+                        padding: EdgeInsets.only(left: 24, top: 16, bottom: 16, right: 24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                ///TODO: call to seller
-                                // String mobile = product.merchantMobile.replaceAll('-', '');
-                                // callPhone(mobile);
-                              },
-                              child: Container(
-                                width: maxWidth * .45,
-                                height: 40,
-                                decoration:
-                                    BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(width: 16, height: 16, child: Image.asset('assets/icons/phone.png', fit: BoxFit.fitWidth)),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 8),
-                                      child: Text(
-                                        "ติดต่อผู้ขาย",
-                                        style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
+                            statusReceived(Status.empty),
+                            statusShipped(Status.empty),
+
+                            ///Preparing
+                            statusPreparing(Status.empty),
+
+                            ///Preparing self
+                            statusPending(Status.empty)
+                          ],
+                        ),
+                      ),
+
+                      ///bottomSheet
+                      SizedBox(
+                        width: maxWidth,
+                        height: 56 + 68 + 72 + 88 + 16,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: maxWidth,
+                              height: 16,
+                              color: backgroundNo2,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                ///TODO: Call refund
-                              },
-                              child: Container(
-                                  width: maxWidth * .45,
-                                  height: 40,
-                                  decoration:
-                                      BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
-                                  child: Center(
+                            Container(
+                              width: maxWidth,
+                              height: 56 + 68 + 72,
+                              color: Colors.white,
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 16.0),
                                     child: Text(
-                                      "คืนสินค้า/คืนเงิน",
-                                      style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
+                                      "ติดต่อผู้ขาย",
+                                      style: AlvaStyles().headingSize12w700(Colors.black).copyWith(height: 2),
                                     ),
-                                  )),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 8.0),
+                                        child: Text(
+                                          "•",
+                                          style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                        ),
+                                      ),
+                                      Text(
+                                        "เกี่ยวกับสินค้า การจัดส่ง การคืนสินค้า และการคืนเงิน",
+                                        style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 8.0),
+                                        child: Text(
+                                          "•",
+                                          style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                        ),
+                                      ),
+                                      Text(
+                                        "การคืนสินค้า/คืนเงินหลังจาก X วัน กรุณาติดต่อผู้ขายโดยตรง",
+                                        style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 16.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          ///TODO: call to seller
+                                          // String mobile = product.merchantMobile.replaceAll('-', '');
+                                          // callPhone(mobile);
+                                        },
+                                        child: Container(
+                                          width: maxWidth * .45,
+                                          height: 40,
+                                          decoration:
+                                          BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(width: 16, height: 16, child: Image.asset('assets/icons/phone.png', fit: BoxFit.fitWidth)),
+                                              Padding(
+                                                padding: EdgeInsets.only(left: 8),
+                                                child: Text(
+                                                  "ติดต่อผู้ขาย",
+                                                  style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          ///TODO: Call refund
+                                        },
+                                        child: Container(
+                                            width: maxWidth * .45,
+                                            height: 40,
+                                            decoration:
+                                            BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
+                                            child: Center(
+                                              child: Text(
+                                                "คืนสินค้า/คืนเงิน",
+                                                style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
+                                              ),
+                                            )),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              color: spaceGrey,
+                              width: maxWidth,
+                              height: 88,
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  AlvaText(
+                                    title: HomeConst().askInformation,
+                                    textStyle: AlvaStyles().headingSize10w600(whiteFalse).copyWith(height: 1.6),
+                                  ),
+                                  GestureDetector(
+                                    key: const Key("call_button"),
+                                    onTap: () {
+                                      RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
+
+                                      // Extracting the phone number using RegExp
+                                      String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
+                                      callPhone(phoneNumber);
+                                    },
+                                    child: Text(
+                                      HomeConst().pleaseContact,
+                                      style: AlvaStyles().headingSize12w700(whiteFalse).copyWith(height: 2),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 32,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: spaceGrey,
-                    width: maxWidth,
-                    height: 88,
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 16,
                         ),
-                        AlvaText(
-                          title: HomeConst().askInformation,
-                          textStyle: AlvaStyles().headingSize10w600(whiteFalse).copyWith(height: 1.6),
-                        ),
-                        GestureDetector(
-                          key: const Key("call_button"),
-                          onTap: () {
-                            RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
-
-                            // Extracting the phone number using RegExp
-                            String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
-                            callPhone(phoneNumber);
-                          },
-                          child: Text(
-                            HomeConst().pleaseContact,
-                            style: AlvaStyles().headingSize12w700(whiteFalse).copyWith(height: 2),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return LoadingScreen();
+                }
+              },
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+      )
+    );
   }
 }

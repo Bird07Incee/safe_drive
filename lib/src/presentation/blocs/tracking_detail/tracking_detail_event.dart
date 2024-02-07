@@ -7,8 +7,8 @@ class TrackingDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetTrackingByID extends TrackingDetailEvent {
-  const GetTrackingByID({this.orderNo = '', this.productId = ''});
+class GetTracking extends TrackingDetailEvent {
+  const GetTracking({this.orderNo = '', this.productId = ''});
   final String orderNo;
   final String productId;
 
