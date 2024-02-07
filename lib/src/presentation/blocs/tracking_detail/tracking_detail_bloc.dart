@@ -76,7 +76,6 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
       // final t = EX().receivedSelfRefundRequestMock;
       // final t = EX().receivedSelfRefundSuccessMock;
       // final t = EX().receivedSelfRefundRejectMock;
-      await Future.delayed(Duration(seconds: 1));
       emit(state.copyWith(status: TrackingDetailStatus.success, tracking: t));
     } catch (e) {
       emit(state.copyWith(status: TrackingDetailStatus.error));

@@ -15,125 +15,151 @@ class EX {
 
   ///Pending
   Map<String, dynamic> pending = {
-    "order_ref": "pending",
-    "refund_day": 7,
+    "orderRef": "pending",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "active",
-        "remark": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
-        "order_ref": "RE1293109248",
-        "card_number": "เลขบัตร",
-        "payment_gateway": "2C2P",
-        "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "paymentDetail": [
+          {
+            "labelName": "orderRef",
+            "column1": "หมายเลขอ้างอิง",
+            "column2": "LA202401191444029i6hQ"
+          },
+          {
+            "labelName": "card_number",
+            "column1": "ชำระเงินโดย",
+            "column2": "XXXXXXXXXXX1234",
+          },
+          {
+            "labelName": "payment_gateway",
+            "column1": "ช่องทางการชำระเงิน",
+            "column2": "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
+          },
+          {
+            "labelName": "merchant_name",
+            "column1": "ผู้รับเงิน",
+            "column2": "บริษัท อินโนพาวเวอร์ จำกัด",
+          }
+        ],
+        "statusDetail": [
+          {
+            "column1": "ผู้ขายกำลังเตรียมพัสดุ",
+          },
+          {
+            "column1": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
+            "isHighlight": true
+          },
+        ],
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> pendingRefundRequest = {
-    "order_ref": "pendingRefundRequest",
-    "refund_day": 7,
+    "orderRef": "pendingRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundRequest", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundRequest", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "active",
         "remark": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "เลขบัตร",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> pendingRefundSuccess = {
-    "order_ref": "pendingRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "pendingRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "*การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "active",
         "remark": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "เลขบัตร",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> pendingRefundRejected = {
-    "order_ref": "pendingRefundRejected",
-    "refund_day": 7,
+    "orderRef": "pendingRefundRejected",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundRejected", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundRejected", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "active",
         "remark": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "เลขบัตร",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   ///Preparing
   Map<String, dynamic> preparedDelivery = {
-    "order_ref": "preparedDelivery",
-    "refund_day": 7,
+    "orderRef": "preparedDelivery",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {"remark": "ผู้ขายเตรียมพัสดุ เสร็จเรียบร้อยแล้ว"}
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท ABC",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfSuccess = {
-    "order_ref": "preparedSelfSuccess",
-    "refund_day": 7,
+    "orderRef": "preparedSelfSuccess",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -142,28 +168,28 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfFailed = {
-    "order_ref": "preparedSelfFailed",
-    "refund_day": 7,
+    "orderRef": "preparedSelfFailed",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_failed",
           "remark": "เจ้าหน้าที่ไม่สามารถติดต่อคุณได้ หรุณาติดต่อกลับ",
@@ -172,119 +198,119 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedDeliveryRefundRequest = {
-    "order_ref": "preparedDeliveryRefundRequest",
-    "refund_day": 7,
+    "orderRef": "preparedDeliveryRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {"remark": "ผู้ขายเตรียมพัสดุ เสร็จเรียบร้อยแล้ว"}
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท ABC",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedDeliveryRefundSuccess = {
-    "order_ref": "preparedDeliveryRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "preparedDeliveryRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {"remark": "ผู้ขายเตรียมพัสดุ เสร็จเรียบร้อยแล้ว"}
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท ABC",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedDeliveryRefundRejected = {
-    "order_ref": "preparedDeliveryRefundRejected",
-    "refund_day": 7,
+    "orderRef": "preparedDeliveryRefundRejected",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundRejected", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundRejected", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {"remark": "ผู้ขายเตรียมพัสดุ เสร็จเรียบร้อยแล้ว"}
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท ABC",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfSuccessRefundRequest = {
-    "order_ref": "preparedSelfSuccessRefundRequest",
-    "refund_day": 7,
+    "orderRef": "preparedSelfSuccessRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -293,33 +319,33 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfSuccessRefundSuccess = {
-    "order_ref": "preparedSelfSuccessRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "preparedSelfSuccessRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -328,29 +354,29 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfSuccessRefundReject = {
-    "order_ref": "preparedSelfSuccessRefundReject",
-    "refund_day": 7,
+    "orderRef": "preparedSelfSuccessRefundReject",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundReject", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -359,33 +385,33 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfFailedRefundRequest = {
-    "order_ref": "preparedSelfFailedRefundRequest",
-    "refund_day": 7,
+    "orderRef": "preparedSelfFailedRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_failed",
           "remark": "เจ้าหน้าที่ไม่สามารถติดต่อคุณได้ หรุณาติดต่อกลับ",
@@ -394,33 +420,33 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfFailedRefundSuccess = {
-    "order_ref": "preparedSelfFailedRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "preparedSelfFailedRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_failed",
           "remark": "เจ้าหน้าที่ไม่สามารถติดต่อคุณได้ หรุณาติดต่อกลับ",
@@ -429,29 +455,29 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> preparedSelfFailedRefundReject = {
-    "order_ref": "preparingSelfFailed",
-    "refund_day": 7,
+    "orderRef": "preparingSelfFailed",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundReject", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "active",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_failed",
           "remark": "เจ้าหน้าที่ไม่สามารถติดต่อคุณได้ หรุณาติดต่อกลับ",
@@ -460,26 +486,26 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   ///Shipped
   Map<String, dynamic> shippedDelivery = {
-    "order_ref": "shippedDelivery",
-    "refund_day": 7,
+    "orderRef": "shippedDelivery",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -489,13 +515,13 @@ class EX {
           "shipping_status": "Shipping",
           "remark": "สินค้าอยู่ระหว่างการจัดส่ง"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -504,35 +530,35 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelf = {
-    "order_ref": "shippedSelf",
-    "refund_day": 7,
+    "orderRef": "shippedSelf",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -541,30 +567,30 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedDeliveryRefundRequest = {
-    "order_ref": "shippedDeliveryRefundRequest",
-    "refund_day": 7,
+    "orderRef": "shippedDeliveryRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -573,13 +599,13 @@ class EX {
           "tracking_url": "",
           "shipping_status": "Shipping / Re-shipping"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -588,30 +614,30 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedDeliveryRefundSuccess = {
-    "order_ref": "shippedDeliveryRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "shippedDeliveryRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -620,13 +646,13 @@ class EX {
           "tracking_url": "",
           "shipping_status": "Shipping / Re-shipping"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -635,30 +661,30 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedDeliveryRefundReject = {
-    "order_ref": "shippedDeliveryRefundReject",
-    "refund_day": 7,
+    "orderRef": "shippedDeliveryRefundReject",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundReject",
+        "statusName": "RefundReject",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -667,13 +693,13 @@ class EX {
           "tracking_url": "",
           "shipping_status": "Shipping / Re-shipping"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -682,40 +708,40 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelfRefundRequest = {
-    "order_ref": "shippedSelfRefundRequest",
-    "refund_day": 7,
+    "orderRef": "shippedSelfRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -724,40 +750,40 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelfRefundSuccess = {
-    "order_ref": "shippedSelfRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "shippedSelfRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -766,36 +792,36 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelfRefundReject = {
-    "order_ref": "shippedSelfRefundReject",
-    "refund_day": 7,
+    "orderRef": "shippedSelfRefundReject",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundReject", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -804,25 +830,25 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedDeliveryFail = {
-    "order_ref": "shippedDelivery",
-    "refund_day": 7,
+    "orderRef": "shippedDelivery",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -834,13 +860,13 @@ class EX {
           "merchant_number": "0812345678",
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -849,25 +875,25 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelfFailed = {
-    "order_ref": "shippedSelf",
-    "refund_day": 7,
+    "orderRef": "shippedSelf",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {
@@ -876,13 +902,13 @@ class EX {
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
           "sub_status": "Shipping Failed"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -891,30 +917,30 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedDeliveryFailedRefundRequest = {
-    "order_ref": "shippedDeliveryFailedRefundRequest",
-    "refund_day": 7,
+    "orderRef": "shippedDeliveryFailedRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -926,13 +952,13 @@ class EX {
           "merchant_number": "0812345678",
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -941,30 +967,30 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedDeliveryFailedRefundSuccess = {
-    "order_ref": "shippedDeliveryFailedRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "shippedDeliveryFailedRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -976,13 +1002,13 @@ class EX {
           "merchant_number": "0812345678",
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -991,26 +1017,26 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedDeliveryFailedRefundReject = {
-    "order_ref": "shippedDeliveryFailedRefundReject",
-    "refund_day": 7,
+    "orderRef": "shippedDeliveryFailedRefundReject",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundReject", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "delivery",
         "delivery_service": {
@@ -1022,13 +1048,13 @@ class EX {
           "merchant_number": "0812345678",
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1037,30 +1063,30 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelfFailedRefundRequest = {
-    "order_ref": "shippedSelfFailedRefundRequest",
-    "refund_day": 7,
+    "orderRef": "shippedSelfFailedRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Refund",
+        "statusName": "Refund",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {
@@ -1069,13 +1095,13 @@ class EX {
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
           "sub_status": "Shipping Failed"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1084,30 +1110,30 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelfFailedRefundSuccess = {
-    "order_ref": "shippedSelfFailedRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "shippedSelfFailedRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {
@@ -1116,13 +1142,13 @@ class EX {
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
           "sub_status": "Shipping Failed"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1131,26 +1157,26 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> shippedSelfFailedRefundReject = {
-    "order_ref": "shippedSelfFailedRefundReject",
-    "refund_day": 7,
+    "orderRef": "shippedSelfFailedRefundReject",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundReject", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "active",
         "service_type": "self",
         "self_service": {
@@ -1159,13 +1185,13 @@ class EX {
           "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
           "sub_status": "Shipping Failed"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 3)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1174,35 +1200,35 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 4)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   ///Received
   Map<String, dynamic> receivedDelivery = {
-    "order_ref": "shippedDelivery",
-    "refund_day": 7,
+    "orderRef": "shippedDelivery",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "delivery",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "delivery",
         "delivery_service": {
@@ -1211,13 +1237,13 @@ class EX {
           "tracking_url": "",
           "shipping_status": "Shipping / Re-shipping"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1226,39 +1252,39 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> receivedDeliveryRefundRequest = {
-    "order_ref": "receivedDeliveryRefundRequest",
-    "refund_day": 7,
+    "orderRef": "receivedDeliveryRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "delivery",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "delivery",
         "delivery_service": {
@@ -1267,49 +1293,49 @@ class EX {
           "tracking_url": "",
           "shipping_status": "Shipping / Re-shipping"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {"remark": "ผู้ขายเตรียมพัสดุ เสร็จเรียบร้อยแล้ว"}
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> receivedDeliveryRefundSuccess = {
-    "order_ref": "receivedDeliveryRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "receivedDeliveryRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "delivery",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "delivery",
         "delivery_service": {
@@ -1318,45 +1344,45 @@ class EX {
           "tracking_url": "",
           "shipping_status": "Shipping / Re-shipping"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {"remark": "ผู้ขายเตรียมพัสดุ เสร็จเรียบร้อยแล้ว"}
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> receivedDeliveryRefundReject = {
-    "order_ref": "receivedDeliveryRefundReject",
-    "refund_day": 7,
+    "orderRef": "receivedDeliveryRefundReject",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundReject", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "delivery",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "delivery",
         "delivery_service": {
@@ -1365,54 +1391,54 @@ class EX {
           "tracking_url": "",
           "shipping_status": "Shipping / Re-shipping"
         },
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "delivery",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "delivery_service": {"remark": "ผู้ขายเตรียมพัสดุ เสร็จเรียบร้อยแล้ว"}
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 3)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> receivedSelf = {
-    "order_ref": "shippedSelf",
-    "refund_day": 7,
+    "orderRef": "shippedSelf",
+    "refundDay": 7,
     "refundable": true,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "self",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1421,49 +1447,49 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> receivedSelfRefundRequest = {
-    "order_ref": "receivedSelfRefundRequest",
-    "refund_day": 7,
+    "orderRef": "receivedSelfRefundRequest",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundRequest",
+        "statusName": "RefundRequest",
         "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "self",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1472,49 +1498,49 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> receivedSelfRefundSuccess = {
-    "order_ref": "receivedSelfRefundSuccess",
-    "refund_day": 7,
+    "orderRef": "receivedSelfRefundSuccess",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
       {
-        "status_name": "RefundSuccess",
+        "statusName": "RefundSuccess",
         "remark": "การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       },
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "self",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1523,45 +1549,45 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
 
   Map<String, dynamic> receivedSelfRefundReject = {
-    "order_ref": "receivedSelfRefundReject",
-    "refund_day": 7,
+    "orderRef": "receivedSelfRefundReject",
+    "refundDay": 7,
     "refundable": false,
-    "order_create_datetime": "datetime",
+    "orderCreateDateTime": "datetime",
     "status": [
-      {"status_name": "RefundReject", "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString()},
+      {"statusName": "RefundReject", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
-        "status_name": "Received",
+        "statusName": "Received",
         "state": "active",
         "remark": "สินค้าถูกจัดส่งสำเร็จแล้ว",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "service_type": "self",
         "merchant_number": "0812345678",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"
       },
       {
-        "status_name": "Shipped",
+        "statusName": "Shipped",
         "state": "inactive",
         "service_type": "self",
         "self_service": {"remark": "สินค้าอยู่ระหว่างการจัดส่ง", "merchant_number": "0812345678", "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด"},
-        "status_date_time": DateTime.now().subtract(Duration(days: 1)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
       },
       {
-        "status_name": "Preparing/Packed",
+        "statusName": "Preparing/Packed",
         "state": "inactive",
         "service_type": "self",
-        "status_date_time": DateTime.now().subtract(Duration(hours: 2)).toUtc().toString(),
+        "statusDateTime": "8 ธันวาคม 2566 15:30",
         "self_service": {
           "sub_status": "contact_success",
           "remark": "ยืนยันเวลาจัดส่งสำเร็จกรุณารอรับสินค้าตามเวลานัดหมาย",
@@ -1570,13 +1596,13 @@ class EX {
         }
       },
       {
-        "status_name": "Pending",
+        "statusName": "Pending",
         "state": "inactive",
-        "order_ref": "RE1293109248",
+        "orderRef": "RE1293109248",
         "card_number": "XXX1234",
         "payment_gateway": "2C2P",
         "merchant_name": "บริษัท อินโนพาวเวอร์ จำกัด",
-        "status_date_time": DateTime.now().subtract(Duration(days: 2)).toUtc().toString()
+        "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
     ]
   };
@@ -1623,17 +1649,25 @@ class EX {
   TrackingModel get receivedSelfRefundRejectMock => TrackingModel.fromJson(receivedSelfRefundReject);
 }
 
-extension XtrackingStatus on String {
+extension StatusNameX on String {
   bool get isPending => this == "Pending";
   bool get isPreparing => this == "Preparing";
+  bool get isPreparingSelfServiceFail => this == "PreparingSelfServiceFail";
   bool get isShipped => this == "Shipped";
+  bool get isShippingFail => this == "ShippingFail";
   bool get isReceived => this == "Received";
-  bool get isRefund => this == "Refund";
+  bool get isRefundRequest => this == "RefundRequest";
+  bool get isRefundSuccess => this == "RefundSuccess";
+  bool get isRefundRejected => this == "RefundRejected";
 }
 
 extension ServiceTypeX on String {
   bool get isDelivery => this == "delivery";
   bool get isSelf => this == "self";
+}
+
+extension StateX on String {
+  bool get isActive => this == "active";
 }
 
 class TrackingModel extends Equatable {
@@ -1650,10 +1684,10 @@ class TrackingModel extends Equatable {
   factory TrackingModel.fromJson(Map<String, dynamic> json) {
     var status = json['status'] != null ? json['status'].map<Status>((e) => Status.fromJson(e)).toList() : [];
     return TrackingModel(
-        orderRef: json['order_ref'] ?? '',
-        refundDay: json['refund_day'] ?? 0,
+        orderRef: json['orderRef'] ?? '',
+        refundDay: json['refundDay'] ?? 0,
         refundable: json['refundable'] ?? false,
-        orderCreateDate: json['order_create_datetime'] ?? "",
+        orderCreateDate: json['orderCreateDateTime'] ?? "",
         status: status
     );
   }
@@ -1665,54 +1699,48 @@ class TrackingModel extends Equatable {
 class Status extends Equatable {
   final String statusName;
   final String state;
-  final String remark;
   final String statusDateTime;
   final String serviceType;
-  final String merchantNumber;
-  final String merchantName;
   final Service deliveryService;
   final Service selfService;
-  final String orderRef;
+  final List<StatusDetail> details;
+  final List<StatusDetail> paymentDetails;
 
   const Status(
       {required this.statusName,
       required this.state,
-      required this.remark,
       required this.statusDateTime,
       required this.serviceType,
-      required this.merchantNumber,
-      required this.merchantName,
       required this.deliveryService,
       required this.selfService,
-      required this.orderRef});
+      required this.details,
+      required this.paymentDetails});
 
   static const empty = Status(
       statusName: "",
       state: "",
-      remark: "",
       statusDateTime: "",
       serviceType: "",
-      merchantNumber: "",
-      merchantName: "",
       deliveryService: Service.empty,
       selfService: Service.empty,
-      orderRef: "");
+      details: [],
+      paymentDetails: []
+  );
 
   factory Status.fromJson(Map<String, dynamic> json) {
-    Service delivery = json['delivery_service'] != null ? Service.fromJson(json['delivery_service']) : Service.empty;
-    Service self = json['self_service'] != null ? Service.fromJson(json['self_service']) : Service.empty;
-
+    Service delivery = json['deliveryService'] != null ? Service.fromJson(json['deliveryService']) : Service.empty;
+    Service self = json['selfService'] != null ? Service.fromJson(json['selfService']) : Service.empty;
+    List<StatusDetail> details = json['statusDetail'] != null ? json['statusDetail'].map<StatusDetail>((json) => StatusDetail.fromJson(json)).toList() : [];
+    List<StatusDetail> paymentDetails = json['paymentDetail'] != null ? json['paymentDetail'].map<StatusDetail>((json) => StatusDetail.fromJson(json)).toList() : [];
     return Status(
-      statusName: json['status_name'] ?? "",
+      statusName: json['statusName'] ?? "",
       state: json['state'] ?? "",
-      remark: json['remark'] ?? "",
-      statusDateTime: json['status_date_time'] ?? "",
-      serviceType: json['service_type'] ?? "",
-      merchantNumber: json['merchant_number'] ?? "",
-      merchantName: json['merchant_name'] ?? "",
+      statusDateTime: json['statusDateTime'] ?? "",
+      serviceType: json['serviceType'] ?? "",
       deliveryService: delivery,
       selfService: self,
-      orderRef: json['order_ref'] ?? "",
+      details: details,
+      paymentDetails: paymentDetails
     );
   }
 
@@ -1720,14 +1748,12 @@ class Status extends Equatable {
   List<Object?> get props => [
         statusName,
         state,
-        remark,
         statusDateTime,
         serviceType,
-        merchantNumber,
-        merchantName,
         deliveryService,
         selfService,
-        orderRef,
+        details,
+        paymentDetails
       ];
 }
 
@@ -1757,16 +1783,51 @@ class Service extends Equatable {
   factory Service.fromJson(Map<String, dynamic> json) {
     return Service(
       courier: json['courier'] ?? "",
-      trackingNumber: json['tracking_number'] ?? "",
-      trackingUrl: json['tracking_url'] ?? "",
-      shippingStatus: json['shipping_status'] ?? "",
+      trackingNumber: json['trackingNumber'] ?? "",
+      trackingUrl: json['trackingUrl'] ?? "",
+      shippingStatus: json['shippingStatus'] ?? "",
       remark: json['remark'] ?? "",
-      merchantNumber: json['merchant_number'] ?? "",
-      merchantName: json['merchant_name'] ?? "",
-      subStatus: json['sub_status'] ?? "",
+      merchantNumber: json['merchantNumber'] ?? "",
+      merchantName: json['merchantName'] ?? "",
+      subStatus: json['subStatus'] ?? "",
     );
   }
 
   @override
   List<Object?> get props => [courier, trackingNumber, trackingUrl, shippingStatus, remark, merchantNumber, merchantName, subStatus];
+}
+
+class StatusDetail extends Equatable {
+  final String labelName;
+  final String column1;
+  final String column2;
+  final bool isCopyButton;
+  final bool isHighlight;
+
+  const StatusDetail(
+      {required this.labelName,
+      required this.column1,
+      required this.column2,
+      required this.isCopyButton,
+      required this.isHighlight});
+
+  static const empty =
+  StatusDetail(labelName: "", column1: "", column2: "", isCopyButton: false, isHighlight: false);
+
+  factory StatusDetail.fromJson(Map<String, dynamic> json) {
+    return StatusDetail(
+      labelName: json['labelName'] ?? "",
+      column1: json['column1'] ?? "",
+      column2: json['column2'] ?? "",
+      isCopyButton: json['isCopyButton'] ?? false,
+      isHighlight: json['isHighlight'] ?? false
+    );
+  }
+
+  @override
+  List<Object?> get props => [labelName,
+    column1,
+    column2,
+    isCopyButton,
+    isHighlight];
 }
