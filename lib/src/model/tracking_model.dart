@@ -13,6 +13,7 @@ class EX {
     "RefundRejected",
   ];
 
+
   ///Pending
   Map<String, dynamic> pending = {
     "orderRef": "pending",
@@ -21,9 +22,22 @@ class EX {
     "orderCreateDateTime": "datetime",
     "status": [
       {
-        "statusName": "Pending",
+        "statusName": "Preparing",
         "state": "active",
-        "paymentDetail": [
+        "statusDetail": [
+          {
+            "column1": "ผู้ขายกำลังเตรียมพัสดุ",
+          },
+          {
+            "column1": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
+            "isHighlight": true
+          },
+        ]
+      },
+      {
+        "statusName": "Pending",
+        "state": "inactive",
+        "statusDetail": [
           {
             "labelName": "orderRef",
             "column1": "หมายเลขอ้างอิง",
@@ -44,15 +58,6 @@ class EX {
             "column1": "ผู้รับเงิน",
             "column2": "บริษัท อินโนพาวเวอร์ จำกัด",
           }
-        ],
-        "statusDetail": [
-          {
-            "column1": "ผู้ขายกำลังเตรียมพัสดุ",
-          },
-          {
-            "column1": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
-            "isHighlight": true
-          },
         ],
         "statusDateTime": "8 ธันวาคม 2566 15:30"
       }
@@ -1661,11 +1666,6 @@ extension StatusNameX on String {
   bool get isRefundRejected => this == "RefundRejected";
 }
 
-extension ServiceTypeX on String {
-  bool get isDelivery => this == "delivery";
-  bool get isSelf => this == "self";
-}
-
 extension StateX on String {
   bool get isActive => this == "active";
 }
@@ -1701,8 +1701,6 @@ class Status extends Equatable {
   final String state;
   final String statusDateTime;
   final String serviceType;
-  final Service deliveryService;
-  final Service selfService;
   final List<StatusDetail> details;
   final List<StatusDetail> paymentDetails;
 
@@ -1711,8 +1709,6 @@ class Status extends Equatable {
       required this.state,
       required this.statusDateTime,
       required this.serviceType,
-      required this.deliveryService,
-      required this.selfService,
       required this.details,
       required this.paymentDetails});
 
@@ -1721,15 +1717,11 @@ class Status extends Equatable {
       state: "",
       statusDateTime: "",
       serviceType: "",
-      deliveryService: Service.empty,
-      selfService: Service.empty,
       details: [],
       paymentDetails: []
   );
 
   factory Status.fromJson(Map<String, dynamic> json) {
-    Service delivery = json['deliveryService'] != null ? Service.fromJson(json['deliveryService']) : Service.empty;
-    Service self = json['selfService'] != null ? Service.fromJson(json['selfService']) : Service.empty;
     List<StatusDetail> details = json['statusDetail'] != null ? json['statusDetail'].map<StatusDetail>((json) => StatusDetail.fromJson(json)).toList() : [];
     List<StatusDetail> paymentDetails = json['paymentDetail'] != null ? json['paymentDetail'].map<StatusDetail>((json) => StatusDetail.fromJson(json)).toList() : [];
     return Status(
@@ -1737,8 +1729,6 @@ class Status extends Equatable {
       state: json['state'] ?? "",
       statusDateTime: json['statusDateTime'] ?? "",
       serviceType: json['serviceType'] ?? "",
-      deliveryService: delivery,
-      selfService: self,
       details: details,
       paymentDetails: paymentDetails
     );
@@ -1750,51 +1740,9 @@ class Status extends Equatable {
         state,
         statusDateTime,
         serviceType,
-        deliveryService,
-        selfService,
         details,
         paymentDetails
       ];
-}
-
-class Service extends Equatable {
-  final String courier;
-  final String trackingNumber;
-  final String trackingUrl;
-  final String shippingStatus;
-  final String remark;
-  final String merchantNumber;
-  final String merchantName;
-  final String subStatus;
-
-  const Service(
-      {required this.courier,
-      required this.trackingNumber,
-      required this.trackingUrl,
-      required this.shippingStatus,
-      required this.remark,
-      required this.merchantNumber,
-      required this.merchantName,
-      required this.subStatus});
-
-  static const empty =
-      Service(courier: "", trackingNumber: "", trackingUrl: "", shippingStatus: "", remark: "", merchantNumber: "", merchantName: "", subStatus: "");
-
-  factory Service.fromJson(Map<String, dynamic> json) {
-    return Service(
-      courier: json['courier'] ?? "",
-      trackingNumber: json['trackingNumber'] ?? "",
-      trackingUrl: json['trackingUrl'] ?? "",
-      shippingStatus: json['shippingStatus'] ?? "",
-      remark: json['remark'] ?? "",
-      merchantNumber: json['merchantNumber'] ?? "",
-      merchantName: json['merchantName'] ?? "",
-      subStatus: json['subStatus'] ?? "",
-    );
-  }
-
-  @override
-  List<Object?> get props => [courier, trackingNumber, trackingUrl, shippingStatus, remark, merchantNumber, merchantName, subStatus];
 }
 
 class StatusDetail extends Equatable {

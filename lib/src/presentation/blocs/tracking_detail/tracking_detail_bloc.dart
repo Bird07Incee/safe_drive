@@ -27,15 +27,15 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
 
     try {
       String path = "/v1/trackingDetail";
-      // Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {
-      //   "orderNo": event.orderNo,
-      //   "productId": event.productId
-      // }, headers: {
-      //   "Authorization": "Bearer $accessToken",
-      // });
+      Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {
+        "orderNo": event.orderNo,
+        "productId": event.productId
+      }, headers: {
+        "Authorization": "Bearer $accessToken",
+      });
 
-      //final t = TrackingResponseModel.fromJson(response.data);
-      final t = EX().pendingMock;
+      final t = TrackingResponseModel.fromJson(response.data);
+      //final t = EX().pendingMock;
       // final t = EX().pendingMock;
       // final t = EX().pendingRefundRequestMock;
       // final t = EX().pendingRefundSuccessMock;
@@ -76,7 +76,7 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
       // final t = EX().receivedSelfRefundRequestMock;
       // final t = EX().receivedSelfRefundSuccessMock;
       // final t = EX().receivedSelfRefundRejectMock;
-      emit(state.copyWith(status: TrackingDetailStatus.success, tracking: t));
+      emit(state.copyWith(status: TrackingDetailStatus.success, tracking: t.tracking));
     } catch (e) {
       emit(state.copyWith(status: TrackingDetailStatus.error));
     }

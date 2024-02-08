@@ -205,20 +205,16 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     }
 
     if (!isPayment) {
-      return Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(border: Border(left: BorderSide(width: 4, color: Color(0xffe8e7e7)))),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: l
-              ),
-            ),
+      return Container(
+        margin: EdgeInsets.only(left: 10),
+        decoration: BoxDecoration(border: Border(left: BorderSide(width: 4, color: Color(0xffe8e7e7)))),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: l
           ),
-        ],
+        ),
       );
     } else {
       return Padding(
@@ -270,13 +266,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   Widget statusPending(Status s) {
     return Column(
       children: [
-        statusTitle(Image.asset('assets/icons/packed_${s.state.isActive ? "" : "in"}active.png', fit: BoxFit.fitWidth), "เตรียมจัดส่ง", s.state.isActive),
-        statusContent(s.details, isPayment: false, isActive: s.state.isActive),
-        SizedBox(
-          height: 16,
-        ),
         statusTitle(Image.asset('assets/icons/paid_inactive.png', fit: BoxFit.fitWidth), "ชำระเงินแล้ว", false, dt: s.statusDateTime),
-        statusContent(s.paymentDetails, isPayment: true, isActive: s.state.isActive),
+        statusContent(s.details, isPayment: true, isActive: s.state.isActive),
       ],
     );
   }
@@ -362,45 +353,61 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
         },
           child: AlvaRootWidget(
             titlePage: titleWebPage,
+            appBar: AppBar(
+              title: AlvaText(
+                  title: "รายละเอียดการจัดส่ง",
+                  textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18)),
+              titleSpacing: 0,
+              elevation: 0.4,
+              leadingWidth: 60,
+              centerTitle: false,
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                  key: const Key("back_btn_tracking"),
+                  onPressed: () {
+                    onBack(context);
+                  },
+                  icon: const Icon(Icons.arrow_back_ios_rounded)),
+            ),
             child: BlocBuilder<TrackingDetailBloc, TrackingDetailState>(
               builder: (context, state) {
                 if(state.status.isSuccess) {
                   return ListView(
                     children: [
                       ///appbar
-                      Container(
-                        width: maxWidth,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
-                              spreadRadius: 0,
-                              blurRadius: 16,
-                              offset: Offset(0, 4), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 48,
-                              height: 48,
-                              child: IconButton(
-                                  key: const Key("back_btn_tracking"),
-                                  onPressed: () {
-                                    onBack(context);
-                                  },
-                                  icon: const Icon(Icons.arrow_back_ios_rounded)),
-                            ),
-                            AlvaText(
-                                title: "รายละเอียดการจัดส่ง", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18)),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   width: maxWidth,
+                      //   height: 56,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         color: Colors.black.withOpacity(0.04),
+                      //         spreadRadius: 0,
+                      //         blurRadius: 16,
+                      //         offset: Offset(0, 4), // changes position of shadow
+                      //       ),
+                      //     ],
+                      //   ),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: [
+                      //       SizedBox(
+                      //         width: 48,
+                      //         height: 48,
+                      //         child: IconButton(
+                      //             key: const Key("back_btn_tracking"),
+                      //             onPressed: () {
+                      //               onBack(context);
+                      //             },
+                      //             icon: const Icon(Icons.arrow_back_ios_rounded)),
+                      //       ),
+                      //       AlvaText(
+                      //           title: "รายละเอียดการจัดส่ง", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18)),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(
                         height: maxHeight - 56,
                         width: maxWidth,
@@ -568,7 +575,6 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                           ],
                         ),
                       ),
-
                     ],
                   );
                 } else if(state.status.isLoading || state.status.isInitial) {
