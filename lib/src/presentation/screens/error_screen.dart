@@ -15,7 +15,6 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
-    var maxHeight = MediaQuery.of(context).size.height;
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -23,41 +22,42 @@ class ErrorScreen extends StatelessWidget {
           titlePage: titleWebPage,
           child: Column(
             children: [
-              Container(
-                color: whitePure,
-                height: maxHeight - 96,
-                width: maxWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 356,
-                      width: maxWidth - 30,
-                      child: Column(
-                        children: [
-                          const Icon(
-                            Icons.warning_amber_rounded,
-                            color: cloudSoftDeepWhite,
-                            size: 125,
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Text(title!, style: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Text(subTitle!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
-                          subTitleSec!.isNotEmpty
-                              ? Text(subTitleSec!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW))
-                              : Container(),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                        ],
+              Expanded(
+                child: Container(
+                  color: whitePure,
+                  width: maxWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 356,
+                        width: maxWidth - 30,
+                        child: Column(
+                          children: [
+                            const Icon(
+                              Icons.warning_amber_rounded,
+                              color: cloudSoftDeepWhite,
+                              size: 125,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Text(title!, style: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(subTitle!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
+                            subTitleSec!.isNotEmpty
+                                ? Text(subTitleSec!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW))
+                                : Container(),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Container(

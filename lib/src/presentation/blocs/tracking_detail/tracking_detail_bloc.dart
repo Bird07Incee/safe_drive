@@ -1,12 +1,9 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/tracking_model.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/tracking_detail_screen.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 part 'tracking_detail_event.dart';
@@ -24,6 +21,8 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     emit(state.copyWith(status: TrackingDetailStatus.loading));
+    accessToken =
+        "Bearer AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQEqvco4Uw3IBD/x7boq8sKxAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAxhHwr6V0yGVH0zp/ECARCAggEH3HfWQx9xpSv1t+090V4dhREQLeGa7rL+oPZzyKFtbAJm9XWdXGZ5KS662obTNuaQJ/kev3TO1ceit/kJj93rqnopgOIfHTiOdFq6QszCbiM/LzE/dvyhzfON2sL8ng3GHv9vEwtA0t4stgVE4lg4E9tgP0is9kdPC5dOMGql+bIbRov85A3abOovQS/ZOP+Z8kyaJ1us6iTbCb2LWwB4eiLwDkdwcvocwRuMQ+CEMVuzLSl5LNN42/ZXy6+tT11lES0qJOUL1NP2I9ffolZfsFXQrtQAYwP7OLJmZ59lQ8xYCMugFPqPFugXsA2+rtB3NePb55G298wsDGZAxf5dDIS8sjgxM1M=";
 
     try {
       String path = "/v1/trackingDetail";
@@ -80,7 +79,6 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
     } catch (e) {
       emit(state.copyWith(status: TrackingDetailStatus.error));
     }
-
   }
 }
 
