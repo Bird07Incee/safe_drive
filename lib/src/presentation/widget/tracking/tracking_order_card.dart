@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/model/tracking_detail/tracking_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class TrackingOrderCard extends StatelessWidget {
   const TrackingOrderCard({super.key, required this.order});
@@ -112,12 +114,18 @@ class TrackingOrderCard extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              Container(
-                height: 40,
-                width: (maxWidth - 35) / 2,
-                decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
-                child: Center(child: Text("รายละเอียดการจัดส่ง", style: AlvaStyles().heading3())),
-              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.tracking.toStringPath(),
+                      arguments: TrackingDetailArgs(orderNo: order.orderNo!, productId: order.products![0].productId!));
+                },
+                child: Container(
+                  height: 40,
+                  width: (maxWidth - 35) / 2,
+                  decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
+                  child: Center(child: Text("รายละเอียดการจัดส่ง", style: AlvaStyles().heading3())),
+                ),
+              )
             ],
           ),
         ),
