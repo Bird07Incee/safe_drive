@@ -20,15 +20,15 @@ late DatadogConfiguration configuration;
 void main() async {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
-  // _configureApp();
+  _configureApp();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    runApp(const MyApp());
-    // DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
-    //   return runApp(const MyApp());
-    // });
+    // runApp(const MyApp());
+    DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
+      return runApp(const MyApp());
+    });
   });
 }
 
