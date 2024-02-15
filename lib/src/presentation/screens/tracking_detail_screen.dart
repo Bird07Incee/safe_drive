@@ -44,8 +44,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
-      orderNo = "LA202402081707425tpvy";
-      productId = "PV_2Q3HC9TC7ONG";
+      orderNo = "LA20240207093650H7hTB";
+      productId = "PV_V1S7APOZCYVT";
       context.read<TrackingDetailBloc>().add(GetTracking(orderNo: orderNo, productId: productId));
     }
   }
@@ -54,44 +54,48 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     Navigator.pop(context);
   }
 
-  Widget rowOfKeyValue(String k, String v, {bool withCopy = false}) {
+  Widget rowOfKeyValue(String k, String v, {bool isActive = false, bool withCopy = false}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          width: 92,
-          child: Text(
-            k,
-            style: AlvaStyles().headingSize10w600(grey300).copyWith(height: 2.4),
+        Expanded(
+          flex: 4,
+          child: SizedBox(
+            child: Text(
+              k,
+              style: AlvaStyles().headingSize10w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
+            ),
           ),
         ),
-        Container(
-          padding: EdgeInsets.only(left: 16.0),
-          width: maxWidth - 196,
-          child: withCopy
-              ? Row(
-                  children: [
-                    SelectableText(
-                      v,
-                      style: AlvaStyles().headingSize10w700(grey300).copyWith(height: 2.4),
-                    ),
-                    GestureDetector(
-                        key: const Key("copy_tracking"),
-                        onTap: () {
-                          ///TODO: check this method working on web
-                          Clipboard.setData(ClipboardData(text: v));
-                        },
-                        child: Text(
-                          " [คัดลอก]",
-                          style: AlvaStyles().headingSize10w600(btnBlue).copyWith(height: 2.4),
-                        )),
-                  ],
-                )
-              : Text(
-                  v,
-                  style: AlvaStyles().headingSize10w600(grey300).copyWith(height: 2.4),
-                ),
-        ),
+        Expanded(
+          flex: 7,
+          child: Container(
+            padding: EdgeInsets.only(left: 16.0),
+            child: withCopy
+                ? Row(
+                    children: [
+                      SelectableText(
+                        v,
+                        style: AlvaStyles().headingSize10w700(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
+                      ),
+                      GestureDetector(
+                          key: const Key("copy_tracking"),
+                          onTap: () {
+                            Clipboard.setData(ClipboardData(text: v));
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("คัดลอกลงคลิปบอร์ด")));
+                          },
+                          child: Text(
+                            " [คัดลอก]",
+                            style: AlvaStyles().headingSize10w600(isActive ? btnBlue : grey300).copyWith(height: 2.4),
+                          )),
+                    ],
+                  )
+                : Text(
+                    v,
+                    style: AlvaStyles().headingSize10w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
+                  ),
+          ),
+        )
       ],
     );
   }
@@ -100,19 +104,17 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     List<Widget> l = [];
     for (var s in t.status) {
       if (s.statusName.isPending) {
-        l.add(statusPending(s));
+        l.add(Container(padding: EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 16), child: statusPending(s)));
       } else if (s.statusName.isPreparing || s.statusName.isPreparingSelfServiceFail) {
-        l.add(statusPreparing(s));
+        l.add(Container(padding: EdgeInsets.only(left: 24, right: 24, top: 16), child: statusPreparing(s)));
       } else if (s.statusName.isShipped || s.statusName.isShippingFail) {
-        l.add(statusShipped(s));
+        l.add(Container(padding: EdgeInsets.only(left: 24, right: 24, top: 16), child: statusShipped(s)));
       } else if (s.statusName.isReceived) {
-        l.add(statusReceived(s));
+        l.add(Container(padding: EdgeInsets.only(left: 24, right: 24, top: 16), child: statusReceived(s)));
       } else if (s.statusName.isRefundRequest) {
-        ///TODO: send statusModel if dynamic text
-        l.add(statusReturn());
+        l.add(Container(child: statusReturn(s)));
       } else if (s.statusName.isRefundSuccess) {
-        ///TODO: send statusModel if dynamic text
-        l.add(statusRefund());
+        l.add(Container(child: statusRefund(s)));
       } else if (s.statusName.isRefundRejected) {
         //do nothing
       }
@@ -176,29 +178,26 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     List<Widget> l = [];
     for (var d in details) {
       if (d.column1 != "" && d.column2 != "") {
-        l.add(rowOfKeyValue(d.column1, d.column2, withCopy: d.isCopyButton));
+        l.add(rowOfKeyValue(d.column1, d.column2, isActive: isActive, withCopy: d.isCopyButton));
       } else if (d.column1 != "" && d.column2 == "" && !d.isHighlight && !d.isCopyButton) {
-        Widget text = Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: SizedBox(
-            width: maxWidth - 88,
-            child: Text(
-              d.column1,
-              style: AlvaStyles().headingSize10w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
-            ),
+        Widget text = SizedBox(
+          width: maxWidth - 88,
+          child: Text(
+            d.column1,
+            style: AlvaStyles().headingSize10w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
           ),
         );
         l.add(text);
       } else if (d.column1 != "" && d.column2 == "" && d.isHighlight && !d.isCopyButton) {
         Widget highlightText = Padding(
-          padding: EdgeInsets.only(left: 16, top: 8),
+          padding: EdgeInsets.only(top: 8),
           child: Container(
             width: maxWidth - 88,
             padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Color(0xffe7f4ff)),
             child: Text(
               d.column1,
-              style: AlvaStyles().headingSize8w600(isActive ? btnBlue : grey300).copyWith(height: 2),
+              style: AlvaStyles().headingSize8w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2),
             ),
           ),
         );
@@ -211,7 +210,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
         margin: EdgeInsets.only(left: 10),
         decoration: BoxDecoration(border: Border(left: BorderSide(width: 4, color: Color(0xffe8e7e7)))),
         child: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
+          padding: const EdgeInsets.only(left: 30.0),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: l),
         ),
       );
@@ -229,7 +228,9 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   Widget statusReceived(Status s) {
     return Column(
       children: [
-        statusTitle(Image.asset('assets/icons/received.png', fit: BoxFit.fitWidth), "จัดส่งสำเร็จ", s.state.isActive, dt: s.statusDateTime),
+        statusTitle(
+            Image.asset('assets/icons/received_${s.state.isActive ? "" : "in"}active.png', fit: BoxFit.fitWidth), "จัดส่งสำเร็จ", s.state.isActive,
+            dt: s.statusDateTime),
         statusContent(s.details, isActive: s.state.isActive),
         SizedBox(
           height: 8,
@@ -276,73 +277,84 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   }
 
   ///TODO: return and refund status_detail json???
-  Widget statusReturn() => Container(
-        color: Color(0xfffeedcd),
-        padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 40,
-              height: 40,
-              child: Image.asset('assets/icons/return.png', fit: BoxFit.fitWidth),
-            ),
-            SizedBox(
-              width: 16,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "ได้รับคำขอคืนสินค้า/คืนเงินแล้ว",
-                  style: AlvaStyles().headingSize12w700(grey300).copyWith(height: 2),
-                ),
-                Text(
-                  "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-                  style: AlvaStyles().headingSize10w500(grey300).copyWith(height: 2.4),
-                ),
-              ],
-            )
-          ],
-        ),
-      );
+  Widget statusReturn(Status s) {
+    List<Widget> l = [];
+    for (var col in s.details) {
+      List<String> listCol = col.column1.split("\n");
+      for (int i = 0; i < listCol.length; i++) {
+        l.add(SizedBox(
+          child: Text(
+            listCol[i],
+            style: i == 0
+                ? AlvaStyles().headingSize12w600(blackGoMunTo).copyWith(height: 2.4)
+                : AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
+          ),
+        ));
+      }
+    }
+    return Container(
+      color: Color(0xfffeedcd),
+      padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 40,
+            height: 40,
+            child: Image.asset('assets/icons/return.png', fit: BoxFit.fitWidth),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: l)
+        ],
+      ),
+    );
+  }
 
-  Widget statusRefund() => Container(
-        color: Color(0xfffeedcd),
-        padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 40,
-              height: 40,
-              child: Image.asset('assets/icons/refund.png', fit: BoxFit.fitWidth),
+  Widget statusRefund(Status s) {
+    List<Widget> l = [];
+
+    for (var col in s.details) {
+      List<String> listCol = col.column1.split("\n");
+      for (int i = 0; i < listCol.length; i++) {
+        if (i == 0) {
+          l.add(SizedBox(
+            child: Text(
+              s.statusDateTime,
+              style: AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
             ),
-            SizedBox(
-              width: 16,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "15 ธันวาคม 2566 16:10",
-                  style: AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
-                ),
-                Text(
-                  "คืนเงินสำเร็จ",
-                  style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
-                ),
-                SizedBox(
-                  width: maxWidth - (98 + 16),
-                  child: Text(
-                    "*การคืนเงินเป็นไปตามเงื่อนไขข้อตกลงของธนาคาร กรุณาตรวจสอบกับธนาคารผู้ออกบัตร",
-                    style: AlvaStyles().headingSize10w500(grey300).copyWith(height: 2),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      );
+          ));
+        }
+        l.add(SizedBox(
+          child: Text(
+            listCol[i],
+            style: i == 0
+                ? AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2.4)
+                : AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
+          ),
+        ));
+      }
+    }
+    return Container(
+      color: Color(0xfffeedcd),
+      padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 40,
+            height: 40,
+            child: Image.asset('assets/icons/refund.png', fit: BoxFit.fitWidth),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: l)
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -377,7 +389,6 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
               return ListView(
                 children: [
                   SizedBox(
-                    height: maxHeight - 56,
                     width: maxWidth,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -385,7 +396,6 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                         ///tracking timeline
                         Container(
                           width: maxWidth,
-                          padding: EdgeInsets.only(left: 24, top: 16, bottom: 16, right: 24),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: trackingStatuses(state.tracking),

@@ -13,7 +13,6 @@ class EX {
     "RefundRejected",
   ];
 
-
   ///Pending
   Map<String, dynamic> pending = {
     "orderRef": "pending",
@@ -29,7 +28,8 @@ class EX {
             "column1": "ผู้ขายกำลังเตรียมพัสดุ",
           },
           {
-            "column1": "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
+            "column1":
+                "กรณีถ้าสินค้ามีบริการติดตั้ง\nกรุณารอเจ้าหน้าที่ติดต่อกลับ เพื่อนัดหมายวันจัดส่ง และติดตั้งสินค้า\nภายใน 24 ชม. ในวันและเวลาทำการ",
             "isHighlight": true
           },
         ]
@@ -38,11 +38,7 @@ class EX {
         "statusName": "Pending",
         "state": "inactive",
         "statusDetail": [
-          {
-            "labelName": "orderRef",
-            "column1": "หมายเลขอ้างอิง",
-            "column2": "LA202401191444029i6hQ"
-          },
+          {"labelName": "orderRef", "column1": "หมายเลขอ้างอิง", "column2": "LA202401191444029i6hQ"},
           {
             "labelName": "card_number",
             "column1": "ชำระเงินโดย",
@@ -220,11 +216,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Preparing/Packed",
         "state": "active",
@@ -306,11 +298,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Preparing/Packed",
         "state": "active",
@@ -407,11 +395,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Preparing/Packed",
         "state": "active",
@@ -589,11 +573,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Shipped",
         "state": "active",
@@ -683,11 +663,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundReject",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundReject", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Shipped",
         "state": "active",
@@ -730,11 +706,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Shipped",
         "state": "active",
@@ -939,11 +911,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Shipped",
         "state": "active",
@@ -1085,11 +1053,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "Refund",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "Refund", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Shipped",
         "state": "active",
@@ -1274,11 +1238,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Received",
         "state": "active",
@@ -1469,11 +1429,7 @@ class EX {
     "refundable": false,
     "orderCreateDateTime": "datetime",
     "status": [
-      {
-        "statusName": "RefundRequest",
-        "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ",
-        "statusDateTime": "8 ธันวาคม 2566 15:30"
-      },
+      {"statusName": "RefundRequest", "remark": "กรุณารอผู้ขายติดต่อกลับภายใน 3 - 5 วันทำการ", "statusDateTime": "8 ธันวาคม 2566 15:30"},
       {
         "statusName": "Received",
         "state": "active",
@@ -1656,7 +1612,7 @@ class EX {
 
 extension StatusNameX on String {
   bool get isPending => this == "Pending";
-  bool get isPreparing => this == "Preparing";
+  bool get isPreparing => this == "Preparing/Packed";
   bool get isPreparingSelfServiceFail => this == "PreparingSelfServiceFail";
   bool get isShipped => this == "Shipped";
   bool get isShippingFail => this == "ShippingFail";
@@ -1677,19 +1633,19 @@ class TrackingModel extends Equatable {
   final String orderCreateDate;
   final List<Status> status;
 
-  const TrackingModel({required this.orderRef,required this.refundDay, required this.refundable, required this.orderCreateDate, required this.status});
+  const TrackingModel(
+      {required this.orderRef, required this.refundDay, required this.refundable, required this.orderCreateDate, required this.status});
 
   static const empty = TrackingModel(orderRef: "", refundDay: 0, refundable: false, orderCreateDate: "", status: []);
 
   factory TrackingModel.fromJson(Map<String, dynamic> json) {
     var status = json['status'] != null ? json['status'].map<Status>((e) => Status.fromJson(e)).toList() : [];
     return TrackingModel(
-        orderRef: json['orderRef'] ?? '',
-        refundDay: json['refundDay'] ?? 0,
-        refundable: json['refundable'] ?? false,
-        orderCreateDate: json['orderCreateDateTime'] ?? "",
-        status: status
-    );
+        orderRef: json['order_ref'] ?? '',
+        refundDay: json['refund_day'] ?? 0,
+        refundable: json['refund_able'] ?? false,
+        orderCreateDate: json['order_create'] ?? "",
+        status: status);
   }
 
   @override
@@ -1702,47 +1658,24 @@ class Status extends Equatable {
   final String statusDateTime;
   final String serviceType;
   final List<StatusDetail> details;
-  final List<StatusDetail> paymentDetails;
 
-  const Status(
-      {required this.statusName,
-      required this.state,
-      required this.statusDateTime,
-      required this.serviceType,
-      required this.details,
-      required this.paymentDetails});
+  const Status({required this.statusName, required this.state, required this.statusDateTime, required this.serviceType, required this.details});
 
-  static const empty = Status(
-      statusName: "",
-      state: "",
-      statusDateTime: "",
-      serviceType: "",
-      details: [],
-      paymentDetails: []
-  );
+  static const empty = Status(statusName: "", state: "", statusDateTime: "", serviceType: "", details: []);
 
   factory Status.fromJson(Map<String, dynamic> json) {
-    List<StatusDetail> details = json['statusDetail'] != null ? json['statusDetail'].map<StatusDetail>((json) => StatusDetail.fromJson(json)).toList() : [];
-    List<StatusDetail> paymentDetails = json['paymentDetail'] != null ? json['paymentDetail'].map<StatusDetail>((json) => StatusDetail.fromJson(json)).toList() : [];
+    List<StatusDetail> details =
+        json['status_detail'] != null ? json['status_detail'].map<StatusDetail>((json) => StatusDetail.fromJson(json)).toList() : [];
     return Status(
-      statusName: json['statusName'] ?? "",
-      state: json['state'] ?? "",
-      statusDateTime: json['statusDateTime'] ?? "",
-      serviceType: json['serviceType'] ?? "",
-      details: details,
-      paymentDetails: paymentDetails
-    );
+        statusName: json['status_name'] ?? "",
+        state: json['state'] ?? "",
+        statusDateTime: json['status_date_time'] ?? "",
+        serviceType: json['serviceType'] ?? "",
+        details: details);
   }
 
   @override
-  List<Object?> get props => [
-        statusName,
-        state,
-        statusDateTime,
-        serviceType,
-        details,
-        paymentDetails
-      ];
+  List<Object?> get props => [statusName, state, statusDateTime, serviceType, details];
 }
 
 class StatusDetail extends Equatable {
@@ -1752,30 +1685,19 @@ class StatusDetail extends Equatable {
   final bool isCopyButton;
   final bool isHighlight;
 
-  const StatusDetail(
-      {required this.labelName,
-      required this.column1,
-      required this.column2,
-      required this.isCopyButton,
-      required this.isHighlight});
+  const StatusDetail({required this.labelName, required this.column1, required this.column2, required this.isCopyButton, required this.isHighlight});
 
-  static const empty =
-  StatusDetail(labelName: "", column1: "", column2: "", isCopyButton: false, isHighlight: false);
+  static const empty = StatusDetail(labelName: "", column1: "", column2: "", isCopyButton: false, isHighlight: false);
 
   factory StatusDetail.fromJson(Map<String, dynamic> json) {
     return StatusDetail(
-      labelName: json['labelName'] ?? "",
-      column1: json['column1'] ?? "",
-      column2: json['column2'] ?? "",
-      isCopyButton: json['isCopyButton'] ?? false,
-      isHighlight: json['isHighlight'] ?? false
-    );
+        labelName: json['labelName'] ?? "",
+        column1: json['column1'] ?? "",
+        column2: json['column2'] ?? "",
+        isCopyButton: json['isCopyButton'] != null ? true : false,
+        isHighlight: json['isHighlight'] != null ? true : false);
   }
 
   @override
-  List<Object?> get props => [labelName,
-    column1,
-    column2,
-    isCopyButton,
-    isHighlight];
+  List<Object?> get props => [labelName, column1, column2, isCopyButton, isHighlight];
 }
