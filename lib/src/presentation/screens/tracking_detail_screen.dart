@@ -392,7 +392,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ///tracking timeline
-                        Container(
+                        SizedBox(
                           width: maxWidth,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

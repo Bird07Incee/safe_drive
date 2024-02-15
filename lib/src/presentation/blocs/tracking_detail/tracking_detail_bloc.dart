@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/tracking_model.dart';
