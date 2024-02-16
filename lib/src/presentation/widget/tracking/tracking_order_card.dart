@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
-import 'package:marketplace_line_oa/src/model/tracking_detail/tracking_detail_args.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 
@@ -116,8 +115,7 @@ class TrackingOrderCard extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, Routes.tracking.toStringPath(),
-                      arguments: TrackingDetailArgs(orderNo: order.orderNo!, productId: order.products![0].productId!));
+                  Navigator.pushNamed(context, '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}');
                 },
                 child: Container(
                   height: 40,
