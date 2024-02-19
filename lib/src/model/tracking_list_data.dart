@@ -22,18 +22,18 @@ class Order {
     shippingStatusMessage = json['shippingStatusMessage'] ?? "";
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['orderNo'] = orderNo;
-    data['shippingStatus'] = shippingStatus;
-    if (products != null) {
-      data['products'] = products!.map((v) => v.toJson()).toList();
-    }
-    data['totalPrice'] = totalPrice;
-    data['totalQty'] = totalQty;
-    data['shippingStatusMessage'] = shippingStatusMessage;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['orderNo'] = orderNo;
+  //   data['shippingStatus'] = shippingStatus;
+  //   if (products != null) {
+  //     data['products'] = products!.map((v) => v.toJson()).toList();
+  //   }
+  //   data['totalPrice'] = totalPrice;
+  //   data['totalQty'] = totalQty;
+  //   data['shippingStatusMessage'] = shippingStatusMessage;
+  //   return data;
+  // }
 }
 
 class Products {
@@ -79,22 +79,22 @@ class Products {
     lastUpdateDate = json['lastUpdateDate'] ?? "";
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['productId'] = productId;
-    data['productNameTh'] = productNameTh;
-    data['productNameEn'] = productNameEn;
-    data['productDescription'] = productDescription;
-    data['productImageUrl'] = productImageUrl;
-    data['productQty'] = productQty;
-    data['price'] = price;
-    data['discountPrice'] = discountPrice;
-    data['currency'] = currency;
-    data['channel'] = channel;
-    data['createDate'] = createDate;
-    data['lastUpdateDate'] = lastUpdateDate;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['productId'] = productId;
+  //   data['productNameTh'] = productNameTh;
+  //   data['productNameEn'] = productNameEn;
+  //   data['productDescription'] = productDescription;
+  //   data['productImageUrl'] = productImageUrl;
+  //   data['productQty'] = productQty;
+  //   data['price'] = price;
+  //   data['discountPrice'] = discountPrice;
+  //   data['currency'] = currency;
+  //   data['channel'] = channel;
+  //   data['createDate'] = createDate;
+  //   data['lastUpdateDate'] = lastUpdateDate;
+  //   return data;
+  // }
 }
 
 class TrackingListPage {
@@ -109,11 +109,11 @@ class TrackingListPage {
         currentPage = json['currentPage'] ?? 1,
         totalPage = json['totalPage'] ?? 1;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['totalCountItems'] = totalCountItems;
-    data['currentPage'] = currentPage;
-    data['totalPage'] = totalPage;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['totalCountItems'] = totalCountItems;
+  //   data['currentPage'] = currentPage;
+  //   data['totalPage'] = totalPage;
+  //   return data;
+  // }
 }

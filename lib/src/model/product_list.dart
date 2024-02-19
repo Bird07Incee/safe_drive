@@ -50,10 +50,6 @@ class Banner extends Equatable {
   List<Object?> get props => [image, route, url, seqNo];
 }
 
-extension ProductX on Product {
-  bool get isEmpty => this != Product.empty;
-}
-
 class Product extends Equatable {
   const Product({
     required this.appId,

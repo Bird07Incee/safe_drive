@@ -15,6 +15,14 @@ class MockBuildContext extends Mock implements BuildContext {}
 void main() {
   late DioUtilityRepository utilityRepository;
 
+  test("TrackingDetailEvent supports comparisons", (){
+    expect(TrackingDetailEvent().props, TrackingDetailEvent().props);
+  });
+
+  test("GetTracking supports comparisons", (){
+    expect(GetTracking().props, GetTracking().props);
+  });
+
   group('TrackingOrderBloc', () {
     late MockBuildContext mockBuildContext;
     // Test initial state

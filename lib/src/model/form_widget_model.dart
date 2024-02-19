@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-extension FormWidgetX on FormWidgetModel {
-  bool get isEmpty => this != FormWidgetModel.empty;
-}
-
 class FormWidgetModel {
   final GlobalKey<FormState>? key;
   final String label;
@@ -53,28 +49,28 @@ class FormWidgetModel {
       this.listInputFormatter,
       this.focusNode});
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['label'] = label;
-    data['fieldName'] = fieldName;
-    data['formType'] = formType;
-    data['value'] = value;
-    data['options'] = options;
-    data['isHiding'] = isHiding;
-    data['required'] = required;
-    data['keyboardType'] = keyboardType;
-    data['childSelectFields'] = childSelectFields;
-    data['visibleIfMatchValue'] = visibleIfMatchValue;
-    data['matchField'] = matchField;
-    data['maxLength'] = maxLength;
-    data['maxLines'] = maxLines;
-    data['checkRequiredField'] = checkRequiredField;
-    data['checkRequiredFieldMatchValue'] = checkRequiredFieldMatchValue;
-    data['textControllerValue'] = textControllerValue;
-    data['isShowCounter'] = isShowCounter;
-    data['listInputFormatter'] = listInputFormatter;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['label'] = label;
+  //   data['fieldName'] = fieldName;
+  //   data['formType'] = formType;
+  //   data['value'] = value;
+  //   data['options'] = options;
+  //   data['isHiding'] = isHiding;
+  //   data['required'] = required;
+  //   data['keyboardType'] = keyboardType;
+  //   data['childSelectFields'] = childSelectFields;
+  //   data['visibleIfMatchValue'] = visibleIfMatchValue;
+  //   data['matchField'] = matchField;
+  //   data['maxLength'] = maxLength;
+  //   data['maxLines'] = maxLines;
+  //   data['checkRequiredField'] = checkRequiredField;
+  //   data['checkRequiredFieldMatchValue'] = checkRequiredFieldMatchValue;
+  //   data['textControllerValue'] = textControllerValue;
+  //   data['isShowCounter'] = isShowCounter;
+  //   data['listInputFormatter'] = listInputFormatter;
+  //   return data;
+  // }
 
   static const empty = FormWidgetModel(
     label: '',

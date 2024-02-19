@@ -66,30 +66,30 @@ class InquiryData extends Equatable {
         installmentPeriod = json['installmentPeriod'] ?? "",
         paymentChannelText = json['paymentChannelText'] ?? "";
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['invoiceNo'] = invoiceNo;
-    data['cardNo'] = cardNo;
-    data['paymentDate'] = paymentDate;
-    data['paymentTime'] = paymentTime;
-    data['paymentGateway'] = paymentGateway;
-    data['paymentChannel'] = paymentChannel;
-    data['merchantFullName'] = merchantFullName;
-    data['productImagePath'] = productImagePath;
-    data['productId'] = productId;
-    data['productName'] = productName;
-    data['productOption'] = productOption;
-    data['amount'] = amount;
-    data['customerFullname'] = customerFullname;
-    data['customerMobile'] = customerMobile;
-    data['customerEmail'] = customerEmail;
-    data['customerAddress'] = customerAddress;
-    data['merchantAddress'] = merchantAddress;
-    data['merchantMobile'] = merchantMobile;
-    data['installmentPeriod'] = installmentPeriod;
-    data['paymentChannelText'] = paymentChannelText;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['invoiceNo'] = invoiceNo;
+  //   data['cardNo'] = cardNo;
+  //   data['paymentDate'] = paymentDate;
+  //   data['paymentTime'] = paymentTime;
+  //   data['paymentGateway'] = paymentGateway;
+  //   data['paymentChannel'] = paymentChannel;
+  //   data['merchantFullName'] = merchantFullName;
+  //   data['productImagePath'] = productImagePath;
+  //   data['productId'] = productId;
+  //   data['productName'] = productName;
+  //   data['productOption'] = productOption;
+  //   data['amount'] = amount;
+  //   data['customerFullname'] = customerFullname;
+  //   data['customerMobile'] = customerMobile;
+  //   data['customerEmail'] = customerEmail;
+  //   data['customerAddress'] = customerAddress;
+  //   data['merchantAddress'] = merchantAddress;
+  //   data['merchantMobile'] = merchantMobile;
+  //   data['installmentPeriod'] = installmentPeriod;
+  //   data['paymentChannelText'] = paymentChannelText;
+  //   return data;
+  // }
 
   @override
   // TODO: implement props
