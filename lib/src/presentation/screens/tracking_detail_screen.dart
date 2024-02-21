@@ -44,6 +44,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
+      orderNo = "LA20240206165409HB3q2";
+      productId = "PV_2Q3HC9TC7ONG";
       context.read<TrackingDetailBloc>().add(GetTracking(orderNo: orderNo, productId: productId));
     }
   }
@@ -330,24 +332,23 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       List<String> listCol = col.column1.split("\n");
       for (int i = 0; i < listCol.length; i++) {
         if (i == 0) {
-          l.add(SizedBox(
-            height: 5,
-            child: Text(
+          l.add(
+            Text(
               s.statusDateTime,
               style: AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
             ),
-          ));
+          );
         }
-        l.add(SizedBox(
-          child: Text(
+        l.add(
+          Text(
             listCol[i],
             style: i == 0
                 ? AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2.4)
                 : s.statusName.isRefundSuccess
-                    ? AlvaStyles().headingSize18w400Cordia(blackGoMunTo).copyWith(height: 2.4)
+                    ? AlvaStyles().headingSize14w400Cordia(blackGoMunTo)
                     : AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
           ),
-        ));
+        );
       }
     }
 
