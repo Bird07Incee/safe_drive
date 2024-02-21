@@ -61,7 +61,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
           child: SizedBox(
             child: Text(
               k,
-              style: AlvaStyles().headingSize10w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
+              style: AlvaStyles().headingSize10w500(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
             ),
           ),
         ),
@@ -72,25 +72,36 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             child: withCopy
                 ? Row(
                     children: [
-                      SelectableText(
-                        v,
-                        style: AlvaStyles().headingSize10w700(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
-                      ),
-                      GestureDetector(
-                          key: const Key("copy_tracking"),
-                          onTap: () {
-                            Clipboard.setData(ClipboardData(text: v));
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("คัดลอกลงคลิปบอร์ด")));
-                          },
-                          child: Text(
-                            " [คัดลอก]",
-                            style: AlvaStyles().headingSize10w600(isActive ? btnBlue : grey300).copyWith(height: 2.4),
-                          )),
+                      Expanded(
+                          child: RichText(
+                        text: TextSpan(
+                          children: [
+                            WidgetSpan(
+                              child: SelectableText(
+                                v,
+                                style: AlvaStyles().headingSize10w500(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
+                              ),
+                            ),
+                            WidgetSpan(
+                              child: GestureDetector(
+                                  key: const Key("copy_tracking"),
+                                  onTap: () {
+                                    Clipboard.setData(ClipboardData(text: v));
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("คัดลอกลงคลิปบอร์ด")));
+                                  },
+                                  child: Text(
+                                    " [คัดลอก]",
+                                    style: AlvaStyles().headingSize10w500(isActive ? btnBlue : grey300).copyWith(height: 2.4),
+                                  )),
+                            )
+                          ],
+                        ),
+                      ))
                     ],
                   )
                 : Text(
                     v,
-                    style: AlvaStyles().headingSize10w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
+                    style: AlvaStyles().headingSize10w500(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
                   ),
           ),
         )
@@ -143,10 +154,12 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                       ),
                     ],
                   ),
-                  Text(
+                  Expanded(
+                      child: Text(
                     dt,
+                    textAlign: TextAlign.end,
                     style: AlvaStyles().headingSize10w500(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
-                  )
+                  ))
                 ],
               )
             : Row(
@@ -182,7 +195,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
           width: maxWidth - 88,
           child: Text(
             d.column1,
-            style: AlvaStyles().headingSize10w600(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
+            style: AlvaStyles().headingSize10w500(isActive ? blackGoMunTo : grey300).copyWith(height: 2.4),
           ),
         );
         l.add(text);
@@ -318,6 +331,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       for (int i = 0; i < listCol.length; i++) {
         if (i == 0) {
           l.add(SizedBox(
+            height: 5,
             child: Text(
               s.statusDateTime,
               style: AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
@@ -329,11 +343,14 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             listCol[i],
             style: i == 0
                 ? AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2.4)
-                : AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
+                : s.statusName.isRefundSuccess
+                    ? AlvaStyles().headingSize18w400Cordia(blackGoMunTo).copyWith(height: 2.4)
+                    : AlvaStyles().headingSize10w500(blackGoMunTo).copyWith(height: 2.4),
           ),
         ));
       }
     }
+
     return Container(
       color: Color(0xfffeedcd),
       padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
@@ -348,7 +365,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
           SizedBox(
             width: 16,
           ),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: l)
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: l))
         ],
       ),
     );
@@ -385,170 +402,184 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
           builder: (context, state) {
             if (state.status.isSuccess) {
               return ListView(
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   SizedBox(
                     width: maxWidth,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    height: maxHeight - 51,
+                    child: Stack(
                       children: [
                         ///tracking timeline
-                        SizedBox(
-                          width: maxWidth,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: trackingStatuses(state.tracking),
-                          ),
+                        ListView(
+                          children: [
+                            SizedBox(
+                              width: maxWidth,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: trackingStatuses(state.tracking),
+                              ),
+                            ),
+                            SizedBox(
+                              width: maxWidth,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: maxWidth,
+                                    height: 16,
+                                    color: backgroundNo2,
+                                  ),
+                                  Container(
+                                    width: maxWidth,
+                                    color: Colors.white,
+                                    padding: EdgeInsets.all(16.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 16.0),
+                                          child: Text(
+                                            "ติดต่อผู้ขาย",
+                                            style: AlvaStyles().headingSize12w700(Colors.black).copyWith(height: 2),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(right: 8.0),
+                                              child: Text(
+                                                "•",
+                                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                "เกี่ยวกับสินค้า การจัดส่ง การคืนสินค้า และการคืนเงิน",
+                                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2.4),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(right: 8.0),
+                                              child: Text(
+                                                "•",
+                                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                "การคืนสินค้า/คืนเงินหลังจาก ${state.tracking.refundDay} วัน กรุณาติดต่อผู้ขายโดยตรง",
+                                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2.4),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 16.0,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            GestureDetector(
+                                              key: const Key("call_seller"),
+                                              onTap: () {
+                                                ///TODO: call to seller
+                                                // String mobile = product.merchantMobile.replaceAll('-', '');
+                                                // callPhone(mobile);
+                                              },
+                                              child: Container(
+                                                width: state.tracking.refundable ? maxWidth * .45 : maxWidth - 32,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                        width: 16, height: 16, child: Image.asset('assets/icons/phone.png', fit: BoxFit.fitWidth)),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(left: 8),
+                                                      child: Text(
+                                                        "ติดต่อผู้ขาย",
+                                                        style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            state.tracking.refundable
+                                                ? GestureDetector(
+                                                    onTap: () {
+                                                      ///TODO: Call refund
+                                                    },
+                                                    child: Container(
+                                                        width: maxWidth * .45,
+                                                        height: 40,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            border: Border.all(width: 2, color: cloudSoftDeepWhite)),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "คืนสินค้า/คืนเงิน",
+                                                            style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
+                                                          ),
+                                                        )),
+                                                  )
+                                                : SizedBox.shrink(),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 88)
+                          ],
                         ),
 
                         ///bottomSheet
-                        SizedBox(
-                          width: maxWidth,
-                          height: 56 + 68 + 72 + 88 + 16,
-                          child: Column(
-                            children: [
-                              Container(
-                                width: maxWidth,
-                                height: 16,
-                                color: backgroundNo2,
-                              ),
-                              Container(
-                                width: maxWidth,
-                                height: 56 + 68 + 72,
-                                color: Colors.white,
-                                padding: EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 16.0),
-                                      child: Text(
-                                        "ติดต่อผู้ขาย",
-                                        style: AlvaStyles().headingSize12w700(Colors.black).copyWith(height: 2),
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(right: 8.0),
-                                          child: Text(
-                                            "•",
-                                            style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
-                                          ),
-                                        ),
-                                        Text(
-                                          "เกี่ยวกับสินค้า การจัดส่ง การคืนสินค้า และการคืนเงิน",
-                                          style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(right: 8.0),
-                                          child: Text(
-                                            "•",
-                                            style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
-                                          ),
-                                        ),
-                                        Text(
-                                          "การคืนสินค้า/คืนเงินหลังจาก ${state.tracking.refundDay} วัน กรุณาติดต่อผู้ขายโดยตรง",
-                                          style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 16.0,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        GestureDetector(
-                                          key: const Key("call_seller"),
-                                          onTap: () {
-                                            ///TODO: call to seller
-                                            // String mobile = product.merchantMobile.replaceAll('-', '');
-                                            // callPhone(mobile);
-                                          },
-                                          child: Container(
-                                            width: state.tracking.refundable ? maxWidth * .45 : maxWidth - 32,
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                SizedBox(width: 16, height: 16, child: Image.asset('assets/icons/phone.png', fit: BoxFit.fitWidth)),
-                                                Padding(
-                                                  padding: EdgeInsets.only(left: 8),
-                                                  child: Text(
-                                                    "ติดต่อผู้ขาย",
-                                                    style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        state.tracking.refundable
-                                            ? GestureDetector(
-                                                onTap: () {
-                                                  ///TODO: Call refund
-                                                },
-                                                child: Container(
-                                                    width: maxWidth * .45,
-                                                    height: 40,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(8),
-                                                        border: Border.all(width: 2, color: cloudSoftDeepWhite)),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "คืนสินค้า/คืนเงิน",
-                                                        style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
-                                                      ),
-                                                    )),
-                                              )
-                                            : SizedBox.shrink(),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                color: spaceGrey,
-                                width: maxWidth,
-                                height: 88,
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    AlvaText(
-                                      title: HomeConst().askInformation,
-                                      textStyle: AlvaStyles().headingSize10w600(whiteFalse).copyWith(height: 1.6),
-                                    ),
-                                    GestureDetector(
-                                      key: const Key("call_button"),
-                                      onTap: () {
-                                        RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
 
-                                        // Extracting the phone number using RegExp
-                                        String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
-                                        callPhone(phoneNumber);
-                                      },
-                                      child: Text(
-                                        HomeConst().pleaseContact,
-                                        style: AlvaStyles().headingSize12w700(whiteFalse).copyWith(height: 2),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 32,
-                                    ),
-                                  ],
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          child: Container(
+                            color: spaceGrey,
+                            width: maxWidth,
+                            height: 88,
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 16,
                                 ),
-                              ),
-                            ],
+                                AlvaText(
+                                  title: HomeConst().askInformation,
+                                  textStyle: AlvaStyles().headingSize10w600(whiteFalse).copyWith(height: 1.6),
+                                ),
+                                GestureDetector(
+                                  key: const Key("call_button"),
+                                  onTap: () {
+                                    RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
+
+                                    // Extracting the phone number using RegExp
+                                    String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
+                                    callPhone(phoneNumber);
+                                  },
+                                  child: Text(
+                                    HomeConst().pleaseContact,
+                                    style: AlvaStyles().headingSize12w700(whiteFalse).copyWith(height: 2),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 32,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),

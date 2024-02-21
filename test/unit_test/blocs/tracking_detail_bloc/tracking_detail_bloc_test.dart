@@ -14,17 +14,15 @@ class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
   late DioUtilityRepository utilityRepository;
-
-  test("TrackingDetailEvent supports comparisons", (){
+  test("TrackingDetailEvent supports comparisons", () {
     expect(TrackingDetailEvent().props, TrackingDetailEvent().props);
   });
 
-  test("GetTracking supports comparisons", (){
+  test("GetTracking supports comparisons", () {
     expect(GetTracking().props, GetTracking().props);
   });
 
   group('TrackingOrderBloc', () {
-    late MockBuildContext mockBuildContext;
     // Test initial state
     setUp(() {
       WidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +50,6 @@ void main() {
 
     blocTest<TrackingDetailBloc, TrackingDetailState>("onGetTrackingDetail Success",
         setUp: () {
-          mockBuildContext = MockBuildContext();
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
           final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
