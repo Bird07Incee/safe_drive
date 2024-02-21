@@ -38,6 +38,25 @@ class GeneralDialog {
         isConfirmPayment: isConfirmPayment);
   }
 
+  showRefundDialog({Key? key, required BuildContext context, bool? canBack, bool isConfirmPayment = false}) {
+    _showGeneralAlert(
+        context,
+        Container(
+          constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
+          child: Text('กรุณากด “ยืนยัน” เพื่อทำรายการต่อ',
+              style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
+        ),
+        title: Text("การคืนสินค้าและคืนเงิน เป็นไปตามเงื่อนไขการให้บริการของผู้ขาย",
+            style: AlvaStyles()
+                .headingSize18(Colors.black)
+                .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
+                .copyWith(height: 24 / 14)),
+        key: key ?? const Key("back_from_summary_dialog"),
+        // contentPadding: const EdgeInsets.all(24),
+        contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
+        actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8));
+  }
+
   _showGeneralLoading(BuildContext context, {Key? key, bool? canBack}) {
     Widget loading = WillPopScope(
       onWillPop: () async => canBack ?? false,
@@ -79,7 +98,7 @@ class GeneralDialog {
         }
       },
       child: Text(
-        isConfirmPayment ? "ยืนยัน" : "อยู่หน้านี้ต่อไป", //"ออกจากหน้านี้"
+        isConfirmPayment ? "ยืนยัน" : "อยู่หน้านี้ต่อไป",
         style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
       ),
     );

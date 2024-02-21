@@ -8,18 +8,18 @@ class RefundRequestEvent extends Equatable {
 }
 
 class SetRefundData extends RefundRequestEvent {
-  const SetRefundData({required this.orderNo, required this.reasonList,
-    required this.isShowEditIconReason, required this.isShowEditIconRemark});
+  const SetRefundData({required this.orderNo, required this.reasonList});
 
   final String? orderNo;
   final List<DropdownAddressModel>? reasonList;
-  final bool isShowEditIconReason;
-  final bool isShowEditIconRemark;
 
 }
 
 class OnSelectReason extends RefundRequestEvent {
-  const OnSelectReason({required this.refundRequestModel});
+  const OnSelectReason({required this.refundRequestModel, required this.getTextReason, required this.getTextRemark});
+
 
   final RefundRequestModel refundRequestModel;
+  final TextEditingController getTextReason;
+  final TextEditingController getTextRemark;
 }

@@ -19,7 +19,7 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
   final DioUtilityRepository utilityRepository;
 
   RefundRequestBloc({required this.utilityRepository})
-      : super(RefundRequestState()) {
+      : super(RefundRequestState(getTextReason: TextEditingController(), getTextRemark: TextEditingController())) {
 
     on<RefundRequestEvent>((event, emit) {
 // TODO: implement event handler
@@ -75,7 +75,7 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
   _onSelectReason(OnSelectReason event, Emitter<RefundRequestState> emit) async {
   //   emit(state.copyWith(refundRequestData: RefundRequestModel(refundInfo: RefundInfoModel(reason: reason, refundNo: '', refundDate: '', refundTime: '', remark: ''), status: '', product: null),
   //       refundRequestStatus: GetRefundRequestStatus.success));
-    emit(state.copyWith(refundRequestStatus: GetRefundRequestStatus.success));
+    emit(state.copyWith(refundRequestData: event.refundRequestModel, getTextReason: event.getTextReason, getTextRemark: event.getTextRemark, refundRequestStatus: GetRefundRequestStatus.success));
 
    }
 }

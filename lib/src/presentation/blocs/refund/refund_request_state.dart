@@ -33,7 +33,9 @@ class RefundRequestState extends Equatable {
           paymentChannelText: ""),
       this.reasonList = const <DropdownAddressModel>[],
       this.isShowEditIconReason = false,
-      this.isShowEditIconRemark = false});
+      this.isShowEditIconRemark = false,
+      required this.getTextReason,
+      required this.getTextRemark});
 
   final GetRefundRequestStatus refundRequestStatus;
   final RefundRequestModel refundRequestData;
@@ -41,6 +43,8 @@ class RefundRequestState extends Equatable {
   final List<DropdownAddressModel> reasonList;
   final bool isShowEditIconReason;
   final bool isShowEditIconRemark;
+  final TextEditingController getTextReason;
+  final TextEditingController getTextRemark;
 
   @override
   List<Object> get props => [
@@ -49,7 +53,9 @@ class RefundRequestState extends Equatable {
         inquiryData,
         reasonList,
         isShowEditIconReason,
-        isShowEditIconRemark
+        isShowEditIconRemark,
+        getTextReason,
+        getTextRemark
       ];
 
   RefundRequestState copyWith(
@@ -58,14 +64,17 @@ class RefundRequestState extends Equatable {
       InquiryData? inquiryData,
       List<DropdownAddressModel>? reasonList,
       bool? isShowEditIconReason,
-      bool? isShowEditIconRemark}) {
+      bool? isShowEditIconRemark,
+      TextEditingController? getTextReason,
+      TextEditingController? getTextRemark}) {
     return RefundRequestState(
         refundRequestStatus: refundRequestStatus ?? this.refundRequestStatus,
         refundRequestData: refundRequestData ?? this.refundRequestData,
         inquiryData: inquiryData ?? this.inquiryData,
         reasonList: reasonList ?? this.reasonList,
         isShowEditIconReason: isShowEditIconReason ?? this.isShowEditIconReason,
-        isShowEditIconRemark:
-            isShowEditIconRemark ?? this.isShowEditIconRemark);
+        isShowEditIconRemark: isShowEditIconRemark ?? this.isShowEditIconRemark,
+        getTextReason: getTextReason ?? this.getTextReason,
+        getTextRemark: getTextRemark ?? this.getTextRemark);
   }
 }
