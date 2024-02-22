@@ -23,3 +23,17 @@ class OnSelectReason extends RefundRequestEvent {
   final TextEditingController getTextReason;
   final TextEditingController getTextRemark;
 }
+
+class OnEditRemark extends RefundRequestEvent {
+  const OnEditRemark({required this.refundRequestModel, required this.getTextReason, required this.getTextRemark});
+
+
+  final RefundRequestModel refundRequestModel;
+  final TextEditingController getTextReason;
+  final TextEditingController getTextRemark;
+}
+
+class OnSubmitRefundData extends RefundRequestEvent {
+  const OnSubmitRefundData();
+
+}

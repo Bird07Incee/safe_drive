@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,8 +58,9 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
 
       context.read<RefundRequestBloc>().add(SetRefundData(
-          orderNo: orderNo,
-          reasonList: [],));
+            orderNo: orderNo,
+            reasonList: [],
+          ));
     }
   }
 
@@ -94,6 +97,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
             return BlocBuilder<RefundRequestBloc, RefundRequestState>(
               builder: (context, state) {
                 bool haveReason = state.getTextReason.text.isNotEmpty;
+                bool haveRemark = state.getTextRemark.text.isNotEmpty;
                 if (state.refundRequestStatus ==
                     GetRefundRequestStatus.success) {
                   return AlvaRootWidget(
@@ -101,20 +105,22 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                     appBar: appBar,
                     child: ListView(
                       children: [
-                        Container(
-                          color: Color(0xfffeedcd),
-                          height: 48,
-                          padding: EdgeInsets.only(
-                              left: 16, right: 16, top: 12, bottom: 12),
-                          child: Row(
-                            //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "หมายเลขอ้างอิง: ${orderNo}",
-                                style: AlvaStyles()
-                                    .headingSize12w600(blackGoMunTo),
-                              ),
-                            ],
+                        Expanded(
+                          child: Container(
+                            color: Color(0xfffeedcd),
+                            height: 48,
+                            padding: EdgeInsets.only(
+                                left: 16, right: 16, top: 12, bottom: 12),
+                            child: Row(
+                              //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "หมายเลขอ้างอิง: ${orderNo}",
+                                  style: AlvaStyles()
+                                      .headingSize12w600(blackGoMunTo),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Container(
@@ -138,7 +144,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                             Container(
                               padding: EdgeInsets.only(
                                   right: 16, left: 16, bottom: 16),
-                              width: (maxWidth / 2) - 32,
+                              //    width: (maxWidth / 2) - 32,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -169,31 +175,28 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(
-                                  right: 16, left: 16, bottom: 16),
-                              //   width: (maxWidth / 2) - 32,
+                              padding: EdgeInsets.only(bottom: 4, top: 8),
+                              //     width: (maxWidth / 2) - 32,
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     state.inquiryData.productName!,
                                     style: AlvaStyles()
-                                        .headingSize14w600(blackGoMunTo),
+                                        .headingSize14w700(blackGoMunTo),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
                                     state.inquiryData.productOption!,
                                     style: AlvaStyles()
-                                        .headingSize12w400WithLineHeight(
-                                            blackGoMunTo),
+                                        .headingSize10w400(blackGoMunTo),
                                   )
                                 ],
                               ),
                             ),
                           ],
-                        ),
-                        SizedBox(
-                          height: 16.0,
                         ),
                         Container(
                           width: maxWidth,
@@ -207,7 +210,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                           child: AlvaText(
                               title: "เหตุผลการคืนสินค้า/คืนเงิน",
                               textStyle: AlvaStyles()
-                                  .headingSize14w700(
+                                  .headingSize14w800(
                                       BTN_SELECTED_TEXT_COLOR_NEW)
                                   .copyWith(height: 24 / 14)),
                         ),
@@ -371,7 +374,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   controller: state.getTextRemark,
                                   label: "คำอธิบายเพิ่มเติม",
                                   outsideLabel: true,
-                                  marginBottom: 15,
+                                  marginBottom: 5,
                                   required: false,
                                   textInputAction: TextInputAction.done,
                                   keyboardType: TextInputType.text,
@@ -379,8 +382,49 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   maxLines: null,
                                   showCounter: true,
                                   focusNode: FocusNode(),
+                                  // onChanged: (value){
+                                  //   RefundRequestModel refundModel =
+                                  //   RefundRequestModel(
+                                  //       status: '',
+                                  //       refundInfo: RefundInfoModel(
+                                  //           refundNo: '',
+                                  //           refundTime: '',
+                                  //           refundDate: '',
+                                  //           remark: state.getTextRemark.text,
+                                  //           reason: ''),
+                                  //       product: null);
+                                  //   context
+                                  //       .read<RefundRequestBloc>()
+                                  //       .add(OnEditRemark(
+                                  //       refundRequestModel:
+                                  //       refundModel,
+                                  //       getTextReason:
+                                  //       state.getTextReason,
+                                  //       getTextRemark:
+                                  //       state.getTextRemark));
+                                  //   print("test onChanged "+ value);
+                                  // },
+                                  onFocusChange: () {
+                                    RefundRequestModel refundModel =
+                                        RefundRequestModel(
+                                            status: '',
+                                            refundInfo: RefundInfoModel(
+                                                refundNo: '',
+                                                refundTime: '',
+                                                refundDate: '',
+                                                remark:
+                                                    state.getTextRemark.text,
+                                                reason: ''),
+                                            product: null);
+                                    context.read<RefundRequestBloc>().add(
+                                        OnEditRemark(
+                                            refundRequestModel: refundModel,
+                                            getTextReason: state.getTextReason,
+                                            getTextRemark:
+                                                state.getTextRemark));
+                                  },
                                 ),
-                                state.isShowEditIconRemark
+                                haveRemark
                                     ? Positioned(
                                         right: 5,
                                         top: 26,
@@ -402,16 +446,16 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                     : Container(),
                               ],
                             )),
-                        SizedBox(
-                          height: 16,
-                        ),
+                        // SizedBox(
+                        //   height: 16,
+                        // ),
 
                         ///bottomSheet
                         Column(
                           children: [
                             SizedBox(
                               width: maxWidth,
-                              height: 56 + 68 + 72 + 88 + 16,
+                              //   height: 56 + 68 + 72 + 88 + 16,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -423,7 +467,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   ),
                                   Container(
                                     width: maxWidth,
-                                    height: 56 + 68 + 72,
+                                    //      height: 56 + 68 + 72,
                                     color: Colors.white,
                                     padding: EdgeInsets.all(16.0),
                                     child: Column(
@@ -517,68 +561,77 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                             ),
                           ],
                         ),
+
                         /// Button send Request
                         Container(
-                        width: maxWidth,
-                        height: 96,
-                padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
-                decoration: BoxDecoration(
-                color: Colors.white,
-                ),
-                        child:Container(
+                            width: maxWidth,
+                            height: 96,
+                            padding: EdgeInsets.only(
+                                left: 16, right: 16, top: 16, bottom: 32),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8)),
-                            height: 48,
-                        //    width: (maxWidth - 40) / 2,
-                            child: OutlinedButton(
-                              onPressed: haveReason
-                                  ? () {
-                                print("Button send Order " + orderNo);
-                                print("Button send Product " + state.inquiryData.productName.toString());
-                                print("Button send Reason " + state.getTextReason.text);
-                                print("Button send Remark " + state.getTextRemark.text);
-                                      GeneralDialog(
-                                              onAccept: () async {
-                                                final refundBloc = context.read<RefundRequestBloc>();
-
-                                                // final orderBloc = context.read<OrderSummaryBloc>();
-                                                // ProductionOptionals step1SelectedOption = productState
-                                                //     .product.productionOptionals.isEmpty
-                                                //     ? ProductionOptionals.fromJson(const {})
-                                                //     : productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0];
-                                                // requestModel = CreateOrderRequestModel(
-                                                //     uid: await LineDataHelper().getLineUid(),
-                                                //     products: [
-                                                //       OrderProduct(
-                                                //           productId: productState.product.productId,
-                                                //           qty: 1,
-                                                //           unitPrice: productState.product.productionOptionals.isNotEmpty
-                                                //               ? step1price
-                                                //               : showPrice,
-                                                //           optional: productState.product.productionOptionals.isEmpty
-                                                //               ? null
-                                                //               : Optional(
-                                                //               productId: step1SelectedOption.subProductId,
-                                                //               qty: 1,
-                                                //               unitPrice: step1SelectedOption.price))
-                                                //     ]);
-                                              },
-                                              onCancel: () {})
-                                          .showRefundDialog(
-                                              context: context,
-                                              isConfirmPayment: true);
-                                    }
-                                  : null,
-                              style: AlvaStyles().outlineNoneBorderButtonStyle(
-                                  haveReason ? YellowKrungsri : cloudDeepWhite,
-                                  Colors.transparent,
-                                  isRadius8: true),
-                              child: Text("ส่งคำขอ",
-                                  style: AlvaStyles().headingSize16w700(haveReason
-                                      ? BTN_SELECTED_TEXT_COLOR_NEW
-                                      : smockGrey)),
+                              color: Colors.white,
                             ),
-                          )),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
+                              height: 48,
+                              //    width: (maxWidth - 40) / 2,
+                              child: OutlinedButton(
+                                onPressed: haveReason
+                                    ? () {
+                                        // print("Button send Order " + orderNo);
+                                        // print("Button send Product " + state.inquiryData.productName.toString());
+                                        // print("Button send Reason " + state.getTextReason.text);
+                                        // print("Button send Remark " + state.getTextRemark.text);
+                                        GeneralDialog(
+                                                onAccept: () async {
+                                                  final refundBloc =
+                                                      context.read<
+                                                          RefundRequestBloc>();
+                                                  refundBloc.add(
+                                                      OnSubmitRefundData());
+                                                  // final orderBloc = context.read<OrderSummaryBloc>();
+                                                  // ProductionOptionals step1SelectedOption = productState
+                                                  //     .product.productionOptionals.isEmpty
+                                                  //     ? ProductionOptionals.fromJson(const {})
+                                                  //     : productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0];
+                                                  // requestModel = CreateOrderRequestModel(
+                                                  //     uid: await LineDataHelper().getLineUid(),
+                                                  //     products: [
+                                                  //       OrderProduct(
+                                                  //           productId: productState.product.productId,
+                                                  //           qty: 1,
+                                                  //           unitPrice: productState.product.productionOptionals.isNotEmpty
+                                                  //               ? step1price
+                                                  //               : showPrice,
+                                                  //           optional: productState.product.productionOptionals.isEmpty
+                                                  //               ? null
+                                                  //               : Optional(
+                                                  //               productId: step1SelectedOption.subProductId,
+                                                  //               qty: 1,
+                                                  //               unitPrice: step1SelectedOption.price))
+                                                  //     ]);
+                                                },
+                                                onCancel: () {})
+                                            .showRefundDialog(
+                                                context: context,
+                                                isConfirmPayment: true);
+                                      }
+                                    : null,
+                                style: AlvaStyles()
+                                    .outlineNoneBorderButtonStyle(
+                                        haveReason
+                                            ? YellowKrungsri
+                                            : cloudDeepWhite,
+                                        Colors.transparent,
+                                        isRadius8: true),
+                                child: Text("ส่งคำขอ",
+                                    style: AlvaStyles().headingSize16w700(
+                                        haveReason
+                                            ? BTN_SELECTED_TEXT_COLOR_NEW
+                                            : smockGrey)),
+                              ),
+                            )),
                       ],
                     ),
                   );

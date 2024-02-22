@@ -32,19 +32,17 @@ class RefundRequestState extends Equatable {
           installmentPeriod: "",
           paymentChannelText: ""),
       this.reasonList = const <DropdownAddressModel>[],
-      this.isShowEditIconReason = false,
-      this.isShowEditIconRemark = false,
       required this.getTextReason,
-      required this.getTextRemark});
+      required this.getTextRemark,
+      required this.orderNo});
 
   final GetRefundRequestStatus refundRequestStatus;
   final RefundRequestModel refundRequestData;
   final InquiryData inquiryData;
   final List<DropdownAddressModel> reasonList;
-  final bool isShowEditIconReason;
-  final bool isShowEditIconRemark;
   final TextEditingController getTextReason;
   final TextEditingController getTextRemark;
+  final String orderNo;
 
   @override
   List<Object> get props => [
@@ -52,10 +50,9 @@ class RefundRequestState extends Equatable {
         refundRequestData,
         inquiryData,
         reasonList,
-        isShowEditIconReason,
-        isShowEditIconRemark,
         getTextReason,
-        getTextRemark
+        getTextRemark,
+        orderNo
       ];
 
   RefundRequestState copyWith(
@@ -63,18 +60,16 @@ class RefundRequestState extends Equatable {
       RefundRequestModel? refundRequestData,
       InquiryData? inquiryData,
       List<DropdownAddressModel>? reasonList,
-      bool? isShowEditIconReason,
-      bool? isShowEditIconRemark,
       TextEditingController? getTextReason,
-      TextEditingController? getTextRemark}) {
+      TextEditingController? getTextRemark,
+      String? orderNo}) {
     return RefundRequestState(
         refundRequestStatus: refundRequestStatus ?? this.refundRequestStatus,
         refundRequestData: refundRequestData ?? this.refundRequestData,
         inquiryData: inquiryData ?? this.inquiryData,
         reasonList: reasonList ?? this.reasonList,
-        isShowEditIconReason: isShowEditIconReason ?? this.isShowEditIconReason,
-        isShowEditIconRemark: isShowEditIconRemark ?? this.isShowEditIconRemark,
         getTextReason: getTextReason ?? this.getTextReason,
-        getTextRemark: getTextRemark ?? this.getTextRemark);
+        getTextRemark: getTextRemark ?? this.getTextRemark,
+        orderNo: orderNo ?? this.orderNo);
   }
 }
