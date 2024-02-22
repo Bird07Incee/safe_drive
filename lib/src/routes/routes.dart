@@ -30,7 +30,7 @@ enum Routes {
   orderCancel,
   trackingList,
   tracking,
-  refundFormTracking
+  refundFormTracking,
   refundSuccess
 }
 
