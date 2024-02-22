@@ -12,6 +12,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 
 class TrackingDetailScreen extends StatefulWidget {
@@ -514,18 +515,27 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                             state.tracking.refundable
                                                 ? GestureDetector(
                                                     onTap: () {
-                                                      ///TODO: Call refund
+                                                      if (state.tracking.refundDay > 0) {
+                                                        Navigator.pushNamed(
+                                                            context, '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId');
+                                                      }
                                                     },
                                                     child: Container(
                                                         width: maxWidth * .45,
                                                         height: 40,
                                                         decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(8),
-                                                            border: Border.all(width: 2, color: cloudSoftDeepWhite)),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          border: Border.all(
+                                                            width: 2,
+                                                            color: cloudSoftDeepWhite,
+                                                          ),
+                                                        ),
                                                         child: Center(
                                                           child: Text(
                                                             "คืนสินค้า/คืนเงิน",
-                                                            style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
+                                                            style: AlvaStyles()
+                                                                .headingSize12w700(state.tracking.refundDay > 0 ? blackGoMunTo : grey300)
+                                                                .copyWith(height: 2),
                                                           ),
                                                         )),
                                                   )

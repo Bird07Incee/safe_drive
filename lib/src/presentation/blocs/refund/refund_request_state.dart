@@ -1,6 +1,6 @@
 part of 'refund_request_bloc.dart';
 
-enum GetRefundRequestStatus { initial, loading, success, empty, error }
+enum GetRefundRequestStatus { initial, loading, success, empty, error, submitSuccess, submitFail }
 
 class RefundRequestState extends Equatable {
   const RefundRequestState(
@@ -34,7 +34,8 @@ class RefundRequestState extends Equatable {
       this.reasonList = const <DropdownAddressModel>[],
       required this.getTextReason,
       required this.getTextRemark,
-      required this.orderNo});
+      required this.orderNo,
+      required this.refundResponse});
 
   final GetRefundRequestStatus refundRequestStatus;
   final RefundRequestModel refundRequestData;
@@ -43,17 +44,10 @@ class RefundRequestState extends Equatable {
   final TextEditingController getTextReason;
   final TextEditingController getTextRemark;
   final String orderNo;
+  final Map<String, dynamic> refundResponse;
 
   @override
-  List<Object> get props => [
-        refundRequestStatus,
-        refundRequestData,
-        inquiryData,
-        reasonList,
-        getTextReason,
-        getTextRemark,
-        orderNo
-      ];
+  List<Object> get props => [refundRequestStatus, refundRequestData, inquiryData, reasonList, getTextReason, getTextRemark, orderNo, refundResponse];
 
   RefundRequestState copyWith(
       {GetRefundRequestStatus? refundRequestStatus,
@@ -62,7 +56,8 @@ class RefundRequestState extends Equatable {
       List<DropdownAddressModel>? reasonList,
       TextEditingController? getTextReason,
       TextEditingController? getTextRemark,
-      String? orderNo}) {
+      String? orderNo,
+      Map<String, dynamic>? refundResponse}) {
     return RefundRequestState(
         refundRequestStatus: refundRequestStatus ?? this.refundRequestStatus,
         refundRequestData: refundRequestData ?? this.refundRequestData,
@@ -70,6 +65,7 @@ class RefundRequestState extends Equatable {
         reasonList: reasonList ?? this.reasonList,
         getTextReason: getTextReason ?? this.getTextReason,
         getTextRemark: getTextRemark ?? this.getTextRemark,
-        orderNo: orderNo ?? this.orderNo);
+        orderNo: orderNo ?? this.orderNo,
+        refundResponse: refundResponse ?? this.refundResponse);
   }
 }

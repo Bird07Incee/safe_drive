@@ -31,7 +31,30 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
         "Authorization": "Bearer $accessToken",
       });
       final t = TrackingResponseModel.fromJson(response.data);
-      emit(state.copyWith(status: TrackingDetailStatus.success, tracking: t.tracking));
+      var tracking = t.tracking;
+      String refundExpireDateTime = t.tracking.refundExpireDateTime;
+      Duration diffDay = Duration.zero;
+      int refundDay = tracking.refundDay;
+      if (refundExpireDateTime.isNotEmpty) {
+        DateTime dateTimeExpire = DateTime.parse(refundExpireDateTime);
+        diffDay = dateTimeExpire.difference(DateTime.now());
+      }
+      bool isRefundable = true;
+      if (diffDay.isNegative || ["RefundSuccess"].contains(t.tracking.status[0].statusName)) {
+        isRefundable = false;
+      } else if (["RefundRequest"].contains(t.tracking.status[0].statusName)) {
+        refundDay = 0;
+      }
+      refundDay = 1;
+
+      TrackingModel modelTracking = TrackingModel(
+          orderRef: tracking.orderRef,
+          refundExpireDateTime: tracking.refundExpireDateTime,
+          refundDay: refundDay,
+          refundable: isRefundable,
+          orderCreateDate: tracking.orderCreateDate,
+          status: tracking.status);
+      emit(state.copyWith(status: TrackingDetailStatus.success, tracking: modelTracking));
     } catch (e) {
       emit(state.copyWith(status: TrackingDetailStatus.error));
     }

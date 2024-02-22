@@ -1628,20 +1628,28 @@ extension StateX on String {
 
 class TrackingModel extends Equatable {
   final String orderRef;
+  final String refundExpireDateTime;
   final int refundDay;
   final bool refundable;
   final String orderCreateDate;
   final List<Status> status;
 
   const TrackingModel(
-      {required this.orderRef, required this.refundDay, required this.refundable, required this.orderCreateDate, required this.status});
+      {required this.orderRef,
+      required this.refundExpireDateTime,
+      required this.refundDay,
+      required this.refundable,
+      required this.orderCreateDate,
+      required this.status});
 
-  static const empty = TrackingModel(orderRef: "", refundDay: 0, refundable: false, orderCreateDate: "", status: []);
+  static const empty = TrackingModel(orderRef: "", refundExpireDateTime: "", refundDay: 0, refundable: false, orderCreateDate: "", status: []);
 
   factory TrackingModel.fromJson(Map<String, dynamic> json) {
     var status = json['status'] != null ? json['status'].map<Status>((e) => Status.fromJson(e)).toList() : [];
+
     return TrackingModel(
         orderRef: json['order_ref'] ?? '',
+        refundExpireDateTime: json['refund_expire_date_time'] ?? '',
         refundDay: json['refund_day'] ?? 0,
         refundable: json['refund_able'] ?? false,
         orderCreateDate: json['order_create'] ?? "",
@@ -1649,7 +1657,7 @@ class TrackingModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [orderRef, refundDay, refundable, orderCreateDate, status];
+  List<Object?> get props => [orderRef, refundExpireDateTime, refundDay, refundable, orderCreateDate, status];
 }
 
 class Status extends Equatable {

@@ -5,7 +5,7 @@ import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
-import 'package:marketplace_line_oa/src/model/product_summary/args/shipping_address_args.dart';
+import 'package:marketplace_line_oa/src/model/product_summary/arguments/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';

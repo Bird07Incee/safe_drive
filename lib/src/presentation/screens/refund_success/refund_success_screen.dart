@@ -4,6 +4,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
+import 'package:marketplace_line_oa/src/model/refund/arguments/refund_success_args.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_event.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_state.dart';
@@ -14,6 +15,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
+import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:marketplace_line_oa/src/utils/phone_number_formatter.dart';
 
 class RefundSuccessScreen extends StatefulWidget {
@@ -29,17 +31,24 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
   late double maxWidth, maxHeight;
 
   void loadRefundData() {
-    // settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
-    // if (settings != null) {
-    //   var uriData = Uri.parse(settings!.name!);
-    //   var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
-    //   orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
-    //   RefundSuccessState state = context.read<RefundSuccessBloc>().state;
-    //   if (orderNo != "" &&
-    //       (state.refundSuccessStatus == GetRefundSuccessDataStatus.initial || state.refundSuccessStatus == GetRefundSuccessDataStatus.error)) {
-    context.read<RefundSuccessBloc>().add(GetRefundSuccess(context, orderNo));
-    // }
-    // }
+    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    if (settings != null) {
+      var uriData = Uri.parse(settings!.name!);
+      RefundSuccessArgs args = settings!.arguments as RefundSuccessArgs;
+      Map<String, dynamic> refundResponse = {};
+      if (args.refundResponse!.isNotEmpty) {
+        refundResponse = args.refundResponse!;
+        var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+        orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
+
+        RefundSuccessState state = context.read<RefundSuccessBloc>().state;
+        if (orderNo != "" &&
+            refundResponse.isNotEmpty &&
+            (state.refundSuccessStatus == GetRefundSuccessDataStatus.initial || state.refundSuccessStatus == GetRefundSuccessDataStatus.error)) {
+          context.read<RefundSuccessBloc>().add(GetRefundSuccess(context, orderNo, refundResponse));
+        }
+      }
+    }
   }
 
   @override
