@@ -8,6 +8,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/order_summary_scree
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/refund_form_tracking_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/refund_success/refund_success_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/shipping_address/shipping_address_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
@@ -29,6 +30,7 @@ enum Routes {
   orderCancel,
   trackingList,
   tracking,
+  refundFormTracking
   refundSuccess
 }
 
@@ -61,6 +63,8 @@ extension TypeCoverter on Routes {
         return '/trackingList';
       case Routes.tracking:
         return '/tracking';
+      case Routes.refundFormTracking:
+        return '/refundFormTracking';
       case Routes.refundSuccess:
         return '/refundSuccess';
     }
@@ -152,6 +156,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => TrackingListScreen(), settings: settings);
     case "/tracking":
       return MaterialPageRoute(builder: (_) => TrackingDetailScreen(), settings: settings);
+    case "/refundFormTracking":
+      return MaterialPageRoute(builder: (_) => RefundFormTrackingScreen(), settings: settings);
     case "/refundSuccess":
       return MaterialPageRoute(builder: (_) => RefundSuccessScreen(), settings: settings);
     default:

@@ -15,26 +15,78 @@ class GeneralDialog {
   final OnTap? onAccept;
 
   showLoadingDialog({Key? key, required BuildContext context, bool? canBack}) {
-    return _showGeneralLoading(context, key: key ?? const Key("loading"), canBack: false);
+    return _showGeneralLoading(context,
+        key: key ?? const Key("loading"), canBack: false);
   }
 
-  showSummaryDialog({Key? key, required BuildContext context, bool? canBack, bool isConfirmPayment = false}) {
+  showSummaryDialog(
+      {Key? key,
+      required BuildContext context,
+      bool? canBack,
+      bool isConfirmPayment = false}) {
     _showGeneralAlert(
         context,
         Container(
-          constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
-          child: Text(isConfirmPayment ? 'กด "ยืนยัน" เพื่อทำการชำระเงิน' : 'หากกด “ออกจากหน้านี้” จะต้องทำรายการสั่งซื้อใหม่',
-              style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
+          constraints: BoxConstraints(
+              minWidth: MediaQuery.of(context).size.width * .722),
+          child: Text(
+              isConfirmPayment
+                  ? 'กด "ยืนยัน" เพื่อทำการชำระเงิน'
+                  : 'หากกด “ออกจากหน้านี้” จะต้องทำรายการสั่งซื้อใหม่',
+              style: AlvaStyles()
+                  .headingSize14w400(Colors.black)
+                  .copyWith(color: Colors.black, fontSize: 14)
+                  .copyWith(height: 24 / 14)),
         ),
-        title: Text(isConfirmPayment ? "ชำระเงิน" : "คุณต้องการออกจากหน้านี้ใช่หรือไม่",
+        title: Text(
+            isConfirmPayment ? "ชำระเงิน" : "คุณต้องการออกจากหน้านี้ใช่หรือไม่",
             style: AlvaStyles()
                 .headingSize18(Colors.black)
-                .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
+                .copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    height: 24 / 18)
                 .copyWith(height: 24 / 14)),
         key: key ?? const Key("back_from_summary_dialog"),
         // contentPadding: const EdgeInsets.all(24),
-        contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
-        actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        contentPadding:
+            const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
+        actionPadding:
+            const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        isConfirmPayment: isConfirmPayment);
+  }
+
+  showRefundDialog(
+      {Key? key,
+      required BuildContext context,
+      bool? canBack,
+      bool isConfirmPayment = false}) {
+    _showGeneralAlert(
+        context,
+        Container(
+          constraints: BoxConstraints(
+              minWidth: MediaQuery.of(context).size.width * .722),
+          child: Text('กรุณากด “ยืนยัน” เพื่อทำรายการต่อ',
+              style: AlvaStyles()
+                  .headingSize14w400(Colors.black)
+                  .copyWith(color: Colors.black, fontSize: 14)
+                  .copyWith(height: 24 / 14)),
+        ),
+        title: Text(
+            "การคืนสินค้าและคืนเงิน เป็นไปตามเงื่อนไขการให้บริการของผู้ขาย",
+            style: AlvaStyles()
+                .headingSize18(Colors.black)
+                .copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    height: 24 / 18)
+                .copyWith(height: 24 / 14)),
+        key: key ?? const Key("back_from_summary_dialog"),
+        // contentPadding: const EdgeInsets.all(24),
+        contentPadding:
+            const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
+        actionPadding:
+            const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
         isConfirmPayment: isConfirmPayment);
   }
 
@@ -68,7 +120,8 @@ class GeneralDialog {
       bool isConfirmPayment = false}) {
     Widget acceptButton = TextButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
+        padding: MaterialStateProperty.all<EdgeInsets>(
+            EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
       ),
       onPressed: () {
         Navigator.pop(context);
@@ -79,14 +132,15 @@ class GeneralDialog {
         }
       },
       child: Text(
-        isConfirmPayment ? "ยืนยัน" : "อยู่หน้านี้ต่อไป", //"ออกจากหน้านี้"
+        isConfirmPayment ? "ยืนยัน" : "อยู่หน้านี้ต่อไป",
         style: AlvaStyles().heading2(btnBlue).copyWith(height: 24 / 14),
       ),
     );
 
     Widget cancelButton = TextButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 16, right: 14, top: 8, bottom: 8)),
+        padding: MaterialStateProperty.all<EdgeInsets>(
+            EdgeInsets.only(left: 16, right: 14, top: 8, bottom: 8)),
       ),
       onPressed: () {
         Navigator.pop(context);
@@ -103,8 +157,10 @@ class GeneralDialog {
     );
 
     Widget alert = AlertDialog(
-      contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(24, 24, 24, 8),
-      actionsPadding: actionPadding ?? const EdgeInsets.symmetric(horizontal: 8),
+      contentPadding:
+          contentPadding ?? const EdgeInsets.fromLTRB(24, 24, 24, 8),
+      actionsPadding:
+          actionPadding ?? const EdgeInsets.symmetric(horizontal: 8),
       key: key,
       title: title,
       content: body,
@@ -113,12 +169,15 @@ class GeneralDialog {
         acceptButton,
       ],
       shadowColor: const Color.fromARGB(26, 44, 38, 38),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0))),
     );
 
     if (platformSpecific) {
       if (Platform.isIOS) {
-        List<Widget> actions = onCancel != null ? [CupertinoDialogAction(child: cancelButton)] : [];
+        List<Widget> actions = onCancel != null
+            ? [CupertinoDialogAction(child: cancelButton)]
+            : [];
         actions.add(CupertinoDialogAction(child: acceptButton));
 
         alert = CupertinoAlertDialog(

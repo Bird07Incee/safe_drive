@@ -23,6 +23,8 @@ class DropDownInputWidget extends StatefulWidget {
   final String? errRequiredMessage;
   final TextEditingController? textEditingController;
   final bool isDisableDropdownSuffixButton;
+  final double bottomSheetHeight;
+  final Widget? customButton;
 
   const DropDownInputWidget(
       {super.key,
@@ -43,7 +45,9 @@ class DropDownInputWidget extends StatefulWidget {
       this.autoValidateMode,
       this.errRequiredMessage,
       this.textEditingController,
-      this.isDisableDropdownSuffixButton = false});
+      this.isDisableDropdownSuffixButton = false,
+      this.bottomSheetHeight = 0,
+      this.customButton});
 
   @override
   State<DropDownInputWidget> createState() => _DropDownInputWidgetState();
@@ -55,6 +59,11 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
   @override
   Widget build(BuildContext context) {
     bool showOutsideLabel = widget.outsideLabel && widget.label != null;
+    double height = MediaQuery.of(context).size.height - 32;
+
+    if(widget.bottomSheetHeight != 0){
+      height = widget.bottomSheetHeight;
+    }
 
     return GestureDetector(
         key: const Key("select_dropdown"),
@@ -75,7 +84,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                   return SingleChildScrollView(
                       physics: NeverScrollableScrollPhysics(),
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height - 32,
+                        height: height, //MediaQuery.of(context).size.height - 32,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -136,7 +145,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                 });
           }
         },
-        child: Container(
+        child: widget.customButton ?? Container(
             margin: EdgeInsets.only(
               bottom: widget.marginBottom,
             ),
