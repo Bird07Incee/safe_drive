@@ -378,6 +378,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
           Focus(
             child: textFormField,
             onFocusChange: (isFocus) {
+              print("isFocus "+isFocus.toString());
               if (widget.onFocusChange != null) {
                 widget.onFocusChange?.call(isFocus);
               }

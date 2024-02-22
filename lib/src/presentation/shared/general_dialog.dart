@@ -71,6 +71,7 @@ class GeneralDialog {
                   .headingSize14w400(Colors.black)
                   .copyWith(color: Colors.black, fontSize: 14)
                   .copyWith(height: 24 / 14)),
+       //   textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         ),
         title: Text(
             "การคืนสินค้าและคืนเงิน เป็นไปตามเงื่อนไขการให้บริการของผู้ขาย",
@@ -81,6 +82,7 @@ class GeneralDialog {
                     color: Colors.black,
                     height: 24 / 18)
                 .copyWith(height: 24 / 14)),
+          //  textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         key: key ?? const Key("back_from_summary_dialog"),
         // contentPadding: const EdgeInsets.all(24),
         contentPadding:
