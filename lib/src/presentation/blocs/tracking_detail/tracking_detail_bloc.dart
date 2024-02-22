@@ -45,7 +45,6 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
       } else if (["RefundRequest"].contains(t.tracking.status[0].statusName)) {
         refundDay = 0;
       }
-      refundDay = 1;
 
       TrackingModel modelTracking = TrackingModel(
           orderRef: tracking.orderRef,

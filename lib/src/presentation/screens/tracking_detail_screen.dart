@@ -45,8 +45,6 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
-      orderNo = "LA20240206165409HB3q2";
-      productId = "PV_2Q3HC9TC7ONG";
       context.read<TrackingDetailBloc>().add(GetTracking(orderNo: orderNo, productId: productId));
     }
   }
