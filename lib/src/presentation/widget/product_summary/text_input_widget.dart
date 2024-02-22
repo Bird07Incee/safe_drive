@@ -64,6 +64,8 @@ class TextInputWidget extends StatefulWidget {
   final bool isAllowAutoAddPhoneFormat;
   final bool isAllowAutoAddEmailFormat;
 
+  final TextStyle? textStyle;
+
   const TextInputWidget({
     super.key,
     this.onTapSuffix,
@@ -111,6 +113,7 @@ class TextInputWidget extends StatefulWidget {
     this.digitForCheck,
     this.isAllowAutoAddPhoneFormat = false,
     this.isAllowAutoAddEmailFormat = false,
+    this.textStyle
   });
 
   @override
@@ -188,6 +191,10 @@ class TextInputWidgetState extends State<TextInputWidget> {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyleCustom = AlvaStyles().heading3Size16Bold();
+    if(widget.textStyle != null){
+      textStyleCustom = widget.textStyle!;
+    }
     Widget? suffixIcon;
     if (widget.isPasswordField) {
       suffixIcon = IconButton(
@@ -247,7 +254,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
       textAlign: widget.textAlign ?? TextAlign.left,
       maxLength: widget.isAllowAutoAddPhoneFormat ? 12 : widget.maxLength,
       textInputAction: widget.textInputAction,
-      style: AlvaStyles().heading3Size16Bold(),
+      style: textStyleCustom,
       decoration: InputDecoration(
         counterText: "",
         errorText: widget.errRequiredMessage,

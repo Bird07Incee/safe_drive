@@ -363,6 +363,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           autoValidateMode:
                                               AutovalidateMode.disabled,
                                           controller: state.getTextReason,
+                                          textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                           outsideLabel: true,
                                           marginBottom: 15,
                                           required: false,
@@ -446,6 +447,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                       autoValidateMode: AutovalidateMode.disabled,
                                       controller: state.getTextRemark,
                                       label: "คำอธิบายเพิ่มเติม",
+                                      textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                       outsideLabel: true,
                                       marginBottom: 5,
                                       required: false,
