@@ -16,7 +16,8 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_i
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_summary/shipping_address_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_detail/tracking_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_order/tracking_order_bloc.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
@@ -42,4 +43,5 @@ final List<BlocProvider> blocs = [
   BlocProvider<TrackingOrderBloc>(create: (_) => TrackingOrderBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<TrackingDetailBloc>(create: (_) => TrackingDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<ProductDetailDescriptionCubit>(create: (_) => ProductDetailDescriptionCubit()),
+  BlocProvider<RefundSuccessBloc>(create: (_) => RefundSuccessBloc(utilityRepository: _.read<DioUtilityRepository>()))
 ];

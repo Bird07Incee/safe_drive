@@ -8,6 +8,7 @@ Map<String, dynamic> envConfig = {
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-dev",
     "INQUIRY_URL": "/v1/inquiry",
     "TRACKING_LIST_URL": "/v1/trackingList",
+    "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
   },
@@ -20,6 +21,7 @@ Map<String, dynamic> envConfig = {
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-qa",
     "INQUIRY_URL": "/v1/inquiry",
     "TRACKING_LIST_URL": "/v1/trackingList",
+    "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Wdam3RjL&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
   },
@@ -32,6 +34,7 @@ Map<String, dynamic> envConfig = {
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-int",
     "INQUIRY_URL": "/v1/inquiry",
     "TRACKING_LIST_URL": "/v1/trackingList",
+    "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-MJN5qmQ0&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
   },
@@ -45,6 +48,7 @@ Map<String, dynamic> envConfig = {
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-uat",
     "INQUIRY_URL": "/v1/inquiry",
     "TRACKING_LIST_URL": "/v1/trackingList",
+    "REFUND_URL": "/v1/refund",
     //TODO: config redirect url uat
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
@@ -59,6 +63,7 @@ Map<String, dynamic> envConfig = {
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-prod",
     "INQUIRY_URL": "/v1/inquiry",
     "TRACKING_LIST_URL": "/v1/trackingList",
+    "REFUND_URL": "/v1/refund",
     //TODO: config redirect url prod
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"

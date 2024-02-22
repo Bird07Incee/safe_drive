@@ -4,7 +4,9 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_event.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_state.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/order_cancel.dart';
@@ -12,60 +14,37 @@ import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
-import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:marketplace_line_oa/src/utils/phone_number_formatter.dart';
 
-class OrderSuccessScreen extends StatefulWidget {
-  const OrderSuccessScreen({super.key});
+class RefundSuccessScreen extends StatefulWidget {
+  const RefundSuccessScreen({super.key});
 
   @override
-  State<OrderSuccessScreen> createState() => _OrderSuccessScreenState();
+  State<RefundSuccessScreen> createState() => _RefundSuccessScreenState();
 }
 
-class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
+class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
   late RouteSettings? settings;
-  String invoiceNo = "";
+  String orderNo = "";
   late double maxWidth, maxHeight;
 
-  void loadInvoice() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
-    if (settings != null) {
-      var uriData = Uri.parse(settings!.name!);
-      var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
-      invoiceNo = (routingData["invoiceNo"] == null) ? "" : routingData["invoiceNo"];
-      OrderSuccessState state = context.read<OrderSuccessBloc>().state;
-      if (invoiceNo != "" &&
-          (state.orderSuccessStatus == GetOrderSuccessDataStatus.initial || state.orderSuccessStatus == GetOrderSuccessDataStatus.error)) {
-        context.read<OrderSuccessBloc>().add(GetOrderSuccess(context, invoiceNo));
-        // context.read<OrderSuccessBloc>().add(GetOrderSuccessMock(context));
-      }
-      // else {
-      //   context.read<OrderSuccessBloc>().add(SetOrderStatus(GetOrderSuccessDataStatus.error));
-      // }
-    }
+  void loadRefundData() {
+    // settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    // if (settings != null) {
+    //   var uriData = Uri.parse(settings!.name!);
+    //   var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
+    //   orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
+    //   RefundSuccessState state = context.read<RefundSuccessBloc>().state;
+    //   if (orderNo != "" &&
+    //       (state.refundSuccessStatus == GetRefundSuccessDataStatus.initial || state.refundSuccessStatus == GetRefundSuccessDataStatus.error)) {
+    context.read<RefundSuccessBloc>().add(GetRefundSuccess(context, orderNo));
+    // }
+    // }
   }
-
-  // String safeDecimalFormat(String price) {
-  //   String result = "";
-
-  //   try {
-  //     result = double.parse(price).round().toDecimalFormat();
-  //   } catch (e) {
-  //     result = "0";
-  //   }
-
-  //   return result;
-  // }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
 
   @override
   void didChangeDependencies() {
-    loadInvoice();
+    loadRefundData();
     super.didChangeDependencies();
   }
 
@@ -82,10 +61,10 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
       },
       child: AlvaRootWidget(
         titlePage: titleWebPage,
-        child: BlocBuilder<OrderSuccessBloc, OrderSuccessState>(
+        child: BlocBuilder<RefundSuccessBloc, RefundSuccessState>(
           builder: (context, state) {
-            var orderSuccessData = state.orderSuccessData;
-            if (state.orderSuccessStatus == GetOrderSuccessDataStatus.success) {
+            var refundSuccessData = state.refundSuccessData;
+            if (state.refundSuccessStatus == GetRefundSuccessDataStatus.success) {
               return Column(
                 children: [
                   Container(
@@ -96,27 +75,36 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                         children: [
                           Container(
                             width: maxWidth,
-                            height: 76,
-                            padding: EdgeInsets.all(16),
-                            color: successGreen,
-                            child: Row(children: [
-                              SizedBox(width: 32, height: 32, child: Image.asset('assets/images/order_success.png')),
+                            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                            color: orangeSoft,
+                            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                              SizedBox(width: 32, height: 32, child: Image.asset('assets/images/refund_request_success.png')),
                               SizedBox(
-                                width: 16,
+                                width: 24,
                               ),
-                              Column(
+                              Expanded(
+                                  child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "ชำระเงินสำเร็จ",
-                                    style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                                    "คืนสินค้า/คืนเงิน",
+                                    style: AlvaStyles().headingSize14w700(blackGoMunTo),
                                   ),
                                   Text(
-                                    "หมายเลขอ้างอิง: ${orderSuccessData.invoiceNo}",
-                                    style: AlvaStyles().headingSize12w400(blackGoMunTo),
-                                  )
+                                    "หมายเลขอ้างอิง: ${refundSuccessData.refundNo}",
+                                    style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
+                                  ),
+                                  Text(
+                                    "วันที่ ${refundSuccessData.refundDate}",
+                                    style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
+                                  ),
+                                  Text(
+                                    "เวลา : ${refundSuccessData.refundTime}",
+                                    style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
+                                  ),
                                 ],
-                              )
+                              ))
                             ]),
                           ),
                           Container(
@@ -125,33 +113,13 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             color: Colors.white,
                             child: Column(children: [
                               ProductAttribute(
-                                attributeKey: "ชำระเงินโดย",
-                                attributevalue: orderSuccessData.cardNo!,
+                                attributeKey: "เหตุผล",
+                                attributevalue: refundSuccessData.reason!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
-                                attributeKey: "วันที่ชำระเงิน",
-                                attributevalue: orderSuccessData.paymentDate!,
-                                maxWidth: maxWidth,
-                              ),
-                              ProductAttribute(
-                                attributeKey: "เวลาที่ชำระเงิน",
-                                attributevalue: orderSuccessData.paymentTime!,
-                                maxWidth: maxWidth,
-                              ),
-                              ProductAttribute(
-                                attributeKey: "ช่องทางการชำระเงิน",
-                                attributevalue: orderSuccessData.paymentGateway!,
-                                maxWidth: maxWidth,
-                              ),
-                              ProductAttribute(
-                                attributeKey: "รูปแบบการชำระเงิน",
-                                attributevalue: orderSuccessData.paymentChannelText!,
-                                maxWidth: maxWidth,
-                              ),
-                              ProductAttribute(
-                                attributeKey: "ผู้รับเงิน",
-                                attributevalue: orderSuccessData.merchantFullName!,
+                                attributeKey: "คำอธิบายเพิ่มเติม",
+                                attributevalue: phoneNumberFormatter(refundSuccessData.remark!),
                                 maxWidth: maxWidth,
                               ),
                             ]),
@@ -160,7 +128,52 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             width: maxWidth,
                             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             child: Text(
-                              "รหัสสินค้า: ${orderSuccessData.productId}",
+                              "รายละเอียดการชำระเงิน",
+                              style: AlvaStyles().headingSize12w600(blackGoMunTo),
+                            ),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.all(16),
+                            color: Colors.white,
+                            child: Column(children: [
+                              ProductAttribute(
+                                attributeKey: "ชำระเงินโดย",
+                                attributevalue: refundSuccessData.cardNo!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "วันที่ชำระเงิน",
+                                attributevalue: refundSuccessData.paymentDate!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "เวลาที่ชำระเงิน",
+                                attributevalue: refundSuccessData.paymentTime!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "ช่องทางการชำระเงิน",
+                                attributevalue: refundSuccessData.paymentGateway!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "รูปแบบการชำระเงิน",
+                                attributevalue: refundSuccessData.paymentChannelText!,
+                                maxWidth: maxWidth,
+                              ),
+                              ProductAttribute(
+                                attributeKey: "ผู้รับเงิน",
+                                attributevalue: refundSuccessData.merchantFullName!,
+                                maxWidth: maxWidth,
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            width: maxWidth,
+                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            child: Text(
+                              "รหัสสินค้า: ${refundSuccessData.productId}",
                               style: AlvaStyles().headingSize12w600(blackGoMunTo),
                             ),
                           ),
@@ -185,7 +198,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                               height: 74,
                                               placeholder: const AssetImage('assets/homepage/img_default.png'),
                                               // Replace with your placeholder image path
-                                              image: NetworkImage(orderSuccessData.productImagePath!),
+                                              image: NetworkImage(refundSuccessData.productImagePath!),
                                               fit: BoxFit.fitWidth,
                                               imageErrorBuilder: (context, error, stackTrace) => Image.asset(
                                                 'assets/homepage/img_default.png',
@@ -204,12 +217,12 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            orderSuccessData.productName!,
+                                            refundSuccessData.productName!,
                                             style: AlvaStyles().headingSize14w600(blackGoMunTo),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           Text(
-                                            orderSuccessData.productOption!,
+                                            refundSuccessData.productOption!,
                                             style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
                                           )
                                         ],
@@ -245,7 +258,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("${orderSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
+                                          Text("${refundSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                           SizedBox(
                                             height: 4,
                                           ),
@@ -273,22 +286,22 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             child: Column(children: [
                               ProductAttribute(
                                 attributeKey: "ชื่อผู้รับสินค้า",
-                                attributevalue: orderSuccessData.customerFullname!,
+                                attributevalue: refundSuccessData.customerFullname!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "เบอร์โทรติดต่อ",
-                                attributevalue: phoneNumberFormatter(orderSuccessData.customerMobile!),
+                                attributevalue: phoneNumberFormatter(refundSuccessData.customerMobile!),
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "อีเมล",
-                                attributevalue: orderSuccessData.customerEmail!,
+                                attributevalue: refundSuccessData.customerEmail!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "ที่อยู่",
-                                attributevalue: orderSuccessData.customerAddress!,
+                                attributevalue: refundSuccessData.customerAddress!,
                                 maxWidth: maxWidth,
                               ),
                             ]),
@@ -308,7 +321,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             child: Column(children: [
                               Center(
                                 child: Text(
-                                  orderSuccessData.merchantAddress!.replaceAll("\n", ""),
+                                  refundSuccessData.merchantAddress!.replaceAll("\n", ""),
                                   style: AlvaStyles().headingSize12w400(spaceGrey),
                                   textAlign: TextAlign.center,
                                 ),
@@ -319,11 +332,11 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               GestureDetector(
                                 key: const Key("call_to_merchant_button"),
                                 onTap: () {
-                                  String phoneNumber = orderSuccessData.merchantMobile!.replaceAll("-", "");
+                                  String phoneNumber = refundSuccessData.merchantMobile!.replaceAll("-", "");
                                   callPhone(phoneNumber);
                                 },
                                 child: Text(
-                                  "โทร ${phoneNumberFormatter(orderSuccessData.merchantMobile!)}",
+                                  "โทร ${phoneNumberFormatter(refundSuccessData.merchantMobile!)}",
                                   style: AlvaStyles().headingSize16w600(blackGoMunTo),
                                 ),
                               ),
@@ -392,10 +405,10 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       ))
                 ],
               );
-            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.initial ||
-                state.orderSuccessStatus == GetOrderSuccessDataStatus.loading) {
+            } else if (state.refundSuccessStatus == GetRefundSuccessDataStatus.initial ||
+                state.refundSuccessStatus == GetRefundSuccessDataStatus.loading) {
               return const LoadingScreen();
-            } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.cancel) {
+            } else if (state.refundSuccessStatus == GetRefundSuccessDataStatus.cancel) {
               return OrderCancelScreen();
             } else {
               return ErrorScreen(
@@ -403,7 +416,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                 subTitle: ErrorConst().subTitleNS,
                 titleBtn: ErrorConst().titleBtnNS,
                 onTap: () {
-                  loadInvoice();
+                  loadRefundData();
                 },
               );
             }
@@ -433,14 +446,14 @@ class ProductAttribute extends StatelessWidget {
             width: (maxWidth / 2) - 32,
             child: Text(
               attributeKey,
-              style: AlvaStyles().headingSize12w400(spaceGrey),
+              style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2.0),
             ),
           ),
           SizedBox(
             width: (maxWidth / 2) - 32,
             child: Text(
               attributevalue,
-              style: AlvaStyles().headingSize12w500(blackGoMunTo),
+              style: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 2.0),
             ),
           )
         ],

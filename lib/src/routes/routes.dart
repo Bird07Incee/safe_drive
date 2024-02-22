@@ -7,8 +7,9 @@ import 'package:marketplace_line_oa/src/presentation/screens/order_success.dart'
 import 'package:marketplace_line_oa/src/presentation/screens/order_summary_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/product_select_options.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/product_summary/shipping_address_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/read_term_and_con.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/refund_success/refund_success_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/shipping_address/shipping_address_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/term_and_con.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/tracking_detail_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/tracking_list.dart';
@@ -27,7 +28,8 @@ enum Routes {
   orderSuccess,
   orderCancel,
   trackingList,
-  tracking
+  tracking,
+  refundSuccess
 }
 
 extension TypeCoverter on Routes {
@@ -59,6 +61,8 @@ extension TypeCoverter on Routes {
         return '/trackingList';
       case Routes.tracking:
         return '/tracking';
+      case Routes.refundSuccess:
+        return '/refundSuccess';
     }
   }
 }
@@ -148,6 +152,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => TrackingListScreen(), settings: settings);
     case "/tracking":
       return MaterialPageRoute(builder: (_) => TrackingDetailScreen(), settings: settings);
+    case "/refundSuccess":
+      return MaterialPageRoute(builder: (_) => RefundSuccessScreen(), settings: settings);
     default:
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }
