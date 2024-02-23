@@ -87,7 +87,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                             padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                             color: orangeSoft,
                             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                              SizedBox(width: 32, height: 32, child: Image.asset('assets/images/refund_request_success.png')),
+                              SizedBox(width: 32, height: 32, child: Image.asset('assets/icons/refund_request_success.png')),
                               SizedBox(
                                 width: 24,
                               ),

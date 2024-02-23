@@ -35,7 +35,7 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
-    final inquriyPath = Environment().getValue("INQUIRY_URL");
+    final inquiryPath = Environment().getValue("INQUIRY_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
 
@@ -43,7 +43,7 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
 
     try {
       Response response =
-          await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken"});
+          await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquiryPath", payload, headers: {"Authorization": "Bearer $accessToken"});
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
       String status = response.data["status"] ?? "";
@@ -101,7 +101,7 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
     String accessToken = await lineDataHelper.getLineAccessToken();
 
     try {
-      String path = "/v1/refund";
+      String path = Environment().getValue("REFUND_URL");
       var data = {"orderNo": state.inquiryData.invoiceNo!, "reason": state.getTextReason.text, "remark": state.getTextRemark.text};
       Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$path", data, headers: {
         "Authorization": "Bearer $accessToken",

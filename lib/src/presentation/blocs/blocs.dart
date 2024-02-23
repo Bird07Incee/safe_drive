@@ -16,7 +16,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_i
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/refund/refund_request_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_request/refund_request_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_detail/tracking_detail_bloc.dart';

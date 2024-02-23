@@ -10,7 +10,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 import 'package:marketplace_line_oa/src/model/refund/arguments/refund_success_args.dart';
 import 'package:marketplace_line_oa/src/model/refund/refund_request_model.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/refund/refund_request_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_request/refund_request_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
