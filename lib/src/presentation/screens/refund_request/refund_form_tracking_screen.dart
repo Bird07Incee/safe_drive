@@ -288,6 +288,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                       textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                       outsideLabel: true,
                                       marginBottom: 15,
+                                      paddingRightOnly: 50,
                                       required: false,
                                       textInputAction: TextInputAction.done,
                                       keyboardType: TextInputType.text,
@@ -304,8 +305,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           bottomSheetHeight: 419,
                                           customButton: Container(
                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: cloudyWhite),
-                                            width: 32,
-                                            height: 32,
+                                            width: 24,
+                                            height: 24,
                                             padding: EdgeInsets.all(5),
                                             child: Image.asset(
                                               'assets/icons/edit.png',
@@ -353,6 +354,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                   outsideLabel: true,
                                   marginBottom: 5,
+                                  padding: 16,
+                                  paddingRightOnly: 50,
                                   required: false,
                                   textInputAction: TextInputAction.done,
                                   keyboardType: TextInputType.text,
@@ -373,11 +376,11 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                 haveRemark && !state.focusRemark.hasFocus
                                     ? Positioned(
                                         right: 5,
-                                        top: 26,
+                                        top: 38,
                                         child: Container(
                                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: cloudyWhite),
-                                          width: 32,
-                                          height: 32,
+                                          width: 24,
+                                          height: 24,
                                           padding: EdgeInsets.all(5),
                                           child: Image.asset(
                                             'assets/icons/edit.png',
@@ -393,7 +396,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                         ///bottomSheet
                         Column(
                           children: [
-                            SizedBox(
+                            Container(
+                              padding: EdgeInsets.only(bottom: 96),
                               width: maxWidth,
                               //     height: 56 + 68 + 72 + 88 + 16,
                               child: Column(
@@ -417,7 +421,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           padding: const EdgeInsets.only(bottom: 16.0),
                                           child: Text(
                                             AppStrings().remarkTitle,
-                                            style: AlvaStyles().headingSize12w700(Colors.black).copyWith(height: 2),
+                                            style: AlvaStyles().headingSize14w800(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2),
                                           ),
                                         ),
                                         Row(
@@ -505,10 +509,12 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                       GeneralDialog(onAccept: () async {
                                         final refundBloc = context.read<RefundRequestBloc>();
                                         refundBloc.add(OnSubmitRefundData());
-                                      }, onCancel: () {
-                                        Navigator.pop(context);
-                                      }).showRefundDialog(context: context, isConfirmPayment: true);
-                                    }
+                                      },
+                                          onCancel: () {})
+                                          .showRefundDialog(
+                                          context: context,
+                                          isConfirmPayment: true);
+                              }
                                   : null,
                               style: AlvaStyles()
                                   .outlineNoneBorderButtonStyle(haveReason ? YellowKrungsri : cloudDeepWhite, Colors.transparent, isRadius8: true),

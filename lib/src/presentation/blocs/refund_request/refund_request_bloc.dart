@@ -34,7 +34,8 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
   }
 
   _onSetRefundData(SetRefundData event, Emitter<RefundRequestState> emit) async {
-    emit(state.copyWith(refundRequestStatus: GetRefundRequestStatus.loading));
+    emit(state.copyWith(refundRequestStatus: GetRefundRequestStatus.loading,
+        getTextReason: TextEditingController(), getTextRemark: TextEditingController()));
 
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");

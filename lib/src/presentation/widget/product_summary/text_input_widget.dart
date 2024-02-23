@@ -33,6 +33,7 @@ class TextInputWidget extends StatefulWidget {
   final Function? onTapSuffix;
   final Color? labelColor;
   final double padding;
+  final double paddingRightOnly;
   final TextAlign? textAlign;
   final bool? alignLabelWithHint;
   final List<TextInputFormatter>? inputFormatters;
@@ -89,6 +90,7 @@ class TextInputWidget extends StatefulWidget {
       this.helperText,
       this.labelColor,
       this.padding = 8,
+      this.paddingRightOnly = 0,
       this.textAlign,
       this.alignLabelWithHint = false,
       this.inputFormatters,
@@ -266,7 +268,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
         filled: widget.filled == true ? widget.filled : widget.disabled,
         contentPadding: EdgeInsets.only(
           left: 0,
-          right: 0,
+          right: widget.paddingRightOnly,
           top: widget.padding,
           bottom: widget.padding,
         ),

@@ -482,66 +482,67 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            GestureDetector(
-                                              key: const Key("call_seller"),
-                                              onTap: () {
-                                                ///TODO: call to seller
-                                                // String mobile = product.merchantMobile.replaceAll('-', '');
-                                                // callPhone(mobile);
-                                              },
-                                              child: Container(
-                                                width: state.tracking.refundable ? maxWidth * .45 : maxWidth - 32,
-                                                height: 40,
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    SizedBox(
-                                                        width: 16, height: 16, child: Image.asset('assets/icons/phone.png', fit: BoxFit.fitWidth)),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(left: 8),
-                                                      child: Text(
-                                                        "ติดต่อผู้ขาย",
-                                                        style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
-                                                      ),
-                                                    )
-                                                  ],
+                                            Expanded(
+                                              child: GestureDetector(
+                                                key: const Key("call_seller"),
+                                                onTap: () {
+                                                  ///TODO: call to seller
+                                                  // String mobile = product.merchantMobile.replaceAll('-', '');
+                                                  // callPhone(mobile);
+                                                },
+                                                child: Container(
+                                           //     width: state.tracking.refundable ? maxWidth * .45 : maxWidth - 32,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      SizedBox(
+                                                          width: 16, height: 16, child: Image.asset('assets/icons/phone.png', fit: BoxFit.fitWidth)),
+                                                      Padding(
+                                                        padding: EdgeInsets.only(left: 8),
+                                                        child: Text(
+                                                          "ติดต่อผู้ขาย",
+                                                          style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 8.0,
-                                            ),
                                             state.tracking.refundable
-                                                ? GestureDetector(
-                                                    onTap: () {
-                                                      if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
-                                                        Navigator.pushNamed(context,
-                                                            '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}');
-                                                      }
-                                                    },
-                                                    child: Container(
-                                                        width: maxWidth * .45,
-                                                        height: 40,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(8),
-                                                          border: Border.all(
-                                                            width: 2,
-                                                            color: cloudSoftDeepWhite,
-                                                          ),
+                                                ? Expanded(
+                                              child: GestureDetector(
+                                                  onTap: () {
+                                                    if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
+                                                      Navigator.pushNamed(context,
+                                                          '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}');
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(left: 8),
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        border: Border.all(
+                                                          width: 2,
+                                                          color: cloudSoftDeepWhite,
                                                         ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            "คืนสินค้า/คืนเงิน",
-                                                            style: AlvaStyles()
-                                                                .headingSize12w700(state.tracking.refundDay > 0 && !state.tracking.disableRefundButton
-                                                                    ? blackGoMunTo
-                                                                    : grey300)
-                                                                .copyWith(height: 2),
-                                                          ),
-                                                        )),
-                                                  )
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "คืนสินค้า/คืนเงิน",
+                                                          style: AlvaStyles()
+                                                              .headingSize12w700(state.tracking.refundDay > 0 && !state.tracking.disableRefundButton
+                                                                  ? blackGoMunTo
+                                                                  : grey300)
+                                                              .copyWith(height: 2),
+                                                        ),
+                                                      )),
+                                                ),
+                                            )
                                                 : SizedBox.shrink(),
                                           ],
                                         )
