@@ -135,7 +135,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  "หมายเลขอ้างอิง: ${orderNo}",
+                                  "หมายเลขอ้างอิง: $orderNo",
                                   style: AlvaStyles().headingSize12w600(blackGoMunTo),
                                 ),
                               ),

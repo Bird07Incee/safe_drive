@@ -145,7 +145,6 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
         emit(state.copyWith(refundRequestStatus: GetRefundRequestStatus.submitSuccess, refundResponse: refundResponse));
       }
     } catch (e) {
-      print(e.toString());
       emit(state.copyWith(refundRequestStatus: GetRefundRequestStatus.submitFail));
     }
   }
