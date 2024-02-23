@@ -513,7 +513,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                             state.tracking.refundable
                                                 ? GestureDetector(
                                                     onTap: () {
-                                                      if (state.tracking.refundDay > 0) {
+                                                      if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
                                                         Navigator.pushNamed(
                                                             context, '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId');
                                                       }
@@ -532,7 +532,9 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                           child: Text(
                                                             "คืนสินค้า/คืนเงิน",
                                                             style: AlvaStyles()
-                                                                .headingSize12w700(state.tracking.refundDay > 0 ? blackGoMunTo : grey300)
+                                                                .headingSize12w700(state.tracking.refundDay > 0 && !state.tracking.disableRefundButton
+                                                                    ? blackGoMunTo
+                                                                    : grey300)
                                                                 .copyWith(height: 2),
                                                           ),
                                                         )),

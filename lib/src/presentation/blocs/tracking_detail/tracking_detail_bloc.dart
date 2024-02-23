@@ -40,10 +40,11 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
         diffDay = dateTimeExpire.difference(DateTime.now());
       }
       bool isRefundable = true;
+      bool disableRefundButton = false;
       if (diffDay.isNegative || ["RefundSuccess"].contains(t.tracking.status[0].statusName)) {
         isRefundable = false;
       } else if (["RefundRequest"].contains(t.tracking.status[0].statusName)) {
-        refundDay = 0;
+        disableRefundButton = true;
       }
 
       TrackingModel modelTracking = TrackingModel(
@@ -51,6 +52,7 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
           refundExpireDateTime: tracking.refundExpireDateTime,
           refundDay: refundDay,
           refundable: isRefundable,
+          disableRefundButton: disableRefundButton,
           orderCreateDate: tracking.orderCreateDate,
           status: tracking.status);
       emit(state.copyWith(status: TrackingDetailStatus.success, tracking: modelTracking));
