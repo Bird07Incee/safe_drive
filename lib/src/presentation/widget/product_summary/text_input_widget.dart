@@ -66,55 +66,54 @@ class TextInputWidget extends StatefulWidget {
 
   final TextStyle? textStyle;
 
-  const TextInputWidget({
-    super.key,
-    this.onTapSuffix,
-    this.marginBottom = 0,
-    this.onFocus,
-    this.suffixIcon,
-    this.borderRadius = 1,
-    this.validator,
-    this.required = false,
-    this.initialValue,
-    this.label,
-    this.placeholder,
-    this.keyboardType,
-    this.isPasswordField = false,
-    this.controller,
-    this.focusNode,
-    this.maxLines = 1,
-    this.prefixIcon,
-    this.outsideLabel = false,
-    this.filled = false,
-    this.helperText,
-    this.labelColor,
-    this.padding = 8,
-    this.textAlign,
-    this.alignLabelWithHint = false,
-    this.inputFormatters,
-    this.maxLength,
-    this.readOnly = false,
-    this.textInputAction,
-    this.onFieldSubmitted,
-    this.onEditingCompleted,
-    this.onChanged,
-    this.suffixText,
-    this.disabled = false,
-    this.textCapitalization = TextCapitalization.none,
-    this.errRequiredMessage,
-    this.minLines,
-    this.autoValidateMode,
-    this.onFocusChange,
-    this.showCounter = false,
-    this.isAutoDisable = false,
-    this.isAbsoluteZeroForbidden = false,
-    this.isPercentageFieldLimit100 = false,
-    this.isAllowAutoAddDecimal = false,
-    this.digitForCheck,
-    this.isAllowAutoAddPhoneFormat = false,
-    this.isAllowAutoAddEmailFormat = false,
-    this.textStyle
-  });
+  const TextInputWidget(
+      {super.key,
+      this.onTapSuffix,
+      this.marginBottom = 0,
+      this.onFocus,
+      this.suffixIcon,
+      this.borderRadius = 1,
+      this.validator,
+      this.required = false,
+      this.initialValue,
+      this.label,
+      this.placeholder,
+      this.keyboardType,
+      this.isPasswordField = false,
+      this.controller,
+      this.focusNode,
+      this.maxLines = 1,
+      this.prefixIcon,
+      this.outsideLabel = false,
+      this.filled = false,
+      this.helperText,
+      this.labelColor,
+      this.padding = 8,
+      this.textAlign,
+      this.alignLabelWithHint = false,
+      this.inputFormatters,
+      this.maxLength,
+      this.readOnly = false,
+      this.textInputAction,
+      this.onFieldSubmitted,
+      this.onEditingCompleted,
+      this.onChanged,
+      this.suffixText,
+      this.disabled = false,
+      this.textCapitalization = TextCapitalization.none,
+      this.errRequiredMessage,
+      this.minLines,
+      this.autoValidateMode,
+      this.onFocusChange,
+      this.showCounter = false,
+      this.isAutoDisable = false,
+      this.isAbsoluteZeroForbidden = false,
+      this.isPercentageFieldLimit100 = false,
+      this.isAllowAutoAddDecimal = false,
+      this.digitForCheck,
+      this.isAllowAutoAddPhoneFormat = false,
+      this.isAllowAutoAddEmailFormat = false,
+      this.textStyle});
 
   @override
   TextInputWidgetState createState() => TextInputWidgetState();
@@ -192,7 +191,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
   @override
   Widget build(BuildContext context) {
     TextStyle textStyleCustom = AlvaStyles().heading3Size16Bold();
-    if(widget.textStyle != null){
+    if (widget.textStyle != null) {
       textStyleCustom = widget.textStyle!;
     }
     Widget? suffixIcon;
@@ -385,7 +384,6 @@ class TextInputWidgetState extends State<TextInputWidget> {
           Focus(
             child: textFormField,
             onFocusChange: (isFocus) {
-              print("isFocus "+isFocus.toString());
               if (widget.onFocusChange != null) {
                 widget.onFocusChange?.call(isFocus);
               }
