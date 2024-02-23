@@ -510,12 +510,15 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                 ),
                                               ),
                                             ),
+                                            SizedBox(
+                                              width: 8.0,
+                                            ),
                                             state.tracking.refundable
                                                 ? GestureDetector(
                                                     onTap: () {
                                                       if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
-                                                        Navigator.pushNamed(
-                                                            context, '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId');
+                                                        Navigator.pushNamed(context,
+                                                            '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}');
                                                       }
                                                     },
                                                     child: Container(

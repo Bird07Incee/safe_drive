@@ -15,5 +15,8 @@ class AppStrings {
 
   String remarkRefundFirst = "การคืนสินค้าและการคืนเงิน เป็นไปตามเงื่อนไขที่ผู้ขายกำหนด";
   String remarkRefundSecond = "กรุงศรี ออโต้ เป็นช่องทางการแสดงสินค้าเท่านั้น";
-  String remarkRefundThird = "การคืนสินค้า/คืนเงินหลังจาก X วัน กรุณาติดต่อผู้ขายโดยตรง";
+
+  String remarkRefundThird({String refundDay = "X"}) {
+    return "การคืนสินค้า/คืนเงินหลังจาก $refundDay วัน กรุณาติดต่อผู้ขายโดยตรง";
+  }
 }

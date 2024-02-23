@@ -44,7 +44,7 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
       if (diffDay.isNegative || ["RefundSuccess"].contains(t.tracking.status[0].statusName)) {
         isRefundable = false;
       } else if (["RefundRequest"].contains(t.tracking.status[0].statusName)) {
-        disableRefundButton = true;
+        isRefundable = false;
       }
 
       TrackingModel modelTracking = TrackingModel(

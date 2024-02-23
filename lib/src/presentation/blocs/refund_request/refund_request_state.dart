@@ -35,7 +35,8 @@ class RefundRequestState extends Equatable {
       required this.getTextReason,
       required this.getTextRemark,
       required this.orderNo,
-      required this.refundResponse});
+      required this.refundResponse,
+      required this.focusRemark});
 
   final GetRefundRequestStatus refundRequestStatus;
   final RefundRequestModel refundRequestData;
@@ -43,11 +44,13 @@ class RefundRequestState extends Equatable {
   final List<DropdownAddressModel> reasonList;
   final TextEditingController getTextReason;
   final TextEditingController getTextRemark;
+  final FocusNode focusRemark;
   final String orderNo;
   final Map<String, dynamic> refundResponse;
 
   @override
-  List<Object> get props => [refundRequestStatus, refundRequestData, inquiryData, reasonList, getTextReason, getTextRemark, orderNo, refundResponse];
+  List<Object> get props =>
+      [refundRequestStatus, refundRequestData, inquiryData, reasonList, getTextReason, getTextRemark, orderNo, refundResponse, focusRemark];
 
   RefundRequestState copyWith(
       {GetRefundRequestStatus? refundRequestStatus,
@@ -56,6 +59,7 @@ class RefundRequestState extends Equatable {
       List<DropdownAddressModel>? reasonList,
       TextEditingController? getTextReason,
       TextEditingController? getTextRemark,
+      FocusNode? focusRemark,
       String? orderNo,
       Map<String, dynamic>? refundResponse}) {
     return RefundRequestState(
@@ -65,6 +69,7 @@ class RefundRequestState extends Equatable {
         reasonList: reasonList ?? this.reasonList,
         getTextReason: getTextReason ?? this.getTextReason,
         getTextRemark: getTextRemark ?? this.getTextRemark,
+        focusRemark: focusRemark ?? this.focusRemark,
         orderNo: orderNo ?? this.orderNo,
         refundResponse: refundResponse ?? this.refundResponse);
   }

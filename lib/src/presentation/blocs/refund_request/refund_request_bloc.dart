@@ -18,7 +18,11 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
 
   RefundRequestBloc({required this.utilityRepository})
       : super(RefundRequestState(
-            getTextReason: TextEditingController(), getTextRemark: TextEditingController(), orderNo: "", refundResponse: const {})) {
+            getTextReason: TextEditingController(),
+            getTextRemark: TextEditingController(),
+            orderNo: "",
+            refundResponse: const {},
+            focusRemark: FocusNode())) {
     on<RefundRequestEvent>((event, emit) {
 // TODO: implement event handler
     });
@@ -108,39 +112,6 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
       });
 
       if (response.statusCode == 200) {
-        // var mock = {
-        //   "status": "Complete",
-        //   "refundInfo": {
-        //     "refundNo": "RFLA20240215100358LXVdT",
-        //     "refundDate": "21 กุมภาพันธ์ 2567",
-        //     "refundTime": "18:32:17",
-        //     "reason": "test reason ipp",
-        //     "remark": "test remark ipp"
-        //   },
-        //   "rawData": {
-        //     "invoiceNo": "LA20240215100138ZKR6H",
-        //     "cardNo": "XXXXXXXXXXXX0006",
-        //     "paymentDate": "15 กุมภาพันธ์ 2567",
-        //     "paymentTime": "10:03:20",
-        //     "paymentGateway": "บัตรเครดิต/บัตรเดบิต (ผ่าน 2C2P)",
-        //     "paymentChannel": "IPP",
-        //     "amount": "47,890",
-        //     "merchantFullName": "ChocoCard Store",
-        //     "merchantAddress": "2150/4  ถนนสุขุมวิท บางจาก พระโขนง กรุงเทพมหานคร 10260",
-        //     "merchantMobile": "0123456789",
-        //     "productImagePath":
-        //         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20231225_035156_Privilege_XK099RS.png?sv=2020-08-04&se=2028-11-28T08%3A51%3A56Z&sr=b&sp=r&sig=1aVZGa3bm5eiP5sU9mwhgw5z5Vb7XBWxwz%2BO6i%2Flghs%3D",
-        //     "productId": "PV_2Q3HC9TC7ONG",
-        //     "productOption": " Kook EV 2 Opt 3 Mer1 สายสีน้ำเงิน",
-        //     "productName": "Pulsa Max Kook EV 2 Opt 1 Mer1 ",
-        //     "customerFullname": "sss",
-        //     "customerMobile": "0810155211",
-        //     "customerEmail": "atirat.chunsith@gmail.com",
-        //     "customerAddress": "23  คันนายาว คันนายาว กรุงเทพมหานคร 10230",
-        //     "installmentPeriod": "10",
-        //     "paymentChannelText": "ผ่อนชำระ 10 เดือน "
-        //   }
-        // };
         var refundResponse = response.data as Map<String, dynamic>;
         emit(state.copyWith(refundRequestStatus: GetRefundRequestStatus.submitSuccess, refundResponse: refundResponse));
       }

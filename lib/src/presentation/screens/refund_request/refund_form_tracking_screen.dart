@@ -32,8 +32,7 @@ class RefundFormTrackingScreen extends StatefulWidget {
 class _RefundRequestState extends State<RefundFormTrackingScreen> {
   final scrollController = ScrollController();
   late RouteSettings? settings;
-  String orderNo = "";
-  String productId = "";
+  String orderNo = "", productId = "", refundDay = "";
   List<DropdownAddressModel> listReason = [];
   bool isLoaded = false;
   final TextEditingController reasonText = TextEditingController();
@@ -55,6 +54,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
+      refundDay = (routingData["refundDay"] == null) ? "" : routingData["refundDay"];
 
       context.read<RefundRequestBloc>().add(SetRefundData(
             orderNo: orderNo,
@@ -304,8 +304,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           bottomSheetHeight: 419,
                                           customButton: Container(
                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: cloudyWhite),
-                                            width: 24,
-                                            height: 24,
+                                            width: 32,
+                                            height: 32,
                                             padding: EdgeInsets.all(5),
                                             child: Image.asset(
                                               'assets/icons/edit.png',
@@ -359,7 +359,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   maxLength: 250,
                                   maxLines: null,
                                   showCounter: true,
-                                  focusNode: FocusNode(),
+                                  focusNode: state.focusRemark,
                                   onFocusChange: (bool isFocus) async {
                                     RefundRequestModel refundModel = RefundRequestModel(
                                         status: '',
@@ -370,14 +370,14 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                         refundRequestModel: refundModel, getTextReason: state.getTextReason, getTextRemark: state.getTextRemark));
                                   },
                                 ),
-                                haveRemark
+                                haveRemark && !state.focusRemark.hasFocus
                                     ? Positioned(
                                         right: 5,
                                         top: 26,
                                         child: Container(
                                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: cloudyWhite),
-                                          width: 24,
-                                          height: 24,
+                                          width: 32,
+                                          height: 32,
                                           padding: EdgeInsets.all(5),
                                           child: Image.asset(
                                             'assets/icons/edit.png',
@@ -465,7 +465,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                AppStrings().remarkRefundThird,
+                                                AppStrings().remarkRefundThird(refundDay: refundDay),
                                                 style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
                                               ),
                                             ),
