@@ -78,6 +78,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double btmInset = MediaQuery.of(context).viewInsets.bottom;
     var maxWidth = MediaQuery.of(context).size.width;
 
     AppBar appBar = AppBar(
@@ -341,13 +342,6 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                             child: Stack(
                               children: [
                                 TextInputWidget(
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.deny(RegExp(r"[0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
-                                        '"'
-                                        "]")),
-                                    FilteringTextInputFormatter.deny(
-                                        RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
-                                  ],
                                   autoValidateMode: AutovalidateMode.disabled,
                                   controller: state.getTextRemark,
                                   label: "คำอธิบายเพิ่มเติม",
@@ -490,38 +484,40 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                     ),
 
                     /// Button send Request
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                          width: maxWidth,
-                          height: 96,
-                          padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                            height: 48,
-                            //    width: (maxWidth - 40) / 2,
-                            child: OutlinedButton(
-                              onPressed: haveReason
-                                  ? () {
-                                      GeneralDialog(onAccept: () async {
-                                        final refundBloc = context.read<RefundRequestBloc>();
-                                        refundBloc.add(OnSubmitRefundData());
-                                      },
-                                          onCancel: () {})
-                                          .showRefundDialog(
-                                          context: context,
-                                          isConfirmPayment: true);
-                              }
-                                  : null,
-                              style: AlvaStyles()
-                                  .outlineNoneBorderButtonStyle(haveReason ? YellowKrungsri : cloudDeepWhite, Colors.transparent, isRadius8: true),
-                              child: Text("ส่งคำขอ", style: AlvaStyles().headingSize16w700(haveReason ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
-                            ),
-                          )),
-                    ),
+                    btmInset == 0
+                        ? Positioned(
+                            bottom: 0,
+                            child: Container(
+                                width: maxWidth,
+                                height: 96,
+                                padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                                  height: 48,
+                                  //    width: (maxWidth - 40) / 2,
+                                  child: OutlinedButton(
+                                    onPressed: haveReason
+                                        ? () {
+                                            GeneralDialog(
+                                                    onAccept: () async {
+                                                      final refundBloc = context.read<RefundRequestBloc>();
+                                                      refundBloc.add(OnSubmitRefundData());
+                                                    },
+                                                    onCancel: () {})
+                                                .showRefundDialog(context: context, isConfirmPayment: true);
+                                          }
+                                        : null,
+                                    style: AlvaStyles().outlineNoneBorderButtonStyle(haveReason ? YellowKrungsri : cloudDeepWhite, Colors.transparent,
+                                        isRadius8: true),
+                                    child:
+                                        Text("ส่งคำขอ", style: AlvaStyles().headingSize16w700(haveReason ? BTN_SELECTED_TEXT_COLOR_NEW : smockGrey)),
+                                  ),
+                                )),
+                          )
+                        : Container(),
                   ],
                 ),
               );
