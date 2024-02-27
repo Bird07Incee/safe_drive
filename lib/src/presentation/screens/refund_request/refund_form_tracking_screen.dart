@@ -277,13 +277,6 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                 child: Stack(
                                   children: [
                                     TextInputWidget(
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.allow(RegExp(r"[0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
-                                            '"'
-                                            "]")),
-                                        FilteringTextInputFormatter.allow(RegExp(
-                                            r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'))
-                                      ],
                                       autoValidateMode: AutovalidateMode.disabled,
                                       controller: state.getTextReason,
                                       textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
@@ -344,6 +337,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                 TextInputWidget(
                                   autoValidateMode: AutovalidateMode.disabled,
                                   controller: state.getTextRemark,
+                                  isAllowEmoji: true,
                                   label: "คำอธิบายเพิ่มเติม",
                                   textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                   outsideLabel: true,

@@ -64,6 +64,7 @@ class TextInputWidget extends StatefulWidget {
   final int? digitForCheck;
   final bool isAllowAutoAddPhoneFormat;
   final bool isAllowAutoAddEmailFormat;
+  final bool isAllowEmoji;
 
   final TextStyle? textStyle;
 
@@ -115,6 +116,7 @@ class TextInputWidget extends StatefulWidget {
       this.digitForCheck,
       this.isAllowAutoAddPhoneFormat = false,
       this.isAllowAutoAddEmailFormat = false,
+      this.isAllowEmoji = false,
       this.textStyle});
 
   @override
@@ -239,13 +241,15 @@ class TextInputWidgetState extends State<TextInputWidget> {
       textCapitalization: widget.textCapitalization,
       readOnly: widget.readOnly,
       inputFormatters: widget.inputFormatters ??
-          [
-            FilteringTextInputFormatter.allow(RegExp(r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
-                '"'
-                "]")),
-            FilteringTextInputFormatter.deny(
-                RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
-          ],
+          (widget.isAllowEmoji
+              ? null
+              : [
+                  FilteringTextInputFormatter.allow(RegExp(r"[ ก-๛a-zA-Z0-9-!$%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
+                      '"'
+                      "]")),
+                  FilteringTextInputFormatter.deny(
+                      RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
+                ]),
       focusNode: focusNode,
       initialValue: widget.initialValue,
       minLines: widget.minLines ?? 1,
