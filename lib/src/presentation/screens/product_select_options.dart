@@ -51,27 +51,27 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
       myBloc.updateStepOneVariables(
         groupValueRadio: "",
         price: 0,
-        indexSelect: myBloc.state.stepOneIndexSelect,
+        indexSelect: 0,
       );
       myBloc.updateStepTwoVariables(
         groupValueRadio: "",
         price: 0,
-        indexSelect: myBloc.state.stepTwoIndexSelect,
+        indexSelect: 0,
       );
       myBloc.updateStepTreeVariables(
         groupValueRadio: "",
         price: 0,
-        indexSelect: myBloc.state.stepTreeIndexSelect,
+        indexSelect: 0,
       );
       myBloc.updateStepFourVariables(
         groupValueRadio: "",
         price: 0,
-        indexSelect: myBloc.state.stepFourIndexSelect,
+        indexSelect: 0,
       );
       myBloc.updateStepFiveVariables(
         groupValueRadio: "",
         price: 0,
-        indexSelect: myBloc.state.stepFiveIndexSelect,
+        indexSelect: 0,
       );
       myBloc.updateSelectCurrentOption(0);
       myBloc.updateLastOption(1);
