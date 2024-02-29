@@ -100,6 +100,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     price: 0,
                     indexSelect: 0,
                   );
+              context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
+              context.read<ProductOptionBloc>().updateLastOption(0);
               if (isLoaded) {
                 refreshRoute(context: context, currentRoute: "summary", queryParams: "pid=$pid");
               }

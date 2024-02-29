@@ -160,6 +160,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
           price: 0,
           indexSelect: 0,
         );
+    context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
+    context.read<ProductOptionBloc>().updateLastOption(0);
     context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
     context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, MediaQuery.of(context).size.width, "1"));
   }
