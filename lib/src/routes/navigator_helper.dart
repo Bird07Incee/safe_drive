@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 
-void refreshRoute({required BuildContext context, required String currentRoute, required String queryParams}) {
+void refreshRoute(
+    {required BuildContext context, required String currentRoute, required String queryParams, required List<ProductionOptionals> listOption}) {
   switch (currentRoute) {
     case "summary":
       Navigator.pushNamed(context, '/');
       Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
+      if (listOption.isNotEmpty) {
+        Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?$queryParams');
+      }
       break;
     case "selectOption":
       Navigator.pushNamed(context, '/');

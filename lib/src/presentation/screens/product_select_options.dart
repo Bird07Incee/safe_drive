@@ -75,7 +75,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
       );
       myBloc.updateSelectCurrentOption(0);
       myBloc.updateLastOption(1);
-      refreshRoute(context: context, currentRoute: "selectOption", queryParams: "pid=$pid");
+      refreshRoute(context: context, currentRoute: "selectOption", queryParams: "pid=$pid", listOption: []);
     }
 
     return BlocBuilder<ProductOptionBloc, ProductOptionState>(

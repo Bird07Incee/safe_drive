@@ -102,8 +102,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                   );
               context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
               context.read<ProductOptionBloc>().updateLastOption(0);
+
               if (isLoaded) {
-                refreshRoute(context: context, currentRoute: "summary", queryParams: "pid=$pid");
+                refreshRoute(
+                    context: context,
+                    currentRoute: "summary",
+                    queryParams: "pid=$pid",
+                    listOption: context.read<ProductDetailBloc>().state.product.productionOptionals);
               }
               Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
             },
