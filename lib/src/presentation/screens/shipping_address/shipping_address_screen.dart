@@ -84,7 +84,11 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                       if (!args.isFromEditing) myBloc.onClearShippingData();
                       ProductDetailState pdState = context.read<ProductDetailBloc>().state;
                       if (pdState.status.isInitial && pid != "") {
-                        refreshRoute(context: context, currentRoute: "address", queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}");
+                        refreshRoute(
+                            context: context,
+                            currentRoute: "address",
+                            queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}",
+                            listOption: pdState.product.productionOptionals);
                       }
                       Navigator.pop(context);
                     },
@@ -118,7 +122,8 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                         refreshRoute(
                                             context: context,
                                             currentRoute: "address",
-                                            queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}");
+                                            queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}",
+                                            listOption: pdState.product.productionOptionals);
                                       }
                                       Navigator.pop(context);
                                     }
