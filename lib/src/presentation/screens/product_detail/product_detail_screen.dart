@@ -15,6 +15,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
@@ -149,6 +150,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     } else {
       Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
     }
+    context.read<ProductOptionBloc>().updateStepOneVariables(
+          groupValueRadio: "",
+          price: 0,
+          indexSelect: 0,
+        );
+    context.read<ProductOptionBloc>().updateStepTwoVariables(
+          groupValueRadio: "",
+          price: 0,
+          indexSelect: 0,
+        );
     context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
     context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, MediaQuery.of(context).size.width, "1"));
   }
