@@ -486,15 +486,14 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               child: GestureDetector(
                                                 key: const Key("call_seller"),
                                                 onTap: () {
-                                                  ///TODO: call to seller
-                                                  // String mobile = product.merchantMobile.replaceAll('-', '');
-                                                  // callPhone(mobile);
+                                                  String mobile = state.tracking.merchantNumber.replaceAll('-', '');
+                                                  callPhone(mobile);
                                                 },
                                                 child: Container(
-                                           //     width: state.tracking.refundable ? maxWidth * .45 : maxWidth - 32,
                                                   height: 40,
                                                   decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(8), border: Border.all(width: 2, color: cloudSoftDeepWhite)),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      border: Border.all(width: 2, color: cloudSoftDeepWhite)),
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
@@ -514,35 +513,36 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                             ),
                                             state.tracking.refundable
                                                 ? Expanded(
-                                              child: GestureDetector(
-                                                  onTap: () {
-                                                    if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
-                                                      Navigator.pushNamed(context,
-                                                          '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}');
-                                                    }
-                                                  },
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(left: 8),
-                                                      height: 40,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(8),
-                                                        border: Border.all(
-                                                          width: 2,
-                                                          color: cloudSoftDeepWhite,
-                                                        ),
-                                                      ),
-                                                      child: Center(
-                                                        child: Text(
-                                                          "คืนสินค้า/คืนเงิน",
-                                                          style: AlvaStyles()
-                                                              .headingSize12w700(state.tracking.refundDay > 0 && !state.tracking.disableRefundButton
-                                                                  ? blackGoMunTo
-                                                                  : grey300)
-                                                              .copyWith(height: 2),
-                                                        ),
-                                                      )),
-                                                ),
-                                            )
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
+                                                          Navigator.pushNamed(context,
+                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}');
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                          margin: EdgeInsets.only(left: 8),
+                                                          height: 40,
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            border: Border.all(
+                                                              width: 2,
+                                                              color: cloudSoftDeepWhite,
+                                                            ),
+                                                          ),
+                                                          child: Center(
+                                                            child: Text(
+                                                              "คืนสินค้า/คืนเงิน",
+                                                              style: AlvaStyles()
+                                                                  .headingSize12w700(
+                                                                      state.tracking.refundDay > 0 && !state.tracking.disableRefundButton
+                                                                          ? blackGoMunTo
+                                                                          : grey300)
+                                                                  .copyWith(height: 2),
+                                                            ),
+                                                          )),
+                                                    ),
+                                                  )
                                                 : SizedBox.shrink(),
                                           ],
                                         )
@@ -577,10 +577,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                 GestureDetector(
                                   key: const Key("call_button"),
                                   onTap: () {
-                                    RegExp regExp = RegExp(r'\b\d{3}-\d{3}-\d{4}\b');
-
-                                    // Extracting the phone number using RegExp
-                                    String phoneNumber = regExp.stringMatch(HomeConst().pleaseContact) ?? '';
+                                    String phoneNumber = HomeConst().pleaseContactNumber;
                                     callPhone(phoneNumber);
                                   },
                                   child: Text(

@@ -1633,6 +1633,7 @@ class TrackingModel extends Equatable {
   final bool refundable;
   final bool disableRefundButton;
   final String orderCreateDate;
+  final String merchantNumber;
   final List<Status> status;
 
   const TrackingModel(
@@ -1642,10 +1643,18 @@ class TrackingModel extends Equatable {
       required this.refundable,
       required this.disableRefundButton,
       required this.orderCreateDate,
+      required this.merchantNumber,
       required this.status});
 
   static const empty = TrackingModel(
-      orderRef: "", refundExpireDateTime: "", refundDay: 0, refundable: false, disableRefundButton: false, orderCreateDate: "", status: []);
+      orderRef: "",
+      refundExpireDateTime: "",
+      refundDay: 0,
+      refundable: false,
+      disableRefundButton: false,
+      orderCreateDate: "",
+      merchantNumber: "",
+      status: []);
 
   factory TrackingModel.fromJson(Map<String, dynamic> json) {
     var status = json['status'] != null ? json['status'].map<Status>((e) => Status.fromJson(e)).toList() : [];
@@ -1657,11 +1666,12 @@ class TrackingModel extends Equatable {
         refundable: json['refund_able'] ?? false,
         disableRefundButton: false,
         orderCreateDate: json['order_create'] ?? "",
+        merchantNumber: json['merchant_info']['mobile_no'] ?? "",
         status: status);
   }
 
   @override
-  List<Object?> get props => [orderRef, refundExpireDateTime, refundDay, refundable, disableRefundButton, orderCreateDate, status];
+  List<Object?> get props => [orderRef, refundExpireDateTime, refundDay, refundable, disableRefundButton, orderCreateDate, merchantNumber, status];
 }
 
 class Status extends Equatable {

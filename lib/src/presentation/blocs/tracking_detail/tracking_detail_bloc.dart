@@ -54,7 +54,8 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
           refundable: isRefundable,
           disableRefundButton: disableRefundButton,
           orderCreateDate: tracking.orderCreateDate,
-          status: tracking.status);
+          status: tracking.status,
+          merchantNumber: tracking.merchantNumber);
       emit(state.copyWith(status: TrackingDetailStatus.success, tracking: modelTracking));
     } catch (e) {
       emit(state.copyWith(status: TrackingDetailStatus.error));
