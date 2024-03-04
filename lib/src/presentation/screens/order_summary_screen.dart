@@ -536,99 +536,99 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                       ),
                                                     )
                                                   : SizedBox.shrink(),
-                                              Container(
-                                                width: maxWidth,
-                                                height: 1,
-                                                decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
-                                                child: Row(
-                                                  children: [
-                                                    AlvaText(
-                                                        title: "รหัสผู้แนะนำ",
-                                                        textStyle:
-                                                            AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
-                                                    AlvaText(
-                                                        title: "(ถ้ามี)",
-                                                        textStyle: AlvaStyles().headingSize14w400(spaceGrey123).copyWith(height: 24 / 14)),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                height: 32 + 24,
-                                                padding: EdgeInsets.only(left: 16, right: 16, bottom: 24),
-                                                child: BlocBuilder<ShowSaleCodeCubit, bool>(
-                                                  builder: (context, showEditForm) {
-                                                    return TextFormField(
-                                                      key: const Key("sale_code_box"),
-                                                      controller: staffCode,
-                                                      onTap: () {
-                                                        setState(() {});
-                                                      },
-                                                      onChanged: (text) {
-                                                        if (text != "") {
-                                                          context.read<ShowSaleCodeCubit>().show(true);
-                                                        } else {
-                                                          context.read<ShowSaleCodeCubit>().show(false);
-                                                        }
-                                                      },
-                                                      maxLines: 1,
-                                                      maxLength: 50,
-                                                      style: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 26 / 16),
-                                                      cursorColor: BTN_SELECTED_TEXT_COLOR_NEW,
-                                                      cursorWidth: 1,
-                                                      cursorHeight: 20,
-                                                      decoration: InputDecoration(
-                                                        suffix: showEditForm
-                                                            ? Container(
-                                                                margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                                                                child: GestureDetector(
-                                                                    key: const Key("clear_search_box"),
-                                                                    onTap: () {
-                                                                      saleCodeNode.requestFocus();
-                                                                    },
-                                                                    child: Container(
-                                                                      width: 24,
-                                                                      height: 24,
-                                                                      decoration:
-                                                                          BoxDecoration(color: cloudyWhite, borderRadius: BorderRadius.circular(36)),
-                                                                      child: Center(
-                                                                        child: SizedBox(
-                                                                          width: 10,
-                                                                          height: 10,
-                                                                          child: Image.asset(
-                                                                            'assets/icons/edit.png',
-                                                                            fit: BoxFit.fitWidth,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    )),
-                                                              )
-                                                            : null,
-                                                        contentPadding: const EdgeInsets.only(bottom: 12),
-                                                        counterText: "",
-                                                        hintMaxLines: 1,
-                                                        enabledBorder: UnderlineInputBorder(
-                                                          borderSide: const BorderSide(
-                                                            color: grey300,
-                                                            width: 1.0,
-                                                          ),
-                                                        ),
-                                                        focusedBorder: UnderlineInputBorder(
-                                                          borderSide: const BorderSide(
-                                                            color: BlueFantasy,
-                                                            width: 1.0,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      onFieldSubmitted: (value) {
-                                                        FocusManager.instance.primaryFocus?.unfocus();
-                                                      },
-                                                    );
-                                                  },
-                                                ),
-                                              ),
+                                              // Container(
+                                              //   width: maxWidth,
+                                              //   height: 1,
+                                              //   decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: cloudSoftDeepWhite))),
+                                              // ),
+                                             // Container(
+                                             //    padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
+                                             //    child: Row(
+                                             //      children: [
+                                             //        AlvaText(
+                                             //            title: "รหัสผู้แนะนำ",
+                                             //            textStyle:
+                                             //                AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
+                                             //        AlvaText(
+                                             //            title: "(ถ้ามี)",
+                                             //            textStyle: AlvaStyles().headingSize14w400(spaceGrey123).copyWith(height: 24 / 14)),
+                                             //      ],
+                                             //    ),
+                                             //  ),
+                                             //  Container(
+                                             //    height: 32 + 24,
+                                             //    padding: EdgeInsets.only(left: 16, right: 16, bottom: 24),
+                                             //    child: BlocBuilder<ShowSaleCodeCubit, bool>(
+                                             //      builder: (context, showEditForm) {
+                                             //        return TextFormField(
+                                             //          key: const Key("sale_code_box"),
+                                             //          controller: staffCode,
+                                             //          onTap: () {
+                                             //            setState(() {});
+                                             //          },
+                                             //          onChanged: (text) {
+                                             //            if (text != "") {
+                                             //              context.read<ShowSaleCodeCubit>().show(true);
+                                             //            } else {
+                                             //              context.read<ShowSaleCodeCubit>().show(false);
+                                             //            }
+                                             //          },
+                                             //          maxLines: 1,
+                                             //          maxLength: 50,
+                                             //          style: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 26 / 16),
+                                             //          cursorColor: BTN_SELECTED_TEXT_COLOR_NEW,
+                                             //          cursorWidth: 1,
+                                             //          cursorHeight: 20,
+                                             //          decoration: InputDecoration(
+                                             //            suffix: showEditForm
+                                             //                ? Container(
+                                             //                    margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                                             //                    child: GestureDetector(
+                                             //                        key: const Key("clear_search_box"),
+                                             //                        onTap: () {
+                                             //                          saleCodeNode.requestFocus();
+                                             //                        },
+                                             //                        child: Container(
+                                             //                          width: 24,
+                                             //                          height: 24,
+                                             //                          decoration:
+                                             //                              BoxDecoration(color: cloudyWhite, borderRadius: BorderRadius.circular(36)),
+                                             //                          child: Center(
+                                             //                            child: SizedBox(
+                                             //                              width: 10,
+                                             //                              height: 10,
+                                             //                              child: Image.asset(
+                                             //                                'assets/icons/edit.png',
+                                             //                                fit: BoxFit.fitWidth,
+                                             //                              ),
+                                             //                            ),
+                                             //                          ),
+                                             //                        )),
+                                             //                  )
+                                             //                : null,
+                                             //            contentPadding: const EdgeInsets.only(bottom: 12),
+                                             //            counterText: "",
+                                             //            hintMaxLines: 1,
+                                             //            enabledBorder: UnderlineInputBorder(
+                                             //              borderSide: const BorderSide(
+                                             //                color: grey300,
+                                             //                width: 1.0,
+                                             //              ),
+                                             //            ),
+                                             //            focusedBorder: UnderlineInputBorder(
+                                             //              borderSide: const BorderSide(
+                                             //                color: BlueFantasy,
+                                             //                width: 1.0,
+                                             //              ),
+                                             //            ),
+                                             //          ),
+                                             //          onFieldSubmitted: (value) {
+                                             //            FocusManager.instance.primaryFocus?.unfocus();
+                                             //          },
+                                             //        );
+                                             //      },
+                                             //    ),
+                                             //  ),
                                               SizedBox(
                                                 height: 160 + btmInset,
                                               ),
