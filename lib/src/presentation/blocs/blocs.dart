@@ -4,7 +4,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_b
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/order_summary_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_sale_code_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_summary_detail_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
