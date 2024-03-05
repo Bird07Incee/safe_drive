@@ -99,18 +99,20 @@ class SubOptional {
 
 class PaymentInfo {
   final String? channel;
-  final String? staffCode;
+//  final String? staffCode;
 
-  const PaymentInfo({required this.channel, required this.staffCode});
+//  const PaymentInfo({required this.channel, required this.staffCode});
+  const PaymentInfo({required this.channel});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['channel'] = channel;
-    data['staffCode'] = staffCode;
+  //  data['staffCode'] = staffCode;
     return data;
   }
 
-  static const empty = PaymentInfo(channel: "", staffCode: "");
+//  static const empty = PaymentInfo(channel: "", staffCode: "");
+  static const empty = PaymentInfo(channel: "");
 }
 
 class ShippingInfo {
