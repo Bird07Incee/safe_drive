@@ -63,7 +63,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   @override
   void initState() {
     super.initState();
-    unLoadOneTrustCookieScript();
     context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     scrollController.addListener(() {
