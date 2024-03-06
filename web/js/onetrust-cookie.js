@@ -16,8 +16,6 @@ function loadOneTrustCookieScript() {
 }
 
 function unLoadOneTrustCookieScript(){
-    const script1 = document.getElementById("onetrust1");
-    const script2 = document.getElementById("onetrust2");
-    script1.remove();
-    script2.remove();
+    const onetrust = document.getElementById("onetrust-consent-sdk");
+    onetrust.remove();
 }
