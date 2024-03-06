@@ -10,4 +10,4 @@ external void loadOneTrustCookieScript();
 external void jsAlert(val);
 external void callPhone(val);
 external void replacePageHistory();
-external void unLoadOneTrustCookieScript();
+external void hideOneTrustCookieScript();
