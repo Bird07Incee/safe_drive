@@ -11,3 +11,4 @@ external void jsAlert(val);
 external void callPhone(val);
 external void replacePageHistory();
 external void hideOneTrustCookieScript();
+external void showOneTrustCookieScript();

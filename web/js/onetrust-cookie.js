@@ -17,3 +17,12 @@ function hideOneTrustCookieScript(){
     const onetrust = document.getElementById("onetrust-consent-sdk");
     onetrust.setAttribute("style", "visibility: hidden;");
 }
+
+function showOneTrustCookieScript(){
+    try {
+        const onetrust = document.getElementById("onetrust-consent-sdk");
+        onetrust.setAttribute("style", "visibility: visible;");
+    } catch {
+        console.log("onetrust show error");
+    }
+}
