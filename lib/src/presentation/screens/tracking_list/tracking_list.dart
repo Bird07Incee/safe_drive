@@ -51,6 +51,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
       leading: IconButton(
           key: const Key("pop_navigator_to_home_page"),
           onPressed: () {
+            showOneTrustCookieScript();
             Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           },
           icon: const Icon(Icons.arrow_back_ios_rounded)),
