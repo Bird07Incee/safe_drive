@@ -39,10 +39,9 @@ class HomepageTopSection extends StatelessWidget {
                     textStyle: AlvaStyles().heading1(),
                   ),
                   GestureDetector(
-                    onTap: () async {
+                    onTap: () {
                       hideOneTrustCookieScript();
-                      await Navigator.pushNamed(context, '/trackingList');
-                      showOneTrustCookieScript();
+                      Navigator.pushNamed(context, '/trackingList');
                     },
                     child: Container(
                       height: 40,
