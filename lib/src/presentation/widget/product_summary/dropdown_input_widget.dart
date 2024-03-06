@@ -61,7 +61,7 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
     bool showOutsideLabel = widget.outsideLabel && widget.label != null;
     double height = MediaQuery.of(context).size.height - 32;
 
-    if(widget.bottomSheetHeight != 0){
+    if (widget.bottomSheetHeight != 0) {
       height = widget.bottomSheetHeight;
     }
 
@@ -145,97 +145,98 @@ class _DropDownInputWidgetState extends State<DropDownInputWidget> {
                 });
           }
         },
-        child: widget.customButton ?? Container(
-            margin: EdgeInsets.only(
-              bottom: widget.marginBottom,
-            ),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Visibility(
-                      visible: showOutsideLabel,
-                      child: RichText(
-                        textAlign: TextAlign.left,
-                        text: TextSpan(
-                          text: widget.label ?? '',
-                          style: TextStyle(
-                            color: widget.disable
-                                ? widget.options!.length == 1
-                                    ? blackInBlack
-                                    : cloudSoftDeepWhite
-                                : blackInBlack,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            fontFamily: fontFamily,
-                          ),
-                          // children: <TextSpan>[
-                          //   if (required)
-                          //     const TextSpan(
-                          //       text: ' *',
-                          //       style: TextStyle(
-                          //         color: Colors.red,
-                          //       ),
-                          //     ),
-                          // ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width - 32,
-                      child: TextFormField(
-                        enabled: false,
-                        controller: widget.textEditingController,
-                        style: AlvaStyles().heading3Size16Bold(),
-                        decoration: InputDecoration(
-                          counterText: "",
-                          errorText: widget.errRequiredMessage,
-                          errorStyle: AlvaStyles().bodySize12W400(RedWordShow),
-                          suffixStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                          ),
-                          isDense: true,
-                          label: !showOutsideLabel && widget.label != null
-                              ? Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      !showOutsideLabel ? widget.label ?? '' : '',
-                                      style: AlvaStyles().bodySize12W600(widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
-                                    ),
-                                  ],
-                                )
-                              : null,
-                          suffixIcon: widget.options!.length == 1 && widget.isDisableDropdownSuffixButton
-                              ? null
-                              : Icon(Icons.keyboard_arrow_down_outlined, size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
-                          fillColor: cloudSoftDeepWhite,
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: grey300),
-                            borderRadius: BorderRadius.circular(widget.borderRadius),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: grey300, width: 2),
-                            borderRadius: BorderRadius.circular(widget.borderRadius),
-                          ),
-                          disabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
+        child: widget.customButton ??
+            Container(
+                margin: EdgeInsets.only(
+                  bottom: widget.marginBottom,
+                ),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Visibility(
+                          visible: showOutsideLabel,
+                          child: RichText(
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                              text: widget.label ?? '',
+                              style: TextStyle(
                                 color: widget.disable
                                     ? widget.options!.length == 1
-                                        ? grey300
+                                        ? blackInBlack
                                         : cloudSoftDeepWhite
-                                    : grey300,
-                                width: 1),
-                            borderRadius: BorderRadius.circular(widget.borderRadius),
+                                    : blackInBlack,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                                fontFamily: fontFamily,
+                              ),
+                              // children: <TextSpan>[
+                              //   if (required)
+                              //     const TextSpan(
+                              //       text: ' *',
+                              //       style: TextStyle(
+                              //         color: Colors.red,
+                              //       ),
+                              //     ),
+                              // ],
+                            ),
                           ),
                         ),
-                      ),
-                    )
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 32,
+                          child: TextFormField(
+                            enabled: false,
+                            controller: widget.textEditingController,
+                            style: AlvaStyles().heading3Size16Bold(),
+                            decoration: InputDecoration(
+                              counterText: "",
+                              errorText: widget.errRequiredMessage,
+                              errorStyle: AlvaStyles().bodySize12W400(RedWordShow),
+                              suffixStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                              isDense: true,
+                              label: !showOutsideLabel && widget.label != null
+                                  ? Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          !showOutsideLabel ? widget.label ?? '' : '',
+                                          style: AlvaStyles().bodySize12W600(widget.disable ? cloudSoftDeepWhite : BTN_SELECTED_TEXT_COLOR_NEW),
+                                        ),
+                                      ],
+                                    )
+                                  : null,
+                              suffixIcon: widget.options!.length == 1 && widget.isDisableDropdownSuffixButton
+                                  ? null
+                                  : Icon(Icons.keyboard_arrow_down_outlined, size: 24, color: widget.disable ? cloudSoftDeepWhite : blackInBlack),
+                              fillColor: cloudSoftDeepWhite,
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(color: grey300),
+                                borderRadius: BorderRadius.circular(widget.borderRadius),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: grey300, width: 2),
+                                borderRadius: BorderRadius.circular(widget.borderRadius),
+                              ),
+                              disabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: widget.disable
+                                        ? widget.options!.length == 1
+                                            ? grey300
+                                            : cloudSoftDeepWhite
+                                        : grey300,
+                                    width: 1),
+                                borderRadius: BorderRadius.circular(widget.borderRadius),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ],
-                ),
-              ],
-            )));
+                )));
   }
 }

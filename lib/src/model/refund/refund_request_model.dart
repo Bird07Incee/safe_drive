@@ -11,14 +11,10 @@ class RefundRequestModel {
 
   const RefundRequestModel({required this.status, required this.refundInfo, required this.product});
 
-  RefundRequestModel.fromJson(Map<String, dynamic> json) :
-    status = json['status'],
-    refundInfo = json['refundInfo'] != null
-        ? RefundInfoModel.fromJson(json['refundInfo'])
-        : null,
-    product =
-    json['rawData'] != null ? Product.fromJson(json['rawData']) : null;
-
+  RefundRequestModel.fromJson(Map<String, dynamic> json)
+      : status = json['status'],
+        refundInfo = json['refundInfo'] != null ? RefundInfoModel.fromJson(json['refundInfo']) : null,
+        product = json['rawData'] != null ? Product.fromJson(json['rawData']) : null;
 }
 
 class RefundInfoModel {
@@ -28,22 +24,17 @@ class RefundInfoModel {
   final String? reason;
   final String? remark;
 
-  const RefundInfoModel(
-      {required this.refundNo,
-        required this.refundDate,
-        required this.refundTime,
-        required this.reason,
-        required this.remark});
+  const RefundInfoModel({required this.refundNo, required this.refundDate, required this.refundTime, required this.reason, required this.remark});
 
-  RefundInfoModel.fromJson(Map<String, dynamic> json) :
-    refundNo = json['refundNo'],
-    refundDate = json['refundDate'],
-    refundTime = json['refundTime'],
-    reason = json['reason'],
-    remark = json['remark'];
+  RefundInfoModel.fromJson(Map<String, dynamic> json)
+      : refundNo = json['refundNo'],
+        refundDate = json['refundDate'],
+        refundTime = json['refundTime'],
+        reason = json['reason'],
+        remark = json['remark'];
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['refundNo'] = refundNo;
     data['refundDate'] = refundDate;
     data['refundTime'] = refundTime;

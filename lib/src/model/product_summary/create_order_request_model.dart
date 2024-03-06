@@ -107,7 +107,7 @@ class PaymentInfo {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['channel'] = channel;
-  //  data['staffCode'] = staffCode;
+    //  data['staffCode'] = staffCode;
     return data;
   }
 

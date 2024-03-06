@@ -12,12 +12,10 @@ class SetRefundData extends RefundRequestEvent {
 
   final String? orderNo;
   final List<DropdownAddressModel>? reasonList;
-
 }
 
 class OnSelectReason extends RefundRequestEvent {
   const OnSelectReason({required this.refundRequestModel, required this.getTextReason, required this.getTextRemark});
-
 
   final RefundRequestModel refundRequestModel;
   final TextEditingController getTextReason;
@@ -27,7 +25,6 @@ class OnSelectReason extends RefundRequestEvent {
 class OnEditRemark extends RefundRequestEvent {
   const OnEditRemark({required this.refundRequestModel, required this.getTextReason, required this.getTextRemark});
 
-
   final RefundRequestModel refundRequestModel;
   final TextEditingController getTextReason;
   final TextEditingController getTextRemark;
@@ -35,5 +32,4 @@ class OnEditRemark extends RefundRequestEvent {
 
 class OnSubmitRefundData extends RefundRequestEvent {
   const OnSubmitRefundData();
-
 }
