@@ -77,7 +77,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     if (!isLoaded) {
       isLoaded = true;
       loadProduct();
-      hideOneTrustCookieScript();
+      // hideOneTrustCookieScript();
     }
   }
 

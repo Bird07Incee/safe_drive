@@ -52,16 +52,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // });
   }
 
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        showOneTrustCookieScript();
-        break;
-      default:
-        break;
-    }
-  }
-
   Future<void> openLine() async {
     final Uri deepLink = Uri.parse(HomeConst().lineOAURL);
     if (!await launchUrl(deepLink)) {

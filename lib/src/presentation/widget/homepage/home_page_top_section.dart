@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
 class HomepageTopSection extends StatelessWidget {
@@ -38,8 +39,10 @@ class HomepageTopSection extends StatelessWidget {
                     textStyle: AlvaStyles().heading1(),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/trackingList');
+                    onTap: () async {
+                      hideOneTrustCookieScript();
+                      await Navigator.pushNamed(context, '/trackingList');
+                      showOneTrustCookieScript();
                     },
                     child: Container(
                       height: 40,
