@@ -5,11 +5,6 @@ enum GetRefundRequestStatus { initial, loading, success, empty, error, submitSuc
 class RefundRequestState extends Equatable {
   const RefundRequestState(
       {this.refundRequestStatus = GetRefundRequestStatus.initial,
-      this.refundRequestData = const RefundRequestModel(
-        status: '',
-        refundInfo: RefundInfoModel.empty,
-        product: Product.empty,
-      ),
       this.inquiryData = const InquiryData(
           invoiceNo: "",
           cardNo: "",
@@ -32,44 +27,36 @@ class RefundRequestState extends Equatable {
           installmentPeriod: "",
           paymentChannelText: ""),
       this.reasonList = const <DropdownAddressModel>[],
-      required this.getTextReason,
-      required this.getTextRemark,
+      this.getTextReason = "",
+      this.getTextRemark = "",
       required this.orderNo,
-      required this.refundResponse,
-      required this.focusRemark});
+      required this.refundResponse});
 
   final GetRefundRequestStatus refundRequestStatus;
-  final RefundRequestModel refundRequestData;
   final InquiryData inquiryData;
   final List<DropdownAddressModel> reasonList;
-  final TextEditingController getTextReason;
-  final TextEditingController getTextRemark;
-  final FocusNode focusRemark;
+  final String getTextReason;
+  final String getTextRemark;
   final String orderNo;
   final Map<String, dynamic> refundResponse;
 
   @override
-  List<Object> get props =>
-      [refundRequestStatus, refundRequestData, inquiryData, reasonList, getTextReason, getTextRemark, orderNo, refundResponse, focusRemark];
+  List<Object> get props => [refundRequestStatus, inquiryData, reasonList, getTextReason, getTextRemark, orderNo, refundResponse];
 
   RefundRequestState copyWith(
       {GetRefundRequestStatus? refundRequestStatus,
-      RefundRequestModel? refundRequestData,
       InquiryData? inquiryData,
       List<DropdownAddressModel>? reasonList,
-      TextEditingController? getTextReason,
-      TextEditingController? getTextRemark,
-      FocusNode? focusRemark,
+      String? getTextReason,
+      String? getTextRemark,
       String? orderNo,
       Map<String, dynamic>? refundResponse}) {
     return RefundRequestState(
         refundRequestStatus: refundRequestStatus ?? this.refundRequestStatus,
-        refundRequestData: refundRequestData ?? this.refundRequestData,
         inquiryData: inquiryData ?? this.inquiryData,
         reasonList: reasonList ?? this.reasonList,
         getTextReason: getTextReason ?? this.getTextReason,
         getTextRemark: getTextRemark ?? this.getTextRemark,
-        focusRemark: focusRemark ?? this.focusRemark,
         orderNo: orderNo ?? this.orderNo,
         refundResponse: refundResponse ?? this.refundResponse);
   }

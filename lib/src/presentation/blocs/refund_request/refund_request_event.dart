@@ -15,19 +15,15 @@ class SetRefundData extends RefundRequestEvent {
 }
 
 class OnSelectReason extends RefundRequestEvent {
-  const OnSelectReason({required this.refundRequestModel, required this.getTextReason, required this.getTextRemark});
-
-  final RefundRequestModel refundRequestModel;
-  final TextEditingController getTextReason;
-  final TextEditingController getTextRemark;
+  const OnSelectReason({required this.getTextReason, required this.getTextRemark});
+  final String getTextReason;
+  final String getTextRemark;
 }
 
 class OnEditRemark extends RefundRequestEvent {
-  const OnEditRemark({required this.refundRequestModel, required this.getTextReason, required this.getTextRemark});
-
-  final RefundRequestModel refundRequestModel;
-  final TextEditingController getTextReason;
-  final TextEditingController getTextRemark;
+  const OnEditRemark({required this.getTextReason, required this.getTextRemark});
+  final String getTextReason;
+  final String getTextRemark;
 }
 
 class OnSubmitRefundData extends RefundRequestEvent {

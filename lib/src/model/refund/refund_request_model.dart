@@ -1,57 +1,42 @@
-import 'package:marketplace_line_oa/src/model/product_list.dart';
-
-extension RefundInfoModelX on RefundInfoModel {
-  bool get isEmpty => this != RefundInfoModel.empty;
-}
-
-class RefundRequestModel {
-  final String? status;
-  final RefundInfoModel? refundInfo;
-  final Product? product;
-
-  const RefundRequestModel({required this.status, required this.refundInfo, required this.product});
-
-  RefundRequestModel.fromJson(Map<String, dynamic> json)
-      : status = json['status'],
-        refundInfo = json['refundInfo'] != null ? RefundInfoModel.fromJson(json['refundInfo']) : null,
-        product = json['rawData'] != null ? Product.fromJson(json['rawData']) : null;
-}
-
-class RefundInfoModel {
-  final String? refundNo;
-  final String? refundDate;
-  final String? refundTime;
-  final String? reason;
-  final String? remark;
-
-  const RefundInfoModel({required this.refundNo, required this.refundDate, required this.refundTime, required this.reason, required this.remark});
-
-  RefundInfoModel.fromJson(Map<String, dynamic> json)
-      : refundNo = json['refundNo'],
-        refundDate = json['refundDate'],
-        refundTime = json['refundTime'],
-        reason = json['reason'],
-        remark = json['remark'];
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['refundNo'] = refundNo;
-    data['refundDate'] = refundDate;
-    data['refundTime'] = refundTime;
-    data['reason'] = reason;
-    data['remark'] = remark;
-    return data;
-  }
-
-  static const empty = RefundInfoModel(
-    refundNo: '',
-    refundDate: '',
-    refundTime: '',
-    reason: '',
-    remark: '',
-  );
-}
-
+// extension RefundInfoModelX on RefundInfoModel {
+//   bool get isEmpty => this != RefundInfoModel.empty;
+// }
+//
+// class RefundInfoModel {
+//   final String? refundNo;
+//   final String? refundDate;
+//   final String? refundTime;
+//   final String? reason;
+//   final String? remark;
+//
+//   const RefundInfoModel({required this.refundNo, required this.refundDate, required this.refundTime, required this.reason, required this.remark});
+//
+//   RefundInfoModel.fromJson(Map<String, dynamic> json)
+//       : refundNo = json['refundNo'],
+//         refundDate = json['refundDate'],
+//         refundTime = json['refundTime'],
+//         reason = json['reason'],
+//         remark = json['remark'];
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data['refundNo'] = refundNo;
+//     data['refundDate'] = refundDate;
+//     data['refundTime'] = refundTime;
+//     data['reason'] = reason;
+//     data['remark'] = remark;
+//     return data;
+//   }
+//
+//   static const empty = RefundInfoModel(
+//     refundNo: '',
+//     refundDate: '',
+//     refundTime: '',
+//     reason: '',
+//     remark: '',
+//   );
+// }
+//
 // class Product {
 //   String? invoiceNo;
 //   String? cardNo;

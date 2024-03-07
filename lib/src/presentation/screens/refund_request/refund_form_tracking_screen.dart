@@ -9,7 +9,6 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 import 'package:marketplace_line_oa/src/model/refund/arguments/refund_success_args.dart';
-import 'package:marketplace_line_oa/src/model/refund/refund_request_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_request/refund_request_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -118,8 +117,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                 },
               );
             } else if (state.refundRequestStatus == GetRefundRequestStatus.success) {
-              bool haveReason = state.getTextReason.text.isNotEmpty;
-              bool haveRemark = state.getTextRemark.text.isNotEmpty;
+              bool haveReason = state.getTextReason.isNotEmpty;
+              bool haveRemark = state.getTextRemark.isNotEmpty;
               return AlvaRootWidget(
                 titlePage: titleWebPage,
                 appBar: appBar,
@@ -255,18 +254,15 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                 ),
                                 autoValidateMode: AutovalidateMode.onUserInteraction,
                                 label: "เหตุผลการคืนสินค้า",
-                                textEditingController: state.getTextReason,
+                                textEditingController: context.read<RefundRequestBloc>().textEditingControllerReason,
                                 marginBottom: 15,
                                 required: true,
-                                value: state.refundRequestData.refundInfo!.reason,
+                                value: state.getTextReason,
                                 options: state.reasonList,
                                 onChanged: (DropdownAddressModel value) async {
-                                  RefundRequestModel refundModel = RefundRequestModel(
-                                      status: '',
-                                      refundInfo: RefundInfoModel(refundNo: '', refundTime: '', refundDate: '', remark: '', reason: value.nameTh),
-                                      product: null);
                                   context.read<RefundRequestBloc>().add(OnSelectReason(
-                                      refundRequestModel: refundModel, getTextReason: state.getTextReason, getTextRemark: state.getTextRemark));
+                                      getTextReason: context.read<RefundRequestBloc>().textEditingControllerReason!.text,
+                                      getTextRemark: context.read<RefundRequestBloc>().textEditingControllerRemark!.text));
                                 },
                               ),
 
@@ -278,7 +274,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   children: [
                                     TextInputWidget(
                                       autoValidateMode: AutovalidateMode.disabled,
-                                      controller: state.getTextReason,
+                                      controller: context.read<RefundRequestBloc>().textEditingControllerReason,
                                       textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                       outsideLabel: true,
                                       marginBottom: 15,
@@ -310,21 +306,15 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           ),
                                           autoValidateMode: AutovalidateMode.onUserInteraction,
                                           label: "เหตุผลการคืนสินค้า",
-                                          textEditingController: state.getTextReason,
+                                          textEditingController: context.read<RefundRequestBloc>().textEditingControllerReason,
                                           marginBottom: 15,
                                           required: true,
-                                          value: state.refundRequestData.refundInfo!.reason,
+                                          value: state.getTextReason,
                                           options: state.reasonList,
                                           onChanged: (DropdownAddressModel value) async {
-                                            RefundRequestModel refundModel = RefundRequestModel(
-                                                status: '',
-                                                refundInfo:
-                                                    RefundInfoModel(refundNo: '', refundTime: '', refundDate: '', remark: '', reason: value.nameTh),
-                                                product: null);
                                             context.read<RefundRequestBloc>().add(OnSelectReason(
-                                                refundRequestModel: refundModel,
-                                                getTextReason: state.getTextReason,
-                                                getTextRemark: state.getTextRemark));
+                                                getTextReason: context.read<RefundRequestBloc>().textEditingControllerReason!.text,
+                                                getTextRemark: context.read<RefundRequestBloc>().textEditingControllerRemark!.text));
                                           },
                                         )),
                                   ],
@@ -336,7 +326,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                               children: [
                                 TextInputWidget(
                                   autoValidateMode: AutovalidateMode.disabled,
-                                  controller: state.getTextRemark,
+                                  controller: context.read<RefundRequestBloc>().textEditingControllerRemark,
                                   isAllowEmoji: true,
                                   label: "คำอธิบายเพิ่มเติม",
                                   textStyle: AlvaStyles().headingSize16w500(BTN_SELECTED_TEXT_COLOR_NEW),
@@ -350,18 +340,14 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   maxLength: 250,
                                   maxLines: null,
                                   showCounter: true,
-                                  focusNode: state.focusRemark,
+                                  focusNode: context.read<RefundRequestBloc>().focusRemark,
                                   onFocusChange: (bool isFocus) async {
-                                    RefundRequestModel refundModel = RefundRequestModel(
-                                        status: '',
-                                        refundInfo: RefundInfoModel(
-                                            refundNo: '', refundTime: '', refundDate: '', remark: state.getTextRemark.text, reason: ''),
-                                        product: null);
                                     context.read<RefundRequestBloc>().add(OnEditRemark(
-                                        refundRequestModel: refundModel, getTextReason: state.getTextReason, getTextRemark: state.getTextRemark));
+                                        getTextReason: context.read<RefundRequestBloc>().textEditingControllerReason!.text,
+                                        getTextRemark: context.read<RefundRequestBloc>().textEditingControllerRemark!.text));
                                   },
                                 ),
-                                haveRemark && !state.focusRemark.hasFocus
+                                haveRemark && !context.read<RefundRequestBloc>().focusRemark!.hasFocus
                                     ? Positioned(
                                         right: 5,
                                         top: 38,
