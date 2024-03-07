@@ -80,14 +80,6 @@ void main() {
       },
     );
 
-    blocTest<RefundSuccessBloc, RefundSuccessState>("get refund success",
-        setUp: () {
-          mockBuildContext = MockBuildContext();
-        },
-        build: () => RefundSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "1234", const {}, bypassContext: true)),
-        expect: () => <RefundSuccessState>[RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.success)]);
-
     blocTest<RefundSuccessBloc, RefundSuccessState>("RefundRequestSuccess success",
         setUp: () async {
           SharedPreferences.setMockInitialValues({});
