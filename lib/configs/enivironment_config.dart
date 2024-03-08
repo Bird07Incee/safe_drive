@@ -40,8 +40,7 @@ Map<String, dynamic> envConfig = {
   },
   "uat": {
     "ENVIRONMENT_NAME": "uat",
-    //TODO: config redirect url uat
-    "LIFF_ID": "1661164508-Kn9nO7oB",
+    "LIFF_ID": "1661164508-ZNvKbY9k",
     "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
     "BFF_SOCIAL_BASE_URL": "/mercury-social-uat",
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-uat",
@@ -49,9 +48,8 @@ Map<String, dynamic> envConfig = {
     "INQUIRY_URL": "/v1/inquiry",
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
-    //TODO: config redirect url uat
     "LINE_REDIRECT_URL":
-        "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
+        "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-ZNvKbY9k&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
   },
   "prod": {
     "ENVIRONMENT_NAME": "prod",
