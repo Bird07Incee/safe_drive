@@ -101,7 +101,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                     style: AlvaStyles().headingSize14w700(blackGoMunTo),
                                   ),
                                   Text(
-                                    "หมายเลขอ้างอิง: ${refundSuccessData.refundNo}",
+                                    "หมายเลขอ้างอิง: ${refundSuccessData.invoiceNo}",
                                     style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
                                   ),
                                   Text(
