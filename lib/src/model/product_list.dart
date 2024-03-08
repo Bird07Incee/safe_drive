@@ -101,7 +101,7 @@ class Product extends Equatable {
   final List<String> promotionTag;
   final String description;
   final String technicalSpec;
-  final String remark;
+  final List<String> remark;
   final String currency;
   final int price;
   final int discountPrice;
@@ -133,7 +133,7 @@ class Product extends Equatable {
       promotionTag: [],
       description: '',
       technicalSpec: '',
-      remark: '',
+      remark: [],
       currency: '',
       price: 0,
       discountPrice: 0,

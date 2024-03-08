@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -11,6 +12,7 @@ import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/utils/phone_number_formatter.dart';
 
 class PDBottomSection extends StatefulWidget {
   const PDBottomSection({super.key});
@@ -39,12 +41,91 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       builder: (context, state) {
-        remarkHtmlString = state.product.remark.replaceAllMapped(
-          RegExp(r'เบอร์ติดต่อ (\d{3}-\d{3}-\d{4})'),
-          (match) {
-            return '<strong>${match.group(0)}</strong>';
-          },
-        );
+        // remarkHtmlString = state.product.remark.replaceAllMapped(
+        //   RegExp(r'เบอร์ติดต่อ (\d{3}-\d{3}-\d{4})'),
+        //   (match) {
+        //     return '<strong>${match.group(0)}</strong>';
+        //   },
+        // );
+        List<Widget> listRemark = [];
+        RichText? textMerchantName;
+        for (var text in state.product.remark){
+          textMerchantName = null;
+          String mobileNo = "";
+          String homeNo = "";
+          if(text.contains("merchantFullName")){
+            text = text.replaceAll("merchantFullName", state.product.merchantFullName);
+            var list = text.split(state.product.merchantFullName);
+            text.replaceAllMapped(
+              RegExp(r'(\d{3}-\d{3}-\d{4})'),
+                  (match) {
+                mobileNo = '${match.group(0)}';
+                text = text.replaceAll(mobileNo, "");
+                list.last = list.last.replaceAll(mobileNo, "");
+                return "";
+              },
+            );
+
+            textMerchantName = RichText(text:
+            TextSpan(text: list.first,
+                style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2.4),
+                children: [TextSpan(text: state.product.merchantFullName,
+                    style: AlvaStyles().headingSize12w600(spaceGrey).copyWith(height: 2.4),
+                    children: [TextSpan(text: list.last,
+                        style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2.4),
+                        children: [TextSpan(text: mobileNo.isNotEmpty ? mobileNo: homeNo.isNotEmpty ? homeNo:"",
+                        style: AlvaStyles().headingSize12w600(spaceGrey).copyWith(height: 2.4),
+                        recognizer: TapGestureRecognizer()..onTap = () {
+                            String phoneNumber = mobileNo.replaceAll("-", "");
+                            callPhone(phoneNumber);
+                        })])
+                    ])
+            ]));
+          }
+          else{
+            text.replaceAllMapped(
+              RegExp(r'(\d{2}-\d{3}-\d{4})'),
+                  (match) {
+                homeNo = '${match.group(0)}';
+                text = text.replaceAll(homeNo, "");
+                listRemark.add(RichText(text:
+                TextSpan(text: text,
+                    style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2.4),
+                    children: [
+                      TextSpan(text: homeNo,
+                    recognizer: TapGestureRecognizer()..onTap = () {
+                        String phoneNumber = homeNo.replaceAll("-", "");
+                        callPhone(phoneNumber);
+                    },
+                         style: AlvaStyles().headingSize12w600(spaceGrey).copyWith(height: 2.4))
+                    ]),
+                ));
+                // list.last = list.last.replaceAll(homeNo, "");
+                return "";
+              },
+            );
+            if(homeNo.isNotEmpty){
+              continue;
+            }
+          }
+          listRemark.add(
+              Row(
+                children: [
+                  Expanded(
+                    child: textMerchantName ?? Text(text,
+                        style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2.4))
+                  ),
+                      // Expanded(child:
+                      // Text(text, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW))),
+                      // SizedBox(
+                      //   width: 5,
+                      // ),
+                      // Text(mobileNo.isNotEmpty ? mobileNo: homeNo.isNotEmpty ? homeNo:"",
+                      //     style: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)),
+
+                ],
+              ));
+        }
         return Column(
           children: [
             buildProductDescriptionWidget(state.product),
@@ -154,16 +235,34 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   buildDetailCardWidget(context, state.product,
                       titleKey: AppKeys().productDetailRemarkTitleKey,
                       title: AppStrings().remarkTitle,
-                      bodyPage: HtmlWidget(
-                        remarkHtmlString ?? "",
-                        buildAsync: false,
-                        customStylesBuilder: (element) {
-                          if (element.localName == 'strong') {
-                            return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
-                          }
-                          return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
-                        },
-                        textStyle: TextStyle(fontWeight: FontWeight.w400),
+                      bodyPage: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children : listRemark,
+                        // remarkHtmlString ?? "",
+                        // buildAsync: false,
+                        // customStylesBuilder: (element) {
+                        //   if (element.localName == 'strong') {
+                        //     print(" test " + remarkHtmlString!);
+                        //     return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
+                        //   }
+                        //   return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
+                        // },
+                        // textStyle: TextStyle(fontWeight: FontWeight.w400),
+        // customWidgetBuilder: (element) {
+        // if (element.localName == 'strong') {
+        //   String text = element.text;
+        //   return SizedBox(
+        //     child: OutlinedButton(
+        //       onPressed: () {
+        //         String phoneNumber = text.replaceAll("-", "");
+        //         callPhone(phoneNumber);
+        //       },
+        //       style: AlvaStyles().outlineButtonStyle(Colors.transparent, whitePure, 0),
+        //       child: Text(text, style: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)),
+        //     ),
+        //   );
+        // }
+        // },
                       )),
                 ],
               ),
