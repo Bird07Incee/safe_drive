@@ -72,7 +72,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
         } else {
           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
         }
-        return false;
+        return true;
       },
       child: AlvaRootWidget(
         titlePage: titleWebPage,
