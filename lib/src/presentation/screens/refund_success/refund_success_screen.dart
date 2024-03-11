@@ -65,7 +65,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
     return RootPageCondition(
         child: WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, Routes.tracking.toStringPath(), (route) => false);
         return false;
       },
       child: AlvaRootWidget(
