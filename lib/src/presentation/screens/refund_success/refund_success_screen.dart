@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -68,9 +69,9 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
       onWillPop: () async {
         String pid = context.read<RefundSuccessBloc>().state.refundSuccessData.productId ?? "";
         if (pid.isNotEmpty) {
-          Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.initial.toStringPath()));
           refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
         } else {
+          CurrentRouteObserver.instance.stack.clear();
           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
         }
         return true;
