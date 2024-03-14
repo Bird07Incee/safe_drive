@@ -43,7 +43,7 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
       bool disableRefundButton = false;
       if (diffDay.isNegative || ["RefundSuccess"].contains(t.tracking.status[0].statusName)) {
         isRefundable = false;
-      } else if (["RefundRequest"].contains(t.tracking.status[0].statusName)) {
+      } else if (["RefundRequest"].contains(t.tracking.status[0].statusName) || ["RefundRejected"].contains(t.tracking.status[0].statusName)) {
         isRefundable = false;
       }
 
