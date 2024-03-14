@@ -12,7 +12,6 @@ import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
-import 'package:marketplace_line_oa/src/utils/phone_number_formatter.dart';
 
 class PDBottomSection extends StatefulWidget {
   const PDBottomSection({super.key});
