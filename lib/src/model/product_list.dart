@@ -169,7 +169,7 @@ class Product extends Equatable {
         promotionTag: json['promotionTag'] != null ? List.castFrom<dynamic, String>(json['promotionTag']) : [],
         description: json['description'] != null ? json['description'].toString() : "",
         technicalSpec: json['technicalSpec'] != null ? json['technicalSpec'].toString() : "",
-        remark: json['remark'] ?? '',
+        remark: json['remark'] != null ? List.castFrom<dynamic, String>(json['remark']) : [],
         currency: json['currency'] ?? '',
         price: json['price'] ?? 0,
         discountPrice: json['discountPrice'] ?? 0,
@@ -1380,7 +1380,7 @@ const mockProductResponse = {
   "description": "<h1>Desc cate 2 Palsar Max version2</h1></h1>",
   "technicalSpec":
       "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
-  "remark": "<h1>Remark cate 2 Palsar Max version2</h1></h1>",
+  "remark": [],
   "currency": "THB",
   "price": 100000,
   "discountPrice": 50000,
