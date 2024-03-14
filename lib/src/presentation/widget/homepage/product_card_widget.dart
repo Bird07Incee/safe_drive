@@ -114,6 +114,7 @@ class ProductCardWidget extends StatelessWidget {
                               child: GestureDetector(
                                 key: const Key("see_photo"),
                                 onTap: () async {
+                                  hideOneTrustCookieScript();
                                   context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                   context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));
                                   context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
@@ -123,6 +124,7 @@ class ProductCardWidget extends StatelessWidget {
                                   final ctx = context.read<ProductDetailCarouselScrollControllerBloc>();
                                   await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
 
+                                  showOneTrustCookieScript();
                                   int detailPage = ctx.state.page as int;
                                   pageViewController.jumpToPage(detailPage);
                                 },
