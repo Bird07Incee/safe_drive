@@ -13,12 +13,16 @@ function loadOneTrustCookieScript() {
     document.body.appendChild(script2);
 }
 
-function hideOneTrustCookieScript(){
-    const onetrust = document.getElementById("onetrust-consent-sdk");
-    onetrust.setAttribute("style", "visibility: hidden;");
+function hideOneTrustCookieScript() {
+    try {
+        const onetrust = document.getElementById("onetrust-consent-sdk");
+        onetrust.setAttribute("style", "visibility: hidden;");
+    } catch {
+        console.log("onetrust hide error");
+    }
 }
 
-function showOneTrustCookieScript(){
+function showOneTrustCookieScript() {
     try {
         const onetrust = document.getElementById("onetrust-consent-sdk");
         onetrust.setAttribute("style", "visibility: visible;");

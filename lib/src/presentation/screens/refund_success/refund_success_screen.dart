@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -14,6 +15,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/order_cancel.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:marketplace_line_oa/src/utils/phone_number_formatter.dart';
@@ -65,8 +67,14 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
     return RootPageCondition(
         child: WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
-        return false;
+        String pid = context.read<RefundSuccessBloc>().state.refundSuccessData.productId ?? "";
+        if (pid.isNotEmpty) {
+          refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
+        } else {
+          CurrentRouteObserver.instance.stack.clear();
+          Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+        }
+        return true;
       },
       child: AlvaRootWidget(
         titlePage: titleWebPage,

@@ -75,7 +75,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
       );
       myBloc.updateSelectCurrentOption(0);
       myBloc.updateLastOption(1);
-      refreshRoute(context: context, currentRoute: "selectOption", queryParams: "pid=$pid", listOption: []);
+      ProductDetailState pdState = context.read<ProductDetailBloc>().state;
+      refreshRoute(context: context, currentRoute: "selectOption", queryParams: "pid=$pid", listOption: pdState.product.productionOptionals);
     }
 
     return BlocBuilder<ProductOptionBloc, ProductOptionState>(
@@ -109,9 +110,10 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                         child: prodOptState.selectCurrentOption == prodOptState.lastOption &&
                                 (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                             ? OutlinedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
+                                onPressed: () async {
+                                  await Navigator.pushNamed(
                                       context, '${Routes.orderSummary.toStringPath()}?pid=$pid&opt_lv1=${prodOptState.stepOneIndexSelect}');
+                                  resetAllState();
                                 },
                                 style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent),
                                 child: Text(ProductSelectOptionsConst().continueText,

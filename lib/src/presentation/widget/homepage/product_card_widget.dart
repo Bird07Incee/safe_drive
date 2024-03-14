@@ -114,6 +114,7 @@ class ProductCardWidget extends StatelessWidget {
                               child: GestureDetector(
                                 key: const Key("see_photo"),
                                 onTap: () async {
+                                  hideOneTrustCookieScript();
                                   context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                   context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));
                                   context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
@@ -123,6 +124,7 @@ class ProductCardWidget extends StatelessWidget {
                                   final ctx = context.read<ProductDetailCarouselScrollControllerBloc>();
                                   await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
 
+                                  showOneTrustCookieScript();
                                   int detailPage = ctx.state.page as int;
                                   pageViewController.jumpToPage(detailPage);
                                 },
@@ -194,11 +196,15 @@ class ProductCardWidget extends StatelessWidget {
                                       alignment: Alignment.bottomRight,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-                                        child: Image.network(
-                                          products[index].merchantLogo,
-                                          height: 32,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                        child: Container(
+                                          color: Colors.white,
+                                          padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                                          child: Image.network(
+                                            products[index].merchantLogo,
+                                            height: 32,
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                          ),
                                         ),
                                       ),
                                     )),

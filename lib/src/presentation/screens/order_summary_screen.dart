@@ -109,7 +109,6 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     queryParams: "pid=$pid",
                     listOption: context.read<ProductDetailBloc>().state.product.productionOptionals);
               }
-              Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
             },
             onCancel: () {})
         .showSummaryDialog(context: context);
@@ -129,12 +128,12 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
         child: WillPopScope(
       onWillPop: () async {
         onBack(context);
-        return true;
+        return false;
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
           if (state.status.isSuccess && currentRoute.contains(Routes.orderSummary.toStringPath())) {
-            // loadSelectOption(state.product);
+            loadSelectOption(state.product);
           }
         },
         builder: (context, productState) {
