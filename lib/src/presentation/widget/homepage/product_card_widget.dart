@@ -194,11 +194,15 @@ class ProductCardWidget extends StatelessWidget {
                                       alignment: Alignment.bottomRight,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-                                        child: Image.network(
-                                          products[index].merchantLogo,
-                                          height: 32,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                        child: Container(
+                                          color: Colors.white,
+                                          padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                                          child: Image.network(
+                                            products[index].merchantLogo,
+                                            height: 32,
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                          ),
                                         ),
                                       ),
                                     )),

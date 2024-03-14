@@ -656,11 +656,15 @@ class _PDTopSectionState extends State<PDTopSection> {
                             alignment: Alignment.bottomRight,
                             child: ClipRRect(
                               borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-                              child: Image.network(
-                                state.product.merchantLogo,
-                                height: 32,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                              child: Container(
+                                color: Colors.white,
+                                padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                                child: Image.network(
+                                  state.product.merchantLogo,
+                                  height: 32,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                ),
                               ),
                             ),
                           )),
