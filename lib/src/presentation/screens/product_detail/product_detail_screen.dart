@@ -146,11 +146,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   }
 
   void onBack() {
+    showOneTrustCookieScript();
     var stack = CurrentRouteObserver.instance.stack;
     if (stack.contains(Routes.initial.toStringPath())) {
       Navigator.pop(context);
     } else {
-      showOneTrustCookieScript();
       Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
     }
     context.read<ProductOptionBloc>().updateStepOneVariables(
