@@ -297,6 +297,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   Widget viewImagePage(
       PageController pageController, BuildContext context, TransformationController zoomState, double previousState, ProductDetailState pdState) {
     backButtontoDetail() {
+      showOneTrustCookieScript();
       final myBloc = BlocProvider.of<ProductDetailDescriptionCubit>(context);
 
       myBloc.updateToggleTapDescription(toggleDescription: false);
