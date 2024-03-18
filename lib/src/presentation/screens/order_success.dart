@@ -391,7 +391,6 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                         onTap: () {
                           refreshRoute(context: context, currentRoute: "orderSuccess", queryParams: "", listOption: []);
                           Navigator.pushNamed(context, '/trackingList');
-                          hideOneTrustCookieScript();
                         },
                         child: Container(
                           height: 48,

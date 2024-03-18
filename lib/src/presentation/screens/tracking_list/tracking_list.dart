@@ -27,6 +27,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
   @override
   void initState() {
     super.initState();
+    hideOneTrustCookieScript();
     context.read<TrackingOrderBloc>().add(GetTrackingOrderListByPage(1, context));
   }
 
