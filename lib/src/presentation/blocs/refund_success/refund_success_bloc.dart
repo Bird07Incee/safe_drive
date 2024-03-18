@@ -34,7 +34,9 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
 
       Map<String, dynamic> refundJsonData = {};
       if (response.statusCode == 200) {
-        refundJsonData = response.data;
+        refundJsonData = {"status": response.data["status"]};
+        refundJsonData.addAll(response.data["refundInfo"] as Map<String, dynamic>);
+        refundJsonData.addAll(response.data["rawData"] as Map<String, dynamic>);
       } else {
         refundJsonData = {"status": event.refundResponse["status"]};
         refundJsonData.addAll(event.refundResponse["refundInfo"] as Map<String, dynamic>);
@@ -42,6 +44,7 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
       }
 
       var status = refundJsonData["status"];
+
       final RefundSuccessDataModel refundData = RefundSuccessDataModel.fromJson(refundJsonData);
       if (status == "Complete") {
         if (!event.bypassContext) {
