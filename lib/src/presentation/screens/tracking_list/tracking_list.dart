@@ -66,7 +66,6 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
         child: BlocBuilder<TrackingOrderBloc, TrackingOrderState>(
           builder: (context, state) {
             if (state.trackingOrderListStatus == GetTrackingOrderListStatus.success) {
-              hideOneTrustCookieScript();
               return AlvaRootWidget(
                   titlePage: titleWebPage,
                   appBar: appBar,

@@ -389,7 +389,6 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       child: GestureDetector(
                         key: const Key("back_to_tracking_list_button"),
                         onTap: () {
-                          refreshRoute(context: context, currentRoute: "orderSuccess", queryParams: "", listOption: []);
                           Navigator.pushNamed(context, '/trackingList');
                         },
                         child: Container(
