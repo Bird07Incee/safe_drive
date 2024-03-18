@@ -52,8 +52,35 @@ void main() {
     }
   };
 
-  RefundSuccessDataModel refundData = RefundSuccessDataModel.fromJson(mockResponse);
-  Map<String, dynamic> refundJsonData = {"status": mockResponse["status"]};
+  var mockExpected = {
+    "status": "Complete",
+    "refundNo": "RFLA20240215100358LXVdT",
+    "refundDate": "15 กุมภาพันธ์ 2567",
+    "refundTime": "10:03:58",
+    "reason": "test reason ipp",
+    "remark": "test remark ipp",
+    "invoiceNo": "LA20231121153204CgSTp",
+    "cardNo": "439137XXXXXX0006",
+    "paymentDate": "21 พฤศจิกายน 2566",
+    "paymentTime": "15:34:16",
+    "paymentGateway": "บัตรเครดิต/บัตรเดบิต (ผ่าน 2C2P)",
+    "paymentChannel": "IPP",
+    "productImagePath": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/WALLBOX_DAY2_2.jpg",
+    "productId": "P005",
+    "productName": "Palsar Max EV4",
+    "productOption": "",
+    "amount": "10000.0",
+    "customerFullname": "Mr Ship Add",
+    "customerMobile": "0810155211",
+    "customerEmail": "atirat.chunsith@gmail.com",
+    "customerAddress": "333/23 แขวงทุ่งสองห้อง เขตมีนบุรี จ.กรุงเทพ 10110",
+    "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
+    "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท เขตพญาไท กทม 10400",
+    "merchantMobile": "091-862-5011",
+    "paymentChannelText": "ผ่อนชำระ 3 เดือน"
+  };
+
+  RefundSuccessDataModel refundData = RefundSuccessDataModel.fromJson(mockExpected);
 
   group('RefundSuccessBloc', () {
     late MockBuildContext mockBuildContext;
