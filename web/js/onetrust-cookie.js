@@ -16,7 +16,7 @@ function loadOneTrustCookieScript() {
 function hideOneTrustCookieScript() {
     try {
         const onetrust = document.getElementById("onetrust-consent-sdk");
-        onetrust.setAttribute("style", "visibility: hidden;");
+        onetrust.setAttribute("style", "display: none;");
     } catch {
         console.log("onetrust hide error");
     }
@@ -25,7 +25,7 @@ function hideOneTrustCookieScript() {
 function showOneTrustCookieScript() {
     try {
         const onetrust = document.getElementById("onetrust-consent-sdk");
-        onetrust.setAttribute("style", "visibility: visible;");
+        onetrust.removeAttribute("style");
     } catch {
         console.log("onetrust show error");
     }
