@@ -12,13 +12,15 @@ import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
+import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 // import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 late DatadogConfiguration configuration;
+UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
 void main() async {
-  usePathUrlStrategy();
+  setUrlStrategy(urlStrategyPromptBuy);
   WidgetsFlutterBinding.ensureInitialized();
   _configureApp();
   await SystemChrome.setPreferredOrientations([
