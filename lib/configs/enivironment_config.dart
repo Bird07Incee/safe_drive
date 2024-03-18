@@ -7,6 +7,7 @@ Map<String, dynamic> envConfig = {
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-dev",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-dev",
     "INQUIRY_URL": "/v1/inquiry",
+    "INQUIRY_REFUND_URL": "/v1/inquiry/refund",
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
@@ -20,6 +21,7 @@ Map<String, dynamic> envConfig = {
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-qa",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-qa",
     "INQUIRY_URL": "/v1/inquiry",
+    "INQUIRY_REFUND_URL": "/v1/inquiry/refund",
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
@@ -33,6 +35,7 @@ Map<String, dynamic> envConfig = {
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-int",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-int",
     "INQUIRY_URL": "/v1/inquiry",
+    "INQUIRY_REFUND_URL": "/v1/inquiry/refund",
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
@@ -46,6 +49,7 @@ Map<String, dynamic> envConfig = {
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-uat",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-uat",
     "INQUIRY_URL": "/v1/inquiry",
+    "INQUIRY_REFUND_URL": "/v1/inquiry/refund",
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
@@ -60,6 +64,7 @@ Map<String, dynamic> envConfig = {
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-prod",
     "BFF_INVENTORY_BASE_URL": "/mercury-inventory-manager-prod",
     "INQUIRY_URL": "/v1/inquiry",
+    "INQUIRY_REFUND_URL": "/v1/inquiry/refund",
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
     //TODO: config redirect url prod

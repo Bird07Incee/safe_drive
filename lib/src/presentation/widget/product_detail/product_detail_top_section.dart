@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -265,11 +263,11 @@ class _PDTopSectionState extends State<PDTopSection> {
 
             // The process of counting lines and checking how many characters each line has and maxLine should be set.
             for (int i = 0; i < lines.length; i++) {
-              log("line[$i] ${lines[i].length} : ${lines[i]}");
+              //log("line[$i] ${lines[i].length} : ${lines[i]}");
               if (lines.length - 1 >= 1) {
                 // If the first line is too long, then maxLine = 1.
                 if (lines[0].length >= 150) {
-                  log(("case 1"));
+                  //log(("case 1"));
                   maxLines = 1;
                 }
               }
@@ -277,12 +275,12 @@ class _PDTopSectionState extends State<PDTopSection> {
                 // If the second line is too long and the first line is not too long, then maxLine = 2.
                 if (lines[1].length >= 80 && lines[1].length <= 169 && lines[0].length <= 149) {
                   maxLines = 2;
-                  log(("case 2"));
-                  log(("line ${lines.length} ${lines.length - 1 >= 3}"));
+                  //log(("case 2"));
+                  //log(("line ${lines.length} ${lines.length - 1 >= 3}"));
                   for (int i = 0; i < bigText.length; i++) {
                     if (lines[0].length >= 100 && lines[0].contains(bigText[i])) {
                       maxLines = 1;
-                      log(("case 2.0.1"));
+                      //log(("case 2.0.1"));
                     } else if (lines[0].length <= 100 &&
                         !(lines[0].contains(bigText[i])) &&
                         lines[1].length >= 80 &&
@@ -291,19 +289,19 @@ class _PDTopSectionState extends State<PDTopSection> {
                         lines[2].length >= 80 &&
                         lines[2].length <= 115) {
                       maxLines = 3;
-                      log(("case 2.0.2"));
+                      //log(("case 2.0.2"));
                     }
                   }
 
                   // If the second line is too long and the first line is not too long, then maxLine = 2.
                 } else if (lines[1].length >= 170 && lines[0].length <= 149) {
                   maxLines = 2;
-                  log(("case 2.1"));
+                  //log(("case 2.1"));
                   for (int i = 0; i < bigText.length; i++) {
                     if (lines[0].length >= 100 && lines[0].contains(bigText[i])) {
                       maxLines = 1;
 
-                      log(("case 2.0.1"));
+                      //log(("case 2.0.1"));
                     }
                   }
                 }
@@ -312,11 +310,11 @@ class _PDTopSectionState extends State<PDTopSection> {
                     if (lines[0].length >= 70 && lines[0].contains(bigText[i])) {
                       maxLines = 1;
 
-                      log(("case 2.0.1"));
+                      //log(("case 2.0.1"));
                     }
                     if (lines[0].length <= 69 && lines[0].contains(bigText[i]) && lines[1].contains(bigText[i])) {
                       maxLines = 2;
-                      log(("case 2.0.2"));
+                      //log(("case 2.0.2"));
                     }
                   }
                 }
@@ -325,36 +323,36 @@ class _PDTopSectionState extends State<PDTopSection> {
                 // If the third line is too long and the second line is not too long and the first line is not too long, then maxLine = 3
                 if (lines[2].length >= 100 && lines[2].length <= 169 && lines[1].length <= 80 && lines[0].length <= 149) {
                   maxLines = 3;
-                  log(("case 3"));
+                  //log(("case 3"));
                 } else if (lines[2].length >= 170 && lines[1].length <= 80 && lines[0].length <= 149) {
                   maxLines = 3;
-                  log(("case 3.1"));
+                  //log(("case 3.1"));
                 } else if (lines[2].length <= 10 && lines[1].length <= 80 && lines[0].length <= 149) {
                   maxLines = 2;
-                  log(("case 3.2"));
+                  //log(("case 3.2"));
                 }
                 for (int i = 0; i < bigText.length; i++) {
                   if (lines[2].length <= 169 && lines[2].contains(bigText[i]) && lines[1].length <= 80 && lines[0].length <= 149) {
                     maxLines = 2;
-                    log(("case 3.3"));
+                    //log(("case 3.3"));
                   }
                 }
               }
               if (lines.length - 1 >= 4) {
                 if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
                   maxLines = 3;
-                  log(("case 4"));
+                  //log(("case 4"));
                 } else if (lines[3].length <= 10 &&
                     lines[3].length >= 169 &&
                     lines[2].length <= 100 &&
                     lines[1].length <= 80 &&
                     lines[0].length <= 149) {
-                  log(("case 4.2"));
+                  //log(("case 4.2"));
                   maxLines = 2;
                 }
                 for (int i = 0; i < bigText.length; i++) {
                   if (lines[3].contains(bigText[i]) && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
-                    log(("case 4.3"));
+                    //log(("case 4.3"));
                     if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                         lines[1].contains("<p>") &&
                         lines[2].contains("<p>") &&
@@ -385,7 +383,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                 if (i == 0) {
                   // Insert the first line into a variable.
                   truncatedHtmlContent = [lines[0]].take(maxLines).join('\n');
-                  log("maxLines 2 step 1");
+                  //log("maxLines 2 step 1");
                 } else if (i == 1) {
                   if (lines[1].length >= 170 && lines[0].length <= 149) {
                     if (lineFinal == 2 && maxLines == 2) {
@@ -400,23 +398,23 @@ class _PDTopSectionState extends State<PDTopSection> {
                         truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 70)].take(maxLines).join('</'))}";
                       }
 
-                      log("maxLines 2 step 2");
+                      //log("maxLines 2 step 2");
                     } else {
                       if (lines[1].length >= 220) {
                         truncatedHtmlContent =
                             "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 220)].take(maxLines).join('</'))}";
-                        log("maxLines 2 step 2");
+                        //log("maxLines 2 step 2");
                       } else {
                         lineFinal = 2;
                         maxLines = 2;
                         truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('</'))}";
-                        log("maxLines 2 step 2");
+                        //log("maxLines 2 step 2");
                       }
                     }
                   } else {
                     if (lines[1].length <= 169 && lines[0].length <= 149) {
                       // Merge the second line into the variable truncatedHtmlContent.
-                      log("(${(lines[0].contains("<h1>") || lines[0].contains("<h2>"))})");
+                      //log("(${(lines[0].contains("<h1>") || lines[0].contains("<h2>"))})");
                       if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                           lines[0].length >= 40 &&
                           lines[0].length <= 73 &&
@@ -425,7 +423,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                           lineFinal = 3;
                           maxLines = 2;
                         }
-                        log("h1");
+                        //log("h1");
                         truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
                       } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                           lines[0].length <= 40 &&
@@ -435,13 +433,13 @@ class _PDTopSectionState extends State<PDTopSection> {
                           lineFinal = 3;
                           maxLines = 2;
                         }
-                        log("h1");
+                        //log("h1");
                         truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
                       } else {
                         truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
                           lines[1].substring(0, (lines[1].length * 0.9).round())
                         ].take(maxLines).join('</'))}";
-                        log("maxLines 2 step 2");
+                        //log("maxLines 2 step 2");
                       }
                     }
                   }
@@ -450,16 +448,16 @@ class _PDTopSectionState extends State<PDTopSection> {
 
               // process for substring. When the  line tree is found to be too long
             } else if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
-              log("maxLines 3");
+              //log("maxLines 3");
               for (int i = 0; i < lines.length; i++) {
                 if (i == 0) {
                   // Insert the first line into a variable.
                   truncatedHtmlContent = [lines[0]].take(maxLines).join('\n');
-                  log("maxLines 3 step 1");
+                  //log("maxLines 3 step 1");
                 } else if (i == 1) {
                   // Merge the second line into the variable truncatedHtmlContent.
                   truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('\n'))}";
-                  log("maxLines 3 step 2");
+                  //log("maxLines 3 step 2");
                 } else if (i == 2) {
                   if (lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
                     // Merge the second line into the variable truncatedHtmlContent.
@@ -473,7 +471,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                             (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                             lines[2].length >= 40) {
                       truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
-                      log("maxLines 3 step 3 with out h1 in line 1(phh)");
+                      //log("maxLines 3 step 3 with out h1 in line 1(phh)");
                     } else if (
                         // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                         lines[0].length <= 40 &&
@@ -482,7 +480,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                             (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                             lines[2].length >= 40) {
                       truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
-                      log("maxLines 3 step 3 with out h1 in line 1 and 2 (line 3 >= 40) (pph)");
+                      //log("maxLines 3 step 3 with out h1 in line 1 and 2 (line 3 >= 40) (pph)");
                     } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                         lines[0].length <= 40 &&
                         // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
@@ -490,7 +488,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                         (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                         lines[2].length >= 40) {
                       truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
-                      log("maxLines 3 step 3 with out h1 in line 2 (hph)");
+                      //log("maxLines 3 step 3 with out h1 in line 2 (hph)");
                     } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                             lines[0].length <= 40 &&
                             // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
@@ -503,7 +501,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                         truncatedHtmlContent =
                             "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
                       }
-                      log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (hpp)");
+                      //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (hpp)");
                     } else if (
                         // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                         lines[0].length <= 40 && (lines[1].contains("<h1>") || lines[1].contains("<h2>")) && lines[1].length <= 43
@@ -516,10 +514,10 @@ class _PDTopSectionState extends State<PDTopSection> {
                             "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
                       }
 
-                      log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (php)");
+                      //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (php)");
                     } else {
                       truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
-                      log("maxLines 3 step 3 all p");
+                      //log("maxLines 3 step 3 all p");
                     }
                   }
                 }

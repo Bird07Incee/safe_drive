@@ -900,8 +900,17 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                         ),
                                       )
                                     : SizedBox.shrink());
-                          } else {
+                          } else if (productState.status.isLoading) {
                             return const LoadingScreen();
+                          } else {
+                            return ErrorScreen(
+                                title: ErrorConst().titleNS,
+                                subTitle: ErrorConst().subTitleNS,
+                                titleBtn: ErrorConst().titleBtnNS,
+                                onTap: () {
+                                  isLoaded = true;
+                                  loadProduct();
+                                });
                           }
                         },
                       );

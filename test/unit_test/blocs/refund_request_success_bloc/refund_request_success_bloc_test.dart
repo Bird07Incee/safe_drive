@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/refund/refund_success_data_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
@@ -86,12 +88,26 @@ void main() {
           mockBuildContext = MockBuildContext();
           final mock = {"uid": "1234"};
           await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
-          refundJsonData.addAll(mockResponse["refundInfo"] as Map<String, dynamic>);
-          refundJsonData.addAll(mockResponse["rawData"] as Map<String, dynamic>);
-          refundData = RefundSuccessDataModel.fromJson(refundJsonData);
+          final baseUrl = Environment().getValue("BFF_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final inquiryRefundPath = Environment().getValue("INQUIRY_REFUND_URL");
+
+          when(() {
+            return utilityRepository.getByURL("$baseUrl$transactionApiPath$inquiryRefundPath", {"invoiceNo": "RFLA20240215100358LXVdT"},
+                headers: {"Authorization": "Bearer "});
+          }).thenAnswer(
+            (_) async {
+              RequestOptions option = RequestOptions(
+                  baseUrl: "$baseUrl$transactionApiPath$inquiryRefundPath",
+                  method: "GET",
+                  data: {"invoiceNo": "RFLA20240215100358LXVdT"},
+                  headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: mockResponse, statusCode: 200, statusMessage: "OK");
+            },
+          );
         },
         build: () => RefundSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "1234", mockResponse, bypassContext: true)),
+        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "RFLA20240215100358LXVdT", mockResponse, bypassContext: true)),
         expect: () => <RefundSuccessState>[
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.loading),
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.success, refundSuccessData: refundData)
@@ -105,7 +121,7 @@ void main() {
           await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
         },
         build: () => RefundSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "1234", const {}, bypassContext: true)),
+        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "RFLA20240215100358LXVdT", const {}, bypassContext: true)),
         expect: () => <RefundSuccessState>[
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.loading),
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.error)

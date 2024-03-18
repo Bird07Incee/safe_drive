@@ -411,7 +411,13 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                       child: GestureDetector(
                         key: const Key("back_to_tracking_list_button"),
                         onTap: () {
-                          Navigator.pushNamed(context, '/trackingList');
+                          String pid = state.refundSuccessData.productId ?? "";
+                          if (pid.isNotEmpty) {
+                            refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
+                          } else {
+                            CurrentRouteObserver.instance.stack.clear();
+                            Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+                          }
                         },
                         child: Container(
                           height: 48,
