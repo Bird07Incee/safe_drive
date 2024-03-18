@@ -70,7 +70,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
       onWillPop: () async {
         String pid = context.read<RefundSuccessBloc>().state.refundSuccessData.productId ?? "";
         if (pid.isNotEmpty) {
-          refreshRoute(context: context, currentRoute: "refundSuccess", listOption: [], queryParams: '');
+          refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
         } else {
           CurrentRouteObserver.instance.stack.clear();
           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);

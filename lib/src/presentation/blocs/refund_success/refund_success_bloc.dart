@@ -27,20 +27,24 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
       stateSc = ScaffoldMessenger.of(event.context);
     }
     String accessToken = await lineDataHelper.getLineAccessToken();
-
+    Map<String, dynamic> refundJsonData = {};
     try {
       Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$inquiryRefundPath", {"invoiceNo": event.invoiceNo},
           headers: {"Authorization": "Bearer $accessToken"});
 
-      Map<String, dynamic> refundJsonData = {};
       if (response.statusCode == 200) {
         refundJsonData = {"status": response.data["status"]};
         refundJsonData.addAll(response.data["refundInfo"] as Map<String, dynamic>);
         refundJsonData.addAll(response.data["rawData"] as Map<String, dynamic>);
       } else {
-        refundJsonData = {"status": event.refundResponse["status"]};
-        refundJsonData.addAll(event.refundResponse["refundInfo"] as Map<String, dynamic>);
-        refundJsonData.addAll(event.refundResponse["rawData"] as Map<String, dynamic>);
+        if (event.refundResponse.isNotEmpty) {
+          refundJsonData = {"status": event.refundResponse["status"]};
+          refundJsonData.addAll(event.refundResponse["refundInfo"] as Map<String, dynamic>);
+          refundJsonData.addAll(event.refundResponse["rawData"] as Map<String, dynamic>);
+        } else {
+          emit(state.copyWith(refundSuccessStatus: GetRefundSuccessDataStatus.error));
+          return;
+        }
       }
 
       var status = refundJsonData["status"];
