@@ -27,7 +27,6 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
   @override
   void initState() {
     super.initState();
-    hideOneTrustCookieScript();
     context.read<TrackingOrderBloc>().add(GetTrackingOrderListByPage(1, context));
   }
 
@@ -67,6 +66,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
         child: BlocBuilder<TrackingOrderBloc, TrackingOrderState>(
           builder: (context, state) {
             if (state.trackingOrderListStatus == GetTrackingOrderListStatus.success) {
+              hideOneTrustCookieScript();
               return AlvaRootWidget(
                   titlePage: titleWebPage,
                   appBar: appBar,
