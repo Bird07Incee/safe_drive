@@ -12,6 +12,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/order_cancel.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
@@ -389,6 +390,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       child: GestureDetector(
                         key: const Key("back_to_tracking_list_button"),
                         onTap: () {
+                          setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
                           Navigator.pushNamed(context, '/trackingList');
                         },
                         child: Container(

@@ -33,7 +33,7 @@ refreshRoute(
       Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?$queryParams');
       Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?$queryParams');
       break;
-    case "orderSuccess":
+    case "initial" || "orderSuccess":
       parallelUrlStrategy(context, Routes.initial.name, Routes.initial.toStringPath());
       break;
     case "refundSuccess":

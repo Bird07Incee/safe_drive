@@ -12,6 +12,8 @@ import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/tracking/tracking_order_card.dart';
+import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
+import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 import 'tracking_list_no_product.dart';
@@ -52,6 +54,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
           key: const Key("pop_navigator_to_home_page"),
           onPressed: () {
             showOneTrustCookieScript();
+            setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
             Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           },
           icon: const Icon(Icons.arrow_back_ios_rounded)),
@@ -60,6 +63,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
       child: WillPopScope(
         onWillPop: () async {
           showOneTrustCookieScript();
+          setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           return false;
         },

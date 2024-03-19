@@ -23,6 +23,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_b
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
     // Timer(const Duration(seconds: 1), () {
     //   final checkBrowserState = context.read<CheckBrowserBloc>().state;
     //   final env = Environment().getValue("ENVIRONMENT_NAME");
@@ -86,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return RootPageCondition(
         child: WillPopScope(
             onWillPop: () async {
-              refreshRoute(context: context, currentRoute: "orderSuccess", queryParams: "", listOption: []);
+              refreshRoute(context: context, currentRoute: "initial", queryParams: "", listOption: []);
               return false;
             },
             child: AlvaRootWidget(
