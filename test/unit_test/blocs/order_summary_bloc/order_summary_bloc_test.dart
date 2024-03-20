@@ -158,24 +158,17 @@ void main() {
   //   ]
   // };
 
-  final mockOrderResponse = {
-    "orderNo": "o1234",
-    "paymentURL": "https://test.test.com"
-  };
+  final mockOrderResponse = {"orderNo": "o1234", "paymentURL": "https://test.test.com"};
 
-  group("orderSummary bloc", ()
-  {
-    setUp(
-          () {
-            WidgetsFlutterBinding.ensureInitialized();
-            utilityRepository = MockDioUtilityRepository();
-          }
-    );
-
+  group("orderSummary bloc", () {
+    setUp(() {
+      WidgetsFlutterBinding.ensureInitialized();
+      utilityRepository = MockDioUtilityRepository();
+    });
 
     test(
       'initial state [OrderStatus.initial]',
-          () {
+      () {
         expect(
           OrderSummaryBloc(utilityRepository: utilityRepository).state.orderStatus.isInitial,
           isTrue,
@@ -185,7 +178,7 @@ void main() {
 
     test(
       'OrderSummaryState copyWith method initial state',
-          () {
+      () {
         expect(
           OrderSummaryBloc(utilityRepository: utilityRepository).state,
           OrderSummaryBloc(utilityRepository: utilityRepository).state.copyWith(),
@@ -197,9 +190,7 @@ void main() {
       blocTest<OrderSummaryBloc, OrderSummaryState>("set initial OrderSummaryEvent",
           build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const InitialOrderState()),
-          expect: () => <OrderSummaryState>[
-            OrderSummaryState()
-          ]);
+          expect: () => <OrderSummaryState>[OrderSummaryState()]);
     });
 
     group("OrderSummaryBloc CreateOrder", () {
@@ -207,54 +198,59 @@ void main() {
           setUp: () {
             SharedPreferences.setMockInitialValues({});
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+            final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
             String path = "/v1/create";
-            when((){
-              return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
+            when(() {
+              return utilityRepository
+                  .postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
             }).thenAnswer(
-                  (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$transactionApiPath$path", method: "POST", data: CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
+              (_) async {
+                RequestOptions option = RequestOptions(
+                    baseUrl: "$baseUrl$transactionApiPath$path",
+                    method: "POST",
+                    data: CreateOrderRequestModel.empty.toJson(),
+                    headers: {"Authorization": "Bearer "});
                 return Response(requestOptions: option, data: mockOrderResponse, statusCode: 200, statusMessage: "OK");
-              },
-            );
-            },
-          build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
-          act: (bloc) => bloc.add(const CreateOrder(requestModel: CreateOrderRequestModel.empty)),
-          expect: () => <OrderSummaryState>[
-            OrderSummaryState(orderStatus: OrderStatus.loading),
-            OrderSummaryState(orderStatus: OrderStatus.success, orderResponseModel: OrderResponseModel.fromJson(mockOrderResponse))
-      ]);
-
-      blocTest<OrderSummaryBloc, OrderSummaryState>("create order case fail",
-          setUp: () {
-            SharedPreferences.setMockInitialValues({});
-            final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
-            String path = "/v1/create";
-            when((){
-              return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
-            }).thenAnswer(
-                  (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$transactionApiPath$path", method: "POST", data: CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
-                return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
           },
           build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const CreateOrder(requestModel: CreateOrderRequestModel.empty)),
           expect: () => <OrderSummaryState>[
-            OrderSummaryState(orderStatus: OrderStatus.loading),
-            OrderSummaryState(orderStatus: OrderStatus.error)
-          ]);
+                OrderSummaryState(orderStatus: OrderStatus.loading),
+                OrderSummaryState(orderStatus: OrderStatus.success, orderResponseModel: OrderResponseModel.fromJson(mockOrderResponse))
+              ]);
+
+      blocTest<OrderSummaryBloc, OrderSummaryState>("create order case fail",
+          setUp: () {
+            SharedPreferences.setMockInitialValues({});
+            final baseUrl = Environment().getValue("BFF_BASE_URL");
+            final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
+            String path = "/v1/create";
+            when(() {
+              return utilityRepository
+                  .postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
+            }).thenAnswer(
+              (_) async {
+                RequestOptions option = RequestOptions(
+                    baseUrl: "$baseUrl$transactionApiPath$path",
+                    method: "POST",
+                    data: CreateOrderRequestModel.empty.toJson(),
+                    headers: {"Authorization": "Bearer "});
+                return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
+              },
+            );
+          },
+          build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
+          act: (bloc) => bloc.add(const CreateOrder(requestModel: CreateOrderRequestModel.empty)),
+          expect: () => <OrderSummaryState>[OrderSummaryState(orderStatus: OrderStatus.loading), OrderSummaryState(orderStatus: OrderStatus.error)]);
     });
 
     group("ProductDetailBloc SelectPaymentType", () {
       blocTest<OrderSummaryBloc, OrderSummaryState>("set SelectPaymentType success case",
           build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const SelectPaymentType(paymentType: PaymentType.fullPayment)),
-          expect: () => <OrderSummaryState>[
-            OrderSummaryState(paymentType: PaymentType.fullPayment)
-          ]);
+          expect: () => <OrderSummaryState>[OrderSummaryState(paymentType: PaymentType.fullPayment)]);
     });
   });
 }

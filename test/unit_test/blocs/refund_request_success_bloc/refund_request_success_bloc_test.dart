@@ -116,7 +116,7 @@ void main() {
           final mock = {"uid": "1234"};
           await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
           final inquiryRefundPath = Environment().getValue("INQUIRY_REFUND_URL");
 
           when(() {

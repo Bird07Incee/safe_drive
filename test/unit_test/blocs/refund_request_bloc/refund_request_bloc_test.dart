@@ -68,7 +68,7 @@ void main() {
         setUp: () async {
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_INQUIRY_BASE_URL");
           String path = "/v1/inquiry";
           final mock = {"uid": "1234"};
           await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
@@ -143,7 +143,7 @@ void main() {
         setUp: () async {
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
           String path = "/v1/refund";
           final mock = {"uid": "1234"};
           await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));

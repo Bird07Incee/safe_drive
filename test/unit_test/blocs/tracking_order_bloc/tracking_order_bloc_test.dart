@@ -26,9 +26,7 @@ void main() {
       'initial state',
       () {
         expect(
-          TrackingOrderBloc(utilityRepository: utilityRepository)
-              .state
-              .trackingOrderListStatus,
+          TrackingOrderBloc(utilityRepository: utilityRepository).state.trackingOrderListStatus,
           GetTrackingOrderListStatus.initial,
         );
       },
@@ -39,9 +37,7 @@ void main() {
       () {
         expect(
           TrackingOrderBloc(utilityRepository: utilityRepository).state,
-          TrackingOrderBloc(utilityRepository: utilityRepository)
-              .state
-              .copyWith(),
+          TrackingOrderBloc(utilityRepository: utilityRepository).state.copyWith(),
         );
       },
     );
@@ -52,7 +48,7 @@ void main() {
     //       SharedPreferences.setMockInitialValues({});
     //       final baseUrl = Environment().getValue("BFF_BASE_URL");
     //       final transactionApiPath =
-    //           Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    //           Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
     //       String path = "/v1/trackingList";
     //       when(() {
     //         return utilityRepository.getByURL(
@@ -87,36 +83,23 @@ void main() {
           mockBuildContext = MockBuildContext();
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final transactionApiPath =
-              Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
           String path = "/v1/trackingList";
           when(() {
-            return utilityRepository.getByURL(
-                "$baseUrl$transactionApiPath$path", {},
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {}, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$transactionApiPath",
-                  method: "GET",
-                  data: {},
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: {},
-                  statusCode: 400,
-                  statusMessage: "Bad Request");
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
             },
           );
         },
         build: () => TrackingOrderBloc(utilityRepository: utilityRepository),
-        act: (bloc) =>
-            bloc.add(GetTrackingOrderListByPage(1, mockBuildContext)),
+        act: (bloc) => bloc.add(GetTrackingOrderListByPage(1, mockBuildContext)),
         expect: () => <TrackingOrderState>[
-              TrackingOrderState(
-                  trackingOrderListStatus: GetTrackingOrderListStatus.loading),
-              TrackingOrderState(
-                  trackingOrderListStatus: GetTrackingOrderListStatus.error)
+              TrackingOrderState(trackingOrderListStatus: GetTrackingOrderListStatus.loading),
+              TrackingOrderState(trackingOrderListStatus: GetTrackingOrderListStatus.error)
             ]);
   });
 }

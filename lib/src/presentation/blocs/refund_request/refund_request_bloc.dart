@@ -34,7 +34,7 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
 
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_INQUIRY_BASE_URL");
     final inquiryPath = Environment().getValue("INQUIRY_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
@@ -83,11 +83,10 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
     emit(state.copyWith(refundRequestStatus: GetRefundRequestStatus.loading));
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
-
+    String path = Environment().getValue("REFUND_URL");
     try {
-      String path = Environment().getValue("REFUND_URL");
       var data = {"orderNo": state.inquiryData.invoiceNo!, "reason": state.getTextReason, "remark": state.getTextRemark};
       Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$path", data, headers: {
         "Authorization": "Bearer $accessToken",

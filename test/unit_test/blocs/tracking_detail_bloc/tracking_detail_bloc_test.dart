@@ -52,7 +52,7 @@ void main() {
         setUp: () {
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
           String path = "/v1/trackingDetail";
           when(() {
             return utilityRepository.getByURL(

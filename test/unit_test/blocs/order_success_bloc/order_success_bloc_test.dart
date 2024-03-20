@@ -28,8 +28,7 @@ void main() {
       "payment_medthod": "บัตรเครดิต/เดบิต(ผ่าน 2C2P)",
       "payment_period": "ผ่อนชำระ 6 เดือน",
       "payment_merchant": "บริษัท อินโนพาวเวอร์ จำกัด",
-      "product_asset":
-          "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
+      "product_asset": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
       "product_id": "PM12345678",
       "product_name": "Pulsar Max from mercury-mocker",
       "product_attr": ["สีดำ", "ความยาวสาย 3 เมตร"],
@@ -37,10 +36,8 @@ void main() {
       "customer_name": "กรุงศรี ออโต้",
       "customer_tel": "0812345678",
       "customer_email": "k_auto@krungsri.com",
-      "customer_address":
-          "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
-      "seller_address":
-          "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
+      "customer_address": "898 อาคารเพลินจิตทาวเวอร์ ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+      "seller_address": "บริษัท อินโนพาวเวอร์ จำกัด\nชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 \nแขวงพญาไท เขตพญาไท กทม 10400",
       "seller_tel": "0918620511",
     }
   };
@@ -57,9 +54,7 @@ void main() {
       'initial state',
       () {
         expect(
-          OrderSuccessBloc(utilityRepository: utilityRepository)
-              .state
-              .orderSuccessStatus,
+          OrderSuccessBloc(utilityRepository: utilityRepository).state.orderSuccessStatus,
           GetOrderSuccessDataStatus.initial,
         );
       },
@@ -70,63 +65,42 @@ void main() {
       () {
         expect(
           OrderSuccessBloc(utilityRepository: utilityRepository).state,
-          OrderSuccessBloc(utilityRepository: utilityRepository)
-              .state
-              .copyWith(),
+          OrderSuccessBloc(utilityRepository: utilityRepository).state.copyWith(),
         );
       },
     );
 
     blocTest<OrderSuccessBloc, OrderSuccessState>("set order status",
         build: () => OrderSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) =>
-            bloc.add(const SetOrderStatus(GetOrderSuccessDataStatus.success)),
-        expect: () => <OrderSuccessState>[
-              OrderSuccessState(
-                  orderSuccessStatus: GetOrderSuccessDataStatus.success)
-            ]);
+        act: (bloc) => bloc.add(const SetOrderStatus(GetOrderSuccessDataStatus.success)),
+        expect: () => <OrderSuccessState>[OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.success)]);
 
     blocTest<OrderSuccessBloc, OrderSuccessState>("OrderSuccess success",
         setUp: () async {
           SharedPreferences.setMockInitialValues({});
           mockBuildContext = MockBuildContext();
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final transactionApiPath =
-              Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_INQUIRY_BASE_URL");
           final inquriyPath = Environment().getValue("INQUIRY_URL");
           final mock = {"uid": "1234"};
-          await LineDataHelper()
-              .saveSocialDataToLocalStorage(json.encode(mock));
+          await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
           var payload = {"invoiceNo": "1234", "uid": "1234"};
 
           when(() {
-            return utilityRepository.postByURL(
-                "$baseUrl$transactionApiPath$inquriyPath", payload,
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
               RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$transactionApiPath$inquriyPath",
-                  method: "POST",
-                  data: payload,
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: mockResponse,
-                  statusCode: 200,
-                  statusMessage: "OK");
+                  baseUrl: "$baseUrl$transactionApiPath$inquriyPath", method: "POST", data: payload, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: mockResponse, statusCode: 200, statusMessage: "OK");
             },
           );
         },
         build: () => OrderSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(
-            GetOrderSuccess(mockBuildContext, "1234", bypassContext: true)),
+        act: (bloc) => bloc.add(GetOrderSuccess(mockBuildContext, "1234", bypassContext: true)),
         expect: () => <OrderSuccessState>[
-              OrderSuccessState(
-                  orderSuccessStatus: GetOrderSuccessDataStatus.loading),
-              OrderSuccessState(
-                  orderSuccessStatus: GetOrderSuccessDataStatus.success,
-                  orderSuccessData: inquiryData)
+              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.loading),
+              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.success, orderSuccessData: inquiryData)
             ]);
 
     blocTest<OrderSuccessBloc, OrderSuccessState>("OrderSuccess error",
@@ -134,38 +108,25 @@ void main() {
           SharedPreferences.setMockInitialValues({});
           mockBuildContext = MockBuildContext();
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final transactionApiPath =
-              Environment().getValue("BFF_TRANSACTION_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_INQUIRY_BASE_URL");
           final inquriyPath = Environment().getValue("INQUIRY_URL");
           var payload = {"invoiceNo": "1234", "uid": ""};
 
           when(() {
-            return utilityRepository.postByURL(
-                "$baseUrl$transactionApiPath$inquriyPath", payload,
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
               RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$transactionApiPath$inquriyPath",
-                  method: "POST",
-                  data: payload,
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: {},
-                  statusCode: 400,
-                  statusMessage: "Bad Request");
+                  baseUrl: "$baseUrl$transactionApiPath$inquriyPath", method: "POST", data: payload, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
             },
           );
         },
         build: () => OrderSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(
-            GetOrderSuccess(mockBuildContext, "1234", bypassContext: true)),
+        act: (bloc) => bloc.add(GetOrderSuccess(mockBuildContext, "1234", bypassContext: true)),
         expect: () => <OrderSuccessState>[
-              OrderSuccessState(
-                  orderSuccessStatus: GetOrderSuccessDataStatus.loading),
-              OrderSuccessState(
-                  orderSuccessStatus: GetOrderSuccessDataStatus.error)
+              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.loading),
+              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.error)
             ]);
   });
 }

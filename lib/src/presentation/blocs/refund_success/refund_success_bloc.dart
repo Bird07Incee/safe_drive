@@ -20,7 +20,7 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
     emit(state.copyWith(refundSuccessStatus: GetRefundSuccessDataStatus.loading));
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
     final inquiryRefundPath = Environment().getValue("INQUIRY_REFUND_URL");
     ScaffoldMessengerState? stateSc;
     if (!event.bypassContext) {

@@ -25,7 +25,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
   _onCreateOrder(CreateOrder event, Emitter<OrderSummaryState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     emit(state.copyWith(orderStatus: OrderStatus.loading));
 

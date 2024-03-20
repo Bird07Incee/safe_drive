@@ -67,7 +67,7 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
 
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
     final trackingListPath = Environment().getValue("TRACKING_LIST_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();

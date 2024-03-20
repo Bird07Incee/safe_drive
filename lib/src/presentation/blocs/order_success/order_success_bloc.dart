@@ -30,7 +30,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.loading));
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_INQUIRY_BASE_URL");
     final inquriyPath = Environment().getValue("INQUIRY_URL");
     // final ctx = ScaffoldMessenger.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();

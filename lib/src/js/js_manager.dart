@@ -12,3 +12,4 @@ external void callPhone(val);
 external void replacePageHistory();
 external void hideOneTrustCookieScript();
 external void showOneTrustCookieScript();
+external void setHistoryToInitialPage();

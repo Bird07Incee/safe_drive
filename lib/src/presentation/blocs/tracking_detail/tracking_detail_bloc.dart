@@ -18,7 +18,7 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
   _onGetTrackingDetail(GetTracking event, Emitter<TrackingDetailState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_BASE_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     emit(state.copyWith(status: TrackingDetailStatus.loading));
 

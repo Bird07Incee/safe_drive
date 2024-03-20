@@ -16,3 +16,7 @@ function replacePageHistory() {
     history.forward();
     window.onpopstate = function () { history.go(1); };
 }
+
+function setHistoryToInitialPage() {
+  window.location.replace('/');
+}
