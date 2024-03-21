@@ -7,7 +7,6 @@ import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 part 'product_detail_event.dart';
-
 part 'product_detail_state.dart';
 
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
@@ -23,7 +22,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     emit(state.copyWith(status: ProductDetailStatus.loading));
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
 
     try {

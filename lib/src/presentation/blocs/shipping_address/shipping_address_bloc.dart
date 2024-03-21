@@ -363,7 +363,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
   fetchDataFromApi(String path, {String refId = "", bool isDistrict = false, bool isSubDistrict = false}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     Map<String, Object> queryParams = {};
     if (refId.isNotEmpty) {

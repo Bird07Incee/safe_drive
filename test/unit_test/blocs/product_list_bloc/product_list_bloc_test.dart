@@ -27,9 +27,7 @@ void main() {
       'initial state',
       () {
         expect(
-          ProductListBloc(utilityRepository: utilityRepository)
-              .state
-              .productListStatus,
+          ProductListBloc(utilityRepository: utilityRepository).state.productListStatus,
           GetProductListStatus.initial,
         );
       },
@@ -40,9 +38,7 @@ void main() {
       () {
         expect(
           ProductListBloc(utilityRepository: utilityRepository).state,
-          ProductListBloc(utilityRepository: utilityRepository)
-              .state
-              .copyWith(),
+          ProductListBloc(utilityRepository: utilityRepository).state.copyWith(),
         );
       },
     );
@@ -50,32 +46,21 @@ void main() {
     blocTest<ProductListBloc, ProductListState>("SelectTabIndex",
         build: () => ProductListBloc(utilityRepository: utilityRepository),
         act: (bloc) => bloc.add(const SetSelectTabIndex(1)),
-        expect: () =>
-            <ProductListState>[ProductListState(selectedTabIndex: 1)]);
+        expect: () => <ProductListState>[ProductListState(selectedTabIndex: 1)]);
 
     blocTest<ProductListBloc, ProductListState>("getProductList success",
         setUp: () {
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final inventoryApiPath =
-              Environment().getValue("BFF_INVENTORY_BASE_URL");
+          final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
           String path = "/ecommerce/v1/products";
           when(() {
-            return utilityRepository.getByURL(
-                "$baseUrl$inventoryApiPath$path", {},
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$inventoryApiPath",
-                  method: "GET",
-                  data: {},
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: mockProductListResponse,
-                  statusCode: 200,
-                  statusMessage: "OK");
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: mockProductListResponse, statusCode: 200, statusMessage: "OK");
             },
           );
         },
@@ -83,34 +68,22 @@ void main() {
         act: (bloc) => bloc.add(const GetProductList()),
         expect: () => <ProductListState>[
               ProductListState(productListStatus: GetProductListStatus.loading),
-              ProductListState(
-                  productListStatus: GetProductListStatus.success,
-                  productList: ProductList.fromJson(mockProductListResponse))
+              ProductListState(productListStatus: GetProductListStatus.success, productList: ProductList.fromJson(mockProductListResponse))
             ]);
 
     blocTest<ProductListBloc, ProductListState>("getProductList error",
         setUp: () {
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final inventoryApiPath =
-              Environment().getValue("BFF_INVENTORY_BASE_URL");
+          final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
           String path = "/ecommerce/v1/products";
           when(() {
-            return utilityRepository.getByURL(
-                "$baseUrl$inventoryApiPath$path", {},
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$inventoryApiPath",
-                  method: "GET",
-                  data: {},
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: {},
-                  statusCode: 400,
-                  statusMessage: "Bad Request");
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
             },
           );
         },
@@ -126,112 +99,68 @@ void main() {
           mockBuildContext = MockBuildContext();
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final inventoryApiPath =
-              Environment().getValue("BFF_INVENTORY_BASE_URL");
+          final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
           String path = "/ecommerce/v1/products";
           when(() {
-            return utilityRepository.getByURL(
-                "$baseUrl$inventoryApiPath$path", {"categoryId": "1234"},
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"categoryId": "1234"}, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$inventoryApiPath",
-                  method: "GET",
-                  data: {},
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: mockProductListResponse,
-                  statusCode: 200,
-                  statusMessage: "OK");
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: mockProductListResponse, statusCode: 200, statusMessage: "OK");
             },
           );
         },
         build: () => ProductListBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetProductListByCategory(
-            "1234", mockBuildContext,
-            bypassContext: true)),
+        act: (bloc) => bloc.add(GetProductListByCategory("1234", mockBuildContext, bypassContext: true)),
         expect: () => <ProductListState>[
-              ProductListState(
-                  productListStatus: GetProductListStatus.success,
-                  productList: ProductList.fromJson(mockProductListResponse))
+              ProductListState(productListStatus: GetProductListStatus.success, productList: ProductList.fromJson(mockProductListResponse))
             ]);
 
-    blocTest<ProductListBloc, ProductListState>(
-        "getProductList by category fail",
+    blocTest<ProductListBloc, ProductListState>("getProductList by category fail",
         setUp: () {
           mockBuildContext = MockBuildContext();
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final inventoryApiPath =
-              Environment().getValue("BFF_INVENTORY_BASE_URL");
+          final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
           String path = "/ecommerce/v1/products";
           when(() {
-            return utilityRepository.getByURL(
-                "$baseUrl$inventoryApiPath$path", {"categoryId": "1234"},
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"categoryId": "1234"}, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$inventoryApiPath",
-                  method: "GET",
-                  data: {},
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: {},
-                  statusCode: 400,
-                  statusMessage: "Bad Request");
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
             },
           );
         },
         build: () => ProductListBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetProductListByCategory(
-            "1234", mockBuildContext, bypassContext: true)),
-        expect: () => <ProductListState>[
-              ProductListState(productListStatus: GetProductListStatus.error)
-            ]);
+        act: (bloc) => bloc.add(GetProductListByCategory("1234", mockBuildContext, bypassContext: true)),
+        expect: () => <ProductListState>[ProductListState(productListStatus: GetProductListStatus.error)]);
 
     blocTest<ProductListBloc, ProductListState>("getProductList by page",
         setUp: () {
           mockBuildContext = MockBuildContext();
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final inventoryApiPath =
-              Environment().getValue("BFF_INVENTORY_BASE_URL");
+          final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
           String path = "/ecommerce/v1/products";
           var params = {"page": "2", "itemPersPage": 10, "categoryId": "1234"};
           when(() {
-            return utilityRepository.getByURL(
-                "$baseUrl$inventoryApiPath$path", params,
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", params, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$inventoryApiPath",
-                  method: "GET",
-                  data: {},
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: mockProductListResponse,
-                  statusCode: 200,
-                  statusMessage: "OK");
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: mockProductListResponse, statusCode: 200, statusMessage: "OK");
             },
           );
         },
         build: () => ProductListBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetProductListByPage(
-            ProductList.fromJson(mockProductListResponse),
-            2,
-            "1234",
-            mockBuildContext,
-            bypassContext: true)),
+        act: (bloc) =>
+            bloc.add(GetProductListByPage(ProductList.fromJson(mockProductListResponse), 2, "1234", mockBuildContext, bypassContext: true)),
         expect: () => <ProductListState>[
-              ProductListState(
-                  productListStatus: GetProductListStatus.success,
-                  productList: ProductList.fromJson(mockProductListResponse))
+              ProductListState(productListStatus: GetProductListStatus.success, productList: ProductList.fromJson(mockProductListResponse))
             ]);
 
     blocTest<ProductListBloc, ProductListState>("getProductList by page error",
@@ -239,38 +168,22 @@ void main() {
           mockBuildContext = MockBuildContext();
           SharedPreferences.setMockInitialValues({});
           final baseUrl = Environment().getValue("BFF_BASE_URL");
-          final inventoryApiPath =
-              Environment().getValue("BFF_INVENTORY_BASE_URL");
+          final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
           String path = "/ecommerce/v1/products";
           var params = {"page": "2", "itemPersPage": 10, "categoryId": "1234"};
           when(() {
-            return utilityRepository.getByURL(
-                "$baseUrl$inventoryApiPath$path", params,
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", params, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$inventoryApiPath",
-                  method: "GET",
-                  data: {},
-                  headers: {"Authorization": "Bearer "});
-              return Response(
-                  requestOptions: option,
-                  data: {},
-                  statusCode: 400,
-                  statusMessage: "Bad Request");
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
             },
           );
         },
         build: () => ProductListBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetProductListByPage(
-            ProductList.fromJson(mockProductListResponse),
-            2,
-            "1234",
-            mockBuildContext,
-            bypassContext: true)),
-        expect: () => <ProductListState>[
-              ProductListState(productListStatus: GetProductListStatus.error)
-            ]);
+        act: (bloc) =>
+            bloc.add(GetProductListByPage(ProductList.fromJson(mockProductListResponse), 2, "1234", mockBuildContext, bypassContext: true)),
+        expect: () => <ProductListState>[ProductListState(productListStatus: GetProductListStatus.error)]);
   });
 }

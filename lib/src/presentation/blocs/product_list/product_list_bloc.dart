@@ -29,7 +29,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     try {
       LineDataHelper lineDataHelper = LineDataHelper();
       final baseUrl = Environment().getValue("BFF_BASE_URL");
-      final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+      final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
       String accessToken = await lineDataHelper.getLineAccessToken();
       Response response =
           await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken"});
@@ -69,7 +69,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   _onGetProductListByCategory(GetProductListByCategory event, Emitter<ProductListState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
     // final nav = Navigator.of(event.context);
     // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();
@@ -109,7 +109,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   _onGetProductListByPage(GetProductListByPage event, Emitter<ProductListState> emit) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+    final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
     // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
     // final nav = Navigator.of(event.context);
     String accessToken = await lineDataHelper.getLineAccessToken();

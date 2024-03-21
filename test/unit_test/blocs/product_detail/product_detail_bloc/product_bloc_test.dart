@@ -157,19 +157,15 @@ void main() {
   //   ]
   // };
 
-  group("product detail bloc", ()
-  {
-    setUp(
-          () {
-            WidgetsFlutterBinding.ensureInitialized();
-            utilityRepository = MockDioUtilityRepository();
-          }
-    );
-
+  group("product detail bloc", () {
+    setUp(() {
+      WidgetsFlutterBinding.ensureInitialized();
+      utilityRepository = MockDioUtilityRepository();
+    });
 
     test(
       'initial state [ProductDetailStatus.initial]',
-          () {
+      () {
         expect(
           ProductDetailBloc(utilityRepository: utilityRepository).state.status.isInitial,
           isTrue,
@@ -179,7 +175,7 @@ void main() {
 
     test(
       'ProductDetailState copyWith method initial state',
-          () {
+      () {
         expect(
           ProductDetailBloc(utilityRepository: utilityRepository).state,
           ProductDetailBloc(utilityRepository: utilityRepository).state.copyWith(),
@@ -192,45 +188,45 @@ void main() {
           setUp: () {
             SharedPreferences.setMockInitialValues({});
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
             String path = "/ecommerce/v1/products";
-            when((){
+            when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": "test12345"}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
-                  (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              (_) async {
+                RequestOptions option =
+                    RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
                 return Response(requestOptions: option, data: mockProductResponse, statusCode: 200, statusMessage: "OK");
-              },
-            );
-            },
-          build: () => ProductDetailBloc(utilityRepository: utilityRepository),
-          act: (bloc) => bloc.add(const GetProductByID(pid: "test12345")),
-          expect: () => <ProductDetailState>[
-            ProductDetailState(status: ProductDetailStatus.loading),
-            ProductDetailState(status: ProductDetailStatus.success, product: Product.fromJson(mockProductResponse))
-      ]);
-
-      blocTest<ProductDetailBloc, ProductDetailState>("get product detail by id[POST Method] fail case",
-          setUp: () {
-            SharedPreferences.setMockInitialValues({});
-            final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
-            String path = "/ecommerce/v1/products";
-            when((){
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": "test12345"}, headers: {"Authorization": "Bearer "});
-            }).thenAnswer(
-                  (_) async {
-                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
-                return Response(requestOptions: option, data: <String, dynamic>{}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
           },
           build: () => ProductDetailBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const GetProductByID(pid: "test12345")),
           expect: () => <ProductDetailState>[
-            ProductDetailState(status: ProductDetailStatus.loading),
-            ProductDetailState(status: ProductDetailStatus.error)
-      ]);
+                ProductDetailState(status: ProductDetailStatus.loading),
+                ProductDetailState(status: ProductDetailStatus.success, product: Product.fromJson(mockProductResponse))
+              ]);
+
+      blocTest<ProductDetailBloc, ProductDetailState>("get product detail by id[POST Method] fail case",
+          setUp: () {
+            SharedPreferences.setMockInitialValues({});
+            final baseUrl = Environment().getValue("BFF_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
+            String path = "/ecommerce/v1/products";
+            when(() {
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": "test12345"}, headers: {"Authorization": "Bearer "});
+            }).thenAnswer(
+              (_) async {
+                RequestOptions option =
+                    RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+                return Response(requestOptions: option, data: <String, dynamic>{}, statusCode: 400, statusMessage: "Bad Request");
+              },
+            );
+          },
+          build: () => ProductDetailBloc(utilityRepository: utilityRepository),
+          act: (bloc) => bloc.add(const GetProductByID(pid: "test12345")),
+          expect: () =>
+              <ProductDetailState>[ProductDetailState(status: ProductDetailStatus.loading), ProductDetailState(status: ProductDetailStatus.error)]);
 
       // blocTest<ProductDetailBloc, ProductDetailState>("set contact detail type maps",
       //     setUp: () {
@@ -255,18 +251,14 @@ void main() {
       blocTest<ProductDetailBloc, ProductDetailState>("set product detail success case",
           build: () => ProductDetailBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const SetProduct(product: Product.empty)),
-          expect: () => <ProductDetailState>[
-            ProductDetailState(product: Product.empty, status: ProductDetailStatus.initial)
-          ]);
+          expect: () => <ProductDetailState>[ProductDetailState(product: Product.empty, status: ProductDetailStatus.initial)]);
     });
 
     group("ProductDetailBloc SetClickFromImage", () {
       blocTest<ProductDetailBloc, ProductDetailState>("set SetClickFromImage success case",
           build: () => ProductDetailBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const SetClickFromImage(isClickFromImage: true)),
-          expect: () => <ProductDetailState>[
-            ProductDetailState(clickFromImage: true)
-          ]);
+          expect: () => <ProductDetailState>[ProductDetailState(clickFromImage: true)]);
     });
   });
 }

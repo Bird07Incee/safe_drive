@@ -48,7 +48,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("setFormData case success case",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
 
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
@@ -89,7 +89,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("setFormData case fail case",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
@@ -112,7 +112,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("setFormData case fail case catch exception",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             String path = "/ecommerce/v1/data/province1";
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
@@ -138,7 +138,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("updateDropdownSelected case success case",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
@@ -261,7 +261,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("updateDropdownSelected case fail getDistrict case",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
@@ -312,7 +312,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("updateDropdownSelected case fail getSubDistrict case",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
@@ -409,7 +409,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("validateAnyFieldInForm case success case",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
@@ -449,7 +449,7 @@ void main() {
       blocTest<ShippingAddressBloc, ShippingAddressState>("onSubmitPressed case success case",
           setUp: () {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
-            final inventoryApiPath = Environment().getValue("BFF_INVENTORY_BASE_URL");
+            final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
               return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
             }).thenAnswer(
