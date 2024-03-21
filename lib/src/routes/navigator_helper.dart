@@ -37,7 +37,7 @@ refreshRoute(
       parallelUrlStrategy(context, Routes.initial.name, Routes.initial.toStringPath());
       break;
     case "refundSuccess":
-      parallelUrlStrategy(context, Routes.initial.name, Routes.initial.toStringPath());
+      // parallelUrlStrategy(context, Routes.initial.name, Routes.initial.toStringPath());
       parallelUrlStrategy(context, Routes.trackingList.name, Routes.trackingList.toStringPath());
       parallelUrlStrategy(context, Routes.tracking.name, '${Routes.tracking.toStringPath()}?$queryParams');
       break;
