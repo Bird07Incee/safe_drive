@@ -18,5 +18,5 @@ function replacePageHistory() {
 }
 
 function setHistoryToInitialPage() {
-  window.location.replace('/');
+    window.location.replace('/');
 }

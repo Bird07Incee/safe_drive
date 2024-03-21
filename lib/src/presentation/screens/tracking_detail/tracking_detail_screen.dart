@@ -401,6 +401,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
         child: BlocBuilder<TrackingDetailBloc, TrackingDetailState>(
           builder: (context, state) {
             if (state.status.isSuccess) {
+              hideOneTrustCookieScript();
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [

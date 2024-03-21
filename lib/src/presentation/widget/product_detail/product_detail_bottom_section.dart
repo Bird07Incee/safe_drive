@@ -50,20 +50,20 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (text.contains(state.product.merchantFullName)) {
             var list = text.split(state.product.merchantFullName);
             String phone = state.product.merchantMobile;
-            if(phone.replaceAll("-", "").length == 9) {
+            if (phone.replaceAll("-", "").length == 9) {
               text.replaceAllMapped(
                 RegExp(r'(\d{2}-\d{3}-\d{4})'),
-                    (match) {
+                (match) {
                   mobileNo = '${match.group(0)}';
                   text = text.replaceAll(mobileNo, "");
                   list.last = list.last.replaceAll(mobileNo, "");
                   return "";
                 },
               );
-            }else if (phone.replaceAll("-", "").length == 10) {
+            } else if (phone.replaceAll("-", "").length == 10) {
               text.replaceAllMapped(
                 RegExp(r'(\d{3}-\d{3}-\d{4})'),
-                    (match) {
+                (match) {
                   mobileNo = '${match.group(0)}';
                   text = text.replaceAll(mobileNo, "");
                   list.last = list.last.replaceAll(mobileNo, "");
