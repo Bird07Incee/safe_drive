@@ -52,7 +52,7 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
       final RefundSuccessDataModel refundData = RefundSuccessDataModel.fromJson(refundJsonData);
       if (status == "Complete") {
         if (!event.bypassContext) {
-          stateSc!.showSnackBar(getMkpToast("หลักฐานการขอคืนสินค้า ถูกจัดส่งไปยังอีเมลของคุณแล้ว"));
+          stateSc!.showSnackBar(getMkpToast("หลักฐานการขอคืนสินค้า ถูกจัดส่งไปยังอีเมลของคุณแล้ว", horizontalMargin: 30));
         }
         emit(state.copyWith(refundSuccessData: refundData, refundSuccessStatus: GetRefundSuccessDataStatus.success));
       } else {
