@@ -41,7 +41,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   @override
   void initState() {
     super.initState();
-    AmplitudeWebHelper.getInstance().logEnterTermAndConPage;
+
     // Setup the listener.
     _controller.addListener(() {
       if (_controller.position.atEdge) {
@@ -53,6 +53,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         }
       }
     });
+    AmplitudeWebHelper.getInstance().logEnterTermAndConPage;
   }
 
   void acceptTermAndCond() async {
@@ -160,12 +161,12 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           key: const Key("cancel_term_and_con_button"),
                           onTap: () {
                             if (scrollFinished) {
-                              AmplitudeWebHelper.getInstance().logTapOnCancelButtonTermAndConPage();
                               var localStorage = window.localStorage;
                               localStorage.clear();
 
                               liff.logout();
                               liff.closeWindow();
+                              AmplitudeWebHelper.getInstance().logTapOnCancelButtonTermAndConPage();
                             }
                           },
                           child: Container(
@@ -189,8 +190,8 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           key: const Key("accept_term_and_con_button"),
                           onTap: () async {
                             if (scrollFinished) {
-                              AmplitudeWebHelper.getInstance().logTapOnOkButtonTermAndConPage();
                               acceptTermAndCond();
+                              AmplitudeWebHelper.getInstance().logTapOnOkButtonTermAndConPage();
                             }
                           },
                           child: Container(

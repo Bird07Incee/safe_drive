@@ -65,8 +65,8 @@ class TermAndConSection extends StatelessWidget {
         child: GestureDetector(
           key: const Key("about_us_button"),
           onTap: () {
-            AmplitudeWebHelper.getInstance().logTapOnPrivacyButtonTermAndConPage();
             launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html"));
+            AmplitudeWebHelper.getInstance().logTapOnPrivacyButtonTermAndConPage();
           },
           child: Text(
             HomeConst().privacyPolicy,
