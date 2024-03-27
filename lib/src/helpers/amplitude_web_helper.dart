@@ -47,4 +47,44 @@ class AmplitudeWebHelper {
       debugPrint(e.toString());
     }
   }
+
+  void logEnterTermAndConPage() async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    String tcVersion = await lineDataHelper.getTAndC();
+    logEvent(
+        eventType: "Enter term&condition page",
+        screenName: "AutoStation_eMarketplace_term&condition_page",
+        eventName: tcVersion,
+        eventProperties: {"event_name": tcVersion});
+  }
+
+  void logTapOnOkButtonTermAndConPage() async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var tcVersion = await lineDataHelper.getTAndC();
+    logEvent(
+        eventType: "Tap on ok button",
+        screenName: "AutoStation_eMarketplace_term&condition_page",
+        eventName: tcVersion,
+        eventProperties: {"event_name": tcVersion});
+  }
+
+  void logTapOnCancelButtonTermAndConPage() async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var tcVersion = await lineDataHelper.getTAndC();
+    logEvent(
+        eventType: "Tap on cancel button",
+        screenName: "AutoStation_eMarketplace_term&condition_page",
+        eventName: tcVersion,
+        eventProperties: {"event_name": tcVersion});
+  }
+
+  void logTapOnPrivacyButtonTermAndConPage() async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var tcVersion = await lineDataHelper.getTAndC();
+    logEvent(
+        eventType: "Tap on privacy policy button",
+        screenName: "AutoStation_eMarketplace_term&condition_page",
+        eventName: tcVersion,
+        eventProperties: {"event_name": tcVersion});
+  }
 }

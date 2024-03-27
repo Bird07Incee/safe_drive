@@ -41,9 +41,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   @override
   void initState() {
     super.initState();
-    AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
-    amplitudeWebHelper.logEvent(
-        eventType: "Enter term&condition page", screenName: "AutoStation_eMarketplace_term&condition_page", eventName: "Enter term&condition page");
+    AmplitudeWebHelper.getInstance().logEnterTermAndConPage;
     // Setup the listener.
     _controller.addListener(() {
       if (_controller.position.atEdge) {
@@ -162,6 +160,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           key: const Key("cancel_term_and_con_button"),
                           onTap: () {
                             if (scrollFinished) {
+                              AmplitudeWebHelper.getInstance().logTapOnCancelButtonTermAndConPage();
                               var localStorage = window.localStorage;
                               localStorage.clear();
 
@@ -190,6 +189,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           key: const Key("accept_term_and_con_button"),
                           onTap: () async {
                             if (scrollFinished) {
+                              AmplitudeWebHelper.getInstance().logTapOnOkButtonTermAndConPage();
                               acceptTermAndCond();
                             }
                           },
