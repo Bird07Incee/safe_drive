@@ -17,7 +17,8 @@ Map<String, dynamic> envConfig = {
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
-        "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz"
+        "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz",
+    "SUPER_APP_AMPLITUDE_API_KEY": "efe3fd38cdcba282250a9b6f999fcb5f"
   },
   "qa": {
     "ENVIRONMENT_NAME": "qa",

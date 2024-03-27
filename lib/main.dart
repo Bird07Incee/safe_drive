@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
@@ -22,21 +25,34 @@ UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
 void main() async {
   setUrlStrategy(urlStrategyPromptBuy);
   WidgetsFlutterBinding.ensureInitialized();
-  _configureApp();
+  // _configureApp();
+  _setUpAmplitude();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    // runApp(const MyApp());
-    DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
-      return runApp(const MyApp());
-    });
+    runApp(MyApp());
+    // DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
+    //   return runApp(const MyApp());
+    // });
   });
 }
 
 _configureApp() {
   _setUpDatadog();
   _setUpLineLIFF();
+}
+
+_setUpDatadog() {
+  DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
+  configuration = DatadogConfiguration(
+    clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
+    env: const String.fromEnvironment('SET_ENV', defaultValue: 'dev'),
+    site: DatadogSite.us1,
+    nativeCrashReportEnabled: true,
+    loggingConfiguration: DatadogLoggingConfiguration(),
+    rumConfiguration: DatadogRumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee', traceSampleRate: 100),
+  );
 }
 
 _setUpLineLIFF() {
@@ -60,23 +76,38 @@ _setUpLineLIFF() {
       });
 }
 
-_setUpDatadog() {
-  DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
-  configuration = DatadogConfiguration(
-    clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
-    env: const String.fromEnvironment('SET_ENV', defaultValue: 'dev'),
-    site: DatadogSite.us1,
-    nativeCrashReportEnabled: true,
-    loggingConfiguration: DatadogLoggingConfiguration(),
-    rumConfiguration: DatadogRumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee', traceSampleRate: 100),
-  );
+_setUpAmplitude() {
+  final env = Environment().getValue("ENVIRONMENT_NAME");
+  if (env == "dev") {
+    try {
+      AmplitudeWebHelper.getInstance();
+    } catch (e) {
+      debugPrint("Error initializing Amplitude: $e");
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    //qa
+    lineDataHelper.saveSocialDataToLocalStorage(json.encode({
+      "uid": "e959b083b3166422fb8717c6fe7e19e0cc6042dcb53976b26cb0c67085f636bf9fa8bef968f675d85619e150b1b2c91e6edf9859880ea63b38a5d18bca1b2be6",
+      "access_token":
+          "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQHH1TTAYaeDYZrot7f/MF+xAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAz8WjYdLV/0BxVdAoMCARCAggEHkWU0LbJns3MjepHoh2qrRJQNLin+cf0It4j20BcQyMt8BkaokyHX+JF/IdmuSs7IoE91fvFcHQ+AMmu8Z7KM5mBc17j2te8QPga7rvGD/BfTO9R/8+ptHJXnWxb8Vx6zp7Un1bprsXvB1nCknbpJ4KrHkCd5UOc+hqKZiNskmCd8thYlMPMiw+WWFvtol+hpVMB+l/QEyYx2OqtvR/iVetp7pfxhnePO2HTkP74hMLwQyZFUtMzgsE4apkMB8Nq56upCvbRM0o90SijtWvaXnskOeEyingk8hhnjgnk9M8a2iGD1iKVorI449QP2K8KzpOvFsfSOKitTer9IwYzp053uggfiTnU=",
+      "refresh_token":
+          "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQHV0mwEfX+n9TyfcVHt5Lc/AAAAcjBwBgkqhkiG9w0BBwagYzBhAgEAMFwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMiDBMB/w3cnGX86zwAgEQgC8EWRNCiio8BA1/l/QOSOiHN9FRqM5/63A6SzStxP9T/yOxu792a0U+57n4olAo5A==",
+      "expires_in": 2592000,
+      "tcVersion": "1",
+      "tc_accept": "true"
+    }));
+    PreferencesHelper.setString("code", "unq9oC8ktfM5dKYf3tTg");
+    PreferencesHelper.setString("LineLogin", 'true');
+    PreferencesHelper.setString("tcVersion", '1');
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<DioUtilityRepository>(create: (context) => DioUtilityRepository(service: DioUtilityService())),

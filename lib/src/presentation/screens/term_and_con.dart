@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 // ignore: avoid_web_libraries_in_flutter
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
@@ -8,6 +9,7 @@ import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
@@ -39,7 +41,9 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   @override
   void initState() {
     super.initState();
-
+    AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
+    amplitudeWebHelper.logEvent(
+        eventType: "Enter term&condition page", screenName: "AutoStation_eMarketplace_term&condition_page", eventName: "Enter term&condition page");
     // Setup the listener.
     _controller.addListener(() {
       if (_controller.position.atEdge) {
