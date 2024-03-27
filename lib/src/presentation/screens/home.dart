@@ -8,6 +8,7 @@ import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
@@ -35,6 +36,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
   PageController pageController = PageController(initialPage: 0, keepPage: false);
   ScrollController scrollController = ScrollController();
   bool isNotLogin = true;
@@ -43,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
     // Timer(const Duration(seconds: 1), () {
     //   final checkBrowserState = context.read<CheckBrowserBloc>().state;
     //   final env = Environment().getValue("ENVIRONMENT_NAME");
@@ -50,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     //     context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
     //   }
     // });
+    context.read<ProductListBloc>().add(const GetProductList());
   }
 
   Future<void> openLine() async {
@@ -135,6 +139,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
                                         unselectedLabelColor: const Color(0xffDEDEDE),
                                         onTap: (int index) {
+                                          amplitudeWebHelper.logTapOnCategory(categoryId: state.productList.category![index - 1]["categoryId"]);
                                           context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                           if (index == 0) {
                                             context.read<ProductListBloc>().add(GetProductListByCategory("", context));
@@ -288,6 +293,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             title: HomeConst().termsAndConditions,
                                             textStyle: AlvaStyles().headingSize10w600(sugarRed),
                                             onTapfunction: () {
+                                              amplitudeWebHelper.logTapOnTermAndConditionButton();
                                               Navigator.pushNamed(context, '/readTermAndCon');
                                             }),
                                         Container(
@@ -298,7 +304,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         ),
                                         GestureDetector(
                                           key: const Key("about_us_button"),
-                                          onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html")),
+                                          onTap: () {
+                                            amplitudeWebHelper.logTapOnPrivacyPolicyButton();
+                                            launchUrl(Uri.parse("https://www.krungsriauto.com/auto/About-Us/Privacy_Notice.html"));
+                                          },
                                           child: Text(
                                             HomeConst().privacyPolicy,
                                             style: AlvaStyles().headingSize10w600(sugarRed),
@@ -326,6 +335,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         GestureDetector(
                                           key: const Key("call_button"),
                                           onTap: () {
+                                            amplitudeWebHelper.logTapOnCallCenterButton();
                                             callPhone(HomeConst().pleaseContactNumber);
                                           },
                                           child: Row(

@@ -77,14 +77,11 @@ _setUpLineLIFF() {
 }
 
 _setUpAmplitude() {
-  final env = Environment().getValue("ENVIRONMENT_NAME");
-  if (env == "dev") {
     try {
       AmplitudeWebHelper.getInstance();
     } catch (e) {
       debugPrint("Error initializing Amplitude: $e");
     }
-  }
 }
 
 class MyApp extends StatelessWidget {
