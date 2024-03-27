@@ -48,7 +48,6 @@ class AmplitudeWebHelper {
     }
   }
 
-
   void logEnterTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
     String tcVersion = await lineDataHelper.getTAndC();
@@ -89,86 +88,75 @@ class AmplitudeWebHelper {
         eventProperties: {"event_name": tcVersion});
   }
 
-    void logeMarketplaceHomePageHomeScreen() {
-      logEvent(
-          eventType: "Enter eMarketplace homepage",
-          screenName: "AutoStation_eMarketplace_homepage",
-          eventName: "AutoStation_eMarketplace_homepage");
-    }
+  void logeMarketplaceHomePageHomeScreen() {
+    logEvent(
+        eventType: "Enter eMarketplace homepage", screenName: "AutoStation_eMarketplace_homepage", eventName: "AutoStation_eMarketplace_homepage");
+  }
 
-    void logeTapCarouselOnHomeScreen(
-        {required String bannerName, required String bannerSequence}) {
-      logEvent(
-          eventType: "Tap carousel",
-          screenName: "AutoStation_eMarketplace_homepage",
-          eventName: bannerName,
-          eventProperties: {"position": bannerSequence});
-    }
-
-    void logTapOnProduct(
-        {required String productName, required String productId, required String categoryId, required String price, required String discountPrice}) {
-      logEvent(eventType: "Tap on product list",
-          screenName: "AutoStation_eMarketplace_homepage",
-          eventName: productName,
-          eventProperties: {
-            "content_id": productId,
-            "content_type": categoryId,
-            "product_price": price,
-            "product_discount_price": discountPrice,
-          });
-    }
-
-    void logTapOnImageGallery(
-        {required String productName, required String productId, required String categoryId}) {
-      logEvent(eventType: "Tap on image gallery",
-          screenName: "AutoStation_eMarketplace_homepage",
-          eventName: productName,
-          eventProperties: {
-            "content_id": productId,
-            "content_type": categoryId,
-          });
-    }
-
-    void logTapOnTermAndConditionButton() {
-      logEvent(
-        eventType: "Tap on term&condition button",
+  void logeTapCarouselOnHomeScreen({required String bannerName, required String bannerSequence}) {
+    logEvent(
+        eventType: "Tap carousel",
         screenName: "AutoStation_eMarketplace_homepage",
-        eventName: "AutoStation_eMarketplace_term&condition",
-      );
-    }
+        eventName: bannerName,
+        eventProperties: {"position": bannerSequence});
+  }
 
-    void logTapOnPrivacyPolicyButton() {
-      logEvent(
-        eventType: "Tap on privacy policy button",
+  void logTapOnProduct(
+      {required String productName, required String productId, required String categoryId, required String price, required String discountPrice}) {
+    logEvent(eventType: "Tap on product list", screenName: "AutoStation_eMarketplace_homepage", eventName: productName, eventProperties: {
+      "content_id": productId,
+      "content_type": categoryId,
+      "product_price": price,
+      "product_discount_price": discountPrice,
+    });
+  }
+
+  void logTapOnImageGallery({required String productName, required String productId, required String categoryId}) {
+    logEvent(eventType: "Tap on image gallery", screenName: "AutoStation_eMarketplace_homepage", eventName: productName, eventProperties: {
+      "content_id": productId,
+      "content_type": categoryId,
+    });
+  }
+
+  void logTapOnTermAndConditionButton() {
+    logEvent(
+      eventType: "Tap on term&condition button",
+      screenName: "AutoStation_eMarketplace_homepage",
+      eventName: "AutoStation_eMarketplace_term&condition",
+    );
+  }
+
+  void logTapOnPrivacyPolicyButton() {
+    logEvent(
+      eventType: "Tap on privacy policy button",
+      screenName: "AutoStation_eMarketplace_homepage",
+      eventName: "AutoStation_eMarketplace_privacypolicy",
+    );
+  }
+
+  void logTapOnCallCenterButton() {
+    logEvent(
+      eventType: "Tap on call center button",
+      screenName: "AutoStation_eMarketplace_homepage",
+      eventName: "AutoStation_eMarketplace_callcenter",
+    );
+  }
+
+  void logTapOnCategory({required String categoryId}) {
+    logEvent(
+        eventType: "Tap on category",
         screenName: "AutoStation_eMarketplace_homepage",
-        eventName: "AutoStation_eMarketplace_privacypolicy",
-      );
-    }
+        eventName: "AutoStation_eMarketplace_catagory",
+        eventProperties: {
+          "content_type": categoryId,
+        });
+  }
 
-    void logTapOnCallCenterButton() {
-      logEvent(
-        eventType: "Tap on call center button",
-        screenName: "AutoStation_eMarketplace_homepage",
-        eventName: "AutoStation_eMarketplace_callcenter",
-      );
-    }
-
-    void logTapOnCategory({required String categoryId}) {
-      logEvent(
-          eventType: "Tap on category",
-          screenName: "AutoStation_eMarketplace_homepage",
-          eventName: "AutoStation_eMarketplace_catagory",
-          eventProperties: {
-            "content_type": categoryId,
-          });
-    }
-
-    void logTapOnOrderTrackingButton() {
-      logEvent(
-        eventType: "Tap on order tracking button",
-        screenName: "AutoStation_eMarketplace_homepage",
-        eventName: "AutoStation_eMarketplace_order_tracking",
-      );
-    }
-
+  void logTapOnOrderTrackingButton() {
+    logEvent(
+      eventType: "Tap on order tracking button",
+      screenName: "AutoStation_eMarketplace_homepage",
+      eventName: "AutoStation_eMarketplace_order_tracking",
+    );
+  }
 }
