@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     //     context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
     //   }
     // });
-    context.read<ProductListBloc>().add(const GetProductList());
   }
 
   Future<void> openLine() async {
