@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
@@ -41,7 +40,7 @@ class HomepageTopSection extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButton();
+                      // AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButton();
                       hideOneTrustCookieScript();
                       Navigator.pushNamed(context, '/trackingList');
                     },

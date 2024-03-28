@@ -11,9 +11,9 @@ class AmplitudeWebHelper {
     _onInit();
   }
 
-  static AmplitudeWebHelper getInstance() {
-    return AmplitudeWebHelper._();
-  }
+  // static AmplitudeWebHelper getInstance() {
+  //   return AmplitudeWebHelper._();
+  // }
 
   void _onInit() async {
     if (_amplitude == null) {

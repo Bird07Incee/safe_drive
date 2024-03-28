@@ -9,7 +9,6 @@ import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
@@ -53,7 +52,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         }
       }
     });
-    AmplitudeWebHelper.getInstance().logEnterTermAndConPage;
+    // AmplitudeWebHelper.getInstance().logEnterTermAndConPage;
   }
 
   void acceptTermAndCond() async {
@@ -166,7 +165,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
 
                               liff.logout();
                               liff.closeWindow();
-                              AmplitudeWebHelper.getInstance().logTapOnCancelButtonTermAndConPage();
+                              // AmplitudeWebHelper.getInstance().logTapOnCancelButtonTermAndConPage();
                             }
                           },
                           child: Container(
@@ -191,7 +190,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           onTap: () async {
                             if (scrollFinished) {
                               acceptTermAndCond();
-                              AmplitudeWebHelper.getInstance().logTapOnOkButtonTermAndConPage();
+                              // AmplitudeWebHelper.getInstance().logTapOnOkButtonTermAndConPage();
                             }
                           },
                           child: Container(
