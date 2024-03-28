@@ -17,7 +17,6 @@ import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart'
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
-// import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 late DatadogConfiguration configuration;
 UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
 void main() async {
