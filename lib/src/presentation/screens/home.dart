@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   PageController pageController = PageController(initialPage: 0, keepPage: false);
   ScrollController scrollController = ScrollController();
   bool isNotLogin = true;
+  TextEditingController tc = TextEditingController();
   // late TabController tabController;
 
   @override
@@ -116,6 +117,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           child: ListView(
                             controller: scrollController,
                             children: [
+                              Container(
+                                width: maxWidth,
+                                height: 50,
+                                color: Colors.white,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextField(
+                                      controller: tc,
+                                    ),
+                                    TextButton(
+                                      child: const Text('DEPPLINK'),
+                                      onPressed: () {
+                                        launchUrl(Uri.parse(tc.text));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
                               HomepageTopSection(maxWidth: maxWidth),
                               HomePageBanner(
                                 pageControllerState: pageController,
