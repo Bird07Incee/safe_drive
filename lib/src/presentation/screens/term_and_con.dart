@@ -35,13 +35,14 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   bool scrollFinished = false;
   TermAndConHelper termAndConHelper = TermAndConHelper();
   DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
+  AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
   LineDataHelper lineDataHelper = LineDataHelper();
   final liff = fll.FlutterLineLiff();
 
   @override
   void initState() {
     super.initState();
-
+    amplitudeWebHelper.logEnterTermAndConPage();
     // Setup the listener.
     _controller.addListener(() {
       if (_controller.position.atEdge) {
@@ -53,7 +54,6 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
         }
       }
     });
-    AmplitudeWebHelper.getInstance().logEnterTermAndConPage;
   }
 
   void acceptTermAndCond() async {
