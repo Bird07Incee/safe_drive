@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
@@ -37,7 +38,7 @@ void main() async {
 _configureApp() {
   _setUpDatadog();
   _setUpLineLIFF();
-  // _setUpAmplitude();
+  _setUpAmplitude();
 }
 
 _setUpDatadog() {
@@ -73,13 +74,13 @@ _setUpLineLIFF() {
       });
 }
 
-// _setUpAmplitude() {
-//   try {
-//     AmplitudeWebHelper.getInstance();
-//   } catch (e) {
-//     debugPrint("Error initializing Amplitude: $e");
-//   }
-// }
+_setUpAmplitude() {
+  try {
+    AmplitudeWebHelper.getInstance();
+  } catch (e) {
+    debugPrint("Error initializing Amplitude: $e");
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
