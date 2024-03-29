@@ -105,20 +105,22 @@ class UnbreakableText extends StatelessWidget {
           TextSpan(text: textList[i]),
           if (i + 1 != textList.length) WidgetSpan(alignment: PlaceholderAlignment.middle, child: Text(pattern!, style: style)),
         ],
+        WidgetSpan(
+          child: SizedBox(
+            width: 4,
+          ),
+        ),
         if (header == "การเชื่อมโยงกับเว็บไซต์อื่น" && CheckLastText().checkLastWord(text, lastWord))
           WidgetSpan(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 4),
-              child: GestureDetector(
-                key: const Key("privacy_notice_text_button"),
-                onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/privacy-notice-th")),
-                child: Text(
-                  "https://www.krungsriauto.com/auto/privacy-notice-th",
-                  style: AlvaStyles().headingSize12w500(BlueFantasy).copyWith(
-                        height: 20 / 12,
-                        decoration: TextDecoration.underline,
-                      ),
-                ),
+            child: GestureDetector(
+              key: const Key("privacy_notice_text_button"),
+              onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/privacy-notice-th")),
+              child: Text(
+                "https://www.krungsriauto.com/auto/privacy-notice-th",
+                style: AlvaStyles().headingSize12w500(BlueFantasy).copyWith(
+                      height: 20 / 12,
+                      decoration: TextDecoration.underline,
+                    ),
               ),
             ),
           )
