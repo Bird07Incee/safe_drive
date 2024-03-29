@@ -124,14 +124,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    TextField(
-                                      controller: tc,
+                                    SizedBox(
+                                      width: maxWidth * .8,
+                                      height: 50,
+                                      child: TextField(
+                                        controller: tc,
+                                      ),
                                     ),
-                                    TextButton(
-                                      child: const Text('DEPPLINK'),
-                                      onPressed: () {
-                                        launchUrl(Uri.parse(tc.text));
-                                      },
+                                    SizedBox(
+                                      width: maxWidth * .2,
+                                      height: 40,
+                                      child: TextButton(
+                                        child: const Text('DEPPLINK'),
+                                        onPressed: () {
+                                          launchUrl(Uri.parse(tc.text));
+                                        },
+                                      ),
                                     ),
                                   ],
                                 ),
