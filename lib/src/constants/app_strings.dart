@@ -19,4 +19,8 @@ class AppStrings {
   String remarkRefundThird({String refundDay = "X"}) {
     return "การคืนสินค้า/คืนเงินหลังจาก $refundDay วัน กรุณาติดต่อผู้ขายโดยตรง";
   }
+
+  String disclaimerTextFirst = "กรุงศรี ออโต้ เป็นเพียงช่องทางในการซื้อขายสินค้าระหว่าง";
+  String disclaimerTextSecond = "ผู้ซื้อและผู้ขายเท่านั้น โดยกรุงศรี ออโต้ ไม่มีความรับผิดใดในสินค้า";
+  String disclaimerTextThird = "ที่เสนอขายบนแพลตฟอร์มนี้";
 }

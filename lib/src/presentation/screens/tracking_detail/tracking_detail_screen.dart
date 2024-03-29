@@ -11,6 +11,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/disclaimer_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
@@ -553,12 +554,11 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 88)
+                            DisclaimerSection(),
+                            SizedBox(height: 88),
                           ],
                         ),
-
                         ///bottomSheet
-
                         Positioned(
                           bottom: 0,
                           left: 0,

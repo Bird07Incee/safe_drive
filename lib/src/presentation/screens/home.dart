@@ -19,6 +19,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart
 // import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/disclaimer_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_banner.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
@@ -307,6 +308,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       ],
                                     ),
                                   ),
+                                  DisclaimerSection(), //P
                                   Container(
                                     color: spaceGrey,
                                     child: Column(

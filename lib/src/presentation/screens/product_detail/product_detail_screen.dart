@@ -21,6 +21,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/disclaimer_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
@@ -287,10 +288,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     ),
                   ),
                 ),
-                PDBottomSection()
+                PDBottomSection(),
+                DisclaimerSection()
               ],
             ),
-          )),
+          ),
+      ),
     );
   }
 

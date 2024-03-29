@@ -11,6 +11,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart
 import 'package:marketplace_line_oa/src/presentation/screens/order_cancel.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/disclaimer_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
@@ -338,6 +339,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               ),
                             ]),
                           ),
+                          DisclaimerSection(),
                           Container(
                             color: spaceGrey,
                             child: Column(

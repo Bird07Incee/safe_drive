@@ -15,6 +15,7 @@ import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/disclaimer_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/dropdown_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_summary/text_input_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
@@ -449,12 +450,13 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 16,
-                                        ),
+                                        // SizedBox(
+                                        //   height: 16,
+                                        // ),
                                       ],
                                     ),
                                   ),
+                                  DisclaimerSection(),
                                 ],
                               ),
                             ),
