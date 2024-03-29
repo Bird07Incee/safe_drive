@@ -650,79 +650,43 @@ const mockProductListResponse = {
 
 const mockProductResponse = {
   "appId": "Marketplace-mini-app",
-  "merchantId": "0004234232",
-  "paymentChannelCode": ["cc", "ipp"],
+  "channelId": ["LINE"],
+  "merchantId": "123456",
+  "paymentChannelCode": ["CC"],
   "refundDay": 7,
-  "postDate": "2023‐09‐01T02:49:06−07:00",
-  "lastUpdateDate": "2023‐09‐02T02:49:06−07:00",
-  "categoryId": ["CT_371KNH5QXG6O"],
-  "productId": "PV_KH73Y1L00NLA03",
-  "quantity": 100,
-  "productName":
-      "Palsar Max version2hkerhckjfshdjkhfgksdjhfgkjshdlkfjghlskdjfhglksjhdfkjghslkdfhglkhsldkfhlgkhsldfhgjsdhfgjhslkdfghlksjhfglkshldfghl",
-  "productStatus": "Available",
-  "commissionAmount": 2000,
+  "postDate": "2024-03-12T15:33:58.3079046",
+  "lastUpdateDate": "2024-03-12T15:43:54.8571842",
+  "productId": "PV_G7XMPQF1XS31",
+  "quantity": 2,
+  "productName": "วอลชาร์จ พลัส",
+  "commissionAmount": 20,
   "serviceFee": 0,
   "shippingFee": 0,
-  "tagline":
-      "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
-  "promotionTag": ["ติดตั้งฟรี", "รับประกัน 3 ปี", "สิทธิ์พิเศษเฉพาะ ลูกค้ากรุงศรี ออโต้"],
-  "description": "<h1>Desc cate 2 Palsar Max version2</h1></h1>",
-  "technicalSpec":
-      "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\"><tbody><tr><td style=\"width:50%\"><p>รหัสสินค้า</p></td><td style=\"width:50%\"><p>PM12345678</p></td></tr><tr><td style=\"width:50%\"><p>ประเภทของเครื่องชาร์จ</p></td><td style=\"width:50%\"><p>Mode 3</p></td></tr><tr><td style=\"width:50%\"><p>ขนาด</p></td><td style=\"width:50%\"><p>198 x 201 x 99 มิลลิเมตร<br />(ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>น้ำหนัก</p></td><td style=\"width:50%\"><p>1 กิโลกรัม (ไม่รวมสายชาร์จ)</p></td></tr><tr><td style=\"width:50%\"><p>ความยาวสายชาร์จ</p></td><td style=\"width:50%\"><p>5 เมตร</p></td></tr><tr><td style=\"width:50%\"><p>การเชื่อมต่อ</p></td><td style=\"width:50%\"><p>Wi-Fi / Bluetooth</p></td></tr><tr><td style=\"width:50%\"><p>การเข้าใช้งาน</p></td><td style=\"width:50%\"><p>myWallbox App&amp;Portal</p></td></tr><tr><td style=\"width:50%\"><p>สี</p></td><td style=\"width:50%\"><p>ขาว หรือ ดำ</p></td></tr></tbody></table>",
-  "remark": [],
-  "currency": "THB",
-  "price": 100000,
-  "discountPrice": 50000,
-  "percentDiscountPrice": 5,
-  "productionAssets": [
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_BLACK_MONOCHROME_PHONE_1.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_1.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_2.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_ACCESORIES_3.png",
-    "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PULSARMAX_APP_EURO.png"
+  "tagline": "",
+  "promotionTag": [],
+  "description": "",
+  "technicalSpec": "<p>Wall charger by Innopower</p>",
+  "remark": [
+    "ข้อมูลนี้เป็นข้อมูลจากผู้ขาย อาจมีการเปลี่ยนแปลงได้ตลอดเวลา",
+    "กรุงศรี ออโต้ Line Official Account เป็นช่องทางการแสดงสินค้าเท่านั้น",
+    "สอบถามข้อมูลเพิ่มเติมเกี่ยวกับสินค้า กรุณาติดต่อผู้ขาย บริษัท อินโนพาวเวอร์ จำกัด​ ที่หมายเลข 02-096-9341",
+    "แจ้งปัญหาการสั่งซื้อสินค้า กรุณาติดต่อผู้ดูแลระบบที่หมายเลข 02-023-8858"
   ],
-  "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด",
-  "merchantAddress": "ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2 เลขที่ 118/1 ถนนพระราม 6 แขวงพญาไท\nเขตพญาไท กทม 10400",
-  "merchantLogo": "Url",
-  "merchantMobile": "091-862-5011",
-  "merchantEmail": "",
-  "productionOptionals": [
-    {
-      "label": "5เมตร สีดำ",
-      "levelName": "ความยาวสายและสี",
-      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-      "price": 50000,
-      "subProductId": "P003-1",
-      "quantity": 200
-    },
-    {
-      "label":
-          "5เมตร สีขาวhkerhckjfshdjkhfgksdjhfgkjshdlkfjghlskdjfhglksjhdfkjghslkdfhglkhsldkfhlgkhsldfhgjsdhfgjhslkdfghlksjhfglkshldfghljkshdkfghlsjkdhfjgklhsjlkdfhgjlkshljkdfhglwkercmnwltkenhvtksduhnlkh",
-      "levelName": "ความยาวสายและสี",
-      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-      "price": 50000,
-      "subProductId": "P003-2",
-      "quantity": 250
-    },
-    {
-      "label": "10เมตร สีดำ",
-      "levelName": "ความยาวสายและสี",
-      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/commander/c2_white_3phase.png",
-      "price": 55000,
-      "subProductId": "P003-3",
-      "quantity": 200
-    },
-    {
-      "label": "10เมตร สีขาว",
-      "levelName": "ความยาวสายและสี",
-      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/5_PPMAX_WHITE_MONOCHROME_2_1.png",
-      "price": 55000,
-      "subProductId": "P003-4",
-      "quantity": 250
-    }
-  ]
+  "currency": "Baht",
+  "price": 100000,
+  "discountPrice": 0,
+  "percentDiscountPrice": 0,
+  "productionAssets": [
+    "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240312_033446_Privilege_4B79A1U.png?sv=2020-08-04&se=2029-02-14T08%3A34%3A46Z&sr=b&sp=r&sig=8yANYIRiTOxJONrcBoPDB8zxz79OoTtifTJBLogO8NI%3D"
+  ],
+  "merchantFullName": "บริษัท อินโนพาวเวอร์ จำกัด​",
+  "merchantAddress": "118/1 ชั้น19 อาคารทิปโก้ ทาวเวอร์ 2  ถนนพระราม6 พญาไท พญาไท กรุงเทพมหานคร 10400",
+  "merchantLogo":
+      "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/BUSDOAIGQZSP_app-bo-cust/merchant/20240315_022123_merchant_IPSO24I.png?sv=2020-08-04&se=2029-02-17T07%3A21%3A25Z&sr=b&sp=r&sig=I95xpxZ9ipI2a4%2BK4%2BwpxSzi0gHRLYnMwMMPHFjNMlw%3D",
+  "merchantMobile": "02-096-9341",
+  "merchantEmail": "kotchapan.nuambunlue@gmail.com",
+  "merchantTaxCode": "eWHT",
+  "merchantTaxPercent": 1.0,
+  "productionOptionals": [],
+  "installment": []
 };
