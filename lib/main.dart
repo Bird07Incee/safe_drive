@@ -23,7 +23,6 @@ void main() async {
   setUrlStrategy(urlStrategyPromptBuy);
   WidgetsFlutterBinding.ensureInitialized();
   _configureApp();
-
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
