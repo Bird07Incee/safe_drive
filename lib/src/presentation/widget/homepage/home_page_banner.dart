@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,6 +20,7 @@ class HomePageBanner extends StatefulWidget {
 }
 
 class _HomePageBannerState extends State<HomePageBanner> {
+  AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
   @override
   Widget build(BuildContext context) {
     int itemBannerLength = widget.banners.length;
@@ -44,6 +46,8 @@ class _HomePageBannerState extends State<HomePageBanner> {
                 return GestureDetector(
                   key: const Key("home_banner"),
                   onTap: () {
+                    amplitudeWebHelper.logeTapCarouselOnHomeScreen(
+                        bannerName: widget.banners[i].route.toString(), bannerSequence: widget.banners[i].seqNo.toString());
                     if (itemBannerLength != 0) {
                       launchUrl(Uri.parse(widget.banners[i].url));
                     }

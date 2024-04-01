@@ -247,7 +247,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                         }
 
                         input = IgnorePointer(
-                            ignoring: state.status.isFetching,
+                            ignoring: false,
                             child: DropDownInputWidget(
                               disable: isDisable,
                               textEditingController: item.controller,

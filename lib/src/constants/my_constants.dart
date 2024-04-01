@@ -1,4 +1,5 @@
 const titleWebPage = 'วอลชาร์จรถไฟฟ้า | กรุงศรี ออโต้';
+const promptBuyWebTitle = "PROMPT_BUY_WEB";
 const fontFamily = "Krungsri Condensed";
 const carouselShowLimit = 3;
 

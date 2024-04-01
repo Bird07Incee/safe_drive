@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/helpers/check_last_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TermAndConParagraph extends StatelessWidget {
   const TermAndConParagraph({super.key, required this.header, required this.text});
@@ -31,7 +34,7 @@ class TermAndConParagraph extends StatelessWidget {
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: SafetyText(text, style: AlvaStyles().body1(), pattern: 'กรุงศรี ออโต้'),
+            child: SafetyText(text, style: AlvaStyles().body1(), pattern: 'กรุงศรี ออโต้', header: header),
           ),
         ),
       ],
@@ -43,6 +46,7 @@ class SafetyText extends StatelessWidget {
   final String text;
   final TextStyle? style;
   final String? pattern;
+  final String? header;
 
   final String _pattern = '\n';
 
@@ -51,6 +55,7 @@ class SafetyText extends StatelessWidget {
     super.key,
     this.style,
     this.pattern,
+    this.header,
   });
 
   @override
@@ -65,6 +70,7 @@ class SafetyText extends StatelessWidget {
                 value,
                 style: style,
                 pattern: pattern,
+                header: header,
               ),
             ),
           )
@@ -77,16 +83,19 @@ class UnbreakableText extends StatelessWidget {
   final String text;
   final TextStyle? style;
   final String? pattern;
+  final String? header;
 
   const UnbreakableText(
     this.text, {
     super.key,
     this.style,
     this.pattern,
+    this.header,
   });
 
   @override
   Widget build(BuildContext context) {
+    String lastWord = 'ออโต้ได้ที่';
     final textList = text.split(pattern!);
     return RichText(
         text: TextSpan(
@@ -96,6 +105,25 @@ class UnbreakableText extends StatelessWidget {
           TextSpan(text: textList[i]),
           if (i + 1 != textList.length) WidgetSpan(alignment: PlaceholderAlignment.middle, child: Text(pattern!, style: style)),
         ],
+        WidgetSpan(
+          child: SizedBox(
+            width: 4,
+          ),
+        ),
+        if (header == "การเชื่อมโยงกับเว็บไซต์อื่น" && CheckLastText().checkLastWord(text, lastWord))
+          WidgetSpan(
+            child: GestureDetector(
+              key: const Key("privacy_notice_text_button"),
+              onTap: () => launchUrl(Uri.parse("https://www.krungsriauto.com/auto/privacy-notice-th")),
+              child: Text(
+                "https://www.krungsriauto.com/auto/privacy-notice-th",
+                style: AlvaStyles().headingSize12w500(BlueFantasy).copyWith(
+                      height: 20 / 12,
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
+            ),
+          )
       ],
     ));
   }

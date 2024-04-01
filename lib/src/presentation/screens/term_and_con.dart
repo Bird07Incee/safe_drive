@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 // ignore: avoid_web_libraries_in_flutter
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
@@ -8,6 +9,7 @@ import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/term_and_con_helper.dart';
@@ -33,13 +35,14 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
   bool scrollFinished = false;
   TermAndConHelper termAndConHelper = TermAndConHelper();
   DioUtilityRepository dioUtilityRepository = DioUtilityRepository(service: DioUtilityService());
+  AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
   LineDataHelper lineDataHelper = LineDataHelper();
   final liff = fll.FlutterLineLiff();
 
   @override
   void initState() {
     super.initState();
-
+    amplitudeWebHelper.logEnterTermAndConPage();
     // Setup the listener.
     _controller.addListener(() {
       if (_controller.position.atEdge) {
@@ -163,6 +166,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
 
                               liff.logout();
                               liff.closeWindow();
+                              AmplitudeWebHelper.getInstance().logTapOnCancelButtonTermAndConPage();
                             }
                           },
                           child: Container(
@@ -187,6 +191,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           onTap: () async {
                             if (scrollFinished) {
                               acceptTermAndCond();
+                              AmplitudeWebHelper.getInstance().logTapOnOkButtonTermAndConPage();
                             }
                           },
                           child: Container(

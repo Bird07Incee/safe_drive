@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_line_liff/flutter_line_liff.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
@@ -16,7 +17,6 @@ import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart'
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
-// import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 late DatadogConfiguration configuration;
 UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
 void main() async {
@@ -27,7 +27,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    // runApp(const MyApp());
+    // runApp(MyApp());
     DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
       return runApp(const MyApp());
     });
@@ -37,6 +37,19 @@ void main() async {
 _configureApp() {
   _setUpDatadog();
   _setUpLineLIFF();
+  _setUpAmplitude();
+}
+
+_setUpDatadog() {
+  DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
+  configuration = DatadogConfiguration(
+    clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
+    env: const String.fromEnvironment('SET_ENV', defaultValue: 'dev'),
+    site: DatadogSite.us1,
+    nativeCrashReportEnabled: true,
+    loggingConfiguration: DatadogLoggingConfiguration(),
+    rumConfiguration: DatadogRumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee', traceSampleRate: 100),
+  );
 }
 
 _setUpLineLIFF() {
@@ -60,21 +73,18 @@ _setUpLineLIFF() {
       });
 }
 
-_setUpDatadog() {
-  DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
-  configuration = DatadogConfiguration(
-    clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
-    env: const String.fromEnvironment('SET_ENV', defaultValue: 'dev'),
-    site: DatadogSite.us1,
-    nativeCrashReportEnabled: true,
-    loggingConfiguration: DatadogLoggingConfiguration(),
-    rumConfiguration: DatadogRumConfiguration(applicationId: '93edfddb-2127-4074-b50c-ae8d9b9fadee', traceSampleRate: 100),
-  );
+_setUpAmplitude() {
+  try {
+    AmplitudeWebHelper.getInstance();
+  } catch (e) {
+    debugPrint("Error initializing Amplitude: $e");
+  }
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(

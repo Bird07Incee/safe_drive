@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +8,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
@@ -87,6 +90,13 @@ class ProductCardWidget extends StatelessWidget {
                     child: GestureDetector(
                       key: const Key("product_card"),
                       onTap: () async {
+                        log("product card");
+                        AmplitudeWebHelper.getInstance().logTapOnProduct(
+                            productName: products[index].productName,
+                            productId: products[index].productId,
+                            categoryId: products[index].categoryId.toString(),
+                            price: products[index].price.toString(),
+                            discountPrice: products[index].discountPrice.toString());
                         hideOneTrustCookieScript();
                         context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                         context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
@@ -114,6 +124,10 @@ class ProductCardWidget extends StatelessWidget {
                               child: GestureDetector(
                                 key: const Key("see_photo"),
                                 onTap: () async {
+                                  AmplitudeWebHelper.getInstance().logTapOnImageGallery(
+                                      productName: products[index].productName,
+                                      productId: products[index].productId,
+                                      categoryId: products[index].categoryId.toString());
                                   hideOneTrustCookieScript();
                                   context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                   context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));
