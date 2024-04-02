@@ -53,3 +53,5 @@ const cloudWhite = Color(0xffEFEFEF);
 const successGreen = Color(0xffE8F7EE);
 
 const orangeSoft = Color(0xFFFFF6E6);
+
+const globalYellow = Color(0xfffffbe6);
