@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_c_p_i_loader.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
@@ -16,11 +18,11 @@ class _LandingScreenState extends State<LandingScreen> {
 
   _redirectTo(String url) {
     Future.delayed(const Duration(seconds: 5)).then((r) {
-      print('launch url: $url');
+      log('launch url: $url');
       try {
         launchUrl(Uri.parse(url));
       } catch (e) {
-        print("launch fail: $e");
+        log("launch fail: $e");
       }
 
     });
@@ -39,7 +41,7 @@ class _LandingScreenState extends State<LandingScreen> {
         }
       }
     } catch (e) {
-      print(e);
+      log("load setting exception: $e");
     }
   }
 
