@@ -91,6 +91,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
           key: const Key("pop_navigator_to_home_page"),
           onPressed: () {
             Navigator.pop(context);
+            context.read<RefundRequestBloc>().textEditingControllerReason!.clear();
+            context.read<RefundRequestBloc>().textEditingControllerRemark!.clear();
           },
           icon: const Icon(Icons.arrow_back_ios_rounded)),
     );
