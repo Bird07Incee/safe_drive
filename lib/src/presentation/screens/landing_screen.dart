@@ -16,13 +16,24 @@ class _LandingScreenState extends State<LandingScreen> {
   late RouteSettings? settings;
   String redirectUrl = "";
 
-  _redirectTo(String url) {
+  _redirectTo() {
     Future.delayed(const Duration(seconds: 5)).then((r) {
-      log('launch url: $url');
+      String urlDecoded = Uri.decodeFull(redirectUrl);
+      log('launch url auto: $urlDecoded');
       try {
-        launchUrl(Uri.parse(url));
+        launchUrl(Uri.parse(urlDecoded));
       } catch (e) {
         log("launch fail: $e");
+      }
+
+    });
+    Future.delayed(const Duration(seconds: 20)).then((r) {
+      String urlDecoded = Uri.decodeFull(redirectUrl);
+      log('launch url by clicked button: $urlDecoded');
+      try {
+        w.onDoubleTap!();
+      } catch (e) {
+        log("launch fail double tap: $e");
       }
 
     });
@@ -36,8 +47,7 @@ class _LandingScreenState extends State<LandingScreen> {
         var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
         redirectUrl = (routingData["redirectUrl"] == null) ? "" : routingData["redirectUrl"];
         if (redirectUrl.isNotEmpty) {
-          String urlDecoded = Uri.decodeFull(redirectUrl);
-          _redirectTo(urlDecoded);
+          _redirectTo();
         }
       }
     } catch (e) {
@@ -45,9 +55,17 @@ class _LandingScreenState extends State<LandingScreen> {
     }
   }
 
+  late GestureDetector w;
+
   @override
   void initState() {
     _loadSetting();
+    w = GestureDetector(
+        onDoubleTap: () {
+          _redirectTo();
+        },
+        child: AlvaCPILoader()
+    );
     super.initState();
   }
 
@@ -55,19 +73,14 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         width: maxWidth,
         height: maxHeight,
         color: Colors.white,
         child: Center(
-          child: GestureDetector(
-            onDoubleTap: () {
-              String urlDecoded = Uri.decodeFull(redirectUrl);
-              launchUrl(Uri.parse(urlDecoded));
-            },
-              child: AlvaCPILoader()
-          ),
+          child: w
         ),
       ),
     );

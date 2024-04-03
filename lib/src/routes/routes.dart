@@ -164,6 +164,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case "/landing":
       return MaterialPageRoute(builder: (_) => LandingScreen(), settings: settings);
     default:
-      return MaterialPageRoute(builder: (_) => const LandingScreen(), settings: settings);
+      return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }
 }
