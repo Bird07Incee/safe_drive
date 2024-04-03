@@ -566,7 +566,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   )
                 : Container(),
             const SizedBox(
-              height: 24,
+              height: 16,
             ),
           ],
         ));
