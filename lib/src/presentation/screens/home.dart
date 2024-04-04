@@ -86,7 +86,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final maxWidth = size.width;
-    final tabController = TabController(length: 5, vsync: this);
     return RootPageCondition(
         child: WillPopScope(
             onWillPop: () async {
@@ -158,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     padding: const EdgeInsets.symmetric(horizontal: 16),
                                     color: Colors.white,
                                     child: TabBar(
-                                        controller: tabController,
+                                        controller: TabController(length: state.productList.category!.length + 1, vsync: this),
                                         labelColor: Colors.black,
                                         indicatorColor: BlueFantasy,
                                         padding: EdgeInsets.only(right: 8),
