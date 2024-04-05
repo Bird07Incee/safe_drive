@@ -271,7 +271,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           fieldName: 'name',
           listInputFormatter: [
             FilteringTextInputFormatter.deny(RegExp(
-                r"[0-9-!Ŵëéèêěẽēėęřțťþÿŷýųůűūũüúùûǔįıīĩǐǐïíìîőōõøœǒöôóòàáâäǎæãåāăąßşșśšďðğġħķľļłźžżçćčċňņńñ–—•₽¥£€$฿§«»„“”…¿¡`‘’'‰≈≠\\%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
+                r"[0-9-!Ŵŵëéèêěẽēėęřțťþÿŷýųůűūũüúùûǔįıīĩǐǐïíìîőōõøœǒöôóòàáâäǎæãåāăąßşșśšďðğġħķľļłźžżçćčċňņńñ–—•₽¥£€$฿§«»„“”…¿¡`‘’'‰≈≠\\%^&*#@()_+|~=`{}\[\]:;'<>?,.\/"
                 '"'
                 "]")),
             FilteringTextInputFormatter.deny(
