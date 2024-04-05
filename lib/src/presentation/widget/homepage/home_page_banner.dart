@@ -75,19 +75,21 @@ class _HomePageBannerState extends State<HomePageBanner> {
             child: Align(
           alignment: Alignment.bottomCenter,
           child: Visibility(
-            visible: itemBannerLength == 1 ? false : true,
+            visible: itemBannerLength <= 1 ? false : true,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-              child: SmoothPageIndicator(
-                  controller: widget.pageControllerState,
-                  count: itemBannerLength <= 5 ? itemBannerLength : 5,
-                  effect: const ExpandingDotsEffect(
-                    expansionFactor: 2,
-                    dotHeight: 6,
-                    dotWidth: 6,
-                    activeDotColor: cloudSoftDeepWhite,
-                    dotColor: spaceGrey,
-                  )),
+              child: itemBannerLength > 0
+                  ? SmoothPageIndicator(
+                      controller: widget.pageControllerState,
+                      count: itemBannerLength <= 5 ? itemBannerLength : 5,
+                      effect: const ExpandingDotsEffect(
+                        expansionFactor: 2,
+                        dotHeight: 6,
+                        dotWidth: 6,
+                        activeDotColor: cloudSoftDeepWhite,
+                        dotColor: spaceGrey,
+                      ))
+                  : SizedBox.shrink(),
             ),
           ),
         )),
