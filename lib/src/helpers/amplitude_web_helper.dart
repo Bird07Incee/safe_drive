@@ -1,5 +1,4 @@
 import 'package:amplitude_flutter/amplitude.dart';
-import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
@@ -21,6 +20,7 @@ class AmplitudeWebHelper {
       final apiKey = Environment().getValue("SUPER_APP_AMPLITUDE_API_KEY");
 
       _amplitude!.init(apiKey);
+      _amplitude!.setUserProperties({'Version': '1.0.0'});
     }
   }
 
@@ -44,7 +44,7 @@ class AmplitudeWebHelper {
       }
       _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
     } catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
     }
   }
 

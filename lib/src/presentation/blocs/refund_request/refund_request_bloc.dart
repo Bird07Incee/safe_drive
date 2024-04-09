@@ -34,16 +34,16 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
 
     LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
-    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_INQUIRY_BASE_URL");
-    final inquiryPath = Environment().getValue("INQUIRY_URL");
+    final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
+    final inquiryRefundPath = Environment().getValue("INQUIRY_REFUND_URL");
     String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
 
     var payload = {"invoiceNo": event.orderNo, "uid": uid};
 
     try {
-      Response response =
-          await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquiryPath", payload, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository
+          .postByURL("$baseUrl$transactionApiPath$inquiryRefundPath", payload, headers: {"Authorization": "Bearer $accessToken"});
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
       String status = response.data["status"] ?? "";
