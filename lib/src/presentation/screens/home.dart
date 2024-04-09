@@ -117,33 +117,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           child: ListView(
                             controller: scrollController,
                             children: [
-                              Container(
-                                width: maxWidth,
-                                height: 50,
-                                color: Colors.white,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: maxWidth * .8,
-                                      height: 50,
-                                      child: TextField(
-                                        controller: tc,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: maxWidth * .2,
-                                      height: 40,
-                                      child: TextButton(
-                                        child: const Text('DEPPLINK'),
-                                        onPressed: () {
-                                          launchUrl(Uri.parse(tc.text));
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               HomepageTopSection(maxWidth: maxWidth),
                               HomePageBanner(
                                 pageControllerState: pageController,
