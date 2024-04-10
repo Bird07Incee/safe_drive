@@ -70,11 +70,9 @@ void main() {
           final baseUrl = Environment().getValue("BFF_BASE_URL");
           final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
           String path = "/v1/inquiry/refund";
-          final mock = {"uid": "1234"};
-          await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
           when(() {
-            return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", {"invoiceNo": "LA202402081707425tpvy", "uid": "1234"},
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository
+                .getByURL("$baseUrl$transactionApiPath$path", {"invoiceNo": "LA202402081707425tpvy"}, headers: {"Authorization": "Bearer "});
           }).thenAnswer(
             (_) async {
               RequestOptions option =
