@@ -4,10 +4,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   Map<String, dynamic> headers = HeaderUtil.baseHeader();
   headers.addAll({"authorization": "Bearer test"});
+  SharedPreferences.setMockInitialValues({});
   final dioClient = DioClient().dioClient;
   final dioAdapter = DioAdapter(
     dio: dioClient,
