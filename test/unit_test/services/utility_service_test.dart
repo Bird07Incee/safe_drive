@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
 void main() async {
-  Map<String, dynamic> headers = HeaderUtil.baseHeader;
+  Map<String, dynamic> headers = HeaderUtil.baseHeader();
   headers.addAll({"authorization": "Bearer test"});
   final dioClient = DioClient().dioClient;
   final dioAdapter = DioAdapter(
@@ -20,21 +20,14 @@ void main() async {
       return handler.next(options);
     },
   ));
-  dynamic resJson = {
-    "message": "ok"
-  };
+  dynamic resJson = {"message": "ok"};
   setUp(() {
     WidgetsFlutterBinding.ensureInitialized();
   });
 
   group('utility service', () {
-    Map<String, dynamic> header = {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Accept': "application/json",
-      "Authorization": "Bearer test"
-    };
-    test(
-        'test get success case', () async {
+    Map<String, dynamic> header = {'Content-Type': 'application/json; charset=UTF-8', 'Accept': "application/json", "Authorization": "Bearer test"};
+    test('test get success case', () async {
       dioAdapter.onGet(
         "http://www.mockurl.com/",
         (server) => server.reply(
@@ -53,11 +46,10 @@ void main() async {
       );
     });
 
-    test(
-        'test get success case but response data is empty', () async {
+    test('test get success case but response data is empty', () async {
       dioAdapter.onGet(
         "http://www.mockurl.com/",
-            (server) => server.reply(
+        (server) => server.reply(
           200,
           {},
           delay: const Duration(milliseconds: 1),
@@ -76,9 +68,8 @@ void main() async {
         );
       }
     });
-    
-    test(
-        'test get not success case', () async {
+
+    test('test get not success case', () async {
       dioAdapter.onGet(
         "http://www.mockurl.com/",
         (server) => server.reply(
@@ -129,8 +120,7 @@ void main() async {
       );
     });
 
-    test(
-        'test post success case', () async {
+    test('test post success case', () async {
       dioAdapter.onPost(
         "http://www.mockurl.com/",
         (server) => server.reply(
@@ -143,18 +133,17 @@ void main() async {
       );
 
       final service = DioUtilityService(dio: dioClient);
-      Response response = await service.postByURL("http://www.mockurl.com/", {}, headers: {});
+      Response response = await service.postByURL("http://www.mockurl.com/", {});
       expect(
         response.data,
         resJson,
       );
     });
 
-    test(
-        'test post success case but response data is empty', () async {
+    test('test post success case but response data is empty', () async {
       dioAdapter.onPost(
         "http://www.mockurl.com/",
-            (server) => server.reply(
+        (server) => server.reply(
           200,
           {},
           delay: const Duration(milliseconds: 1),
@@ -175,8 +164,7 @@ void main() async {
       }
     });
 
-    test(
-        'test get not success case', () async {
+    test('test get not success case', () async {
       dioAdapter.onPost(
         "http://www.mockurl.com/",
         (server) => server.reply(
@@ -228,7 +216,5 @@ void main() async {
         throwsA(isA<DioException>()),
       );
     });
-
   });
-
 }

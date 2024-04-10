@@ -201,8 +201,7 @@ void main() {
             final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
             String path = "/v1/create";
             when(() {
-              return utilityRepository
-                  .postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
+              return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson());
             }).thenAnswer(
               (_) async {
                 RequestOptions option = RequestOptions(
@@ -228,8 +227,7 @@ void main() {
             final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
             String path = "/v1/create";
             when(() {
-              return utilityRepository
-                  .postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson(), headers: {"Authorization": "Bearer "});
+              return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson());
             }).thenAnswer(
               (_) async {
                 RequestOptions option = RequestOptions(

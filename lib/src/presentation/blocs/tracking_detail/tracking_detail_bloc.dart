@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/tracking_model.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
@@ -16,20 +15,14 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
   final DioUtilityRepository utilityRepository;
 
   _onGetTrackingDetail(GetTracking event, Emitter<TrackingDetailState> emit) async {
-    LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
-    String accessToken = await lineDataHelper.getLineAccessToken();
     emit(state.copyWith(status: TrackingDetailStatus.loading));
 
     try {
       String path = "/v1/trackingDetail";
-      Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {
-        "orderNo": event.orderNo,
-        "productId": event.productId
-      }, headers: {
-        "Authorization": "Bearer $accessToken",
-      });
+      Response response =
+          await utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {"orderNo": event.orderNo, "productId": event.productId});
       final t = TrackingResponseModel.fromJson(response.data);
       var tracking = t.tracking;
       String refundExpireDateTime = t.tracking.refundExpireDateTime;

@@ -71,8 +71,7 @@ void main() {
           final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
           String path = "/v1/inquiry/refund";
           when(() {
-            return utilityRepository
-                .getByURL("$baseUrl$transactionApiPath$path", {"invoiceNo": "LA202402081707425tpvy"}, headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {"invoiceNo": "LA202402081707425tpvy"});
           }).thenAnswer(
             (_) async {
               RequestOptions option =
@@ -147,7 +146,7 @@ void main() {
           await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
           var data = {"orderNo": "", "reason": "", "remark": ""};
           when(() {
-            return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", data, headers: {"Authorization": "Bearer "});
+            return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", data);
           }).thenAnswer(
             (_) async {
               RequestOptions option =

@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
 
 class DioUtilityService {
@@ -9,10 +10,9 @@ class DioUtilityService {
   final Dio _dioClient;
 
   Future<Response> getByURL(String path, Map<String, Object> params, {bool isRecursion = false, Map<String, dynamic>? headers}) async {
-    _dioClient.options.headers = HeaderUtil.baseHeader;
-    if (headers != null) {
-      _dioClient.options.headers.addAll(headers);
-    }
+    LineDataHelper lineDataHelper = LineDataHelper();
+    String accessToken = await lineDataHelper.getLineAccessToken();
+    _dioClient.options.headers = HeaderUtil.baseHeader(token: accessToken);
 
     try {
       final response = await _dioClient.get(
@@ -38,11 +38,10 @@ class DioUtilityService {
     }
   }
 
-  Future<Response> postByURL(String path, Map<dynamic, dynamic> body, {bool isRecursion = false, Map<String, dynamic>? headers}) async {
-    _dioClient.options.headers = HeaderUtil.baseHeader;
-    if (headers != null) {
-      _dioClient.options.headers.addAll(headers);
-    }
+  Future<Response> postByURL(String path, Map<dynamic, dynamic> body, {bool isRecursion = false}) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    String accessToken = await lineDataHelper.getLineAccessToken();
+    _dioClient.options.headers = HeaderUtil.baseHeader(token: accessToken);
 
     try {
       final response = await _dioClient.post(

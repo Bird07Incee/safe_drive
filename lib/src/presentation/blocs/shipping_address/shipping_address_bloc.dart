@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
@@ -362,10 +361,8 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
   }
 
   fetchDataFromApi(String path, {String refId = "", bool isDistrict = false, bool isSubDistrict = false}) async {
-    LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
-    String accessToken = await lineDataHelper.getLineAccessToken();
     Map<String, Object> queryParams = {};
     if (refId.isNotEmpty) {
       if (isDistrict) {
@@ -374,8 +371,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
         queryParams = {getDistrict: refId};
       }
     }
-    Response response =
-        await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", queryParams, headers: {"Authorization": "Bearer $accessToken"});
+    Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", queryParams);
 
     return response;
   }

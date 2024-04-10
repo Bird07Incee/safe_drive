@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:uuid/uuid.dart';
 
 class HeaderUtil {
-  static Map<String, dynamic> get baseHeader {
+  static Map<String, dynamic> baseHeader({String token = ""}) {
     String dateTime = DateTime.now().toUtc().add(const Duration(hours: 7)).toIso8601String();
     const uuid = Uuid();
     return {
@@ -11,7 +11,8 @@ class HeaderUtil {
       HttpHeaders.acceptHeader: "application/json",
       "Nonce": "MARKETPLACE|${uuid.v4()}|$dateTime",
       "Accept": "application/json",
-      "source": "LINE"
+      "source": "LINE",
+      "Authorization": "Bearer $token"
     };
   }
 }

@@ -5,6 +5,7 @@ class DioUtilityRepository {
   const DioUtilityRepository({required this.service});
   final DioUtilityService service;
 
-  Future<Response> getByURL(path, params, {headers}) async => service.getByURL(path, params, headers: headers);
-  Future<Response> postByURL(path, body, {headers}) async => service.postByURL(path, body, headers: headers);
+  Future<Response> getByURL(path, params) async => service.getByURL(path, params);
+
+  Future<Response> postByURL(path, body) async => service.postByURL(path, body);
 }

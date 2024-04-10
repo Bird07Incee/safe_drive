@@ -69,14 +69,12 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
     final trackingListPath = Environment().getValue("TRACKING_LIST_URL");
-    String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
 
     var params = {"itemsPerPage": 10, "page": event.page, "customerRef": uid};
 
     try {
-      Response response =
-          await utilityRepository.getByURL("$baseUrl$transactionApiPath$trackingListPath", params, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$trackingListPath", params);
 
       List ordersResponse = response.data["orders"];
       TrackingListPage trackingListPage = TrackingListPage.fromJson(response.data);

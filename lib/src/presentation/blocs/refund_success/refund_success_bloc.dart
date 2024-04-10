@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/refund/refund_success_data_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_event.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_state.dart';
@@ -18,7 +17,6 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
 
   _onGetRefundSuccess(GetRefundSuccess event, Emitter<RefundSuccessState> emit) async {
     emit(state.copyWith(refundSuccessStatus: GetRefundSuccessDataStatus.loading));
-    LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
     final inquiryRefundPath = Environment().getValue("INQUIRY_REFUND_URL");
@@ -26,11 +24,9 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
     if (!event.bypassContext) {
       stateSc = ScaffoldMessenger.of(event.context);
     }
-    String accessToken = await lineDataHelper.getLineAccessToken();
     Map<String, dynamic> refundJsonData = {};
     try {
-      Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$inquiryRefundPath", {"invoiceNo": event.invoiceNo},
-          headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$inquiryRefundPath", {"invoiceNo": event.invoiceNo});
 
       if (response.statusCode == 200) {
         refundJsonData = {"status": response.data["status"]};

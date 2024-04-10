@@ -87,11 +87,10 @@ void main() {
           var payload = {"invoiceNo": "1234", "uid": "1234"};
 
           when(() {
-            return utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer "});
+            return utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload);
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$transactionApiPath$inquriyPath", method: "POST", data: payload, headers: {"Authorization": "Bearer "});
+              RequestOptions option = RequestOptions(baseUrl: "$baseUrl$transactionApiPath$inquriyPath", method: "POST", data: payload);
               return Response(requestOptions: option, data: mockResponse, statusCode: 200, statusMessage: "OK");
             },
           );
@@ -113,11 +112,10 @@ void main() {
           var payload = {"invoiceNo": "1234", "uid": ""};
 
           when(() {
-            return utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer "});
+            return utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload);
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$transactionApiPath$inquriyPath", method: "POST", data: payload, headers: {"Authorization": "Bearer "});
+              RequestOptions option = RequestOptions(baseUrl: "$baseUrl$transactionApiPath$inquriyPath", method: "POST", data: payload);
               return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
             },
           );

@@ -56,8 +56,9 @@ void main() {
           String path = "/v1/trackingDetail";
           when(() {
             return utilityRepository.getByURL(
-                "$baseUrl$transactionApiPath$path", {"orderNo": "LA202402081707425tpvy", "productId": "PV_2Q3HC9TC7ONG"},
-                headers: {"Authorization": "Bearer "});
+              "$baseUrl$transactionApiPath$path",
+              {"orderNo": "LA202402081707425tpvy", "productId": "PV_2Q3HC9TC7ONG"},
+            );
           }).thenAnswer(
             (_) async {
               RequestOptions option = RequestOptions(

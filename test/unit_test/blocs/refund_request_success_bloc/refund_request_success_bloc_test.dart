@@ -120,8 +120,10 @@ void main() {
           final inquiryRefundPath = Environment().getValue("INQUIRY_REFUND_URL");
 
           when(() {
-            return utilityRepository.getByURL("$baseUrl$transactionApiPath$inquiryRefundPath", {"invoiceNo": "RFLA20240215100358LXVdT"},
-                headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL(
+              "$baseUrl$transactionApiPath$inquiryRefundPath",
+              {"invoiceNo": "RFLA20240215100358LXVdT"},
+            );
           }).thenAnswer(
             (_) async {
               RequestOptions option = RequestOptions(

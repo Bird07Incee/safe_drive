@@ -51,11 +51,10 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
 
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {});
             }).thenAnswer(
               (_) async {
-                RequestOptions option =
-                    RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {});
                 return Response(
                     requestOptions: option,
                     data: ShippingAddressBloc(utilityRepository: utilityRepository).provinceDataMock,
@@ -91,11 +90,10 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {});
             }).thenAnswer(
               (_) async {
-                RequestOptions option =
-                    RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {});
                 return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
@@ -115,11 +113,10 @@ void main() {
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             String path = "/ecommerce/v1/data/province1";
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {});
             }).thenAnswer(
               (_) async {
-                RequestOptions option =
-                    RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {});
                 return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
@@ -140,11 +137,10 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"});
             }).thenAnswer(
               (_) async {
-                RequestOptions option = RequestOptions(
-                    baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"province": "01"}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"province": "01"});
                 return Response(
                     requestOptions: option,
                     data: ShippingAddressBloc(utilityRepository: utilityRepository).districtDataMock,
@@ -153,11 +149,10 @@ void main() {
               },
             );
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"district": "0101"}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"district": "0101"});
             }).thenAnswer(
               (_) async {
-                RequestOptions option = RequestOptions(
-                    baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"district": "0101"}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"district": "0101"});
                 return Response(
                     requestOptions: option,
                     data: ShippingAddressBloc(utilityRepository: utilityRepository).subDistrictDataMock,
@@ -263,11 +258,10 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"});
             }).thenAnswer(
               (_) async {
-                RequestOptions option = RequestOptions(
-                    baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"province": "01"}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"province": "01"});
                 return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
@@ -314,11 +308,10 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"province": "01"});
             }).thenAnswer(
               (_) async {
-                RequestOptions option = RequestOptions(
-                    baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"province": "01"}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"province": "01"});
                 return Response(
                     requestOptions: option,
                     data: ShippingAddressBloc(utilityRepository: utilityRepository).districtDataMock,
@@ -327,11 +320,10 @@ void main() {
               },
             );
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"district": "0101"}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"district": "0101"});
             }).thenAnswer(
               (_) async {
-                RequestOptions option = RequestOptions(
-                    baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"district": "0101"}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {"district": "0101"});
                 return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
               },
             );
@@ -411,11 +403,10 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {});
             }).thenAnswer(
               (_) async {
-                RequestOptions option =
-                    RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {});
                 return Response(
                     requestOptions: option,
                     data: ShippingAddressBloc(utilityRepository: utilityRepository).provinceDataMock,
@@ -451,11 +442,10 @@ void main() {
             final baseUrl = Environment().getValue("BFF_BASE_URL");
             final inventoryApiPath = Environment().getValue("BFF_MASTER_PROVINCE_MANAGER_BASE_URL");
             when(() {
-              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {}, headers: {"Authorization": "Bearer "});
+              return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {});
             }).thenAnswer(
               (_) async {
-                RequestOptions option =
-                    RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+                RequestOptions option = RequestOptions(baseUrl: "$baseUrl$inventoryApiPath$path", method: "GET", data: {});
                 return Response(
                     requestOptions: option,
                     data: ShippingAddressBloc(utilityRepository: utilityRepository).provinceDataMock,

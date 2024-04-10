@@ -33,13 +33,11 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     final transactionApiPath = Environment().getValue("BFF_TRANSACTION_INQUIRY_BASE_URL");
     final inquriyPath = Environment().getValue("INQUIRY_URL");
     // final ctx = ScaffoldMessenger.of(event.context);
-    String accessToken = await lineDataHelper.getLineAccessToken();
     String uid = await lineDataHelper.getLineUid();
 
     var payload = {"invoiceNo": event.invoiceNo, "uid": uid};
     try {
-      Response response =
-          await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload);
 
       final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
       String status = response.data["status"] ?? "";
@@ -59,9 +57,7 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             break;
           }
           await Future.delayed(Duration(seconds: 8));
-          Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, headers: {
-            "Authorization": "Bearer $accessToken",
-          });
+          Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload);
           final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
           String status = response.data["status"] ?? "";
           if (status == "Complete") {

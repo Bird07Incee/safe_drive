@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:marketplace_line_oa/src/helpers/interceptor_handler.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
@@ -18,7 +18,7 @@ void main() async {
   late DioUtilityService utilityService;
   late DioUtilityRepository utilityRepository;
   late InterceptorHandler interceptorHandler;
-  Map<String, dynamic> headers = HeaderUtil.baseHeader;
+  Map<String, dynamic> headers = HeaderUtil.baseHeader();
   headers.addAll({"authorization": "Bearer test"});
   final dioClient = DioClient().dioClient;
   final dioAdapter = DioAdapter(
@@ -32,7 +32,8 @@ void main() async {
       return handler.next(options);
     },
   ));
-  RequestOptions optionPOST = RequestOptions(path: '/mercury-social-dev/line/token', baseUrl: "https://api.marketplace.ksauto.net", method: "POST", data: {"renew": "test"});
+  RequestOptions optionPOST =
+      RequestOptions(path: '/mercury-social-dev/line/token', baseUrl: "https://api.marketplace.ksauto.net", method: "POST", data: {"renew": "test"});
   setUp(() {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
@@ -90,34 +91,33 @@ void main() async {
 
     test('call refreshToken method success 200', () async {
       when(
-            () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
+        () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
       ).thenAnswer(
-            (_) => Future.value(
+        (_) => Future.value(
           Response(requestOptions: optionPOST, data: {"access_token": "success", "refresh_token": "success"}, statusCode: 200, statusMessage: "OK"),
         ),
       );
-      
+
       await interceptorHandler.refreshToken();
       verify(
-            () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
+        () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
       ).called(1);
     });
 
     test('call refreshToken method fail non-200', () async {
       when(
-            () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
+        () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
       ).thenAnswer(
-            (_) => Future.value(
-          Response(requestOptions: optionPOST, data: {"access_token": "success", "refresh_token": "success"}, statusCode: 400, statusMessage: "Error"),
+        (_) => Future.value(
+          Response(
+              requestOptions: optionPOST, data: {"access_token": "success", "refresh_token": "success"}, statusCode: 400, statusMessage: "Error"),
         ),
       );
 
       await interceptorHandler.refreshToken();
       verify(
-            () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
+        () => utilityService.postByURL("https://api.marketplace.ksauto.net/mercury-social-dev/line/token", {"renew": "test"}),
       ).called(1);
     });
-
   });
-
 }

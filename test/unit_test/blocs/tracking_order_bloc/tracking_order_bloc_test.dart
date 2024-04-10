@@ -86,11 +86,10 @@ void main() {
           final transactionApiPath = Environment().getValue("BFF_TRANSACTION_TRACKING_BASE_URL");
           String path = "/v1/trackingList";
           when(() {
-            return utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {}, headers: {"Authorization": "Bearer "});
+            return utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {});
           }).thenAnswer(
             (_) async {
-              RequestOptions option =
-                  RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "GET", data: {}, headers: {"Authorization": "Bearer "});
+              RequestOptions option = RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "GET", data: {});
               return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
             },
           );
