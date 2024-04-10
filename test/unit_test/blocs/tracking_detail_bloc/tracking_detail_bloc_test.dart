@@ -61,8 +61,7 @@ void main() {
             );
           }).thenAnswer(
             (_) async {
-              RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$transactionApiPath", method: "GET", data: mockTrackingDetail, headers: {"Authorization": accessToken});
+              RequestOptions option = RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "GET", data: mockTrackingDetail);
               return Response(requestOptions: option, data: mockTrackingDetail, statusCode: 200, statusMessage: "OK");
             },
           );

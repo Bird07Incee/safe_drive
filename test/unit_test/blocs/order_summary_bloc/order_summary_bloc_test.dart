@@ -204,11 +204,8 @@ void main() {
               return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson());
             }).thenAnswer(
               (_) async {
-                RequestOptions option = RequestOptions(
-                    baseUrl: "$baseUrl$transactionApiPath$path",
-                    method: "POST",
-                    data: CreateOrderRequestModel.empty.toJson(),
-                    headers: {"Authorization": "Bearer "});
+                RequestOptions option =
+                    RequestOptions(baseUrl: "$baseUrl$transactionApiPath$path", method: "POST", data: CreateOrderRequestModel.empty.toJson());
                 return Response(requestOptions: option, data: mockOrderResponse, statusCode: 200, statusMessage: "OK");
               },
             );

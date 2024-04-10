@@ -74,8 +74,7 @@ void main() {
             return utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {"invoiceNo": "LA202402081707425tpvy"});
           }).thenAnswer(
             (_) async {
-              RequestOptions option =
-                  RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "POST", data: mockInquiry, headers: {"Authorization": accessToken});
+              RequestOptions option = RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "POST", data: mockInquiry);
               return Response(requestOptions: option, data: mockInquiry, statusCode: 200, statusMessage: "OK");
             },
           );

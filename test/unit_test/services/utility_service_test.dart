@@ -39,7 +39,7 @@ void main() async {
       );
 
       final service = DioUtilityService(dio: dioClient);
-      Response response = await service.getByURL("http://www.mockurl.com/", {}, headers: {});
+      Response response = await service.getByURL("http://www.mockurl.com/", {});
       expect(
         response.data,
         resJson,

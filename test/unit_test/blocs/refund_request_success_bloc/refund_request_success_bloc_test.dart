@@ -127,10 +127,7 @@ void main() {
           }).thenAnswer(
             (_) async {
               RequestOptions option = RequestOptions(
-                  baseUrl: "$baseUrl$transactionApiPath$inquiryRefundPath",
-                  method: "GET",
-                  data: {"invoiceNo": "RFLA20240215100358LXVdT"},
-                  headers: {"Authorization": "Bearer "});
+                  baseUrl: "$baseUrl$transactionApiPath$inquiryRefundPath", method: "GET", data: {"invoiceNo": "RFLA20240215100358LXVdT"});
               return Response(requestOptions: option, data: mockResponse, statusCode: 200, statusMessage: "OK");
             },
           );
