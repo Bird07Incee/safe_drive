@@ -189,7 +189,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     },
                     icon: const Icon(Icons.arrow_back_ios_rounded),
                   ),
-                  leadingWidth: 60,
+                  leadingWidth: 48,
                   titleSpacing: 0,
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,13 +207,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                   : pdState.product.discountPrice.toDecimalFormat(),
                               textStyle: AlvaStyles()
                                   .heading1()
-                                  .copyWith(color: pdState.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow, height: 1.33)),
+                                  .copyWith(color: BTN_SELECTED_TEXT_COLOR_NEW, height: 1.33)),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 1),
+                            padding: const EdgeInsets.only(bottom: 1, top: 2),
                             child: AlvaText(
                                 title: ' บาท',
-                                textStyle: AlvaStyles()
-                                    .heading2(pdState.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow)
+                                textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)
                                     .copyWith(height: 1.33)),
                           ),
                         ],
@@ -225,7 +224,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
               : AppBar(
                   title: AlvaText(title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                   titleSpacing: 0,
-                  leadingWidth: 60,
+                  leadingWidth: 48,
                   centerTitle: false,
                   automaticallyImplyLeading: false,
                   leading: IconButton(

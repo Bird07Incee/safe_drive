@@ -7,6 +7,7 @@ class HomeConst {
   String imageTopSecPath = 'assets/homepage/krungsri-auto-logo-2.20f3516 1.png';
   String titleTopSec = 'PromptBuy';
   String bannerImagePath = 'assets/homepage/banner.png';
+  String titleTopSecTH = 'พร้อมบาย';
 
   String lineOAURL = 'https://line.me/R/ti/p/@018qbfet';
   String termsAndConditions = 'ข้อตกลงและเงื่อนไข';

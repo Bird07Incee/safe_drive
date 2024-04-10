@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
@@ -24,21 +25,22 @@ class HomepageTopSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                HomeConst().imageTopSecPath,
-                width: 86,
-                height: 40,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AlvaText(
-                    title: HomeConst().titleTopSec,
-                    textStyle: AlvaStyles().heading1(),
-                  ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AlvaText(
+                            title: HomeConst().titleTopSec,
+                            textStyle: AlvaStyles().headingSize16Bold()
+                          ),
+                          AlvaText(
+                            title: HomeConst().titleTopSecTH,
+                            textStyle: AlvaStyles().headingSize8w500Height12(blackGoMunTo)
+                          ),
+                        ],
+                      ),
                   GestureDetector(
                     onTap: () {
                       AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButton();

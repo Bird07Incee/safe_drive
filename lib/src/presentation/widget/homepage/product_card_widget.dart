@@ -361,6 +361,9 @@ class ProductCardWidget extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
@@ -370,20 +373,18 @@ class ProductCardWidget extends StatelessWidget {
                                                 products[index].discountPrice == 0
                                                     ? products[index].price.toDecimalFormat()
                                                     : products[index].discountPrice.toDecimalFormat(),
-                                                style: products[index].discountPrice == 0
-                                                    ? AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                    : AlvaStyles().headingSize22(RedWordShow),
+                                                style: AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW),
                                               ),
                                               const SizedBox(
                                                 width: 2,
                                               ),
                                               Text(
-                                                "บาท",
-                                                style: products[index].discountPrice == 0
-                                                    ? AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                    : AlvaStyles().headingSize18(RedWordShow),
+                                                "บาท", style: AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
                                               ),
                                             ],
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
                                           ),
                                           Container(
                                             height: 40,

@@ -773,11 +773,13 @@ class _PDTopSectionState extends State<PDTopSection> {
                                     } else if (element.localName == "td") {
                                       return {'width': '50%'};
                                     }
-
                                     return null;
                                   }),
                                 );
                               },
+                            ),
+                            const SizedBox(
+                              height: 16,
                             ),
                             Visibility(
                               visible: state.product.discountPrice != 0 && state.product.productionOptionals.isEmpty,
@@ -785,11 +787,13 @@ class _PDTopSectionState extends State<PDTopSection> {
                                 children: [
                                   AlvaText(
                                     title: state.product.price.toDecimalFormat(),
-                                    textStyle: AlvaStyles().discountPriceTxt14w400(smockGrey).copyWith(height: 1.714),
+                                    textStyle: AlvaStyles().discountPriceTxt14w400(RedWordShow)
+                                        .copyWith(height: 1.714),
                                   ),
                                   AlvaText(
                                     title: ' บาท',
-                                    textStyle: AlvaStyles().bodySize14w400(smockGrey).copyWith(height: 1.714),
+                                    textStyle: AlvaStyles().bodySize14w400(RedWordShow)
+                                        .copyWith(height: 1.714),//smockGrey
                                   ),
                                 ],
                               ),
@@ -801,16 +805,15 @@ class _PDTopSectionState extends State<PDTopSection> {
                                   title: state.product.discountPrice == 0
                                       ? state.product.price.toDecimalFormat()
                                       : state.product.discountPrice.toDecimalFormat(),
-                                  textStyle: AlvaStyles()
-                                      .headingSize22w700(state.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow)
+                                  textStyle: AlvaStyles().headingSize22w700Height(BTN_SELECTED_TEXT_COLOR_NEW)
                                       .copyWith(height: 1.454),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 2, top: tagline != "" ? 16 : 1),
+                                  padding: EdgeInsets.only(bottom: 3, top: 0),
+                                //  padding: EdgeInsets.only(bottom: 2, top: tagline != "" ? 16 : 1),
                                   child: AlvaText(
                                     title: ' บาท',
-                                    textStyle: AlvaStyles()
-                                        .headingSize18w700(state.product.discountPrice == 0 ? BTN_SELECTED_TEXT_COLOR_NEW : RedWordShow)
+                                    textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)
                                         .copyWith(height: 1.454),
                                   ),
                                 ),

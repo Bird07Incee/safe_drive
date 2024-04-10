@@ -316,7 +316,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       ],
                                     ),
                                   ),
-                                  DisclaimerSection(), //P
+                                  DisclaimerSection(),
                                   Container(
                                     color: spaceGrey,
                                     child: Column(
