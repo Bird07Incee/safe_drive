@@ -99,7 +99,7 @@ class TrackingOrderCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("ราคารวม", style: AlvaStyles().headingSize18w400Cordia(spaceGrey123)),
+                  Text("ราคา", style: AlvaStyles().headingSize18w400Cordia(spaceGrey123)),
                   Text("${order.totalPrice!.toDecimalFormat()} บาท", style: AlvaStyles().headingSize14w800(blackGoMunTo)),
                 ],
               ),

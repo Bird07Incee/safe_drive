@@ -29,7 +29,7 @@ class TrackingListNoProduct extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  Text("คุณไม่มีสถานะจัดส่ง", style: AlvaStyles().headingSize18w500(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  Text("คุณไม่มีรายการสั่งซื้อ", style: AlvaStyles().headingSize18w500(BTN_SELECTED_TEXT_COLOR_NEW)),
                   const SizedBox(
                     height: 8,
                   ),

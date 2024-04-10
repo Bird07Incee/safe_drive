@@ -82,7 +82,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
     var maxWidth = MediaQuery.of(context).size.width;
 
     AppBar appBar = AppBar(
-      title: AlvaText(title: "คืนสินค้า คืนเงิน", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+      title: AlvaText(title: "คืนสินค้า/คืนเงิน", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
       titleSpacing: 0,
       leadingWidth: 60,
       centerTitle: false,

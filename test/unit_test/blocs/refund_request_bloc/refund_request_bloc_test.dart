@@ -205,7 +205,7 @@ var mockRefund = {
     "refundNo": "LA202402081707425tpvy",
     "refundDate": "15 กุมภาพันธ์ 2567",
     "refundTime": "10:03:58",
-    "reason": "เปลี่ยนใจ",
+    "reason": "มีความสนใจสินค้าอื่น",
     "remark": "ฉันต้องการสินค้าชิ้นอื่น"
   },
   "rawData": {

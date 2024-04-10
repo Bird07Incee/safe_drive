@@ -1,4 +1,4 @@
-const titleWebPage = 'วอลชาร์จรถไฟฟ้า | กรุงศรี ออโต้';
+const titleWebPage = 'PromptBuy | พร้อมบาย';
 const promptBuyWebTitle = "PROMPT_BUY_WEB";
 const fontFamily = "Krungsri Condensed";
 const carouselShowLimit = 3;
@@ -11,8 +11,8 @@ class HomeConst {
   String lineOAURL = 'https://line.me/R/ti/p/@018qbfet';
   String termsAndConditions = 'ข้อตกลงและเงื่อนไข';
   String privacyPolicy = 'ประกาศความคุ้มครองข้อมูลส่วนบุคคล';
-  String askInformation = 'สอบถามข้อมูลอื่นๆ เกี่ยวกับสินค้า หรือ ติดตามสถานะการจัดส่งสินค้า';
-  String pleaseContact = 'กรุณาติดต่อ  02-023-8858';
+  String askInformation = 'สอบถามข้อมูลปัญหาการใช้งาน เช่น ขั้นตอนการสั่งซื้อหรือการชำระเงิน';
+  String pleaseContact = 'กรุณาติดต่อผู้ดูแลระบบ 02-023-8858';
   String pleaseContactNumber = '020238858';
   String warningWord = 'ข้อมูลนี้เป็นข้อมูลจากผู้ให้บริการ อาจมีการเปลี่ยนแปลงได้ตลอดเวลา';
 }

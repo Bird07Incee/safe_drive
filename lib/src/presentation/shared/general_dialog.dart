@@ -43,11 +43,11 @@ class GeneralDialog {
         context,
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
-          child: Text('กรุณากด “ยืนยัน” เพื่อทำรายการต่อ',
+          child: Text('กรุณาอ่านเงื่อนไขการคืนสินค้า/คืนเงิน ก่อนทำการยืนยัน',
               style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
           //   textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         ),
-        title: Text("การคืนสินค้าและคืนเงิน เป็นไปตามเงื่อนไขการให้บริการของผู้ขาย",
+        title: Text("คุณต้องการคืนสินค้า/คืนเงิน?",
             style: AlvaStyles()
                 .headingSize18(Colors.black)
                 .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
