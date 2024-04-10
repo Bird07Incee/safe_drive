@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
@@ -27,12 +26,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
   Future<ProductList> _getProductWithNoCategory() async {
     try {
-      LineDataHelper lineDataHelper = LineDataHelper();
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
-      String accessToken = await lineDataHelper.getLineAccessToken();
-      Response response =
-          await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {}, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {});
       final productList = ProductList.fromJson(response.data);
       return productList;
     } catch (e) {
@@ -67,12 +63,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   }
 
   _onGetProductListByCategory(GetProductListByCategory event, Emitter<ProductListState> emit) async {
-    LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
     // final nav = Navigator.of(event.context);
     // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
-    String accessToken = await lineDataHelper.getLineAccessToken();
     var category = {};
 
     if (event.categoryId.isNotEmpty) {
@@ -85,8 +79,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
 
     try {
-      Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category);
 
       final productList = ProductList.fromJson(response.data);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
@@ -107,12 +100,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   }
 
   _onGetProductListByPage(GetProductListByPage event, Emitter<ProductListState> emit) async {
-    LineDataHelper lineDataHelper = LineDataHelper();
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
     // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
     // final nav = Navigator.of(event.context);
-    String accessToken = await lineDataHelper.getLineAccessToken();
     var params = {"page": event.page.toString(), "itemPersPage": 10};
 
     if (event.categoryId.isNotEmpty) {
@@ -125,8 +116,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
 
     try {
-      Response response = await utilityRepository
-          .getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params, headers: {"Authorization": "Bearer $accessToken"});
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params);
 
       var currentProductList = ProductList.fromJson(response.data);
       var oldProducts = state.productList.products;
