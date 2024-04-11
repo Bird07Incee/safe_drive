@@ -647,7 +647,6 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                               height: 8,
                             ),
                             DisclaimerSection(),
-                            SizedBox(height: 88),
                           ],
                         ),
                       ],
