@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -401,6 +402,11 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
         ),
         child: BlocBuilder<TrackingDetailBloc, TrackingDetailState>(
           builder: (context, state) {
+            String merchantName = state.tracking.merchantName;
+            String merchantNumber = state.tracking.merchantNumber;
+            // String merchantName = "บจก.อรุ่มเจ๊่าะ";
+            // String merchantNumber = "02989878676";
+            final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
               return ListView(
@@ -438,13 +444,14 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(bottom: 16.0),
+                                          padding: const EdgeInsets.only(bottom: 8.0),
                                           child: Text(
-                                            "ติดต่อผู้ขาย",
+                                            "หมายเหตุ",
                                             style: AlvaStyles().headingSize12w700(Colors.black).copyWith(height: 2),
                                           ),
                                         ),
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(right: 8.0),
@@ -454,14 +461,36 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               ),
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                "เกี่ยวกับสินค้า การจัดส่ง การคืนสินค้า และการคืนเงิน",
-                                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2.4),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  style: DefaultTextStyle.of(context).style,
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: ProductDetailConst().li1.split('**')[0],
+                                                      style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2),
+                                                    ),
+                                                    TextSpan(
+                                                      text: ProductDetailConst().li1.split('**')[1],
+                                                      style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
+                                                      recognizer: TapGestureRecognizer()
+                                                        ..onTap = () {
+                                                          String phoneNumber = ProductDetailConst().li1.split('**')[1];
+                                                          phoneNumber = phoneNumber.replaceAll("-", "");
+                                                          callPhone(phoneNumber);
+                                                        },
+                                                    ),
+                                                    TextSpan(
+                                                      text: ProductDetailConst().li1.split('**')[2],
+                                                      style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(right: 8.0),
@@ -471,13 +500,73 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               ),
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                "การคืนสินค้า/คืนเงินหลังจาก ${state.tracking.refundDay} วัน กรุณาติดต่อผู้ขายโดยตรง",
-                                                style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2.4),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  style: DefaultTextStyle.of(context).style,
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: li2.split('**')[0],
+                                                      style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2),
+                                                    ),
+                                                    TextSpan(
+                                                      text: li2.split('**')[1],
+                                                      style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
+                                                      recognizer: TapGestureRecognizer()..onTap = () {},
+                                                    ),
+                                                    TextSpan(
+                                                      text: li2.split('**')[2],
+                                                      style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2),
+                                                    ),
+                                                    TextSpan(
+                                                      text: li2.split('**')[3],
+                                                      style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
+                                                      recognizer: TapGestureRecognizer()
+                                                        ..onTap = () {
+                                                          String phoneNumber = li2.split('**')[3];
+                                                          phoneNumber = phoneNumber.replaceAll("-", "");
+                                                          callPhone(phoneNumber);
+                                                        },
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
+                                        // Row(
+                                        //   children: [
+                                        //     Padding(
+                                        //       padding: const EdgeInsets.only(right: 8.0),
+                                        //       child: Text(
+                                        //         "•",
+                                        //         style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                        //       ),
+                                        //     ),
+                                        //     Expanded(
+                                        //       child: Text(
+                                        //         "กรณีลูกค้าต้องการสอบถามข้อมูลเกี่ยวกับสินค้า การจัดส่ง การคืนสินค้า/คืนเงิน หรือปัญหาการใช้งานอื่นๆ กรุณาติดต่อ บริษัท ช็อคโก้ คาร์ด เอ็นเตอร์ไพรส์ จำกัด โทร. 02-023-8858 ในวันและเวลาทำการ",
+                                        //         style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2.4),
+                                        //       ),
+                                        //     )
+                                        //   ],
+                                        // ),
+                                        // Row(
+                                        //   children: [
+                                        //     Padding(
+                                        //       padding: const EdgeInsets.only(right: 8.0),
+                                        //       child: Text(
+                                        //         "•",
+                                        //         style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2),
+                                        //       ),
+                                        //     ),
+                                        //     Expanded(
+                                        //       child: Text(
+                                        //         "การคืนสินค้า/คืนเงินหลังจาก ${state.tracking.refundDay} วัน กรุณาติดต่อผู้ขายโดยตรง",
+                                        //         style: AlvaStyles().headingSize12w400(Colors.black).copyWith(height: 2.4),
+                                        //       ),
+                                        //     )
+                                        //   ],
+                                        // ),
                                         SizedBox(
                                           height: 16.0,
                                         ),

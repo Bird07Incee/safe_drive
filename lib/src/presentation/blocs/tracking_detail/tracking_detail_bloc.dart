@@ -48,7 +48,8 @@ class TrackingDetailBloc extends Bloc<TrackingDetailEvent, TrackingDetailState> 
           disableRefundButton: disableRefundButton,
           orderCreateDate: tracking.orderCreateDate,
           status: tracking.status,
-          merchantNumber: tracking.merchantNumber);
+          merchantNumber: tracking.merchantNumber,
+          merchantName: tracking.merchantName);
       emit(state.copyWith(status: TrackingDetailStatus.success, tracking: modelTracking));
     } catch (e) {
       emit(state.copyWith(status: TrackingDetailStatus.error));
