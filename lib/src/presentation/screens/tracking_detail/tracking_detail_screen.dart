@@ -577,7 +577,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               child: GestureDetector(
                                                 key: const Key("call_seller"),
                                                 onTap: () {
-                                                  String mobile = state.tracking.merchantNumber.replaceAll('-', '');
+                                                  String mobile = "020238858";
                                                   callPhone(mobile);
                                                 },
                                                 child: Container(
@@ -593,7 +593,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       Padding(
                                                         padding: EdgeInsets.only(left: 8),
                                                         child: Text(
-                                                          "ติดต่อผู้ขาย",
+                                                          "สอบถามเพิ่มเติม",
                                                           style: AlvaStyles().headingSize12w700(blackGoMunTo).copyWith(height: 2),
                                                         ),
                                                       )
@@ -650,42 +650,6 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                             SizedBox(height: 88),
                           ],
                         ),
-
-                        ///bottomSheet
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          child: Container(
-                            color: spaceGrey,
-                            width: maxWidth,
-                            height: 88,
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                AlvaText(
-                                  title: HomeConst().askInformation,
-                                  textStyle: AlvaStyles().headingSize10w600(whiteFalse).copyWith(height: 1.6),
-                                ),
-                                GestureDetector(
-                                  key: const Key("call_button"),
-                                  onTap: () {
-                                    String phoneNumber = HomeConst().pleaseContactNumber;
-                                    callPhone(phoneNumber);
-                                  },
-                                  child: Text(
-                                    HomeConst().pleaseContact,
-                                    style: AlvaStyles().headingSize12w700(whiteFalse).copyWith(height: 2),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 32,
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ),
