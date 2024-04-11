@@ -28,19 +28,13 @@ class HomepageTopSection extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AlvaText(
-                            title: HomeConst().titleTopSec,
-                            textStyle: AlvaStyles().headingSize16Bold()
-                          ),
-                          AlvaText(
-                            title: HomeConst().titleTopSecTH,
-                            textStyle: AlvaStyles().headingSize8w500Height12(blackGoMunTo)
-                          ),
-                        ],
-                      ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AlvaText(title: HomeConst().titleTopSec, textStyle: AlvaStyles().headingSize16Bold()),
+                      AlvaText(title: HomeConst().titleTopSecTH, textStyle: AlvaStyles().headingSize8w500Height12(blackGoMunTo)),
+                    ],
+                  ),
                   GestureDetector(
                     onTap: () {
                       AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButton();

@@ -11,8 +11,7 @@ class DisclaimerSection extends StatefulWidget {
   State<DisclaimerSection> createState() => _DisclaimerSection();
 }
 
-class _DisclaimerSection extends State<DisclaimerSection>
-    with TickerProviderStateMixin {
+class _DisclaimerSection extends State<DisclaimerSection> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;

@@ -33,7 +33,8 @@ class AlvaStyles {
 
   TextStyle headingSize22w700(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: color);
 
-  TextStyle headingSize22w700Height(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: color, height: 22/22);
+  TextStyle headingSize22w700Height(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: color, height: 22 / 22);
 
   TextStyle headingSize32() => const TextStyle(
         fontFamily: fontFamily,
@@ -59,16 +60,16 @@ class AlvaStyles {
         fontWeight: FontWeight.bold,
         height: 32 / 22,
       );
-  TextStyle headingSize8w500Height12(Color color)  => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 8,
-    fontWeight: FontWeight.w500,
-    height: 12 / 8,
-    color: color,
-  );
+  TextStyle headingSize8w500Height12(Color color) => TextStyle(
+        fontFamily: fontFamily,
+        fontSize: 8,
+        fontWeight: FontWeight.w500,
+        height: 12 / 8,
+        color: color,
+      );
 
   TextStyle headingSize16Bold() =>
-      const TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.bold, color: BTN_SELECTED_TEXT_COLOR_NEW, height: 16/16);
+      const TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.bold, color: BTN_SELECTED_TEXT_COLOR_NEW, height: 16 / 16);
 
   TextStyle headingSize8w500(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 8, fontWeight: FontWeight.w500, color: color);
   TextStyle headingSize8w600(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 8, fontWeight: FontWeight.w600, color: color);

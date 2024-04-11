@@ -561,6 +561,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                             SizedBox(height: 88),
                           ],
                         ),
+
                         ///bottomSheet
                         Positioned(
                           bottom: 0,

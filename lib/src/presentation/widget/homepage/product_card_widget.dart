@@ -379,7 +379,8 @@ class ProductCardWidget extends StatelessWidget {
                                                 width: 2,
                                               ),
                                               Text(
-                                                "บาท", style: AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
+                                                "บาท",
+                                                style: AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
                                               ),
                                             ],
                                           ),

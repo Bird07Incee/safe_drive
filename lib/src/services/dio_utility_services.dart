@@ -40,8 +40,12 @@ class DioUtilityService {
 
   Future<Response> postByURL(String path, Map<dynamic, dynamic> body, {bool isRecursion = false}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    String accessToken = await lineDataHelper.getLineAccessToken();
-    _dioClient.options.headers = HeaderUtil.baseHeader(token: accessToken);
+    if (!path.contains("/line/token")) {
+      String accessToken = await lineDataHelper.getLineAccessToken();
+      _dioClient.options.headers = HeaderUtil.baseHeader(token: accessToken);
+    } else {
+      _dioClient.options.headers = HeaderUtil.baseHeader();
+    }
 
     try {
       final response = await _dioClient.post(

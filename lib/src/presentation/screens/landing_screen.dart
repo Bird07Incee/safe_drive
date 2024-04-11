@@ -25,7 +25,6 @@ class _LandingScreenState extends State<LandingScreen> {
       } catch (e) {
         log("launch fail: $e");
       }
-
     });
     Future.delayed(const Duration(seconds: 20)).then((r) {
       String urlDecoded = Uri.decodeFull(redirectUrl);
@@ -35,7 +34,6 @@ class _LandingScreenState extends State<LandingScreen> {
       } catch (e) {
         log("launch fail double tap: $e");
       }
-
     });
   }
 
@@ -64,8 +62,7 @@ class _LandingScreenState extends State<LandingScreen> {
         onDoubleTap: () {
           _redirectTo();
         },
-        child: AlvaCPILoader()
-    );
+        child: AlvaCPILoader());
     super.initState();
   }
 
@@ -79,9 +76,7 @@ class _LandingScreenState extends State<LandingScreen> {
         width: maxWidth,
         height: maxHeight,
         color: Colors.white,
-        child: Center(
-          child: w
-        ),
+        child: Center(child: w),
       ),
     );
   }

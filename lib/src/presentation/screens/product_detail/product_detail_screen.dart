@@ -178,120 +178,115 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
         return true;
       },
       child: AlvaRootWidget(
-          titlePage: titleWebPage,
-          appBar: stateAppBar.appBarCarDetailStatus
-              ? AppBar(
-                  automaticallyImplyLeading: false,
-                  leading: IconButton(
+        titlePage: titleWebPage,
+        appBar: stateAppBar.appBarCarDetailStatus
+            ? AppBar(
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                  key: const Key("pop_navigator_to_home_page"),
+                  onPressed: () {
+                    onBack();
+                  },
+                  icon: const Icon(Icons.arrow_back_ios_rounded),
+                ),
+                leadingWidth: 48,
+                titleSpacing: 0,
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AlvaTextMaxLinesOverflow(
+                        title: pdState.product.productName,
+                        maxLines: 1,
+                        textStyle: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(fontWeight: FontWeight.w500, height: 1.17)),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        AlvaText(
+                            title: pdState.product.discountPrice == 0
+                                ? pdState.product.price.toDecimalFormat()
+                                : pdState.product.discountPrice.toDecimalFormat(),
+                            textStyle: AlvaStyles().heading1().copyWith(color: BTN_SELECTED_TEXT_COLOR_NEW, height: 1.33)),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 1, top: 2),
+                          child: AlvaText(title: ' บาท', textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.33)),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                centerTitle: false,
+              )
+            : AppBar(
+                title: AlvaText(title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                titleSpacing: 0,
+                leadingWidth: 48,
+                centerTitle: false,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
                     key: const Key("pop_navigator_to_home_page"),
                     onPressed: () {
                       onBack();
                     },
-                    icon: const Icon(Icons.arrow_back_ios_rounded),
-                  ),
-                  leadingWidth: 48,
-                  titleSpacing: 0,
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AlvaTextMaxLinesOverflow(
-                          title: pdState.product.productName,
-                          maxLines: 1,
-                          textStyle: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(fontWeight: FontWeight.w500, height: 1.17)),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          AlvaText(
-                              title: pdState.product.discountPrice == 0
-                                  ? pdState.product.price.toDecimalFormat()
-                                  : pdState.product.discountPrice.toDecimalFormat(),
-                              textStyle: AlvaStyles()
-                                  .heading1()
-                                  .copyWith(color: BTN_SELECTED_TEXT_COLOR_NEW, height: 1.33)),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 1, top: 2),
-                            child: AlvaText(
-                                title: ' บาท',
-                                textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)
-                                    .copyWith(height: 1.33)),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  centerTitle: false,
-                )
-              : AppBar(
-                  title: AlvaText(title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                  titleSpacing: 0,
-                  leadingWidth: 48,
-                  centerTitle: false,
-                  automaticallyImplyLeading: false,
-                  leading: IconButton(
-                      key: const Key("pop_navigator_to_home_page"),
-                      onPressed: () {
-                        onBack();
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_rounded)),
-                ),
-          bottomSheet: Container(
-            decoration: BoxDecoration(
-              color: whitePure,
-              boxShadow: [
-                BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
-              ],
-            ),
-            width: maxWidth,
-            height: 96,
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                    height: 48,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        if (pdState.product.productionOptionals.isNotEmpty) {
-                          Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
-                              arguments: ProductDetailArgs(product: pdState.product));
-                        } else {
-                          Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
-                        }
-                      },
-                      style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
-                      child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                    ),
-                  ),
-                )
-              ],
-            ),
+                    icon: const Icon(Icons.arrow_back_ios_rounded)),
+              ),
+        bottomSheet: Container(
+          decoration: BoxDecoration(
+            color: whitePure,
+            boxShadow: [
+              BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
+            ],
           ),
-          // child: ProductDetailBody(),
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 96),
-            color: backgroundNo2,
-            child: ListView(
-              shrinkWrap: true,
-              controller: scrollController,
-              children: [
-                PDTopSection(),
-                Container(
-                  height: 16,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        color: cloudWhite, // Replace with your color
-                        width: 2.0, // Adjust the border width as needed
-                      ),
+          width: maxWidth,
+          height: 96,
+          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  height: 48,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      if (pdState.product.productionOptionals.isNotEmpty) {
+                        Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
+                            arguments: ProductDetailArgs(product: pdState.product));
+                      } else {
+                        Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
+                      }
+                    },
+                    style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
+                    child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        // child: ProductDetailBody(),
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 96),
+          color: backgroundNo2,
+          child: ListView(
+            shrinkWrap: true,
+            controller: scrollController,
+            children: [
+              PDTopSection(),
+              Container(
+                height: 16,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: cloudWhite, // Replace with your color
+                      width: 2.0, // Adjust the border width as needed
                     ),
                   ),
                 ),
-                PDBottomSection(),
-                DisclaimerSection()
-              ],
-            ),
+              ),
+              PDBottomSection(),
+              DisclaimerSection()
+            ],
           ),
+        ),
       ),
     );
   }
