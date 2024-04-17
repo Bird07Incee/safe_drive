@@ -24,6 +24,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   late final TabController _tabController;
   String? remarkHtmlString;
   bool isPressedReadMore = false;
+  double descriptionHeight = 0;
+  final GlobalKey _descriptionKey = GlobalKey();
 
   @override
   void dispose() {
@@ -34,7 +36,19 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   @override
   void initState() {
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.index == 1) {
+        _getDescriptionHeight();
+      }
+    });
     super.initState();
+  }
+
+  void _getDescriptionHeight() {
+    final RenderBox renderBox = _descriptionKey.currentContext!.findRenderObject() as RenderBox;
+    setState(() {
+      descriptionHeight = renderBox.size.height;
+    });
   }
 
   @override
@@ -321,7 +335,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 ? product.description.substring(3, product.description.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
                 : "";
             data = product.description.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
+            if (descriptionHeight > 120) {
+              descriptionHeight = 120;
+            }
           }
+
           return Column(
             children: [
               Padding(
@@ -402,19 +420,51 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                 buildAsync: false,
                                 customStylesBuilder: (element) {
-                                  return {'font-family': 'Krungsri Condensed', 'font-size': '14px', 'line-height': '24px', 'color': '#2c2626'};
+                                  if (element.localName == "table") {
+                                    return {'width': '100%'};
+                                  }
+                                  if (element.localName == "td") {
+                                    return {
+                                      'width': '50%',
+                                      'vertical-align': 'top;',
+                                      'padding-top': '8px;',
+                                      'padding-bottom': '8px;',
+                                      'font-size': '14px',
+                                      'line-height': '24px',
+                                      'color': '#2c2626'
+                                    };
+                                  }
+                                  if (element.localName == "th" || element.localName == "thead") {
+                                    return null;
+                                  }
+                                  if (element.localName == "p") {
+                                    return {
+                                      'font-family': 'Krungsri Condensed',
+                                      'font-size': '14px',
+                                      'line-height': '24px',
+                                      'color': '#2c2626',
+                                    };
+                                  }
+                                  return null;
+                                },
+                                customWidgetBuilder: (element) {
+                                  if (element.localName == "th" || element.localName == "thead") {
+                                    return SizedBox.shrink();
+                                  }
+                                  return null;
                                 },
                                 factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                               )
                             : Container(),
                         !isPressedReadMore
-                            ? Container(
+                            ? SizedBox(
                                 width: MediaQuery.of(context).size.width - 32,
-                                constraints: _tabController.index == 1 ? BoxConstraints(maxHeight: 120) : null,
+                                height: _tabController.index == 1 ? descriptionHeight : null,
                                 child: SingleChildScrollView(
                                   physics: NeverScrollableScrollPhysics(),
                                   child: HtmlWidget(
                                     data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+                                    key: _descriptionKey,
                                     buildAsync: false,
                                     customStylesBuilder: (element) {
                                       if (element.localName == "table") {
@@ -459,14 +509,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               ),
               data.isNotEmpty
                   ? _tabController.index == 1
-                      ? LayoutBuilder(builder: (context, constraints) {
-                          data = data.replaceAll("<br/>", "\n");
-                          final span = TextSpan(text: data, style: TextStyle(fontFamily: 'Krungsri Condensed', fontSize: 14));
-                          final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
-                          tp.layout(maxWidth: constraints.maxWidth);
-                          final numLines = tp.computeLineMetrics().length;
-                          return Container(
-                              padding: numLines > 5 ? null : EdgeInsets.only(top: 16),
+                      ? Container(
+                          padding: descriptionHeight >= 120 ? null : EdgeInsets.only(top: 16),
+                          child: Visibility(
+                              visible: descriptionHeight >= 120,
                               child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 16),
                                   child: Row(
@@ -492,8 +538,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                         ),
                                       )
                                     ],
-                                  )));
-                        })
+                                  ))))
                       : Container()
                   : Container()
             ],
