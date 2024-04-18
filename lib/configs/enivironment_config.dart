@@ -85,9 +85,8 @@ Map<String, dynamic> envConfig = {
   },
   "prod": {
     "ENVIRONMENT_NAME": "prod",
-    //TODO: config redirect url prod
-    "LIFF_ID": "1661164508-Kn9nO7oB",
-    "BFF_BASE_URL": "https://api.marketplace.ksauto.net",
+    "LIFF_ID": "1661164508-7eq9gAyr",
+    "BFF_BASE_URL": "https://api.marketplace.digitso.be",
     "BFF_SOCIAL_BASE_URL": "/mercury-social-prod",
     "BFF_TRANSACTION_BASE_URL": "/mercury-transaction-manager-prod",
     "BFF_TRANSACTION_CREATE_BASE_URL": "/mercury-transaction-manager-create-prod",
@@ -101,9 +100,8 @@ Map<String, dynamic> envConfig = {
     "INQUIRY_REFUND_URL": "/v1/inquiry/refund",
     "TRACKING_LIST_URL": "/v1/trackingList",
     "REFUND_URL": "/v1/refund",
-    //TODO: config redirect url prod
     "LINE_REDIRECT_URL":
-        "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Kn9nO7oB&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz",
+        "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-7eq9gAyr&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz",
     "SUPER_APP_AMPLITUDE_API_KEY": "efe3fd38cdcba282250a9b6f999fcb5f"
   },
 };
