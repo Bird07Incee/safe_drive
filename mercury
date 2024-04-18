@@ -113,7 +113,7 @@ distribution_secret_env() {
       'qa') echo "E3KVG3XULGA6Y9";;
       'int') echo "E6L8FC8PW270F";;
       'uat') echo "E3UDP8G3QMPITE";;
-      'prod') echo "";;
+      'prod') echo "E16CLLQJRVHKT8";;
   esac
 }
 
