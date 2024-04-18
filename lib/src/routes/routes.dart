@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/home.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/landing_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/order_cancel.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/order_success.dart';
@@ -161,8 +160,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => RefundFormTrackingScreen(), settings: settings);
     case "/refundSuccess":
       return MaterialPageRoute(builder: (_) => RefundSuccessScreen(), settings: settings);
-    case "/landing":
-      return MaterialPageRoute(builder: (_) => LandingScreen(), settings: settings);
     default:
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
   }
