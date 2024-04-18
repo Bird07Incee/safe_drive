@@ -71,7 +71,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
           isCodeVerify = true;
           lineDataHelper.saveSocialDataToLocalStorage(json.encode(response.data));
           String lineUid = await lineDataHelper.getLineUid();
-          DatadogSdk.instance.setUserInfo(id: lineUid, name: "Merphy");
+          DatadogSdk.instance.setUserInfo(id: lineUid);
         } else if (response.statusCode == 400) {
           PreferencesHelper.clear();
           String url = Environment().getValue("LINE_REDIRECT_URL");
@@ -85,7 +85,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
           termAndConHelper.setTermAndConToAccept();
           int tokenExp = await lineDataHelper.getTokenExp();
           String termAndConVersion = await lineDataHelper.getTAndC();
-          DatadogSdk.instance.setUserInfo(id: lineUid, name: "Merphy", extraInfo: {"tokenExp": tokenExp, "TnCVersion": termAndConVersion});
+          DatadogSdk.instance.setUserInfo(id: lineUid, extraInfo: {"tokenExp": tokenExp, "TnCVersion": termAndConVersion});
           //stamp version
           if (!mounted) return;
           Navigator.of(context).pop();
