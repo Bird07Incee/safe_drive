@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_c_p_i_loader.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,24 +18,13 @@ class _LandingScreenState extends State<LandingScreen> {
   String redirectUrl = "";
 
   _redirectTo() {
-    Future.delayed(const Duration(seconds: 5)).then((r) {
-      String urlDecoded = Uri.decodeFull(redirectUrl);
-      log('launch url auto: $urlDecoded');
-      try {
-        launchUrl(Uri.parse(urlDecoded));
-      } catch (e) {
-        log("launch fail: $e");
-      }
-    });
-    Future.delayed(const Duration(seconds: 20)).then((r) {
-      String urlDecoded = Uri.decodeFull(redirectUrl);
-      log('launch url by clicked button: $urlDecoded');
-      try {
-        w.onDoubleTap!();
-      } catch (e) {
-        log("launch fail double tap: $e");
-      }
-    });
+    String urlDecoded = Uri.decodeFull(redirectUrl);
+    log('launch url auto: $urlDecoded');
+    try {
+      launchUrl(Uri.parse(urlDecoded));
+    } catch (e) {
+      log("launch fail: $e");
+    }
   }
 
   _loadSetting() {
@@ -45,7 +35,7 @@ class _LandingScreenState extends State<LandingScreen> {
         var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
         redirectUrl = (routingData["redirectUrl"] == null) ? "" : routingData["redirectUrl"];
         if (redirectUrl.isNotEmpty) {
-          _redirectTo();
+          _showDialog();
         }
       }
     } catch (e) {
@@ -54,6 +44,12 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   late GestureDetector w;
+
+  _showDialog() {
+    GeneralDialog(onAccept: () {
+      _redirectTo();
+    }).showTextDialog(context: context, canBack: false);
+  }
 
   @override
   void initState() {

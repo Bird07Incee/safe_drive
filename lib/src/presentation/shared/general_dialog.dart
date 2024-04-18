@@ -81,6 +81,23 @@ class GeneralDialog {
     );
   }
 
+  showTextDialog({Key? key, required BuildContext context, bool? canBack}) {
+    _showGeneralAlert(
+      context,
+      Container(
+        constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
+        child: Text('กดยืนยันเพื่อกลับสู่แอป \"Krungsri Auto\"',
+            style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
+        //   textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
+      ),
+      //  textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
+      key: key ?? const Key("back_ka"),
+      // contentPadding: const EdgeInsets.all(24),
+      contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
+      actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+    );
+  }
+
   _showGeneralAlert(BuildContext context, Widget body,
       {Key? key,
       Widget? title,
