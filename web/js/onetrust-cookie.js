@@ -10,7 +10,7 @@ function loadOneTrustCookieScript(env) {
 
     let script2 = document.createElement('script');
     script2.type = "text/javascript";
-    script2.src = "https://cdn-apac.onetrust.com/scripttemplates/otSDKStub.js";
+    script2.src = "https://cdn-apac.onetrust.com/consent/018ef16a-cf99-7e16-85e4-2ac03c9aed2b/otSDKStub.js";
     script2.setAttribute("charset", "UTF-8");
     script2.setAttribute("data-document-language", "true");
 
