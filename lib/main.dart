@@ -51,6 +51,7 @@ _configureApp() {
   String sessionId = generateSessionId(length: 20);
   setStrictlyNecessaryCookie("PromptbuyVersion", "1.0", 30);
   setStrictlyNecessaryCookie("PromptbuySession", sessionId, 30);
+  loadOneTrustCookieScript('prod');
 }
 
 _setUpDatadog() {
