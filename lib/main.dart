@@ -16,6 +16,7 @@ import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart
 import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
+import 'dart:html';
 
 late DatadogConfiguration configuration;
 UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
@@ -38,6 +39,7 @@ _configureApp() {
   _setUpDatadog();
   _setUpLineLIFF();
   _setUpAmplitude();
+  _setUpMockCookies();
 }
 
 _setUpDatadog() {
@@ -79,6 +81,10 @@ _setUpAmplitude() {
   } catch (e) {
     debugPrint("Error initializing Amplitude: $e");
   }
+}
+
+_setUpMockCookies() {
+  document.cookie="promptbuy_version=555";
 }
 
 class MyApp extends StatelessWidget {
