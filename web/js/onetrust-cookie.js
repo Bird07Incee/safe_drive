@@ -4,7 +4,7 @@ function loadOneTrustCookieScript(env) {
     if(env === "prod") {
     script1.src = "https://cdn-apac.onetrust.com/consent/018ef16a-cf99-7e16-85e4-2ac03c9aed2b/OtAutoBlock.js";
     } else {
-    script1.src = "https://cdn-apac.onetrust.com/consent/5304c4a0-db56-49ce-9950-fe9f7ac9aedc-test/OtAutoBlock.js";
+    script1.src = "https://cdn-apac.onetrust.com/consent/018ef16a-cf99-7e16-85e4-2ac03c9aed2b-test/OtAutoBlock.js";
     }
     document.body.appendChild(script1);
 
@@ -17,7 +17,7 @@ function loadOneTrustCookieScript(env) {
     if(env === "prod") {
     script2.setAttribute("data-domain-script", "018ef16a-cf99-7e16-85e4-2ac03c9aed2b");
     } else {
-    script2.setAttribute("data-domain-script", "5304c4a0-db56-49ce-9950-fe9f7ac9aedc-test");
+    script2.setAttribute("data-domain-script", "018ef16a-cf99-7e16-85e4-2ac03c9aed2b-test");
     }
     document.body.appendChild(script2);
 }
