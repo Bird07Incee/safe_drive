@@ -20,3 +20,10 @@ function replacePageHistory() {
 function setHistoryToInitialPage() {
     window.location.replace('/');
 }
+
+function setStrictlyNecessaryCookie(cookieName, cookieValue, expirationDays) {
+  var expirationDate = new Date();
+  expirationDate.setTime(expirationDate.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + expirationDate.toUTCString();
+  document.cookie = encodeURIComponent(cookieName) + "=" + encodeURIComponent(cookieValue) + "; " + expires + "; path=/";
+}

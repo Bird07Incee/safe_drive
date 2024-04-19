@@ -9,6 +9,7 @@ import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
+import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
@@ -16,7 +17,6 @@ import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart
 import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
-import 'dart:html';
 import 'dart:math';
 
 late DatadogConfiguration configuration;
@@ -36,12 +36,21 @@ void main() async {
   });
 }
 
+String generateSessionId({int length = 10}) {
+  final random = Random();
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  return String.fromCharCodes(Iterable.generate(
+      length, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
+}
 
 _configureApp() {
   _setUpDatadog();
   _setUpLineLIFF();
   _setUpAmplitude();
-  _setUpMockCookies();
+
+  String sessionId = generateSessionId(length: 20);
+  setStrictlyNecessaryCookie("PromptbuyVersion", "1.0", 30);
+  setStrictlyNecessaryCookie("PromptbuySession", sessionId, 30);
 }
 
 _setUpDatadog() {
@@ -83,29 +92,6 @@ _setUpAmplitude() {
   } catch (e) {
     debugPrint("Error initializing Amplitude: $e");
   }
-}
-
-
-String generateSessionId({int length = 10}) {
-  final random = Random();
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  return String.fromCharCodes(Iterable.generate(
-      length, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
-}
-
-
-_setUpMockCookies() {
-  // Get current time
-  DateTime now = DateTime.now();
-  // Set expiration date to 7 days from now
-  DateTime expirationDate = now.add(Duration(days: 7));
-  // Format expiration date in UTC timezone
-  String expires = "expires=${expirationDate.toUtc().toIso8601String()}";
-
-  document.cookie="PromptbuyVersion=1.0 path=/; $expires";
-
-  String sessionId = generateSessionId();
-  document.cookie="PromptbuySession=$sessionId path=/; $expires";
 }
 
 class MyApp extends StatelessWidget {
