@@ -6,7 +6,7 @@ library jsManager;
 import 'package:js/js.dart';
 
 @JS()
-external void loadOneTrustCookieScript();
+external void loadOneTrustCookieScript(env);
 external void jsAlert(val);
 external void callPhone(val);
 external void replacePageHistory();

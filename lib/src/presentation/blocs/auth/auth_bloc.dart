@@ -28,13 +28,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         } else {
           bool isAccepted = await termAndConHelper.isTermAndConAccepted();
           if (isAccepted) {
-            debugPrint("term and con already accept");
-            loadOneTrustCookieScript();
+            // debugPrint("term and con already accept");
+            String env = Environment().getValue("ENVIRONMENT_NAME");
+            loadOneTrustCookieScript(env);
             emit(state.copyWith(authStatus: AuthStatus.success));
           } else {
-            debugPrint("term and con not accept");
+            // debugPrint("term and con not accept");
             await navCtx.pushNamed(Routes.termAndCon.toStringPath());
-            loadOneTrustCookieScript();
+            String env = Environment().getValue("ENVIRONMENT_NAME");
+            loadOneTrustCookieScript(env);
             emit(state.copyWith(authStatus: AuthStatus.success));
           }
         }
