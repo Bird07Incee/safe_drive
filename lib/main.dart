@@ -17,6 +17,7 @@ import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart'
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 import 'dart:html';
+import 'dart:math';
 
 late DatadogConfiguration configuration;
 UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
@@ -34,6 +35,7 @@ void main() async {
     });
   });
 }
+
 
 _configureApp() {
   _setUpDatadog();
@@ -83,8 +85,20 @@ _setUpAmplitude() {
   }
 }
 
+
+String generateSessionId({int length = 10}) {
+  final random = Random();
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  return String.fromCharCodes(Iterable.generate(
+      length, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
+}
+
+
 _setUpMockCookies() {
-  document.cookie="promptbuy_version=555";
+  document.cookie="PromptbuyVersion=1.0";
+
+  String sessionId = generateSessionId();
+  document.cookie="PromptbuySession=$sessionId";
 }
 
 class MyApp extends StatelessWidget {
