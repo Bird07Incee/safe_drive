@@ -95,10 +95,17 @@ String generateSessionId({int length = 10}) {
 
 
 _setUpMockCookies() {
-  document.cookie="PromptbuyVersion=1.0";
+  // Get current time
+  DateTime now = DateTime.now();
+  // Set expiration date to 7 days from now
+  DateTime expirationDate = now.add(Duration(days: 7));
+  // Format expiration date in UTC timezone
+  String expires = "expires=${expirationDate.toUtc().toIso8601String()}";
+
+  document.cookie="PromptbuyVersion=1.0 path=/; $expires";
 
   String sessionId = generateSessionId();
-  document.cookie="PromptbuySession=$sessionId";
+  document.cookie="PromptbuySession=$sessionId path=/; $expires";
 }
 
 class MyApp extends StatelessWidget {
