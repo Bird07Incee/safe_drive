@@ -421,8 +421,8 @@ const mockProductListResponse = {
       "tagline": "",
       "promotionTag": [],
       "currency": "Baht",
-      "price": 50000.0,
-      "discountPrice": 0,
+      "price": 50000.00,
+      "discountPrice": 0.00,
       "percentDiscountPrice": 0,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240312_034218_Privilege_ZTJ0LBR.png?sv=2020-08-04&se=2029-02-14T08%3A42%3A19Z&sr=b&sp=r&sig=nH5LFLJAI0zrZ%2BlHMvstagcDO%2FeUPQCH3LvTHvbXXhI%3D"
@@ -443,7 +443,7 @@ const mockProductListResponse = {
       "promotionTag": [],
       "currency": "Baht",
       "price": 100000.0,
-      "discountPrice": 0.0,
+      "discountPrice": 0.00,
       "percentDiscountPrice": 0,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240312_033446_Privilege_4B79A1U.png?sv=2020-08-04&se=2029-02-14T08%3A34%3A46Z&sr=b&sp=r&sig=8yANYIRiTOxJONrcBoPDB8zxz79OoTtifTJBLogO8NI%3D"
@@ -463,8 +463,8 @@ const mockProductListResponse = {
       "tagline": "<p>SMART CHARGING SOLUTIONS FOR ELECTRIC VEHICLES<br />วิถีใหม่แห่งการชาร์จรถยนต์ไฟฟ้าอย่างชาญฉลาด</p>",
       "promotionTag": ["รถไฟฟ้า", "สายชาร์จ"],
       "currency": "Baht",
-      "price": 40000.0,
-      "discountPrice": 0,
+      "price": 40000.00,
+      "discountPrice": 0.00,
       "percentDiscountPrice": 0,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_062827_Privilege_5PO67KE.png?sv=2020-08-04&se=2029-02-15T11%3A28%3A27Z&sr=b&sp=r&sig=7l%2BJw9EnEq6nrmoLG1ALqzqTEpeyzwmmyKoFTNc0H88%3D",
@@ -486,8 +486,8 @@ const mockProductListResponse = {
       "tagline": "<p>SMART CHARGING SOLUTIONS FOR ELECTRIC VEHICLES<br />วิถีใหม่แห่งการชาร์จรถยนต์ไฟฟ้าอย่างชาญฉลาด</p>",
       "promotionTag": ["รถไฟฟ้า", "สายชาร์จ"],
       "currency": "Baht",
-      "price": 43000.0,
-      "discountPrice": 40000.0,
+      "price": 43000.00,
+      "discountPrice": 40000.00,
       "percentDiscountPrice": 7,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_071133_Privilege_LEN4GFO.png?sv=2020-08-04&se=2029-02-15T12%3A11%3A33Z&sr=b&sp=r&sig=2Sm2qhtOdB6TAD5nri2z0DGM0GzDg5GPHt6ocktFlNI%3D",
@@ -511,8 +511,8 @@ const mockProductListResponse = {
           "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
       "promotionTag": [],
       "currency": "Baht",
-      "price": 32000.0,
-      "discountPrice": 0,
+      "price": 32000.00,
+      "discountPrice": 0.00,
       "percentDiscountPrice": 0,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_110140_Privilege_S98QFZH.png?sv=2020-08-04&se=2029-02-15T04%3A01%3A40Z&sr=b&sp=r&sig=DPenA4yaRZTT%2F4QArqajBpflmyIFbPvb0EmWScYM%2B7g%3D",
@@ -533,8 +533,8 @@ const mockProductListResponse = {
       "tagline": "<p>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</p>",
       "promotionTag": ["Promotion"],
       "currency": "Baht",
-      "price": 59000.0,
-      "discountPrice": 55555.0,
+      "price": 59000.00,
+      "discountPrice": 55555.00,
       "percentDiscountPrice": 6,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_094212_Privilege_UQA67VG.png?sv=2020-08-04&se=2029-02-15T02%3A42%3A12Z&sr=b&sp=r&sig=2oBC0VgL8%2FA4neTw1WMz2dpIQpq9N%2FhC%2BV4RIRU2pF8%3D",
@@ -555,8 +555,8 @@ const mockProductListResponse = {
       "tagline": "<p>ไม่มีข้อมูลของออม</p>",
       "promotionTag": ["เงิน", "รับ", "เลย"],
       "currency": "Baht",
-      "price": 49000.0,
-      "discountPrice": 45000.0,
+      "price": 49000.00,
+      "discountPrice": 45000.00,
       "percentDiscountPrice": 8,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_013333_Privilege_8ZUSFTN.png?sv=2020-08-04&se=2029-02-15T06%3A33%3A34Z&sr=b&sp=r&sig=7gsgHxHT4tkO5%2BnvpS55%2FoxH5FOcHfLdkWkGcTpxZWo%3D",
@@ -577,8 +577,8 @@ const mockProductListResponse = {
       "tagline": "",
       "promotionTag": ["รถไฟฟ้า", "สายชาจ"],
       "currency": "Baht",
-      "price": 250000.0,
-      "discountPrice": 0,
+      "price": 250000.00,
+      "discountPrice": 0.00,
       "percentDiscountPrice": 0,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_032422_Privilege_12Y18JE.png?sv=2020-08-04&se=2029-02-15T08%3A24%3A22Z&sr=b&sp=r&sig=thn3AK5K2pSbCmwICAo9qyRqZuR5WbkgKA%2FoEQ%2BhCKA%3D",
@@ -624,9 +624,9 @@ const mockProductResponse = {
   "productId": "PV_G7XMPQF1XS31",
   "quantity": 2,
   "productName": "วอลชาร์จ พลัส",
-  "commissionAmount": 20,
-  "serviceFee": 0,
-  "shippingFee": 0,
+  "commissionAmount": 20.00,
+  "serviceFee": 0.00,
+  "shippingFee": 0.00,
   "tagline": "",
   "promotionTag": [],
   "description": "",
@@ -638,8 +638,8 @@ const mockProductResponse = {
     "แจ้งปัญหาการสั่งซื้อสินค้า กรุณาติดต่อผู้ดูแลระบบที่หมายเลข 02-023-8858"
   ],
   "currency": "Baht",
-  "price": 100000,
-  "discountPrice": 0,
+  "price": 100000.00,
+  "discountPrice": 0.00,
   "percentDiscountPrice": 0,
   "productionAssets": [
     "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240312_033446_Privilege_4B79A1U.png?sv=2020-08-04&se=2029-02-14T08%3A34%3A46Z&sr=b&sp=r&sig=8yANYIRiTOxJONrcBoPDB8zxz79OoTtifTJBLogO8NI%3D"
@@ -651,7 +651,7 @@ const mockProductResponse = {
   "merchantMobile": "02-096-9341",
   "merchantEmail": "kotchapan.nuambunlue@gmail.com",
   "merchantTaxCode": "eWHT",
-  "merchantTaxPercent": 1.0,
+  "merchantTaxPercent": 1.00,
   "productionOptionals": [],
   "installment": []
 };
