@@ -48,9 +48,25 @@ _configureApp() {
   _setUpLineLIFF();
   _setUpAmplitude();
 
-  String sessionId = generateSessionId(length: 20);
-  setStrictlyNecessaryCookie("PromptbuyVersion", "1.0", 30);
-  setStrictlyNecessaryCookie("PromptbuySession", sessionId, 30);
+  String sessionId = generateSessionId(length: 10);
+  // Strictly Necessary Cookies
+  setStrictlyNecessaryCookie("PromptbuyStrictly", "1.0", 30);
+
+  // Performance Cookies
+  sessionId = generateSessionId(length: 10);
+  setStrictlyNecessaryCookie("PromptbuyPerformance", sessionId, 0);
+
+  // Targeting Cookies
+  sessionId = generateSessionId(length: 10);
+  setStrictlyNecessaryCookie("PromptbuyTargeting", sessionId, 30);
+
+  // Functional Cookies
+  sessionId = generateSessionId(length: 10);
+  setStrictlyNecessaryCookie("PromptbuyFunctional", sessionId, 30);
+
+  // Social Media Cookies
+  sessionId = generateSessionId(length: 10);
+  setStrictlyNecessaryCookie("PromptbuySocial", sessionId, 0);
 }
 
 _setUpDatadog() {
