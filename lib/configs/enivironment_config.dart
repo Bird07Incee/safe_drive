@@ -39,7 +39,7 @@ Map<String, dynamic> envConfig = {
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-Wdam3RjL&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz",
-    "SUPER_APP_AMPLITUDE_API_KEY": "efe3fd38cdcba282250a9b6f999fcb5f"
+    "SUPER_APP_AMPLITUDE_API_KEY": "9f748b79a284e73f418f9af5645a64ab"
   },
   "int": {
     "ENVIRONMENT_NAME": "int",
@@ -60,7 +60,7 @@ Map<String, dynamic> envConfig = {
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-MJN5qmQ0&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz",
-    "SUPER_APP_AMPLITUDE_API_KEY": "efe3fd38cdcba282250a9b6f999fcb5f"
+    "SUPER_APP_AMPLITUDE_API_KEY": "ae860d2f9f87d6921cc86ebc40c15239"
   },
   "uat": {
     "ENVIRONMENT_NAME": "uat",
@@ -81,7 +81,7 @@ Map<String, dynamic> envConfig = {
     "REFUND_URL": "/v1/refund",
     "LINE_REDIRECT_URL":
         "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1661164508&redirect_uri=https%3A%2F%2Fliff.line.me%2F1661164508-ZNvKbY9k&state=12345abcde&scope=profile%20openid%20email&nonce=09876xyz",
-    "SUPER_APP_AMPLITUDE_API_KEY": "efe3fd38cdcba282250a9b6f999fcb5f"
+    "SUPER_APP_AMPLITUDE_API_KEY": "2c0e56f704009859be290549ed29c96c"
   },
   "prod": {
     "ENVIRONMENT_NAME": "prod",
