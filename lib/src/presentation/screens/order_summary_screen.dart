@@ -118,7 +118,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   @override
   Widget build(BuildContext context) {
     String step1 = "";
-    int step1price = 0;
+    double step1price = 0;
     String step2 = "";
     double btmInset = MediaQuery.of(context).viewInsets.bottom;
     // int step2price = selectOptionBloc.stepTwoPrice ?? 0;
@@ -149,7 +149,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
           //   //     .read<ProductOptionBloc>()
           //   //     .updateStepTwoVariables(groupValueRadio: "ความยาวสาย 3 เมตร", price: 99999999);
           // }
-          int showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
+          double showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
           return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
             listener: (context, state) {
               if (currentRoute.contains(Routes.orderSummary.toStringPath())) {

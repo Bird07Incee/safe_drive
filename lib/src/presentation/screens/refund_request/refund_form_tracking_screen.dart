@@ -402,6 +402,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           ),
                                         ),
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(right: 8.0),
@@ -419,6 +420,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           ],
                                         ),
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(right: 8.0),
@@ -436,6 +438,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                           ],
                                         ),
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(right: 8.0),

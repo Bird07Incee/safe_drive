@@ -2,7 +2,7 @@ class Order {
   String? orderNo;
   String? shippingStatus;
   List<Products>? products;
-  int? totalPrice;
+  double? totalPrice;
   int? totalQty;
   String? shippingStatusMessage;
 
@@ -43,8 +43,8 @@ class Products {
   String? productDescription;
   String? productImageUrl;
   int? productQty;
-  int? price;
-  int? discountPrice;
+  double? price;
+  double? discountPrice;
   String? currency;
   String? channel;
   String? createDate;

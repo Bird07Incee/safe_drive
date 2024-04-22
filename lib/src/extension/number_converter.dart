@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
-extension NumberConverter on int {
+extension NumberConverter on double {
   String toDecimalFormat() {
-    return NumberFormat.decimalPattern().format(this);
+    return NumberFormat.decimalPatternDigits(decimalDigits: 2).format(this);
   }
 }

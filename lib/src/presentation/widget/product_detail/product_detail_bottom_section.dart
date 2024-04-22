@@ -335,8 +335,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 ? product.description.substring(3, product.description.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
                 : "";
             data = product.description.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
-            if (descriptionHeight > 120) {
-              descriptionHeight = 120;
+            if (descriptionHeight > 150) {
+              descriptionHeight = 150;
             }
           }
 
@@ -512,7 +512,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       ? Container(
                           padding: descriptionHeight >= 120 ? null : EdgeInsets.only(top: 16),
                           child: Visibility(
-                              visible: descriptionHeight >= 120,
+                              visible: descriptionHeight >= 150,
                               child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 16),
                                   child: Row(
@@ -634,6 +634,7 @@ class _MyFactory extends WidgetFactory {
         return;
       }
     }
+
     return super.parse(meta);
   }
 }

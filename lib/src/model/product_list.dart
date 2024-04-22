@@ -97,17 +97,17 @@ class Product extends Equatable {
   final int quantity;
   final String productName;
   final String productStatus;
-  final int commissionAmount;
-  final int serviceFee;
-  final int shippingFee;
+  final double commissionAmount;
+  final double serviceFee;
+  final double shippingFee;
   final String tagline;
   final List<String> promotionTag;
   final String description;
   final String technicalSpec;
   final List<String> remark;
   final String currency;
-  final int price;
-  final int discountPrice;
+  final double price;
+  final double discountPrice;
   final int percentDiscountPrice;
   final List<String> productionAssets;
   final String merchantFullName;
@@ -241,7 +241,7 @@ class ProductionOptionals extends Equatable {
   final String label;
   final String levelName;
   final String image;
-  final int price;
+  final double price;
   final String subProductId;
   final int quantity;
   final List<Level2> level2;
@@ -405,58 +405,10 @@ class Level5 extends Equatable {
 }
 
 const mockProductListResponse = {
-  "productAllItems": 10,
+  "productAllItems": 8,
+  "productCountItems": 8,
   "productPage": 1,
-  "productCountItems": 1,
-  "banner": [
-    {
-      "bannerId": "BN1",
-      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/homepage/HeroBanner.png",
-      "route": "HeroBanner",
-      "url": "http://",
-      "seqNo": 1
-    },
-    {
-      "bannerId": "BN2",
-      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/homepage/banner.png",
-      "route": "Banner",
-      "url": "http://",
-      "seqNo": 2
-    },
-    {
-      "bannerId": "BN3",
-      "image": "https://dev-app.marketplace.ksauto.net/assets/assets/homepage/banner.png",
-      "route": "Banner2",
-      "url": "http://",
-      "seqNo": 3
-    }
-  ],
-  "category": [
-    {
-      "categoryId": 1,
-      "categoryTh": "วอลล์ชาร์จ",
-      "categoryEn": "EV Charger",
-      "img_active": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_active_cate_wallcharge.png",
-      "img_inactive": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_cate_wallcharge.png",
-      "seqNo": 1
-    },
-    {
-      "categoryId": 2,
-      "categoryTh": "โซลาร์เซลล์",
-      "categoryEn": "Solar",
-      "img_active": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_active_cate_solar.png",
-      "img_inactive": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_cate_solar.png",
-      "seqNo": 2
-    },
-    {
-      "categoryId": 3,
-      "categoryTh": "สินค้าอื่นๆ",
-      "categoryEn": "Accessory",
-      "img_active": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_active_cate_other.png",
-      "img_inactive": "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/icon/icon_cate_other.png",
-      "seqNo": 3
-    }
-  ],
+  "totalPage": 1,
   "products": [
     {
       "appId": "Marketplace-mini-app",
@@ -469,7 +421,7 @@ const mockProductListResponse = {
       "tagline": "",
       "promotionTag": [],
       "currency": "Baht",
-      "price": 50000,
+      "price": 50000.0,
       "discountPrice": 0,
       "percentDiscountPrice": 0,
       "productionAssets": [
@@ -490,8 +442,8 @@ const mockProductListResponse = {
       "tagline": "",
       "promotionTag": [],
       "currency": "Baht",
-      "price": 100000,
-      "discountPrice": 0,
+      "price": 100000.0,
+      "discountPrice": 0.0,
       "percentDiscountPrice": 0,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240312_033446_Privilege_4B79A1U.png?sv=2020-08-04&se=2029-02-14T08%3A34%3A46Z&sr=b&sp=r&sig=8yANYIRiTOxJONrcBoPDB8zxz79OoTtifTJBLogO8NI%3D"
@@ -511,7 +463,7 @@ const mockProductListResponse = {
       "tagline": "<p>SMART CHARGING SOLUTIONS FOR ELECTRIC VEHICLES<br />วิถีใหม่แห่งการชาร์จรถยนต์ไฟฟ้าอย่างชาญฉลาด</p>",
       "promotionTag": ["รถไฟฟ้า", "สายชาร์จ"],
       "currency": "Baht",
-      "price": 40000,
+      "price": 40000.0,
       "discountPrice": 0,
       "percentDiscountPrice": 0,
       "productionAssets": [
@@ -534,8 +486,8 @@ const mockProductListResponse = {
       "tagline": "<p>SMART CHARGING SOLUTIONS FOR ELECTRIC VEHICLES<br />วิถีใหม่แห่งการชาร์จรถยนต์ไฟฟ้าอย่างชาญฉลาด</p>",
       "promotionTag": ["รถไฟฟ้า", "สายชาร์จ"],
       "currency": "Baht",
-      "price": 43000,
-      "discountPrice": 40000,
+      "price": 43000.0,
+      "discountPrice": 40000.0,
       "percentDiscountPrice": 7,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_071133_Privilege_LEN4GFO.png?sv=2020-08-04&se=2029-02-15T12%3A11%3A33Z&sr=b&sp=r&sig=2Sm2qhtOdB6TAD5nri2z0DGM0GzDg5GPHt6ocktFlNI%3D",
@@ -559,7 +511,7 @@ const mockProductListResponse = {
           "<h2>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</h2><p>เป็นเครื่องชาร์จรถไฟฟ้าแบบสมาร์ท ได้รับการออกแบบให้ประหยัดทั้งเวลา เงิน และประหยัดพลังงานสำหรับการชาร์จรถยนต์ไฟฟ้าของคุณในทุกๆวันเอนจอยกับรถยนต์ไฟฟ้าของคุณได้แบบเต็มที่</p>",
       "promotionTag": [],
       "currency": "Baht",
-      "price": 32000,
+      "price": 32000.0,
       "discountPrice": 0,
       "percentDiscountPrice": 0,
       "productionAssets": [
@@ -581,8 +533,8 @@ const mockProductListResponse = {
       "tagline": "<p>แกร่งขึ้น ง่ายขึ้น สมาร์ทขึ้น</p>",
       "promotionTag": ["Promotion"],
       "currency": "Baht",
-      "price": 59000,
-      "discountPrice": 55555,
+      "price": 59000.0,
+      "discountPrice": 55555.0,
       "percentDiscountPrice": 6,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_094212_Privilege_UQA67VG.png?sv=2020-08-04&se=2029-02-15T02%3A42%3A12Z&sr=b&sp=r&sig=2oBC0VgL8%2FA4neTw1WMz2dpIQpq9N%2FhC%2BV4RIRU2pF8%3D",
@@ -603,8 +555,8 @@ const mockProductListResponse = {
       "tagline": "<p>ไม่มีข้อมูลของออม</p>",
       "promotionTag": ["เงิน", "รับ", "เลย"],
       "currency": "Baht",
-      "price": 49000,
-      "discountPrice": 45000,
+      "price": 49000.0,
+      "discountPrice": 45000.0,
       "percentDiscountPrice": 8,
       "productionAssets": [
         "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_013333_Privilege_8ZUSFTN.png?sv=2020-08-04&se=2029-02-15T06%3A33%3A34Z&sr=b&sp=r&sig=7gsgHxHT4tkO5%2BnvpS55%2FoxH5FOcHfLdkWkGcTpxZWo%3D",
@@ -625,7 +577,7 @@ const mockProductListResponse = {
       "tagline": "",
       "promotionTag": ["รถไฟฟ้า", "สายชาจ"],
       "currency": "Baht",
-      "price": 250000,
+      "price": 250000.0,
       "discountPrice": 0,
       "percentDiscountPrice": 0,
       "productionAssets": [
@@ -644,6 +596,19 @@ const mockProductListResponse = {
       "merchantLogo":
           "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/BUSDOAIGQZSP_app-bo-cust/merchant/20240313_031107_merchant_PTN8UN1.png?sv=2020-08-04&se=2029-02-15T08%3A11%3A07Z&sr=b&sp=r&sig=QH%2FueOhmhmWcMKkLkXYWnsOoyP6d7AEbV14XFwi94rw%3D",
       "productionOptionals": []
+    }
+  ],
+  "banner": [],
+  "category": [
+    {
+      "categoryId": 25,
+      "categoryTh": "Category of dev",
+      "categoryEn": "CATE DEV",
+      "img_active":
+          "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240314_025728_Privilege_Category_SS1MYPD.jpg?sv=2020-08-04&se=2029-02-16T07%3A57%3A28Z&sr=b&sp=r&sig=uveV1uNCc2nOKT1xq9SGYxr%2Fp%2BeuRDPnvGKXfz3oKwk%3D",
+      "img_inactive":
+          "https://devbcrmdata.blob.core.windows.net/bcrm-139-busdoaigqzsp/AJAYT7XH1HMV_app-bo-cust/Privilege/20240313_095515_Privilege_Category_ORP2LVG.png?sv=2020-08-04&se=2029-02-15T02%3A55%3A15Z&sr=b&sp=r&sig=VYtlPN417UMztumxeBbhWnY4BKIjN7Xgxov2Mt28W3E%3D",
+      "seqNo": 3
     }
   ]
 };

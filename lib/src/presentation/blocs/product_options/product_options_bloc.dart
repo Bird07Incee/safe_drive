@@ -7,7 +7,7 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
   // Create methods to update the variables and emit the state
   void updateStepOneVariables({
     String? groupValueRadio,
-    int? price,
+    double? price,
     int? indexSelect,
   }) {
     emit(state.copyWith(
@@ -19,7 +19,7 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
 
   void updateStepTwoVariables({
     String? groupValueRadio,
-    int? price,
+    double? price,
     int? indexSelect,
   }) {
     emit(state.copyWith(
@@ -31,7 +31,7 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
 
   void updateStepTreeVariables({
     String? groupValueRadio,
-    int? price,
+    double? price,
     int? indexSelect,
   }) {
     emit(state.copyWith(
@@ -43,7 +43,7 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
 
   void updateStepFourVariables({
     String? groupValueRadio,
-    int? price,
+    double? price,
     int? indexSelect,
   }) {
     emit(state.copyWith(
@@ -55,7 +55,7 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
 
   void updateStepFiveVariables({
     String? groupValueRadio,
-    int? price,
+    double? price,
     int? indexSelect,
   }) {
     emit(state.copyWith(
@@ -77,19 +77,19 @@ class ProductOptionBloc extends Cubit<ProductOptionState> {
 
 class ProductOptionState extends Equatable {
   final String stepOneGroupValueRadio;
-  final int? stepOnePrice;
+  final double? stepOnePrice;
   final int? stepOneIndexSelect;
   final String stepTwoGroupValueRadio;
-  final int? stepTwoPrice;
+  final double? stepTwoPrice;
   final int? stepTwoIndexSelect;
   final String stepTreeGroupValueRadio;
-  final int? stepTreePrice;
+  final double? stepTreePrice;
   final int? stepTreeIndexSelect;
   final String stepFourGroupValueRadio;
-  final int? stepFourPrice;
+  final double? stepFourPrice;
   final int? stepFourIndexSelect;
   final String stepFiveGroupValueRadio;
-  final int? stepFivePrice;
+  final double? stepFivePrice;
   final int? stepFiveIndexSelect;
   final int? lastOption;
   final int? selectCurrentOption;
@@ -116,19 +116,19 @@ class ProductOptionState extends Equatable {
 
   ProductOptionState copyWith({
     String? stepOneGroupValueRadio,
-    int? stepOnePrice,
+    double? stepOnePrice,
     int? stepOneIndexSelect,
     String? stepTwoGroupValueRadio,
-    int? stepTwoPrice,
+    double? stepTwoPrice,
     int? stepTwoIndexSelect,
     String? stepTreeGroupValueRadio,
-    int? stepTreePrice,
+    double? stepTreePrice,
     int? stepTreeIndexSelect,
     String? stepFourGroupValueRadio,
-    int? stepFourPrice,
+    double? stepFourPrice,
     int? stepFourIndexSelect,
     String? stepFiveGroupValueRadio,
-    int? stepFivePrice,
+    double? stepFivePrice,
     int? stepFiveIndexSelect,
     int? lastOption,
     int? selectCurrentOption,

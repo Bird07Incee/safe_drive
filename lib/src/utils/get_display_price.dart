@@ -1,6 +1,6 @@
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 
-int getDisplayPrice(int price, List<ProductionOptionals> option) {
+double getDisplayPrice(double price, List<ProductionOptionals> option) {
   var result = price;
 
   if (option.isNotEmpty) {

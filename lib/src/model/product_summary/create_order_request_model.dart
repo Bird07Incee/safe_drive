@@ -38,7 +38,7 @@ class CreateOrderRequestModel {
 class OrderProduct {
   final String? productId;
   final int? qty;
-  final int? unitPrice;
+  final double? unitPrice;
   final Optional? optional;
 
   const OrderProduct({required this.productId, required this.qty, required this.unitPrice, this.optional});
@@ -60,7 +60,7 @@ class OrderProduct {
 class Optional {
   final String? productId;
   final int? qty;
-  final int? unitPrice;
+  final double? unitPrice;
   final SubOptional? subOptional;
 
   const Optional({required this.productId, required this.qty, required this.unitPrice, this.subOptional});
@@ -82,7 +82,7 @@ class Optional {
 class SubOptional {
   final String? productId;
   final int? qty;
-  final int? unitPrice;
+  final double? unitPrice;
 
   const SubOptional({required this.productId, required this.qty, required this.unitPrice});
 
