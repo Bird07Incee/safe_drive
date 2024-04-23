@@ -24,6 +24,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   late final TabController _tabController;
   String? remarkHtmlString;
   bool isPressedReadMore = false;
+  bool isReadMoreVisible = false;
   double descriptionHeight = 0;
   final GlobalKey _descriptionKey = GlobalKey();
 
@@ -36,10 +37,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   @override
   void initState() {
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _getDescriptionHeight();
+    });
     _tabController.addListener(() {
-      if (_tabController.index == 1) {
-        _getDescriptionHeight();
-      }
+      _getDescriptionHeight();
     });
     super.initState();
   }
@@ -375,6 +377,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         fontWeight: FontWeight.w700,
                       ),
                       onTap: (int index) {
+                        print(descriptionHeight);
                         setState(() {});
                       },
                       tabs: [
@@ -460,7 +463,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         !isPressedReadMore
                             ? SizedBox(
                                 width: MediaQuery.of(context).size.width - 32,
-                                height: _tabController.index == 1 ? descriptionHeight : null,
+                                height: _tabController.index == 1
+                                    ? descriptionHeight > 150
+                                        ? 150
+                                        : descriptionHeight
+                                    : null,
                                 child: SingleChildScrollView(
                                   physics: NeverScrollableScrollPhysics(),
                                   child: HtmlWidget(
@@ -513,7 +520,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       ? Container(
                           padding: descriptionHeight >= 150 ? null : EdgeInsets.only(top: 16),
                           child: Visibility(
-                              visible: descriptionHeight >= 150,
+                              visible: isReadMoreVisible,
                               child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 16),
                                   child: Row(
