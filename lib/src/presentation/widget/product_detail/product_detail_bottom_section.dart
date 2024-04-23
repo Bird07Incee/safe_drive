@@ -378,7 +378,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         fontWeight: FontWeight.w700,
                       ),
                       onTap: (int index) {
-                        print(descriptionHeight);
                         setState(() {});
                         if (index == 0) {
                           AmplitudeWebHelper.getInstance().logTapOnGeneralInfoButton(
