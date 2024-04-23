@@ -26,8 +26,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   String? remarkHtmlString;
   bool isPressedReadMore = false;
   bool isReadMoreVisible = false;
-  double descriptionHeight = 0;
+  bool isBuildFinish = false;
+  double descriptionHeight = 24;
   final GlobalKey _descriptionKey = GlobalKey();
+  final GlobalKey _descriptionGetHeightKey = GlobalKey();
 
   @override
   void dispose() {
@@ -41,17 +43,14 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _getDescriptionHeight();
     });
-    _tabController.addListener(() {
-      _getDescriptionHeight();
-    });
     super.initState();
   }
 
   void _getDescriptionHeight() {
-    final RenderBox renderBox = _descriptionKey.currentContext!.findRenderObject() as RenderBox;
-    setState(() {
+    final RenderBox renderBox = _descriptionGetHeightKey.currentContext!.findRenderObject() as RenderBox;
+    if (renderBox.size.height != 0) {
       descriptionHeight = renderBox.size.height;
-    });
+    }
   }
 
   @override
@@ -330,6 +329,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         ),
         child: StatefulBuilder(builder: (context, setState) {
           String data = "";
+
           if (_tabController.index == 0) {
             data = product.technicalSpec;
           } else {
@@ -340,8 +340,59 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             data = data.replaceAll("<<", "<").replaceAll(">>", ">");
             if (descriptionHeight > 150) {
               descriptionHeight = 150;
+              isReadMoreVisible = true;
+            } else {
+              descriptionHeight = 150;
+              isReadMoreVisible = false;
             }
           }
+
+          final replaceInnerTagP = product.description.isNotEmpty
+              ? product.description.substring(3, product.description.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
+              : "";
+          var description = product.description.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
+          description = description.replaceAll("<<", "<").replaceAll(">>", ">");
+
+          Widget descriptionWidget = HtmlWidget(
+            key: _descriptionGetHeightKey,
+            description.isNotEmpty ? description : AppStrings().noDataFromSeller,
+            buildAsync: false,
+            customStylesBuilder: (element) {
+              if (element.localName == "table") {
+                return {'width': '100%'};
+              }
+              if (element.localName == "td") {
+                return {
+                  'width': '50%',
+                  'vertical-align': 'top;',
+                  'padding-top': '8px;',
+                  'padding-bottom': '8px;',
+                  'font-size': '14px',
+                  'line-height': '24px',
+                  'color': '#2c2626'
+                };
+              }
+              if (element.localName == "th" || element.localName == "thead") {
+                return null;
+              }
+              if (element.localName == "p") {
+                return {
+                  'font-family': 'Krungsri Condensed',
+                  'font-size': '14px',
+                  'line-height': '24px',
+                  'color': '#2c2626',
+                };
+              }
+              return null;
+            },
+            customWidgetBuilder: (element) {
+              if (element.localName == "th" || element.localName == "thead") {
+                return SizedBox.shrink();
+              }
+              return null;
+            },
+            factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+          );
 
           return Column(
             children: [
@@ -377,7 +428,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         fontWeight: FontWeight.w700,
                       ),
                       onTap: (int index) {
-                        setState(() {});
+                        setState(() {
+                          if (index == 1) {
+                            _getDescriptionHeight();
+                          }
+                        });
                         if (index == 0) {
                           AmplitudeWebHelper.getInstance().logTapOnGeneralInfoButton(
                               productName: product.productName,
@@ -431,6 +486,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 : 0),
                     child: Column(
                       children: [
+                        SizedBox(height: 0, child: descriptionWidget),
                         isPressedReadMore
                             ? HtmlWidget(
                                 data.isNotEmpty ? data : AppStrings().noDataFromSeller,
@@ -485,7 +541,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                   child: HtmlWidget(
                                     data.isNotEmpty ? data : AppStrings().noDataFromSeller,
                                     key: _descriptionKey,
-                                    buildAsync: false,
+                                    buildAsync: true,
                                     customStylesBuilder: (element) {
                                       if (element.localName == "table") {
                                         return {'width': '100%'};
@@ -530,9 +586,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               data.isNotEmpty
                   ? _tabController.index == 1
                       ? Container(
-                          padding: descriptionHeight >= 150 ? null : EdgeInsets.only(top: 16),
+                          padding: _tabController.index == 1
+                              ? descriptionHeight >= 150
+                                  ? null
+                                  : EdgeInsets.only(top: 16)
+                              : null,
                           child: Visibility(
-                              visible: isReadMoreVisible,
+                              visible: _tabController.index == 1 && isReadMoreVisible,
                               child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 16),
                                   child: Row(
