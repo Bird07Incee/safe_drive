@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
@@ -104,6 +105,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, pdState) {
           if (pdState.status.isSuccess) {
+            AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                productName: pdState.product.productName,
+                contentId: pdState.product.productId,
+                merchantName: pdState.product.merchantFullName,
+                productCategoryId: pdState.product.categoryId.toString());
             return BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
               builder: (ctx, stateAppBar) {
                 return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
@@ -247,6 +253,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                   height: 48,
                   child: OutlinedButton(
                     onPressed: () {
+                      AmplitudeWebHelper.getInstance().logTapOnPurchaseButton(
+                          productName: pdState.product.productName,
+                          contentId: pdState.product.productId,
+                          merchantName: pdState.product.merchantFullName,
+                          productCategoryId: pdState.product.categoryId.toString(),
+                          price: pdState.product.price.toString(),
+                          discountPrice: pdState.product.discountPrice.toString());
                       if (pdState.product.productionOptionals.isNotEmpty) {
                         Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
                             arguments: ProductDetailArgs(product: pdState.product));

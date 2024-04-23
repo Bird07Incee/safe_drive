@@ -6,6 +6,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
@@ -593,6 +594,11 @@ class _PDTopSectionState extends State<PDTopSection> {
                                       GestureDetector(
                                         key: const Key("image_slide_action"),
                                         onTap: () {
+                                          AmplitudeWebHelper.getInstance().logTapOniImageGallery(
+                                              productName: state.product.productName,
+                                              contentId: state.product.productId,
+                                              merchantName: state.product.merchantFullName,
+                                              productCategoryId: state.product.categoryId.toString());
                                           context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                           context
                                               .read<ProductDetailCarouselScrollControllerBloc>()

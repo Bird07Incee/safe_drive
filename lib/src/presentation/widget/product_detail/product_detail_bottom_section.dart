@@ -8,6 +8,7 @@ import 'package:marketplace_line_oa/src/constants/app_keys.dart';
 import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
@@ -379,6 +380,19 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       onTap: (int index) {
                         print(descriptionHeight);
                         setState(() {});
+                        if (index == 0) {
+                          AmplitudeWebHelper.getInstance().logTapOnGeneralInfoButton(
+                              productName: product.productName,
+                              contentId: product.productId,
+                              merchantName: product.merchantFullName,
+                              productCategoryId: product.categoryId.toString());
+                        } else {
+                          AmplitudeWebHelper.getInstance().logTapOnConditionsButton(
+                              productName: product.productName,
+                              contentId: product.productId,
+                              merchantName: product.merchantFullName,
+                              productCategoryId: product.categoryId.toString());
+                        }
                       },
                       tabs: [
                         Tab(
@@ -582,6 +596,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         height: 48,
                         child: OutlinedButton(
                           onPressed: () async {
+                            AmplitudeWebHelper.getInstance().logTapOnCallMerchantButton(
+                                productName: product.productName,
+                                contentId: product.productId,
+                                merchantName: product.merchantFullName,
+                                productCategoryId: product.categoryId.toString());
                             String mobile = product.merchantMobile.replaceAll('-', '');
                             callPhone(mobile);
                           },
