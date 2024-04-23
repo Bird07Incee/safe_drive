@@ -335,6 +335,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 ? product.description.substring(3, product.description.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
                 : "";
             data = product.description.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
+            data = data.replaceAll("<<", "<").replaceAll(">>", ">");
             if (descriptionHeight > 150) {
               descriptionHeight = 150;
             }
@@ -510,7 +511,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               data.isNotEmpty
                   ? _tabController.index == 1
                       ? Container(
-                          padding: descriptionHeight >= 120 ? null : EdgeInsets.only(top: 16),
+                          padding: descriptionHeight >= 150 ? null : EdgeInsets.only(top: 16),
                           child: Visibility(
                               visible: descriptionHeight >= 150,
                               child: Padding(
