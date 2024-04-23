@@ -293,7 +293,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         // buildAsync: false,
                         // customStylesBuilder: (element) {
                         //   if (element.localName == 'strong') {
-                        //     print(" test " + remarkHtmlString!);
                         //     return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
                         //   }
                         //   return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
