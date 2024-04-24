@@ -604,7 +604,16 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   }
                 },
                 child: Container(
-                  padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                  padding: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      bottom: _tabController.index == 0
+                          ? product.technicalSpec.isEmpty
+                              ? 0
+                              : 16
+                          : dataDescription.isEmpty
+                              ? 16
+                              : 0),
                   child: _tabController.index == 0
                       ? product.technicalSpec.isEmpty
                           ? noDataFromSeller
