@@ -510,15 +510,13 @@ class AmplitudeWebHelper {
     });
   }
 
-  Future<void> logTapOneMarketplaceHomepageButton({
-    required String productName,
-  }) async {
+  Future<void> logTapOneMarketplaceHomepageButton() async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on eMarketplace homepage button",
         screenName: "AutoStation_eMarketplace_payment_fail",
-        eventName: productName,
+        eventName: "AutoStation_eMarketplace_homapage",
         eventProperties: {
           'channel': "LINE",
           'line_uuid': lineUID,

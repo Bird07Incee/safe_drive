@@ -4,6 +4,7 @@ import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -96,6 +97,17 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
           builder: (context, state) {
             var orderSuccessData = state.orderSuccessData;
             if (state.orderSuccessStatus == GetOrderSuccessDataStatus.success) {
+              AmplitudeWebHelper.getInstance().logEnterOrderSuccessPage(
+                  selectedType: orderSuccessData.installmentPeriod.toString(),
+                  invoiceNumber: orderSuccessData.invoiceNo.toString(),
+                  productName: orderSuccessData.productName.toString(),
+                  contentId: orderSuccessData.productId.toString(),
+                  optionID: "option_id",
+                  merchantName: orderSuccessData.merchantFullName.toString(),
+                  productCategoryId: "product_category_id",
+                  price: orderSuccessData.amount.toString(),
+                  paymentType: orderSuccessData.paymentChannelText.toString(),
+                  userLocation: orderSuccessData.customerAddress.toString());
               return Column(
                 children: [
                   Container(
@@ -329,6 +341,11 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               GestureDetector(
                                 key: const Key("call_to_merchant_button"),
                                 onTap: () {
+                                  AmplitudeWebHelper.getInstance().logTapTapOnCallMerchantButton(
+                                    invoiceNumber: orderSuccessData.invoiceNo.toString(),
+                                    productName: orderSuccessData.productName.toString(),
+                                    merchantName: orderSuccessData.merchantFullName.toString(),
+                                  );
                                   String phoneNumber = orderSuccessData.merchantMobile!.replaceAll("-", "");
                                   callPhone(phoneNumber);
                                 },
@@ -359,6 +376,11 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 GestureDetector(
                                   key: const Key("call_button"),
                                   onTap: () {
+                                    AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonSuccessScreen(
+                                      invoiceNumber: orderSuccessData.invoiceNo.toString(),
+                                      productName: orderSuccessData.productName.toString(),
+                                      merchantName: orderSuccessData.merchantFullName.toString(),
+                                    );
                                     callPhone(HomeConst().pleaseContactNumber);
                                   },
                                   child: Row(
@@ -392,6 +414,11 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       child: GestureDetector(
                         key: const Key("back_to_tracking_list_button"),
                         onTap: () {
+                          AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButtonSuccessScreen(
+                            invoiceNumber: orderSuccessData.invoiceNo.toString(),
+                            productName: orderSuccessData.productName.toString(),
+                            merchantName: orderSuccessData.merchantFullName.toString(),
+                          );
                           setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
                           Navigator.pushNamed(context, '/trackingList');
                         },
@@ -408,6 +435,16 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                 state.orderSuccessStatus == GetOrderSuccessDataStatus.loading) {
               return const LoadingScreen();
             } else if (state.orderSuccessStatus == GetOrderSuccessDataStatus.cancel) {
+              AmplitudeWebHelper.getInstance().logEnterPaymentFailPage(
+                  invoiceNumber: orderSuccessData.invoiceNo.toString(),
+                  productName: orderSuccessData.productName.toString(),
+                  contentId: orderSuccessData.productId.toString(),
+                  optionID: "optionID",
+                  merchantName: orderSuccessData.merchantFullName.toString(),
+                  productCategoryId: "productCategoryId",
+                  price: orderSuccessData.amount.toString(),
+                  paymentType: orderSuccessData.paymentChannelText.toString(),
+                  userLocation: orderSuccessData.customerAddress.toString());
               return OrderCancelScreen();
             } else {
               return ErrorScreen(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
@@ -13,7 +14,6 @@ class OrderCancelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
     var maxHeight = MediaQuery.of(context).size.height;
-
     return RootPageCondition(
       child: AlvaRootWidget(
           titlePage: titleWebPage,
@@ -64,6 +64,7 @@ class OrderCancelScreen extends StatelessWidget {
                   child: GestureDetector(
                     key: const Key("back_to_home_page"),
                     onTap: () {
+                      AmplitudeWebHelper.getInstance().logTapOneMarketplaceHomepageButton();
                       Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                     },
                     child: Container(
