@@ -28,7 +28,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   bool isReadMoreVisible = false;
   bool isBuildFinish = false;
   double descriptionHeight = 0;
-  final GlobalKey _descriptionKey = GlobalKey();
   final GlobalKey _descriptionGetHeightKey = GlobalKey();
 
   @override
