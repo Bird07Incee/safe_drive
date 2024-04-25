@@ -139,15 +139,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
                                         unselectedLabelColor: const Color(0xffDEDEDE),
                                         onTap: (int index) {
-                                          amplitudeWebHelper.logTapOnCategory(categoryId: state.productList.category![index - 1]["categoryId"]);
-                                          context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                           if (index == 0) {
+                                            amplitudeWebHelper.logTapOnCategory(categoryId: state.productList.category![0]["categoryId"].toString());
                                             context.read<ProductListBloc>().add(GetProductListByCategory("", context));
                                           } else {
-                                            context
-                                                .read<ProductListBloc>()
-                                                .add(GetProductListByCategory(state.productList.category![index - 1]["categoryId"], context));
+                                            amplitudeWebHelper.logTapOnCategory(
+                                                categoryId: state.productList.category![index - 1]["categoryId"].toString());
+                                            context.read<ProductListBloc>().add(
+                                                GetProductListByCategory(state.productList.category![index - 1]["categoryId"].toString(), context));
                                           }
+                                          context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                           scrollController.animateTo(
                                               //go to top of scroll
                                               0, //scroll offset to go

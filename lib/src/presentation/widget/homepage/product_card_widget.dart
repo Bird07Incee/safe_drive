@@ -367,43 +367,60 @@ class ProductCardWidget extends StatelessWidget {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                products[index].discountPrice == 0
-                                                    ? products[index].price.toDecimalFormat()
-                                                    : products[index].discountPrice.toDecimalFormat(),
-                                                style: AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW),
-                                              ),
-                                              const SizedBox(
-                                                width: 2,
-                                              ),
-                                              Text(
-                                                "บาท",
-                                                style: AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
-                                              ),
-                                            ],
+                                          Expanded(
+                                            flex: 6,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                        text: products[index].discountPrice == 0
+                                                            ? products[index].price.toDecimalFormat()
+                                                            : products[index].discountPrice.toDecimalFormat(),
+                                                        style: AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW),
+                                                        children: [
+                                                          WidgetSpan(
+                                                              child: Padding(
+                                                            padding: EdgeInsets.symmetric(horizontal: 3, vertical: 3.25),
+                                                            child: Text(
+                                                              "บาท",
+                                                              style: AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
+                                                            ),
+                                                          ))
+                                                        ]),
+                                                  ),
+                                                ),
+                                                // Expanded(
+                                                //   child: Text(
+                                                //     products[index].discountPrice == 0
+                                                //         ? products[index].price.toDecimalFormat()
+                                                //         : products[index].discountPrice.toDecimalFormat(),
+                                                //     style: AlvaStyles().headingSize22(BTN_SELECTED_TEXT_COLOR_NEW),
+                                                //   ),
+                                                // ),
+                                                // Expanded(
+                                                //     child: Align(
+                                                //   alignment: Alignment.centerLeft,
+                                                //   child: Text(
+                                                //     "บาท",
+                                                //     style: AlvaStyles().headingSize18(BTN_SELECTED_TEXT_COLOR_NEW),
+                                                //   ),
+                                                // ))
+                                              ],
+                                            ),
                                           ),
                                           const SizedBox(
                                             width: 4,
                                           ),
                                           Container(
                                             height: 40,
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.symmetric(horizontal: 32),
                                             decoration:
                                                 const BoxDecoration(color: YellowKrungsri, borderRadius: BorderRadius.all(Radius.circular(8))),
-                                            child: Row(
-                                              children: [
-                                                const SizedBox(
-                                                  width: 32,
-                                                ),
-                                                Text(
-                                                  'สนใจ',
-                                                  style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW),
-                                                ),
-                                                const SizedBox(
-                                                  width: 32,
-                                                ),
-                                              ],
+                                            child: Text(
+                                              'สนใจ',
+                                              style: AlvaStyles().bodySize14W600(BTN_SELECTED_TEXT_COLOR_NEW),
                                             ),
                                           )
                                         ],
