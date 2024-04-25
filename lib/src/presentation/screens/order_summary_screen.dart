@@ -187,6 +187,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           step1price = pdOptState.stepOnePrice ?? 0;
                           step2 = pdOptState.stepTwoGroupValueRadio;
                           if (productState.status.isSuccess) {
+                            AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
                             return Scaffold(
                                 resizeToAvoidBottomInset: true,
                                 backgroundColor: Colors.white,
@@ -386,6 +387,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                               ),
                                                               GestureDetector(
                                                                 onTap: () {
+                                                                  AmplitudeWebHelper.getInstance().logTapOnManageShippingAddressButton();
                                                                   FocusManager.instance.primaryFocus?.unfocus();
                                                                   Navigator.pushNamed(context,
                                                                       '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}',
@@ -840,6 +842,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                         }
                                                         GeneralDialog(
                                                                 onAccept: () async {
+                                                                  AmplitudeWebHelper.getInstance().logTapOnConfirmOrderButton(
+                                                                      productName: productState.product.productName,
+                                                                      contentId: productState.product.productId,
+                                                                      merchantName: productState.product.merchantFullName,
+                                                                      price: productState.product.price,
+                                                                      paymentType: productState.product.paymentType,
+                                                                      productCategoryId: productState.product.categoryId.toString());
                                                                   final orderBloc = context.read<OrderSummaryBloc>();
                                                                   ProductionOptionals step1SelectedOption = productState
                                                                           .product.productionOptionals.isEmpty

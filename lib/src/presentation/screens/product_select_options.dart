@@ -81,6 +81,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
 
     return BlocBuilder<ProductOptionBloc, ProductOptionState>(
       builder: (context, prodOptState) {
+        AmplitudeWebHelper.getInstance().logEnterProductOptionPage(
+            productName: prodOptState.product.productName,
+            contentId: prodOptState.product.productId,
+            merchantName: prodOptState.product.merchantFullName,
+            productCategoryId: prodOptState.product.categoryId.toString());
         return RootPageCondition(
           child: WillPopScope(
             onWillPop: () async {
@@ -111,6 +116,14 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                             ? OutlinedButton(
                                 onPressed: () async {
+                                  AmplitudeWebHelper.getInstance().logTapOnNextButton(
+                                      productName: prodOptState.product.productName,
+                                      contentId: prodOptState.product.productId,
+                                      merchantName: prodOptState.product.merchantFullName,
+                                      optionID: "option_id",
+                                      productOptionPrice: prodOptState.product.optionPrice,
+                                      productCategoryId: prodOptState.product.categoryId.toString());
+
                                   await Navigator.pushNamed(
                                       context, '${Routes.orderSummary.toStringPath()}?pid=$pid&opt_lv1=${prodOptState.stepOneIndexSelect}');
                                   resetAllState();

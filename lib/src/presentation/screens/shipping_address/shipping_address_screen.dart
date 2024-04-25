@@ -65,6 +65,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
         ctx.read<ShippingAddressBloc>().setFormData(isFromEditing: args.isFromEditing);
         return const LoadingScreen();
       } else if (state.status.isSuccess || state.status.isFetching) {
+        AmplitudeWebHelper.getInstance().logEnterShippingAddressPage();
         return RootPageCondition(
           child: AlvaRootWidget(
               appBar: AppBar(
@@ -114,6 +115,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                 height: 48,
                                 child: OutlinedButton(
                                   onPressed: () async {
+                                    AmplitudeWebHelper.getInstance().logEnterProductOptionPage(address: state.address.toString());
                                     if (state.isAllowSubmit) {
                                       final myBloc = ctx.read<ShippingAddressBloc>();
                                       myBloc.onSubmitPressed();
