@@ -4,6 +4,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -44,9 +45,22 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ProductDetailState pdState = context.read<ProductDetailBloc>().state;
+    AmplitudeWebHelper.getInstance().logEnterProductOptionPage(
+        productName: pdState.product.productName,
+        contentId: pdState.product.productId,
+        merchantName: pdState.product.merchantFullName,
+        productCategoryId: pdState.product.categoryId.toString());
+  }
+
+  @override
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
     final myBloc = BlocProvider.of<ProductOptionBloc>(context);
+    ProductDetailState pdState = context.read<ProductDetailBloc>().state;
     resetAllState() {
       myBloc.updateStepOneVariables(
         groupValueRadio: "",
@@ -75,17 +89,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
       );
       myBloc.updateSelectCurrentOption(0);
       myBloc.updateLastOption(1);
-      ProductDetailState pdState = context.read<ProductDetailBloc>().state;
       refreshRoute(context: context, currentRoute: "selectOption", queryParams: "pid=$pid", listOption: pdState.product.productionOptionals);
     }
 
     return BlocBuilder<ProductOptionBloc, ProductOptionState>(
       builder: (context, prodOptState) {
-        AmplitudeWebHelper.getInstance().logEnterProductOptionPage(
-            productName: prodOptState.product.productName,
-            contentId: prodOptState.product.productId,
-            merchantName: prodOptState.product.merchantFullName,
-            productCategoryId: prodOptState.product.categoryId.toString());
         return RootPageCondition(
           child: WillPopScope(
             onWillPop: () async {
@@ -116,13 +124,19 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                             ? OutlinedButton(
                                 onPressed: () async {
+                                  String productOptionPrice = "";
+                                  // if(prodOptState.lastOption == 2){
+                                  //   productOptionPrice = "${state.product.productionOptionals[index].price}";
+                                  // }else {
+                                  //
+                                  // }
                                   AmplitudeWebHelper.getInstance().logTapOnNextButton(
-                                      productName: prodOptState.product.productName,
-                                      contentId: prodOptState.product.productId,
-                                      merchantName: prodOptState.product.merchantFullName,
-                                      optionID: "option_id",
-                                      productOptionPrice: prodOptState.product.optionPrice,
-                                      productCategoryId: prodOptState.product.categoryId.toString());
+                                      productName: pdState.product.productName,
+                                      contentId: pdState.product.productId,
+                                      merchantName: pdState.product.merchantFullName,
+                                      productOptionPrice: productOptionPrice,
+                                      productCategoryId: pdState.product.categoryId.toString(),
+                                      optionId: "");
 
                                   await Navigator.pushNamed(
                                       context, '${Routes.orderSummary.toStringPath()}?pid=$pid&opt_lv1=${prodOptState.stepOneIndexSelect}');

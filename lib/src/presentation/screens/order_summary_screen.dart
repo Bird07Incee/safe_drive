@@ -5,6 +5,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/arguments/shipping_address_args.dart';
@@ -48,6 +49,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
 
   @override
   void initState() {
+    AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
     context.read<OrderSummaryBloc>().add(InitialOrderState());
     super.initState();
   }
@@ -187,7 +189,6 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           step1price = pdOptState.stepOnePrice ?? 0;
                           step2 = pdOptState.stepTwoGroupValueRadio;
                           if (productState.status.isSuccess) {
-                            AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
                             return Scaffold(
                                 resizeToAvoidBottomInset: true,
                                 backgroundColor: Colors.white,
@@ -842,13 +843,14 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                         }
                                                         GeneralDialog(
                                                                 onAccept: () async {
-                                                                  AmplitudeWebHelper.getInstance().logTapOnConfirmOrderButton(
-                                                                      productName: productState.product.productName,
-                                                                      contentId: productState.product.productId,
-                                                                      merchantName: productState.product.merchantFullName,
-                                                                      price: productState.product.price,
-                                                                      paymentType: productState.product.paymentType,
-                                                                      productCategoryId: productState.product.categoryId.toString());
+                                                                  // AmplitudeWebHelper.getInstance().logTapOnConfirmOrderButton(
+                                                                  //     productName: productState.product.productName,
+                                                                  //     contentId: productState.product.productId,
+                                                                  //     merchantName: productState.product.merchantFullName,
+                                                                  //     price: productState.product.price,
+                                                                  //     paymentType: productState.product.paymentType,
+                                                                  //     productCategoryId: productState.product.categoryId.toString());
+
                                                                   final orderBloc = context.read<OrderSummaryBloc>();
                                                                   ProductionOptionals step1SelectedOption = productState
                                                                           .product.productionOptionals.isEmpty

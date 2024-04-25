@@ -4,6 +4,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/arguments/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
@@ -33,6 +34,12 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   String pid = '';
   int? optLv1;
   bool isLoaded = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    AmplitudeWebHelper.getInstance().logEnterShippingAddressPage();
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -65,7 +72,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
         ctx.read<ShippingAddressBloc>().setFormData(isFromEditing: args.isFromEditing);
         return const LoadingScreen();
       } else if (state.status.isSuccess || state.status.isFetching) {
-        AmplitudeWebHelper.getInstance().logEnterShippingAddressPage();
         return RootPageCondition(
           child: AlvaRootWidget(
               appBar: AppBar(
@@ -115,7 +121,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                 height: 48,
                                 child: OutlinedButton(
                                   onPressed: () async {
-                                    AmplitudeWebHelper.getInstance().logEnterProductOptionPage(address: state.address.toString());
                                     if (state.isAllowSubmit) {
                                       final myBloc = ctx.read<ShippingAddressBloc>();
                                       myBloc.onSubmitPressed();
@@ -127,6 +132,15 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                             queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}",
                                             listOption: pdState.product.productionOptionals);
                                       }
+                                      String addressCustomer = "${state.formResult!.where((element) => element.fieldName == 'name').first.value!}"
+                                          "${state.formResult!.where((element) => element.fieldName == 'phone').first.value!}"
+                                          "${state.formResult!.where((element) => element.fieldName == 'email').first.value!}"
+                                          "${state.formResult!.where((element) => element.fieldName == 'address').first.value!}"
+                                          "${state.formResult!.where((element) => element.fieldName == 'province').first.value!}"
+                                          "${state.formResult!.where((element) => element.fieldName == 'district').first.value!}"
+                                          "${state.formResult!.where((element) => element.fieldName == 'subdistrict').first.value!}"
+                                          "${state.formResult!.where((element) => element.fieldName == 'zipcode').first.value!}";
+                                      AmplitudeWebHelper.getInstance().logTapOnOkButton(address: addressCustomer);
                                       Navigator.pop(context);
                                     }
                                   },
