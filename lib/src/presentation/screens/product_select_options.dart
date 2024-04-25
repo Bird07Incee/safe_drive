@@ -125,18 +125,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                             ? OutlinedButton(
                                 onPressed: () async {
                                   String productOptionPrice = "";
-                                  // if(prodOptState.lastOption == 2){
-                                  //   productOptionPrice = "${state.product.productionOptionals[index].price}";
-                                  // }else {
-                                  //
-                                  // }
+                                  if (pdState.product.productionOptionals.isNotEmpty) {
+                                    productOptionPrice = pdState.product.productionOptionals[0].subProductId;
+                                  }
                                   AmplitudeWebHelper.getInstance().logTapOnNextButton(
                                       productName: pdState.product.productName,
                                       contentId: pdState.product.productId,
                                       merchantName: pdState.product.merchantFullName,
                                       productOptionPrice: productOptionPrice,
                                       productCategoryId: pdState.product.categoryId.toString(),
-                                      optionId: "");
+                                      optionId: productOptionPrice);
 
                                   await Navigator.pushNamed(
                                       context, '${Routes.orderSummary.toStringPath()}?pid=$pid&opt_lv1=${prodOptState.stepOneIndexSelect}');

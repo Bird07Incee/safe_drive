@@ -88,9 +88,18 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     }
   }
 
-  void onBack(BuildContext context) {
+  void onBack(BuildContext context, ProductDetailState productState, OrderSummaryState orderState, double step1price, double showPrice) {
     GeneralDialog(
             onAccept: () {
+              AmplitudeWebHelper.getInstance().logTapOnBackButton(
+                productName: productState.product.productName,
+                contentId: productState.product.productId,
+                merchantName: productState.product.merchantFullName,
+                productCategoryId: productState.product.categoryId.toString(),
+                optionID: productState.product.productionOptionals[0].subProductId,
+                price: "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
+                paymentType: orderState.paymentType.name,
+              );
               context.read<ShippingAddressBloc>().onClearShippingData();
               context.read<ProductOptionBloc>().updateStepOneVariables(
                     groupValueRadio: "",
@@ -130,7 +139,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     return RootPageCondition(
         child: WillPopScope(
       onWillPop: () async {
-        onBack(context);
+        ProductDetailState productState = context.read<ProductDetailBloc>().state;
+        OrderSummaryState orderState = context.read<OrderSummaryBloc>().state;
+        double showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
+        onBack(context, productState, orderState, step1price, showPrice);
         return false;
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
@@ -208,7 +220,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                           leading: IconButton(
                                               key: const Key("pop_navigator_to_home_page"),
                                               onPressed: () {
-                                                onBack(context);
+                                                onBack(context, productState, orderState, step1price, showPrice);
                                               },
                                               icon: const Icon(Icons.arrow_back_ios_rounded)),
                                         ),
@@ -843,13 +855,17 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                         }
                                                         GeneralDialog(
                                                                 onAccept: () async {
-                                                                  // AmplitudeWebHelper.getInstance().logTapOnConfirmOrderButton(
-                                                                  //     productName: productState.product.productName,
-                                                                  //     contentId: productState.product.productId,
-                                                                  //     merchantName: productState.product.merchantFullName,
-                                                                  //     price: productState.product.price,
-                                                                  //     paymentType: productState.product.paymentType,
-                                                                  //     productCategoryId: productState.product.categoryId.toString());
+                                                                  AmplitudeWebHelper.getInstance().logTapOnConfirmOrderButton(
+                                                                      productName: productState.product.productName,
+                                                                      contentId: productState.product.productId,
+                                                                      merchantName: productState.product.merchantFullName,
+                                                                      price:
+                                                                          "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
+                                                                      paymentType: orderState.paymentType.name,
+                                                                      optionID: productState.product.productionOptionals.isNotEmpty
+                                                                          ? productState.product.productionOptionals[0].subProductId
+                                                                          : "[]",
+                                                                      productCategoryId: productState.product.categoryId.toString());
 
                                                                   final orderBloc = context.read<OrderSummaryBloc>();
                                                                   ProductionOptionals step1SelectedOption = productState
