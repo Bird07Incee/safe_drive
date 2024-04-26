@@ -140,15 +140,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         unselectedLabelColor: const Color(0xffDEDEDE),
                                         onTap: (int index) {
                                           context.read<ProductListBloc>().add(SetSelectTabIndex(index));
-
                                           if (index == 0) {
-                                            context.read<ProductListBloc>().add(GetProductListByCategory("ALL", context));
+                                            amplitudeWebHelper.logTapOnCategory(
+                                                categoryId: "ALL");
+                                            context.read<ProductListBloc>().add(GetProductListByCategory("", context));
                                           } else {
                                             amplitudeWebHelper.logTapOnCategory(
                                                 categoryId: state.productList.category![index - 1]["categoryId"].toString());
                                             context.read<ProductListBloc>().add(
                                                 GetProductListByCategory(state.productList.category![index - 1]["categoryId"].toString(), context));
                                           }
+
                                           scrollController.animateTo(
                                               //go to top of scroll
                                               0, //scroll offset to go
