@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
   bool isNotLogin = true;
   TextEditingController tc = TextEditingController();
-  // late TabController tabController;
+  TabController? tabController;
 
   @override
   void initState() {
@@ -106,12 +106,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         context.read<ProductListBloc>().add(const GetProductList());
                       }
                     }, builder: (context, stateAuth) {
-                      // tabController = TabController(length: state.productList.category!.length + 1, vsync: this);
                       if (stateAuth.authStatus == AuthStatus.initial && isNotLogin) {
                         isNotLogin = false;
                         context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
                       }
                       if (state.productListStatus == GetProductListStatus.success) {
+                        tabController ??= TabController(length: state.productList.category!.length + 1, vsync: this);
                         return Container(
                           color: cloudyWhite,
                           child: ListView(
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     padding: const EdgeInsets.symmetric(horizontal: 16),
                                     color: Colors.white,
                                     child: TabBar(
-                                        controller: TabController(length: state.productList.category!.length + 1, vsync: this),
+                                        controller: tabController,
                                         labelColor: Colors.black,
                                         indicatorColor: BlueFantasy,
                                         padding: EdgeInsets.only(right: 8),
@@ -139,15 +139,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
                                         unselectedLabelColor: const Color(0xffDEDEDE),
                                         onTap: (int index) {
-
                                           context.read<ProductListBloc>().add(SetSelectTabIndex(index));
+
                                           if (index == 0) {
                                             context.read<ProductListBloc>().add(GetProductListByCategory("ALL", context));
                                           } else {
-                                            amplitudeWebHelper.logTapOnCategory(categoryId: state.productList.category![index - 1]["categoryId"]);
-                                            context
-                                                .read<ProductListBloc>()
-                                                .add(GetProductListByCategory(state.productList.category![index - 1]["categoryId"], context));
+                                            amplitudeWebHelper.logTapOnCategory(
+                                                categoryId: state.productList.category![index - 1]["categoryId"].toString());
+                                            context.read<ProductListBloc>().add(
+                                                GetProductListByCategory(state.productList.category![index - 1]["categoryId"].toString(), context));
                                           }
                                           scrollController.animateTo(
                                               //go to top of scroll
