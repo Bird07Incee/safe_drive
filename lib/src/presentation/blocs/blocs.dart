@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/order_summary_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_summary_detail_cubit.dart';
@@ -25,7 +24,6 @@ import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart
 final List<BlocProvider> blocs = [
   BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
   BlocProvider<CheckBrowserBloc>(create: (_) => CheckBrowserBloc()),
-  BlocProvider<ConnectivityStatusBloc>(create: (_) => ConnectivityStatusBloc()),
   BlocProvider<ScrollProductDetailBloc>(create: (_) => ScrollProductDetailBloc()),
   BlocProvider<ProductDetailCarouselScrollControllerBloc>(create: (_) => ProductDetailCarouselScrollControllerBloc()),
   BlocProvider<ImgGalleryZoomBloc>(create: (_) => ImgGalleryZoomBloc()),

@@ -1,4 +1,3 @@
-// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,6 @@ import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/blocs.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
-// import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
@@ -140,17 +138,7 @@ class _RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
     context.read<CheckBrowserBloc>().add(GetBrowserClient());
-    // initConnectivity();
-    // Connectivity().onConnectivityChanged.listen((result) {
-    //   context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: result));
-    // });
   }
-
-  // Future<void> initConnectivity() async {
-  //   await Connectivity()
-  //       .checkConnectivity()
-  //       .then((value) => context.read<ConnectivityStatusBloc>().add(ConnectivityStatusEvent(connectivityResult: value)));
-  // }
 
   @override
   Widget build(BuildContext context) {
