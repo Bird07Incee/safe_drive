@@ -323,6 +323,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                       ? GestureDetector(
                                                           behavior: HitTestBehavior.translucent,
                                                           onTap: () {
+                                                            AmplitudeWebHelper.getInstance().logTapOnManageShippingAddressButton();
                                                             Navigator.pushNamed(context,
                                                                 '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}');
                                                           },
