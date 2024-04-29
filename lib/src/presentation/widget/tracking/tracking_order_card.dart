@@ -80,7 +80,7 @@ class TrackingOrderCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          order.products![0].productNameEn!,
+                          order.products![0].productNameTh!,
                           style: AlvaStyles().headingSize14w600(blackGoMunTo),
                           overflow: TextOverflow.ellipsis,
                         ),
