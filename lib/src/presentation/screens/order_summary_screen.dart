@@ -95,8 +95,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 productName: productState.product.productName,
                 contentId: productState.product.productId,
                 merchantName: productState.product.merchantFullName,
-                productCategoryId: productState.product.categoryId.toString(),
-                optionID: productState.product.productionOptionals[0].subProductId,
+                productCategoryId: productState.product.categoryId.isNotEmpty ? productState.product.categoryId.toString() : "",
+                optionID: productState.product.productionOptionals.isNotEmpty ? productState.product.productionOptionals[0].subProductId : "",
                 price: "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
                 paymentType: orderState.paymentType.name,
               );
