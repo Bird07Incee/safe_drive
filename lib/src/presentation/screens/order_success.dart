@@ -439,9 +439,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                   invoiceNumber: orderSuccessData.invoiceNo.toString(),
                   productName: orderSuccessData.productName.toString(),
                   contentId: orderSuccessData.productId.toString(),
-                  optionID: "optionID",
                   merchantName: orderSuccessData.merchantFullName.toString(),
-                  productCategoryId: "productCategoryId",
                   price: orderSuccessData.amount.toString(),
                   paymentType: orderSuccessData.paymentChannelText.toString(),
                   userLocation: orderSuccessData.customerAddress.toString());

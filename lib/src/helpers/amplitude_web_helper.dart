@@ -488,9 +488,9 @@ class AmplitudeWebHelper {
       {required String invoiceNumber,
       required String productName,
       required String contentId,
-      required String optionID,
+
       required String merchantName,
-      required String productCategoryId,
+
       required String price,
       required String paymentType,
       required String userLocation}) async {
@@ -499,9 +499,7 @@ class AmplitudeWebHelper {
     logEvent(eventType: "Enter payment fail page", screenName: "AutoStation_eMarketplace_payment_fail", eventName: productName, eventProperties: {
       'invoice_number': invoiceNumber,
       'content_id': contentId,
-      'sub_category_name': optionID,
       'category_name': merchantName,
-      'content_type': productCategoryId,
       'product_price': price,
       'payment_type': paymentType,
       'user_location': userLocation,
