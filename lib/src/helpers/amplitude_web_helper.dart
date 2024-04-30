@@ -51,41 +51,45 @@ class AmplitudeWebHelper {
   void logEnterTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
     String tcVersion = await lineDataHelper.getTAndC();
+    String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Enter term&condition page",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion});
+        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
   }
 
   void logTapOnOkButtonTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    var tcVersion = await lineDataHelper.getTAndC();
+    String tcVersion = await lineDataHelper.getTAndC();
+    String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on ok button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion});
+        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
   }
 
   void logTapOnCancelButtonTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    var tcVersion = await lineDataHelper.getTAndC();
+    String tcVersion = await lineDataHelper.getTAndC();
+    String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on cancel button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion});
+        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
   }
 
   void logTapOnPrivacyButtonTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    var tcVersion = await lineDataHelper.getTAndC();
+    String tcVersion = await lineDataHelper.getTAndC();
+    String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on privacy policy button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion});
+        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
   }
 
   void logeMarketplaceHomePageHomeScreen() {
@@ -488,9 +492,7 @@ class AmplitudeWebHelper {
       {required String invoiceNumber,
       required String productName,
       required String contentId,
-
       required String merchantName,
-
       required String price,
       required String paymentType,
       required String userLocation}) async {
