@@ -56,7 +56,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
     });
   }
 
-  void acceptTermAndCond() async {
+  acceptTermAndCond() async {
     try {
       GeneralDialog().showLoadingDialog(context: context);
       final baseUrl = Environment().getValue("BFF_BASE_URL");
@@ -188,7 +188,7 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
                           key: const Key("accept_term_and_con_button"),
                           onTap: () async {
                             if (scrollFinished) {
-                              acceptTermAndCond();
+                              await acceptTermAndCond();
                               AmplitudeWebHelper.getInstance().logTapOnOkButtonTermAndConPage();
                             }
                           },
