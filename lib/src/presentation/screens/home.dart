@@ -141,8 +141,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         onTap: (int index) {
                                           context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                           if (index == 0) {
-                                            amplitudeWebHelper.logTapOnCategory(
-                                                categoryId: "ALL");
+                                            amplitudeWebHelper.logTapOnCategory(categoryId: "ALL");
                                             context.read<ProductListBloc>().add(GetProductListByCategory("", context));
                                           } else {
                                             amplitudeWebHelper.logTapOnCategory(

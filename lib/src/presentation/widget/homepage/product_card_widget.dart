@@ -95,8 +95,8 @@ class ProductCardWidget extends StatelessWidget {
                             productName: products[index].productName,
                             productId: products[index].productId,
                             categoryId: products[index].categoryId.toString(),
-                            price: products[index].price.toString(),
-                            discountPrice: products[index].discountPrice.toString());
+                            price: products[index].price.toDecimalFormat().toString(),
+                            discountPrice: products[index].discountPrice.toDecimalFormat().toString());
                         hideOneTrustCookieScript();
                         context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                         context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
