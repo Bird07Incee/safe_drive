@@ -1,4 +1,7 @@
 // import 'package:dio/browser.dart';
+import 'dart:developer';
+
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
@@ -30,6 +33,11 @@ class DioUtilityService {
       }
     } on DioException catch (e) {
       if (e.error != null) {
+        try {
+          DatadogSdk.instance.rum?.addError("GET $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network);
+        } catch (e1) {
+          log('dd error $e1');
+        }
         if (!isRecursion && e.response?.statusCode == 401) {
           //handle token
         }
@@ -62,6 +70,12 @@ class DioUtilityService {
         throw Exception("Posting service error with response ${response.statusCode}");
       }
     } on DioException catch (e) {
+      try {
+        DatadogSdk.instance.rum?.addError("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network);
+        // DDLogger.logger?.error("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}");
+      } catch (e1) {
+        log('dd error $e1');
+      }
       if (e.error != null) {
         if (!isRecursion && e.response?.statusCode == 401) {
           //handle token
