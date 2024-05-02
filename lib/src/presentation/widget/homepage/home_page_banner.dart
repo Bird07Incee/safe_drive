@@ -47,7 +47,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                   key: const Key("home_banner"),
                   onTap: () {
                     amplitudeWebHelper.logeTapCarouselOnHomeScreen(
-                        bannerName: widget.banners[i].route.toString(), bannerSequence: widget.banners[i].seqNo.toString());
+                        bannerName: widget.banners[i].route.toString(), bannerSequence:"${i+1}");
                     if (itemBannerLength != 0) {
                       launchUrl(Uri.parse(widget.banners[i].url));
                     }
