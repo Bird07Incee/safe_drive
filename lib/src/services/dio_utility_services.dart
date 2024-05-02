@@ -1,6 +1,4 @@
 // import 'package:dio/browser.dart';
-import 'dart:developer';
-
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -32,16 +30,8 @@ class DioUtilityService {
         throw Exception("Getting service error with response ${response.statusCode}");
       }
     } on DioException catch (e) {
-      if (e.error != null) {
-        try {
-          DatadogSdk.instance.rum?.addError("GET $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network);
-        } catch (e1) {
-          log('dd error $e1');
-        }
-        if (!isRecursion && e.response?.statusCode == 401) {
-          //handle token
-        }
-      }
+      var uid = LineDataHelper().getLineUid();
+      DatadogSdk.instance.rum?.addError("GET $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network, attributes: {"uuid": uid});
       rethrow;
     }
   }
@@ -70,17 +60,8 @@ class DioUtilityService {
         throw Exception("Posting service error with response ${response.statusCode}");
       }
     } on DioException catch (e) {
-      try {
-        DatadogSdk.instance.rum?.addError("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network);
-        // DDLogger.logger?.error("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}");
-      } catch (e1) {
-        log('dd error $e1');
-      }
-      if (e.error != null) {
-        if (!isRecursion && e.response?.statusCode == 401) {
-          //handle token
-        }
-      }
+      var uid = LineDataHelper().getLineUid();
+      DatadogSdk.instance.rum?.addError("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network, attributes: {"uuid": uid});
       rethrow;
     }
   }
