@@ -7,6 +7,8 @@ class RefundRequestEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class OnClearState extends RefundRequestEvent {}
+
 class SetRefundData extends RefundRequestEvent {
   const SetRefundData({required this.orderNo, required this.reasonList});
 

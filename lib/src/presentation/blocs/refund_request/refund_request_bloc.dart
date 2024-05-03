@@ -21,11 +21,16 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
     on<RefundRequestEvent>((event, emit) {
 // TODO: implement event handler
     });
-
+    on<OnClearState>(_onClearState);
     on<SetRefundData>(_onSetRefundData);
     on<OnSelectReason>(_onSelectReason);
     on<OnEditRemark>(_onEditRemark);
     on<OnSubmitRefundData>(_onSubmit);
+  }
+
+  _onClearState(OnClearState event, Emitter<RefundRequestState> emit) {
+    emit(state
+        .copyWith(refundRequestStatus: GetRefundRequestStatus.loading, getTextReason: "", getTextRemark: "", orderNo: "", refundResponse: const {}));
   }
 
   _onSetRefundData(SetRefundData event, Emitter<RefundRequestState> emit) async {

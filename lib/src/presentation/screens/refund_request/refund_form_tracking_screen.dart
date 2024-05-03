@@ -42,9 +42,20 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
     super.didChangeDependencies();
     if (!isLoaded) {
       isLoaded = true;
+      clearState();
       readJson();
       loadRefundRequest();
     }
+  }
+
+  @override
+  void initState() {
+    clearState();
+    super.initState();
+  }
+
+  void clearState() {
+    context.read<RefundRequestBloc>().add(OnClearState());
   }
 
   void loadRefundRequest() {
