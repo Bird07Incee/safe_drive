@@ -47,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
     // Timer(const Duration(seconds: 1), () {
     //   final checkBrowserState = context.read<CheckBrowserBloc>().state;
     //   final env = Environment().getValue("ENVIRONMENT_NAME");
@@ -79,6 +78,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     bool tc = await TermAndConHelper().isTermAndConAccepted();
     if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
       nav.pushNamed(Routes.termAndCon.toStringPath());
+    }else{
+      amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
     }
   }
 
