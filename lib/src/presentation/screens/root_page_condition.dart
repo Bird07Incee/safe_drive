@@ -42,7 +42,7 @@ class _RootPageConditionState extends State<RootPageCondition> {
         final env = Environment().getValue("ENVIRONMENT_NAME");
         if (checkBrowserState is CheckBrowserInitial || checkBrowserState is CheckBrowserLoading) {
           return const LoadingScreen();
-        } else if (checkBrowserState is BrowserIsNotLineLiff && (env == 'uat' || env == 'uat')) {
+        } else if (checkBrowserState is BrowserIsNotLineLiff && (env == 'uat' || env == 'prod')) {
           return ErrorScreen(
             title: ErrorConst().titleBrowser,
             subTitle: ErrorConst().subTitleBrowser,
