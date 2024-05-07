@@ -93,7 +93,6 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
         titlePage: titleWebPage,
         child: BlocBuilder<RefundSuccessBloc, RefundSuccessState>(
           builder: (context, state) {
-            var refundSuccessData = state.refundSuccessData;
             if (state.refundSuccessStatus == GetRefundSuccessDataStatus.success) {
               return Column(
                 children: [
@@ -122,15 +121,15 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                     style: AlvaStyles().headingSize14w700(blackGoMunTo),
                                   ),
                                   Text(
-                                    "หมายเลขอ้างอิง: ${refundSuccessData.invoiceNo}",
+                                    "หมายเลขอ้างอิง: ${state.refundSuccessData.invoiceNo}",
                                     style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
                                   ),
                                   Text(
-                                    "วันที่ ${refundSuccessData.refundDate}",
+                                    "วันที่ ${state.refundSuccessData.refundDate}",
                                     style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
                                   ),
                                   Text(
-                                    "เวลา : ${refundSuccessData.refundTime}",
+                                    "เวลา : ${state.refundSuccessData.refundTime}",
                                     style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
                                   ),
                                 ],
@@ -144,12 +143,12 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                             child: Column(children: [
                               ProductAttribute(
                                 attributeKey: "เหตุผล",
-                                attributevalue: refundSuccessData.reason!,
+                                attributevalue: state.refundSuccessData.reason!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "คำอธิบายเพิ่มเติม",
-                                attributevalue: phoneNumberFormatter(refundSuccessData.remark!),
+                                attributevalue: phoneNumberFormatter(state.refundSuccessData.remark!),
                                 maxWidth: maxWidth,
                               ),
                             ]),
@@ -169,32 +168,32 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                             child: Column(children: [
                               ProductAttribute(
                                 attributeKey: "ชำระเงินโดย",
-                                attributevalue: refundSuccessData.cardNo!,
+                                attributevalue: state.refundSuccessData.cardNo!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "วันที่ชำระเงิน",
-                                attributevalue: refundSuccessData.paymentDate!,
+                                attributevalue: state.refundSuccessData.paymentDate!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "เวลาที่ชำระเงิน",
-                                attributevalue: refundSuccessData.paymentTime!,
+                                attributevalue: state.refundSuccessData.paymentTime!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "ช่องทางการชำระเงิน",
-                                attributevalue: refundSuccessData.paymentGateway!,
+                                attributevalue: state.refundSuccessData.paymentGateway!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "รูปแบบการชำระเงิน",
-                                attributevalue: refundSuccessData.paymentChannelText!,
+                                attributevalue: state.refundSuccessData.paymentChannelText!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "ผู้รับเงิน",
-                                attributevalue: refundSuccessData.merchantFullName!,
+                                attributevalue: state.refundSuccessData.merchantFullName!,
                                 maxWidth: maxWidth,
                               ),
                             ]),
@@ -203,7 +202,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                             width: maxWidth,
                             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             child: Text(
-                              "รหัสสินค้า: ${refundSuccessData.productId}",
+                              "รหัสสินค้า: ${state.refundSuccessData.productId}",
                               style: AlvaStyles().headingSize12w600(blackGoMunTo),
                             ),
                           ),
@@ -228,7 +227,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                               height: 74,
                                               placeholder: const AssetImage('assets/homepage/img_default.png'),
                                               // Replace with your placeholder image path
-                                              image: NetworkImage(refundSuccessData.productImagePath!),
+                                              image: NetworkImage(state.refundSuccessData.productImagePath!),
                                               fit: BoxFit.fitWidth,
                                               imageErrorBuilder: (context, error, stackTrace) => Image.asset(
                                                 'assets/homepage/img_default.png',
@@ -247,12 +246,12 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            refundSuccessData.productName!,
+                                            state.refundSuccessData.productName!,
                                             style: AlvaStyles().headingSize14w600(blackGoMunTo),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           Text(
-                                            refundSuccessData.productOption!,
+                                            state.refundSuccessData.productOption!,
                                             style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
                                           )
                                         ],
@@ -288,7 +287,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("${refundSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
+                                          Text("${state.refundSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
                                           SizedBox(
                                             height: 4,
                                           ),
@@ -316,22 +315,22 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                             child: Column(children: [
                               ProductAttribute(
                                 attributeKey: "ชื่อผู้รับสินค้า",
-                                attributevalue: refundSuccessData.customerFullname!,
+                                attributevalue: state.refundSuccessData.customerFullname!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "เบอร์โทรติดต่อ",
-                                attributevalue: phoneNumberFormatter(refundSuccessData.customerMobile!),
+                                attributevalue: phoneNumberFormatter(state.refundSuccessData.customerMobile!),
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "อีเมล",
-                                attributevalue: refundSuccessData.customerEmail!,
+                                attributevalue: state.refundSuccessData.customerEmail!,
                                 maxWidth: maxWidth,
                               ),
                               ProductAttribute(
                                 attributeKey: "ที่อยู่",
-                                attributevalue: refundSuccessData.customerAddress!,
+                                attributevalue: state.refundSuccessData.customerAddress!,
                                 maxWidth: maxWidth,
                               ),
                             ]),
@@ -351,7 +350,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                             child: Column(children: [
                               Center(
                                 child: Text(
-                                  refundSuccessData.merchantAddress!.replaceAll("\n", ""),
+                                  state.refundSuccessData.merchantAddress!.replaceAll("\n", ""),
                                   style: AlvaStyles().headingSize12w400(spaceGrey),
                                   textAlign: TextAlign.center,
                                 ),
@@ -362,11 +361,11 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                               GestureDetector(
                                 key: const Key("call_to_merchant_button"),
                                 onTap: () {
-                                  String phoneNumber = refundSuccessData.merchantMobile!.replaceAll("-", "");
+                                  String phoneNumber = state.refundSuccessData.merchantMobile!.replaceAll("-", "");
                                   callPhone(phoneNumber);
                                 },
                                 child: Text(
-                                  "โทร ${phoneNumberFormatter(refundSuccessData.merchantMobile!)}",
+                                  "โทร ${phoneNumberFormatter(state.refundSuccessData.merchantMobile!)}",
                                   style: AlvaStyles().headingSize16w600(blackGoMunTo),
                                 ),
                               ),

@@ -17,7 +17,7 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
   final DioUtilityRepository utilityRepository;
 
   _onClearState(OnClearState event, Emitter<RefundSuccessState> emit) {
-    emit(RefundSuccessState(refundSuccessData: RefundSuccessDataModel.empty));
+    emit(RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.initial, refundSuccessData: RefundSuccessDataModel.empty));
   }
 
   _onGetRefundSuccess(GetRefundSuccess event, Emitter<RefundSuccessState> emit) async {
