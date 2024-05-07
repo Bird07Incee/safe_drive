@@ -37,25 +37,18 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
         refundJsonData = {"status": response.data["status"]};
         refundJsonData.addAll(response.data["refundInfo"] as Map<String, dynamic>);
         refundJsonData.addAll(response.data["rawData"] as Map<String, dynamic>);
-      } else {
-        if (event.refundResponse.isNotEmpty) {
-          refundJsonData = {"status": event.refundResponse["status"]};
-          refundJsonData.addAll(event.refundResponse["refundInfo"] as Map<String, dynamic>);
-          refundJsonData.addAll(event.refundResponse["rawData"] as Map<String, dynamic>);
+
+        var status = refundJsonData["status"];
+
+        final RefundSuccessDataModel refundData = RefundSuccessDataModel.fromJson(refundJsonData);
+        if (status == "Complete") {
+          if (!event.bypassContext) {
+            stateSc!.showSnackBar(getMkpToast("หลักฐานการขอคืนสินค้า ถูกจัดส่งไปยังอีเมลของคุณแล้ว", horizontalMargin: 30));
+          }
+          emit(state.copyWith(refundSuccessData: refundData, refundSuccessStatus: GetRefundSuccessDataStatus.success));
         } else {
           emit(state.copyWith(refundSuccessStatus: GetRefundSuccessDataStatus.error));
-          return;
         }
-      }
-
-      var status = refundJsonData["status"];
-
-      final RefundSuccessDataModel refundData = RefundSuccessDataModel.fromJson(refundJsonData);
-      if (status == "Complete") {
-        if (!event.bypassContext) {
-          stateSc!.showSnackBar(getMkpToast("หลักฐานการขอคืนสินค้า ถูกจัดส่งไปยังอีเมลของคุณแล้ว", horizontalMargin: 30));
-        }
-        emit(state.copyWith(refundSuccessData: refundData, refundSuccessStatus: GetRefundSuccessDataStatus.success));
       } else {
         emit(state.copyWith(refundSuccessStatus: GetRefundSuccessDataStatus.error));
       }

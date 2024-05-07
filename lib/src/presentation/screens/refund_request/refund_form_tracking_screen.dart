@@ -54,6 +54,9 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
   }
 
   void clearState() {
+    orderNo = "";
+    productId = "";
+    refundDay = "";
     context.read<RefundRequestBloc>().add(OnClearState());
   }
 
