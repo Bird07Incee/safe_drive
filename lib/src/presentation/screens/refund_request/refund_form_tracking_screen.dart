@@ -35,7 +35,6 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
   String orderNo = "", productId = "", refundDay = "";
   List<DropdownAddressModel> listReason = [];
   bool isLoaded = false;
-  final TextEditingController reasonText = TextEditingController();
 
   @override
   void didChangeDependencies() {

@@ -29,8 +29,10 @@ class RefundRequestBloc extends Bloc<RefundRequestEvent, RefundRequestState> {
   }
 
   _onClearState(OnClearState event, Emitter<RefundRequestState> emit) {
-    emit(state
-        .copyWith(refundRequestStatus: GetRefundRequestStatus.loading, getTextReason: "", getTextRemark: "", orderNo: "", refundResponse: const {}));
+    textEditingControllerReason!.clear();
+    textEditingControllerRemark!.clear();
+    emit(RefundRequestState(
+        refundRequestStatus: GetRefundRequestStatus.loading, getTextReason: "", getTextRemark: "", orderNo: "", refundResponse: const {}));
   }
 
   _onSetRefundData(SetRefundData event, Emitter<RefundRequestState> emit) async {
