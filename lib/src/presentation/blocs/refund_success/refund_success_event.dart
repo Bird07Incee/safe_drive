@@ -9,11 +9,10 @@ class RefundSuccessEvent extends Equatable {
 }
 
 class GetRefundSuccess extends RefundSuccessEvent {
-  const GetRefundSuccess(this.context, this.invoiceNo, this.refundResponse, {this.bypassContext = false});
+  const GetRefundSuccess(this.context, this.invoiceNo, {this.bypassContext = false});
 
   final BuildContext context;
   final String invoiceNo;
-  final Map<String, dynamic> refundResponse;
   final bool bypassContext;
 }
 

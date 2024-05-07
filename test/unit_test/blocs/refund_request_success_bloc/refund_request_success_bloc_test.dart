@@ -105,7 +105,7 @@ void main() {
           );
         },
         build: () => RefundSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "RFLA20240215100358LXVdT", mockResponse, bypassContext: true)),
+        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "RFLA20240215100358LXVdT", bypassContext: true)),
         expect: () => <RefundSuccessState>[
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.loading),
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.success, refundSuccessData: refundData)
@@ -119,7 +119,7 @@ void main() {
           await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
         },
         build: () => RefundSuccessBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "RFLA20240215100358LXVdT", const {}, bypassContext: true)),
+        act: (bloc) => bloc.add(GetRefundSuccess(mockBuildContext, "RFLA20240215100358LXVdT", bypassContext: true)),
         expect: () => <RefundSuccessState>[
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.loading),
               RefundSuccessState(refundSuccessStatus: GetRefundSuccessDataStatus.error)

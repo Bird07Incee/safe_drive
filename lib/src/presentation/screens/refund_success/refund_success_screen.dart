@@ -5,7 +5,6 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
-import 'package:marketplace_line_oa/src/model/refund/arguments/refund_success_args.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_event.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_state.dart';
@@ -41,20 +40,13 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
     settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
-      RefundSuccessArgs args;
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
-      Map<String, dynamic> refundResponse = {};
-      if (settings!.arguments != null) {
-        args = settings!.arguments as RefundSuccessArgs;
-        if (args.refundResponse!.isNotEmpty) {
-          refundResponse = args.refundResponse!;
-        }
-      }
       RefundSuccessState state = context.read<RefundSuccessBloc>().state;
       if (orderNo != "" &&
           (state.refundSuccessStatus == GetRefundSuccessDataStatus.initial || state.refundSuccessStatus == GetRefundSuccessDataStatus.error)) {
-        context.read<RefundSuccessBloc>().add(GetRefundSuccess(context, orderNo, refundResponse));
+        clearState();
+        context.read<RefundSuccessBloc>().add(GetRefundSuccess(context, orderNo));
       }
     }
   }
