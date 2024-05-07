@@ -34,14 +34,10 @@ class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
       Response response = await utilityRepository.getByURL("$baseUrl$transactionApiPath$inquiryRefundPath", {"invoiceNo": event.invoiceNo});
 
       if (response.statusCode == 200) {
-        refundJsonData = {"status": response.data["status"]};
-        refundJsonData.addAll(response.data["refundInfo"] as Map<String, dynamic>);
-        refundJsonData.addAll(response.data["rawData"] as Map<String, dynamic>);
+        refundJsonData.addAll(response.data as Map<String, dynamic>);
       } else {
         if (event.refundResponse.isNotEmpty) {
-          refundJsonData = {"status": event.refundResponse["status"]};
-          refundJsonData.addAll(event.refundResponse["refundInfo"] as Map<String, dynamic>);
-          refundJsonData.addAll(event.refundResponse["rawData"] as Map<String, dynamic>);
+          refundJsonData.addAll(event.refundResponse);
         } else {
           emit(state.copyWith(refundSuccessStatus: GetRefundSuccessDataStatus.error));
           return;
