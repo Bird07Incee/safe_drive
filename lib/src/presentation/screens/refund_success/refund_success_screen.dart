@@ -418,6 +418,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                         onTap: () {
                           String pid = state.refundSuccessData.productId ?? "";
                           if (pid.isNotEmpty) {
+                            clearState();
                             refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
                           } else {
                             CurrentRouteObserver.instance.stack.clear();
