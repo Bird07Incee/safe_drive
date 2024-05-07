@@ -138,4 +138,32 @@ class RefundSuccessDataModel extends Equatable {
         installmentPeriod,
         paymentChannelText
       ];
+
+  static const empty = RefundSuccessDataModel(
+      status: '',
+      refundNo: '',
+      refundDate: '',
+      refundTime: '',
+      reason: '',
+      remark: '',
+      invoiceNo: '',
+      cardNo: '',
+      paymentDate: '',
+      paymentTime: '',
+      paymentGateway: '',
+      paymentChannel: '',
+      merchantFullName: '',
+      productImagePath: '',
+      productId: '',
+      productName: '',
+      productOption: '',
+      amount: '',
+      customerFullname: '',
+      customerMobile: '',
+      customerEmail: '',
+      customerAddress: '',
+      merchantAddress: '',
+      merchantMobile: '',
+      installmentPeriod: '',
+      paymentChannelText: '');
 }

@@ -9,11 +9,16 @@ import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.d
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
-  RefundSuccessBloc({required this.utilityRepository}) : super(RefundSuccessState()) {
+  RefundSuccessBloc({required this.utilityRepository}) : super(RefundSuccessState(refundSuccessData: RefundSuccessDataModel.empty)) {
+    on<OnClearState>(_onClearState);
     on<GetRefundSuccess>(_onGetRefundSuccess);
   }
 
   final DioUtilityRepository utilityRepository;
+
+  _onClearState(OnClearState event, Emitter<RefundSuccessState> emit) {
+    emit(RefundSuccessState(refundSuccessData: RefundSuccessDataModel.empty));
+  }
 
   _onGetRefundSuccess(GetRefundSuccess event, Emitter<RefundSuccessState> emit) async {
     emit(state.copyWith(refundSuccessStatus: GetRefundSuccessDataStatus.loading));

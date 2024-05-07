@@ -33,6 +33,10 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
   String orderNo = "";
   late double maxWidth, maxHeight;
 
+  void clearState() {
+    context.read<RefundSuccessBloc>().add(OnClearState());
+  }
+
   void loadRefundData() {
     settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (settings != null) {
@@ -56,7 +60,14 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
   }
 
   @override
+  void initState() {
+    clearState();
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() {
+    clearState();
     loadRefundData();
     super.didChangeDependencies();
   }

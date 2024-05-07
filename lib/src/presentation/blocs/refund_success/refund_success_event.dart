@@ -16,3 +16,7 @@ class GetRefundSuccess extends RefundSuccessEvent {
   final Map<String, dynamic> refundResponse;
   final bool bypassContext;
 }
+
+class OnClearState extends RefundSuccessEvent {
+  const OnClearState();
+}
