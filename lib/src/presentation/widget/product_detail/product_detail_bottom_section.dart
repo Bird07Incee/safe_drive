@@ -29,6 +29,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   bool isBuildFinish = false;
   double descriptionHeight = 0;
   final GlobalKey _descriptionGetHeightKey = GlobalKey();
+  String? truncatedHtmlContent;
 
   @override
   void dispose() {
@@ -250,7 +251,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                           children: [
                             Expanded(
                                 child: AlvaText(
-                                    title: state.product.merchantFullName, textStyle: AlvaStyles().headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)))
+                                    title: state.product.merchantFullName, textStyle: AlvaStyles().headingSize14Height22()))
                           ],
                         ),
                         const SizedBox(
@@ -258,7 +259,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         ),
                         Row(
                           children: [
-                            Expanded(child: AlvaText(title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize10w400(spaceGrey)))
+                            Expanded(child: AlvaText(title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize12w400(spaceGrey)))
                           ],
                         ),
                       ],
@@ -407,7 +408,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   'padding-top': '8px;',
                   'padding-bottom': '8px;',
                   'font-size': '14px',
-                  'line-height': '24px',
+                  'line-height': '22px',
+                  'font-weight': '400',
                   'color': '#2c2626'
                 };
               }
@@ -418,7 +420,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 return {
                   'font-family': 'Krungsri Condensed',
                   'font-size': '14px',
-                  'line-height': '24px',
+                  'line-height': '22px',
+                  'font-weight': '400',
                   'color': '#2c2626',
                 };
               }
@@ -448,7 +451,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'padding-top': '8px;',
                     'padding-bottom': '8px;',
                     'font-size': '14px',
-                    'line-height': '24px',
+                    'line-height': '22px',
                     'color': '#2c2626'
                   };
                 }
@@ -459,7 +462,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   return {
                     'font-family': 'Krungsri Condensed',
                     'font-size': '14px',
-                    'line-height': '24px',
+                    'line-height': '22px',
                     'color': '#2c2626',
                   };
                 }
@@ -493,7 +496,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                           'padding-top': '8px;',
                           'padding-bottom': '8px;',
                           'font-size': '14px',
-                          'line-height': '24px',
+                          'line-height': '22px',
+                          'font-weight': '400',
                           'color': '#2c2626'
                         };
                       }
@@ -504,7 +508,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         return {
                           'font-family': 'Krungsri Condensed',
                           'font-size': '14px',
-                          'line-height': '24px',
+                          'line-height': '22px',
+                          'font-weight': '400',
                           'color': '#2c2626',
                         };
                       }
@@ -523,7 +528,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
             child: Text(
               AppStrings().noDataFromSeller,
-              style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2.4),
+              style: AlvaStyles().headingSize14RegHeight22(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2.4),
             ),
           );
 
@@ -554,10 +559,12 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       controller: _tabController,
                       labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
                       indicatorColor: BlueFantasy,
-                      unselectedLabelColor: cloudSoftDeepWhite,
+                      unselectedLabelColor: neutral100,
+                    //  unselectedLabelColor: cloudSoftDeepWhite,
                       labelStyle: const TextStyle(
                         fontFamily: fontFamily,
                         fontSize: 14,
+                        height: 22 / 14,
                         fontWeight: FontWeight.w700,
                       ),
                       onTap: (int index) {
@@ -650,10 +657,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                                 isPressedReadMore = !isPressedReadMore;
                                               }));
                                             },
-                                            style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, Colors.transparent),
+                                            style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy),
                                             child: AlvaText(
                                               title: isPressedReadMore ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
-                                              textStyle: AlvaStyles().headingSize14w700(BlueFantasy),
+                                              textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
                                               disableSelectableText: true,
                                             ),
                                           ),
@@ -750,11 +757,11 @@ class _MyFactory extends WidgetFactory {
         for (int i = 0; i < e.nodes.length; i++) {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style": "color:#9c9c9c; font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
+              "style": "color:#5a5a5a; font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;",
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style": "color:#2c2626;  font-size:14px; font-family:Krungsri Condensed; line-height:24px;",
+              "style": "color:#2c2626;  font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;",
             } as LinkedHashMap<Object, String>;
           }
         }

@@ -110,19 +110,19 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                 children: [
                                   Text(
                                     "คืนสินค้า/คืนเงิน",
-                                    style: AlvaStyles().headingSize14w700(blackGoMunTo),
+                                    style: AlvaStyles().headingSize14BoldHeight22(blackGoMunTo),
                                   ),
                                   Text(
                                     "หมายเลขอ้างอิง: ${state.refundSuccessData.invoiceNo}",
-                                    style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
+                                    style: AlvaStyles().headingSize12RegHeight20(blackGoMunTo),
                                   ),
                                   Text(
                                     "วันที่ ${state.refundSuccessData.refundDate}",
-                                    style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
+                                    style: AlvaStyles().headingSize12RegHeight20(blackGoMunTo),
                                   ),
                                   Text(
                                     "เวลา : ${state.refundSuccessData.refundTime}",
-                                    style: AlvaStyles().headingSize12w400(blackGoMunTo).copyWith(height: 2.0),
+                                    style: AlvaStyles().headingSize12RegHeight20(blackGoMunTo),
                                   ),
                                 ],
                               ))
@@ -239,7 +239,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                         children: [
                                           Text(
                                             state.refundSuccessData.productName!,
-                                            style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                                            style: AlvaStyles().headingSize14BoldHeight22(blackGoMunTo),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           Text(
@@ -271,7 +271,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo)),
+                                            Text("ยอดชำระ", style: AlvaStyles().headingSize12RegHeight20(blackGoMunTo)),
                                           ],
                                         )),
                                     SizedBox(
@@ -279,11 +279,11 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("${state.refundSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
+                                          Text("${state.refundSuccessData.amount!} บาท", style: AlvaStyles().headingSize14BoldHeight22(blackGoMunTo)),
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey))
+                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey).copyWith(height: 20/12))
                                         ],
                                       ),
                                     )
@@ -343,7 +343,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                               Center(
                                 child: Text(
                                   state.refundSuccessData.merchantAddress!.replaceAll("\n", ""),
-                                  style: AlvaStyles().headingSize12w400(spaceGrey),
+                                  style: AlvaStyles().headingSize12RegHeight20(spaceGrey),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -358,7 +358,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                 },
                                 child: Text(
                                   "โทร ${phoneNumberFormatter(state.refundSuccessData.merchantMobile!)}",
-                                  style: AlvaStyles().headingSize16w600(blackGoMunTo),
+                                  style: AlvaStyles().headingSize16BoldHeight32(blackGoMunTo),
                                 ),
                               ),
                             ]),

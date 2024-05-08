@@ -91,7 +91,7 @@ class ProductDetailConst {
   ];
   List<String> htmlTableTag = ['/table', 'table', '/thead', 'thead', 'tr', '/tr', 'th', '/th', 'tbody', '/tbody', 'td', '/td'];
   String imgDefaultPath = "assets/homepage/img_default.png";
-  String imgHeroBannerPath = "assets/homepage/HeroBanner.png";
+  String imgHeroBannerPath = "assets/homepage/HeroBanner2.png";
 
   String htmlExampleBullet = '''
 <h1>✅ที่ชาร์จรถยนต์ไฟฟ้าสามารถแบ่งที่ชาร์จรถยนต์ไฟฟ้าสามารถแบ่งที่ชารถ</h1> 
@@ -140,7 +140,7 @@ class LoaderConst {
 }
 
 // assets data
-const List assetsCarouselItem = ["assets/homepage/HeroBanner.png"];
+const List assetsCarouselItem = ["assets/homepage/HeroBanner2.png"];
 
 class ProductSelectOptionsConst {
   String continueText = "ดำเนินการต่อ";

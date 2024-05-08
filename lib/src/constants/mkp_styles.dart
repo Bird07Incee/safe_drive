@@ -38,6 +38,8 @@ const cloudDeepWhite = Color(0xffE2DFDF);
 
 const cloudSoftDeepWhite = Color(0xffDEDEDE);
 
+const neutral100 = Color(0xffE0E0E0);
+
 const whiteSoftGreen = Color(0xffE8F7EE);
 
 const btnBlue = Color(0xFF1094FB);

@@ -128,6 +128,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:  MainAxisAlignment.end,
                                 children: [
                                   Text(
                                     "ชำระเงินสำเร็จ",
@@ -227,12 +228,13 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                         children: [
                                           Text(
                                             orderSuccessData.productName!,
-                                            style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                                            maxLines: 1,
+                                            style: AlvaStyles().headingSize14w800(blackGoMunTo).copyWith(height: 22/14),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           Text(
                                             orderSuccessData.productOption!,
-                                            style: AlvaStyles().headingSize12w400WithLineHeight(blackGoMunTo),
+                                            style: AlvaStyles().headingSize12RegHeight20(blackGoMunTo),
                                           )
                                         ],
                                       ),
@@ -255,11 +257,12 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                         width: (maxWidth / 2) - 32,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text("ยอดชำระ", style: AlvaStyles().headingSize12w400(blackGoMunTo)),
+                                            Text("ยอดชำระ", style: AlvaStyles().headingSize12RegHeight20(blackGoMunTo)),
                                           ],
                                         )),
                                     SizedBox(
@@ -267,11 +270,11 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("${orderSuccessData.amount!} บาท", style: AlvaStyles().headingSize14w600(blackGoMunTo)),
+                                          Text("${orderSuccessData.amount!} บาท", style: AlvaStyles().headingSize14BoldHeight22(blackGoMunTo)),
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey))
+                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey).copyWith(height: 20/12))
                                         ],
                                       ),
                                     )
@@ -292,7 +295,10 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             width: maxWidth,
                             padding: EdgeInsets.all(16),
                             color: Colors.white,
-                            child: Column(children: [
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
                               ProductAttribute(
                                 attributeKey: "ชื่อผู้รับสินค้า",
                                 attributevalue: orderSuccessData.customerFullname!,
@@ -331,7 +337,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               Center(
                                 child: Text(
                                   orderSuccessData.merchantAddress!.replaceAll("\n", ""),
-                                  style: AlvaStyles().headingSize12w400(spaceGrey),
+                                  style: AlvaStyles().headingSize12RegHeight20(spaceGrey),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -351,7 +357,8 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 },
                                 child: Text(
                                   "โทร ${phoneNumberFormatter(orderSuccessData.merchantMobile!)}",
-                                  style: AlvaStyles().headingSize16w600(blackGoMunTo),
+                                  style: AlvaStyles().headingSize16BoldHeight32(blackGoMunTo),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ]),
@@ -475,19 +482,20 @@ class ProductAttribute extends StatelessWidget {
       padding: EdgeInsets.only(top: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(
             width: (maxWidth / 2) - 32,
             child: Text(
               attributeKey,
-              style: AlvaStyles().headingSize12w400(spaceGrey),
+              style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12),
             ),
           ),
           SizedBox(
             width: (maxWidth / 2) - 32,
             child: Text(
               attributevalue,
-              style: AlvaStyles().headingSize12w500(blackGoMunTo),
+              style: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 20 / 12),
             ),
           )
         ],

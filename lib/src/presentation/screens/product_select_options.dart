@@ -363,8 +363,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   width: maxWidth - 32 - 24 - 72,
                                                                   child: Text(state.product.productionOptionals[index].label,
                                                                       style: AlvaStyles()
-                                                                          .bodySize12W600(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                          .copyWith(height: 2)),
+                                                                          .bodySize14W500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                          .copyWith(height: 22 / 14)),
                                                                 ),
                                                               ),
                                                               Padding(
@@ -380,8 +380,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                 child: Text(
                                                                     "${(state.product.productionOptionals[index].price).toDecimalFormat()} บาท",
                                                                     style: AlvaStyles()
-                                                                        .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                        .copyWith(height: 24 / 14)),
+                                                                        .headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                        .copyWith(height: 24 / 16)),
                                                               ),
                                                             ],
                                                           ),

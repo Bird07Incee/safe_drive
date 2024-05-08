@@ -20,7 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(const AuthState()) {
     on<UserAuthEventLogin>((event, emit) async {
       final navCtx = Navigator.of(event.context);
-      await liff.ready.then((_) async {
+   /*   await liff.ready.then((_) async {
         bool isLogin = await PreferencesHelper.isContains('LineLogin');
         if (!isLogin) {
           String url = Environment().getValue("LINE_REDIRECT_URL");
@@ -40,7 +40,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(state.copyWith(authStatus: AuthStatus.success));
           }
         }
-      });
+      }); */
+      emit(state.copyWith(authStatus: AuthStatus.success));
     });
 
     on<UserAuthEventLogout>((event, emit) async {

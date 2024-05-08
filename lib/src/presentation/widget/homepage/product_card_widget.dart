@@ -51,12 +51,14 @@ class ProductCardWidget extends StatelessWidget {
     List<InlineSpan> l = [];
     int len = p.promotionTag.length;
     for (var i = 0; i < len; i++) {
-      l.add(TextSpan(text: p.promotionTag[i], style: AlvaStyles().headingSize12w400(spaceGrey)));
-      if (i != len - 1) {
+      l.add(TextSpan(
+          text: p.promotionTag[i],
+              style: AlvaStyles().headingSize12w500(spaceGrey)));
+      if (i != len - 1 && len <= 3) {
         l.add(WidgetSpan(
           child: Container(
             width: 1,
-            height: 16,
+            height: 20,
             margin: EdgeInsets.only(left: 6, right: 6),
             color: cloudSoftDeepWhite,
           ),
@@ -208,17 +210,17 @@ class ProductCardWidget extends StatelessWidget {
                                     Positioned.fill(
                                         child: Align(
                                       alignment: Alignment.bottomRight,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-                                        child: Container(
+                                      child: Container(
+                                        decoration: BoxDecoration(
                                           color: Colors.white,
-                                          padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                                          child: Image.network(
-                                            products[index].merchantLogo,
-                                            height: 32,
-                                            fit: BoxFit.cover,
-                                            errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
-                                          ),
+                                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                                        margin: EdgeInsets.all(8),
+                                        padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
+                                        child: Image.network(
+                                          products[index].merchantLogo,
+                                          height: 40,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
                                         ),
                                       ),
                                     )),
@@ -311,9 +313,9 @@ class ProductCardWidget extends StatelessWidget {
                                                 'font-family': 'Krungsri Condensed',
                                                 'font-size': '12px',
                                                 'line-height': '20px',
-                                                'font-weight': '400',
+                                                'font-weight': '500',
                                                 'color': '#5A5A5A',
-                                                'max-lines': '4',
+                                                'max-lines': '3',
                                                 'text-overflow': 'ellipsis'
                                               };
                                             } else if (element.localName == "b") {
@@ -321,6 +323,8 @@ class ProductCardWidget extends StatelessWidget {
                                                 'font-family': 'Krungsri Condensed',
                                                 'font-size': '16px',
                                                 'font-weight': '600',
+                                                'line-height': '24px',
+                                                'max-lines': '1',
                                                 'color': '#2C2626'
                                               };
                                             } else {
@@ -328,9 +332,9 @@ class ProductCardWidget extends StatelessWidget {
                                                 'font-family': 'Krungsri Condensed',
                                                 'font-size': '12px',
                                                 'line-height': '20px',
-                                                'font-weight': '400',
+                                                'font-weight': '500',
                                                 'color': '#5A5A5A',
-                                                'max-lines': '4',
+                                                'max-lines': '3',
                                                 'text-overflow': 'ellipsis'
                                               };
                                             }

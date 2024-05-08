@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
@@ -25,12 +26,18 @@ class PDTopSection extends StatefulWidget {
 }
 
 class _PDTopSectionState extends State<PDTopSection> {
+  bool isPressedReadMore = false;
+  bool isReadMoreVisible = false;
+  double descriptionHeight = 0;
+
   Widget promos(Product p) {
     List<InlineSpan> l = [];
     int len = p.promotionTag.length > 3 ? 3 : p.promotionTag.length;
     for (var i = 0; i < len; i++) {
-      l.add(TextSpan(text: p.promotionTag[i], style: AlvaStyles().headingSize12w400(spaceGrey)));
-      if (i != len - 1) {
+      l.add(TextSpan(
+          text: p.promotionTag[i],
+          style: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20/12)));
+      if (i != len - 1 && len <= 3) {
         l.add(WidgetSpan(
           child: Container(
             width: 1,
@@ -205,7 +212,7 @@ class _PDTopSectionState extends State<PDTopSection> {
           tagline = tagline.replaceAll("<br />", "<br/>");
           tagline = removeHtmlForbiddenTagsTags(tagline);
           // tagline = removeInvalidWords(tagline);
-          // print("taglinenamo ${tagline}");
+           print("taglinenamo ${tagline}");
           // check html tag in string input
           if (!containsHtmlTags(tagline)) {
             // print("not containsHtmlTags");
@@ -214,8 +221,10 @@ class _PDTopSectionState extends State<PDTopSection> {
             // check expended content
             if (tagline.length >= 291) {
               // cut content string show 100 char
+            //  isReadMoreVisible = true;
               textString = tagline.substring(0, 290);
               //set toggleDescription
+
               myBloc.updateToggleTapDescription(toggleDescription: false);
               //set maxLines lineFinal for lineFinal<=maxLines
               maxLines = 1;
@@ -223,6 +232,7 @@ class _PDTopSectionState extends State<PDTopSection> {
               // check html tag in textString
               if (containsHtmlTags(textString)) {
                 // set truncatedHtmlContent in textString
+              //  isReadMoreVisible = false;
                 truncatedHtmlContent = textString;
               }
               // Verify that the data in characters does not exceed a line but is <br>Many items beyond the line.
@@ -263,6 +273,7 @@ class _PDTopSectionState extends State<PDTopSection> {
             lines = tagline.split('</').expand((s) => s.split('<br>')).toList();
 
             // The process of counting lines and checking how many characters each line has and maxLine should be set.
+            myBloc.updateToggleTapDescription(toggleDescription: true, textNotMoreThan: true);
             for (int i = 0; i < lines.length; i++) {
               //log("line[$i] ${lines[i].length} : ${lines[i]}");
               if (lines.length - 1 >= 1) {
@@ -340,7 +351,10 @@ class _PDTopSectionState extends State<PDTopSection> {
                 }
               }
               if (lines.length - 1 >= 4) {
-                if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
+                myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
+
+                if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 &&
+                    lines[1].length <= 80 && lines[0].length <= 149) {
                   maxLines = 3;
                   //log(("case 4"));
                 } else if (lines[3].length <= 10 &&
@@ -530,26 +544,29 @@ class _PDTopSectionState extends State<PDTopSection> {
             if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
               lineFinal = 4;
             }
-            if (maxLines == 1) {
+            if (maxLines == 1 || maxLines == 2 || maxLines == 3) {
               if (truncatedHtmlContent!.length >= 285) {
                 truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
                 lineFinal = 4;
+                myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
                 for (int i = 0; i < bigText.length; i++) {
                   if (truncatedHtmlContent!.contains(bigText[i])) {
                     if (bigText[i] == "<h1>") {
                       truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
                     } else {
-                      truncatedHtmlContent = truncatedHtmlContent.substring(0, 100);
+                      truncatedHtmlContent = truncatedHtmlContent.substring(0, 210);
                     }
                   }
                 }
-              } else if (truncatedHtmlContent.length >= 100 && truncatedHtmlContent.length <= 284) {
+              } else if (truncatedHtmlContent.length >= 150 && truncatedHtmlContent.length <= 284) {
                 for (int i = 0; i < bigText.length; i++) {
                   if (truncatedHtmlContent!.contains(bigText[i])) {
                     if (bigText[i] == "<h1>") {
                       truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
+                      myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
                     } else {
-                      truncatedHtmlContent = truncatedHtmlContent.substring(0, 100);
+                      truncatedHtmlContent = truncatedHtmlContent.substring(0, 150);
+                      myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
                     }
                   }
                 }
@@ -559,8 +576,11 @@ class _PDTopSectionState extends State<PDTopSection> {
             }
           }
         }
-        // print("${tagline}");
-        // print("truncatedHtmlContent ${truncatedHtmlContent}");
+
+       // truncatedHtmlContent = "$truncatedHtmlContent</li>";
+         print("final ${tagline}");
+         print("textString final ${textString}");
+         print("truncatedHtmlContent final $truncatedHtmlContent");
         // print(
         //     "(lineFinal(${lineFinal}) <= maxLines(${maxLines}) && containsHtmlTags(tagline)(${containsHtmlTags(tagline)})) == ${(lineFinal <= maxLines && containsHtmlTags(tagline))}");
         return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
@@ -737,50 +757,151 @@ class _PDTopSectionState extends State<PDTopSection> {
                             BlocBuilder<ProductDetailDescriptionCubit, ProductDetailDescriptionCubitState>(
                               builder: (context, descriptionState) {
                                 return GestureDetector(
-                                  onTap: () {
-                                    if (!descriptionState.textNotMoreThan) {
-                                      if (descriptionState.toggleDescription) {
-                                        myBloc.updateToggleTapDescription(toggleDescription: false);
-                                      } else {
-                                        myBloc.updateToggleTapDescription(toggleDescription: true);
-                                      }
-                                    }
-                                  },
-                                  child: HtmlWidget(
-                                      descriptionState.toggleDescription || (lineFinal <= maxLines && containsHtmlTags(tagline))
-                                          ? "$tagline${lineFinal <= maxLines ? "" : " <p1>ซ่อนรายละเอียด<p1> "}"
-                                          : !containsHtmlTags(tagline)
-                                              ? tagline != ""
-                                                  ? "${textString!}...<p1>อ่านต่อ</p1>"
+                                  // onTap: () {
+                                  //   if (!descriptionState.textNotMoreThan) {
+                                  //     if (descriptionState.toggleDescription) {
+                                  //       myBloc.updateToggleTapDescription(toggleDescription: false);
+                                  //     } else {
+                                  //       myBloc.updateToggleTapDescription(toggleDescription: true);
+                                  //     }
+                                  //   }
+                                  // },
+                                  child: Column(
+                                    children: [
+                                      GestureDetector(
+                                        key: const Key("read_more_product_detail"),
+                                        child: Container(
+                                         // padding: EdgeInsets.only(right: 16),
+                                          child: HtmlWidget(
+                                              descriptionState.toggleDescription ||
+                                                  (lineFinal <= maxLines && containsHtmlTags(tagline))
+                                                  ? "$tagline${lineFinal <= maxLines ? "" : " "}" //<p1>ซ่อนรายละเอียด<p1>
+                                                  : !containsHtmlTags(tagline)
+                                                  ? tagline != ""
+                                                  ? "${textString!}..." //<p1>อ่านต่อ</p1>
                                                   : ""
-                                              : "$truncatedHtmlContent...${"<p1>อ่านต่อ</p1>"}",
-                                      buildAsync: false,
-                                      textStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12), customStylesBuilder: (element) {
-                                    if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
-                                      if (element.attributes['style'].toString().contains('9c9c9c')) {
-                                        element.attributes['style'] = 'color:#9c9c9c';
-                                      } else {
-                                        element.attributes['style'] = 'color:#6699ff';
-                                      }
-                                    } else {
-                                      element.attributes['style'] = '';
-                                    }
-                                    if (element.localName == "p1") {
-                                      return {
-                                        'color': "#40A9FC",
-                                        'font-weight': 'bold',
-                                        'font-family': 'Krungsri Condensed',
-                                        'font-size': '12px',
-                                        'line-height': '20px',
-                                      };
-                                    }
-                                    if (element.localName == "table") {
-                                      return {'width': '100%'};
-                                    } else if (element.localName == "td") {
-                                      return {'width': '50%'};
-                                    }
-                                    return null;
-                                  }),
+                                                  : "$truncatedHtmlContent...", //${"<p1>อ่านต่อ</p1>"}
+                                              buildAsync: false,
+                                              textStyle: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 24 / 16), customStylesBuilder: (element) {
+                                            if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
+                                              if (element.attributes['style'].toString().contains('9c9c9c')) {
+                                                element.attributes['style'] = 'color:#9c9c9c';
+                                              } else {
+                                                element.attributes['style'] = 'color:#6699ff';
+                                              }
+                                            } else {
+                                              element.attributes['style'] = '';
+                                            }
+                                            if (element.localName == "p1") {
+                                              return {
+                                                'font-weight': '700',
+                                                'font-family': 'Krungsri Condensed',
+                                                'font-size': '14px',
+                                                'line-height': '24px',
+                                                'color': '#40A9FC'
+                                              };
+                                            }
+                                            if (element.localName == "p" || element.localName == "li") {
+                                              return {
+                                                'font-weight': '500',
+                                                'font-family': 'Krungsri Condensed',
+                                                'font-size': '12px',
+                                                'line-height': '20px',
+                                                'color': '#5A5A5A'
+                                              };
+                                            }
+                                            if (element.localName == "table") {
+                                              return {'width': '100%'};
+                                            } else if (element.localName == "td") {
+                                              return {'width': '50%'};
+                                            }
+                                            return null;
+                                          }),
+                                        ),
+                                      ),
+                                      tagline != ""
+                                        ? Visibility(
+                                              visible: !descriptionState.textNotMoreThan, //lineFinal <= maxLines && containsHtmlTags(tagline),
+                                              child: Container(
+                                                  padding: EdgeInsets.only(top: 8),
+                                                  child:Row(
+                                               //   mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    child: Container(
+                                                      alignment: Alignment.centerLeft,
+                                                    //  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                                    //  height: 24,
+                                                      child: OutlinedButton(
+                                                        onPressed: () async {
+                                                          if (!descriptionState.textNotMoreThan) {
+                                                            if (descriptionState.toggleDescription) {
+                                                              myBloc.updateToggleTapDescription(toggleDescription: false);
+                                                            } else {
+                                                              myBloc.updateToggleTapDescription(toggleDescription: true);
+                                                            }
+                                                          }
+                                                        },
+                                                        style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy, padding: 0),
+                                                        child: AlvaText(
+                                                          title: descriptionState.toggleDescription ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
+                                                          textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
+                                                          disableSelectableText: true,
+                                                        ),
+                                                      ),
+
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                          )) //"${textString!}..." //<p1>อ่านต่อ</p1>
+                                          : Container(),
+                                      // HtmlWidget(
+                                      //     descriptionState.toggleDescription || (lineFinal <= maxLines && containsHtmlTags(tagline))
+                                      //         ? "$tagline${lineFinal <= maxLines ? "" : " <p1>ซ่อนรายละเอียด<p1> "}"
+                                      //         : !containsHtmlTags(tagline)
+                                      //             ? tagline != ""
+                                      //                 ? "${textString!}... <p1>อ่านต่อ</p1>" //<p1>อ่านต่อ</p1>
+                                      //                 : ""
+                                      //             : "$truncatedHtmlContent... ${"<p1>อ่านต่อ</p1>"}", //${"<p1>อ่านต่อ</p1>"}
+                                      //     buildAsync: false,
+                                      //     textStyle: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 24 / 16), customStylesBuilder: (element) {
+                                      //   if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
+                                      //     if (element.attributes['style'].toString().contains('9c9c9c')) {
+                                      //       element.attributes['style'] = 'color:#9c9c9c';
+                                      //     } else {
+                                      //       element.attributes['style'] = 'color:#6699ff';
+                                      //     }
+                                      //   } else {
+                                      //     element.attributes['style'] = '';
+                                      //   }
+                                      //   if (element.localName == "p1") {
+                                      //     return {
+                                      //       'font-weight': '700',
+                                      //       'font-family': 'Krungsri Condensed',
+                                      //       'font-size': '14px',
+                                      //       'line-height': '24px',
+                                      //       'color': '#40A9FC'
+                                      //     };
+                                      //   }
+                                      //   if (element.localName == "p") {
+                                      //     return {
+                                      //       'font-weight': '500',
+                                      //       'font-family': 'Krungsri Condensed',
+                                      //       'font-size': '12px',
+                                      //       'line-height': '20px',
+                                      //       'color': '#5A5A5A'
+                                      //     };
+                                      //   }
+                                      //   if (element.localName == "table") {
+                                      //     return {'width': '100%'};
+                                      //   } else if (element.localName == "td") {
+                                      //     return {'width': '50%'};
+                                      //   }
+                                      //   return null;
+                                      // }),
+                                    ],
+                                  ),
                                 );
                               },
                             ),

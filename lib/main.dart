@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,15 +24,15 @@ UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
 void main() async {
   setUrlStrategy(urlStrategyPromptBuy);
   WidgetsFlutterBinding.ensureInitialized();
-  _configureApp();
+//  _configureApp();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    // runApp(MyApp());
-    DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
+    runApp(MyApp());
+  /*  DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
       return runApp(const MyApp());
-    });
+    }); */
   });
 }
 
@@ -113,6 +115,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    lineDataHelper.saveSocialDataToLocalStorage(json.encode({
+    "uid": "a9e80b41265c8c609069b1858310d8711d6a749e080aa9ff8fb85516c3112f5626cdd286195cc06d3a5f0ca6b3caa63651a9ad69b5ade9521454f9ae3f5f0336",
+    "access_token":
+    "AQICAHiutkfusspu4B4+vok30KHIzyz9jCK+YkPnBsGCVB2f6wHeDhyCqGP+yG8HBQ9eAjjyAAABVDCCAVAGCSqGSIb3DQEHBqCCAUEwggE9AgEAMIIBNgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAx8jp9/8OPFerJubHQCARCAggEHwkoFK6uq6/S35NQqq/zH8f1eP9rz8E9OseZMG5saHm5XlYUDw7vWrzWCZiFUpcwjC35WASvyaFh4O94kdyfNWNBUiA7CdxeeTCCqc0Xteu33/GmAEuNfINB2TdfXlubSdAgxaPT7Q/arVNj/8TFXmoQsA5Clzbm+yHVHtkUUERnIvqGllg4bY9PHm6kXtOslZSSpJpQ0d1bYf2M6aYM40trhOgHkesHgtIb+/nzf3zuNYDnhPb51AoP925kERIcuuWBtnNvWzxzhhJGFWAqCF4gihdDEbmVaZkYCb15B0RW4mnQvLwHn2YMTC+gYzvqTvHLhbpXEq2aPQI+ppa1QN2VCIQKpyuo=",
+    "refresh_token":
+    "AQICAHiHh8UolZwiInbRGrYIc4hBqU2lEtG0b/SgxcDfwKyzuQGQhwJwXvShbvdnL3rKWSi4AAAAcjBwBgkqhkiG9w0BBwagYzBhAgEAMFwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMMuYxDx9KZZ1Hgdk+AgEQgC9VzGiPUwxoly21i3mBNsb42tJYSQ2eOj0wfpzK/VkkbrQ7fQ9ySVVWKWG+pYwaLw==",
+    "expires_in": 2592000,
+    "tcVersion": "1",
+    "tc_accept": "true"
+    }));
+    PreferencesHelper.setString("code", "iOWflHc6DWvCSQxvnsQC");
+    PreferencesHelper.setString("LineLogin", 'true');
+    PreferencesHelper.setString("tcVersion", '1');
+
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<DioUtilityRepository>(create: (context) => DioUtilityRepository(service: DioUtilityService())),

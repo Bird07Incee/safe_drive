@@ -284,23 +284,23 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                               title: productState.product.productName,
                                                               textStyle: AlvaStyles()
                                                                   .headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                  .copyWith(height: 24 / 14)),
+                                                                  .copyWith(height: 22 / 14)),
                                                         ),
                                                         productState.product.productionOptionals.isEmpty
                                                             ? SizedBox.shrink()
                                                             : Padding(
                                                                 padding: const EdgeInsets.only(top: 4),
-                                                                child: SizedBox(
-                                                                  width: maxWidth - 32 - 16 - 72,
-                                                                  child: AlvaTextMaxLinesOverflow(
-                                                                      maxLines: 5,
-                                                                      title:
-                                                                          "${productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0].levelName}: $step1",
-                                                                      textStyle: AlvaStyles()
-                                                                          .headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                          .copyWith(height: 1.6)),
-                                                                ),
-                                                              ),
+                                                          child: SizedBox(
+                                                            width: maxWidth - 32 - 16 - 72,
+                                                            child: AlvaTextMaxLinesOverflow(
+                                                                maxLines: 5,
+                                                                title:
+                                                                    "${productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0].levelName}: $step1",
+                                                                textStyle: AlvaStyles()
+                                                                    .headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                    .copyWith(height: 1.6)),
+                                                          ),
+                                                          ),
                                                       ],
                                                     )
                                                   ],
@@ -708,14 +708,15 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                               left: 16, right: 16, top: 16, bottom: (step1.isEmpty && step2.isEmpty) ? 16 : 4),
                                                           child: Row(
                                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            crossAxisAlignment: CrossAxisAlignment.end,
                                                             children: [
                                                               Flexible(
                                                                 child: AlvaTextMaxLinesOverflow(
                                                                     title: productState.product.productName,
                                                                     maxLines: 1,
                                                                     textStyle: AlvaStyles()
-                                                                        .headingSize12w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                        .copyWith(height: 2)),
+                                                                        .bodySize14W500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                        .copyWith(height: 22/14)),
                                                               ),
                                                               SizedBox(
                                                                 width: 16,
@@ -724,8 +725,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                   title:
                                                                       "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
                                                                   textStyle: AlvaStyles()
-                                                                      .headingSize12w500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                      .copyWith(height: 2)),
+                                                                      .bodySize14W500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                      .copyWith(height: 22/14)),
                                                             ],
                                                           ),
                                                         ),
@@ -744,8 +745,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                           "${productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0].levelName}: ${productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0].label}",
                                                                       maxLines: 5,
                                                                       textStyle: AlvaStyles()
-                                                                          .headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                          .copyWith(height: 1.6)),
+                                                                          .bodySize12W400(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                          .copyWith(height: 20/12)),
                                                                 ),
                                                               )
                                                             : SizedBox.shrink(),
@@ -821,13 +822,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                             AlvaText(
                                                                 title: "ยอดชำระเงิน",
                                                                 textStyle: AlvaStyles()
-                                                                    .headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                    .copyWith(height: 24 / 14)),
+                                                                    .headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                    .copyWith(height: 24 / 16)),
                                                             AlvaText(
                                                                 title: "(รวมภาษีมูลค่าเพิ่มแล้ว)",
                                                                 textStyle: AlvaStyles().body1().copyWith(
                                                                       fontWeight: FontWeight.w400,
-                                                                      fontSize: 8,
+                                                                      fontSize: 10,
                                                                       color: BTN_SELECTED_TEXT_COLOR_NEW,
                                                                       height: 2,
                                                                     )),
@@ -840,7 +841,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                       title:
                                                           "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
                                                       textStyle:
-                                                          AlvaStyles().headingSize14w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
+                                                          AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 16)),
                                                 ],
                                               ),
                                             ),

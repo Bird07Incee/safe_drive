@@ -213,7 +213,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                     child: AlvaTextMaxLinesOverflow(
                                         maxLines: 1,
                                         title: state.inquiryData.productName!,
-                                        textStyle: AlvaStyles().headingSize14w500(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 14)),
+                                        textStyle: AlvaStyles().headingSize14Height22()),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 4),
@@ -222,7 +222,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                       child: AlvaTextMaxLinesOverflow(
                                           maxLines: 5,
                                           title: state.inquiryData.productOption!,
-                                          textStyle: AlvaStyles().headingSize10w400(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
+                                          textStyle: AlvaStyles().headingSize12RegHeight20(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.6)),
                                     ),
                                   ),
                                 ],

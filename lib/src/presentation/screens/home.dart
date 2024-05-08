@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     //     context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
     //   }
     // });
+    context.read<ProductListBloc>().add(const GetProductList());
   }
 
   Future<void> openLine() async {
@@ -128,17 +129,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   visible: state.hideCategory ? false : true,
                                   child: Container(
                                     width: maxWidth,
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  //  padding: const EdgeInsets.symmetric(horizontal: 16),
                                     color: Colors.white,
                                     child: TabBar(
                                         controller: tabController,
                                         labelColor: Colors.black,
                                         indicatorColor: BlueFantasy,
-                                        padding: EdgeInsets.only(right: 8),
-                                        labelPadding: EdgeInsets.symmetric(horizontal: 24),
+                                    //    padding: EdgeInsets.only(right: 8),
+                                        labelPadding: EdgeInsets.symmetric(horizontal: 30),
                                         isScrollable: true,
                                         labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
-                                        unselectedLabelColor: const Color(0xffDEDEDE),
+                                        unselectedLabelColor: const Color(0xffC2C1C1),
                                         onTap: (int index) {
                                           context.read<ProductListBloc>().add(SetSelectTabIndex(index));
                                           if (index == 0) {
@@ -159,40 +160,50 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               );
                                         },
                                         tabs: [
-                                          Tab(
-                                            text: "ทั้งหมด",
-                                            icon: state.selectedTabIndex == 0
-                                                ? Image.asset('assets/images/category/icon_active_cate_all.png', width: 24, height: 24)
-                                                : Image.asset('assets/images/category/icon_cate_all.png', width: 24, height: 24),
+                                          Container(
+                                            height: 58,
+                                            padding: EdgeInsets.only(top: 8, bottom: 4),
+                                            child: Tab(
+                                              iconMargin: EdgeInsets.only(bottom: 4),
+                                              text: "ทั้งหมด",
+                                              icon: state.selectedTabIndex == 0
+                                                  ? Image.asset('assets/images/category/icon_active_cate_all2.png', width: 24, height: 24)
+                                                  : Image.asset('assets/images/category/icon_cate_all2.png', width: 24, height: 24),
+                                            ),
                                           ),
                                           for (int i = 0; i < state.productList.category!.length; i++)
-                                            Tab(
-                                                text: state.productList.category![i]["categoryTh"],
-                                                icon: state.selectedTabIndex == (i + 1)
-                                                    ? SizedBox(
-                                                        width: 24,
-                                                        height: 24,
-                                                        child: FadeInImage(
-                                                          placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
-                                                          // Replace with your placeholder image path
-                                                          image: NetworkImage(state.productList.category![i]["img_active"]),
-                                                          fit: BoxFit.fitWidth,
-                                                          imageErrorBuilder: (context, error, stackTrace) =>
-                                                              Image.asset('assets/images/category/icon_active_cate_other.png', fit: BoxFit.fitWidth),
-                                                        ),
-                                                      )
-                                                    : SizedBox(
-                                                        width: 24,
-                                                        height: 24,
-                                                        child: FadeInImage(
-                                                          placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
-                                                          // Replace with your placeholder image path
-                                                          image: NetworkImage(state.productList.category![i]["img_inactive"]),
-                                                          fit: BoxFit.fitWidth,
-                                                          imageErrorBuilder: (context, error, stackTrace) =>
-                                                              Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
-                                                        ),
-                                                      )),
+                                            Container(
+                                              height: 58,
+                                              padding: EdgeInsets.only(top: 8, bottom: 4),
+                                              child: Tab(
+                                                  iconMargin: EdgeInsets.only(bottom: 4),
+                                                  text: state.productList.category![i]["categoryTh"],
+                                                  icon: state.selectedTabIndex == (i + 1)
+                                                      ? SizedBox(
+                                                          width: 24,
+                                                          height: 24,
+                                                          child: FadeInImage(
+                                                            placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
+                                                            // Replace with your placeholder image path
+                                                            image: NetworkImage(state.productList.category![i]["img_active"]),
+                                                            fit: BoxFit.fitWidth,
+                                                            imageErrorBuilder: (context, error, stackTrace) =>
+                                                                Image.asset('assets/images/category/icon_active_cate_other.png', fit: BoxFit.fitWidth),
+                                                          ),
+                                                        )
+                                                      : SizedBox(
+                                                          width: 24,
+                                                          height: 24,
+                                                          child: FadeInImage(
+                                                            placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
+                                                            // Replace with your placeholder image path
+                                                            image: NetworkImage(state.productList.category![i]["img_inactive"]),
+                                                            fit: BoxFit.fitWidth,
+                                                            imageErrorBuilder: (context, error, stackTrace) =>
+                                                                Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
+                                                          ),
+                                                        )),
+                                            ),
                                         ]),
                                   ),
                                 ),
