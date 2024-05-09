@@ -31,7 +31,8 @@ class DioUtilityService {
       }
     } on DioException catch (e) {
       var uid = LineDataHelper().getLineUid();
-      DatadogSdk.instance.rum?.addError("GET $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network, attributes: {"uuid": uid});
+      DatadogSdk.instance.rum?.addError("GET $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network,
+          attributes: {"uuid": uid});
       rethrow;
     }
   }
@@ -61,7 +62,8 @@ class DioUtilityService {
       }
     } on DioException catch (e) {
       var uid = LineDataHelper().getLineUid();
-      DatadogSdk.instance.rum?.addError("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network, attributes: {"uuid": uid});
+      DatadogSdk.instance.rum?.addError("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network,
+          attributes: {"uuid": uid});
       rethrow;
     }
   }

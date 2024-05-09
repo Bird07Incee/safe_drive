@@ -29,6 +29,10 @@ class ErrorConst {
   String subTitleSecBrowser = 'ระบบจะทำการกลับไปที่ LINE เพื่อดำเนินการต่อไป';
   String titleBtnBrowser = 'ตกลง';
 
+  String titleMaintenance = 'อยู่ระหว่าง ปิดปรับปรุงระบบ';
+  String subtitleMaintenance = 'ขออภัยในความไม่สะดวก';
+  String titleBtnMaintenance = 'ตกลง';
+
   String imagePath = "assets/images/404_error.png";
 }
 

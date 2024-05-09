@@ -1,6 +1,6 @@
 part of 'tracking_order_bloc.dart';
 
-enum GetTrackingOrderListStatus { initial, loading, success, empty, error }
+enum GetTrackingOrderListStatus { initial, loading, success, empty, maintenance, error }
 
 class TrackingOrderState extends Equatable {
   const TrackingOrderState(

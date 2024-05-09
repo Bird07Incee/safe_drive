@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     bool tc = await TermAndConHelper().isTermAndConAccepted();
     if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
       nav.pushNamed(Routes.termAndCon.toStringPath());
-    }else{
+    } else {
       amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
     }
   }
