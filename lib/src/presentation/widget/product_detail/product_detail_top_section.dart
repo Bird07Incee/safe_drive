@@ -16,6 +16,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PDTopSection extends StatefulWidget {
@@ -34,9 +35,7 @@ class _PDTopSectionState extends State<PDTopSection> {
     List<InlineSpan> l = [];
     int len = p.promotionTag.length > 3 ? 3 : p.promotionTag.length;
     for (var i = 0; i < len; i++) {
-      l.add(TextSpan(
-          text: p.promotionTag[i],
-          style: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20/12)));
+      l.add(TextSpan(text: p.promotionTag[i], style: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12)));
       if (i != len - 1 && len <= 3) {
         l.add(WidgetSpan(
           child: Container(
@@ -61,7 +60,6 @@ class _PDTopSectionState extends State<PDTopSection> {
       builder: (context, state) {
         final replaceInnerTagP = state.product.tagline.isNotEmpty ? state.product.tagline : "";
         var tagline = state.product.tagline.isNotEmpty ? replaceInnerTagP : "";
-        // print("tagline ${state.product.tagline}");
         // {"<br >": "<br>", "<br />": "<br/>"},
         // -----------process for unSupport emoji,icon in text-------------------
         RegExp emojiRegex = RegExp(
@@ -86,119 +84,7 @@ class _PDTopSectionState extends State<PDTopSection> {
         int lineFinal = 0;
         String? textString;
         List<String> bigText = ['<h1>', '<h2>'];
-
-        String removeHtmlForbiddenTagsTags(String input) {
-          for (String tag in ProductDetailConst().forbiddenTags) {
-            String ht = '<$tag[^>]*>';
-            RegExp tagRegex = RegExp(ht);
-            input = input.replaceAll(tagRegex, '');
-          }
-          return input;
-        }
-
-        // Function for  delete the entire line of tags and do not want to show
-        String removeTags(String html, List<String> tagsToRemove) {
-          // Create a regular expression pattern for specified HTML tags
-          String pattern = '<(?:${tagsToRemove.join('|')})[^>]*>.*?</(?:${tagsToRemove.join('|')})>';
-          RegExp exp = RegExp(pattern, caseSensitive: false, multiLine: true);
-
-          // Remove the specified HTML tags from the string
-          String result = html.replaceAll(exp, '');
-          return result;
-        }
-
-        // Function for refactor html content to one line, example, <p>textt</p><p>textt</p
-        String refactorHtml(String html) {
-          String updatedHtml = html;
-          // updatedHtml = html.replaceAll('</p>', '\n');
-          updatedHtml = updatedHtml.replaceAll('&ndash;', '-');
-          updatedHtml = updatedHtml.replaceAll('&nbsp;', ' ');
-          updatedHtml = updatedHtml.split('\n').map((line) => line).join();
-          return updatedHtml;
-        }
-
-        String fixIncompleteHtmlTags(String input) {
-          // Split the input string into characters
-          List<String> characters = input.split('');
-
-          // Track the opening and closing brackets
-          int openingCount = 0;
-          int closingCount = 0;
-
-          // Iterate through the characters
-          for (int i = 0; i < characters.length; i++) {
-            if (characters[i] == '<') {
-              openingCount++;
-            } else if (characters[i] == '>') {
-              closingCount++;
-            }
-          }
-
-          // Check if there are missing opening brackets at the beginning
-          while (openingCount < closingCount) {
-            characters.insert(0, '</');
-            openingCount++;
-          }
-
-          // Check if there are missing closing brackets at the end
-          while (closingCount < openingCount) {
-            characters.add('>');
-            closingCount++;
-          }
-
-          // Join the characters back into a string
-          String result = characters.join('');
-
-          return result;
-        }
-
-        // Function for cut content string show characters to delete (20% of total characters)
-        String deleteCharacters(String input) {
-          if (input.isEmpty) {
-            // Handle empty string if needed
-            return input;
-          }
-
-          // Calculate the number of characters to delete (20% of total characters)
-          int charactersToDelete = (input.length * 0.2).round();
-
-          // Ensure that at least one character is deleted
-          charactersToDelete = charactersToDelete == 0 ? 1 : charactersToDelete;
-
-          // Delete characters from the end of the string
-          String result = input.substring(0, input.length - charactersToDelete);
-
-          return result;
-        }
-
-        // Function for checking topics and insert <p>
-        String insertPTag(String input) {
-          int brIndex = input.indexOf("<br>");
-
-          if (brIndex != -1) {
-            // Extract the substring before the first <br> tag
-            String beforeBr = input.substring(0, brIndex);
-
-            // Insert <p> tag at the end of the substring before <br>
-            input = input.replaceFirst(beforeBr, "<p>$beforeBr</p>");
-          }
-
-          return input;
-        }
-
-        // Function for checking whether input has html tags or not, excluding <br>
-        bool containsHtmlTags(String input) {
-          input = input.replaceAll("<br/>", "<br>");
-          RegExp htmlTagRegExp = RegExp(r'<[^br/>]+>');
-          return htmlTagRegExp.hasMatch(input);
-        }
-
-        // Function for checking tags br
-        int countBrTags(String htmlString) {
-          RegExp regex = RegExp('<br>', caseSensitive: false);
-          Iterable<RegExpMatch> matches = regex.allMatches(htmlString);
-          return matches.length;
-        }
+        TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
 
         // check empty html string input
 
@@ -210,18 +96,16 @@ class _PDTopSectionState extends State<PDTopSection> {
           // }
           tagline = tagline.replaceAll("<br >", "<br>");
           tagline = tagline.replaceAll("<br />", "<br/>");
-          tagline = removeHtmlForbiddenTagsTags(tagline);
+          tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
           // tagline = removeInvalidWords(tagline);
-           print("taglinenamo ${tagline}");
           // check html tag in string input
-          if (!containsHtmlTags(tagline)) {
-            // print("not containsHtmlTags");
+          if (!truncatedHtmlText.containsHtmlTags(tagline)) {
             // insert <p> in title or first line
-            tagline = insertPTag(tagline);
+            tagline = truncatedHtmlText.insertPTag(tagline);
             // check expended content
             if (tagline.length >= 291) {
               // cut content string show 100 char
-            //  isReadMoreVisible = true;
+              //  isReadMoreVisible = true;
               textString = tagline.substring(0, 290);
               //set toggleDescription
 
@@ -230,22 +114,22 @@ class _PDTopSectionState extends State<PDTopSection> {
               maxLines = 1;
               lineFinal = 2;
               // check html tag in textString
-              if (containsHtmlTags(textString)) {
+              if (truncatedHtmlText.containsHtmlTags(textString)) {
                 // set truncatedHtmlContent in textString
-              //  isReadMoreVisible = false;
+                //  isReadMoreVisible = false;
                 truncatedHtmlContent = textString;
               }
               // Verify that the data in characters does not exceed a line but is <br>Many items beyond the line.
-            } else if (tagline.length <= 169 && countBrTags(tagline) >= 3) {
+            } else if (tagline.length <= 169 && truncatedHtmlText.countBrTags(tagline) >= 3) {
               // cut content string show characters to delete (20% of total characters)
-              textString = deleteCharacters(tagline);
+              textString = truncatedHtmlText.deleteCharacters(tagline);
               //set toggleDescription
               myBloc.updateToggleTapDescription(toggleDescription: false);
               //set maxLines lineFinal for lineFinal<=maxLines
               maxLines = 1;
               lineFinal = 2;
               // check html tag in textString
-              if (containsHtmlTags(textString)) {
+              if (truncatedHtmlText.containsHtmlTags(textString)) {
                 // set truncatedHtmlContent in textString
                 truncatedHtmlContent = textString;
               }
@@ -257,7 +141,7 @@ class _PDTopSectionState extends State<PDTopSection> {
           } else {
             // This string contains html tags.
             // List of tags that you want to delete the entire line of tags and do not want to show
-            tagline = removeTags(tagline, ['table', 'th', 'tr', 'td', 'img', 'nav']);
+            tagline = truncatedHtmlText.removeTags(tagline, ['table', 'th', 'tr', 'td', 'img', 'nav']);
 
             // logic for replacing variables for replacements
             for (var replacement in ProductDetailConst().replacements) {
@@ -266,7 +150,7 @@ class _PDTopSectionState extends State<PDTopSection> {
               });
             }
             // refactor html content to one line, example, <p>text</p><p>text</p
-            tagline = refactorHtml(tagline);
+            tagline = truncatedHtmlText.refactorHtml(tagline);
             // Delete/unnecessary from content
             tagline = tagline.replaceAll(' /', "");
             // Separate the tagline variable one line at a time by separating it from </,<br> and put it in lines.
@@ -353,8 +237,7 @@ class _PDTopSectionState extends State<PDTopSection> {
               if (lines.length - 1 >= 4) {
                 myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
 
-                if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 &&
-                    lines[1].length <= 80 && lines[0].length <= 149) {
+                if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
                   maxLines = 3;
                   //log(("case 4"));
                 } else if (lines[3].length <= 10 &&
@@ -408,21 +291,24 @@ class _PDTopSectionState extends State<PDTopSection> {
                     // Merge the second line into the variable truncatedHtmlContent.
                     if (lines[1].contains("<h1>") || lines[1].contains("<h2>")) {
                       if (lines[0].contains("<h1>") || lines[0].contains("<h1>")) {
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
+                        truncatedHtmlContent =
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
                       } else {
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 70)].take(maxLines).join('</'))}";
+                        truncatedHtmlContent =
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[1].substring(0, 70)].take(maxLines).join('</'))}";
                       }
 
                       //log("maxLines 2 step 2");
                     } else {
                       if (lines[1].length >= 220) {
                         truncatedHtmlContent =
-                            "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 220)].take(maxLines).join('</'))}";
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[1].substring(0, 220)].take(maxLines).join('</'))}";
                         //log("maxLines 2 step 2");
                       } else {
                         lineFinal = 2;
                         maxLines = 2;
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('</'))}";
+                        truncatedHtmlContent =
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[1]].take(maxLines).join('</'))}";
                         //log("maxLines 2 step 2");
                       }
                     }
@@ -439,7 +325,8 @@ class _PDTopSectionState extends State<PDTopSection> {
                           maxLines = 2;
                         }
                         //log("h1");
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
+                        truncatedHtmlContent =
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
                       } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                           lines[0].length <= 40 &&
                           (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
@@ -449,9 +336,10 @@ class _PDTopSectionState extends State<PDTopSection> {
                           maxLines = 2;
                         }
                         //log("h1");
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
+                        truncatedHtmlContent =
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
                       } else {
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
+                        truncatedHtmlContent = "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([
                           lines[1].substring(0, (lines[1].length * 0.9).round())
                         ].take(maxLines).join('</'))}";
                         //log("maxLines 2 step 2");
@@ -471,7 +359,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                   //log("maxLines 3 step 1");
                 } else if (i == 1) {
                   // Merge the second line into the variable truncatedHtmlContent.
-                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('\n'))}";
+                  truncatedHtmlContent = "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[1]].take(maxLines).join('\n'))}";
                   //log("maxLines 3 step 2");
                 } else if (i == 2) {
                   if (lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
@@ -485,7 +373,8 @@ class _PDTopSectionState extends State<PDTopSection> {
                             lines[1].length <= 43 &&
                             (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                             lines[2].length >= 40) {
-                      truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+                      truncatedHtmlContent =
+                          "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
                       //log("maxLines 3 step 3 with out h1 in line 1(phh)");
                     } else if (
                         // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
@@ -494,7 +383,8 @@ class _PDTopSectionState extends State<PDTopSection> {
                             lines[1].length <= 43 &&
                             (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                             lines[2].length >= 40) {
-                      truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+                      truncatedHtmlContent =
+                          "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
                       //log("maxLines 3 step 3 with out h1 in line 1 and 2 (line 3 >= 40) (pph)");
                     } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                         lines[0].length <= 40 &&
@@ -502,7 +392,8 @@ class _PDTopSectionState extends State<PDTopSection> {
                         lines[1].length <= 43 &&
                         (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                         lines[2].length >= 40) {
-                      truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+                      truncatedHtmlContent =
+                          "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
                       //log("maxLines 3 step 3 with out h1 in line 2 (hph)");
                     } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                             lines[0].length <= 40 &&
@@ -511,10 +402,12 @@ class _PDTopSectionState extends State<PDTopSection> {
                         // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                         ) {
                       if (lines[2].length >= 80) {
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
-                      } else {
                         truncatedHtmlContent =
-                            "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
+                      } else {
+                        truncatedHtmlContent = "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([
+                          lines[2].substring(0, lines[2].length)
+                        ].take(maxLines).join('</'))}";
                       }
                       //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (hpp)");
                     } else if (
@@ -523,15 +416,18 @@ class _PDTopSectionState extends State<PDTopSection> {
                         // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                         ) {
                       if (lines[2].length >= 80) {
-                        truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
-                      } else {
                         truncatedHtmlContent =
-                            "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
+                            "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
+                      } else {
+                        truncatedHtmlContent = "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([
+                          lines[2].substring(0, lines[2].length)
+                        ].take(maxLines).join('</'))}";
                       }
 
                       //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (php)");
                     } else {
-                      truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
+                      truncatedHtmlContent =
+                          "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
                       //log("maxLines 3 step 3 all p");
                     }
                   }
@@ -577,12 +473,6 @@ class _PDTopSectionState extends State<PDTopSection> {
           }
         }
 
-       // truncatedHtmlContent = "$truncatedHtmlContent</li>";
-         print("final ${tagline}");
-         print("textString final ${textString}");
-         print("truncatedHtmlContent final $truncatedHtmlContent");
-        // print(
-        //     "(lineFinal(${lineFinal}) <= maxLines(${maxLines}) && containsHtmlTags(tagline)(${containsHtmlTags(tagline)})) == ${(lineFinal <= maxLines && containsHtmlTags(tagline))}");
         return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
           builder: (context, zoomarguments) {
             return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
@@ -771,18 +661,19 @@ class _PDTopSectionState extends State<PDTopSection> {
                                       GestureDetector(
                                         key: const Key("read_more_product_detail"),
                                         child: Container(
-                                         // padding: EdgeInsets.only(right: 16),
+                                          // padding: EdgeInsets.only(right: 16),
                                           child: HtmlWidget(
                                               descriptionState.toggleDescription ||
-                                                  (lineFinal <= maxLines && containsHtmlTags(tagline))
+                                                      (lineFinal <= maxLines && truncatedHtmlText.containsHtmlTags(tagline))
                                                   ? "$tagline${lineFinal <= maxLines ? "" : " "}" //<p1>ซ่อนรายละเอียด<p1>
-                                                  : !containsHtmlTags(tagline)
-                                                  ? tagline != ""
-                                                  ? "${textString!}..." //<p1>อ่านต่อ</p1>
-                                                  : ""
-                                                  : "$truncatedHtmlContent...", //${"<p1>อ่านต่อ</p1>"}
+                                                  : !truncatedHtmlText.containsHtmlTags(tagline)
+                                                      ? tagline != ""
+                                                          ? "${textString!}..." //<p1>อ่านต่อ</p1>
+                                                          : ""
+                                                      : "$truncatedHtmlContent...", //${"<p1>อ่านต่อ</p1>"}
                                               buildAsync: false,
-                                              textStyle: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 24 / 16), customStylesBuilder: (element) {
+                                              textStyle: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 24 / 16),
+                                              customStylesBuilder: (element) {
                                             if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
                                               if (element.attributes['style'].toString().contains('9c9c9c')) {
                                                 element.attributes['style'] = 'color:#9c9c9c';
@@ -820,41 +711,42 @@ class _PDTopSectionState extends State<PDTopSection> {
                                         ),
                                       ),
                                       tagline != ""
-                                        ? Visibility(
+                                          ? Visibility(
                                               visible: !descriptionState.textNotMoreThan, //lineFinal <= maxLines && containsHtmlTags(tagline),
                                               child: Container(
                                                   padding: EdgeInsets.only(top: 8),
-                                                  child:Row(
-                                               //   mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                      alignment: Alignment.centerLeft,
-                                                    //  padding: const EdgeInsets.symmetric(horizontal: 16),
-                                                    //  height: 24,
-                                                      child: OutlinedButton(
-                                                        onPressed: () async {
-                                                          if (!descriptionState.textNotMoreThan) {
-                                                            if (descriptionState.toggleDescription) {
-                                                              myBloc.updateToggleTapDescription(toggleDescription: false);
-                                                            } else {
-                                                              myBloc.updateToggleTapDescription(toggleDescription: true);
-                                                            }
-                                                          }
-                                                        },
-                                                        style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy, padding: 0),
-                                                        child: AlvaText(
-                                                          title: descriptionState.toggleDescription ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
-                                                          textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
-                                                          disableSelectableText: true,
+                                                  child: Row(
+                                                    //   mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Container(
+                                                          alignment: Alignment.centerLeft,
+                                                          //  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                                          //  height: 24,
+                                                          child: OutlinedButton(
+                                                            onPressed: () async {
+                                                              if (!descriptionState.textNotMoreThan) {
+                                                                if (descriptionState.toggleDescription) {
+                                                                  myBloc.updateToggleTapDescription(toggleDescription: false);
+                                                                } else {
+                                                                  myBloc.updateToggleTapDescription(toggleDescription: true);
+                                                                }
+                                                              }
+                                                            },
+                                                            style: AlvaStyles()
+                                                                .outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy, padding: 0),
+                                                            child: AlvaText(
+                                                              title: descriptionState.toggleDescription
+                                                                  ? AppStrings().btnHideDescription
+                                                                  : AppStrings().btnReadMore,
+                                                              textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
+                                                              disableSelectableText: true,
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-
-                                                    ),
-                                                  )
-                                                ],
-                                              )
-                                          )) //"${textString!}..." //<p1>อ่านต่อ</p1>
+                                                      )
+                                                    ],
+                                                  ))) //"${textString!}..." //<p1>อ่านต่อ</p1>
                                           : Container(),
                                       // HtmlWidget(
                                       //     descriptionState.toggleDescription || (lineFinal <= maxLines && containsHtmlTags(tagline))

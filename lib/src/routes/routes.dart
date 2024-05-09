@@ -106,29 +106,6 @@ extension StringExtension on String {
 Route<dynamic> generateRoute(RouteSettings settings) {
   var routingData = settings.name?.getRoutingData;
 
-  // String code = "empty";
-  // String state = "empty";
-  // String liffClientId = "empty";
-  // Uri liffRedirectUri = Uri();
-  //
-  // if (routingData?.route == "/auths") {
-  //   code = (routingData?["code"] == null) ? "" : routingData?["code"];
-  //   state = (routingData?["state"] == null) ? "" : routingData?["state"];
-  //   liffClientId = (routingData?["liffClientId"] == null) ? "" : routingData?["liffClientId"];
-  //   liffRedirectUri =
-  //       (routingData?["liffRedirectUri"] == null) ? Uri() : Uri.parse(routingData!["liffRedirectUri"].toString());
-  // }
-  //
-  // print(code);
-  // print(state);
-  // print(liffClientId);
-  // print(liffRedirectUri);
-  // String pid = '';
-  // if (routingData?.route == "/productDetail" || routingData?.route == "/selectOptions") {
-  //   pid = (routingData?["pid"] == null) ? "" : routingData?["pid"];
-  // }
-  // print(pid);
-
   switch (routingData?.route) {
     case "/":
       return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: settings);
