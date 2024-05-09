@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="KA Line OA Mini">
+  <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="KA Line OA Mini">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <title>PromptBuy | พร้อมบาย</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = "2866764214";
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js?VERSION_CODE=7672" defer></script>
+  <!-- OneTrust Cookies Consent Notice start for promptstart.krungsriauto.com -->
+  <!-- <script type="text/javascript"
+    src="https://cdn-apac.onetrust.com/consent/7906433a-6655-46cf-b306-d14c84ce29b3-test/OtAutoBlock.js"></script>
+  <script src="https://cdn-apac.onetrust.com/scripttemplates/otSDKStub.js" data-document-language="true"
+    type="text/javascript" charset="UTF-8" data-domain-script="7906433a-6655-46cf-b306-d14c84ce29b3-test"></script> -->
+  <!-- OneTrust Cookies Consent Notice end for promptstart.krungsriauto.com -->
+
+</head>
+
+<body>
+  <script>
+    window.addEventListener('load', function (ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine({ useColorEmoji: true }).then(function (appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
