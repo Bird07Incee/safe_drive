@@ -146,6 +146,15 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
               return AlvaRootWidget(titlePage: titleWebPage, child: const LoadingScreen());
             } else if (state.trackingOrderListStatus == GetTrackingOrderListStatus.empty) {
               return AlvaRootWidget(titlePage: titleWebPage, appBar: appBar, child: const TrackingListNoProduct());
+            } else if (state.trackingOrderListStatus == GetTrackingOrderListStatus.maintenance) {
+              return ErrorScreen(
+                title: ErrorConst().titleMaintenance,
+                subTitle: ErrorConst().subtitleMaintenance,
+                titleBtn: ErrorConst().titleBtnMaintenance,
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              );
             } else {
               return ErrorScreen(
                 title: ErrorConst().titleNS,
