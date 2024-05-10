@@ -409,9 +409,9 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             // String merchantName = "บจก.อรุ่มเจ๊่าะ";
             // String merchantNumber = "02989878676";
             final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
-            AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(productName, state.tracking.orderRef, state.tracking.status[0].statusName);
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
+              AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(productName, state.tracking.orderRef, state.tracking.status[0].statusName);
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
