@@ -722,7 +722,7 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'category_name': invoiceNumber,
+          'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
