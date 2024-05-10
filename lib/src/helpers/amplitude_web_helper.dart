@@ -1,4 +1,5 @@
 import 'package:amplitude_flutter/amplitude.dart';
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
@@ -44,7 +45,7 @@ class AmplitudeWebHelper {
       }
       _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
     } catch (e) {
-      // debugPrint(e.toString());
+      DatadogSdk.instance.rum?.addError("Amplitude logEvent Error : $e", RumErrorSource.custom, attributes: {"line_uuid": lineUID});
     }
   }
 
@@ -518,6 +519,210 @@ class AmplitudeWebHelper {
         screenName: "AutoStation_eMarketplace_payment_fail",
         eventName: "AutoStation_eMarketplace_homapage",
         eventProperties: {
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  // Marketplace ac bs not support
+
+  Future<void> logEnterBrowserNotSupport() async {
+    logEvent(
+      eventType: "Enter browser notsupport",
+      screenName: "AutoStation_eMarketplace_browser_notsupport",
+      eventName: "AutoStation_eMarketplace_browser_notsupport",
+    );
+  }
+
+  Future<void> logTapOnOkButtonInBrowserNotSupport() async {
+    logEvent(
+      eventType: "Tap on ok button",
+      screenName: "AutoStation_eMarketplace_browser_notsupport",
+      eventName: "AutoStation_eMarketplace_KALineOAfriend",
+    );
+  }
+
+  // Marketplace ac tracking
+  Future<void> logEnterOrderTrackingPage() async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Enter order tracking page",
+        screenName: "AutoStation_eMarketplace_ordertracking",
+        eventName: "AutoStation_eMarketplace_ordertracking",
+        eventProperties: {
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  Future<void> logTapOnOrderTrackingList(String productName, String invoiceNumber, String statusId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(eventType: "Tap on order tracking list", screenName: "AutoStation_eMarketplace_ordertracking", eventName: productName, eventProperties: {
+      'invoice_number': invoiceNumber,
+      'order_status': statusId,
+      'channel': "LINE",
+      'line_uuid': lineUID,
+    });
+  }
+
+  // Marketplace ac status tracking
+
+  Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Enter order tracking detail",
+        screenName: "AutoStation_eMarketplace_ordertracking_details",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'order_status': statusId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  Future<void> logTapOnCallMerchantButtonInTrackingDetail(String productName, String invoiceNumber, String statusId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Tap on call merchant button",
+        screenName: "AutoStation_eMarketplace_ordertracking_details",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'order_status': statusId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  Future<void> logTapOnProductRefundButton(String productName, String invoiceNumber, String statusId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Tap on product refund button",
+        screenName: "AutoStation_eMarketplace_ordertracking_details",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'order_status': statusId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  Future<void> logTapOnCallCenterButtonInTrackingDetail(String productName, String invoiceNumber, String statusId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Tap on call center button",
+        screenName: "AutoStation_eMarketplace_ordertracking_details",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'order_status': statusId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  // Marketplace ac return
+  Future<void> logEnterProductRefundPage(String productName, String invoiceNumber, String statusId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Enter product refund page",
+        screenName: "AutoStation_eMarketplace_productrefund_page",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'order_status': statusId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  // Marketplace ac return confirm
+  Future<void> logTapOnConfirmRefundButton(String productName, String invoiceNumber, String statusId, String cancelReason, String contentId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Tap on confirm refund button",
+        screenName: "AutoStation_eMarketplace_productrefund_page",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'order_status': statusId,
+          'cancel_reason': cancelReason,
+          'content_id': contentId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  // Marketplace ac success cancel
+
+  Future<void> logTapOnConfirmRefundButtonInSuccessCancel(
+      String productName, String invoiceNumber, String merchantName, String cancelReason, String contentId) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Enter refund summary page",
+        screenName: "AutoStation_eMarketplace_refundsummary_page",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'category_name': merchantName,
+          'cancel_reason': cancelReason,
+          'content_id': contentId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  Future<void> logTapOnOrderTrackingButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Tap on order tracking button",
+        screenName: "AutoStation_eMarketplace_refundsummary_page",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'category_name': merchantName,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  Future<void> logTapOnCallMerchantButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Tap on call merchant button",
+        screenName: "AutoStation_eMarketplace_refundsummary_page",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'category_name': merchantName,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
+  }
+
+  Future<void> logTapOnCallCenterButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName) async {
+    LineDataHelper lineDataHelper = LineDataHelper();
+    var lineUID = await lineDataHelper.getLineUid();
+    logEvent(
+        eventType: "Tap on call center button",
+        screenName: "AutoStation_eMarketplace_refundsummary_page",
+        eventName: productName,
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'category_name': invoiceNumber,
           'channel': "LINE",
           'line_uuid': lineUID,
         });

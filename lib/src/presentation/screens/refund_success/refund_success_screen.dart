@@ -4,6 +4,7 @@ import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_event.dart';
@@ -86,6 +87,12 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
         child: BlocBuilder<RefundSuccessBloc, RefundSuccessState>(
           builder: (context, state) {
             if (state.refundSuccessStatus == GetRefundSuccessDataStatus.success) {
+              AmplitudeWebHelper.getInstance().logTapOnConfirmRefundButtonInSuccessCancel(
+                  state.refundSuccessData.productName!,
+                  state.refundSuccessData.invoiceNo!,
+                  state.refundSuccessData.merchantFullName!,
+                  state.refundSuccessData.reason!,
+                  state.refundSuccessData.productId!);
               return Column(
                 children: [
                   Container(
@@ -353,6 +360,8 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                               GestureDetector(
                                 key: const Key("call_to_merchant_button"),
                                 onTap: () {
+                                  AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInSuccessCancel(state.refundSuccessData.productName!,
+                                      state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!);
                                   String phoneNumber = state.refundSuccessData.merchantMobile!.replaceAll("-", "");
                                   callPhone(phoneNumber);
                                 },
@@ -383,6 +392,8 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                 GestureDetector(
                                   key: const Key("call_button"),
                                   onTap: () {
+                                    AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInSuccessCancel(state.refundSuccessData.productName!,
+                                        state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!);
                                     callPhone(HomeConst().pleaseContactNumber);
                                   },
                                   child: Row(
@@ -416,10 +427,17 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                       child: GestureDetector(
                         key: const Key("back_to_tracking_list_button"),
                         onTap: () {
+                          AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButtonInSuccessCancel(
+                              state.refundSuccessData.productName!, state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!);
+
                           String pid = state.refundSuccessData.productId ?? "";
                           if (pid.isNotEmpty) {
                             clearState();
-                            refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
+                            refreshRoute(
+                                context: context,
+                                currentRoute: "refundSuccess",
+                                queryParams: "orderNo=$orderNo&pid=$pid&productName=${state.refundSuccessData.productName!}",
+                                listOption: []);
                           } else {
                             CurrentRouteObserver.instance.stack.clear();
                             Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
