@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
