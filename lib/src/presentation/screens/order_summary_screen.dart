@@ -830,7 +830,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                       fontWeight: FontWeight.w400,
                                                                       fontSize: 10,
                                                                       color: BTN_SELECTED_TEXT_COLOR_NEW,
-                                                                      height: 2,
+                                                                      height: 1.6,
                                                                     )),
                                                           ],
                                                         ),

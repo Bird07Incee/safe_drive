@@ -258,7 +258,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         ),
                         Row(
                           children: [
-                            Expanded(child: AlvaText(title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize12w400(spaceGrey)))
+                            Expanded(child: AlvaText(title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20/12)))
                           ],
                         ),
                       ],
@@ -382,6 +382,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         ),
         child: StatefulBuilder(builder: (context, setState) {
           var originalDescription = product.description;
+          //    "<p>เป็นเครื่องชาร์จสำหรับบ้านอัจฉริยะใหม่ล่าสุดของเรา ออกแบบมาเพื่อให้การชาร์จรถยนต์ไฟฟ้าทุกวันง่ายกว่าที่ยังคงรักษาประสิทธิภาพขั้นสูงของตระกูล Pulsar ในขณะที่นำเสนอวิธีการประหยัดมากขึ้น การออกแบบใหม่ที่ติดตั้งง่าย และตัวเลือกสีหกสี ทำงานได้อย่างราบรื่นกับโซลูชันการจัดการพลังงานของ Wallbox ทั้งหมด รวมถึงการชาร์จพลังงานแสงอาทิตย์ ได้รับการรับรองกันน้ำและฝุ่นด้วยระดับการป้องกัน IP54 และ IK08 ช่วยให้สามารถติดตั้งภายในอาคารหรือกลางแจ้งได้อย่างปลอดภัยPulsar Plus ใช้ได้กับสายชาร์จประเภท 1 และประเภท 2เชื่อมต่ออุปกรณ์ชาร์จของคุณกับอุปกรณ์อัจฉริยะผ่าน Wi-Fi* หรือบลูทูธ และใช้แอป myWallbox เพื่อควบคุมอุปกรณ์ชาร์จของคุณได้อย่างง่ายดาย กำหนดเวลาเซสชันการชาร์จที่ใช้ประโยชน์จากอัตราพลังงานนอกช่วงสูงสุด ตรวจสอบสถานะเครื่องชาร์จของคุณ และอื่นๆ อีกมากมายผ่านแอป myWallbox</p>";
           final replaceInnerTagP = originalDescription.isNotEmpty
               ? originalDescription.substring(3, originalDescription.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
               : "";
@@ -411,7 +412,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           String? textString;
           List<String> bigText = ['<h1>', '<h2>'];
           TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
-
           // check empty html string input
 
           if (dataDescription != "") {
@@ -798,6 +798,35 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 } else {
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, truncatedHtmlContent.length);
                 }
+              }else{
+                if (truncatedHtmlContent!.length >= 285) {
+                  truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
+                  lineFinal = 4;
+                  isReadMoreVisible = true;
+                  for (int i = 0; i < bigText.length; i++) {
+                    if (truncatedHtmlContent!.contains(bigText[i])) {
+                      if (bigText[i] == "<h1>") {
+                        truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
+                      } else {
+                        truncatedHtmlContent = truncatedHtmlContent.substring(0, 210);
+                      }
+                    }
+                  }
+                } else if (truncatedHtmlContent.length >= 150 && truncatedHtmlContent.length <= 284) {
+                  for (int i = 0; i < bigText.length; i++) {
+                    if (truncatedHtmlContent!.contains(bigText[i])) {
+                      if (bigText[i] == "<h1>") {
+                        truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
+                        isReadMoreVisible = true;
+                      } else {
+                        truncatedHtmlContent = truncatedHtmlContent.substring(0, 150);
+                        isReadMoreVisible = true;
+                      }
+                    }
+                  }
+                } else {
+                  truncatedHtmlContent = truncatedHtmlContent.substring(0, truncatedHtmlContent.length);
+                }
               }
             }
           }
@@ -820,8 +849,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 return {
                   'width': '50%',
                   'vertical-align': 'top;',
-                  'padding-top': '8px;',
-                  'padding-bottom': '8px;',
                   'font-size': '14px',
                   'line-height': '22px',
                   'font-weight': '400',
@@ -863,10 +890,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   return {
                     'width': '50%',
                     'vertical-align': 'top;',
-                    'padding-top': '8px;',
-                    'padding-bottom': '8px;',
                     'font-size': '14px',
                     'line-height': '22px',
+                    'font-weight': '400',
                     'color': '#2c2626'
                   };
                 }
@@ -878,6 +904,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'font-family': 'Krungsri Condensed',
                     'font-size': '14px',
                     'line-height': '22px',
+                    'font-weight': '400',
                     'color': '#2c2626',
                   };
                 }
@@ -911,8 +938,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         return {
                           'width': '50%',
                           'vertical-align': 'top;',
-                          'padding-top': '8px;',
-                          'padding-bottom': '8px;',
                           'font-size': '14px',
                           'line-height': '22px',
                           'font-weight': '400',
@@ -1054,7 +1079,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   ? _tabController.index == 1
                       ? Container(
                           padding: _tabController.index == 1
-                              ? truncatedHtmlContent.length > 285
+                              ? truncatedHtmlContent.length > 150
                                   ? null
                                   : EdgeInsets.only(top: 16)
                               : null,
@@ -1175,7 +1200,7 @@ class _MyFactory extends WidgetFactory {
         for (int i = 0; i < e.nodes.length; i++) {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style": "color:#5a5a5a; font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;",
+              "style": "color:#5a5a5a; font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {

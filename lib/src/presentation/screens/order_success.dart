@@ -132,7 +132,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 children: [
                                   Text(
                                     "ชำระเงินสำเร็จ",
-                                    style: AlvaStyles().headingSize14w600(blackGoMunTo),
+                                    style: AlvaStyles().headingSize14w700(blackGoMunTo),
                                   ),
                                   Text(
                                     "หมายเลขอ้างอิง: ${orderSuccessData.invoiceNo}",

@@ -50,10 +50,17 @@ class ProductCardWidget extends StatelessWidget {
   Widget promos(Product p) {
     List<InlineSpan> l = [];
     int len = p.promotionTag.length;
+
     for (var i = 0; i < len; i++) {
+      if(p.promotionTag[i].length > 6){
       l.add(TextSpan(
-          text: p.promotionTag[i],
+          text: "${p.promotionTag[i]}...",
               style: AlvaStyles().headingSize12w500(spaceGrey)));
+      }else{
+        l.add(TextSpan(
+            text: p.promotionTag[i],
+            style: AlvaStyles().headingSize12w500(spaceGrey)));
+      }
       if (i != len - 1 && len <= 3) {
         l.add(WidgetSpan(
           child: Container(
