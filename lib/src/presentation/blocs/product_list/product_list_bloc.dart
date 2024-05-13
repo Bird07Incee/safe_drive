@@ -27,10 +27,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   Future<ProductList> _getProductWithNoCategory() async {
     try {
       final baseUrl = Environment().getValue("BFF_BASE_URL");
-      // final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
-      // Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {});
-      // final productList = ProductList.fromJson(response.data);
-      final productList = ProductList.fromJson(mockProductListResponse);
+      final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {});
+      final productList = ProductList.fromJson(response.data);
       return productList;
     } catch (e) {
       rethrow;

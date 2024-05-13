@@ -661,7 +661,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                       GestureDetector(
                                         key: const Key("read_more_product_detail"),
                                         child: Container(
-                                          // padding: EdgeInsets.only(right: 16),
+                                           padding: EdgeInsets.only(right: 0),
                                           child: HtmlWidget(
                                               descriptionState.toggleDescription ||
                                                       (lineFinal <= maxLines && truncatedHtmlText.containsHtmlTags(tagline))
