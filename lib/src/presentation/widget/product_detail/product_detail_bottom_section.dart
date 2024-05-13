@@ -258,7 +258,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         ),
                         Row(
                           children: [
-                            Expanded(child: AlvaText(title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20/12)))
+                            Expanded(
+                                child: AlvaText(
+                                    title: state.product.merchantAddress,
+                                    textStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12)))
                           ],
                         ),
                       ],
@@ -798,7 +801,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 } else {
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, truncatedHtmlContent.length);
                 }
-              }else{
+              } else {
                 if (truncatedHtmlContent!.length >= 285) {
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
                   lineFinal = 4;
@@ -830,13 +833,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               }
             }
           }
-          //
-          // if (descriptionHeight >= 150) {
-          //   descriptionHeight = 150;
-          //   isReadMoreVisible = true;
-          // } else {
-          //   isReadMoreVisible = false;
-          // }
+          truncatedHtmlContent ??= "";
 
           Widget technicalSpecWidget = HtmlWidget(
             product.technicalSpec.isNotEmpty ? product.technicalSpec : AppStrings().noDataFromSeller,
@@ -924,7 +921,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               child: SingleChildScrollView(
                   physics: NeverScrollableScrollPhysics(),
                   child: HtmlWidget(
-                    truncatedHtmlContent!.isNotEmpty
+                    truncatedHtmlContent.isNotEmpty
                         ? isReadMoreVisible
                             ? "$truncatedHtmlContent..."
                             : truncatedHtmlContent
@@ -1200,7 +1197,8 @@ class _MyFactory extends WidgetFactory {
         for (int i = 0; i < e.nodes.length; i++) {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style": "color:#5a5a5a; font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+              "style":
+                  "color:#5a5a5a; font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {
