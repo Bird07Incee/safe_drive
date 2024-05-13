@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_order/tracking_order_bloc.dart';
@@ -30,6 +31,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
   @override
   void initState() {
     super.initState();
+    AmplitudeWebHelper.getInstance().logEnterOrderTrackingPage();
     context.read<TrackingOrderBloc>().add(GetTrackingOrderListByPage(1, context));
   }
 

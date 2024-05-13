@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 
@@ -116,7 +117,11 @@ class TrackingOrderCard extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}');
+                  AmplitudeWebHelper.getInstance().logTapOnOrderTrackingList(
+                      order.products![0].productNameTh!.toString(), order.orderNo.toString(), order.shippingStatusMessage.toString());
+
+                  Navigator.pushNamed(context,
+                      '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}&productName=${order.products![0].productNameTh!.toString()}');
                 },
                 child: Container(
                   height: 40,

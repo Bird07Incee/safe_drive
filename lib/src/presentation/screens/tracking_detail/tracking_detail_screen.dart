@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/tracking_model.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_detail/tracking_detail_bloc.dart';
@@ -28,9 +29,9 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   late RouteSettings? settings;
   String orderNo = "";
   String productId = "";
+  String productName = "";
   bool isLoaded = false;
   late double maxWidth, maxHeight;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -46,6 +47,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
+      productName = (routingData["productName"] == null) ? "" : routingData["productName"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
       context.read<TrackingDetailBloc>().add(GetTracking(orderNo: orderNo, productId: productId));
     }
@@ -409,6 +411,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
+              AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(productName, state.tracking.orderRef, state.tracking.status[0].statusName);
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
@@ -474,6 +477,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
+                                                          AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
+                                                              productName, state.tracking.orderRef, state.tracking.status[0].statusName);
                                                           String phoneNumber = ProductDetailConst().li1.split('**')[1];
                                                           phoneNumber = phoneNumber.replaceAll("-", "");
                                                           callPhone(phoneNumber);
@@ -522,6 +527,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
+                                                          AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
+                                                              productName, state.tracking.orderRef, state.tracking.status[0].statusName);
                                                           String phoneNumber = li2.split('**')[3];
                                                           phoneNumber = phoneNumber.replaceAll("-", "");
                                                           callPhone(phoneNumber);
@@ -577,6 +584,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               child: GestureDetector(
                                                 key: const Key("call_seller"),
                                                 onTap: () {
+                                                  AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
+                                                      productName, state.tracking.orderRef, state.tracking.status[0].statusName);
                                                   String mobile = "020238858";
                                                   callPhone(mobile);
                                                 },
@@ -606,9 +615,11 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                 ? Expanded(
                                                     child: GestureDetector(
                                                       onTap: () {
+                                                        AmplitudeWebHelper.getInstance().logTapOnProductRefundButton(
+                                                            productName, state.tracking.orderRef, state.tracking.status[0].statusName);
                                                         if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
                                                           Navigator.pushNamed(context,
-                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}');
+                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=${state.tracking.status[0].statusName}');
                                                         }
                                                       },
                                                       child: Container(

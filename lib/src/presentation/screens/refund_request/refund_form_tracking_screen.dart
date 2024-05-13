@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
 import 'package:marketplace_line_oa/src/model/refund/arguments/refund_success_args.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_request/refund_request_bloc.dart';
@@ -32,7 +33,7 @@ class RefundFormTrackingScreen extends StatefulWidget {
 class _RefundRequestState extends State<RefundFormTrackingScreen> {
   final scrollController = ScrollController();
   late RouteSettings? settings;
-  String orderNo = "", productId = "", refundDay = "";
+  String orderNo = "", productId = "", refundDay = "", orderStatus = "";
   List<DropdownAddressModel> listReason = [];
   bool isLoaded = false;
 
@@ -55,6 +56,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
 
   void clearState() {
     orderNo = "";
+    orderStatus = "";
     productId = "";
     refundDay = "";
     context.read<RefundRequestBloc>().add(OnClearState());
@@ -68,6 +70,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
       refundDay = (routingData["refundDay"] == null) ? "" : routingData["refundDay"];
+      orderStatus = (routingData["orderStatus"] == null) ? "" : routingData["orderStatus"];
 
       context.read<RefundRequestBloc>().add(SetRefundData(
             orderNo: orderNo,
@@ -133,6 +136,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                 },
               );
             } else if (state.refundRequestStatus == GetRefundRequestStatus.success) {
+              AmplitudeWebHelper.getInstance().logEnterProductRefundPage(state.inquiryData.productName!, state.inquiryData.invoiceNo!, orderStatus);
+
               bool haveReason = state.getTextReason.isNotEmpty;
               bool haveRemark = state.getTextRemark.isNotEmpty;
               return AlvaRootWidget(
@@ -505,6 +510,12 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                                     onAccept: () async {
                                                       final refundBloc = context.read<RefundRequestBloc>();
                                                       refundBloc.add(OnSubmitRefundData());
+                                                      AmplitudeWebHelper.getInstance().logTapOnConfirmRefundButton(
+                                                          state.inquiryData.productName!,
+                                                          state.inquiryData.invoiceNo!,
+                                                          orderStatus,
+                                                          "${state.getTextReason.toString()}${state.getTextRemark.isNotEmpty ? "_${state.getTextRemark}" : ""}",
+                                                          state.inquiryData.productId.toString());
                                                     },
                                                     onCancel: () {})
                                                 .showRefundDialog(context: context, isConfirmPayment: true);
