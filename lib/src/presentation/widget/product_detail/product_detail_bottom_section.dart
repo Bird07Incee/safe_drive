@@ -385,7 +385,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         ),
         child: StatefulBuilder(builder: (context, setState) {
           var originalDescription = product.description;
-          //    "<p>เป็นเครื่องชาร์จสำหรับบ้านอัจฉริยะใหม่ล่าสุดของเรา ออกแบบมาเพื่อให้การชาร์จรถยนต์ไฟฟ้าทุกวันง่ายกว่าที่ยังคงรักษาประสิทธิภาพขั้นสูงของตระกูล Pulsar ในขณะที่นำเสนอวิธีการประหยัดมากขึ้น การออกแบบใหม่ที่ติดตั้งง่าย และตัวเลือกสีหกสี ทำงานได้อย่างราบรื่นกับโซลูชันการจัดการพลังงานของ Wallbox ทั้งหมด รวมถึงการชาร์จพลังงานแสงอาทิตย์ ได้รับการรับรองกันน้ำและฝุ่นด้วยระดับการป้องกัน IP54 และ IK08 ช่วยให้สามารถติดตั้งภายในอาคารหรือกลางแจ้งได้อย่างปลอดภัยPulsar Plus ใช้ได้กับสายชาร์จประเภท 1 และประเภท 2เชื่อมต่ออุปกรณ์ชาร์จของคุณกับอุปกรณ์อัจฉริยะผ่าน Wi-Fi* หรือบลูทูธ และใช้แอป myWallbox เพื่อควบคุมอุปกรณ์ชาร์จของคุณได้อย่างง่ายดาย กำหนดเวลาเซสชันการชาร์จที่ใช้ประโยชน์จากอัตราพลังงานนอกช่วงสูงสุด ตรวจสอบสถานะเครื่องชาร์จของคุณ และอื่นๆ อีกมากมายผ่านแอป myWallbox</p>";
           final replaceInnerTagP = originalDescription.isNotEmpty
               ? originalDescription.substring(3, originalDescription.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
               : "";

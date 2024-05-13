@@ -155,6 +155,7 @@ class AlvaStyles {
   TextStyle discountPriceTxt14w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color, decoration: TextDecoration.lineThrough);
 
+  TextStyle headingSize16BoldHeight24(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.bold, color: color, height: 24/16);
   TextStyle body1() => const TextStyle(fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
 
   TextStyle bodySize14w400(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color);
