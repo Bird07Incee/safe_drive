@@ -39,7 +39,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
   PageController pageController = PageController(initialPage: 0, keepPage: false);
-  ScrollController scrollController = ScrollController();
+  ScrollController? scrollController;
   bool isNotLogin = true;
   TextEditingController tc = TextEditingController();
   TabController? tabController;
@@ -113,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       }
                       if (state.productListStatus == GetProductListStatus.success) {
                         tabController ??= TabController(length: state.productList.category!.length + 1, vsync: this);
+                        scrollController ??= ScrollController();
                         return Container(
                           color: cloudyWhite,
                           child: ListView(
@@ -151,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 GetProductListByCategory(state.productList.category![index - 1]["categoryId"].toString(), context));
                                           }
 
-                                          scrollController.animateTo(
+                                          scrollController!.animateTo(
                                               //go to top of scroll
                                               0, //scroll offset to go
                                               duration: Duration(milliseconds: 500), //duration of scroll
