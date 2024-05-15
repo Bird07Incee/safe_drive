@@ -22,9 +22,10 @@ import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  const ProductCardWidget({super.key, required this.maxWidth});
+  const ProductCardWidget({super.key, required this.maxWidth, required this.scrollController});
 
   final double maxWidth;
+  final ScrollController scrollController;
 
   String cleanHtml(String text) {
     String temp = text;
@@ -51,10 +52,8 @@ class ProductCardWidget extends StatelessWidget {
     List<InlineSpan> l = [];
     int len = p.promotionTag.length;
     for (var i = 0; i < len; i++) {
-        l.add(TextSpan(
-            text: p.promotionTag[i],
-            style: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20/12)));
-    //  }
+      l.add(TextSpan(text: p.promotionTag[i], style: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12)));
+      //  }
       if (i != len - 1 && len <= 3) {
         l.add(WidgetSpan(
           child: Container(
@@ -103,6 +102,7 @@ class ProductCardWidget extends StatelessWidget {
                         hideOneTrustCookieScript();
                         context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                         context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
+                        context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
                         await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
                         showOneTrustCookieScript();
                       },
@@ -136,7 +136,7 @@ class ProductCardWidget extends StatelessWidget {
                                   context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));
                                   context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                                   context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
-
+                                  context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
                                   context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                                   final ctx = context.read<ProductDetailCarouselScrollControllerBloc>();
                                   await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
@@ -212,9 +212,7 @@ class ProductCardWidget extends StatelessWidget {
                                         child: Align(
                                       alignment: Alignment.bottomRight,
                                       child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
                                         margin: EdgeInsets.all(8),
                                         padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
                                         child: Image.network(

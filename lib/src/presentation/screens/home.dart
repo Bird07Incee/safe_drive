@@ -102,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     }
                   },
                   builder: (context, state) {
+                    scrollController ??= ScrollController(initialScrollOffset: state.scrollPosition);
                     return BlocConsumer<AuthBloc, AuthState>(listener: (context, stateAuth) {
                       if (stateAuth.authStatus == AuthStatus.success && state.productListStatus == GetProductListStatus.initial) {
                         context.read<ProductListBloc>().add(const GetProductList());
@@ -113,13 +114,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       }
                       if (state.productListStatus == GetProductListStatus.success) {
                         tabController ??= TabController(length: state.productList.category!.length + 1, vsync: this);
-                        scrollController ??= ScrollController();
                         return Container(
                           color: cloudyWhite,
                           child: ListView(
                             controller: scrollController,
                             children: [
-                              HomepageTopSection(maxWidth: maxWidth),
+                              HomepageTopSection(
+                                maxWidth: maxWidth,
+                                scrollController: scrollController!,
+                              ),
                               HomePageBanner(
                                 pageControllerState: pageController,
                                 banners: state.productList.banner!,
@@ -217,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           width: maxWidth - 32,
                                           child: ProductCardWidget(
                                             maxWidth: maxWidth,
+                                            scrollController: scrollController!,
                                             // productList: state.productList,
                                           ),
                                         ),
@@ -309,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             textStyle: AlvaStyles().headingSize10w600(sugarRed),
                                             onTapfunction: () {
                                               amplitudeWebHelper.logTapOnTermAndConditionButton();
+                                              context.read<ProductListBloc>().add(SetScrollPosition(scrollController!.offset));
                                               Navigator.pushNamed(context, '/readTermAndCon');
                                             }),
                                         Container(
