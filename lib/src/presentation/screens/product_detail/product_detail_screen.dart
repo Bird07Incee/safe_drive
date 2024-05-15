@@ -106,10 +106,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
         builder: (context, pdState) {
           if (pdState.status.isSuccess) {
             AmplitudeWebHelper.getInstance().logEnterProductDetails(
-                productName: pdState.product.productName,
-                contentId: pdState.product.productId,
-                merchantName: pdState.product.merchantFullName,
-                productCategoryId: pdState.product.categoryId.toString());
+                productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
             return BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
               builder: (ctx, stateAppBar) {
                 return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
@@ -257,7 +254,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                           productName: pdState.product.productName,
                           contentId: pdState.product.productId,
                           merchantName: pdState.product.merchantFullName,
-                          productCategoryId: pdState.product.categoryId.toString(),
                           price: pdState.product.price.toString(),
                           discountPrice: pdState.product.discountPrice.toString());
                       if (pdState.product.productionOptionals.isNotEmpty) {

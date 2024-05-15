@@ -507,8 +507,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                           AmplitudeWebHelper.getInstance().logTapOniImageGallery(
                                               productName: state.product.productName,
                                               contentId: state.product.productId,
-                                              merchantName: state.product.merchantFullName,
-                                              productCategoryId: state.product.categoryId.toString());
+                                              merchantName: state.product.merchantFullName);
                                           context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: true));
                                           context
                                               .read<ProductDetailCarouselScrollControllerBloc>()
@@ -661,7 +660,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                       GestureDetector(
                                         key: const Key("read_more_product_detail"),
                                         child: Container(
-                                           padding: EdgeInsets.only(right: 0),
+                                          padding: EdgeInsets.only(right: 0),
                                           child: HtmlWidget(
                                               descriptionState.toggleDescription ||
                                                       (lineFinal <= maxLines && truncatedHtmlText.containsHtmlTags(tagline))
