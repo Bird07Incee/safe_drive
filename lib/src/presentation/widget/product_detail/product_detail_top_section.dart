@@ -568,9 +568,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                               child: Align(
                             alignment: Alignment.bottomRight,
                             child: Container(
-                              decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(8))),
+                              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
                               margin: EdgeInsets.all(8),
                               padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
                               child: Image.network(

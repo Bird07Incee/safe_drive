@@ -50,10 +50,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   String maStatus = 'false';
 
   @override
-  void initState() async {
+  void initState() {
     AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
     context.read<OrderSummaryBloc>().add(InitialOrderState());
-    maStatus = await MaintenanceHelper().getMaintenanceData();
+    getMaStatus();
     super.initState();
   }
 
@@ -64,6 +64,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       isLoaded = true;
       loadProduct();
     }
+  }
+
+  getMaStatus() async {
+    var status = await MaintenanceHelper().getMaintenanceData();
+    setState(() {
+      maStatus = status;
+    });
   }
 
   loadProduct() {
@@ -183,7 +190,16 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
               }
             },
             builder: (context, orderState) {
-              if (orderState.orderStatus.isError) {
+              if (maStatus.toLowerCase() == "true") {
+                return ErrorScreen(
+                  title: ErrorConst().titleMaintenance,
+                  subTitle: ErrorConst().subtitleMaintenance,
+                  titleBtn: ErrorConst().titleBtnMaintenance,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                );
+              } else if (orderState.orderStatus.isError) {
                 return ErrorScreen(
                   title: ErrorConst().titleNS,
                   subTitle: ErrorConst().subTitleNS,
