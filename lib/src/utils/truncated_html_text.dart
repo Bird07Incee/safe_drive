@@ -1,4 +1,4 @@
-import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
 
 class TruncatedHtmlText {
   String removeHtmlForbiddenTagsTags(String input) {

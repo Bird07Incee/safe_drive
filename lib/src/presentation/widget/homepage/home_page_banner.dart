@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
-import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
+import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
+import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
+import 'package:autoStation_promptBuy/src/helpers/amplitude_web_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
 
 class AlvaCPILoader extends StatefulWidget {
   // circular progress indicator

@@ -3,11 +3,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketplace_line_oa/configs/enivironment_config.dart';
-import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
-import 'package:marketplace_line_oa/src/model/product_summary/dropdown_address_model.dart';
-import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
-import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
+import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
+import 'package:autoStation_promptBuy/src/model/form_widget_model.dart';
+import 'package:autoStation_promptBuy/src/model/product_summary/dropdown_address_model.dart';
+import 'package:autoStation_promptBuy/src/model/product_summary/shipping_address_model.dart';
+import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
 
 part 'shipping_address_event.dart';
 part 'shipping_address_state.dart';

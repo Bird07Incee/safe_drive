@@ -1,4 +1,4 @@
-import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:autoStation_promptBuy/src/model/product_list.dart';
 
 class ProductDetailArgs {
   ProductDetailArgs({required this.product});

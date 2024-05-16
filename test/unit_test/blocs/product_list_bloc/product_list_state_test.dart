@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:autoStation_promptBuy/src/presentation/blocs/product_list/product_list_bloc.dart';
 
 void main() {
   group("ContactState", (){

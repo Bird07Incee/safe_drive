@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketplace_line_oa/configs/enivironment_config.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
-import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
-import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
-import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
+import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
+import 'package:autoStation_promptBuy/src/helpers/line_data_helper.dart';
+import 'package:autoStation_promptBuy/src/model/tracking_list_data.dart';
+import 'package:autoStation_promptBuy/src/presentation/shared/general_dialog.dart';
+import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
 
 part 'tracking_order_event.dart';
 part 'tracking_order_state.dart';

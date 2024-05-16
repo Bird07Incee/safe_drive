@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
-import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
+import 'package:autoStation_promptBuy/src/services/dio_utility_services.dart';
+import 'package:autoStation_promptBuy/src/services/dio_utils/header_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

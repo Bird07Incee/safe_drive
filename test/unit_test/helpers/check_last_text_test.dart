@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:marketplace_line_oa/src/helpers/check_last_text.dart';
+import 'package:autoStation_promptBuy/src/helpers/check_last_text.dart';
 
 void main() {
   group('CheckLastText', () {

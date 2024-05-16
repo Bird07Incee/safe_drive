@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
-import 'package:marketplace_line_oa/src/constants/app_strings.dart';
-import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:autoStation_promptBuy/src/constants/alva_styles.dart';
+import 'package:autoStation_promptBuy/src/constants/app_strings.dart';
+import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
+import 'package:autoStation_promptBuy/src/presentation/widget/alva_text.dart';
 
 class DisclaimerSection extends StatefulWidget {
   const DisclaimerSection({super.key});

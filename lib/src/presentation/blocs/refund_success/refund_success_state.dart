@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:marketplace_line_oa/src/model/refund/refund_success_data_model.dart';
+import 'package:autoStation_promptBuy/src/model/refund/refund_success_data_model.dart';
 
 enum GetRefundSuccessDataStatus { initial, loading, success, cancel, error }
 

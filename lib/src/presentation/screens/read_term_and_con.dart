@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
-import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
-import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/term_and_con/term_and_con_section.dart';
+import 'package:autoStation_promptBuy/src/constants/alva_styles.dart';
+import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
+import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
+import 'package:autoStation_promptBuy/src/presentation/screens/root_page_condition.dart';
+import 'package:autoStation_promptBuy/src/presentation/widget/alva_text.dart';
+import 'package:autoStation_promptBuy/src/presentation/widget/root_widget.dart';
+import 'package:autoStation_promptBuy/src/presentation/widget/term_and_con/term_and_con_section.dart';
 
 class ReadTermAndConScreen extends StatelessWidget {
   const ReadTermAndConScreen({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
-import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
-import 'package:marketplace_line_oa/src/constants/my_constants.dart';
-import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
-import 'package:marketplace_line_oa/src/js/js_manager.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:autoStation_promptBuy/src/constants/alva_styles.dart';
+import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
+import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
+import 'package:autoStation_promptBuy/src/helpers/amplitude_web_helper.dart';
+import 'package:autoStation_promptBuy/src/js/js_manager.dart';
+import 'package:autoStation_promptBuy/src/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:autoStation_promptBuy/src/presentation/widget/alva_text.dart';
 
 class HomepageTopSection extends StatelessWidget {
   const HomepageTopSection({super.key, required this.maxWidth, required this.scrollController});

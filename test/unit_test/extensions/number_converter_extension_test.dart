@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:autoStation_promptBuy/src/extension/number_converter.dart';
 
 void main() {
   test('Should return string as the decimal number formatted', () {

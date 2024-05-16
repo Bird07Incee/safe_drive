@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
-import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
+import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
+import 'package:autoStation_promptBuy/src/services/dio_utility_services.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockService extends Mock implements DioUtilityService {}

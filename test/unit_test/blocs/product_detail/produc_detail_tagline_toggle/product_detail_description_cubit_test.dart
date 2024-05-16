@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
+import 'package:autoStation_promptBuy/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 
 void main() {
   group('ProductDetailDescriptionCubit', () {

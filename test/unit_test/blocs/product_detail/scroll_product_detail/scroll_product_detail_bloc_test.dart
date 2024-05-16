@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
+import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 
 void main() {
   group("product detail bloc", ()

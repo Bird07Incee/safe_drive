@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:universal_html/html.dart' as html;
-import 'package:marketplace_line_oa/configs/enivironment_config.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
-import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
-import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
-import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
+import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
+import 'package:autoStation_promptBuy/src/helpers/line_data_helper.dart';
+import 'package:autoStation_promptBuy/src/helpers/shared_preference_helper.dart';
+import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
+import 'package:autoStation_promptBuy/src/services/dio_utility_services.dart';
 
 class InterceptorHandler {
   InterceptorHandler({this.dioUtilityRepository});

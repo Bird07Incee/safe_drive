@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
+import 'package:autoStation_promptBuy/src/presentation/blocs/check_browser/check_browser_bloc.dart';
 
 void main() {
   group('CheckBrowserBloc', () {

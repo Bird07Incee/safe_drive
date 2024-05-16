@@ -1,4 +1,4 @@
-import 'package:marketplace_line_oa/src/helpers/interceptor_handler.dart';
+import 'package:autoStation_promptBuy/src/helpers/interceptor_handler.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:dio/dio.dart';
 

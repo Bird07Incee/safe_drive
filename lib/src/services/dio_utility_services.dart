@@ -2,9 +2,9 @@
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
-import 'package:marketplace_line_oa/src/helpers/dio_intercetptor.dart';
-import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
-import 'package:marketplace_line_oa/src/services/dio_utils/header_utils.dart';
+import 'package:autoStation_promptBuy/src/helpers/dio_intercetptor.dart';
+import 'package:autoStation_promptBuy/src/helpers/line_data_helper.dart';
+import 'package:autoStation_promptBuy/src/services/dio_utils/header_utils.dart';
 
 class DioUtilityService {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? DioClient().dioClient;
