@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/maintenance_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/arguments/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/create_order_request_model.dart';
@@ -46,11 +47,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   int? optLv1;
   var currentRoute = CurrentRouteObserver.instance.name;
   bool isLoaded = false;
+  String maStatus = 'false';
 
   @override
-  void initState() {
+  void initState() async {
     AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
     context.read<OrderSummaryBloc>().add(InitialOrderState());
+    maStatus = await MaintenanceHelper().getMaintenanceData();
     super.initState();
   }
 
@@ -200,7 +203,16 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           step1 = pdOptState.stepOneGroupValueRadio;
                           step1price = pdOptState.stepOnePrice ?? 0;
                           step2 = pdOptState.stepTwoGroupValueRadio;
-                          if (productState.status.isSuccess) {
+                          if (maStatus.toLowerCase() == "true") {
+                            return ErrorScreen(
+                              title: ErrorConst().titleMaintenance,
+                              subTitle: ErrorConst().subtitleMaintenance,
+                              titleBtn: ErrorConst().titleBtnMaintenance,
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            );
+                          } else if (productState.status.isSuccess) {
                             return Scaffold(
                                 resizeToAvoidBottomInset: true,
                                 backgroundColor: Colors.white,

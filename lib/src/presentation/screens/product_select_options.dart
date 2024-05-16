@@ -5,8 +5,10 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/maintenance_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
@@ -24,6 +26,7 @@ class ProductSelectOptions extends StatefulWidget {
 class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   late RouteSettings? settings;
   String pid = '';
+  String maStatus = 'false';
 
   @override
   void didChangeDependencies() {
@@ -45,10 +48,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   }
 
   @override
-  void initState() {
+  void initState() async {
     // TODO: implement initState
     super.initState();
     ProductDetailState pdState = context.read<ProductDetailBloc>().state;
+    maStatus = await MaintenanceHelper().getMaintenanceData();
     AmplitudeWebHelper.getInstance().logEnterProductOptionPage(
         productName: pdState.product.productName,
         contentId: pdState.product.productId,
@@ -172,7 +176,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
               ),
               child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
                 builder: (context, state) {
-                  if (state.status.isSuccess) {
+                  if (maStatus.toLowerCase() == "true") {
+                    return ErrorScreen(
+                      title: ErrorConst().titleMaintenance,
+                      subTitle: ErrorConst().subtitleMaintenance,
+                      titleBtn: ErrorConst().titleBtnMaintenance,
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    );
+                  } else if (state.status.isSuccess) {
                     return Container(
                       color: whitePure,
                       child: Theme(
