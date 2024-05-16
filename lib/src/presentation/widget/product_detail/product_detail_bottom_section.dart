@@ -988,7 +988,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(color: cloudWhite, width: 2.0),
+                      bottom: BorderSide(color: neutral100, width: 2.0),
                     ),
                   ),
                 ),
@@ -998,7 +998,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       controller: _tabController,
                       labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
                       indicatorColor: BlueFantasy,
-                      unselectedLabelColor: neutral100,
+                      unselectedLabelColor: whiteGray,
                       //  unselectedLabelColor: cloudSoftDeepWhite,
                       labelStyle: const TextStyle(
                         fontFamily: fontFamily,
