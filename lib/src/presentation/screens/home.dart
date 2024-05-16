@@ -382,6 +382,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         );
                       } else if (state.productListStatus == GetProductListStatus.initial || state.productListStatus == GetProductListStatus.loading) {
                         return const LoadingScreen();
+                      } else if (state.productListStatus == GetProductListStatus.maintenance) {
+                        return ErrorScreen(
+                          title: ErrorConst().titleMaintenance,
+                          subTitle: ErrorConst().subtitleMaintenance,
+                          titleBtn: ErrorConst().titleBtnMaintenance,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        );
                       } else {
                         return ErrorScreen(
                           title: ErrorConst().titleNS,

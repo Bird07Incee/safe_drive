@@ -128,7 +128,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:  MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
                                     "ชำระเงินสำเร็จ",
@@ -229,7 +229,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                           Text(
                                             orderSuccessData.productName!,
                                             maxLines: 1,
-                                            style: AlvaStyles().headingSize14w800(blackGoMunTo).copyWith(height: 22/14),
+                                            style: AlvaStyles().headingSize14w800(blackGoMunTo).copyWith(height: 22 / 14),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           Text(
@@ -274,7 +274,8 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey).copyWith(height: 20/12))
+                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว",
+                                              style: AlvaStyles().headingSize12w400Cordia(spaceGrey).copyWith(height: 20 / 12))
                                         ],
                                       ),
                                     )
@@ -295,10 +296,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             width: maxWidth,
                             padding: EdgeInsets.all(16),
                             color: Colors.white,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
+                            child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.end, children: [
                               ProductAttribute(
                                 attributeKey: "ชื่อผู้รับสินค้า",
                                 attributevalue: orderSuccessData.customerFullname!,

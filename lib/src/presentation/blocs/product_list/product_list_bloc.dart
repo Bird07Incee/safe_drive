@@ -48,6 +48,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       }
 
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 503) {
+        emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
+      }
     } catch (e) {
       // debugPrint('re-load product list after refresh token');
       try {
@@ -57,6 +61,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           emit(state.copyWith(hideCategory: true));
         }
         emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+      } on DioException catch (e) {
+        if (e.response?.statusCode == 503) {
+          emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
+        }
       } catch (e) {
         emit(state.copyWith(productListStatus: GetProductListStatus.error));
       }
@@ -88,6 +96,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
         Navigator.pop(event.context);
+      }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 503) {
+        emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
       }
     } catch (e) {
       // debugPrint(e.toString());
@@ -135,6 +147,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
         Navigator.pop(event.context);
+      }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 503) {
+        emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
       }
     } catch (e) {
       // debugPrint(e.toString());

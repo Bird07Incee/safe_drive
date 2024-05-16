@@ -290,7 +290,8 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว", style: AlvaStyles().headingSize12w400Cordia(spaceGrey).copyWith(height: 20/12))
+                                          Text("ยอดชำระนี้รวมภาษีมูลค่าเพิ่มแล้ว",
+                                              style: AlvaStyles().headingSize12w400Cordia(spaceGrey).copyWith(height: 20 / 12))
                                         ],
                                       ),
                                     )
@@ -432,12 +433,8 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
 
                           String pid = state.refundSuccessData.productId ?? "";
                           if (pid.isNotEmpty) {
-                          //  clearState();
-                            refreshRoute(
-                                context: context,
-                                currentRoute: "refundSuccess",
-                                queryParams: "",
-                                listOption: []);
+                            //  clearState();
+                            refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "", listOption: []);
                           } else {
                             CurrentRouteObserver.instance.stack.clear();
                             Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);

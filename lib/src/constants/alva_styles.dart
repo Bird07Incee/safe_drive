@@ -70,56 +70,56 @@ class AlvaStyles {
       );
 
   TextStyle headingSize16Height24() => const TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    color: BTN_SELECTED_TEXT_COLOR_NEW,
-    height: 24 / 16,
-  );
+        fontFamily: fontFamily,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: BTN_SELECTED_TEXT_COLOR_NEW,
+        height: 24 / 16,
+      );
 
   TextStyle headingSize14Height22() => const TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    color: BTN_SELECTED_TEXT_COLOR_NEW,
-    height: 22 / 14,
-  );
+        fontFamily: fontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: BTN_SELECTED_TEXT_COLOR_NEW,
+        height: 22 / 14,
+      );
 
   TextStyle headingSize14Height24(Color color) => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.bold,
-    height: 24 / 14,
-  );
+        fontFamily: fontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        height: 24 / 14,
+      );
 
   TextStyle headingSize14RegHeight22(Color color) => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    height: 22 / 14,
-    color: color,
-  );
+        fontFamily: fontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        height: 22 / 14,
+        color: color,
+      );
 
   TextStyle headingSize12RegHeight20(Color color) => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 12,
-    fontWeight: FontWeight.w400,
-    height: 20 / 12,
-  );
+        fontFamily: fontFamily,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        height: 20 / 12,
+      );
 
   TextStyle headingSize14BoldHeight22(Color color) => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.bold,
-    height: 22 / 14,
-  );
+        fontFamily: fontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        height: 22 / 14,
+      );
 
   TextStyle headingSize16BoldHeight32(Color color) => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    height: 32 / 16,
-  );
+        fontFamily: fontFamily,
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        height: 32 / 16,
+      );
 
   TextStyle headingSize16Bold() =>
       const TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.bold, color: BTN_SELECTED_TEXT_COLOR_NEW, height: 16 / 16);
@@ -155,7 +155,8 @@ class AlvaStyles {
   TextStyle discountPriceTxt14w400(Color color) =>
       TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color, decoration: TextDecoration.lineThrough);
 
-  TextStyle headingSize16BoldHeight24(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.bold, color: color, height: 24/16);
+  TextStyle headingSize16BoldHeight24(Color color) =>
+      TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.bold, color: color, height: 24 / 16);
   TextStyle body1() => const TextStyle(fontFamily: fontFamily, fontSize: 12, color: BTN_SELECTED_TEXT_COLOR_NEW);
 
   TextStyle bodySize14w400(Color color) => TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: color);
@@ -185,13 +186,14 @@ class AlvaStyles {
         )),
       );
 
-  ButtonStyle outlineNoneBorderButtonStyle(Color backgroundColor, Color foregroundColor, {bool isRadius8 = false, double ?padding}) => OutlinedButton.styleFrom(
+  ButtonStyle outlineNoneBorderButtonStyle(Color backgroundColor, Color foregroundColor, {bool isRadius8 = false, double? padding}) =>
+      OutlinedButton.styleFrom(
         side: BorderSide.none,
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
-        padding: padding != null ? EdgeInsets.symmetric(horizontal: padding) :null,
+        padding: padding != null ? EdgeInsets.symmetric(horizontal: padding) : null,
       );
 }

@@ -101,6 +101,12 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
       } else {
         emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.empty, trackingListData: orderList));
       }
+    } on DioException catch (e) {
+      if (e.response!.statusCode == 503) {
+        emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.maintenance));
+      } else {
+        emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.error));
+      }
     } catch (e) {
       emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.error));
     }
