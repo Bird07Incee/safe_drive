@@ -568,17 +568,17 @@ class _PDTopSectionState extends State<PDTopSection> {
                           Positioned.fill(
                               child: Align(
                             alignment: Alignment.bottomRight,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-                              child: Container(
-                                color: Colors.white,
-                                padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                                child: Image.network(
-                                  state.product.merchantLogo,
-                                  height: 32,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
-                                ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(Radius.circular(8))),
+                              margin: EdgeInsets.all(8),
+                              padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
+                              child: Image.network(
+                                state.product.merchantLogo,
+                                height: 40,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
                               ),
                             ),
                           )),
