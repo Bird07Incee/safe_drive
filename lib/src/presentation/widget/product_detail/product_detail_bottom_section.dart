@@ -1010,16 +1010,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         setState(() {});
                         if (index == 0) {
                           AmplitudeWebHelper.getInstance().logTapOnGeneralInfoButton(
-                              productName: product.productName,
-                              contentId: product.productId,
-                              merchantName: product.merchantFullName,
-                              productCategoryId: product.categoryId.toString());
+                              productName: product.productName, contentId: product.productId, merchantName: product.merchantFullName);
                         } else {
                           AmplitudeWebHelper.getInstance().logTapOnConditionsButton(
-                              productName: product.productName,
-                              contentId: product.productId,
-                              merchantName: product.merchantFullName,
-                              productCategoryId: product.categoryId.toString());
+                              productName: product.productName, contentId: product.productId, merchantName: product.merchantFullName);
                         }
                       },
                       tabs: [
@@ -1143,10 +1137,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         child: OutlinedButton(
                           onPressed: () async {
                             AmplitudeWebHelper.getInstance().logTapOnCallMerchantButton(
-                                productName: product.productName,
-                                contentId: product.productId,
-                                merchantName: product.merchantFullName,
-                                productCategoryId: product.categoryId.toString());
+                                productName: product.productName, contentId: product.productId, merchantName: product.merchantFullName);
                             String mobile = product.merchantMobile.replaceAll('-', '');
                             callPhone(mobile);
                           },

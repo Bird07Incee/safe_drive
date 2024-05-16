@@ -39,7 +39,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
   PageController pageController = PageController(initialPage: 0, keepPage: false);
-  ScrollController scrollController = ScrollController();
+  ScrollController? scrollController;
   bool isNotLogin = true;
   TextEditingController tc = TextEditingController();
   TabController? tabController;
@@ -102,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     }
                   },
                   builder: (context, state) {
+                    scrollController ??= ScrollController(initialScrollOffset: state.scrollPosition);
                     return BlocConsumer<AuthBloc, AuthState>(listener: (context, stateAuth) {
                       if (stateAuth.authStatus == AuthStatus.success && state.productListStatus == GetProductListStatus.initial) {
                         context.read<ProductListBloc>().add(const GetProductList());
@@ -118,7 +119,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           child: ListView(
                             controller: scrollController,
                             children: [
-                              HomepageTopSection(maxWidth: maxWidth),
+                              HomepageTopSection(
+                                maxWidth: maxWidth,
+                                scrollController: scrollController!,
+                              ),
                               HomePageBanner(
                                 pageControllerState: pageController,
                                 banners: state.productList.banner!,
@@ -151,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 GetProductListByCategory(state.productList.category![index - 1]["categoryId"].toString(), context));
                                           }
 
-                                          scrollController.animateTo(
+                                          scrollController!.animateTo(
                                               //go to top of scroll
                                               0, //scroll offset to go
                                               duration: Duration(milliseconds: 500), //duration of scroll
@@ -216,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           width: maxWidth - 32,
                                           child: ProductCardWidget(
                                             maxWidth: maxWidth,
+                                            scrollController: scrollController!,
                                             // productList: state.productList,
                                           ),
                                         ),
@@ -308,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             textStyle: AlvaStyles().headingSize10w600(sugarRed),
                                             onTapfunction: () {
                                               amplitudeWebHelper.logTapOnTermAndConditionButton();
+                                              context.read<ProductListBloc>().add(SetScrollPosition(scrollController!.offset));
                                               Navigator.pushNamed(context, '/readTermAndCon');
                                             }),
                                         Container(
@@ -376,6 +382,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         );
                       } else if (state.productListStatus == GetProductListStatus.initial || state.productListStatus == GetProductListStatus.loading) {
                         return const LoadingScreen();
+                      } else if (state.productListStatus == GetProductListStatus.maintenance) {
+                        return ErrorScreen(
+                          title: ErrorConst().titleMaintenance,
+                          subTitle: ErrorConst().subtitleMaintenance,
+                          titleBtn: ErrorConst().titleBtnMaintenance,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        );
                       } else {
                         return ErrorScreen(
                           title: ErrorConst().titleNS,

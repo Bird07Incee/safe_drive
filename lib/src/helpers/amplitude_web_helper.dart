@@ -166,34 +166,29 @@ class AmplitudeWebHelper {
   }
 
 // ProductDetail
-  Future<void> logEnterProductDetails(
-      {required String productName, required String contentId, required String merchantName, required String productCategoryId}) async {
+  Future<void> logEnterProductDetails({required String productName, required String contentId, required String merchantName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(eventType: "Enter product details", screenName: "AutoStation_eMarketplace_product_details", eventName: productName, eventProperties: {
       "content_id": contentId,
       "category_name": merchantName,
-      "content_type": productCategoryId,
       'channel': "LINE",
       'line_uuid': lineUID,
     });
   }
 
-  Future<void> logTapOniImageGallery(
-      {required String productName, required String contentId, required String merchantName, required String productCategoryId}) async {
+  Future<void> logTapOniImageGallery({required String productName, required String contentId, required String merchantName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(eventType: "Tap on image gallery", screenName: "AutoStation_eMarketplace_product_details", eventName: productName, eventProperties: {
       "content_id": contentId,
       "category_name": merchantName,
-      "content_type": productCategoryId,
       'channel': "LINE",
       'line_uuid': lineUID,
     });
   }
 
-  Future<void> logTapOnGeneralInfoButton(
-      {required String productName, required String contentId, required String merchantName, required String productCategoryId}) async {
+  Future<void> logTapOnGeneralInfoButton({required String productName, required String contentId, required String merchantName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -203,27 +198,23 @@ class AmplitudeWebHelper {
         eventProperties: {
           "content_id": contentId,
           "category_name": merchantName,
-          "content_type": productCategoryId,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
   }
 
-  Future<void> logTapOnConditionsButton(
-      {required String productName, required String contentId, required String merchantName, required String productCategoryId}) async {
+  Future<void> logTapOnConditionsButton({required String productName, required String contentId, required String merchantName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(eventType: "Tap on conditions button", screenName: "AutoStation_eMarketplace_product_details", eventName: productName, eventProperties: {
       "content_id": contentId,
       "category_name": merchantName,
-      "content_type": productCategoryId,
       'channel': "LINE",
       'line_uuid': lineUID,
     });
   }
 
-  Future<void> logTapOnCallMerchantButton(
-      {required String productName, required String contentId, required String merchantName, required String productCategoryId}) async {
+  Future<void> logTapOnCallMerchantButton({required String productName, required String contentId, required String merchantName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -233,7 +224,6 @@ class AmplitudeWebHelper {
         eventProperties: {
           "content_id": contentId,
           "category_name": merchantName,
-          "content_type": productCategoryId,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -243,7 +233,6 @@ class AmplitudeWebHelper {
       {required String productName,
       required String contentId,
       required String merchantName,
-      required String productCategoryId,
       required String price,
       required String discountPrice}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
@@ -251,7 +240,6 @@ class AmplitudeWebHelper {
     logEvent(eventType: "Tap on purchase button", screenName: "AutoStation_eMarketplace_product_details", eventName: productName, eventProperties: {
       "content_id": contentId,
       "category_name": merchantName,
-      "content_type": productCategoryId,
       "product_price": price,
       "product_discount_price": discountPrice,
       'channel': "LINE",

@@ -17,6 +17,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
     on<SetSelectTabIndex>(_onSetSelectTabIndex);
+    on<SetScrollPosition>(_onSetScrollPosition);
   }
   final DioUtilityRepository utilityRepository;
 
@@ -47,6 +48,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       }
 
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 503) {
+        emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
+      }
     } catch (e) {
       // debugPrint('re-load product list after refresh token');
       try {
@@ -56,6 +61,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           emit(state.copyWith(hideCategory: true));
         }
         emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
+      } on DioException catch (e) {
+        if (e.response?.statusCode == 503) {
+          emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
+        }
       } catch (e) {
         emit(state.copyWith(productListStatus: GetProductListStatus.error));
       }
@@ -87,6 +96,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
         Navigator.pop(event.context);
+      }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 503) {
+        emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
       }
     } catch (e) {
       // debugPrint(e.toString());
@@ -135,6 +148,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         // ignore: use_build_context_synchronously
         Navigator.pop(event.context);
       }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 503) {
+        emit(state.copyWith(productListStatus: GetProductListStatus.maintenance));
+      }
     } catch (e) {
       // debugPrint(e.toString());
       emit(state.copyWith(productListStatus: GetProductListStatus.error));
@@ -144,5 +161,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         Navigator.pop(event.context);
       }
     }
+  }
+
+  _onSetScrollPosition(SetScrollPosition event, Emitter<ProductListState> emit) {
+    emit(state.copyWith(scrollPosition: event.scrollPosition));
   }
 }

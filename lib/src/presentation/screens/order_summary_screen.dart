@@ -290,17 +290,17 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                             ? SizedBox.shrink()
                                                             : Padding(
                                                                 padding: const EdgeInsets.only(top: 4),
-                                                          child: SizedBox(
-                                                            width: maxWidth - 32 - 16 - 72,
-                                                            child: AlvaTextMaxLinesOverflow(
-                                                                maxLines: 5,
-                                                                title:
-                                                                    "${productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0].levelName}: $step1",
-                                                                textStyle: AlvaStyles()
-                                                                    .headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                    .copyWith(height: 1.6)),
-                                                          ),
-                                                          ),
+                                                                child: SizedBox(
+                                                                  width: maxWidth - 32 - 16 - 72,
+                                                                  child: AlvaTextMaxLinesOverflow(
+                                                                      maxLines: 5,
+                                                                      title:
+                                                                          "${productState.product.productionOptionals[pdOptState.stepOneIndexSelect ?? 0].levelName}: $step1",
+                                                                      textStyle: AlvaStyles()
+                                                                          .headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                          .copyWith(height: 1.6)),
+                                                                ),
+                                                              ),
                                                       ],
                                                     )
                                                   ],
@@ -716,7 +716,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                     maxLines: 1,
                                                                     textStyle: AlvaStyles()
                                                                         .bodySize14W500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                        .copyWith(height: 22/14)),
+                                                                        .copyWith(height: 22 / 14)),
                                                               ),
                                                               SizedBox(
                                                                 width: 16,
@@ -726,7 +726,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                       "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} บาท",
                                                                   textStyle: AlvaStyles()
                                                                       .bodySize14W500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                      .copyWith(height: 22/14)),
+                                                                      .copyWith(height: 22 / 14)),
                                                             ],
                                                           ),
                                                         ),
@@ -746,7 +746,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                       maxLines: 5,
                                                                       textStyle: AlvaStyles()
                                                                           .bodySize12W400(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                          .copyWith(height: 20/12)),
+                                                                          .copyWith(height: 20 / 12)),
                                                                 ),
                                                               )
                                                             : SizedBox.shrink(),

@@ -216,9 +216,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                   SizedBox(
                                     width: maxWidth - 32 - 16 - 72,
                                     child: AlvaTextMaxLinesOverflow(
-                                        maxLines: 1,
-                                        title: state.inquiryData.productName!,
-                                        textStyle: AlvaStyles().headingSize14Height22()),
+                                        maxLines: 1, title: state.inquiryData.productName!, textStyle: AlvaStyles().headingSize14Height22()),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 4),

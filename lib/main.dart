@@ -27,7 +27,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-  //  runApp(MyApp());
+    //  runApp(MyApp());
     DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
       return runApp(const MyApp());
     });
