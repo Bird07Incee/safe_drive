@@ -1,3 +1,4 @@
+import 'package:autoStation_promptBuy/src/helpers/maintenance_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       if (productList.products!.length == 1 || productList.category!.isEmpty) {
         emit(state.copyWith(hideCategory: true));
       }
+
+      MaintenanceHelper().saveMaintenanceDataToLocalStorage(productList.serviceMA!);
 
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } on DioException catch (e) {
@@ -140,7 +143,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           productCountItems: currentProductList.productCountItems,
           banner: currentProductList.banner,
           category: currentProductList.category,
-          products: oldProducts! + currentProductList.products!);
+          products: oldProducts! + currentProductList.products!,
+          serviceMA: currentProductList.serviceMA);
 
       emit(state.copyWith(productList: nextProduct, productListStatus: GetProductListStatus.success));
 

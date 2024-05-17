@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class ProductList extends Equatable {
-  const ProductList({
-    required this.productAllItems,
-    required this.productPage,
-    required this.productCountItems,
-    required this.banner,
-    required this.category,
-    required this.products,
-  });
+  const ProductList(
+      {required this.productAllItems,
+      required this.productPage,
+      required this.productCountItems,
+      required this.banner,
+      required this.category,
+      required this.products,
+      required this.serviceMA});
 
   final int? productAllItems;
   final int? productPage;
@@ -16,6 +16,7 @@ class ProductList extends Equatable {
   final List<Banner>? banner;
   final List<Map>? category;
   final List<Product>? products;
+  final String? serviceMA;
 
   ProductList.fromJson(Map<String, dynamic> json)
       : banner = json['banner'] != null ? List.from(json['banner']).map((e) => Banner.fromJson(e)).toList() : [],
@@ -23,7 +24,8 @@ class ProductList extends Equatable {
         products = json['products'] != null ? List.from(json['products']).map((e) => Product.fromJson(e)).toList() : [],
         productAllItems = json['productAllItems'] != null ? json['productAllItems'] as int? : 0,
         productPage = json['productPage'] != null ? json['productPage'] as int? : 0,
-        productCountItems = json['productCountItems'] != null ? json['productCountItems'] as int? : 0;
+        productCountItems = json['productCountItems'] != null ? json['productCountItems'] as int? : 0,
+        serviceMA = json['serviceMA'] ?? "false";
 
   @override
   // TODO: implement props
