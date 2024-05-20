@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:autoStation_promptBuy/src/extension/custom_tap_down_details.dart';
+import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
 
 void main() {
   test('Should return TapDownDetails as the TapDownDetails class', (){

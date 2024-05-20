@@ -1,25 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/auth/auth_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/check_browser/check_browser_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/order_success/order_success_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/order_summary/order_summary_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/order_summary/show_summary_detail_cubit.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_list/active_images_index.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_list/product_list_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_options/product_options_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/refund_request/refund_request_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/refund_success/refund_success_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/tracking_detail/tracking_detail_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/tracking_order/tracking_order_bloc.dart';
-import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/order_summary_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_summary_detail_cubit.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_request/refund_request_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/tracking_detail/tracking_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/tracking_order/tracking_order_bloc.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 final List<BlocProvider> blocs = [
   BlocProvider<AuthBloc>(create: (_) => AuthBloc()),

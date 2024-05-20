@@ -3,17 +3,17 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:autoStation_promptBuy/src/constants/alva_styles.dart';
-import 'package:autoStation_promptBuy/src/constants/app_keys.dart';
-import 'package:autoStation_promptBuy/src/constants/app_strings.dart';
-import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
-import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
-import 'package:autoStation_promptBuy/src/helpers/amplitude_web_helper.dart';
-import 'package:autoStation_promptBuy/src/js/js_manager.dart';
-import 'package:autoStation_promptBuy/src/model/product_list.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/widget/alva_text.dart';
-import 'package:autoStation_promptBuy/src/utils/truncated_html_text.dart';
+import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/app_keys.dart';
+import 'package:marketplace_line_oa/src/constants/app_strings.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
+import 'package:marketplace_line_oa/src/js/js_manager.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
 
 class PDBottomSection extends StatefulWidget {
   const PDBottomSection({super.key});

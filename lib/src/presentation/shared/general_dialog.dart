@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:autoStation_promptBuy/src/constants/alva_styles.dart';
-import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
-import 'package:autoStation_promptBuy/src/presentation/widget/alva_c_p_i_loader.dart';
+import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/alva_c_p_i_loader.dart';
 
 typedef OnTap = Function();
 

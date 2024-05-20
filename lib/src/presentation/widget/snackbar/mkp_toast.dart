@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:autoStation_promptBuy/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 
 SnackBar getMkpToast(String text, {double? horizontalMargin}) {
   return SnackBar(

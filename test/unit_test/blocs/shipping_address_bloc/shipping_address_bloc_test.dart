@@ -2,11 +2,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
-import 'package:autoStation_promptBuy/src/model/form_widget_model.dart';
-import 'package:autoStation_promptBuy/src/model/product_summary/shipping_address_model.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
-import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/model/form_widget_model.dart';
+import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

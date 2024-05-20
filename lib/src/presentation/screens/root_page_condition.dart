@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
-import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
-import 'package:autoStation_promptBuy/src/helpers/amplitude_web_helper.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/check_browser/check_browser_bloc.dart';
-// import 'package:autoStation_promptBuy/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
-import 'package:autoStation_promptBuy/src/presentation/screens/error_screen.dart';
-import 'package:autoStation_promptBuy/src/presentation/screens/loading_screen.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
+// import 'package:marketplace_line_oa/src/presentation/blocs/connectivity_status/connectivity_status_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
+import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RootPageCondition extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:autoStation_promptBuy/src/model/line_auth.dart';
+import 'package:marketplace_line_oa/src/model/line_auth.dart';
 
 class User {
   final String umid;

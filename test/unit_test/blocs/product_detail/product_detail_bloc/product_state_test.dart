@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 
 void main() {
   group('XProductDetailStatus ', () {

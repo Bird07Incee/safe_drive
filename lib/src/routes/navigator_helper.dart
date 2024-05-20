@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:autoStation_promptBuy/main.dart';
-import 'package:autoStation_promptBuy/src/model/product_list.dart';
-import 'package:autoStation_promptBuy/src/routes/change_history_url_strategy.dart';
-import 'package:autoStation_promptBuy/src/routes/routes.dart';
+import 'package:marketplace_line_oa/main.dart';
+import 'package:marketplace_line_oa/src/model/product_list.dart';
+import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 void setUrlStrategyListener<T extends ChangeHistoryUrlStrategy>(T setUrlDestination, {bool preventGoBack = false}) {
   if (!preventGoBack) {

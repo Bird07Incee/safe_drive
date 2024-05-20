@@ -1,5 +1,5 @@
-import 'package:autoStation_promptBuy/src/helpers/line_data_helper.dart';
-import 'package:autoStation_promptBuy/src/helpers/shared_preference_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 
 class TermAndConHelper {
   Future<bool> isTermAndConAccepted() async {

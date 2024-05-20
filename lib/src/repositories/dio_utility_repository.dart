@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:autoStation_promptBuy/src/services/dio_utility_services.dart';
+import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 class DioUtilityRepository {
   const DioUtilityRepository({required this.service});

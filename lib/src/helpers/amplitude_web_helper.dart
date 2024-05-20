@@ -1,8 +1,8 @@
 import 'package:amplitude_flutter/amplitude.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
-import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
-import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
-import 'package:autoStation_promptBuy/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 
 class AmplitudeWebHelper {
   Amplitude? _amplitude;

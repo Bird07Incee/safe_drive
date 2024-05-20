@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:autoStation_promptBuy/src/extension/custom_tap_down_details.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
+import 'package:marketplace_line_oa/src/extension/custom_tap_down_details.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 
 void main() {
   group('ImgGalleryZoomBloc', () {

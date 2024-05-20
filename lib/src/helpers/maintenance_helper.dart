@@ -1,4 +1,4 @@
-import 'package:autoStation_promptBuy/src/helpers/shared_preference_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 
 class MaintenanceHelper {
   Future<void> saveMaintenanceDataToLocalStorage(String data) async {

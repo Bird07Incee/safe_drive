@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
-import 'package:autoStation_promptBuy/src/constants/my_constants.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 
 class AlvaStyles {
   TextStyle heading1() => const TextStyle(

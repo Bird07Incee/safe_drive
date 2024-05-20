@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
 
 void main() {
   group("ShippingAddressEvent state", () {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:autoStation_promptBuy/src/constants/alva_styles.dart';
-import 'package:autoStation_promptBuy/src/constants/mkp_styles.dart';
-import 'package:autoStation_promptBuy/src/extension/number_converter.dart';
-import 'package:autoStation_promptBuy/src/helpers/amplitude_web_helper.dart';
-import 'package:autoStation_promptBuy/src/model/tracking_list_data.dart';
-import 'package:autoStation_promptBuy/src/routes/routes.dart';
+import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
+import 'package:marketplace_line_oa/src/extension/number_converter.dart';
+import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
+import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class TrackingOrderCard extends StatelessWidget {
   const TrackingOrderCard({super.key, required this.order});

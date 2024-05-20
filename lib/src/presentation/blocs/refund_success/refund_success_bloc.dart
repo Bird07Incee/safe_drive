@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
-import 'package:autoStation_promptBuy/src/model/refund/refund_success_data_model.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/refund_success/refund_success_event.dart';
-import 'package:autoStation_promptBuy/src/presentation/blocs/refund_success/refund_success_state.dart';
-import 'package:autoStation_promptBuy/src/presentation/widget/snackbar/mkp_toast.dart';
-import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/model/refund/refund_success_data_model.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_event.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_state.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 class RefundSuccessBloc extends Bloc<RefundSuccessEvent, RefundSuccessState> {
   RefundSuccessBloc({required this.utilityRepository})

@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:autoStation_promptBuy/configs/enivironment_config.dart';
-import 'package:autoStation_promptBuy/src/helpers/line_data_helper.dart';
-import 'package:autoStation_promptBuy/src/model/inquiry_data.dart';
-import 'package:autoStation_promptBuy/src/presentation/widget/snackbar/mkp_toast.dart';
-import 'package:autoStation_promptBuy/src/repositories/dio_utility_repository.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/model/inquiry_data.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
+import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 part 'order_success_event.dart';
 part 'order_success_state.dart';
