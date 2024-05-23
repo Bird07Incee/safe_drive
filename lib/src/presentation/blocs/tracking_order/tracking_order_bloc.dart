@@ -18,44 +18,7 @@ class TrackingOrderBloc extends Bloc<TrackingOrderEvent, TrackingOrderState> {
     on<TrackingOrderEvent>((event, emit) {
       // TODO: implement event handler
     });
-
-    on<GetTrackingOrderListFromJson>(_onGetTrackingOrderListFromJson);
     on<GetTrackingOrderListByPage>(_onGetTrackingOrderListByPage);
-  }
-
-  _onGetTrackingOrderListFromJson(GetTrackingOrderListFromJson event, Emitter<TrackingOrderState> emit) {
-    Order mockOrder = Order.fromJson({
-      "orderNo": "1234",
-      "shippingStatus": "pending",
-      "shippingStatusMessage": "จัดส่งแล้วครับ",
-      "products": [
-        {
-          "productId": "PV_EGYJW5CE8Y8G",
-          "productNameTh": "Pulsa Max Kook EV 2 Opt 1 Mer1",
-          "productNameEn": "Pulsa Max Kook EV 2 Opt 1 Mer1",
-          "productDescription": "ทดสอบ",
-          "productImageUrl":
-              "https://dev-app.marketplace.ksauto.net/assets/assets/mocking/product_innopower/pulsar_max/PPMAX_GREY_MONOCHROME_PHONE.png",
-          "productQty": 1,
-          "price": 59000.0,
-          "discountPrice": 40000.0,
-          "currency": "Bath",
-          "channel": "LINE / GOAPP",
-          "createDate": "",
-          "lastUpdateDate": "วันที่ update status ของ shipping"
-        }
-      ],
-      "totalPrice": 59000.0,
-      "totalQty": 1
-    });
-
-    List<Order> mock = [mockOrder, mockOrder];
-
-    if (mock.isNotEmpty) {
-      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.success, trackingListData: mock));
-    } else {
-      emit(state.copyWith(trackingOrderListStatus: GetTrackingOrderListStatus.empty, trackingListData: mock));
-    }
   }
 
   _onGetTrackingOrderListByPage(GetTrackingOrderListByPage event, Emitter<TrackingOrderState> emit) async {
