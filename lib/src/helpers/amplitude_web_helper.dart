@@ -56,7 +56,7 @@ class AmplitudeWebHelper {
     logEvent(
         eventType: "Enter term&condition page",
         screenName: "AutoStation_eMarketplace_term&condition_page",
-        eventName: tcVersion,
+        eventName: "AutoStation_eMarketplace_term&condition",
         eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
   }
 
@@ -73,24 +73,22 @@ class AmplitudeWebHelper {
 
   void logTapOnCancelButtonTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    String tcVersion = await lineDataHelper.getTAndC();
     String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on cancel button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
-        eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
+        eventName: "AutoStation_eMarketplace_term&condition",
+        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID});
   }
 
   void logTapOnPrivacyButtonTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    String tcVersion = await lineDataHelper.getTAndC();
     String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on privacy policy button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
-        eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
+        eventName: "AutoStation_eMarketplace_privacypolicy",
+        eventProperties: {"event_name": "AutoStation_eMarketplace_privacypolicy", "line_uuid": lineUUID});
   }
 
   void logeMarketplaceHomePageHomeScreen() {
