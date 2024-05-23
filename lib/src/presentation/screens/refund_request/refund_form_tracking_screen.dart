@@ -148,7 +148,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                     ListView(
                       children: [
                         Container(
-                          color: Color(0xfffeedcd),
+                          color: orange50,
                           height: 48,
                           padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
                           child: Row(

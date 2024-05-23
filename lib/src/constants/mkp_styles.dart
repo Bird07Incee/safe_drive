@@ -54,7 +54,8 @@ const backgroundNo2 = Color(0xFFF5F5F5);
 const cloudWhite = Color(0xffEFEFEF);
 const successGreen = Color(0xffE8F7EE);
 
-const orangeSoft = Color(0xFFFFF6E6);
-
 const globalYellow = Color(0xfffffbe6);
 const whiteGray = Color(0xffc2c1c1);
+
+const orange50 = Color(0xffFFF6E6);
+const orange100 = Color(0xffFEEDCD);
