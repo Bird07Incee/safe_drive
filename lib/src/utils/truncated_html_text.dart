@@ -25,7 +25,7 @@ class TruncatedHtmlText {
       tagline = removeHtmlForbiddenTagsTags(tagline);
       // tagline = removeInvalidWords(tagline);
       // check html tag in string input
-      if (containsHtmlTags(tagline)) {
+      if (!containsHtmlTags(tagline)) {
         // insert <p> in title or first line
         tagline = insertPTag(tagline);
         // check expended content
