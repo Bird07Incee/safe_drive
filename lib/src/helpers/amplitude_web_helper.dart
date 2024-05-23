@@ -51,13 +51,12 @@ class AmplitudeWebHelper {
 
   void logEnterTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    String tcVersion = await lineDataHelper.getTAndC();
     String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Enter term&condition page",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: "AutoStation_eMarketplace_term&condition",
-        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
+        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID});
   }
 
   void logTapOnOkButtonTermAndConPage() async {
