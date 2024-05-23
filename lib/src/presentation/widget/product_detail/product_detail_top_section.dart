@@ -82,7 +82,6 @@ class _PDTopSectionState extends State<PDTopSection> {
         tagline = tagline.replaceAll(emojiRegex, "");
         TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
         List<dynamic> listResult = truncatedHtmlText.formatSubStringHtml(tagline, myBloc)??[];
-       // listResult ??= ["",false];
 
         // -----------process for unSupport emoji,icon in text-------------------
         // int lineFinal;
@@ -99,8 +98,7 @@ class _PDTopSectionState extends State<PDTopSection> {
           String textString = "";
           String truncatedHtmlContent = "";
 
-       // if(listResult.length == 4) {
-        if(tagline != ""){
+        if(listResult.length == 4) {
           lineFinal = listResult[0];
           maxLines = listResult[1];
           textString = listResult[2];
@@ -686,7 +684,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                                   ? "$tagline${lineFinal <= maxLines ? "" : " "}" //<p1>ซ่อนรายละเอียด<p1>
                                                   : !truncatedHtmlText.containsHtmlTags(tagline)
                                                       ? tagline != ""
-                                                          ? "${textString!}..." //<p1>อ่านต่อ</p1>
+                                                          ? "$textString..." //<p1>อ่านต่อ</p1>
                                                           : ""
                                                       : "$truncatedHtmlContent...", //${"<p1>อ่านต่อ</p1>"}
                                               buildAsync: false,

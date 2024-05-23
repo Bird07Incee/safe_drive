@@ -1,4 +1,3 @@
-import 'dart:js_interop';
 
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
@@ -11,8 +10,6 @@ class TruncatedHtmlText {
     int lineFinal = 0;
     String? textString;
     List<String> bigText = ['<h1>', '<h2>'];
-    print("myBloc1111 = "+myBloc.toString());
-
 
     if (tagline != "") {
       // for (String tableTag in ProductDetailConst().htmlTableTag) {
@@ -34,7 +31,7 @@ class TruncatedHtmlText {
           //  isReadMoreVisible = true;
           textString = tagline.substring(0, 290);
           //set toggleDescription
-          print("textString ="+textString);
+
           myBloc.updateToggleTapDescription(toggleDescription: false);
           //set maxLines lineFinal for lineFinal<=maxLines
           maxLines = 1;
