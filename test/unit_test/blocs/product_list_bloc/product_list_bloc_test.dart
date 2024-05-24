@@ -225,5 +225,29 @@ void main() {
         act: (bloc) =>
             bloc.add(GetProductListByPage(ProductList.fromJson(mockProductListResponse), 2, "1234", mockBuildContext, bypassContext: true)),
         expect: () => <ProductListState>[ProductListState(productListStatus: GetProductListStatus.error)]);
+
+    blocTest<ProductListBloc, ProductListState>("getProductList by page error system maintenance",
+        setUp: () {
+          mockBuildContext = MockBuildContext();
+          SharedPreferences.setMockInitialValues({});
+          final baseUrl = Environment().getValue("BFF_BASE_URL");
+          final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
+          String path = "/ecommerce/v1/products";
+          var params = {"page": "2", "itemPersPage": 10, "categoryId": "1234"};
+          when(() {
+            return utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", params);
+          }).thenThrow(DioException(
+              response: Response(
+                  requestOptions: RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}),
+                  data: {},
+                  statusCode: 503,
+                  statusMessage: "System Maintenance"),
+              requestOptions: RequestOptions(baseUrl: "$baseUrl$inventoryApiPath", method: "GET", data: {}),
+              message: "System Maintenance"));
+        },
+        build: () => ProductListBloc(utilityRepository: utilityRepository),
+        act: (bloc) =>
+            bloc.add(GetProductListByPage(ProductList.fromJson(mockProductListResponse), 2, "1234", mockBuildContext, bypassContext: true)),
+        expect: () => <ProductListState>[ProductListState(productListStatus: GetProductListStatus.maintenance)]);
   });
 }
