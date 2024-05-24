@@ -97,6 +97,38 @@ void main() {
           ];
         });
 
+    blocTest<RefundRequestBloc, RefundRequestState>("onSetRefundData Fail",
+        setUp: () async {
+          SharedPreferences.setMockInitialValues({});
+          final baseUrl = Environment().getValue("BFF_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
+          String path = "/v1/inquiry/refund";
+          when(() {
+            return utilityRepository.getByURL("$baseUrl$transactionApiPath$path", {"invoiceNo": "LA202402081707425tpvy"});
+          }).thenThrow(
+            (_) async {
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "POST", data: mockRefund, headers: {"Authorization": accessToken});
+              return DioException(
+                  requestOptions: option, response: Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request"));
+            },
+          );
+        },
+        build: () => RefundRequestBloc(utilityRepository: utilityRepository),
+        act: (bloc) {
+          bloc.add(SetRefundData(orderNo: orderNo, reasonList: mockReasonList));
+        },
+        expect: () {
+          return <RefundRequestState>[
+            RefundRequestState(refundRequestStatus: GetRefundRequestStatus.loading, orderNo: '', refundResponse: const {}),
+            RefundRequestState(
+              refundRequestStatus: GetRefundRequestStatus.error,
+              orderNo: '',
+              refundResponse: const {},
+            ),
+          ];
+        });
+
     blocTest<RefundRequestBloc, RefundRequestState>("onSelectReason Success",
         setUp: () {
           SharedPreferences.setMockInitialValues({});
@@ -162,6 +194,37 @@ void main() {
           return <RefundRequestState>[
             RefundRequestState(refundRequestStatus: GetRefundRequestStatus.loading, orderNo: '', refundResponse: const {}),
             RefundRequestState(refundRequestStatus: GetRefundRequestStatus.submitSuccess, refundResponse: mockRefund, orderNo: ''),
+          ];
+        });
+
+    blocTest<RefundRequestBloc, RefundRequestState>("onSubmit Fail",
+        setUp: () async {
+          SharedPreferences.setMockInitialValues({});
+          final baseUrl = Environment().getValue("BFF_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_REFUND_BASE_URL");
+          String path = "/v1/refund";
+          final mock = {"uid": "1234"};
+          await LineDataHelper().saveSocialDataToLocalStorage(json.encode(mock));
+          var data = {"orderNo": "", "reason": "", "remark": ""};
+          when(() {
+            return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", data);
+          }).thenThrow(
+            (_) async {
+              RequestOptions option =
+                  RequestOptions(baseUrl: "$baseUrl$transactionApiPath", method: "POST", data: mockRefund, headers: {"Authorization": accessToken});
+              return DioException(
+                  requestOptions: option, response: Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request"));
+            },
+          );
+        },
+        build: () => RefundRequestBloc(utilityRepository: utilityRepository),
+        act: (bloc) {
+          bloc.add(OnSubmitRefundData());
+        },
+        expect: () {
+          return <RefundRequestState>[
+            RefundRequestState(refundRequestStatus: GetRefundRequestStatus.loading, orderNo: '', refundResponse: const {}),
+            RefundRequestState(refundRequestStatus: GetRefundRequestStatus.submitFail, orderNo: '', refundResponse: const {}),
           ];
         });
   });
