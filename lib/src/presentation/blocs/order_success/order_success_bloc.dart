@@ -56,10 +56,12 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.error));
             break;
           }
-          await Future.delayed(Duration(seconds: 8));
-          Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload);
+          if (!event.bypassContext) {
+            await Future.delayed(Duration(seconds: 8));
+          }
+          Response response = await utilityRepository.postByURL("$baseUrl$transactionApiPath$inquriyPath", payload, isRetry: true);
           final InquiryData inquiryData = InquiryData.fromJson(response.data["rawData"]);
-          String status = response.data["status"] ?? "";
+          status = response.data["status"] ?? "";
           if (status == "Complete") {
             emit(state.copyWith(orderSuccessData: inquiryData, orderSuccessStatus: GetOrderSuccessDataStatus.success));
             if (!event.bypassContext) {
@@ -69,10 +71,13 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
             break;
           } else if (status == "Fail") {
             emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
+            break;
           }
           tick++;
         }
-        emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
+        if (status == "Fail") {
+          emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
+        }
       } else if (status == "Fail") {
         emit(state.copyWith(orderSuccessStatus: GetOrderSuccessDataStatus.cancel));
       } else {
