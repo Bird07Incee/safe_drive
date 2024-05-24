@@ -7,5 +7,5 @@ class DioUtilityRepository {
 
   Future<Response> getByURL(path, params) async => service.getByURL(path, params);
 
-  Future<Response> postByURL(path, body) async => service.postByURL(path, body);
+  Future<Response> postByURL(path, body, {bool isRetry = false}) async => service.postByURL(path, body);
 }
