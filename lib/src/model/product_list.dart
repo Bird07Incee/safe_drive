@@ -190,7 +190,7 @@ class Product extends Equatable {
         merchantLogo: json['merchantLogo'] ?? '',
         merchantMobile: json['merchantMobile'] ?? '',
         merchantEmail: json['merchantEmail'] ?? '',
-        serviceMa: json['serviceMa'] ?? 'false',
+        serviceMa: json['serviceMA'] ?? 'false',
         productionOptionals:
             json['productionOptionals'] != null ? List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList() : []);
   }
