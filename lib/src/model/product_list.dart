@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class ProductList extends Equatable {
-  const ProductList(
-      {required this.productAllItems,
-      required this.productPage,
-      required this.productCountItems,
-      required this.banner,
-      required this.category,
-      required this.products,
-      required this.serviceMA});
+  const ProductList({
+    required this.productAllItems,
+    required this.productPage,
+    required this.productCountItems,
+    required this.banner,
+    required this.category,
+    required this.products,
+  });
 
   final int? productAllItems;
   final int? productPage;
@@ -16,7 +16,6 @@ class ProductList extends Equatable {
   final List<Banner>? banner;
   final List<Map>? category;
   final List<Product>? products;
-  final String? serviceMA;
 
   ProductList.fromJson(Map<String, dynamic> json)
       : banner = json['banner'] != null ? List.from(json['banner']).map((e) => Banner.fromJson(e)).toList() : [],
@@ -24,8 +23,7 @@ class ProductList extends Equatable {
         products = json['products'] != null ? List.from(json['products']).map((e) => Product.fromJson(e)).toList() : [],
         productAllItems = json['productAllItems'] != null ? json['productAllItems'] as int? : 0,
         productPage = json['productPage'] != null ? json['productPage'] as int? : 0,
-        productCountItems = json['productCountItems'] != null ? json['productCountItems'] as int? : 0,
-        serviceMA = json['serviceMA'] ?? "false";
+        productCountItems = json['productCountItems'] != null ? json['productCountItems'] as int? : 0;
 
   @override
   // TODO: implement props
@@ -86,6 +84,7 @@ class Product extends Equatable {
     required this.merchantMobile,
     required this.merchantEmail,
     required this.productionOptionals,
+    required this.serviceMa,
   });
 
   final String appId;
@@ -118,6 +117,7 @@ class Product extends Equatable {
   final String merchantMobile;
   final String merchantEmail;
   final List<ProductionOptionals> productionOptionals;
+  final String serviceMa;
 
   static const empty = Product(
       appId: '',
@@ -149,7 +149,8 @@ class Product extends Equatable {
       merchantLogo: '',
       merchantMobile: '',
       merchantEmail: '',
-      productionOptionals: []);
+      productionOptionals: [],
+      serviceMa: '');
 
   factory Product.fromJson(Map<String, dynamic> json) {
     if (json.isEmpty) return Product.empty;
@@ -189,6 +190,7 @@ class Product extends Equatable {
         merchantLogo: json['merchantLogo'] ?? '',
         merchantMobile: json['merchantMobile'] ?? '',
         merchantEmail: json['merchantEmail'] ?? '',
+        serviceMa: json['serviceMa'] ?? 'false',
         productionOptionals:
             json['productionOptionals'] != null ? List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList() : []);
   }
@@ -226,6 +228,7 @@ class Product extends Equatable {
         merchantMobile,
         merchantEmail,
         productionOptionals,
+        serviceMa
       ];
 }
 

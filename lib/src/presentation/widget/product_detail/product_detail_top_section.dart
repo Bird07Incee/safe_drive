@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -80,7 +79,7 @@ class _PDTopSectionState extends State<PDTopSection> {
         );
         tagline = tagline.replaceAll(emojiRegex, "");
         TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
-        List<dynamic> listResult = truncatedHtmlText.formatSubStringHtml(tagline, myBloc)??[];
+        List<dynamic> listResult = truncatedHtmlText.formatSubStringHtml(tagline, myBloc) ?? [];
 
         // -----------process for unSupport emoji,icon in text-------------------
         // int lineFinal;
@@ -92,12 +91,12 @@ class _PDTopSectionState extends State<PDTopSection> {
         // List<String> bigText = ['<h1>', '<h2>'];
         // TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
 
-          int lineFinal = 0;
-          int maxLines = 2;
-          String textString = "";
-          String truncatedHtmlContent = "";
+        int lineFinal = 0;
+        int maxLines = 2;
+        String textString = "";
+        String truncatedHtmlContent = "";
 
-        if(listResult.length == 4) {
+        if (listResult.length == 4) {
           lineFinal = listResult[0];
           maxLines = listResult[1];
           textString = listResult[2];

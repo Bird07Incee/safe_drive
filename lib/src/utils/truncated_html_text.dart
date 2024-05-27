@@ -1,9 +1,8 @@
-
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 
 class TruncatedHtmlText {
-  formatSubStringHtml(String tagline, ProductDetailDescriptionCubit myBloc){
+  formatSubStringHtml(String tagline, ProductDetailDescriptionCubit myBloc) {
     String? truncatedHtmlContent;
     int maxLines = 2;
     List<String> lines;
@@ -163,11 +162,7 @@ class TruncatedHtmlText {
             if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
               maxLines = 3;
               //log(("case 4"));
-            } else if (lines[3].length <= 10 &&
-                lines[3].length >= 169 &&
-                lines[2].length <= 100 &&
-                lines[1].length <= 80 &&
-                lines[0].length <= 149) {
+            } else if (lines[3].length <= 10 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
               //log(("case 4.2"));
               maxLines = 2;
             }
@@ -214,24 +209,20 @@ class TruncatedHtmlText {
                 // Merge the second line into the variable truncatedHtmlContent.
                 if (lines[1].contains("<h1>") || lines[1].contains("<h2>")) {
                   if (lines[0].contains("<h1>") || lines[0].contains("<h1>")) {
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
                   } else {
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 70)].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 70)].take(maxLines).join('</'))}";
                   }
 
                   //log("maxLines 2 step 2");
                 } else {
                   if (lines[1].length >= 220) {
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 220)].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 220)].take(maxLines).join('</'))}";
                     //log("maxLines 2 step 2");
                   } else {
                     lineFinal = 2;
                     maxLines = 2;
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('</'))}";
                     //log("maxLines 2 step 2");
                   }
                 }
@@ -248,8 +239,7 @@ class TruncatedHtmlText {
                       maxLines = 2;
                     }
                     //log("h1");
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
                   } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                       lines[0].length <= 40 &&
                       (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
@@ -259,8 +249,7 @@ class TruncatedHtmlText {
                       maxLines = 2;
                     }
                     //log("h1");
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
                   } else {
                     truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
                       lines[1].substring(0, (lines[1].length * 0.9).round())
@@ -290,24 +279,22 @@ class TruncatedHtmlText {
                 // truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
                 // log("maxLines 3 step 3");
                 if (
-                // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                lines[0].length <= 40 &&
-                    (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                    lines[1].length <= 43 &&
-                    (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                    lines[2].length >= 40) {
-                  truncatedHtmlContent =
-                  "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+                    // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                    lines[0].length <= 40 &&
+                        (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                        lines[1].length <= 43 &&
+                        (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                        lines[2].length >= 40) {
+                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
                   //log("maxLines 3 step 3 with out h1 in line 1(phh)");
                 } else if (
-                // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                lines[0].length <= 40 &&
-                    // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                    lines[1].length <= 43 &&
-                    (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                    lines[2].length >= 40) {
-                  truncatedHtmlContent =
-                  "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+                    // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                    lines[0].length <= 40 &&
+                        // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                        lines[1].length <= 43 &&
+                        (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                        lines[2].length >= 40) {
+                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
                   //log("maxLines 3 step 3 with out h1 in line 1 and 2 (line 3 >= 40) (pph)");
                 } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                     lines[0].length <= 40 &&
@@ -315,42 +302,36 @@ class TruncatedHtmlText {
                     lines[1].length <= 43 &&
                     (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
                     lines[2].length >= 40) {
-                  truncatedHtmlContent =
-                  "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
                   //log("maxLines 3 step 3 with out h1 in line 2 (hph)");
                 } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                    lines[0].length <= 40 &&
-                    // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                    lines[1].length <= 43
-                // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                ) {
+                        lines[0].length <= 40 &&
+                        // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                        lines[1].length <= 43
+                    // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                    ) {
                   if (lines[2].length >= 80) {
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
                   } else {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
-                      lines[2].substring(0, lines[2].length)
-                    ].take(maxLines).join('</'))}";
+                    truncatedHtmlContent =
+                        "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
                   }
                   //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (hpp)");
                 } else if (
-                // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                lines[0].length <= 40 && (lines[1].contains("<h1>") || lines[1].contains("<h2>")) && lines[1].length <= 43
-                // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                ) {
+                    // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                    lines[0].length <= 40 && (lines[1].contains("<h1>") || lines[1].contains("<h2>")) && lines[1].length <= 43
+                    // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                    ) {
                   if (lines[2].length >= 80) {
-                    truncatedHtmlContent =
-                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
+                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
                   } else {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
-                      lines[2].substring(0, lines[2].length)
-                    ].take(maxLines).join('</'))}";
+                    truncatedHtmlContent =
+                        "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
                   }
 
                   //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (php)");
                 } else {
-                  truncatedHtmlContent =
-                  "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
+                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
                   //log("maxLines 3 step 3 all p");
                 }
               }
