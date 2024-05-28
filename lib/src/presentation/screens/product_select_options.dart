@@ -61,10 +61,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
     ProductDetailState pdState = context.read<ProductDetailBloc>().state;
     getMaStatus();
     AmplitudeWebHelper.getInstance().logEnterProductOptionPage(
-        productName: pdState.product.productName,
-        contentId: pdState.product.productId,
-        merchantName: pdState.product.merchantFullName,
-        productCategoryId: pdState.product.categoryId.toString());
+        productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
   }
 
   @override
@@ -146,17 +143,18 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                       (prodOptState.selectCurrentOption != 0 && prodOptState.lastOption != 0)
                                   ? OutlinedButton(
                                       onPressed: () async {
+                                        String productOptionId = "";
                                         String productOptionPrice = "";
                                         if (pdState.product.productionOptionals.isNotEmpty) {
-                                          productOptionPrice = pdState.product.productionOptionals[0].subProductId;
+                                          productOptionId = pdState.product.productionOptionals[0].subProductId;
+                                          productOptionPrice = pdState.product.productionOptionals[0].price.toDecimalFormat();
                                         }
                                         AmplitudeWebHelper.getInstance().logTapOnNextButton(
                                             productName: pdState.product.productName,
                                             contentId: pdState.product.productId,
                                             merchantName: pdState.product.merchantFullName,
                                             productOptionPrice: productOptionPrice,
-                                            productCategoryId: pdState.product.categoryId.toString(),
-                                            optionId: productOptionPrice);
+                                            optionId: productOptionId);
 
                                         await Navigator.pushNamed(
                                             context, '${Routes.orderSummary.toStringPath()}?pid=$pid&opt_lv1=${prodOptState.stepOneIndexSelect}');

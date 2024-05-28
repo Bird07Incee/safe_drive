@@ -894,8 +894,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                       paymentType: orderState.paymentType.name,
                                                                       optionID: productState.product.productionOptionals.isNotEmpty
                                                                           ? productState.product.productionOptionals[0].subProductId
-                                                                          : "[]",
-                                                                      productCategoryId: productState.product.categoryId.toString());
+                                                                          : "[]");
 
                                                                   final orderBloc = context.read<OrderSummaryBloc>();
                                                                   ProductionOptionals step1SelectedOption = productState

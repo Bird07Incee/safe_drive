@@ -254,8 +254,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                           productName: pdState.product.productName,
                           contentId: pdState.product.productId,
                           merchantName: pdState.product.merchantFullName,
-                          price: pdState.product.price.toString(),
-                          discountPrice: pdState.product.discountPrice.toString());
+                          price: pdState.product.price.toDecimalFormat().toString(),
+                          discountPrice: pdState.product.discountPrice.toDecimalFormat().toString());
                       if (pdState.product.productionOptionals.isNotEmpty) {
                         Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
                             arguments: ProductDetailArgs(product: pdState.product));
