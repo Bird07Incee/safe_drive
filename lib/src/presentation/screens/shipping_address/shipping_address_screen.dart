@@ -204,6 +204,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                         input = Form(
                             key: item.key,
                             child: TextInputWidget(
+                              autoFieldHints: item.autoFieldHints,
                               inputFormatters: item.listInputFormatter,
                               autoValidateMode: AutovalidateMode.disabled,
                               controller: item.controller,

@@ -66,6 +66,8 @@ class TextInputWidget extends StatefulWidget {
   final bool isAllowAutoAddEmailFormat;
   final bool isAllowEmoji;
 
+  final Iterable<String>? autoFieldHints;
+
   final TextStyle? textStyle;
 
   const TextInputWidget(
@@ -117,7 +119,8 @@ class TextInputWidget extends StatefulWidget {
       this.isAllowAutoAddPhoneFormat = false,
       this.isAllowAutoAddEmailFormat = false,
       this.isAllowEmoji = false,
-      this.textStyle});
+      this.textStyle,
+      this.autoFieldHints});
 
   @override
   TextInputWidgetState createState() => TextInputWidgetState();
@@ -237,6 +240,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
       cursorHeight: 20,
       cursorColor: BTN_SELECTED_TEXT_COLOR_NEW,
       cursorWidth: 1.5,
+      autofillHints: widget.autoFieldHints,
       autovalidateMode: widget.required ? (widget.autoValidateMode ?? AutovalidateMode.onUserInteraction) : null,
       textCapitalization: widget.textCapitalization,
       readOnly: widget.readOnly,

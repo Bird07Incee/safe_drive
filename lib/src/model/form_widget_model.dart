@@ -24,6 +24,7 @@ class FormWidgetModel {
   final bool isShowCounter;
   final List<TextInputFormatter>? listInputFormatter;
   final FocusNode? focusNode;
+  final Iterable<String>? autoFieldHints;
 
   const FormWidgetModel(
       {this.key,
@@ -47,7 +48,8 @@ class FormWidgetModel {
       this.textControllerValue,
       this.isShowCounter = false,
       this.listInputFormatter,
-      this.focusNode});
+      this.focusNode,
+      this.autoFieldHints});
 
   // Map<String, dynamic> toJson() {
   //   final Map<String, dynamic> data = <String, dynamic>{};
