@@ -15,6 +15,7 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
+    var maxHeight = MediaQuery.of(context).size.height;
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -22,42 +23,33 @@ class ErrorScreen extends StatelessWidget {
           titlePage: titleWebPage,
           child: Column(
             children: [
-              Expanded(
-                child: Container(
-                  color: whitePure,
-                  width: maxWidth,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 356,
-                        width: maxWidth - 30,
-                        child: Column(
-                          children: [
-                            const Icon(
-                              Icons.warning_amber_rounded,
-                              color: cloudSoftDeepWhite,
-                              size: 125,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Text(title!, style: AlvaStyles().headingSize16w600(BTN_SELECTED_TEXT_COLOR_NEW)),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(subTitle!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW)),
-                            subTitleSec!.isNotEmpty
-                                ? Text(subTitleSec!, style: AlvaStyles().headingSize12w400(BTN_SELECTED_TEXT_COLOR_NEW))
-                                : Container(),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+              Container(
+                color: whitePure,
+                width: maxWidth,
+                height: maxHeight - 96,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.warning_amber_rounded,
+                      color: cloudSoftDeepWhite,
+                      size: 125,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Text(title!, style: AlvaStyles().headingSize18w500(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(subTitle!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    subTitleSec!.isNotEmpty
+                        ? Text(subTitleSec!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW))
+                        : Container(),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -78,7 +70,7 @@ class ErrorScreen extends StatelessWidget {
                       height: 48,
                       //  width: (maxWidth - 40) / 2,
                       decoration: BoxDecoration(color: const Color(0xffffd400), borderRadius: const BorderRadius.all(Radius.circular(8))),
-                      child: Center(child: Text(titleBtn!, style: AlvaStyles().heading3())),
+                      child: Center(child: Text(titleBtn!, style: AlvaStyles().heading4())),
                     ),
                   ))
             ],

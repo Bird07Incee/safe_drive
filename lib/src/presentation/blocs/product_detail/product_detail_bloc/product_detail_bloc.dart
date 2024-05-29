@@ -26,6 +26,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       String path = "/ecommerce/v1/products";
       Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": event.pid});
       final p = Product.fromJson(response.data);
+      // MaintenanceHelper().saveMaintenanceDataToLocalStorage(p.serviceMa);
       emit(state.copyWith(status: p == Product.empty ? ProductDetailStatus.error : ProductDetailStatus.success, product: p));
     } catch (e) {
       emit(state.copyWith(status: ProductDetailStatus.error));

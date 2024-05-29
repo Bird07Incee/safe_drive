@@ -47,6 +47,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         emit(state.copyWith(hideCategory: true));
       }
 
+      // MaintenanceHelper().saveMaintenanceDataToLocalStorage(productList.serviceMA!);
+
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
     } on DioException catch (e) {
       if (e.response?.statusCode == 503) {

@@ -7,10 +7,6 @@ class TrackingOrderEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetTrackingOrderListFromJson extends TrackingOrderEvent {
-  const GetTrackingOrderListFromJson();
-}
-
 class GetTrackingOrderListByPage extends TrackingOrderEvent {
   const GetTrackingOrderListByPage(this.page, this.context);
 

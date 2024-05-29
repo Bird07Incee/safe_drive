@@ -84,6 +84,7 @@ class Product extends Equatable {
     required this.merchantMobile,
     required this.merchantEmail,
     required this.productionOptionals,
+    required this.serviceMa,
   });
 
   final String appId;
@@ -116,6 +117,7 @@ class Product extends Equatable {
   final String merchantMobile;
   final String merchantEmail;
   final List<ProductionOptionals> productionOptionals;
+  final String serviceMa;
 
   static const empty = Product(
       appId: '',
@@ -147,7 +149,8 @@ class Product extends Equatable {
       merchantLogo: '',
       merchantMobile: '',
       merchantEmail: '',
-      productionOptionals: []);
+      productionOptionals: [],
+      serviceMa: '');
 
   factory Product.fromJson(Map<String, dynamic> json) {
     if (json.isEmpty) return Product.empty;
@@ -187,6 +190,7 @@ class Product extends Equatable {
         merchantLogo: json['merchantLogo'] ?? '',
         merchantMobile: json['merchantMobile'] ?? '',
         merchantEmail: json['merchantEmail'] ?? '',
+        serviceMa: json['serviceMA'] ?? 'false',
         productionOptionals:
             json['productionOptionals'] != null ? List.from(json['productionOptionals']).map((e) => ProductionOptionals.fromJson(e)).toList() : []);
   }
@@ -224,6 +228,7 @@ class Product extends Equatable {
         merchantMobile,
         merchantEmail,
         productionOptionals,
+        serviceMa
       ];
 }
 

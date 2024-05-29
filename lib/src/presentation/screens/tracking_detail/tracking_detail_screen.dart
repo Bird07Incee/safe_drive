@@ -309,7 +309,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       }
     }
     return Container(
-      color: Color(0xfffeedcd),
+      color: orange100,
       padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -356,7 +356,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     }
 
     return Container(
-      color: Color(0xfffeedcd),
+      color: orange100,
       padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

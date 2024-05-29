@@ -264,6 +264,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
     List<FormWidgetModel> listFormWidget = [
       FormWidgetModel(
           key: nameValidationKey,
+          autoFieldHints: const [AutofillHints.name],
           label: 'ชื่อ นามสกุล',
           controller: TextEditingController(),
           focusNode: FocusNode(),
@@ -283,6 +284,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
           maxLines: null),
       FormWidgetModel(
           key: phoneValidationKey,
+          autoFieldHints: const [AutofillHints.telephoneNumber],
           label: 'เบอร์โทรศัพท์',
           controller: TextEditingController(),
           focusNode: FocusNode(),
@@ -300,6 +302,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       FormWidgetModel(
           key: emailValidationKey,
           label: 'อีเมล',
+          autoFieldHints: const [AutofillHints.email],
           controller: TextEditingController(),
           focusNode: FocusNode(),
           fieldName: 'email',
@@ -310,6 +313,7 @@ class ShippingAddressBloc extends Cubit<ShippingAddressState> {
       FormWidgetModel(
           key: addressValidationKey,
           label: 'บ้านเลขที่ อาคาร ซอย หมู่ ถนน',
+          autoFieldHints: const [AutofillHints.fullStreetAddress],
           controller: TextEditingController(),
           focusNode: FocusNode(),
           fieldName: 'address',

@@ -132,13 +132,10 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                             queryParams: "pid=$pid${optLv1 != null ? '&opt_lv1=$optLv1' : ''}",
                                             listOption: pdState.product.productionOptionals);
                                       }
-                                      String addressCustomer = "${state.formResult!.where((element) => element.fieldName == 'name').first.value!}"
-                                          "${state.formResult!.where((element) => element.fieldName == 'phone').first.value!}"
-                                          "${state.formResult!.where((element) => element.fieldName == 'email').first.value!}"
-                                          "${state.formResult!.where((element) => element.fieldName == 'address').first.value!}"
-                                          "${state.formResult!.where((element) => element.fieldName == 'province').first.value!}"
-                                          "${state.formResult!.where((element) => element.fieldName == 'district').first.value!}"
-                                          "${state.formResult!.where((element) => element.fieldName == 'subdistrict').first.value!}"
+                                      String addressCustomer =
+                                          "${state.formResult!.where((element) => element.fieldName == 'province').first.value!} "
+                                          "${state.formResult!.where((element) => element.fieldName == 'district').first.value!} "
+                                          "${state.formResult!.where((element) => element.fieldName == 'subdistrict').first.value!} "
                                           "${state.formResult!.where((element) => element.fieldName == 'zipcode').first.value!}";
                                       AmplitudeWebHelper.getInstance().logTapOnOkButton(address: addressCustomer);
                                       Navigator.pop(context);
@@ -207,6 +204,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                         input = Form(
                             key: item.key,
                             child: TextInputWidget(
+                              autoFieldHints: item.autoFieldHints,
                               inputFormatters: item.listInputFormatter,
                               autoValidateMode: AutovalidateMode.disabled,
                               controller: item.controller,

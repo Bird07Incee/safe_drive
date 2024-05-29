@@ -1,3 +1,4 @@
+import 'package:marketplace_line_oa/src/helpers/maintenance_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/main.dart';
@@ -46,11 +47,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   int? optLv1;
   var currentRoute = CurrentRouteObserver.instance.name;
   bool isLoaded = false;
+  String maStatus = 'false';
 
   @override
   void initState() {
     AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
     context.read<OrderSummaryBloc>().add(InitialOrderState());
+    getMaStatus();
     super.initState();
   }
 
@@ -61,6 +64,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       isLoaded = true;
       loadProduct();
     }
+  }
+
+  getMaStatus() async {
+    var status = await MaintenanceHelper().getMaintenanceData();
+    setState(() {
+      maStatus = status;
+    });
   }
 
   loadProduct() {
@@ -180,7 +190,16 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
               }
             },
             builder: (context, orderState) {
-              if (orderState.orderStatus.isError) {
+              if (maStatus.toLowerCase() == "true") {
+                return ErrorScreen(
+                  title: ErrorConst().titleMaintenance,
+                  subTitle: ErrorConst().subtitleMaintenance,
+                  titleBtn: ErrorConst().titleBtnMaintenance,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                );
+              } else if (orderState.orderStatus.isError) {
                 return ErrorScreen(
                   title: ErrorConst().titleNS,
                   subTitle: ErrorConst().subTitleNS,
@@ -200,7 +219,16 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           step1 = pdOptState.stepOneGroupValueRadio;
                           step1price = pdOptState.stepOnePrice ?? 0;
                           step2 = pdOptState.stepTwoGroupValueRadio;
-                          if (productState.status.isSuccess) {
+                          if (maStatus.toLowerCase() == "true") {
+                            return ErrorScreen(
+                              title: ErrorConst().titleMaintenance,
+                              subTitle: ErrorConst().subtitleMaintenance,
+                              titleBtn: ErrorConst().titleBtnMaintenance,
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            );
+                          } else if (productState.status.isSuccess) {
                             return Scaffold(
                                 resizeToAvoidBottomInset: true,
                                 backgroundColor: Colors.white,
@@ -866,8 +894,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                       paymentType: orderState.paymentType.name,
                                                                       optionID: productState.product.productionOptionals.isNotEmpty
                                                                           ? productState.product.productionOptionals[0].subProductId
-                                                                          : "[]",
-                                                                      productCategoryId: productState.product.categoryId.toString());
+                                                                          : "[]");
 
                                                                   final orderBloc = context.read<OrderSummaryBloc>();
                                                                   ProductionOptionals step1SelectedOption = productState

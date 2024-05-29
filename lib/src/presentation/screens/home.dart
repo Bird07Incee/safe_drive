@@ -112,7 +112,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         isNotLogin = false;
                         context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
                       }
-                      if (state.productListStatus == GetProductListStatus.success) {
+                      if (state.productListStatus == GetProductListStatus.maintenance) {
+                        return ErrorScreen(
+                          title: ErrorConst().titleMaintenance,
+                          subTitle: ErrorConst().subtitleMaintenance,
+                          titleBtn: ErrorConst().titleBtnMaintenance,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        );
+                      } else if (state.productListStatus == GetProductListStatus.success) {
                         tabController ??= TabController(length: state.productList.category!.length + 1, vsync: this);
                         return Container(
                           color: cloudyWhite,
@@ -382,15 +391,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         );
                       } else if (state.productListStatus == GetProductListStatus.initial || state.productListStatus == GetProductListStatus.loading) {
                         return const LoadingScreen();
-                      } else if (state.productListStatus == GetProductListStatus.maintenance) {
-                        return ErrorScreen(
-                          title: ErrorConst().titleMaintenance,
-                          subTitle: ErrorConst().subtitleMaintenance,
-                          titleBtn: ErrorConst().titleBtnMaintenance,
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        );
                       } else {
                         return ErrorScreen(
                           title: ErrorConst().titleNS,

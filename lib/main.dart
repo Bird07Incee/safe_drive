@@ -67,8 +67,11 @@ _configureApp() {
 }
 
 _setUpDatadog() {
+  //TODO: recheck this setting when deploy on production mode
   DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
   configuration = DatadogConfiguration(
+    version: "0.0.1",
+    service: "promptbuy-web",
     clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
     env: const String.fromEnvironment('SET_ENV', defaultValue: 'dev'),
     site: DatadogSite.us1,

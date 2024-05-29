@@ -49,15 +49,54 @@ class AmplitudeWebHelper {
     }
   }
 
+  String? mapOrderStatusToThai(String paymentType) {
+    Map<String, String> thaiMapping = {
+      "Pending": "ชำระเงินแล้ว",
+      "Preparing/Packed": "เตรียมจัดส่ง",
+      "PreparingSelfServiceFail": "เตรียมจัดส่งล้มเหลว",
+      "Shipped": "กำลังจัดส่ง",
+      "ShippingFail": "จัดส่งล้มเหลว",
+      "Received": "จัดส่งสำเร็จ",
+      "RefundRequest": "ลูกค้าแจ้งคืนเงิน",
+      "RefundSuccess": "คืนเงินสำเร็จ",
+      "RefundRejected": "คืนเงินล้มเหลว"
+    };
+    if (thaiMapping.containsKey(paymentType)) {
+      return thaiMapping[paymentType];
+    } else {
+      return "ไม่พบข้อมูล";
+    }
+  }
+
+  String? mapPaymentTypeToThai(String paymentType) {
+    Map<String, String> thaiMapping = {
+      "ผ่อนชำระ": "Installment",
+      "ชำระเต็มจำนวน": "full amount",
+    };
+
+    RegExp regex = RegExp(r"ผ่อนชำระ\s(\d+)\sเดือน");
+    Iterable<Match> matches = regex.allMatches(paymentType);
+
+    if (matches.isNotEmpty) {
+      String months = matches.first.group(1)!;
+      return "Installment ($months months)";
+    }
+
+    if (thaiMapping.containsKey(paymentType)) {
+      return thaiMapping[paymentType];
+    } else {
+      return "ไม่พบข้อมูล";
+    }
+  }
+
   void logEnterTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    String tcVersion = await lineDataHelper.getTAndC();
     String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Enter term&condition page",
         screenName: "AutoStation_eMarketplace_term&condition_page",
-        eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
+        eventName: "AutoStation_eMarketplace_term&condition",
+        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID});
   }
 
   void logTapOnOkButtonTermAndConPage() async {
@@ -73,24 +112,22 @@ class AmplitudeWebHelper {
 
   void logTapOnCancelButtonTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    String tcVersion = await lineDataHelper.getTAndC();
     String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on cancel button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
-        eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
+        eventName: "AutoStation_eMarketplace_term&condition",
+        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID});
   }
 
   void logTapOnPrivacyButtonTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
-    String tcVersion = await lineDataHelper.getTAndC();
     String lineUUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on privacy policy button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
-        eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
+        eventName: "AutoStation_eMarketplace_privacypolicy",
+        eventProperties: {"event_name": "AutoStation_eMarketplace_privacypolicy", "line_uuid": lineUUID});
   }
 
   void logeMarketplaceHomePageHomeScreen() {
@@ -249,8 +286,7 @@ class AmplitudeWebHelper {
 
   // select option
 
-  Future<void> logEnterProductOptionPage(
-      {required String productName, required String contentId, required String merchantName, required String productCategoryId}) async {
+  Future<void> logEnterProductOptionPage({required String productName, required String contentId, required String merchantName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -260,7 +296,6 @@ class AmplitudeWebHelper {
         eventProperties: {
           "content_id": contentId,
           "category_name": merchantName,
-          "content_type": productCategoryId,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -270,7 +305,6 @@ class AmplitudeWebHelper {
       {required String productName,
       required String contentId,
       required String merchantName,
-      required String productCategoryId,
       required String optionId,
       required String productOptionPrice}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
@@ -279,7 +313,6 @@ class AmplitudeWebHelper {
       "content_id": contentId,
       "sub_category_name": optionId,
       "category_name": merchantName,
-      "content_type": productCategoryId,
       "product_option_price": productOptionPrice,
       'channel': "LINE",
       'line_uuid': lineUID,
@@ -307,7 +340,7 @@ class AmplitudeWebHelper {
     logEvent(
         eventType: "Tap on manage shipping address button",
         screenName: "AutoStation_eMarketplace_ordersummary_page",
-        eventName: "AutoStation_eMarketplace_ordersummary",
+        eventName: "AutoStation_eMarketplace_manage_shipping_address",
         eventProperties: {
           'channel': "LINE",
           'line_uuid': lineUID,
@@ -350,25 +383,28 @@ class AmplitudeWebHelper {
       required String contentId,
       required String optionID,
       required String merchantName,
-      required String productCategoryId,
       required String price,
       required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    Map<String, dynamic> eventProperties = {
+      'content_id': contentId,
+      'category_name': merchantName,
+      'product_price': price,
+      'payment_type': paymentType,
+      'channel': "LINE",
+      'line_uuid': lineUID,
+    };
+
+    if (optionID != "[]") {
+      eventProperties['sub_category_name'] = optionID;
+    }
+
     logEvent(
         eventType: "Tap on confirm order button",
         screenName: "AutoStation_eMarketplace_ordersummary_page",
         eventName: productName,
-        eventProperties: {
-          'content_id': contentId,
-          'sub_category_name': optionID,
-          'category_name': merchantName,
-          'content_type': productCategoryId,
-          'product_price': price,
-          'payment_type': paymentType,
-          'channel': "LINE",
-          'line_uuid': lineUID,
-        });
+        eventProperties: eventProperties);
   }
 
   // Marketplace ac popup cancel order
@@ -401,9 +437,7 @@ class AmplitudeWebHelper {
       required String invoiceNumber,
       required String productName,
       required String contentId,
-      required String optionID,
       required String merchantName,
-      required String productCategoryId,
       required String price,
       required String paymentType,
       required String userLocation}) async {
@@ -416,11 +450,9 @@ class AmplitudeWebHelper {
         eventProperties: {
           'invoice_number': invoiceNumber,
           'content_id': contentId,
-          'sub_category_name': optionID,
           'category_name': merchantName,
-          'content_type': productCategoryId,
           'product_price': price,
-          'payment_type': paymentType,
+          'payment_type': mapPaymentTypeToThai(paymentType),
           'selected_type': selectedType,
           'user_location': userLocation,
           'channel': "LINE",
@@ -505,7 +537,7 @@ class AmplitudeWebHelper {
     logEvent(
         eventType: "Tap on eMarketplace homepage button",
         screenName: "AutoStation_eMarketplace_payment_fail",
-        eventName: "AutoStation_eMarketplace_homapage",
+        eventName: "AutoStation_eMarketplace_homepage",
         eventProperties: {
           'channel': "LINE",
           'line_uuid': lineUID,
@@ -560,13 +592,14 @@ class AmplitudeWebHelper {
   Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+
     logEvent(
         eventType: "Enter order tracking detail",
         screenName: "AutoStation_eMarketplace_ordertracking_details",
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': statusId,
+          'order_status': mapOrderStatusToThai(statusId),
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -581,7 +614,7 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': statusId,
+          'order_status': mapOrderStatusToThai(statusId),
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -596,7 +629,7 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': statusId,
+          'order_status': mapOrderStatusToThai(statusId),
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -611,7 +644,7 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': statusId,
+          'order_status': mapOrderStatusToThai(statusId),
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -627,7 +660,7 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': statusId,
+          'order_status': mapOrderStatusToThai(statusId),
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -643,7 +676,7 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': statusId,
+          'order_status': mapOrderStatusToThai(statusId),
           'cancel_reason': cancelReason,
           'content_id': contentId,
           'channel': "LINE",
