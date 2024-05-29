@@ -278,7 +278,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text("ยอดชำระ", style: AlvaStyles().headingSize12RegHeight20(blackGoMunTo)),
+                                            Text("ยอดชำระ", style: AlvaStyles().headingSize12RegHeight20(spaceGrey)),
                                           ],
                                         )),
                                     SizedBox(
