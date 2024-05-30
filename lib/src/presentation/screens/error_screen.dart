@@ -43,9 +43,7 @@ class ErrorScreen extends StatelessWidget {
                       height: 8,
                     ),
                     Text(subTitle!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW)),
-                    subTitleSec!.isNotEmpty
-                        ? Text(subTitleSec!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW))
-                        : Container(),
+                    subTitleSec!.isNotEmpty ? Text(subTitleSec!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW)) : Container(),
                     const SizedBox(
                       height: 4,
                     ),

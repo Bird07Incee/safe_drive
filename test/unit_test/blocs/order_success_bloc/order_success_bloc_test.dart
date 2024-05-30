@@ -115,6 +115,7 @@ void main() {
   };
 
   final InquiryData inquiryData = InquiryData.fromJson(mockResponse["rawData"]);
+  final InquiryData inquiryDataFail = InquiryData.fromJson(mockResponseFail["rawData"]);
   final InquiryData inquiryDataPending = InquiryData.fromJson(mockResponsePending["rawData"]);
 
   group('OrderSuccessBloc', () {
@@ -243,7 +244,7 @@ void main() {
         act: (bloc) => bloc.add(GetOrderSuccess(mockBuildContext, "1234", bypassContext: true)),
         expect: () => <OrderSuccessState>[
               OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.loading),
-              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.cancel),
+              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.cancel,orderSuccessData: inquiryDataFail),
             ]);
 
     blocTest<OrderSuccessBloc, OrderSuccessState>("OrderSuccess fail",
@@ -268,7 +269,7 @@ void main() {
         act: (bloc) => bloc.add(GetOrderSuccess(mockBuildContext, "1234", bypassContext: true)),
         expect: () => <OrderSuccessState>[
               OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.loading),
-              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.cancel)
+              OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.cancel,orderSuccessData: inquiryDataFail)
             ]);
 
     blocTest<OrderSuccessBloc, OrderSuccessState>("OrderSuccess error NoStatus",
