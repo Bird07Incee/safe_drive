@@ -452,7 +452,7 @@ class AmplitudeWebHelper {
           'content_id': contentId,
           'category_name': merchantName,
           'product_price': price,
-          'payment_type': mapPaymentTypeToThai(paymentType),
+          'payment_type': paymentType,
           'selected_type': selectedType,
           'user_location': userLocation,
           'channel': "LINE",
