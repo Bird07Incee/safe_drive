@@ -36,7 +36,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
   String orderNo = "", productId = "", refundDay = "", orderStatus = "";
   List<DropdownAddressModel> listReason = [];
   bool isLoaded = false;
-
+  bool loglaew = false;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -136,7 +136,10 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                 },
               );
             } else if (state.refundRequestStatus == GetRefundRequestStatus.success) {
-              AmplitudeWebHelper.getInstance().logEnterProductRefundPage(state.inquiryData.productName!, state.inquiryData.invoiceNo!, orderStatus);
+              if (!loglaew) {
+                AmplitudeWebHelper.getInstance().logEnterProductRefundPage(state.inquiryData.productName!, state.inquiryData.invoiceNo!, orderStatus);
+                loglaew = true;
+              }
 
               bool haveReason = state.getTextReason.isNotEmpty;
               bool haveRemark = state.getTextRemark.isNotEmpty;

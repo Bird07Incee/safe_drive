@@ -44,6 +44,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TextEditingController tc = TextEditingController();
   TabController? tabController;
 
+  bool loglaew = false;
+
   @override
   void initState() {
     super.initState();
@@ -79,7 +81,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
       nav.pushNamed(Routes.termAndCon.toStringPath());
     } else {
-      amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
+      if (!loglaew) {
+        amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
+        loglaew = true;
+      }
+
     }
   }
 
