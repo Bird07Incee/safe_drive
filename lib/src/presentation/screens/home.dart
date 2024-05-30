@@ -141,13 +141,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   visible: state.hideCategory ? false : true,
                                   child: Container(
                                     width: maxWidth,
-                                    //  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  //  padding: const EdgeInsets.symmetric(horizontal: 16),
                                     color: Colors.white,
                                     child: TabBar(
                                         controller: tabController,
                                         labelColor: Colors.black,
                                         indicatorColor: BlueFantasy,
-                                        //    padding: EdgeInsets.only(right: 8),
+                                    //    padding: EdgeInsets.only(right: 8),
                                         labelPadding: EdgeInsets.symmetric(horizontal: 30),
                                         isScrollable: true,
                                         labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
@@ -195,12 +195,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                           width: 24,
                                                           height: 24,
                                                           child: FadeInImage(
-                                                            placeholder: const AssetImage('assets/images/category/icon_active_cate_other.png'),
+                                                            placeholder: const AssetImage('assets/images/category/icon_active_cate_other2.png'),
                                                             // Replace with your placeholder image path
                                                             image: NetworkImage(state.productList.category![i]["img_active"]),
                                                             fit: BoxFit.fitWidth,
                                                             imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                'assets/images/category/icon_active_cate_other.png',
+                                                                'assets/images/category/icon_active_cate_other2.png',
                                                                 fit: BoxFit.fitWidth),
                                                           ),
                                                         )
@@ -208,12 +208,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                           width: 24,
                                                           height: 24,
                                                           child: FadeInImage(
-                                                            placeholder: const AssetImage('assets/images/category/icon_cate_other.png'),
+                                                            placeholder: const AssetImage('assets/images/category/icon_cate_other2.png'),
                                                             // Replace with your placeholder image path
                                                             image: NetworkImage(state.productList.category![i]["img_inactive"]),
                                                             fit: BoxFit.fitWidth,
                                                             imageErrorBuilder: (context, error, stackTrace) =>
-                                                                Image.asset('assets/images/category/icon_cate_other.png', fit: BoxFit.fitWidth),
+                                                                Image.asset('assets/images/category/icon_cate_other2.png', fit: BoxFit.fitWidth),
                                                           ),
                                                         )),
                                             ),
