@@ -68,26 +68,26 @@ class AmplitudeWebHelper {
     }
   }
 
-  String? mapPaymentTypeToThai(String paymentType) {
-    Map<String, String> thaiMapping = {
-      "ผ่อนชำระ": "Installment",
+  String mapPaymentTypeToThai(String paymentType) {
+    const Map<String, String> specialCases = {
       "ชำระเต็มจำนวน": "full amount",
     };
 
-    RegExp regex = RegExp(r"ผ่อนชำระ\s(\d+)\sเดือน");
-    Iterable<Match> matches = regex.allMatches(paymentType);
+    if (specialCases.containsKey(paymentType)) {
+      return specialCases[paymentType]!;
+    }
 
-    if (matches.isNotEmpty) {
-      String months = matches.first.group(1)!;
+    final regex = RegExp(r"ผ่อนชำระ (\d+) เดือน");
+    final match = regex.firstMatch(paymentType);
+
+    if (match != null) {
+      final months = match.group(1);
       return "Installment ($months months)";
     }
 
-    if (thaiMapping.containsKey(paymentType)) {
-      return thaiMapping[paymentType];
-    } else {
-      return "ไม่พบข้อมูล";
-    }
+    return "ไม่พบข้อมูล";
   }
+
 
   void logEnterTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
