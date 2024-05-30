@@ -57,7 +57,7 @@ class AmplitudeWebHelper {
       "Shipped": "กำลังจัดส่ง",
       "ShippingFail": "จัดส่งล้มเหลว",
       "Received": "จัดส่งสำเร็จ",
-      "RefundRequest": "ลูกค้าแจ้งคืนเงิน",
+      "RefundRequest": "ได้รับคำคืนสินค้า/คืนเงิน/คืนสินค้าแล้ว",
       "RefundSuccess": "คืนเงินสำเร็จ",
       "RefundRejected": "คืนเงินล้มเหลว"
     };
@@ -68,26 +68,26 @@ class AmplitudeWebHelper {
     }
   }
 
-  String? mapPaymentTypeToThai(String paymentType) {
-    Map<String, String> thaiMapping = {
-      "ผ่อนชำระ": "Installment",
+  String mapPaymentTypeToThai(String paymentType) {
+    const Map<String, String> specialCases = {
       "ชำระเต็มจำนวน": "full amount",
     };
 
-    RegExp regex = RegExp(r"ผ่อนชำระ\s(\d+)\sเดือน");
-    Iterable<Match> matches = regex.allMatches(paymentType);
+    if (specialCases.containsKey(paymentType)) {
+      return specialCases[paymentType]!;
+    }
 
-    if (matches.isNotEmpty) {
-      String months = matches.first.group(1)!;
+    final regex = RegExp(r"ผ่อนชำระ (\d+) เดือน");
+    final match = regex.firstMatch(paymentType);
+
+    if (match != null) {
+      final months = match.group(1);
       return "Installment ($months months)";
     }
 
-    if (thaiMapping.containsKey(paymentType)) {
-      return thaiMapping[paymentType];
-    } else {
-      return "ไม่พบข้อมูล";
-    }
+    return "ไม่พบข้อมูล";
   }
+
 
   void logEnterTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();
@@ -452,7 +452,7 @@ class AmplitudeWebHelper {
           'content_id': contentId,
           'category_name': merchantName,
           'product_price': price,
-          'payment_type': mapPaymentTypeToThai(paymentType),
+          'payment_type': paymentType,
           'selected_type': selectedType,
           'user_location': userLocation,
           'channel': "LINE",
@@ -514,9 +514,7 @@ class AmplitudeWebHelper {
       required String productName,
       required String contentId,
       required String merchantName,
-      required String price,
-      required String paymentType,
-      required String userLocation}) async {
+      required String price}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(eventType: "Enter payment fail page", screenName: "AutoStation_eMarketplace_payment_fail", eventName: productName, eventProperties: {
@@ -524,8 +522,6 @@ class AmplitudeWebHelper {
       'content_id': contentId,
       'category_name': merchantName,
       'product_price': price,
-      'payment_type': paymentType,
-      'user_location': userLocation,
       'channel': "LINE",
       'line_uuid': lineUID,
     });

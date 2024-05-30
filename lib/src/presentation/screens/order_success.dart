@@ -443,9 +443,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                   productName: orderSuccessData.productName.toString(),
                   contentId: orderSuccessData.productId.toString(),
                   merchantName: orderSuccessData.merchantFullName.toString(),
-                  price: orderSuccessData.amount.toString(),
-                  paymentType: orderSuccessData.paymentChannelText.toString(),
-                  userLocation: orderSuccessData.customerAddress.toString());
+                  price: orderSuccessData.amount.toString(),);
               return OrderCancelScreen();
             } else {
               return ErrorScreen(
