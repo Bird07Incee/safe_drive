@@ -514,9 +514,7 @@ class AmplitudeWebHelper {
       required String productName,
       required String contentId,
       required String merchantName,
-      required String price,
-      required String paymentType,
-      required String userLocation}) async {
+      required String price}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(eventType: "Enter payment fail page", screenName: "AutoStation_eMarketplace_payment_fail", eventName: productName, eventProperties: {
@@ -524,8 +522,6 @@ class AmplitudeWebHelper {
       'content_id': contentId,
       'category_name': merchantName,
       'product_price': price,
-      'payment_type': paymentType,
-      'user_location': userLocation,
       'channel': "LINE",
       'line_uuid': lineUID,
     });
