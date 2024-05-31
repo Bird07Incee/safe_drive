@@ -1,4 +1,3 @@
-import 'package:marketplace_line_oa/src/helpers/maintenance_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/main.dart';
@@ -8,6 +7,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
+import 'package:marketplace_line_oa/src/helpers/maintenance_helper.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/arguments/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/create_order_request_model.dart';
@@ -67,7 +67,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   }
 
   getMaStatus() async {
-    var status = await MaintenanceHelper().getMaintenanceData();
+    var status = await MaintenanceHelper().getMaintenanceDataForCreateTransaction();
     setState(() {
       maStatus = status;
     });
