@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:marketplace_line_oa/src/helpers/shared_preference_helper.dart';
 
 class MaintenanceHelper {
@@ -5,8 +7,9 @@ class MaintenanceHelper {
     await PreferencesHelper.setString("maintenanceData", data);
   }
 
-  Future<String> getMaintenanceData() async {
+  Future<String> getMaintenanceDataForCreateTransaction() async {
     var value = await PreferencesHelper.getString("maintenanceData");
-    return value != '' ? value : "false";
+    Map valueMap = json.decode(value);
+    return valueMap["create"] != '' ? value : "false";
   }
 }
