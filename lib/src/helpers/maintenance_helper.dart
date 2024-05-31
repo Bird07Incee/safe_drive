@@ -10,6 +10,7 @@ class MaintenanceHelper {
   Future<String> getMaintenanceDataForCreateTransaction() async {
     var value = await PreferencesHelper.getString("maintenanceData");
     Map valueMap = json.decode(value);
-    return valueMap["create"] != '' ? value : "false";
+    String ma = valueMap["create"] ?? "false";
+    return ma != '' ? ma : "false";
   }
 }
