@@ -91,7 +91,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                   state.refundSuccessData.productName!,
                   state.refundSuccessData.invoiceNo!,
                   state.refundSuccessData.merchantFullName!,
-                  state.refundSuccessData.reason!,
+                  "${state.refundSuccessData.reason!}${state.refundSuccessData.remark!.isNotEmpty ? "_${state.refundSuccessData.remark!}" :""}",
                   state.refundSuccessData.productId!);
               return Column(
                 children: [

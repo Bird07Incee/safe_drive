@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +17,6 @@ import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart
 import 'package:marketplace_line_oa/src/routes/change_history_url_strategy.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
-import 'dart:math';
 
 late DatadogConfiguration configuration;
 UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
@@ -27,7 +28,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    //  runApp(MyApp());
+    // runApp(MyApp());
     DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
       return runApp(const MyApp());
     });
@@ -70,7 +71,7 @@ _setUpDatadog() {
   //TODO: recheck this setting when deploy on production mode
   DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
   configuration = DatadogConfiguration(
-    version: "0.0.1",
+    version: "1.0.1",
     service: "promptbuy-web",
     clientToken: 'pub002fb557c4b3f796b2eb3e9a2cc3bcdd',
     env: const String.fromEnvironment('SET_ENV', defaultValue: 'dev'),
