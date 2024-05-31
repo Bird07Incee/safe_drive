@@ -219,7 +219,12 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       'color': '#2c2626',
                     };
                   }
-                  return null;
+                  return {
+                    'font-family': 'Krungsri Condensed',
+                    'font-size': '14px',
+                    'line-height': '24px',
+                    'color': '#2c2626',
+                  };
                 },
                 customWidgetBuilder: (element) {
                   if (element.localName == "th" || element.localName == "thead") {
@@ -852,7 +857,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'font-size': '14px',
                     'line-height': '22px',
                     'font-weight': '400',
-                    'color': '#5a5a5a'
+                    'color': '#E60000'
                   };
                 } else {
                   return {
@@ -878,7 +883,14 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   'color': '#2c2626',
                 };
               }
-              return null;
+           //   return null;
+              return {
+                'font-family': 'Krungsri Condensed',
+                'font-size': '14px',
+                'line-height': '22px',
+                'font-weight': '400',
+                'color': '#2c2626',
+              };
             },
             customWidgetBuilder: (element) {
               if (element.localName == "th" || element.localName == "thead") {
@@ -1205,11 +1217,11 @@ class _MyFactory extends WidgetFactory {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
               "style":
-                  "color:#5a5a5a; font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+                  "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style": "color:#2c2626;  font-size:14px; font-family:Krungsri Condensed; line-height:22px; font-weight: 400;",
+              "style": "color:#2c2626;  font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;",
             } as LinkedHashMap<Object, String>;
           }
         }
