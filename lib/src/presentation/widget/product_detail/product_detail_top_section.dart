@@ -700,7 +700,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                             if (element.localName == "p1") {
                                               return {
                                                 'font-weight': '700',
-                                                'font-family': 'Krungsri Condensed',
+                                                'font-family': "'Krungsri Condensed'",
                                                 'font-size': '14px',
                                                 'line-height': '24px',
                                                 'color': '#40A9FC'
@@ -709,7 +709,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                             if (element.localName == "p" || element.localName == "li") {
                                               return {
                                                 'font-weight': '500',
-                                                'font-family': 'Krungsri Condensed',
+                                                'font-family': "'Krungsri Condensed'",
                                                 'font-size': '12px',
                                                 'line-height': '20px',
                                                 'color': '#5A5A5A'
@@ -722,7 +722,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                             }
                                             return {
                                               'font-weight': '500',
-                                              'font-family': 'Krungsri Condensed',
+                                              'font-family': "'Krungsri Condensed'",
                                               'font-size': '12px',
                                               'line-height': '20px',
                                               'color': '#5A5A5A'

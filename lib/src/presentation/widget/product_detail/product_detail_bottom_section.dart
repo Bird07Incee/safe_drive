@@ -199,7 +199,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   if (element.localName == "td") {
                     return {
                       'width': '50%',
-                      'font-family': 'Krungsri Condensed',
+                      'font-family': "'Krungsri Condensed'",
                       'vertical-align': 'top;',
                       'padding-top': '8px;',
                       'padding-bottom': '8px;',
@@ -213,14 +213,14 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   }
                   if (element.localName == "p") {
                     return {
-                      'font-family': 'Krungsri Condensed',
+                      'font-family': "'Krungsri Condensed'",
                       'font-size': '14px',
                       'line-height': '24px',
                       'color': '#2c2626',
                     };
                   }
                   return {
-                    'font-family': 'Krungsri Condensed',
+                    'font-family': "'Krungsri Condensed'",
                     'font-size': '14px',
                     'line-height': '24px',
                     'color': '#2c2626',
@@ -851,17 +851,17 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 count += 1;
                 if (count.isOdd) {
                   return {
-                    'font-family': 'Krungsri Condensed',
+                    'font-family': "'Krungsri Condensed'",
                     'width': '50%',
                     'vertical-align': 'top;',
                     'font-size': '14px',
                     'line-height': '22px',
                     'font-weight': '400',
-                    'color': '#E60000'
+                    'color': '#5a5a5a'
                   };
                 } else {
                   return {
-                    'font-family': 'Krungsri Condensed',
+                    'font-family': "'Krungsri Condensed'",
                     'width': '50%',
                     'vertical-align': 'top;',
                     'font-size': '14px',
@@ -876,7 +876,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               }
               if (element.localName == "p") {
                 return {
-                  'font-family': 'Krungsri Condensed',
+                  'font-family': "'Krungsri Condensed'",
                   'font-size': '14px',
                   'line-height': '22px',
                   'font-weight': '400',
@@ -885,7 +885,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               }
            //   return null;
               return {
-                'font-family': 'Krungsri Condensed',
+                'font-family': "'Krungsri Condensed'",
                 'font-size': '14px',
                 'line-height': '22px',
                 'font-weight': '400',
@@ -910,22 +910,44 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   return {'width': '100%'};
                 }
                 if (element.localName == "td") {
-                  return {
-                    'width': '50%',
-                    'vertical-align': 'top;',
-                    'font-family': 'Krungsri Condensed',
-                    'font-size': '14px',
-                    'line-height': '22px',
-                    'font-weight': '400',
-                    'color': '#2c2626'
-                  };
+                  // return {
+                  //   'width': '50%',
+                  //   'vertical-align': 'top;',
+                  //   'font-family': "'Krungsri Condensed'",
+                  //   'font-size': '14px',
+                  //   'line-height': '22px',
+                  //   'font-weight': '400',
+                  //   'color': '#2c2626'
+                  // };
+                  count += 1;
+                  if (count.isOdd) {
+                    return {
+                      'font-family': "'Krungsri Condensed'",
+                      'width': '50%',
+                      'vertical-align': 'top;',
+                      'font-size': '14px',
+                      'line-height': '22px',
+                      'font-weight': '400',
+                      'color': '#5a5a5a'
+                    };
+                  } else {
+                    return {
+                      'font-family': "'Krungsri Condensed'",
+                      'width': '50%',
+                      'vertical-align': 'top;',
+                      'font-size': '14px',
+                      'line-height': '22px',
+                      'font-weight': '400',
+                      'color': '#2c2626'
+                    };
+                  }
                 }
                 if (element.localName == "th" || element.localName == "thead") {
                   return null;
                 }
                 if (element.localName == "p") {
                   return {
-                    'font-family': 'Krungsri Condensed',
+                    'font-family': "'Krungsri Condensed'",
                     'font-size': '14px',
                     'line-height': '22px',
                     'font-weight': '400',
@@ -959,22 +981,44 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         return {'width': '100%'};
                       }
                       if (element.localName == "td") {
-                        return {
-                          'width': '50%',
-                          'vertical-align': 'top;',
-                          'font-family': 'Krungsri Condensed',
-                          'font-size': '14px',
-                          'line-height': '22px',
-                          'font-weight': '400',
-                          'color': '#2c2626'
-                        };
+                        // return {
+                        //   'width': '50%',
+                        //   'vertical-align': 'top;',
+                        //   'font-family': "'Krungsri Condensed'",
+                        //   'font-size': '14px',
+                        //   'line-height': '22px',
+                        //   'font-weight': '400',
+                        //   'color': '#2c2626'
+                        // };
+                        count += 1;
+                        if (count.isOdd) {
+                          return {
+                            'font-family': "'Krungsri Condensed'",
+                            'width': '50%',
+                            'vertical-align': 'top;',
+                            'font-size': '14px',
+                            'line-height': '22px',
+                            'font-weight': '400',
+                            'color': '#5a5a5a'
+                          };
+                        } else {
+                          return {
+                            'font-family': "'Krungsri Condensed'",
+                            'width': '50%',
+                            'vertical-align': 'top;',
+                            'font-size': '14px',
+                            'line-height': '22px',
+                            'font-weight': '400',
+                            'color': '#2c2626'
+                          };
+                        }
                       }
                       if (element.localName == "th" || element.localName == "thead") {
                         return null;
                       }
                       if (element.localName == "p") {
                         return {
-                          'font-family': 'Krungsri Condensed',
+                          'font-family': "'Krungsri Condensed'",
                           'font-size': '14px',
                           'line-height': '22px',
                           'font-weight': '400',

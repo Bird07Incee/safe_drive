@@ -309,7 +309,7 @@ class ProductCardWidget extends StatelessWidget {
                                           customStylesBuilder: (element) {
                                             if (element.localName == "p") {
                                               return {
-                                                'font-family': 'Krungsri Condensed',
+                                                'font-family': "'Krungsri Condensed'",
                                                 'font-size': '12px',
                                                 'line-height': '20px',
                                                 'font-weight': '500',
@@ -319,7 +319,7 @@ class ProductCardWidget extends StatelessWidget {
                                               };
                                             } else if (element.localName == "b") {
                                               return {
-                                                'font-family': 'Krungsri Condensed',
+                                                'font-family': "'Krungsri Condensed'",
                                                 'font-size': '16px',
                                                 'font-weight': '600',
                                                 'line-height': '24px',
@@ -328,7 +328,7 @@ class ProductCardWidget extends StatelessWidget {
                                               };
                                             } else {
                                               return {
-                                                'font-family': 'Krungsri Condensed',
+                                                'font-family': "'Krungsri Condensed'",
                                                 'font-size': '12px',
                                                 'line-height': '20px',
                                                 'font-weight': '500',
