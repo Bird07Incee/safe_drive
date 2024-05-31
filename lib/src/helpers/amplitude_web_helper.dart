@@ -439,8 +439,7 @@ class AmplitudeWebHelper {
       required String contentId,
       required String merchantName,
       required String price,
-      required String paymentType,
-      required String userLocation}) async {
+      required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -454,7 +453,6 @@ class AmplitudeWebHelper {
           'product_price': price,
           'payment_type': mapPaymentTypeToThai(paymentType),
           'selected_type': selectedType,
-          'user_location': userLocation,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
