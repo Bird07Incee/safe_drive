@@ -367,9 +367,7 @@ class TruncatedHtmlText {
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
                   myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
                 } else {
-                  print("truncatedHtmlContent 150 = "+truncatedHtmlContent.length.toString());
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, 150);
-                  print("truncatedHtmlContent 150 sub = "+truncatedHtmlContent.substring(0, 150).toString());
                   myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
                 }
               }
