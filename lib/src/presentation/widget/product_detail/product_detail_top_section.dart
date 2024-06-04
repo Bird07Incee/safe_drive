@@ -720,13 +720,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                             } else if (element.localName == "td") {
                                               return {'width': '50%'};
                                             }
-                                            return {
-                                              'font-weight': '500',
-                                              'font-family': "'Krungsri Condensed'",
-                                              'font-size': '12px',
-                                              'line-height': '20px',
-                                              'color': '#5A5A5A'
-                                            };
+                                            return null;
                                           }),
                                         ),
                                       ),

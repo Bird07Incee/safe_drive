@@ -883,14 +883,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   'color': '#2c2626',
                 };
               }
-           //   return null;
-              return {
-                'font-family': "'Krungsri Condensed'",
-                'font-size': '14px',
-                'line-height': '22px',
-                'font-weight': '400',
-                'color': '#2c2626',
-              };
+              return null;
             },
             customWidgetBuilder: (element) {
               if (element.localName == "th" || element.localName == "thead") {
