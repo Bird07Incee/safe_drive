@@ -346,7 +346,6 @@ class TruncatedHtmlText {
         }
         if (maxLines == 1 || maxLines == 2 || maxLines == 3) {
           if (truncatedHtmlContent!.length >= 285) {
-            print("truncatedHtmlContent 285 = "+truncatedHtmlContent.length.toString());
             truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
             lineFinal = 4;
             myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
