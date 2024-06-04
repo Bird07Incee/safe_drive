@@ -821,6 +821,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     }
                   }
                 } else if (truncatedHtmlContent.length >= 150 && truncatedHtmlContent.length <= 284) {
+                  lineFinal = 3;
                   for (int i = 0; i < bigText.length; i++) {
                     if (truncatedHtmlContent!.contains(bigText[i])) {
                       if (bigText[i] == "<h1>") {

@@ -346,6 +346,7 @@ class TruncatedHtmlText {
         }
         if (maxLines == 1 || maxLines == 2 || maxLines == 3) {
           if (truncatedHtmlContent!.length >= 285) {
+            print("truncatedHtmlContent 285 = "+truncatedHtmlContent.length.toString());
             truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
             lineFinal = 4;
             myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
@@ -358,14 +359,17 @@ class TruncatedHtmlText {
                 }
               }
             }
-          } else if (truncatedHtmlContent.length >= 150 && truncatedHtmlContent.length <= 284) {
+          } else if (truncatedHtmlContent.length > 150 && truncatedHtmlContent.length <= 284) {
+            lineFinal = 3;
             for (int i = 0; i < bigText.length; i++) {
               if (truncatedHtmlContent!.contains(bigText[i])) {
                 if (bigText[i] == "<h1>") {
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
                   myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
                 } else {
+                  print("truncatedHtmlContent 150 = "+truncatedHtmlContent.length.toString());
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, 150);
+                  print("truncatedHtmlContent 150 sub = "+truncatedHtmlContent.substring(0, 150).toString());
                   myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
                 }
               }
