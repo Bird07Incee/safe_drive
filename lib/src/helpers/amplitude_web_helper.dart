@@ -81,13 +81,13 @@ class AmplitudeWebHelper {
     final match = regex.firstMatch(paymentType);
 
     if (match != null) {
-      final months = match.group(1);
-      return "Installment ($months months)";
+      // final months = match.group(1);
+      // return "Installment ($months months)";
+      return "Installment";
     }
 
     return "ไม่พบข้อมูล";
   }
-
 
   void logEnterTermAndConPage() async {
     LineDataHelper lineDataHelper = LineDataHelper();

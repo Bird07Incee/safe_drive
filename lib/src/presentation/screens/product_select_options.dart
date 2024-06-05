@@ -146,8 +146,9 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                         String productOptionId = "";
                                         String productOptionPrice = "";
                                         if (pdState.product.productionOptionals.isNotEmpty) {
-                                          productOptionId = pdState.product.productionOptionals[0].subProductId;
-                                          productOptionPrice = pdState.product.productionOptionals[0].price.toDecimalFormat();
+                                          productOptionId = pdState.product.productionOptionals[prodOptState.stepOneIndexSelect ?? 0].subProductId;
+                                          productOptionPrice =
+                                              pdState.product.productionOptionals[prodOptState.stepOneIndexSelect ?? 0].price.toDecimalFormat();
                                         }
                                         AmplitudeWebHelper.getInstance().logTapOnNextButton(
                                             productName: pdState.product.productName,
