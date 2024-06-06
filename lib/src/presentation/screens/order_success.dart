@@ -101,6 +101,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                   selectedType: orderSuccessData.installmentPeriod.toString(),
                   invoiceNumber: orderSuccessData.invoiceNo.toString(),
                   productName: orderSuccessData.productName.toString(),
+                  optionName: orderSuccessData.productOption!,
                   contentId: orderSuccessData.productId.toString(),
                   merchantName: orderSuccessData.merchantFullName.toString(),
                   price: orderSuccessData.amount.toString(),
@@ -440,9 +441,12 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
               AmplitudeWebHelper.getInstance().logEnterPaymentFailPage(
                   invoiceNumber: orderSuccessData.invoiceNo.toString(),
                   productName: orderSuccessData.productName.toString(),
+                  optionName: orderSuccessData.productOption!,
+                  subCategoryName: orderSuccessData.productId.toString(),
                   contentId: orderSuccessData.productId.toString(),
                   merchantName: orderSuccessData.merchantFullName.toString(),
-                  price: orderSuccessData.amount.toString(),);
+                  price: orderSuccessData.amount.toString(),
+                  paymentType: orderSuccessData.paymentChannelText.toString());
               return OrderCancelScreen();
             } else {
               return ErrorScreen(

@@ -380,6 +380,7 @@ class AmplitudeWebHelper {
 
   Future<void> logTapOnConfirmOrderButton(
       {required String productName,
+      required String optionName,
       required String contentId,
       required String optionID,
       required String merchantName,
@@ -403,7 +404,7 @@ class AmplitudeWebHelper {
     logEvent(
         eventType: "Tap on confirm order button",
         screenName: "AutoStation_eMarketplace_ordersummary_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: eventProperties);
   }
 
@@ -411,6 +412,7 @@ class AmplitudeWebHelper {
 
   Future<void> logTapOnBackButton(
       {required String productName,
+      required String optionName,
       required String contentId,
       required String optionID,
       required String merchantName,
@@ -419,16 +421,20 @@ class AmplitudeWebHelper {
       required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
-    logEvent(eventType: "Tap on back button", screenName: "AutoStation_eMarketplace_ordersummary_page", eventName: productName, eventProperties: {
-      'content_id': contentId,
-      'sub_category_name': optionID,
-      'category_name': merchantName,
-      'content_type': productCategoryId,
-      'product_price': price,
-      'payment_type': paymentType,
-      'channel': "LINE",
-      'line_uuid': lineUID,
-    });
+    logEvent(
+        eventType: "Tap on back button",
+        screenName: "AutoStation_eMarketplace_ordersummary_page",
+        eventName: "$productName $optionName",
+        eventProperties: {
+          'content_id': contentId,
+          'sub_category_name': optionID,
+          'category_name': merchantName,
+          'content_type': productCategoryId,
+          'product_price': price,
+          'payment_type': paymentType,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
   }
 
   // Marketplace ac success order
@@ -436,6 +442,7 @@ class AmplitudeWebHelper {
       {required String selectedType,
       required String invoiceNumber,
       required String productName,
+      required String optionName,
       required String contentId,
       required String merchantName,
       required String price,
@@ -445,7 +452,7 @@ class AmplitudeWebHelper {
     logEvent(
         eventType: "Enter order success page",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'content_id': contentId,
@@ -510,19 +517,28 @@ class AmplitudeWebHelper {
   Future<void> logEnterPaymentFailPage(
       {required String invoiceNumber,
       required String productName,
+      required String optionName,
       required String contentId,
+      required String subCategoryName,
       required String merchantName,
-      required String price}) async {
+      required String price,
+      required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
-    logEvent(eventType: "Enter payment fail page", screenName: "AutoStation_eMarketplace_payment_fail", eventName: productName, eventProperties: {
-      'invoice_number': invoiceNumber,
-      'content_id': contentId,
-      'category_name': merchantName,
-      'product_price': price,
-      'channel': "LINE",
-      'line_uuid': lineUID,
-    });
+    logEvent(
+        eventType: "Enter payment fail page",
+        screenName: "AutoStation_eMarketplace_payment_fail",
+        eventName: "$productName $optionName",
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'content_id': contentId,
+          'sub_category_name': subCategoryName,
+          'category_name': merchantName,
+          'payment_type': mapPaymentTypeToThai(paymentType),
+          'product_price': price,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
   }
 
   Future<void> logTapOneMarketplaceHomepageButton() async {

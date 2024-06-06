@@ -98,11 +98,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     }
   }
 
-  void onBack(BuildContext context, ProductDetailState productState, OrderSummaryState orderState, double step1price, double showPrice) {
+  void onBack(BuildContext context, ProductDetailState productState, OrderSummaryState orderState, double step1price, double showPrice,
+      String step1OptionName) {
     GeneralDialog(
             onAccept: () {
               AmplitudeWebHelper.getInstance().logTapOnBackButton(
                 productName: productState.product.productName,
+                optionName: step1OptionName,
                 contentId: productState.product.productId,
                 merchantName: productState.product.merchantFullName,
                 productCategoryId: productState.product.categoryId.isNotEmpty ? productState.product.categoryId.toString() : "",
@@ -151,8 +153,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       onWillPop: () async {
         ProductDetailState productState = context.read<ProductDetailBloc>().state;
         OrderSummaryState orderState = context.read<OrderSummaryBloc>().state;
+        ProductOptionState productOptionState = context.read<ProductOptionBloc>().state;
+        String optionName = productOptionState.stepOneGroupValueRadio;
         double showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
-        onBack(context, productState, orderState, step1price, showPrice);
+        onBack(context, productState, orderState, step1price, showPrice, optionName);
         return false;
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
@@ -248,7 +252,14 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                           leading: IconButton(
                                               key: const Key("pop_navigator_to_home_page"),
                                               onPressed: () {
-                                                onBack(context, productState, orderState, step1price, showPrice);
+                                                onBack(
+                                                  context,
+                                                  productState,
+                                                  orderState,
+                                                  step1price,
+                                                  showPrice,
+                                                  step1,
+                                                );
                                               },
                                               icon: const Icon(Icons.arrow_back_ios_rounded)),
                                         ),
@@ -887,6 +898,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                 onAccept: () async {
                                                                   AmplitudeWebHelper.getInstance().logTapOnConfirmOrderButton(
                                                                       productName: productState.product.productName,
+                                                                      optionName: step1,
                                                                       contentId: productState.product.productId,
                                                                       merchantName: productState.product.merchantFullName,
                                                                       price:
