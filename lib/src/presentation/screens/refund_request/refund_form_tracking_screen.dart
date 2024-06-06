@@ -137,7 +137,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
               );
             } else if (state.refundRequestStatus == GetRefundRequestStatus.success) {
               if (!loglaew) {
-                AmplitudeWebHelper.getInstance().logEnterProductRefundPage(state.inquiryData.productName!, state.inquiryData.invoiceNo!, orderStatus);
+                AmplitudeWebHelper.getInstance().logEnterProductRefundPage(
+                    state.inquiryData.productName!, state.inquiryData.invoiceNo!, orderStatus, state.inquiryData.merchantFullName!);
                 loglaew = true;
               }
 

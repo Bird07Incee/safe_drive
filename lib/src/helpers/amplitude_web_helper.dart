@@ -583,7 +583,7 @@ class AmplitudeWebHelper {
 
   // Marketplace ac status tracking
 
-  Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId) async {
+  Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
 
@@ -595,11 +595,12 @@ class AmplitudeWebHelper {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
           'channel': "LINE",
+          'category_name': merchantName,
           'line_uuid': lineUID,
         });
   }
 
-  Future<void> logTapOnCallMerchantButtonInTrackingDetail(String productName, String invoiceNumber, String statusId) async {
+  Future<void> logTapOnCallMerchantButtonInTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -610,11 +611,12 @@ class AmplitudeWebHelper {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
           'channel': "LINE",
+          'category_name': merchantName,
           'line_uuid': lineUID,
         });
   }
 
-  Future<void> logTapOnProductRefundButton(String productName, String invoiceNumber, String statusId) async {
+  Future<void> logTapOnProductRefundButton(String productName, String invoiceNumber, String statusId, String merchantName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -624,12 +626,13 @@ class AmplitudeWebHelper {
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
+          'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
   }
 
-  Future<void> logTapOnCallCenterButtonInTrackingDetail(String productName, String invoiceNumber, String statusId) async {
+  Future<void> logTapOnCallCenterButtonInTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -639,13 +642,14 @@ class AmplitudeWebHelper {
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
+          'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
   }
 
   // Marketplace ac return
-  Future<void> logEnterProductRefundPage(String productName, String invoiceNumber, String statusId) async {
+  Future<void> logEnterProductRefundPage(String productName, String invoiceNumber, String statusId, String merchantName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -655,6 +659,7 @@ class AmplitudeWebHelper {
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
+          'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
         });

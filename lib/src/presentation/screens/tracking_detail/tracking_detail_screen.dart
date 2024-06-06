@@ -411,7 +411,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
-              AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(productName, state.tracking.orderRef, state.tracking.status[0].statusName);
+              AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
+                  productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName);
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
@@ -478,7 +479,10 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
                                                           AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
-                                                              productName, state.tracking.orderRef, state.tracking.status[0].statusName);
+                                                              productName,
+                                                              state.tracking.orderRef,
+                                                              state.tracking.status[0].statusName,
+                                                              state.tracking.merchantName);
                                                           String phoneNumber = ProductDetailConst().li1.split('**')[1];
                                                           phoneNumber = phoneNumber.replaceAll("-", "");
                                                           callPhone(phoneNumber);
@@ -528,7 +532,10 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
                                                           AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
-                                                              productName, state.tracking.orderRef, state.tracking.status[0].statusName);
+                                                              productName,
+                                                              state.tracking.orderRef,
+                                                              state.tracking.status[0].statusName,
+                                                              state.tracking.merchantName);
                                                           String phoneNumber = li2.split('**')[3];
                                                           phoneNumber = phoneNumber.replaceAll("-", "");
                                                           callPhone(phoneNumber);
@@ -584,8 +591,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               child: GestureDetector(
                                                 key: const Key("call_seller"),
                                                 onTap: () {
-                                                  AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
-                                                      productName, state.tracking.orderRef, state.tracking.status[0].statusName);
+                                                  AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(productName,
+                                                      state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName);
                                                   String mobile = "020238858";
                                                   callPhone(mobile);
                                                 },
@@ -616,7 +623,10 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         AmplitudeWebHelper.getInstance().logTapOnProductRefundButton(
-                                                            productName, state.tracking.orderRef, state.tracking.status[0].statusName);
+                                                            productName,
+                                                            state.tracking.orderRef,
+                                                            state.tracking.status[0].statusName,
+                                                            state.tracking.merchantName);
                                                         if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
                                                           Navigator.pushNamed(context,
                                                               '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=${state.tracking.status[0].statusName}');
