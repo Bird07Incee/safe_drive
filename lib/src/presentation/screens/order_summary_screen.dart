@@ -47,7 +47,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   int? optLv1;
   var currentRoute = CurrentRouteObserver.instance.name;
   bool isLoaded = false;
-  String maStatus = 'false';
+  String maStatus = 'False';
 
   @override
   void initState() {
@@ -106,7 +106,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 contentId: productState.product.productId,
                 merchantName: productState.product.merchantFullName,
                 productCategoryId: productState.product.categoryId.isNotEmpty ? productState.product.categoryId.toString() : "",
-                optionID: productState.product.productionOptionals.isNotEmpty ? productState.product.productionOptionals[0].subProductId : "",
+                optionID: productState.product.productionOptionals.isNotEmpty ? productState.product.productionOptionals[optLv1!].subProductId : "",
                 price: "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
                 paymentType: orderState.paymentType.name,
               );
@@ -893,7 +893,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                           "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
                                                                       paymentType: orderState.paymentType.name,
                                                                       optionID: productState.product.productionOptionals.isNotEmpty
-                                                                          ? productState.product.productionOptionals[0].subProductId
+                                                                          ? productState.product.productionOptionals[optLv1!].subProductId
                                                                           : "[]");
 
                                                                   final orderBloc = context.read<OrderSummaryBloc>();
