@@ -30,6 +30,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   String orderNo = "";
   String productId = "";
   String productName = "";
+  String optionName = "";
   bool isLoaded = false;
   late double maxWidth, maxHeight;
   @override
@@ -48,6 +49,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
       orderNo = (routingData["orderNo"] == null) ? "" : routingData["orderNo"];
       productName = (routingData["productName"] == null) ? "" : routingData["productName"];
+      optionName = (routingData["optionName"] == null) ? "" : routingData["optionName"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
       context.read<TrackingDetailBloc>().add(GetTracking(orderNo: orderNo, productId: productId));
     }
@@ -412,7 +414,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
               AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
-                  productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName);
+                  productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName);
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
@@ -482,7 +484,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                               productName,
                                                               state.tracking.orderRef,
                                                               state.tracking.status[0].statusName,
-                                                              state.tracking.merchantName);
+                                                              state.tracking.merchantName,
+                                                              optionName);
                                                           String phoneNumber = ProductDetailConst().li1.split('**')[1];
                                                           phoneNumber = phoneNumber.replaceAll("-", "");
                                                           callPhone(phoneNumber);
@@ -591,8 +594,12 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               child: GestureDetector(
                                                 key: const Key("call_seller"),
                                                 onTap: () {
-                                                  AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(productName,
-                                                      state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName);
+                                                  AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
+                                                      productName,
+                                                      state.tracking.orderRef,
+                                                      state.tracking.status[0].statusName,
+                                                      state.tracking.merchantName,
+                                                      optionName);
                                                   String mobile = "020238858";
                                                   callPhone(mobile);
                                                 },

@@ -400,7 +400,9 @@ class AmplitudeWebHelper {
     if (optionID != "[]") {
       eventProperties['sub_category_name'] = optionID;
     }
-
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on confirm order button",
         screenName: "AutoStation_eMarketplace_ordersummary_page",
@@ -421,6 +423,9 @@ class AmplitudeWebHelper {
       required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on back button",
         screenName: "AutoStation_eMarketplace_ordersummary_page",
@@ -449,6 +454,9 @@ class AmplitudeWebHelper {
       required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Enter order success page",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
@@ -525,6 +533,9 @@ class AmplitudeWebHelper {
       required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Enter payment fail page",
         screenName: "AutoStation_eMarketplace_payment_fail",
@@ -586,27 +597,36 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnOrderTrackingList(String productName, String invoiceNumber, String statusId) async {
+  Future<void> logTapOnOrderTrackingList(String productName, String invoiceNumber, String statusId, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
-    logEvent(eventType: "Tap on order tracking list", screenName: "AutoStation_eMarketplace_ordertracking", eventName: productName, eventProperties: {
-      'invoice_number': invoiceNumber,
-      'order_status': statusId,
-      'channel': "LINE",
-      'line_uuid': lineUID,
-    });
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
+    logEvent(
+        eventType: "Tap on order tracking list",
+        screenName: "AutoStation_eMarketplace_ordertracking",
+        eventName: "$productName $optionName",
+        eventProperties: {
+          'invoice_number': invoiceNumber,
+          'order_status': statusId,
+          'channel': "LINE",
+          'line_uuid': lineUID,
+        });
   }
 
   // Marketplace ac status tracking
 
-  Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName) async {
+  Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
-
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Enter order tracking detail",
         screenName: "AutoStation_eMarketplace_ordertracking_details",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
@@ -648,13 +668,17 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnCallCenterButtonInTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName) async {
+  Future<void> logTapOnCallCenterButtonInTrackingDetail(
+      String productName, String invoiceNumber, String statusId, String merchantName, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on call center button",
         screenName: "AutoStation_eMarketplace_ordertracking_details",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
@@ -665,13 +689,16 @@ class AmplitudeWebHelper {
   }
 
   // Marketplace ac return
-  Future<void> logEnterProductRefundPage(String productName, String invoiceNumber, String statusId, String merchantName) async {
+  Future<void> logEnterProductRefundPage(String productName, String invoiceNumber, String statusId, String merchantName, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Enter product refund page",
         screenName: "AutoStation_eMarketplace_productrefund_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
@@ -682,13 +709,17 @@ class AmplitudeWebHelper {
   }
 
   // Marketplace ac return confirm
-  Future<void> logTapOnConfirmRefundButton(String productName, String invoiceNumber, String statusId, String cancelReason, String contentId) async {
+  Future<void> logTapOnConfirmRefundButton(
+      String productName, String invoiceNumber, String statusId, String cancelReason, String contentId, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on confirm refund button",
         screenName: "AutoStation_eMarketplace_productrefund_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId),
@@ -702,13 +733,16 @@ class AmplitudeWebHelper {
   // Marketplace ac success cancel
 
   Future<void> logTapOnConfirmRefundButtonInSuccessCancel(
-      String productName, String invoiceNumber, String merchantName, String cancelReason, String contentId) async {
+      String productName, String invoiceNumber, String merchantName, String cancelReason, String contentId, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Enter refund summary page",
         screenName: "AutoStation_eMarketplace_refundsummary_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,
@@ -719,13 +753,16 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnOrderTrackingButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName) async {
+  Future<void> logTapOnOrderTrackingButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on order tracking button",
         screenName: "AutoStation_eMarketplace_refundsummary_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,
@@ -734,13 +771,16 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnCallMerchantButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName) async {
+  Future<void> logTapOnCallMerchantButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on call merchant button",
         screenName: "AutoStation_eMarketplace_refundsummary_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,
@@ -749,13 +789,16 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnCallCenterButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName) async {
+  Future<void> logTapOnCallCenterButtonInSuccessCancel(String productName, String invoiceNumber, String merchantName, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on call center button",
         screenName: "AutoStation_eMarketplace_refundsummary_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,

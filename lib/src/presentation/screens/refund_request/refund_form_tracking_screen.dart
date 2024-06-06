@@ -137,8 +137,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
               );
             } else if (state.refundRequestStatus == GetRefundRequestStatus.success) {
               if (!loglaew) {
-                AmplitudeWebHelper.getInstance().logEnterProductRefundPage(
-                    state.inquiryData.productName!, state.inquiryData.invoiceNo!, orderStatus, state.inquiryData.merchantFullName!);
+                AmplitudeWebHelper.getInstance().logEnterProductRefundPage(state.inquiryData.productName!, state.inquiryData.invoiceNo!, orderStatus,
+                    state.inquiryData.merchantFullName!, state.inquiryData.productOption!);
                 loglaew = true;
               }
 
@@ -517,7 +517,8 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                                           state.inquiryData.invoiceNo!,
                                                           orderStatus,
                                                           "${state.getTextReason.toString()}${state.getTextRemark.isNotEmpty ? "_${state.getTextRemark}" : ""}",
-                                                          state.inquiryData.productId.toString());
+                                                          state.inquiryData.productId.toString(),
+                                                          state.inquiryData.productOption!);
                                                     },
                                                     onCancel: () {})
                                                 .showRefundDialog(context: context, isConfirmPayment: true);

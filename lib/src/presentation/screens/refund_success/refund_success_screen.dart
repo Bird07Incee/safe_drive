@@ -91,8 +91,9 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                   state.refundSuccessData.productName!,
                   state.refundSuccessData.invoiceNo!,
                   state.refundSuccessData.merchantFullName!,
-                  "${state.refundSuccessData.reason!}${state.refundSuccessData.remark!.isNotEmpty ? "_${state.refundSuccessData.remark!}" :""}",
-                  state.refundSuccessData.productId!);
+                  "${state.refundSuccessData.reason!}${state.refundSuccessData.remark!.isNotEmpty ? "_${state.refundSuccessData.remark!}" : ""}",
+                  state.refundSuccessData.productId!,
+                  state.refundSuccessData.productOption!);
               return Column(
                 children: [
                   Container(
@@ -361,8 +362,11 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                               GestureDetector(
                                 key: const Key("call_to_merchant_button"),
                                 onTap: () {
-                                  AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInSuccessCancel(state.refundSuccessData.productName!,
-                                      state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!);
+                                  AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInSuccessCancel(
+                                      state.refundSuccessData.productName!,
+                                      state.refundSuccessData.invoiceNo!,
+                                      state.refundSuccessData.merchantFullName!,
+                                      state.refundSuccessData.productOption!);
                                   String phoneNumber = state.refundSuccessData.merchantMobile!.replaceAll("-", "");
                                   callPhone(phoneNumber);
                                 },
@@ -393,8 +397,11 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                                 GestureDetector(
                                   key: const Key("call_button"),
                                   onTap: () {
-                                    AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInSuccessCancel(state.refundSuccessData.productName!,
-                                        state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!);
+                                    AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInSuccessCancel(
+                                        state.refundSuccessData.productName!,
+                                        state.refundSuccessData.invoiceNo!,
+                                        state.refundSuccessData.merchantFullName!,
+                                        state.refundSuccessData.productOption!);
                                     callPhone(HomeConst().pleaseContactNumber);
                                   },
                                   child: Row(
@@ -428,8 +435,8 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                       child: GestureDetector(
                         key: const Key("back_to_tracking_list_button"),
                         onTap: () {
-                          AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButtonInSuccessCancel(
-                              state.refundSuccessData.productName!, state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!);
+                          AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButtonInSuccessCancel(state.refundSuccessData.productName!,
+                              state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!, state.refundSuccessData.productOption!);
 
                           String pid = state.refundSuccessData.productId ?? "";
                           if (pid.isNotEmpty) {
