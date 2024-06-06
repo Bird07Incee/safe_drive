@@ -26,7 +26,7 @@ class ProductSelectOptions extends StatefulWidget {
 class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   late RouteSettings? settings;
   String pid = '';
-  String maStatus = 'false';
+  String maStatus = 'False';
 
   @override
   void didChangeDependencies() {
