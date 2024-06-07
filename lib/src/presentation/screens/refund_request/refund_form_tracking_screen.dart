@@ -33,7 +33,7 @@ class RefundFormTrackingScreen extends StatefulWidget {
 class _RefundRequestState extends State<RefundFormTrackingScreen> {
   final scrollController = ScrollController();
   late RouteSettings? settings;
-  String orderNo = "", productId = "", refundDay = "", orderStatus = "";
+  String orderNo = "", productId = "", refundDay = "", orderStatus = "", merchantName = "";
   List<DropdownAddressModel> listReason = [];
   bool isLoaded = false;
   bool loglaew = false;
@@ -59,6 +59,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
     orderStatus = "";
     productId = "";
     refundDay = "";
+    merchantName = "";
     context.read<RefundRequestBloc>().add(OnClearState());
   }
 
@@ -71,7 +72,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
       refundDay = (routingData["refundDay"] == null) ? "" : routingData["refundDay"];
       orderStatus = (routingData["orderStatus"] == null) ? "" : routingData["orderStatus"];
-
+      merchantName = (routingData["merchantName"] == null) ? "" : routingData["merchantName"];
       context.read<RefundRequestBloc>().add(SetRefundData(
             orderNo: orderNo,
             reasonList: listReason,

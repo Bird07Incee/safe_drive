@@ -474,13 +474,13 @@ class AmplitudeWebHelper {
   }
 
   Future<void> logTapOnOrderTrackingButtonSuccessScreen(
-      {required String productName, required String invoiceNumber, required String merchantName}) async {
+      {required String productName, required String invoiceNumber, required String merchantName, required String optionName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on order tracking button",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,
@@ -489,13 +489,14 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapTapOnCallMerchantButton({required String productName, required String invoiceNumber, required String merchantName}) async {
+  Future<void> logTapTapOnCallMerchantButton(
+      {required String productName, required String invoiceNumber, required String merchantName, required String optionName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on call merchant button",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,
@@ -505,13 +506,13 @@ class AmplitudeWebHelper {
   }
 
   Future<void> logTapOnCallCenterButtonSuccessScreen(
-      {required String productName, required String invoiceNumber, required String merchantName}) async {
+      {required String productName, required String invoiceNumber, required String merchantName, required String optionName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
         eventType: "Tap on call center button",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,

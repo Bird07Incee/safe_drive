@@ -636,7 +636,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                             state.tracking.merchantName);
                                                         if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
                                                           Navigator.pushNamed(context,
-                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=${state.tracking.status[0].statusName}');
+                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=${state.tracking.status[0].statusName}&merchantName=$merchantName');
                                                         }
                                                       },
                                                       child: Container(
