@@ -346,6 +346,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                   AmplitudeWebHelper.getInstance().logTapTapOnCallMerchantButton(
                                     invoiceNumber: orderSuccessData.invoiceNo.toString(),
                                     productName: orderSuccessData.productName.toString(),
+                                    optionName: orderSuccessData.productOption!,
                                     merchantName: orderSuccessData.merchantFullName.toString(),
                                   );
                                   String phoneNumber = orderSuccessData.merchantMobile!.replaceAll("-", "");
@@ -382,6 +383,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                     AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonSuccessScreen(
                                       invoiceNumber: orderSuccessData.invoiceNo.toString(),
                                       productName: orderSuccessData.productName.toString(),
+                                      optionName: orderSuccessData.productOption!,
                                       merchantName: orderSuccessData.merchantFullName.toString(),
                                     );
                                     callPhone(HomeConst().pleaseContactNumber);
@@ -420,6 +422,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                           AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButtonSuccessScreen(
                             invoiceNumber: orderSuccessData.invoiceNo.toString(),
                             productName: orderSuccessData.productName.toString(),
+                            optionName: orderSuccessData.productOption!,
                             merchantName: orderSuccessData.merchantFullName.toString(),
                           );
                           setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));

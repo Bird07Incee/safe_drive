@@ -477,6 +477,9 @@ class AmplitudeWebHelper {
       {required String productName, required String invoiceNumber, required String merchantName, required String optionName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on order tracking button",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
@@ -493,6 +496,9 @@ class AmplitudeWebHelper {
       {required String productName, required String invoiceNumber, required String merchantName, required String optionName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on call merchant button",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
@@ -509,6 +515,9 @@ class AmplitudeWebHelper {
       {required String productName, required String invoiceNumber, required String merchantName, required String optionName}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on call center button",
         screenName: "AutoStation_eMarketplace_ordersuccess_page",
