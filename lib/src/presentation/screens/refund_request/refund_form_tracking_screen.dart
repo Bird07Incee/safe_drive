@@ -516,6 +516,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
                                                       AmplitudeWebHelper.getInstance().logTapOnConfirmRefundButton(
                                                           state.inquiryData.productName!,
                                                           state.inquiryData.invoiceNo!,
+                                                          merchantName,
                                                           orderStatus,
                                                           "${state.getTextReason.toString()}${state.getTextRemark.isNotEmpty ? "_${state.getTextRemark}" : ""}",
                                                           state.inquiryData.productId.toString(),

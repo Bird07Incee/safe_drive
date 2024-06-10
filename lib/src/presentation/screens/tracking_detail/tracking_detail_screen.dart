@@ -32,6 +32,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   String productName = "";
   String optionName = "";
   bool isLoaded = false;
+  bool isAlreadyLogEnterPage = false;
   late double maxWidth, maxHeight;
   @override
   void didChangeDependencies() {
@@ -413,13 +414,17 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
-              if (["RefundRequest", "RefundSuccess", "RefundRejected"].contains(state.tracking.status[0].statusName)) {
-                AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
-                    productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName,
-                    statusSecondId: state.tracking.status[1].statusName);
-              } else {
-                AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
-                    productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName);
+              if (!isAlreadyLogEnterPage) {
+                if (["RefundRequest", "RefundSuccess", "RefundRejected"].contains(state.tracking.status[0].statusName)) {
+                  AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
+                      productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName,
+                      statusSecondId: state.tracking.status[1].statusName);
+                  isAlreadyLogEnterPage = true;
+                } else {
+                  AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
+                      productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName);
+                  isAlreadyLogEnterPage = true;
+                }
               }
               return ListView(
                 physics: NeverScrollableScrollPhysics(),

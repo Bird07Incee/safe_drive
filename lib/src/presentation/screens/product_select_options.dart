@@ -151,7 +151,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                               pdState.product.productionOptionals[prodOptState.stepOneIndexSelect ?? 0].price.toDecimalFormat();
                                         }
                                         AmplitudeWebHelper.getInstance().logTapOnNextButton(
-                                            productName: pdState.product.productName,
+                                            productName: "${pdState.product.productName} ${prodOptState.stepOneGroupValueRadio}",
                                             contentId: pdState.product.productId,
                                             merchantName: pdState.product.merchantFullName,
                                             productOptionPrice: productOptionPrice,

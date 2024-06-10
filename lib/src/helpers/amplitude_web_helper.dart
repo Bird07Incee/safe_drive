@@ -556,9 +556,7 @@ class AmplitudeWebHelper {
         eventProperties: {
           'invoice_number': invoiceNumber,
           'content_id': contentId,
-          'sub_category_name': subCategoryName,
           'category_name': merchantName,
-          'payment_type': mapPaymentTypeToThai(paymentType),
           'product_price': price,
           'channel': "LINE",
           'line_uuid': lineUID,
@@ -727,8 +725,8 @@ class AmplitudeWebHelper {
   }
 
   // Marketplace ac return confirm
-  Future<void> logTapOnConfirmRefundButton(
-      String productName, String invoiceNumber, String statusId, String cancelReason, String contentId, String optionName) async {
+  Future<void> logTapOnConfirmRefundButton(String productName, String invoiceNumber, String merchantName, String statusId, String cancelReason,
+      String contentId, String optionName) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
@@ -740,6 +738,7 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
+          'category_name': merchantName,
           'order_status': mapOrderStatusToThai(statusId),
           'cancel_reason': cancelReason,
           'content_id': contentId,
