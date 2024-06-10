@@ -413,8 +413,14 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
-              AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
-                  productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName);
+              if (["RefundRequest", "RefundSuccess", "RefundRejected"].contains(state.tracking.status[0].statusName)) {
+                AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
+                    productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName,
+                    statusSecondId: state.tracking.status[1].statusName);
+              } else {
+                AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
+                    productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName);
+              }
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
@@ -480,12 +486,23 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
-                                                          AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
-                                                              productName,
-                                                              state.tracking.orderRef,
-                                                              state.tracking.status[0].statusName,
-                                                              state.tracking.merchantName,
-                                                              optionName);
+                                                          if (["RefundRequest", "RefundSuccess", "RefundRejected"]
+                                                              .contains(state.tracking.status[0].statusName)) {
+                                                            AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
+                                                                productName,
+                                                                state.tracking.orderRef,
+                                                                state.tracking.status[0].statusName,
+                                                                state.tracking.merchantName,
+                                                                optionName,
+                                                                statusSecondId: state.tracking.status[1].statusName);
+                                                          } else {
+                                                            AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
+                                                                productName,
+                                                                state.tracking.orderRef,
+                                                                state.tracking.status[0].statusName,
+                                                                state.tracking.merchantName,
+                                                                optionName);
+                                                          }
                                                           String phoneNumber = ProductDetailConst().li1.split('**')[1];
                                                           phoneNumber = phoneNumber.replaceAll("-", "");
                                                           callPhone(phoneNumber);
@@ -534,11 +551,21 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
-                                                          AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
-                                                              productName,
-                                                              state.tracking.orderRef,
-                                                              state.tracking.status[0].statusName,
-                                                              state.tracking.merchantName);
+                                                          if (["RefundRequest", "RefundSuccess", "RefundRejected"]
+                                                              .contains(state.tracking.status[0].statusName)) {
+                                                            AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
+                                                                productName,
+                                                                state.tracking.orderRef,
+                                                                state.tracking.status[0].statusName,
+                                                                state.tracking.merchantName,
+                                                                statusSecondId: state.tracking.status[1].statusName);
+                                                          } else {
+                                                            AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
+                                                                productName,
+                                                                state.tracking.orderRef,
+                                                                state.tracking.status[0].statusName,
+                                                                state.tracking.merchantName);
+                                                          }
                                                           String phoneNumber = li2.split('**')[3];
                                                           phoneNumber = phoneNumber.replaceAll("-", "");
                                                           callPhone(phoneNumber);
@@ -594,12 +621,23 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               child: GestureDetector(
                                                 key: const Key("call_seller"),
                                                 onTap: () {
-                                                  AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
-                                                      productName,
-                                                      state.tracking.orderRef,
-                                                      state.tracking.status[0].statusName,
-                                                      state.tracking.merchantName,
-                                                      optionName);
+                                                  if (["RefundRequest", "RefundSuccess", "RefundRejected"]
+                                                      .contains(state.tracking.status[0].statusName)) {
+                                                    AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
+                                                        productName,
+                                                        state.tracking.orderRef,
+                                                        state.tracking.status[0].statusName,
+                                                        state.tracking.merchantName,
+                                                        optionName,
+                                                        statusSecondId: state.tracking.status[1].statusName);
+                                                  } else {
+                                                    AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
+                                                        productName,
+                                                        state.tracking.orderRef,
+                                                        state.tracking.status[0].statusName,
+                                                        state.tracking.merchantName,
+                                                        optionName);
+                                                  }
                                                   String mobile = "020238858";
                                                   callPhone(mobile);
                                                 },
@@ -629,14 +667,33 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                 ? Expanded(
                                                     child: GestureDetector(
                                                       onTap: () {
-                                                        AmplitudeWebHelper.getInstance().logTapOnProductRefundButton(
-                                                            productName,
-                                                            state.tracking.orderRef,
-                                                            state.tracking.status[0].statusName,
-                                                            state.tracking.merchantName);
+                                                        String thaiStatus = "";
+                                                        if (["RefundRequest", "RefundSuccess", "RefundRejected"]
+                                                            .contains(state.tracking.status[0].statusName)) {
+                                                          thaiStatus = AmplitudeWebHelper.getInstance().mapOrderStatusToThai(
+                                                                  state.tracking.status[0].statusName,
+                                                                  statusBeforeRefund: state.tracking.status[1].statusName) ??
+                                                              "";
+                                                          AmplitudeWebHelper.getInstance().logTapOnProductRefundButton(
+                                                              productName,
+                                                              state.tracking.orderRef,
+                                                              state.tracking.status[0].statusName,
+                                                              state.tracking.merchantName,
+                                                              statusSecondId: state.tracking.status[1].statusName);
+                                                        } else {
+                                                          thaiStatus = AmplitudeWebHelper.getInstance().mapOrderStatusToThai(
+                                                                  state.tracking.status[0].statusName,
+                                                                  statusBeforeRefund: state.tracking.status[1].statusName) ??
+                                                              "";
+                                                          AmplitudeWebHelper.getInstance().logTapOnProductRefundButton(
+                                                              productName,
+                                                              state.tracking.orderRef,
+                                                              state.tracking.status[0].statusName,
+                                                              state.tracking.merchantName);
+                                                        }
                                                         if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
                                                           Navigator.pushNamed(context,
-                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=${state.tracking.status[0].statusName}&merchantName=$merchantName');
+                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=$thaiStatus&merchantName=$merchantName');
                                                         }
                                                       },
                                                       child: Container(

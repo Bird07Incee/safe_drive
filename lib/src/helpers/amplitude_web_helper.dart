@@ -49,20 +49,23 @@ class AmplitudeWebHelper {
     }
   }
 
-  String? mapOrderStatusToThai(String paymentType) {
-    Map<String, String> thaiMapping = {
+  String? mapOrderStatusToThai(String latestStatus, {String statusBeforeRefund = ""}) {
+    Map<String, String> thaiMappingLatestStatus = {
       "Pending": "ชำระเงินแล้ว",
       "Preparing/Packed": "เตรียมจัดส่ง",
-      "PreparingSelfServiceFail": "เตรียมจัดส่งล้มเหลว",
+      "PreparingSelfServiceFail": "เตรียมจัดส่ง",
       "Shipped": "กำลังจัดส่ง",
-      "ShippingFail": "จัดส่งล้มเหลว",
+      "ShippingFail": "กำลังจัดส่ง",
       "Received": "จัดส่งสำเร็จ",
-      "RefundRequest": "ได้รับคำคืนสินค้า/คืนเงิน/คืนสินค้าแล้ว",
-      "RefundSuccess": "คืนเงินสำเร็จ",
-      "RefundRejected": "คืนเงินล้มเหลว"
+      "": "ไม่พบข้อมูล"
     };
-    if (thaiMapping.containsKey(paymentType)) {
-      return thaiMapping[paymentType];
+
+    if (thaiMappingLatestStatus.containsKey(latestStatus)) {
+      return thaiMappingLatestStatus[latestStatus];
+    } else if (latestStatus == "RefundRequest" || latestStatus == "RefundSuccess") {
+      return "คืนเงิน/คืนสินค้า";
+    } else if (latestStatus == "RefundRejected") {
+      return thaiMappingLatestStatus[statusBeforeRefund]!;
     } else {
       return "ไม่พบข้อมูล";
     }
@@ -627,7 +630,8 @@ class AmplitudeWebHelper {
 
   // Marketplace ac status tracking
 
-  Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName, String optionName) async {
+  Future<void> logEnterOrderTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName, String optionName,
+      {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
@@ -639,14 +643,15 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId),
+          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
           'channel': "LINE",
           'category_name': merchantName,
           'line_uuid': lineUID,
         });
   }
 
-  Future<void> logTapOnCallMerchantButtonInTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName) async {
+  Future<void> logTapOnCallMerchantButtonInTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName,
+      {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -655,14 +660,15 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId),
+          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
           'channel': "LINE",
           'category_name': merchantName,
           'line_uuid': lineUID,
         });
   }
 
-  Future<void> logTapOnProductRefundButton(String productName, String invoiceNumber, String statusId, String merchantName) async {
+  Future<void> logTapOnProductRefundButton(String productName, String invoiceNumber, String statusId, String merchantName,
+      {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(
@@ -671,7 +677,7 @@ class AmplitudeWebHelper {
         eventName: productName,
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId),
+          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
           'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
@@ -679,7 +685,8 @@ class AmplitudeWebHelper {
   }
 
   Future<void> logTapOnCallCenterButtonInTrackingDetail(
-      String productName, String invoiceNumber, String statusId, String merchantName, String optionName) async {
+      String productName, String invoiceNumber, String statusId, String merchantName, String optionName,
+      {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
@@ -691,7 +698,7 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId),
+          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
           'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
@@ -699,7 +706,8 @@ class AmplitudeWebHelper {
   }
 
   // Marketplace ac return
-  Future<void> logEnterProductRefundPage(String productName, String invoiceNumber, String statusId, String merchantName, String optionName) async {
+  Future<void> logEnterProductRefundPage(String productName, String invoiceNumber, String statusId, String merchantName, String optionName,
+      {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
@@ -711,7 +719,7 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId),
+          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
           'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
