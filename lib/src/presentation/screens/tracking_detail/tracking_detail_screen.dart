@@ -415,7 +415,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             if (state.status.isSuccess) {
               hideOneTrustCookieScript();
               if (!isAlreadyLogEnterPage) {
-                if (["RefundRequest", "RefundSuccess", "RefundRejected"].contains(state.tracking.status[0].statusName)) {
+                if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                   AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
                       productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName,
                       statusSecondId: state.tracking.status[1].statusName);
@@ -491,8 +491,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
-                                                          if (["RefundRequest", "RefundSuccess", "RefundRejected"]
-                                                              .contains(state.tracking.status[0].statusName)) {
+                                                          if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                                                             AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
                                                                 productName,
                                                                 state.tracking.orderRef,
@@ -556,8 +555,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                       style: AlvaStyles().headingSize12w700(spaceGrey).copyWith(height: 2),
                                                       recognizer: TapGestureRecognizer()
                                                         ..onTap = () {
-                                                          if (["RefundRequest", "RefundSuccess", "RefundRejected"]
-                                                              .contains(state.tracking.status[0].statusName)) {
+                                                          if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                                                             AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
                                                                 productName,
                                                                 state.tracking.orderRef,
@@ -626,8 +624,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                               child: GestureDetector(
                                                 key: const Key("call_seller"),
                                                 onTap: () {
-                                                  if (["RefundRequest", "RefundSuccess", "RefundRejected"]
-                                                      .contains(state.tracking.status[0].statusName)) {
+                                                  if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                                                     AmplitudeWebHelper.getInstance().logTapOnCallCenterButtonInTrackingDetail(
                                                         productName,
                                                         state.tracking.orderRef,
@@ -673,8 +670,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         String thaiStatus = "";
-                                                        if (["RefundRequest", "RefundSuccess", "RefundRejected"]
-                                                            .contains(state.tracking.status[0].statusName)) {
+                                                        if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                                                           thaiStatus = AmplitudeWebHelper.getInstance().mapOrderStatusToThai(
                                                                   state.tracking.status[0].statusName,
                                                                   statusBeforeRefund: state.tracking.status[1].statusName) ??

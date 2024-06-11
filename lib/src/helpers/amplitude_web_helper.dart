@@ -57,13 +57,13 @@ class AmplitudeWebHelper {
       "Shipped": "กำลังจัดส่ง",
       "ShippingFail": "กำลังจัดส่ง",
       "Received": "จัดส่งสำเร็จ",
+      "RefundRequest": "คืนเงิน/คืนสินค้า",
+      "RefundSuccess": "คืนเงิน/คืนสินค้า",
       "": "ไม่พบข้อมูล"
     };
 
     if (thaiMappingLatestStatus.containsKey(latestStatus)) {
       return thaiMappingLatestStatus[latestStatus];
-    } else if (latestStatus == "RefundRequest" || latestStatus == "RefundSuccess") {
-      return "คืนเงิน/คืนสินค้า";
     } else if (latestStatus == "RefundRejected") {
       return thaiMappingLatestStatus[statusBeforeRefund]!;
     } else {
@@ -608,7 +608,8 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnOrderTrackingList(String productName, String invoiceNumber, String statusId, String optionName) async {
+  Future<void> logTapOnOrderTrackingList(String productName, String invoiceNumber, String statusId, String optionName,
+      {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
@@ -620,7 +621,7 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': statusId,
+          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -717,7 +718,7 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
+          'order_status': statusId,
           'category_name': merchantName,
           'channel': "LINE",
           'line_uuid': lineUID,
@@ -739,7 +740,7 @@ class AmplitudeWebHelper {
         eventProperties: {
           'invoice_number': invoiceNumber,
           'category_name': merchantName,
-          'order_status': mapOrderStatusToThai(statusId),
+          'order_status': statusId,
           'cancel_reason': cancelReason,
           'content_id': contentId,
           'channel': "LINE",

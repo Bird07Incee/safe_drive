@@ -118,8 +118,17 @@ class TrackingOrderCard extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  AmplitudeWebHelper.getInstance().logTapOnOrderTrackingList(order.products![0].productNameTh!.toString(), order.orderNo.toString(),
-                      order.shippingStatusMessage.toString(), order.products![0].productDescription!);
+                  if (["RefundRejected"].contains(order.shippingStatusMessage)) {
+                    AmplitudeWebHelper.getInstance().logTapOnOrderTrackingList(order.products![0].productNameTh!.toString(), order.orderNo.toString(),
+                        order.shippingStatusMessage.toString(), order.products![0].productDescription!);
+                  } else {
+                    AmplitudeWebHelper.getInstance().logTapOnOrderTrackingList(
+                      order.products![0].productNameTh!.toString(),
+                      order.orderNo.toString(),
+                      order.shippingStatusMessage.toString(),
+                      order.products![0].productDescription!,
+                    );
+                  }
 
                   Navigator.pushNamed(context,
                       '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}&productName=${order.products![0].productNameTh!.toString()}&optionName=${order.products![0].productDescription}');
