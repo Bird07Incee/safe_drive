@@ -621,7 +621,7 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
+          'order_status': statusId,
           'channel': "LINE",
           'line_uuid': lineUID,
         });
@@ -649,14 +649,18 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnCallMerchantButtonInTrackingDetail(String productName, String invoiceNumber, String statusId, String merchantName,
+  Future<void> logTapOnCallMerchantButtonInTrackingDetail(
+      String productName, String optionName, String invoiceNumber, String statusId, String merchantName,
       {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on call merchant button",
         screenName: "AutoStation_eMarketplace_ordertracking_details",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
@@ -666,14 +670,17 @@ class AmplitudeWebHelper {
         });
   }
 
-  Future<void> logTapOnProductRefundButton(String productName, String invoiceNumber, String statusId, String merchantName,
+  Future<void> logTapOnProductRefundButton(String productName, optionName, String invoiceNumber, String statusId, String merchantName,
       {String statusSecondId = ""}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
+    if (optionName.contains(":")) {
+      optionName = optionName.split(":")[1];
+    }
     logEvent(
         eventType: "Tap on product refund button",
         screenName: "AutoStation_eMarketplace_ordertracking_details",
-        eventName: productName,
+        eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
           'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),

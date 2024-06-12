@@ -558,6 +558,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                           if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                                                             AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
                                                                 productName,
+                                                                optionName,
                                                                 state.tracking.orderRef,
                                                                 state.tracking.status[0].statusName,
                                                                 state.tracking.merchantName,
@@ -565,6 +566,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                           } else {
                                                             AmplitudeWebHelper.getInstance().logTapOnCallMerchantButtonInTrackingDetail(
                                                                 productName,
+                                                                optionName,
                                                                 state.tracking.orderRef,
                                                                 state.tracking.status[0].statusName,
                                                                 state.tracking.merchantName);
@@ -677,6 +679,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                               "";
                                                           AmplitudeWebHelper.getInstance().logTapOnProductRefundButton(
                                                               productName,
+                                                              optionName,
                                                               state.tracking.orderRef,
                                                               state.tracking.status[0].statusName,
                                                               state.tracking.merchantName,
@@ -688,6 +691,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                               "";
                                                           AmplitudeWebHelper.getInstance().logTapOnProductRefundButton(
                                                               productName,
+                                                              optionName,
                                                               state.tracking.orderRef,
                                                               state.tracking.status[0].statusName,
                                                               state.tracking.merchantName);
