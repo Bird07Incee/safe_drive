@@ -150,6 +150,11 @@ void main() {
         act: (bloc) => bloc.add(const SetOrderStatus(GetOrderSuccessDataStatus.success)),
         expect: () => <OrderSuccessState>[OrderSuccessState(orderSuccessStatus: GetOrderSuccessDataStatus.success)]);
 
+    blocTest<OrderSuccessBloc, OrderSuccessState>("set is from order success",
+        build: () => OrderSuccessBloc(utilityRepository: utilityRepository),
+        act: (bloc) => bloc.add(const SetIsFromOrderSuccess(true)),
+        expect: () => <OrderSuccessState>[OrderSuccessState(isFromOrderSuccess: true)]);
+
     blocTest<OrderSuccessBloc, OrderSuccessState>("OrderSuccess success",
         setUp: () async {
           SharedPreferences.setMockInitialValues({});

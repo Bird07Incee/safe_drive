@@ -26,3 +26,9 @@ class SetOrderStatus extends OrderSuccessEvent {
 
   final GetOrderSuccessDataStatus status;
 }
+
+class SetIsFromOrderSuccess extends OrderSuccessEvent {
+  const SetIsFromOrderSuccess(this.isFrom);
+
+  final bool isFrom;
+}

@@ -6,6 +6,7 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/tracking_list_data.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_order/tracking_order_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -154,7 +155,14 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
                 subTitle: ErrorConst().subtitleMaintenance,
                 titleBtn: ErrorConst().titleBtnMaintenance,
                 onTap: () {
-                  Navigator.pop(context);
+                  bool isFromOrderSuccess = context.read<OrderSuccessBloc>().state.isFromOrderSuccess;
+
+                  if (isFromOrderSuccess) {
+                    context.read<OrderSuccessBloc>().add(SetIsFromOrderSuccess(false));
+                    Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+                  } else {
+                    Navigator.pop(context);
+                  }
                 },
               );
             } else {

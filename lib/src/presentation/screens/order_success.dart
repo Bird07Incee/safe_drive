@@ -426,6 +426,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                             merchantName: orderSuccessData.merchantFullName.toString(),
                           );
                           setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
+                          context.read<OrderSuccessBloc>().add(SetIsFromOrderSuccess(true));
                           Navigator.pushNamed(context, '/trackingList');
                         },
                         child: Container(

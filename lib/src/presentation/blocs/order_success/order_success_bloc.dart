@@ -18,12 +18,17 @@ class OrderSuccessBloc extends Bloc<OrderSuccessEvent, OrderSuccessState> {
     on<GetOrderSuccess>(_onGetOrderSuccess);
     // on<GetOrderSuccessMock>(_onGetOrderSuccessMock);
     on<SetOrderStatus>(_onSetOrderStatus);
+    on<SetIsFromOrderSuccess>(_onSetIsFromOrderSuccess);
   }
 
   final DioUtilityRepository utilityRepository;
 
   _onSetOrderStatus(SetOrderStatus event, Emitter<OrderSuccessState> emit) {
     emit(state.copyWith(orderSuccessStatus: event.status));
+  }
+
+  _onSetIsFromOrderSuccess(SetIsFromOrderSuccess event, Emitter<OrderSuccessState> emit) {
+    emit(state.copyWith(isFromOrderSuccess: event.isFrom));
   }
 
   _onGetOrderSuccess(GetOrderSuccess event, Emitter<OrderSuccessState> emit) async {

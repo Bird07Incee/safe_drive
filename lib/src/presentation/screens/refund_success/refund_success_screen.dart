@@ -6,6 +6,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_event.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund_success_state.dart';
@@ -437,6 +438,8 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                         onTap: () {
                           AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButtonInSuccessCancel(state.refundSuccessData.productName!,
                               state.refundSuccessData.invoiceNo!, state.refundSuccessData.merchantFullName!, state.refundSuccessData.productOption!);
+
+                          context.read<OrderSuccessBloc>().add(SetIsFromOrderSuccess(true));
 
                           String pid = state.refundSuccessData.productId ?? "";
                           if (pid.isNotEmpty) {

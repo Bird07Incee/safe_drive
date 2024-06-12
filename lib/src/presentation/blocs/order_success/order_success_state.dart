@@ -28,6 +28,7 @@ const defaultInquiryData = {
 class OrderSuccessState extends Equatable {
   const OrderSuccessState(
       {this.orderSuccessStatus = GetOrderSuccessDataStatus.initial,
+      this.isFromOrderSuccess = false,
       this.orderSuccessData = const InquiryData(
           invoiceNo: "",
           cardNo: "",
@@ -52,12 +53,15 @@ class OrderSuccessState extends Equatable {
 
   final GetOrderSuccessDataStatus orderSuccessStatus;
   final InquiryData orderSuccessData;
+  final bool isFromOrderSuccess;
 
   @override
-  List<Object> get props => [orderSuccessStatus, orderSuccessData];
+  List<Object> get props => [orderSuccessStatus, orderSuccessData, isFromOrderSuccess];
 
-  OrderSuccessState copyWith({GetOrderSuccessDataStatus? orderSuccessStatus, InquiryData? orderSuccessData}) {
+  OrderSuccessState copyWith({GetOrderSuccessDataStatus? orderSuccessStatus, InquiryData? orderSuccessData, bool? isFromOrderSuccess}) {
     return OrderSuccessState(
-        orderSuccessData: orderSuccessData ?? this.orderSuccessData, orderSuccessStatus: orderSuccessStatus ?? this.orderSuccessStatus);
+        orderSuccessData: orderSuccessData ?? this.orderSuccessData,
+        orderSuccessStatus: orderSuccessStatus ?? this.orderSuccessStatus,
+        isFromOrderSuccess: isFromOrderSuccess ?? this.isFromOrderSuccess);
   }
 }
