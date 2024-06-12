@@ -126,7 +126,7 @@ class TrackingOrderCard extends StatelessWidget {
                   );
 
                   Navigator.pushNamed(context,
-                      '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}&productName=${order.products![0].productNameTh!.toString()}&optionName=${order.products![0].productDescription}');
+                      '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}&productName=${order.products![0].productNameTh!.toString()}&optionName=${order.products![0].productDescription}&status=${order.shippingStatusMessage}');
                 },
                 child: Container(
                   height: 40,

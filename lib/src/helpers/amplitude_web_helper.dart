@@ -57,8 +57,8 @@ class AmplitudeWebHelper {
       "Shipped": "กำลังจัดส่ง",
       "ShippingFail": "กำลังจัดส่ง",
       "Received": "จัดส่งสำเร็จ",
-      "RefundRequest": "คืนเงิน/คืนสินค้า",
-      "RefundSuccess": "คืนเงิน/คืนสินค้า",
+      "RefundRequest": "คืนสินค้า/คืนเงิน",
+      "RefundSuccess": "คืนสินค้า/คืนเงิน",
       "": "ไม่พบข้อมูล"
     };
 

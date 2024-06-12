@@ -31,6 +31,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   String productId = "";
   String productName = "";
   String optionName = "";
+  String status = "";
   bool isLoaded = false;
   bool isAlreadyLogEnterPage = false;
   late double maxWidth, maxHeight;
@@ -52,6 +53,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
       productName = (routingData["productName"] == null) ? "" : routingData["productName"];
       optionName = (routingData["optionName"] == null) ? "" : routingData["optionName"];
       productId = (routingData["pid"] == null) ? "" : routingData["pid"];
+      status = (routingData["status"] == null) ? "" : routingData["status"];
       context.read<TrackingDetailBloc>().add(GetTracking(orderNo: orderNo, productId: productId));
     }
   }
@@ -421,8 +423,8 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                       statusSecondId: state.tracking.status[1].statusName);
                   isAlreadyLogEnterPage = true;
                 } else {
-                  AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
-                      productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName);
+                  AmplitudeWebHelper.getInstance()
+                      .logEnterOrderTrackingDetail(productName, state.tracking.orderRef, status, state.tracking.merchantName, optionName);
                   isAlreadyLogEnterPage = true;
                 }
               }
