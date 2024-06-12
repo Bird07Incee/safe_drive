@@ -642,7 +642,7 @@ class AmplitudeWebHelper {
         eventName: "$productName $optionName",
         eventProperties: {
           'invoice_number': invoiceNumber,
-          'order_status': mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId),
+          'order_status': statusSecondId.isNotEmpty ? mapOrderStatusToThai(statusId, statusBeforeRefund: statusSecondId) : statusId,
           'channel': "LINE",
           'category_name': merchantName,
           'line_uuid': lineUID,
