@@ -156,6 +156,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
                 titleBtn: ErrorConst().titleBtnMaintenance,
                 onTap: () {
                   bool isFromOrderSuccess = context.read<OrderSuccessBloc>().state.isFromOrderSuccess;
+                  showOneTrustCookieScript();
 
                   if (isFromOrderSuccess) {
                     context.read<OrderSuccessBloc>().add(SetIsFromOrderSuccess(false));
