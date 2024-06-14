@@ -636,6 +636,7 @@ class AmplitudeWebHelper {
     if (optionName.contains(":")) {
       optionName = optionName.split(":")[1];
     }
+    if (statusId == "ชำระเงินแล้ว") statusId = "เตรียมจัดส่ง";
     logEvent(
         eventType: "Enter order tracking detail",
         screenName: "AutoStation_eMarketplace_ordertracking_details",
