@@ -157,12 +157,12 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
                 titleBtn: ErrorConst().titleBtnMaintenance,
                 onTap: () {
                   bool isFromOrderSuccess = context.read<OrderSuccessBloc>().state.isFromOrderSuccess;
-                  String env = Environment().getValue("ENVIRONMENT_NAME");
-                  loadOneTrustCookieScript(env);
-                  showOneTrustCookieScript();
 
                   if (isFromOrderSuccess) {
                     context.read<OrderSuccessBloc>().add(SetIsFromOrderSuccess(false));
+                    String env = Environment().getValue("ENVIRONMENT_NAME");
+                    loadOneTrustCookieScript(env);
+                    showOneTrustCookieScript();
                     Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                   } else {
                     Navigator.pop(context);
