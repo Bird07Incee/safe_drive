@@ -165,6 +165,7 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
                     showOneTrustCookieScript();
                     Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                   } else {
+                    showOneTrustCookieScript();
                     Navigator.pop(context);
                   }
                 },
