@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -160,8 +159,6 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
 
                   if (isFromOrderSuccess) {
                     context.read<OrderSuccessBloc>().add(SetIsFromOrderSuccess(false));
-                    String env = Environment().getValue("ENVIRONMENT_NAME");
-                    loadOneTrustCookieScript(env);
                     showOneTrustCookieScript();
                     Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
                   } else {
