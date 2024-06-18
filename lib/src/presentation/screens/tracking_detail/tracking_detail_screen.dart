@@ -415,7 +415,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             // String merchantNumber = "02989878676";
             final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
             if (state.status.isSuccess) {
-              hideOneTrustCookieScript();
+              // hideOneTrustCookieScript();
               if (!isAlreadyLogEnterPage) {
                 if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                   AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(

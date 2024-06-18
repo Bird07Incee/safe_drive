@@ -36,7 +36,6 @@ function showOneTrustCookieScript() {
     try {
         const onetrust = document.getElementById("onetrust-consent-sdk");
         onetrust.removeAttribute("style");
-        console.log("show onetrust");
     } catch {
         console.log("onetrust show error");
     }
