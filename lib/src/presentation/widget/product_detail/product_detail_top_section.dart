@@ -600,7 +600,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                             visible: state.product.percentDiscountPrice != 0 && state.product.productionOptionals.isEmpty,
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                              decoration: const BoxDecoration(color: BlueFantasy, borderRadius: BorderRadius.only(bottomRight: Radius.circular(8))),
+                              decoration: const BoxDecoration(color: mintGreen, borderRadius: BorderRadius.only(bottomRight: Radius.circular(8))),
                               child: AlvaText(
                                 title: "ถูกลง ${state.product.percentDiscountPrice} %",
                                 textStyle: AlvaStyles().headingSize12w600(Colors.white),
@@ -629,7 +629,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                       expansionFactor: 2,
                                       dotHeight: 6,
                                       dotWidth: 6,
-                                      activeDotColor: BlueFantasy,
+                                      activeDotColor: mintGreen,
                                       dotColor: cloudSoftDeepWhite,
                                     )),
                               ),

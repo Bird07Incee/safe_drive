@@ -17,6 +17,7 @@ const BG_COLOR2 = Color(0xffEFF1F3);
 const BTN_SELECTED_TEXT_COLOR_NEW = Color(0xFF2C2626);
 
 const whitePure = Color(0xffffffff);
+const mintGreen = Color(0xff00A693);
 const blackInBlack = Color(0xff000000);
 const blackGoMunTo = Color(0xff2C2626);
 

@@ -228,7 +228,7 @@ class ProductCardWidget extends StatelessWidget {
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                                         decoration: const BoxDecoration(
-                                            color: Color(0xff40a9fc),
+                                            color: mintGreen,
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(8),
                                                 topRight: Radius.circular(0),
@@ -264,7 +264,7 @@ class ProductCardWidget extends StatelessWidget {
                                             expansionFactor: 2,
                                             dotHeight: 6,
                                             dotWidth: 6,
-                                            activeDotColor: BlueFantasy,
+                                            activeDotColor: mintGreen,
                                             dotColor: cloudSoftDeepWhite,
                                           )),
                                     ),

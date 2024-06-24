@@ -32,7 +32,7 @@ class HomepageTopSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AlvaText(title: HomeConst().titleTopSec, textStyle: AlvaStyles().headingSize16Bold()),
-                      AlvaText(title: HomeConst().titleTopSecTH, textStyle: AlvaStyles().headingSize8w500Height12(blackGoMunTo)),
+                      AlvaText(title: HomeConst().titleTopSecTH, textStyle: AlvaStyles().headingSize8w500Height12(mintGreen)),
                     ],
                   ),
                   GestureDetector(

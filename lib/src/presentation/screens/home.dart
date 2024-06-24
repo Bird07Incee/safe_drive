@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     child: TabBar(
                                         controller: tabController,
                                         labelColor: Colors.black,
-                                        indicatorColor: BlueFantasy,
+                                        indicatorColor: mintGreen,
                                         //    padding: EdgeInsets.only(right: 8),
                                         labelPadding: EdgeInsets.symmetric(horizontal: 30),
                                         isScrollable: true,
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                   DisclaimerSection(),
                                   Container(
-                                    color: spaceGrey,
+                                    color: mintGreen,
                                     child: Column(
                                       children: [
                                         const SizedBox(

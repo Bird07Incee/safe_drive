@@ -1064,7 +1064,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   child: TabBar(
                       controller: _tabController,
                       labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
-                      indicatorColor: BlueFantasy,
+                      indicatorColor: mintGreen,
                       unselectedLabelColor: whiteGray,
                       //  unselectedLabelColor: cloudSoftDeepWhite,
                       labelStyle: const TextStyle(
