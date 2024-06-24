@@ -86,7 +86,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                         dotHeight: 6,
                         dotWidth: 6,
                         activeDotColor: cloudSoftDeepWhite,
-                        dotColor: mintGreen,
+                        dotColor: spaceGrey,
                       ))
                   : SizedBox.shrink(),
             ),
