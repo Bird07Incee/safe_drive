@@ -127,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           },
                         );
                       } else if (state.productListStatus == GetProductListStatus.success) {
-                        tabController ??= TabController(initialIndex: state.selectedTabIndex, length: state.productList.category!.length + 1, vsync: this);
+                        tabController ??=
+                            TabController(initialIndex: state.selectedTabIndex, length: state.productList.category!.length + 1, vsync: this);
                         return Container(
                           color: cloudyWhite,
                           child: ListView(
