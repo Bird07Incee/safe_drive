@@ -9,7 +9,7 @@ class HomeConst {
   String bannerImagePath = 'assets/homepage/banner.png';
   String titleTopSecTH = 'พร้อมบาย';
 
-  String lineOAURL = 'https://line.me/R/ti/p/@018qbfet';
+  String lineOAURL = 'https://line.me/R/ti/p/@089llnyg';
   String termsAndConditions = 'ข้อตกลงและเงื่อนไข';
   String privacyPolicy = 'ประกาศความคุ้มครองข้อมูลส่วนบุคคล';
   String askInformation = 'สอบถามข้อมูลปัญหาการใช้งาน เช่น ขั้นตอนการสั่งซื้อหรือการชำระเงิน';
