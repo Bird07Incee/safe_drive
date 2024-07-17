@@ -113,18 +113,19 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 paymentType: orderState.paymentType.name,
               );
               context.read<ShippingAddressBloc>().onClearShippingData();
-              context.read<ProductOptionBloc>().updateStepOneVariables(
-                    groupValueRadio: "",
-                    price: 0,
-                    indexSelect: 0,
-                  );
-              context.read<ProductOptionBloc>().updateStepTwoVariables(
-                    groupValueRadio: "",
-                    price: 0,
-                    indexSelect: 0,
-                  );
-              context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
-              context.read<ProductOptionBloc>().updateLastOption(0);
+
+              // context.read<ProductOptionBloc>().updateStepOneVariables(
+              //       groupValueRadio: "",
+              //       price: 0,
+              //       indexSelect: 0,
+              //     );
+              // context.read<ProductOptionBloc>().updateStepTwoVariables(
+              //       groupValueRadio: "",
+              //       price: 0,
+              //       indexSelect: 0,
+              //     );
+              // context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
+              // context.read<ProductOptionBloc>().updateLastOption(0);
 
               if (isLoaded) {
                 refreshRoute(

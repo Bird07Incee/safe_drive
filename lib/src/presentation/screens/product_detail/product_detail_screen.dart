@@ -262,6 +262,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                       } else {
                         Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
                       }
+
+                      context.read<ProductOptionBloc>().updateStepOneVariables(
+                            groupValueRadio: "",
+                            price: 0,
+                            indexSelect: 0,
+                          );
+                      context.read<ProductOptionBloc>().updateStepTwoVariables(
+                            groupValueRadio: "",
+                            price: 0,
+                            indexSelect: 0,
+                          );
+                      context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
+                      context.read<ProductOptionBloc>().updateLastOption(0);
                     },
                     style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
                     child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
