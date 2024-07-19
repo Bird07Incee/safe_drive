@@ -25,8 +25,10 @@ class PDBottomSection extends StatefulWidget {
 class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderStateMixin {
   late final TabController _tabController;
   String? remarkHtmlString;
-  bool isPressedReadMore = false;
-  bool isReadMoreVisible = false;
+  bool isPressedSpecReadMore = false;
+  bool isPressedDescReadMore = false;
+  bool isReadMoreSpecVisible = false;
+  bool isReadMoreDescVisible = false;
   bool isBuildFinish = false;
   double descriptionHeight = 0;
   final GlobalKey _descriptionGetHeightKey = GlobalKey();
@@ -51,6 +53,32 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
     final RenderBox renderBox = _descriptionGetHeightKey.currentContext!.findRenderObject() as RenderBox;
     if (renderBox.size.height != 0) {
       descriptionHeight = renderBox.size.height;
+    }
+  }
+
+  checkProductDetailTab(Product product, Widget noDataFromSeller, Widget technicalSpecWidget, Widget technicalSpecHaveMoreWidget,
+      Widget descriptionMaxWidget, Widget descriptionHaveReadMoreWidget) {
+    switch (_tabController.index) {
+      case 0:
+        if (product.technicalSpec.isEmpty) {
+          return noDataFromSeller;
+        } else {
+          if (isPressedSpecReadMore || product.technicalSpec.contains("<table>")) {
+            return technicalSpecWidget;
+          } else {
+            return technicalSpecHaveMoreWidget;
+          }
+        }
+      case 1:
+        if (product.description.isEmpty) {
+          return noDataFromSeller;
+        } else {
+          if (isPressedDescReadMore || product.description.contains("<table>")) {
+            return descriptionMaxWidget;
+          } else {
+            return descriptionHaveReadMoreWidget;
+          }
+        }
     }
   }
 
@@ -391,9 +419,28 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         ),
         child: StatefulBuilder(builder: (context, setState) {
           var originalDescription = product.description;
+          var originalSpec = product.technicalSpec;
+          var data = "";
+
+          if (_tabController.index == 0) {
+            data = originalSpec.isNotEmpty
+                ? originalSpec.contains("<table>")
+                    ? originalSpec
+                    : !originalSpec.contains("<p>")
+                        ? "<p>$originalSpec</p>"
+                        : originalSpec
+                : "";
+          } else if (_tabController.index == 1) {
+            data = originalDescription.isNotEmpty
+                ? !originalDescription.contains("<p>")
+                    ? "<p>$originalDescription</p>"
+                    : originalDescription
+                : "";
+          }
+          // originalDescription = """<a id="test_photo_1"></a>![ดด](<img src="%E0%B8%81%E0%B8%81" alt="test photo" />""";
           // var dataDescription = originalDescription.isNotEmpty ? originalDescription.replaceAll("<p>", "").replaceAll("</p>", "") : "";
-          var dataDescription = "<p>$originalDescription</p>";
-          dataDescription = dataDescription.replaceAll("<<", "<").replaceAll(">>", ">");
+
+          data = data.replaceAll("<<", "<").replaceAll(">>", ">");
 
           RegExp emojiRegex = RegExp(
             r"[\u{1F600}-\u{1F64F}" // Emoticons
@@ -409,7 +456,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             r"]+",
             unicode: true,
           );
-          dataDescription = dataDescription.replaceAll(emojiRegex, "");
+          data = data.replaceAll(emojiRegex, "");
           // -----------process for unSupport emoji,icon in text-------------------
           String? truncatedHtmlContent;
           int maxLines = 4;
@@ -420,20 +467,25 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
           // check empty html string input
 
-          if (dataDescription != "") {
-            dataDescription = dataDescription.replaceAll("<br >", "<br>");
-            dataDescription = dataDescription.replaceAll("<br />", "<br/>");
-            dataDescription = truncatedHtmlText.removeHtmlForbiddenTagsTags(dataDescription);
+          if (data != "") {
+            data = data.replaceAll("<br >", "<br>");
+            data = data.replaceAll("<br />", "<br/>");
+            data = truncatedHtmlText.removeHtmlForbiddenTagsTags(data);
             // dataDescription = removeInvalidWords(dataDescription);
             // check html tag in string input
-            if (!truncatedHtmlText.containsHtmlTags(dataDescription)) {
+            if (!truncatedHtmlText.containsHtmlTags(data)) {
               // insert <p> in title or first line
-              dataDescription = truncatedHtmlText.insertPTag(dataDescription);
+              data = truncatedHtmlText.insertPTag(data);
               // check expended content
-              if (dataDescription.length >= 291) {
+              if (data.length >= 291) {
                 // cut content string show 100 char
-                isReadMoreVisible = true;
-                textString = dataDescription.substring(0, 290);
+                if (_tabController.index == 0) {
+                  isReadMoreSpecVisible = true;
+                } else if (_tabController.index == 1) {
+                  isReadMoreDescVisible = true;
+                }
+
+                textString = data.substring(0, 290);
                 //set toggleDescription
 
                 // myBloc.updateToggleTapDescription(toggleDescription: false);
@@ -443,15 +495,25 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 // check html tag in textString
                 if (truncatedHtmlText.containsHtmlTags(textString)) {
                   // set truncatedHtmlContent in textString
-                  isReadMoreVisible = false;
+                  if (_tabController.index == 0) {
+                    isReadMoreSpecVisible = false;
+                  } else if (_tabController.index == 1) {
+                    isReadMoreDescVisible = false;
+                  }
+
                   truncatedHtmlContent = textString;
                 }
                 // Verify that the data in characters does not exceed a line but is <br>Many items beyond the line.
-              } else if (dataDescription.length <= 169 && truncatedHtmlText.countBrTags(dataDescription) >= 3) {
+              } else if (data.length <= 169 && truncatedHtmlText.countBrTags(data) >= 3) {
                 // cut content string show characters to delete (20% of total characters)
-                textString = truncatedHtmlText.deleteCharacters(dataDescription);
+                textString = truncatedHtmlText.deleteCharacters(data);
                 //set toggleDescription
-                isReadMoreVisible = true;
+                if (_tabController.index == 0) {
+                  isReadMoreSpecVisible = true;
+                } else if (_tabController.index == 1) {
+                  isReadMoreDescVisible = true;
+                }
+
                 // myBloc.updateToggleTapDescription(toggleDescription: false);
                 //set maxLines lineFinal for lineFinal<=maxLines
                 maxLines = 1;
@@ -463,29 +525,39 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 }
               } else {
                 // set toggleDescription adn textNotMoreThan When text does not exceed a line
-                isReadMoreVisible = false;
+                if (_tabController.index == 0) {
+                  isReadMoreSpecVisible = false;
+                } else if (_tabController.index == 1) {
+                  isReadMoreDescVisible = false;
+                }
               }
               //  This string does not contain any html tags.
             } else {
               // This string contains html tags.
               // List of tags that you want to delete the entire line of tags and do not want to show
-              dataDescription = truncatedHtmlText.removeTags(dataDescription, ['table', 'th', 'tr', 'td', 'img', 'nav']);
+              data = truncatedHtmlText.removeTags(data, ['img', 'nav']);
 
               // logic for replacing variables for replacements
               for (var replacement in ProductDetailConst().replacements) {
                 replacement.forEach((key, value) {
-                  dataDescription = dataDescription.replaceAll(key, value);
+                  data = data.replaceAll(key, value);
                 });
               }
               // refactor html content to one line, example, <p>text</p><p>text</p
-              dataDescription = truncatedHtmlText.refactorHtml(dataDescription);
+              data = truncatedHtmlText.refactorHtml(data);
               // Delete/unnecessary from content
-              dataDescription = dataDescription.replaceAll(' /', "");
+              data = data.replaceAll(' /', "");
               // Separate the dataDescription variable one line at a time by separating it from </,<br> and put it in lines.
-              lines = dataDescription.split('</').expand((s) => s.split('<br>')).toList();
+
+              lines = data.split('</').expand((s) => s.split('<br>')).toList();
 
               // The process of counting lines and checking how many characters each line has and maxLine should be set.
-              isReadMoreVisible = false;
+              if (_tabController.index == 0) {
+                isReadMoreSpecVisible = false;
+              } else if (_tabController.index == 1) {
+                isReadMoreDescVisible = false;
+              }
+
               for (int i = 0; i < lines.length; i++) {
                 //log("line[$i] ${lines[i].length} : ${lines[i]}");
                 if (lines.length - 1 >= 1) {
@@ -563,7 +635,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   }
                 }
                 if (lines.length - 1 >= 4) {
-                  isReadMoreVisible = true;
+                  if (_tabController.index == 0) {
+                    isReadMoreSpecVisible = true;
+                  } else if (_tabController.index == 1) {
+                    isReadMoreDescVisible = true;
+                  }
 
                   if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
                     maxLines = 3;
@@ -603,7 +679,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   lineFinal = lineFinal + 1;
                 }
               }
+
               // process for substring. When the second line is found to be too long
+
               if (maxLines == 2) {
                 for (int i = 0; i < lines.length; i++) {
                   if (i == 0) {
@@ -646,7 +724,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     } else {
                       if (lines[1].length <= 169 && lines[0].length <= 149) {
                         // Merge the second line into the variable truncatedHtmlContent.
-                        //log("(${(lines[0].contains("<h1>") || lines[0].contains("<h2>"))})");
                         if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                             lines[0].length >= 40 &&
                             lines[0].length <= 73 &&
@@ -667,7 +744,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                             lineFinal = 3;
                             maxLines = 2;
                           }
-                          //log("h1");
                           truncatedHtmlContent = "$truncatedHtmlContent${truncatedHtmlText.fixIncompleteHtmlTags([
                             lines[1].substring(0, 73)
                           ].take(maxLines).join('</'))}";
@@ -681,7 +757,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     }
                   }
                 }
-
                 // process for substring. When the  line tree is found to be too long
               } else if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
                 //log("maxLines 3");
@@ -779,7 +854,12 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 if (truncatedHtmlContent!.length >= 285) {
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
                   lineFinal = 4;
-                  isReadMoreVisible = true;
+                  if (_tabController.index == 0) {
+                    isReadMoreSpecVisible = true;
+                  } else if (_tabController.index == 1) {
+                    isReadMoreDescVisible = true;
+                  }
+
                   for (int i = 0; i < bigText.length; i++) {
                     if (truncatedHtmlContent!.contains(bigText[i])) {
                       if (bigText[i] == "<h1>") {
@@ -794,10 +874,18 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     if (truncatedHtmlContent!.contains(bigText[i])) {
                       if (bigText[i] == "<h1>") {
                         truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
-                        isReadMoreVisible = true;
+                        if (_tabController.index == 0) {
+                          isReadMoreSpecVisible = true;
+                        } else if (_tabController.index == 1) {
+                          isReadMoreDescVisible = true;
+                        }
                       } else {
                         truncatedHtmlContent = truncatedHtmlContent.substring(0, 150);
-                        isReadMoreVisible = true;
+                        if (_tabController.index == 0) {
+                          isReadMoreSpecVisible = true;
+                        } else if (_tabController.index == 1) {
+                          isReadMoreDescVisible = true;
+                        }
                       }
                     }
                   }
@@ -808,7 +896,12 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 if (truncatedHtmlContent!.length >= 285) {
                   truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
                   lineFinal = 4;
-                  isReadMoreVisible = true;
+                  if (_tabController.index == 0) {
+                    isReadMoreSpecVisible = true;
+                  } else if (_tabController.index == 1) {
+                    isReadMoreDescVisible = true;
+                  }
+
                   for (int i = 0; i < bigText.length; i++) {
                     if (truncatedHtmlContent!.contains(bigText[i])) {
                       if (bigText[i] == "<h1>") {
@@ -824,10 +917,18 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     if (truncatedHtmlContent!.contains(bigText[i])) {
                       if (bigText[i] == "<h1>") {
                         truncatedHtmlContent = truncatedHtmlContent.substring(0, 80);
-                        isReadMoreVisible = true;
+                        if (_tabController.index == 0) {
+                          isReadMoreSpecVisible = true;
+                        } else if (_tabController.index == 1) {
+                          isReadMoreDescVisible = true;
+                        }
                       } else {
                         truncatedHtmlContent = truncatedHtmlContent.substring(0, 150);
-                        isReadMoreVisible = true;
+                        if (_tabController.index == 0) {
+                          isReadMoreSpecVisible = true;
+                        } else if (_tabController.index == 1) {
+                          isReadMoreDescVisible = true;
+                        }
                       }
                     }
                   }
@@ -837,10 +938,87 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               }
             }
           }
+
           truncatedHtmlContent ??= "";
           int count = 0;
-          Widget technicalSpecWidget = HtmlWidget(
-            product.technicalSpec.isNotEmpty ? product.technicalSpec : AppStrings().noDataFromSeller,
+
+          print("แบบเต็ม" + data);
+          print("ตัดคำ" + truncatedHtmlContent);
+
+          Widget technicalSpecMaxWidget = HtmlWidget(
+            data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+            buildAsync: false,
+            customStylesBuilder: (element) {
+              if (element.localName == "table") {
+                return {'width': '100%'};
+              }
+              if (element.localName == "td") {
+                count += 1;
+                if (count.isOdd) {
+                  return {
+                    'font-family': "'Krungsri Condensed'",
+                    'width': '50%',
+                    'vertical-align': 'top;',
+                    'font-size': '14px',
+                    'line-height': '22px',
+                    'font-weight': '400',
+                    'color': '#5a5a5a'
+                  };
+                } else {
+                  return {
+                    'font-family': "'Krungsri Condensed'",
+                    'width': '50%',
+                    'vertical-align': 'top;',
+                    'font-size': '14px',
+                    'line-height': '22px',
+                    'font-weight': '400',
+                    'color': '#2c2626'
+                  };
+                }
+              }
+              if (element.localName == "th" || element.localName == "thead") {
+                return null;
+              }
+              if (element.localName == "p") {
+                return {
+                  'font-family': "'Krungsri Condensed'",
+                  'font-size': '14px',
+                  'line-height': '22px',
+                  'font-weight': '400',
+                  'color': '#2c2626',
+                };
+              }
+              if (element.localName == "strong") {
+                return {
+                  'font-family': "'Krungsri Condensed'",
+                  'font-size': '14px',
+                  'line-height': '22px',
+                  'font-weight': '600',
+                  'color': '#2c2626',
+                };
+              }
+              return {
+                'font-family': "'Krungsri Condensed'",
+                'font-size': '14px',
+                'line-height': '22px',
+                'color': '#2c2626',
+              };
+            },
+            customWidgetBuilder: (element) {
+              if (element.localName == "th" || element.localName == "thead") {
+                return SizedBox.shrink();
+              }
+              return null;
+            },
+            factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+          );
+
+          Widget technicalSpecHaveReadMoreWidget = HtmlWidget(
+            truncatedHtmlContent.isNotEmpty
+                ? isReadMoreSpecVisible
+                    ? "$truncatedHtmlContent..."
+                    : truncatedHtmlContent
+                : AppStrings().noDataFromSeller,
             buildAsync: false,
             customStylesBuilder: (element) {
               if (element.localName == "table") {
@@ -909,7 +1087,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
 
           Widget descriptionMaxWidget = SizedBox(
             child: HtmlWidget(
-              dataDescription.isNotEmpty ? dataDescription : AppStrings().noDataFromSeller,
+              data.isNotEmpty ? data : AppStrings().noDataFromSeller,
               buildAsync: false,
               customStylesBuilder: (element) {
                 if (element.localName == "table") {
@@ -991,7 +1169,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   physics: NeverScrollableScrollPhysics(),
                   child: HtmlWidget(
                     truncatedHtmlContent.isNotEmpty
-                        ? isReadMoreVisible
+                        ? isReadMoreDescVisible
                             ? "$truncatedHtmlContent..."
                             : truncatedHtmlContent
                         : AppStrings().noDataFromSeller,
@@ -1152,64 +1330,73 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   }
                 },
                 child: Container(
-                  padding: EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      bottom: _tabController.index == 0
-                          ? product.technicalSpec.isEmpty
-                              ? 0
-                              : 16
-                          : truncatedHtmlContent.length > 285
-                              ? 16
-                              : 0),
-                  child: _tabController.index == 0
-                      ? product.technicalSpec.isEmpty
-                          ? noDataFromSeller
-                          : technicalSpecWidget
-                      : truncatedHtmlContent.isEmpty
-                          ? noDataFromSeller
-                          : isPressedReadMore
-                              ? descriptionMaxWidget
-                              : descriptionHaveReadMoreWidget,
-                ),
+                    padding: EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        bottom: _tabController.index == 0
+                            ? product.technicalSpec.isEmpty
+                                ? 0
+                                : 16
+                            : truncatedHtmlContent.length > 285
+                                ? 16
+                                : 0),
+                    child: checkProductDetailTab(product, noDataFromSeller, technicalSpecMaxWidget, technicalSpecHaveReadMoreWidget,
+                        descriptionMaxWidget, descriptionHaveReadMoreWidget)),
               ),
               truncatedHtmlContent.isNotEmpty
-                  ? _tabController.index == 1
-                      ? Container(
-                          padding: _tabController.index == 1
-                              ? truncatedHtmlContent.length > 150
-                                  ? null
-                                  : EdgeInsets.only(top: 16)
-                              : null,
-                          child: Visibility(
-                              visible: _tabController.index == 1 && isReadMoreVisible,
-                              child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                                          height: 24,
-                                          child: OutlinedButton(
-                                            onPressed: () async {
-                                              setState((() {
-                                                isPressedReadMore = !isPressedReadMore;
-                                              }));
-                                            },
-                                            style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy),
-                                            child: AlvaText(
-                                              title: isPressedReadMore ? AppStrings().btnHideDescription : AppStrings().btnReadMore,
-                                              textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
-                                              disableSelectableText: true,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ))))
-                      : Container()
+                  ? Container(
+                      padding: truncatedHtmlContent.length > 150 ? null : EdgeInsets.only(top: 0),
+                      child: Visibility(
+                          visible: (_tabController.index == 0 && isReadMoreSpecVisible && !truncatedHtmlContent.contains("<table>")) ||
+                              (_tabController.index == 1 && isReadMoreDescVisible && !truncatedHtmlContent.contains("<table>")),
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      height: 24,
+                                      child: OutlinedButton(
+                                          onPressed: () async {
+                                            setState(() {
+                                              if (_tabController.index == 0) {
+                                                isPressedSpecReadMore = !isPressedSpecReadMore;
+                                              } else if (_tabController.index == 1) {
+                                                isPressedDescReadMore = !isPressedDescReadMore;
+                                              }
+                                            });
+                                          },
+                                          style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy),
+                                          child: _tabController.index == 0
+                                              ? AlvaText(
+                                                  title: _tabController.index == 0
+                                                      ? isPressedSpecReadMore
+                                                          ? AppStrings().btnHideDescription
+                                                          : AppStrings().btnReadMore
+                                                      : isPressedDescReadMore
+                                                          ? AppStrings().btnHideDescription //||isPressedInfoReadMore
+                                                          : AppStrings().btnReadMore,
+                                                  textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
+                                                  // AlvaStyles().headingSize14Height24(BlueFantasy),
+                                                  disableSelectableText: true,
+                                                )
+                                              : AlvaText(
+                                                  title: _tabController.index == 1
+                                                      ? isPressedDescReadMore
+                                                          ? AppStrings().btnHideDescription
+                                                          : AppStrings().btnReadMore
+                                                      : isPressedSpecReadMore
+                                                          ? AppStrings().btnHideDescription //||isPressedInfoReadMore
+                                                          : AppStrings().btnReadMore,
+                                                  textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
+                                                  disableSelectableText: true,
+                                                )),
+                                    ),
+                                  )
+                                ],
+                              ))))
                   : Container()
             ],
           );
