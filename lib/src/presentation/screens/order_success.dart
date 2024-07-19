@@ -362,7 +362,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                           ),
                           DisclaimerSection(),
                           Container(
-                            color: spaceGrey,
+                            color: mintGreen,
                             child: Column(
                               children: [
                                 const SizedBox(

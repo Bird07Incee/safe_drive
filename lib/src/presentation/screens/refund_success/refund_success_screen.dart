@@ -380,7 +380,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
                           ),
                           DisclaimerSection(),
                           Container(
-                            color: spaceGrey,
+                            color: mintGreen,
                             child: Column(
                               children: [
                                 const SizedBox(
