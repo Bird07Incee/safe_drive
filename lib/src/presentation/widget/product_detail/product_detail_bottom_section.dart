@@ -942,9 +942,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           truncatedHtmlContent ??= "";
           int count = 0;
 
-          print("แบบเต็ม" + data);
-          print("ตัดคำ" + truncatedHtmlContent);
-
           Widget technicalSpecMaxWidget = HtmlWidget(
             data.isNotEmpty ? data : AppStrings().noDataFromSeller,
             buildAsync: false,
