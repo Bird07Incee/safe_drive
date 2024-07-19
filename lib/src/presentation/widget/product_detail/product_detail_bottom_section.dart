@@ -390,11 +390,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           color: whitePure,
         ),
         child: StatefulBuilder(builder: (context, setState) {
-          var originalDescription = product.description;
-          final replaceInnerTagP = originalDescription.isNotEmpty
-              ? originalDescription.substring(3, originalDescription.length - 4).replaceAll("<p>", "<br><br>").replaceAll("</p>", "")
-              : "";
-          var dataDescription = originalDescription.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
+          String descTest =
+              """<p>ค่าขนส่ง 2,000 บาท/คัน<br />(ใส่ได้สูงสุด 42 แผง/คัน)<br />ลูกค้าชำระเองตอนรับสินค้า<br />จัดส่งเฉพาะ ปทุมธานี นนทบุรี กรุงเทพ สมุทรปราการ นครปฐม อยุธยา สระบุรี นครนายก</p><p><strong>การคืนสินค้าเกินเวลา 19.30 น. ในวันทำการสั่งซื้อ<br />ร้านค้าไม่สามารถคืนเงินเต็มจำนวนได้<br />(โดยจะหักเป็นจำนวน 3% ของราคาสินค้า)</strong></p>""";
+          var originalDescription = descTest;
+          originalDescription = originalDescription.replaceAll("<p>", "").replaceAll("</p>", "");
+          var dataDescription = originalDescription.isNotEmpty ? "<p>$originalDescription</p>" : "";
           dataDescription = dataDescription.replaceAll("<<", "<").replaceAll(">>", ">");
 
           RegExp emojiRegex = RegExp(
@@ -884,7 +884,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   'color': '#2c2626',
                 };
               }
-              return null;
+              return {
+                'font-family': "'Krungsri Condensed'",
+                'font-size': '14px',
+                'line-height': '22px',
+                'font-weight': '400',
+                'color': '#2c2626',
+              };
             },
             customWidgetBuilder: (element) {
               if (element.localName == "th" || element.localName == "thead") {
@@ -948,7 +954,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'color': '#2c2626',
                   };
                 }
-                return null;
+                return {
+                  'font-family': "'Krungsri Condensed'",
+                  'font-size': '14px',
+                  'line-height': '22px',
+                  'font-weight': '400',
+                  'color': '#2c2626',
+                };
               },
               customWidgetBuilder: (element) {
                 if (element.localName == "th" || element.localName == "thead") {
@@ -1019,7 +1031,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                           'color': '#2c2626',
                         };
                       }
-                      return null;
+                      return {
+                        'font-family': "'Krungsri Condensed'",
+                        'font-size': '14px',
+                        'line-height': '22px',
+                        'font-weight': '400',
+                        'color': '#2c2626',
+                      };
                     },
                     customWidgetBuilder: (element) {
                       if (element.localName == "th" || element.localName == "thead") {
