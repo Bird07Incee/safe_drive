@@ -391,8 +391,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         ),
         child: StatefulBuilder(builder: (context, setState) {
           var originalDescription = product.description;
-          originalDescription = originalDescription.replaceAll("<p>", "").replaceAll("</p>", "");
-          var dataDescription = originalDescription.isNotEmpty ? "<p>$originalDescription</p>" : "";
+          // var dataDescription = originalDescription.isNotEmpty ? originalDescription.replaceAll("<p>", "").replaceAll("</p>", "") : "";
+          var dataDescription = "<p>$originalDescription</p>";
           dataDescription = dataDescription.replaceAll("<<", "<").replaceAll(">>", ">");
 
           RegExp emojiRegex = RegExp(
@@ -882,11 +882,19 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   'color': '#2c2626',
                 };
               }
+              if (element.localName == "strong") {
+                return {
+                  'font-family': "'Krungsri Condensed'",
+                  'font-size': '14px',
+                  'line-height': '22px',
+                  'font-weight': '600',
+                  'color': '#2c2626',
+                };
+              }
               return {
                 'font-family': "'Krungsri Condensed'",
                 'font-size': '14px',
                 'line-height': '22px',
-                'font-weight': '400',
                 'color': '#2c2626',
               };
             },
@@ -952,11 +960,19 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'color': '#2c2626',
                   };
                 }
+                if (element.localName == "strong") {
+                  return {
+                    'font-family': "'Krungsri Condensed'",
+                    'font-size': '14px',
+                    'line-height': '22px',
+                    'font-weight': '600',
+                    'color': '#2c2626',
+                  };
+                }
                 return {
                   'font-family': "'Krungsri Condensed'",
                   'font-size': '14px',
                   'line-height': '22px',
-                  'font-weight': '400',
                   'color': '#2c2626',
                 };
               },
@@ -1026,6 +1042,15 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                           'font-size': '14px',
                           'line-height': '22px',
                           'font-weight': '400',
+                          'color': '#2c2626',
+                        };
+                      }
+                      if (element.localName == "strong") {
+                        return {
+                          'font-family': "'Krungsri Condensed'",
+                          'font-size': '14px',
+                          'line-height': '22px',
+                          'font-weight': '600',
                           'color': '#2c2626',
                         };
                       }
