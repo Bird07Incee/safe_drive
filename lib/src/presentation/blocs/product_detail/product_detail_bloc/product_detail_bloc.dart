@@ -24,10 +24,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     emit(state.copyWith(status: ProductDetailStatus.loading));
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
-
+    Map<String, dynamic> params = {"pid": event.pid};
     try {
       String path = "/ecommerce/v1/products";
-      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", {"pid": event.pid});
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath$path", params);
       final p = Product.fromJson(response.data);
       var jsonString = jsonEncode(p.serviceMa);
       MaintenanceHelper().saveMaintenanceDataToLocalStorage(jsonString);

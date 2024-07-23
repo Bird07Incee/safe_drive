@@ -10,7 +10,7 @@ class DioUtilityService {
   DioUtilityService({Dio? dio}) : _dioClient = dio ?? DioClient().dioClient;
   final Dio _dioClient;
 
-  Future<Response> getByURL(String path, Map<String, Object> params, {bool isRecursion = false, Map<String, dynamic>? headers}) async {
+  Future<Response> getByURL(String path, Map<String, dynamic> params, {bool isRecursion = false, Map<String, dynamic>? headers}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     String accessToken = await lineDataHelper.getLineAccessToken();
     _dioClient.options.headers = HeaderUtil.baseHeader(token: accessToken);

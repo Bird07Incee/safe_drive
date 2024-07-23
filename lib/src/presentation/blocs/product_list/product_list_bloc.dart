@@ -29,7 +29,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     try {
       final baseUrl = Environment().getValue("BFF_BASE_URL");
       final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
-      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", {});
+      Map<String, dynamic> params = {};
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params);
       final productList = ProductList.fromJson(response.data);
       return productList;
     } catch (e) {
@@ -90,7 +91,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
 
     try {
-      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category);
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category as Map<String, dynamic>);
 
       final productList = ProductList.fromJson(response.data);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
