@@ -35,16 +35,27 @@ class Banner extends Equatable {
     required this.image,
     required this.route,
     required this.url,
+    required this.note,
     required this.seqNo,
+    required this.callToAction,
   });
 
   final String image;
   final String route;
   final String url;
+  final String note;
   final int seqNo;
+  final int callToAction;
 
   factory Banner.fromJson(Map<String, dynamic> json) {
-    return Banner(image: json['image'] ?? '', route: json['route'] ?? '', url: json['url'] ?? '', seqNo: json['seqNo'] ?? '');
+    return Banner(
+      image: json['image'] ?? '',
+      route: json['route'] ?? '',
+      url: json['url'] ?? '',
+      note: json['note'] ?? '',
+      seqNo: json['seqNo'] ?? '',
+      callToAction: json['callToAction'] ?? '',
+    );
   }
 
   @override

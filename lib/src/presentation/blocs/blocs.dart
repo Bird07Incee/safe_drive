@@ -19,6 +19,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/refund_success/refund
 import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_detail/tracking_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/tracking_order/tracking_order_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/webview/webview_bloc.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
 final List<BlocProvider> blocs = [
@@ -42,5 +43,6 @@ final List<BlocProvider> blocs = [
   BlocProvider<TrackingDetailBloc>(create: (_) => TrackingDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<ProductDetailDescriptionCubit>(create: (_) => ProductDetailDescriptionCubit()),
   BlocProvider<RefundRequestBloc>(create: (_) => RefundRequestBloc(utilityRepository: _.read<DioUtilityRepository>())),
-  BlocProvider<RefundSuccessBloc>(create: (_) => RefundSuccessBloc(utilityRepository: _.read<DioUtilityRepository>()))
+  BlocProvider<RefundSuccessBloc>(create: (_) => RefundSuccessBloc(utilityRepository: _.read<DioUtilityRepository>())),
+  BlocProvider<WebViewBloc>(create: (_) => WebViewBloc()),
 ];

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/common_webview.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePageBanner extends StatefulWidget {
@@ -43,6 +44,17 @@ class _HomePageBannerState extends State<HomePageBanner> {
               },
               itemBuilder: (ctx, i) {
                 return GestureDetector(
+                  onTap: () {
+                    if (widget.banners[i].callToAction == 5) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommonWebView(
+                                    webTitle: widget.banners[i.floor()].note,
+                                    url: widget.banners[i.floor()].url,
+                                  )));
+                    }
+                  },
                   key: const Key("home_banner"),
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
