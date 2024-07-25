@@ -2,9 +2,9 @@ import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 
 class TruncatedHtmlText {
-  formatSubStringHtml(String tagline, ProductDetailDescriptionCubit myBloc) {
+  formatSubStringHtml(String tagline, ProductDetailDescriptionCubit myBloc, {int getMaxLines = 2}) {
     String? truncatedHtmlContent;
-    int maxLines = 2;
+    int maxLines = getMaxLines;
     List<String> lines;
     int lineFinal = 0;
     String? textString;
@@ -63,7 +63,7 @@ class TruncatedHtmlText {
       } else {
         // This string contains html tags.
         // List of tags that you want to delete the entire line of tags and do not want to show
-        tagline = removeTags(tagline, ['table', 'th', 'tr', 'td', 'img', 'nav']);
+        tagline = removeTags(tagline, ['table', 'th', 'tr', 'td', 'img', 'nav', 'mark']);
 
         // logic for replacing variables for replacements
         for (var replacement in ProductDetailConst().replacements) {
@@ -382,8 +382,8 @@ class TruncatedHtmlText {
     }
   }
 
-  String removeHtmlForbiddenTagsTags(String input) {
-    for (String tag in ProductDetailConst().forbiddenTags) {
+  String removeHtmlForbiddenTagsTags(String input, {List<String> listForbidden = const []}) {
+    for (String tag in listForbidden.isNotEmpty ? listForbidden : ProductDetailConst().forbiddenTags) {
       String ht = '<$tag[^>]*>';
       RegExp tagRegex = RegExp(ht);
       input = input.replaceAll(tagRegex, '');

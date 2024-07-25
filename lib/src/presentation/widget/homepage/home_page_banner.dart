@@ -46,6 +46,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                 return GestureDetector(
                   onTap: () {
                     if (widget.banners[i].callToAction == 5) {
+                      amplitudeWebHelper.logeTapCarouselOnHomeScreen(bannerName: widget.banners[i].route.toString(), bannerSequence: "${i + 1}");
                       launchUrl(Uri.parse(widget.banners[i].url));
                     }
                   },

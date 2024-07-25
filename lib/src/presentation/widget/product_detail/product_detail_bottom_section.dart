@@ -63,7 +63,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         if (product.technicalSpec.isEmpty) {
           return noDataFromSeller;
         } else {
-          if (isPressedSpecReadMore || product.technicalSpec.contains("<table>")) {
+          if (isPressedSpecReadMore || product.technicalSpec.contains("<table")) {
             return technicalSpecWidget;
           } else {
             return technicalSpecHaveMoreWidget;
@@ -73,7 +73,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         if (product.description.isEmpty) {
           return noDataFromSeller;
         } else {
-          if (isPressedDescReadMore || product.description.contains("<table>")) {
+          if (isPressedDescReadMore || product.description.contains("<table")) {
             return descriptionMaxWidget;
           } else {
             return descriptionHaveReadMoreWidget;
@@ -424,7 +424,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
 
           if (_tabController.index == 0) {
             data = originalSpec.isNotEmpty
-                ? originalSpec.contains("<table>")
+                ? originalSpec.contains("<table")
                     ? originalSpec
                     : !originalSpec.contains("<p>")
                         ? "<p>$originalSpec</p>"
@@ -432,11 +432,14 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 : "";
           } else if (_tabController.index == 1) {
             data = originalDescription.isNotEmpty
-                ? !originalDescription.contains("<p>")
-                    ? "<p>$originalDescription</p>"
-                    : originalDescription
+                ? originalDescription.contains("<table")
+                    ? originalDescription
+                    : !originalDescription.contains("<p>")
+                        ? "<p>$originalDescription</p>"
+                        : originalDescription
                 : "";
           }
+
           // originalDescription = """<a id="test_photo_1"></a>![ดด](<img src="%E0%B8%81%E0%B8%81" alt="test photo" />""";
           // var dataDescription = originalDescription.isNotEmpty ? originalDescription.replaceAll("<p>", "").replaceAll("</p>", "") : "";
 
@@ -535,6 +538,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             } else {
               // This string contains html tags.
               // List of tags that you want to delete the entire line of tags and do not want to show
+
               data = truncatedHtmlText.removeTags(data, ['img', 'nav']);
 
               // logic for replacing variables for replacements
@@ -773,7 +777,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     if (lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
                       // Merge the second line into the variable truncatedHtmlContent.
                       // truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
-                      // log("maxLines 3 step 3");
+                      // //log("maxLines 3 step 3");
                       if (
                           // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                           lines[0].length <= 40 &&
@@ -942,145 +946,152 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           truncatedHtmlContent ??= "";
           int count = 0;
 
-          Widget technicalSpecMaxWidget = HtmlWidget(
-            data.isNotEmpty ? data : AppStrings().noDataFromSeller,
-            buildAsync: false,
-            customStylesBuilder: (element) {
-              if (element.localName == "table") {
-                return {'width': '100%'};
-              }
-              if (element.localName == "td") {
-                count += 1;
-                if (count.isOdd) {
+          Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+              buildAsync: false,
+              customStylesBuilder: (element) {
+                if (element.localName == "table") {
+                  return {'width': '100%'};
+                }
+                if (element.localName == "td") {
+                  count += 1;
+                  if (count.isOdd) {
+                    return {
+                      'font-family': "'Krungsri Condensed'",
+                      'width': '50%',
+                      'vertical-align': 'top;',
+                      'font-size': '14px',
+                      'line-height': '22px',
+                      'font-weight': '400',
+                      'color': '#5a5a5a'
+                    };
+                  } else {
+                    return {
+                      'font-family': "'Krungsri Condensed'",
+                      'width': '50%',
+                      'vertical-align': 'top;',
+                      'font-size': '14px',
+                      'line-height': '22px',
+                      'font-weight': '400',
+                      'color': '#2c2626'
+                    };
+                  }
+                }
+                if (element.localName == "th" || element.localName == "thead") {
+                  return null;
+                }
+                if (element.localName == "p") {
                   return {
                     'font-family': "'Krungsri Condensed'",
-                    'width': '50%',
-                    'vertical-align': 'top;',
                     'font-size': '14px',
                     'line-height': '22px',
                     'font-weight': '400',
-                    'color': '#5a5a5a'
-                  };
-                } else {
-                  return {
-                    'font-family': "'Krungsri Condensed'",
-                    'width': '50%',
-                    'vertical-align': 'top;',
-                    'font-size': '14px',
-                    'line-height': '22px',
-                    'font-weight': '400',
-                    'color': '#2c2626'
+                    'color': '#2c2626',
                   };
                 }
-              }
-              if (element.localName == "th" || element.localName == "thead") {
+                if (element.localName == "strong") {
+                  return {
+                    'font-family': "'Krungsri Condensed'",
+                    'font-size': '14px',
+                    'line-height': '22px',
+                    'font-weight': '600',
+                    'color': '#2c2626',
+                  };
+                }
+                return {
+                  'font-family': "'Krungsri Condensed'",
+                  'font-size': '14px',
+                  'line-height': '22px',
+                  'color': '#2c2626',
+                };
+              },
+              customWidgetBuilder: (element) {
+                if (element.localName == "th" || element.localName == "thead") {
+                  return SizedBox.shrink();
+                }
                 return null;
-              }
-              if (element.localName == "p") {
-                return {
-                  'font-family': "'Krungsri Condensed'",
-                  'font-size': '14px',
-                  'line-height': '22px',
-                  'font-weight': '400',
-                  'color': '#2c2626',
-                };
-              }
-              if (element.localName == "strong") {
-                return {
-                  'font-family': "'Krungsri Condensed'",
-                  'font-size': '14px',
-                  'line-height': '22px',
-                  'font-weight': '600',
-                  'color': '#2c2626',
-                };
-              }
-              return {
-                'font-family': "'Krungsri Condensed'",
-                'font-size': '14px',
-                'line-height': '22px',
-                'color': '#2c2626',
-              };
-            },
-            customWidgetBuilder: (element) {
-              if (element.localName == "th" || element.localName == "thead") {
-                return SizedBox.shrink();
-              }
-              return null;
-            },
-            factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
-          );
+              },
+              factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+              onErrorBuilder: (context, el, e) {
+                debugPrint(e.toString());
+                return null;
+              });
 
           Widget technicalSpecHaveReadMoreWidget = HtmlWidget(
-            truncatedHtmlContent.isNotEmpty
-                ? isReadMoreSpecVisible
-                    ? "$truncatedHtmlContent..."
-                    : truncatedHtmlContent
-                : AppStrings().noDataFromSeller,
-            buildAsync: false,
-            customStylesBuilder: (element) {
-              if (element.localName == "table") {
-                return {'width': '100%'};
-              }
-              if (element.localName == "td") {
-                count += 1;
-                if (count.isOdd) {
+              data.contains("<table")
+                  ? data
+                  : truncatedHtmlContent.isNotEmpty
+                      ? isReadMoreSpecVisible
+                          ? "$truncatedHtmlContent..."
+                          : truncatedHtmlContent
+                      : AppStrings().noDataFromSeller,
+              buildAsync: false,
+              customStylesBuilder: (element) {
+                if (element.localName == "table") {
+                  return {'width': '100%'};
+                }
+                if (element.localName == "td") {
+                  count += 1;
+                  if (count.isOdd) {
+                    return {
+                      'font-family': "'Krungsri Condensed'",
+                      'width': '50%',
+                      'vertical-align': 'top;',
+                      'font-size': '14px',
+                      'line-height': '22px',
+                      'font-weight': '400',
+                      'color': '#5a5a5a'
+                    };
+                  } else {
+                    return {
+                      'font-family': "'Krungsri Condensed'",
+                      'width': '50%',
+                      'vertical-align': 'top;',
+                      'font-size': '14px',
+                      'line-height': '22px',
+                      'font-weight': '400',
+                      'color': '#2c2626'
+                    };
+                  }
+                }
+                if (element.localName == "th" || element.localName == "thead") {
+                  return null;
+                }
+                if (element.localName == "p") {
                   return {
                     'font-family': "'Krungsri Condensed'",
-                    'width': '50%',
-                    'vertical-align': 'top;',
                     'font-size': '14px',
                     'line-height': '22px',
                     'font-weight': '400',
-                    'color': '#5a5a5a'
-                  };
-                } else {
-                  return {
-                    'font-family': "'Krungsri Condensed'",
-                    'width': '50%',
-                    'vertical-align': 'top;',
-                    'font-size': '14px',
-                    'line-height': '22px',
-                    'font-weight': '400',
-                    'color': '#2c2626'
+                    'color': '#2c2626',
                   };
                 }
-              }
-              if (element.localName == "th" || element.localName == "thead") {
+                if (element.localName == "strong") {
+                  return {
+                    'font-family': "'Krungsri Condensed'",
+                    'font-size': '14px',
+                    'line-height': '22px',
+                    'font-weight': '600',
+                    'color': '#2c2626',
+                  };
+                }
+                return {
+                  'font-family': "'Krungsri Condensed'",
+                  'font-size': '14px',
+                  'line-height': '22px',
+                  'color': '#2c2626',
+                };
+              },
+              customWidgetBuilder: (element) {
+                if (element.localName == "th" || element.localName == "thead") {
+                  return SizedBox.shrink();
+                }
                 return null;
-              }
-              if (element.localName == "p") {
-                return {
-                  'font-family': "'Krungsri Condensed'",
-                  'font-size': '14px',
-                  'line-height': '22px',
-                  'font-weight': '400',
-                  'color': '#2c2626',
-                };
-              }
-              if (element.localName == "strong") {
-                return {
-                  'font-family': "'Krungsri Condensed'",
-                  'font-size': '14px',
-                  'line-height': '22px',
-                  'font-weight': '600',
-                  'color': '#2c2626',
-                };
-              }
-              return {
-                'font-family': "'Krungsri Condensed'",
-                'font-size': '14px',
-                'line-height': '22px',
-                'color': '#2c2626',
-              };
-            },
-            customWidgetBuilder: (element) {
-              if (element.localName == "th" || element.localName == "thead") {
-                return SizedBox.shrink();
-              }
-              return null;
-            },
-            factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
-          );
+              },
+              factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+              onErrorBuilder: (context, el, e) {
+                debugPrint(e.toString());
+                return null;
+              });
 
           Widget descriptionMaxWidget = SizedBox(
             child: HtmlWidget(
@@ -1158,6 +1169,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 return null;
               },
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+              onErrorBuilder: (context, el, e) {
+                debugPrint(e.toString());
+                return null;
+              },
             ),
           );
 
@@ -1165,11 +1180,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               child: SingleChildScrollView(
                   physics: NeverScrollableScrollPhysics(),
                   child: HtmlWidget(
-                    truncatedHtmlContent.isNotEmpty
-                        ? isReadMoreDescVisible
-                            ? "$truncatedHtmlContent..."
-                            : truncatedHtmlContent
-                        : AppStrings().noDataFromSeller,
+                    data.contains("<table")
+                        ? data
+                        : truncatedHtmlContent.isNotEmpty
+                            ? isReadMoreDescVisible
+                                ? "$truncatedHtmlContent..."
+                                : truncatedHtmlContent
+                            : AppStrings().noDataFromSeller,
                     buildAsync: false,
                     customStylesBuilder: (element) {
                       if (element.localName == "table") {
@@ -1244,6 +1261,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       return null;
                     },
                     factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                    onErrorBuilder: (context, el, e) {
+                      debugPrint(e.toString());
+                      return null;
+                    },
                   )));
 
           Widget noDataFromSeller = Container(
@@ -1344,8 +1365,8 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   ? Container(
                       padding: truncatedHtmlContent.length > 150 ? null : EdgeInsets.only(top: 0),
                       child: Visibility(
-                          visible: (_tabController.index == 0 && isReadMoreSpecVisible && !truncatedHtmlContent.contains("<table>")) ||
-                              (_tabController.index == 1 && isReadMoreDescVisible && !truncatedHtmlContent.contains("<table>")),
+                          visible: (_tabController.index == 0 && isReadMoreSpecVisible && !data.contains("<table")) ||
+                              (_tabController.index == 1 && isReadMoreDescVisible && !data.contains("<table")),
                           child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 16),
                               child: Row(

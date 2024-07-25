@@ -44,6 +44,7 @@ class ProductDetailConst {
     'img',
     'input',
     'meta',
+    'mark',
     'link',
     'base',
     'col',
@@ -92,6 +93,7 @@ class ProductDetailConst {
     {"<h4>": "", "</h4>": ""},
     {"<h5>": "", "</h5>": ""},
     {"<h6>": "", "</h6>": ""},
+    {"<mark>": "", "</mark>": ""}
   ];
   List<String> htmlTableTag = ['/table', 'table', '/thead', 'thead', 'tr', '/tr', 'th', '/th', 'tbody', '/tbody', 'td', '/td'];
   String imgDefaultPath = "assets/homepage/img_default.png";
