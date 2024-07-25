@@ -787,7 +787,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     if (lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
                       // Merge the second line into the variable truncatedHtmlContent.
                       // truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
-                      // //log("maxLines 3 step 3");
+                      // log("maxLines 3 step 3");
                       if (
                           // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
                           lines[0].length <= 40 &&
@@ -957,13 +957,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (!truncatedHtmlContent.startsWith("<") || !truncatedHtmlContent.endsWith(">")) {
             truncatedHtmlContent = "<p>$truncatedHtmlContent</p>";
           }
-          if (!data.startsWith("<") || !data.endsWith(">")) {
+          if (!data.startsWith("<p>") || !data.endsWith("<p>")) {
             data = "<p>$data</p>";
           }
 
           int count = 0;
 
-          Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller,
+          Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data.trim() : AppStrings().noDataFromSeller,
               buildAsync: false,
               customStylesBuilder: (element) {
                 if (element.localName == "table") {
@@ -1030,12 +1030,12 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
                 debugPrint(e.toString());
-                return null;
+                return SizedBox.shrink();
               });
 
           Widget technicalSpecHaveReadMoreWidget = HtmlWidget(
               data.contains("<table")
-                  ? data
+                  ? data.trim()
                   : truncatedHtmlContent.isNotEmpty
                       ? isReadMoreSpecVisible
                           ? "$truncatedHtmlContent..."
@@ -1107,8 +1107,11 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
                 debugPrint(e.toString());
-                return null;
+                return SizedBox.shrink();
               });
+
+          print(data);
+          print(truncatedHtmlContent);
 
           Widget descriptionMaxWidget = SizedBox(
             child: HtmlWidget(
@@ -1188,7 +1191,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
                 debugPrint(e.toString());
-                return null;
+                return SizedBox.shrink();
               },
             ),
           );
@@ -1279,7 +1282,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                     onErrorBuilder: (context, el, e) {
                       debugPrint(e.toString());
-                      return null;
+                      return SizedBox.shrink();
                     },
                   )));
 
