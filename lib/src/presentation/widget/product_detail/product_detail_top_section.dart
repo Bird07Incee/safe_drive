@@ -64,22 +64,36 @@ class _PDTopSectionState extends State<PDTopSection> {
         // {"<br >": "<br>", "<br />": "<br/>"},
         // -----------process for unSupport emoji,icon in text-------------------
         RegExp emojiRegex = RegExp(
-          r"[\u{1F600}-\u{1F64F}" // Emoticons
-          r"\u{1F300}-\u{1F5FF}" // Symbols & Pictographs
-          r"\u{1F680}-\u{1F6FF}" // Transport & Map Symbols
-          r"\u{1F700}-\u{1F77F}" // Alphanumeric Supplement
-          r"\u{1F780}-\u{1F7FF}" // Geometric Shapes Extended
-          r"\u{1F800}-\u{1F8FF}" // Supplemental Arrows-C
-          r"\u{1F900}-\u{1F9FF}" // Supplemental Symbols and Pictographs
-          r"\u{1FA00}-\u{1FA6F}" // Chess Symbols
-          r"\u{1FA70}-\u{1FAFF}" // Symbols and Pictographs Extended-A
-          r"\u{2702}-\u{27B0}" // Dingbat
-          r"]+",
-          unicode: true,
-        );
-        tagline = tagline.replaceAll(emojiRegex, "");
+            r'[\u{1F600}-\u{1F64F}' // Emoticons
+            r'\u{1F300}-\u{1F5FF}' // Misc Symbols and Pictographs
+            r'\u{1F680}-\u{1F6FF}' // Transport and Map
+            r'\u{1F700}-\u{1F77F}' // Alchemical Symbols
+            r'\u{1F780}-\u{1F7FF}' // Geometric Shapes Extended
+            r'\u{1F800}-\u{1F8FF}' // Supplemental Arrows-C
+            r'\u{1F900}-\u{1F9FF}' // Supplemental Symbols and Pictographs
+            r'\u{1FA00}-\u{1FA6F}' // Chess Symbols
+            r'\u{1FA70}-\u{1FAFF}' // Symbols and Pictographs Extended-A
+            r'\u{2600}-\u{26FF}' // Miscellaneous Symbols
+            r'\u{2700}-\u{27BF}' // Dingbats
+            r'\u{2B50}' // Stars
+            r'\u{2B55}' // Circles
+            r'\u{23F0}' // Alarm Clock
+            r'\u{23F3}' // Hourglass
+            r'\u{231A}-\u{231B}' // Watches
+            r'\u{1F004}' // Mahjong Tile Red Dragon
+            r'\u{1F0CF}]' // Playing Card Black Joker
+            r'|[\u{2702}-\u{27B0}]', // Additional Dingbats
+            unicode: true,
+            dotAll: true);
+
         TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
+        tagline = truncatedHtmlText.decodeHtmlEntities(tagline);
+        tagline = tagline.replaceAll(emojiRegex, "");
+
         tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
+        final RegExp regExp = RegExp(r'<thead[^>]*>.*?<\/thead>', multiLine: true, caseSensitive: true, dotAll: true);
+        tagline = tagline.replaceAll(regExp, '');
+
         for (var replacement in [
           {"<table>": "<p>", "</table>": "</p>"},
           {"<thead>": "", "</thead>": ""},

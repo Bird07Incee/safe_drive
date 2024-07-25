@@ -1,3 +1,4 @@
+import 'package:html/parser.dart' as html_parser;
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 
@@ -389,6 +390,11 @@ class TruncatedHtmlText {
       input = input.replaceAll(tagRegex, '');
     }
     return input;
+  }
+
+  String decodeHtmlEntities(String input) {
+    final document = html_parser.parse(input);
+    return document.body!.outerHtml;
   }
 
   // Function for  delete the entire line of tags and do not want to show

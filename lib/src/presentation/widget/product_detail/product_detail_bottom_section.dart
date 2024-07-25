@@ -446,28 +446,38 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           data = data.replaceAll("<<", "<").replaceAll(">>", ">");
 
           RegExp emojiRegex = RegExp(
-            r"[\u{1F600}-\u{1F64F}" // Emoticons
-            r"\u{1F300}-\u{1F5FF}" // Symbols & Pictographs
-            r"\u{1F680}-\u{1F6FF}" // Transport & Map Symbols
-            r"\u{1F700}-\u{1F77F}" // Alphanumeric Supplement
-            r"\u{1F780}-\u{1F7FF}" // Geometric Shapes Extended
-            r"\u{1F800}-\u{1F8FF}" // Supplemental Arrows-C
-            r"\u{1F900}-\u{1F9FF}" // Supplemental Symbols and Pictographs
-            r"\u{1FA00}-\u{1FA6F}" // Chess Symbols
-            r"\u{1FA70}-\u{1FAFF}" // Symbols and Pictographs Extended-A
-            r"\u{2702}-\u{27B0}" // Dingbat
-            r"]+",
-            unicode: true,
-          );
+              r'[\u{1F600}-\u{1F64F}' // Emoticons
+              r'\u{1F300}-\u{1F5FF}' // Misc Symbols and Pictographs
+              r'\u{1F680}-\u{1F6FF}' // Transport and Map
+              r'\u{1F700}-\u{1F77F}' // Alchemical Symbols
+              r'\u{1F780}-\u{1F7FF}' // Geometric Shapes Extended
+              r'\u{1F800}-\u{1F8FF}' // Supplemental Arrows-C
+              r'\u{1F900}-\u{1F9FF}' // Supplemental Symbols and Pictographs
+              r'\u{1FA00}-\u{1FA6F}' // Chess Symbols
+              r'\u{1FA70}-\u{1FAFF}' // Symbols and Pictographs Extended-A
+              r'\u{2600}-\u{26FF}' // Miscellaneous Symbols
+              r'\u{2700}-\u{27BF}' // Dingbats
+              r'\u{2B50}' // Stars
+              r'\u{2B55}' // Circles
+              r'\u{23F0}' // Alarm Clock
+              r'\u{23F3}' // Hourglass
+              r'\u{231A}-\u{231B}' // Watches
+              r'\u{1F004}' // Mahjong Tile Red Dragon
+              r'\u{1F0CF}]' // Playing Card Black Joker
+              r'|[\u{2702}-\u{27B0}]', // Additional Dingbats
+              unicode: true,
+              dotAll: true);
+
+          TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
+          data = truncatedHtmlText.decodeHtmlEntities(data);
           data = data.replaceAll(emojiRegex, "");
-          // -----------process for unSupport emoji,icon in text-------------------
+
           String? truncatedHtmlContent;
           int maxLines = 4;
           List<String> lines;
           int lineFinal = 0;
           String? textString;
           List<String> bigText = ['<h1>', '<h2>'];
-          TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
           // check empty html string input
 
           if (data != "") {
@@ -944,6 +954,13 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           }
 
           truncatedHtmlContent ??= "";
+          if (!truncatedHtmlContent.startsWith("<") || !truncatedHtmlContent.endsWith(">")) {
+            truncatedHtmlContent = "<p>$truncatedHtmlContent</p>";
+          }
+          if (!data.startsWith("<") || !data.endsWith(">")) {
+            data = "<p>$data</p>";
+          }
+
           int count = 0;
 
           Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller,
@@ -1250,7 +1267,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                         'font-family': "'Krungsri Condensed'",
                         'font-size': '14px',
                         'line-height': '22px',
-                        'font-weight': '400',
                         'color': '#2c2626',
                       };
                     },
