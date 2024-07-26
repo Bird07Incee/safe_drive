@@ -379,14 +379,14 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                             // remarkHtmlString ?? "",
                             // buildAsync: false,
                             // customStylesBuilder: (element) {
-                            //   if (element.localName == 'strong') {
+                            //   if (element.localName == 'b') {
                             //     return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
                             //   }
                             //   return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
                             // },
                             // textStyle: TextStyle(fontWeight: FontWeight.w400),
                             // customWidgetBuilder: (element) {
-                            // if (element.localName == 'strong') {
+                            // if (element.localName == 'b') {
                             //   String text = element.text;
                             //   return SizedBox(
                             //     child: OutlinedButton(
@@ -960,6 +960,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (!data.startsWith("<p>") || !data.endsWith("<p>")) {
             data = "<p>$data</p>";
           }
+          if (data.contains("<table")) {
+            data = truncatedHtmlText.minifyHtml(data);
+          }
 
           int count = 0;
 
@@ -1005,7 +1008,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'color': '#2c2626',
                   };
                 }
-                if (element.localName == "strong") {
+                if (element.localName == "b") {
                   return {
                     'font-family': "'Krungsri Condensed'",
                     'font-size': '14px',
@@ -1082,7 +1085,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'color': '#2c2626',
                   };
                 }
-                if (element.localName == "strong") {
+                if (element.localName == "b") {
                   return {
                     'font-family': "'Krungsri Condensed'",
                     'font-size': '14px',
@@ -1109,9 +1112,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 debugPrint(e.toString());
                 return SizedBox.shrink();
               });
-
-          print(data);
-          print(truncatedHtmlContent);
 
           Widget descriptionMaxWidget = SizedBox(
             child: HtmlWidget(
@@ -1166,7 +1166,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     'color': '#2c2626',
                   };
                 }
-                if (element.localName == "strong") {
+                if (element.localName == "b") {
                   return {
                     'font-family': "'Krungsri Condensed'",
                     'font-size': '14px',
@@ -1257,7 +1257,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                           'color': '#2c2626',
                         };
                       }
-                      if (element.localName == "strong") {
+                      if (element.localName == "b") {
                         return {
                           'font-family': "'Krungsri Condensed'",
                           'font-size': '14px',

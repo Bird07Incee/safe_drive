@@ -397,6 +397,16 @@ class TruncatedHtmlText {
     return document.body!.outerHtml;
   }
 
+  String minifyHtml(String input) {
+    // Remove new lines and multiple spaces
+    input = input.replaceAll(RegExp(r'\s+'), ' ');
+
+    // Remove spaces between HTML tags
+    input = input.replaceAll(RegExp(r'> <'), '><');
+
+    return input.trim();
+  }
+
   // Function for  delete the entire line of tags and do not want to show
   String removeTags(String html, List<String> tagsToRemove) {
     // Create a regular expression pattern for specified HTML tags
