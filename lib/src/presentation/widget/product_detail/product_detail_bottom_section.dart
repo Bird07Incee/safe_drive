@@ -777,7 +777,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 for (int i = 0; i < lines.length; i++) {
                   if (i == 0) {
                     // Insert the first line into a variable.
-                    truncatedHtmlContent = [lines[0]].take(maxLines).join('\n');
+                    truncatedHtmlContent = truncatedHtmlText.fixIncompleteHtmlTags([lines[0]].take(maxLines).join('\n'));
                     //log("maxLines 3 step 1");
                   } else if (i == 1) {
                     // Merge the second line into the variable truncatedHtmlContent.
@@ -859,7 +859,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                 }
               } else {
                 // Merge the second line into the variable when all three lines are not too long.
-                truncatedHtmlContent = lines.take(maxLines).join('</');
+                truncatedHtmlContent = truncatedHtmlText.fixIncompleteHtmlTags(lines.take(maxLines).join('</'));
               }
               if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
                 lineFinal = 4;
@@ -954,10 +954,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           }
 
           truncatedHtmlContent ??= "";
-          if (!truncatedHtmlContent.startsWith("<") || !truncatedHtmlContent.endsWith(">")) {
+          if (!truncatedHtmlContent.startsWith("<p>") || !truncatedHtmlContent.endsWith("</p>")) {
             truncatedHtmlContent = "<p>$truncatedHtmlContent</p>";
           }
-          if (!data.startsWith("<p>") || !data.endsWith("<p>")) {
+          if (!data.startsWith("<p>") || !data.endsWith("</p>")) {
             data = "<p>$data</p>";
           }
           if (data.contains("<table")) {
@@ -965,6 +965,14 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           }
 
           int count = 0;
+
+          Widget noDataFromSeller = Container(
+            padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+            child: Text(
+              AppStrings().noDataFromSeller,
+              style: AlvaStyles().headingSize14RegHeight22(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2.4),
+            ),
+          );
 
           Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data.trim() : AppStrings().noDataFromSeller,
               buildAsync: false,
@@ -1033,7 +1041,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
                 debugPrint(e.toString());
-                return SizedBox.shrink();
+                return noDataFromSeller;
               });
 
           Widget technicalSpecHaveReadMoreWidget = HtmlWidget(
@@ -1110,7 +1118,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
                 debugPrint(e.toString());
-                return SizedBox.shrink();
+                return noDataFromSeller;
               });
 
           Widget descriptionMaxWidget = SizedBox(
@@ -1191,7 +1199,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
                 debugPrint(e.toString());
-                return SizedBox.shrink();
+                return noDataFromSeller;
               },
             ),
           );
@@ -1282,17 +1290,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                     onErrorBuilder: (context, el, e) {
                       debugPrint(e.toString());
-                      return SizedBox.shrink();
+                      return noDataFromSeller;
                     },
                   )));
-
-          Widget noDataFromSeller = Container(
-            padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-            child: Text(
-              AppStrings().noDataFromSeller,
-              style: AlvaStyles().headingSize14RegHeight22(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 2.4),
-            ),
-          );
 
           return Column(
             children: [
