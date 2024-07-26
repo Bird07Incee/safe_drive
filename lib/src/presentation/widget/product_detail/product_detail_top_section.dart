@@ -61,7 +61,6 @@ class _PDTopSectionState extends State<PDTopSection> {
         final replaceInnerTagP = state.product.tagline.isNotEmpty ? state.product.tagline : "";
         var tagline = state.product.tagline.isNotEmpty ? replaceInnerTagP : "";
 
-        // {"<br >": "<br>", "<br />": "<br/>"},
         // -----------process for unSupport emoji,icon in text-------------------
         RegExp emojiRegex = RegExp(
             r'[\u{1F600}-\u{1F64F}' // Emoticons
@@ -355,7 +354,7 @@ class _PDTopSectionState extends State<PDTopSection> {
                                           }),
                                         ),
                                       ),
-                                      tagline != "" && !tagline.contains("<table")
+                                      tagline != ""
                                           ? Visibility(
                                               visible: !descriptionState.textNotMoreThan, //lineFinal <= maxLines && containsHtmlTags(tagline),
                                               child: Container(
