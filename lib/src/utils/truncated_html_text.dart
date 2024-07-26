@@ -2,6 +2,8 @@ import 'package:html/parser.dart' as html_parser;
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 
+enum Section { tagLine, description }
+
 class TruncatedHtmlText {
   formatSubStringHtml(String tagline, ProductDetailDescriptionCubit myBloc, {int getMaxLines = 2}) {
     String? truncatedHtmlContent;
@@ -81,270 +83,14 @@ class TruncatedHtmlText {
 
         // The process of counting lines and checking how many characters each line has and maxLine should be set.
         myBloc.updateToggleTapDescription(toggleDescription: true, textNotMoreThan: true);
-        for (int i = 0; i < lines.length; i++) {
-          //log("line[$i] ${lines[i].length} : ${lines[i]}");
-          if (lines.length - 1 >= 1) {
-            // If the first line is too long, then maxLine = 1.
-            if (lines[0].length >= 150) {
-              //log(("case 1"));
-              maxLines = 1;
-            }
-          }
-          if (lines.length - 1 >= 2) {
-            // If the second line is too long and the first line is not too long, then maxLine = 2.
-            if (lines[1].length >= 80 && lines[1].length <= 169 && lines[0].length <= 149) {
-              maxLines = 2;
-              //log(("case 2"));
-              //log(("line ${lines.length} ${lines.length - 1 >= 3}"));
-              for (int i = 0; i < bigText.length; i++) {
-                if (lines[0].length >= 100 && lines[0].contains(bigText[i])) {
-                  maxLines = 1;
-                  //log(("case 2.0.1"));
-                } else if (lines[0].length <= 100 &&
-                    !(lines[0].contains(bigText[i])) &&
-                    lines[1].length >= 80 &&
-                    lines[1].length <= 115 &&
-                    lines.length - 1 >= 3 &&
-                    lines[2].length >= 80 &&
-                    lines[2].length <= 115) {
-                  maxLines = 3;
-                  //log(("case 2.0.2"));
-                }
-              }
+        List<dynamic> truncatedHtmlTextResponse =
+            truncatedHtmlContentBlock(lines, bigText, maxLines, lineFinal, truncatedHtmlContent ?? "", Section.tagLine, () {
+          myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
+        }, null);
+        truncatedHtmlContent = truncatedHtmlTextResponse[0];
+        maxLines = truncatedHtmlTextResponse[1];
+        lineFinal = truncatedHtmlTextResponse[2];
 
-              // If the second line is too long and the first line is not too long, then maxLine = 2.
-            } else if (lines[1].length >= 170 && lines[0].length <= 149) {
-              maxLines = 2;
-              //log(("case 2.1"));
-              for (int i = 0; i < bigText.length; i++) {
-                if (lines[0].length >= 100 && lines[0].contains(bigText[i])) {
-                  maxLines = 1;
-
-                  //log(("case 2.0.1"));
-                }
-              }
-            }
-            if (lines[1].length <= 80 && lines[0].length <= 149) {
-              for (int i = 0; i < bigText.length; i++) {
-                if (lines[0].length >= 70 && lines[0].contains(bigText[i])) {
-                  maxLines = 1;
-
-                  //log(("case 2.0.1"));
-                }
-                if (lines[0].length <= 69 && lines[0].contains(bigText[i]) && lines[1].contains(bigText[i])) {
-                  maxLines = 2;
-                  //log(("case 2.0.2"));
-                }
-              }
-            }
-          }
-          if (lines.length - 1 >= 3) {
-            // If the third line is too long and the second line is not too long and the first line is not too long, then maxLine = 3
-            if (lines[2].length >= 100 && lines[2].length <= 169 && lines[1].length <= 80 && lines[0].length <= 149) {
-              maxLines = 3;
-              //log(("case 3"));
-            } else if (lines[2].length >= 170 && lines[1].length <= 80 && lines[0].length <= 149) {
-              maxLines = 3;
-              //log(("case 3.1"));
-            } else if (lines[2].length <= 10 && lines[1].length <= 80 && lines[0].length <= 149) {
-              maxLines = 2;
-              //log(("case 3.2"));
-            }
-            for (int i = 0; i < bigText.length; i++) {
-              if (lines[2].length <= 169 && lines[2].contains(bigText[i]) && lines[1].length <= 80 && lines[0].length <= 149) {
-                maxLines = 2;
-                //log(("case 3.3"));
-              }
-            }
-          }
-          if (lines.length - 1 >= 4) {
-            myBloc.updateToggleTapDescription(toggleDescription: false, textNotMoreThan: false);
-
-            if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
-              maxLines = 3;
-              //log(("case 4"));
-            } else if (lines[3].length <= 10 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
-              //log(("case 4.2"));
-              maxLines = 2;
-            }
-            for (int i = 0; i < bigText.length; i++) {
-              if (lines[3].contains(bigText[i]) && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
-                //log(("case 4.3"));
-                if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                    lines[1].contains("<p>") &&
-                    lines[2].contains("<p>") &&
-                    (lines[3].contains("<h1>") || lines[3].contains("<h2>"))) {
-                  maxLines = 4;
-                } else {
-                  maxLines = 2;
-                }
-              }
-            }
-          }
-          // if (lines.length >= 5) {
-          //   if(lines[4].length <= 10 && lines[3].length <= 100 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
-          //     log("case 4.2");
-          //     maxLines = 2;
-          //   }
-          // }
-        }
-        // process to count closest lines
-        for (int i = 0; i < lines.length; i++) {
-          if (lines[i].length > 10) {
-            lineFinal = lineFinal + 1;
-          }
-        }
-        // process for substring. When the second line is found to be too long
-        if (maxLines == 2) {
-          for (int i = 0; i < lines.length; i++) {
-            if (i == 0) {
-              // Insert the first line into a variable.
-              truncatedHtmlContent = [lines[0]].take(maxLines).join('\n');
-              //log("maxLines 2 step 1");
-            } else if (i == 1) {
-              if (lines[1].length >= 170 && lines[0].length <= 149) {
-                if (lineFinal == 2 && maxLines == 2) {
-                  lineFinal = 3;
-                  maxLines = 2;
-                }
-                // Merge the second line into the variable truncatedHtmlContent.
-                if (lines[1].contains("<h1>") || lines[1].contains("<h2>")) {
-                  if (lines[0].contains("<h1>") || lines[0].contains("<h1>")) {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
-                  } else {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 70)].take(maxLines).join('</'))}";
-                  }
-
-                  //log("maxLines 2 step 2");
-                } else {
-                  if (lines[1].length >= 220) {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 220)].take(maxLines).join('</'))}";
-                    //log("maxLines 2 step 2");
-                  } else {
-                    lineFinal = 2;
-                    maxLines = 2;
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('</'))}";
-                    //log("maxLines 2 step 2");
-                  }
-                }
-              } else {
-                if (lines[1].length <= 169 && lines[0].length <= 149) {
-                  // Merge the second line into the variable truncatedHtmlContent.
-                  //log("(${(lines[0].contains("<h1>") || lines[0].contains("<h2>"))})");
-                  if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                      lines[0].length >= 40 &&
-                      lines[0].length <= 73 &&
-                      (lines[1].contains("<h1>") || lines[1].contains("<h2>"))) {
-                    if (lineFinal == 2 && maxLines == 2) {
-                      lineFinal = 3;
-                      maxLines = 2;
-                    }
-                    //log("h1");
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
-                  } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                      lines[0].length <= 40 &&
-                      (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                      lines[1].length >= 73) {
-                    if (lineFinal == 2 && maxLines == 2) {
-                      lineFinal = 3;
-                      maxLines = 2;
-                    }
-                    //log("h1");
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
-                  } else {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
-                      lines[1].substring(0, (lines[1].length * 0.9).round())
-                    ].take(maxLines).join('</'))}";
-                    //log("maxLines 2 step 2");
-                  }
-                }
-              }
-            }
-          }
-
-          // process for substring. When the  line tree is found to be too long
-        } else if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
-          //log("maxLines 3");
-          for (int i = 0; i < lines.length; i++) {
-            if (i == 0) {
-              // Insert the first line into a variable.
-              truncatedHtmlContent = [lines[0]].take(maxLines).join('\n');
-              //log("maxLines 3 step 1");
-            } else if (i == 1) {
-              // Merge the second line into the variable truncatedHtmlContent.
-              truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('\n'))}";
-              //log("maxLines 3 step 2");
-            } else if (i == 2) {
-              if (lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
-                // Merge the second line into the variable truncatedHtmlContent.
-                // truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
-                // log("maxLines 3 step 3");
-                if (
-                    // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                    lines[0].length <= 40 &&
-                        (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                        lines[1].length <= 43 &&
-                        (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                        lines[2].length >= 40) {
-                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
-                  //log("maxLines 3 step 3 with out h1 in line 1(phh)");
-                } else if (
-                    // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                    lines[0].length <= 40 &&
-                        // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                        lines[1].length <= 43 &&
-                        (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                        lines[2].length >= 40) {
-                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
-                  //log("maxLines 3 step 3 with out h1 in line 1 and 2 (line 3 >= 40) (pph)");
-                } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                    lines[0].length <= 40 &&
-                    // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                    lines[1].length <= 43 &&
-                    (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                    lines[2].length >= 40) {
-                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
-                  //log("maxLines 3 step 3 with out h1 in line 2 (hph)");
-                } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                        lines[0].length <= 40 &&
-                        // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
-                        lines[1].length <= 43
-                    // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                    ) {
-                  if (lines[2].length >= 80) {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
-                  } else {
-                    truncatedHtmlContent =
-                        "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
-                  }
-                  //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (hpp)");
-                } else if (
-                    // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
-                    lines[0].length <= 40 && (lines[1].contains("<h1>") || lines[1].contains("<h2>")) && lines[1].length <= 43
-                    // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
-                    ) {
-                  if (lines[2].length >= 80) {
-                    truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
-                  } else {
-                    truncatedHtmlContent =
-                        "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
-                  }
-
-                  //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (php)");
-                } else {
-                  truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
-                  //log("maxLines 3 step 3 all p");
-                }
-              }
-            }
-          }
-        } else {
-          // Merge the second line into the variable when all three lines are not too long.
-          truncatedHtmlContent = lines.take(maxLines).join('</');
-        }
-        if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
-          lineFinal = 4;
-        }
         if (maxLines == 1 || maxLines == 2 || maxLines == 3) {
           if (truncatedHtmlContent!.length >= 285) {
             truncatedHtmlContent = truncatedHtmlContent.substring(0, 285);
@@ -509,5 +255,277 @@ class TruncatedHtmlText {
     RegExp regex = RegExp('<br>', caseSensitive: false);
     Iterable<RegExpMatch> matches = regex.allMatches(htmlString);
     return matches.length;
+  }
+
+  List<dynamic> truncatedHtmlContentBlock(List<String> lines, List<String> bigText, int maxLines, int lineFinal, String truncatedHtmlContent,
+      Section section, Function()? updateToggleTapDescription, Function()? setDescriptionState) {
+    for (int i = 0; i < lines.length; i++) {
+      //log("line[$i] ${lines[i].length} : ${lines[i]}");
+      if (lines.length - 1 >= 1) {
+        // If the first line is too long, then maxLine = 1.
+        if (lines[0].length >= 150) {
+          //log(("case 1"));
+          maxLines = 1;
+        }
+      }
+      if (lines.length - 1 >= 2) {
+        // If the second line is too long and the first line is not too long, then maxLine = 2.
+        if (lines[1].length >= 80 && lines[1].length <= 169 && lines[0].length <= 149) {
+          maxLines = 2;
+          //log(("case 2"));
+          //log(("line ${lines.length} ${lines.length - 1 >= 3}"));
+          for (int i = 0; i < bigText.length; i++) {
+            if (lines[0].length >= 100 && lines[0].contains(bigText[i])) {
+              maxLines = 1;
+              //log(("case 2.0.1"));
+            } else if (lines[0].length <= 100 &&
+                !(lines[0].contains(bigText[i])) &&
+                lines[1].length >= 80 &&
+                lines[1].length <= 115 &&
+                lines.length - 1 >= 3 &&
+                lines[2].length >= 80 &&
+                lines[2].length <= 115) {
+              maxLines = 3;
+              //log(("case 2.0.2"));
+            }
+          }
+
+          // If the second line is too long and the first line is not too long, then maxLine = 2.
+        } else if (lines[1].length >= 170 && lines[0].length <= 149) {
+          maxLines = 2;
+          //log(("case 2.1"));
+          for (int i = 0; i < bigText.length; i++) {
+            if (lines[0].length >= 100 && lines[0].contains(bigText[i])) {
+              maxLines = 1;
+
+              //log(("case 2.0.1"));
+            }
+          }
+        }
+        if (lines[1].length <= 80 && lines[0].length <= 149) {
+          for (int i = 0; i < bigText.length; i++) {
+            if (lines[0].length >= 70 && lines[0].contains(bigText[i])) {
+              maxLines = 1;
+
+              //log(("case 2.0.1"));
+            }
+            if (lines[0].length <= 69 && lines[0].contains(bigText[i]) && lines[1].contains(bigText[i])) {
+              maxLines = 2;
+              //log(("case 2.0.2"));
+            }
+          }
+        }
+      }
+      if (lines.length - 1 >= 3) {
+        // If the third line is too long and the second line is not too long and the first line is not too long, then maxLine = 3
+        if (lines[2].length >= 100 && lines[2].length <= 169 && lines[1].length <= 80 && lines[0].length <= 149) {
+          maxLines = 3;
+          //log(("case 3"));
+        } else if (lines[2].length >= 170 && lines[1].length <= 80 && lines[0].length <= 149) {
+          maxLines = 3;
+          //log(("case 3.1"));
+        } else if (lines[2].length <= 10 && lines[1].length <= 80 && lines[0].length <= 149) {
+          maxLines = 2;
+          //log(("case 3.2"));
+        }
+        for (int i = 0; i < bigText.length; i++) {
+          if (lines[2].length <= 169 && lines[2].contains(bigText[i]) && lines[1].length <= 80 && lines[0].length <= 149) {
+            maxLines = 2;
+            //log(("case 3.3"));
+          }
+        }
+      }
+      if (lines.length - 1 >= 4) {
+        if (updateToggleTapDescription != null && section == Section.tagLine) {
+          updateToggleTapDescription();
+        } else if (setDescriptionState != null && section == Section.description) {
+          setDescriptionState();
+        }
+
+        if (lines[3].length >= 100 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
+          maxLines = 3;
+          //log(("case 4"));
+        } else if (lines[3].length <= 10 && lines[3].length >= 169 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
+          //log(("case 4.2"));
+          maxLines = 2;
+        }
+        for (int i = 0; i < bigText.length; i++) {
+          if (lines[3].contains(bigText[i]) && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
+            //log(("case 4.3"));
+            if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                lines[1].contains("<p>") &&
+                lines[2].contains("<p>") &&
+                (lines[3].contains("<h1>") || lines[3].contains("<h2>"))) {
+              maxLines = 4;
+            } else {
+              maxLines = 2;
+            }
+          }
+        }
+      }
+      // if (lines.length >= 5) {
+      //   if(lines[4].length <= 10 && lines[3].length <= 100 && lines[2].length <= 100 && lines[1].length <= 80 && lines[0].length <= 149) {
+      //     log("case 4.2");
+      //     maxLines = 2;
+      //   }
+      // }
+    }
+    // process to count closest lines
+    for (int i = 0; i < lines.length; i++) {
+      if (lines[i].length > 10) {
+        lineFinal = lineFinal + 1;
+      }
+    }
+
+    // process for substring. When the second line is found to be too long
+    if (maxLines == 2) {
+      for (int i = 0; i < lines.length; i++) {
+        if (i == 0) {
+          // Insert the first line into a variable.
+          truncatedHtmlContent = [lines[0]].take(maxLines).join('\n');
+          //log("maxLines 2 step 1");
+        } else if (i == 1) {
+          if (lines[1].length >= 170 && lines[0].length <= 149) {
+            if (lineFinal == 2 && maxLines == 2) {
+              lineFinal = 3;
+              maxLines = 2;
+            }
+            // Merge the second line into the variable truncatedHtmlContent.
+            if (lines[1].contains("<h1>") || lines[1].contains("<h2>")) {
+              if (lines[0].contains("<h1>") || lines[0].contains("<h1>")) {
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
+              } else {
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 70)].take(maxLines).join('</'))}";
+              }
+
+              //log("maxLines 2 step 2");
+            } else {
+              if (lines[1].length >= 220) {
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 220)].take(maxLines).join('</'))}";
+                //log("maxLines 2 step 2");
+              } else {
+                lineFinal = 2;
+                maxLines = 2;
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('</'))}";
+                //log("maxLines 2 step 2");
+              }
+            }
+          } else {
+            if (lines[1].length <= 169 && lines[0].length <= 149) {
+              // Merge the second line into the variable truncatedHtmlContent.
+              if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                  lines[0].length >= 40 &&
+                  lines[0].length <= 73 &&
+                  (lines[1].contains("<h1>") || lines[1].contains("<h2>"))) {
+                if (lineFinal == 2 && maxLines == 2) {
+                  lineFinal = 3;
+                  maxLines = 2;
+                }
+                //log("h1");
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 40)].take(maxLines).join('</'))}";
+              } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                  lines[0].length <= 40 &&
+                  (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                  lines[1].length >= 73) {
+                if (lineFinal == 2 && maxLines == 2) {
+                  lineFinal = 3;
+                  maxLines = 2;
+                }
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
+              } else {
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
+                  lines[1].substring(0, (lines[1].length * 0.9).round())
+                ].take(maxLines).join('</'))}";
+                //log("maxLines 2 step 2");
+              }
+            }
+          }
+        }
+      }
+      // process for substring. When the  line tree is found to be too long
+    } else if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
+      //log("maxLines 3");
+      for (int i = 0; i < lines.length; i++) {
+        if (i == 0) {
+          // Insert the first line into a variable.
+          truncatedHtmlContent = fixIncompleteHtmlTags([lines[0]].take(maxLines).join('\n'));
+          //log("maxLines 3 step 1");
+        } else if (i == 1) {
+          // Merge the second line into the variable truncatedHtmlContent.
+          truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1]].take(maxLines).join('\n'))}";
+          //log("maxLines 3 step 2");
+        } else if (i == 2) {
+          if (lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
+            // Merge the second line into the variable truncatedHtmlContent.
+            // truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
+            // log("maxLines 3 step 3");
+            if (
+                // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                lines[0].length <= 40 &&
+                    (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                    lines[1].length <= 43 &&
+                    (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                    lines[2].length >= 40) {
+              truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+              //log("maxLines 3 step 3 with out h1 in line 1(phh)");
+            } else if (
+                // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                lines[0].length <= 40 &&
+                    // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                    lines[1].length <= 43 &&
+                    (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                    lines[2].length >= 40) {
+              truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+              //log("maxLines 3 step 3 with out h1 in line 1 and 2 (line 3 >= 40) (pph)");
+            } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                lines[0].length <= 40 &&
+                // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                lines[1].length <= 43 &&
+                (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                lines[2].length >= 40) {
+              truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 40)].take(maxLines).join('</'))}";
+              //log("maxLines 3 step 3 with out h1 in line 2 (hph)");
+            } else if ((lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                    lines[0].length <= 40 &&
+                    // (lines[1].contains("<h1>") || lines[1].contains("<h2>")) &&
+                    lines[1].length <= 43
+                // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                ) {
+              if (lines[2].length >= 80) {
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
+              } else {
+                truncatedHtmlContent =
+                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
+              }
+              //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (hpp)");
+            } else if (
+                // (lines[0].contains("<h1>") || lines[0].contains("<h2>")) &&
+                lines[0].length <= 40 && (lines[1].contains("<h1>") || lines[1].contains("<h2>")) && lines[1].length <= 43
+                // (lines[2].contains("<h1>") || lines[2].contains("<h2>")) &&
+                ) {
+              if (lines[2].length >= 80) {
+                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 80)].take(maxLines).join('</'))}";
+              } else {
+                truncatedHtmlContent =
+                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, lines[2].length)].take(maxLines).join('</'))}";
+              }
+
+              //log("maxLines 3 step 3 with out h1 in line 2 and 3 >= 80 (php)");
+            } else {
+              truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[2].substring(0, 90)].take(maxLines).join('</'))}";
+              //log("maxLines 3 step 3 all p");
+            }
+          }
+        }
+      }
+    } else {
+      // Merge the second line into the variable when all three lines are not too long.
+      truncatedHtmlContent = fixIncompleteHtmlTags(lines.take(maxLines).join('</'));
+    }
+    if (maxLines == 3 && lines[2].length >= 170 && lines[0].length <= 149 && lines[1].length <= 80) {
+      lineFinal = 4;
+    }
+
+    return [truncatedHtmlContent, maxLines, lineFinal];
   }
 }
