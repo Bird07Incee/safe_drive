@@ -79,7 +79,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
     // final nav = Navigator.of(event.context);
     // final Function func = GeneralDialog().showLoadingDialog(context: event.context);
-    var category = {};
+    Map<String, dynamic> category = {};
 
     if (event.categoryId.isNotEmpty) {
       category = {"categoryId": event.categoryId};
