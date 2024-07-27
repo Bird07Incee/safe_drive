@@ -483,7 +483,6 @@ class ProductAttribute extends StatelessWidget {
       padding: EdgeInsets.only(top: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(
             width: (maxWidth / 2) - 32,
