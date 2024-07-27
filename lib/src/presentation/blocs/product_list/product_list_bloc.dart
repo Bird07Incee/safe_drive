@@ -91,7 +91,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     }
 
     try {
-      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category as Map<String, dynamic>);
+      Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category);
 
       final productList = ProductList.fromJson(response.data);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
