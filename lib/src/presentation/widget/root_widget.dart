@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class AlvaRootWidget extends StatelessWidget {
   final Widget child;
-  final AppBar? appBar;
+  final Widget? appBar;
   final Widget? bottomSheet;
   final String titlePage;
   const AlvaRootWidget({
@@ -16,6 +16,11 @@ class AlvaRootWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PreferredSizeWidget? appBarCustom;
+    if (appBar != null) {
+      appBarCustom = PreferredSize(preferredSize: Size.fromHeight(kToolbarHeight), child: appBar!);
+    }
+
     return RumUserActionDetector(
       rum: DatadogSdk.instance.rum,
       child: Title(
@@ -23,7 +28,7 @@ class AlvaRootWidget extends StatelessWidget {
           title: titlePage,
           child: Scaffold(
             body: child,
-            appBar: appBar,
+            appBar: appBarCustom,
             bottomSheet: bottomSheet,
             backgroundColor: Colors.white,
           )),

@@ -174,8 +174,19 @@ class TruncatedHtmlText {
     return updatedHtml;
   }
 
+  bool containsIncompleteTags(String input) {
+    // Regular expressions to find incomplete tags
+    RegExp incompleteStartTag = RegExp(r'(?<!<)[a-zA-Z]+>');
+    RegExp incompleteEndTag = RegExp(r'<[a-zA-Z]+(?!>)');
+
+    // Check if the input contains any incomplete tags
+    return incompleteStartTag.hasMatch(input) || incompleteEndTag.hasMatch(input);
+  }
+
   String fixIncompleteHtmlTags(String input) {
     // Split the input string into characters
+    input = input.replaceAllMapped(RegExp(r'(?<!<)b>'), (match) => '<b>');
+
     List<String> characters = input.split('');
 
     // Track the opening and closing brackets

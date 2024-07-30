@@ -96,7 +96,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     }
   }
 
-  //List dataCarouselMock = carouselSingleItem;
   @override
   Widget build(BuildContext context) {
     maxWidth = MediaQuery.of(context).size.width;
@@ -107,21 +106,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
           if (pdState.status.isSuccess) {
             AmplitudeWebHelper.getInstance().logEnterProductDetails(
                 productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
-            return BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(
-              builder: (ctx, stateAppBar) {
-                return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
-                  builder: (context, zoomState) {
-                    return BlocBuilder<PreviousScaleBloc, double>(
-                      builder: (context, previousState) {
-                        return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
-                          builder: (context, switchState) {
-                            return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
-                              builder: (context, carouselState) {
-                                return switchState
-                                    ? viewImagePage(carouselState, context, zoomState, previousState, pdState)
-                                    : productDetailPage(carouselState, stateAppBar, context, pdState);
-                              },
-                            );
+            return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
+              builder: (context, zoomState) {
+                return BlocBuilder<PreviousScaleBloc, double>(
+                  builder: (context, previousState) {
+                    return BlocBuilder<ViewImgDetailPageSwitchBloc, bool>(
+                      builder: (context, switchState) {
+                        return BlocBuilder<ProductDetailCarouselScrollControllerBloc, PageController>(
+                          builder: (context, carouselState) {
+                            return switchState
+                                ? viewImagePage(carouselState, context, zoomState, previousState, pdState)
+                                : productDetailPage(carouselState, context, pdState);
                           },
                         );
                       },
@@ -173,144 +168,145 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, MediaQuery.of(context).size.width, "1"));
   }
 
-  WillPopScope productDetailPage(
-      PageController pageController, ScrollProductDetailState stateAppBar, BuildContext context, ProductDetailState pdState) {
+  WillPopScope productDetailPage(PageController pageController, BuildContext context, ProductDetailState pdState) {
     return WillPopScope(
-      onWillPop: () async {
-        onBack();
-        return true;
-      },
-      child: AlvaRootWidget(
-        titlePage: titleWebPage,
-        appBar: stateAppBar.appBarCarDetailStatus
-            ? AppBar(
-                automaticallyImplyLeading: false,
-                leading: IconButton(
-                  key: const Key("pop_navigator_to_home_page"),
-                  onPressed: () {
-                    onBack();
-                  },
-                  icon: const Icon(Icons.arrow_back_ios_rounded),
-                ),
-                leadingWidth: 48,
-                titleSpacing: 0,
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AlvaTextMaxLinesOverflow(
-                        title: pdState.product.productName,
-                        maxLines: 1,
-                        textStyle: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(fontWeight: FontWeight.w500, height: 1.17)),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+        onWillPop: () async {
+          onBack();
+          return true;
+        },
+        child: AlvaRootWidget(
+          titlePage: titleWebPage,
+          appBar: BlocBuilder<ScrollProductDetailBloc, ScrollProductDetailState>(builder: (ctx, stateAppBar) {
+            return stateAppBar.appBarCarDetailStatus
+                ? AppBar(
+                    automaticallyImplyLeading: false,
+                    leading: IconButton(
+                      key: const Key("pop_navigator_to_home_page"),
+                      onPressed: () {
+                        onBack();
+                      },
+                      icon: const Icon(Icons.arrow_back_ios_rounded),
+                    ),
+                    leadingWidth: 48,
+                    titleSpacing: 0,
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AlvaText(
-                            title: pdState.product.discountPrice == 0
-                                ? pdState.product.price.toDecimalFormat()
-                                : pdState.product.discountPrice.toDecimalFormat(),
-                            textStyle: AlvaStyles().heading1().copyWith(color: BTN_SELECTED_TEXT_COLOR_NEW, height: 1.33)),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 1, top: 2),
-                          child: AlvaText(title: ' บาท', textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.33)),
-                        ),
+                        AlvaTextMaxLinesOverflow(
+                            title: pdState.product.productName,
+                            maxLines: 1,
+                            textStyle:
+                                AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(fontWeight: FontWeight.w500, height: 1.17)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            AlvaText(
+                                title: pdState.product.discountPrice == 0
+                                    ? pdState.product.price.toDecimalFormat()
+                                    : pdState.product.discountPrice.toDecimalFormat(),
+                                textStyle: AlvaStyles().heading1().copyWith(color: BTN_SELECTED_TEXT_COLOR_NEW, height: 1.33)),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 1, top: 2),
+                              child: AlvaText(title: ' บาท', textStyle: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 1.33)),
+                            ),
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-                centerTitle: false,
-              )
-            : AppBar(
-                title: AlvaText(title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                titleSpacing: 0,
-                leadingWidth: 48,
-                centerTitle: false,
-                automaticallyImplyLeading: false,
-                leading: IconButton(
-                    key: const Key("pop_navigator_to_home_page"),
-                    onPressed: () {
-                      onBack();
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_rounded)),
-              ),
-        bottomSheet: Container(
-          decoration: BoxDecoration(
-            color: whitePure,
-            boxShadow: [
-              BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
-            ],
-          ),
-          width: maxWidth,
-          height: 96,
-          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                  height: 48,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      AmplitudeWebHelper.getInstance().logTapOnPurchaseButton(
-                          productName: pdState.product.productName,
-                          contentId: pdState.product.productId,
-                          merchantName: pdState.product.merchantFullName,
-                          price: pdState.product.price.toDecimalFormat().toString(),
-                          discountPrice: pdState.product.discountPrice.toDecimalFormat().toString());
-                      if (pdState.product.productionOptionals.isNotEmpty) {
-                        Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
-                            arguments: ProductDetailArgs(product: pdState.product));
-                      } else {
-                        Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
-                      }
+                    ),
+                    centerTitle: false,
+                  )
+                : AppBar(
+                    title: AlvaText(title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    titleSpacing: 0,
+                    leadingWidth: 48,
+                    centerTitle: false,
+                    automaticallyImplyLeading: false,
+                    leading: IconButton(
+                        key: const Key("pop_navigator_to_home_page"),
+                        onPressed: () {
+                          onBack();
+                        },
+                        icon: const Icon(Icons.arrow_back_ios_rounded)),
+                  );
+          }),
+          bottomSheet: Container(
+            decoration: BoxDecoration(
+              color: whitePure,
+              boxShadow: [
+                BoxShadow(color: const Color(0xff000000).withOpacity(0.04), spreadRadius: 0, blurRadius: 16, offset: const Offset(0, -4)),
+              ],
+            ),
+            width: maxWidth,
+            height: 96,
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                    height: 48,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        AmplitudeWebHelper.getInstance().logTapOnPurchaseButton(
+                            productName: pdState.product.productName,
+                            contentId: pdState.product.productId,
+                            merchantName: pdState.product.merchantFullName,
+                            price: pdState.product.price.toDecimalFormat().toString(),
+                            discountPrice: pdState.product.discountPrice.toDecimalFormat().toString());
+                        if (pdState.product.productionOptionals.isNotEmpty) {
+                          Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
+                              arguments: ProductDetailArgs(product: pdState.product));
+                        } else {
+                          Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
+                        }
 
-                      context.read<ProductOptionBloc>().updateStepOneVariables(
-                            groupValueRadio: "",
-                            price: 0,
-                            indexSelect: 0,
-                          );
-                      context.read<ProductOptionBloc>().updateStepTwoVariables(
-                            groupValueRadio: "",
-                            price: 0,
-                            indexSelect: 0,
-                          );
-                      context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
-                      context.read<ProductOptionBloc>().updateLastOption(0);
-                    },
-                    style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
-                    child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-        // child: ProductDetailBody(),
-        child: Container(
-          padding: const EdgeInsets.only(bottom: 96),
-          color: backgroundNo2,
-          child: ListView(
-            shrinkWrap: true,
-            controller: scrollController,
-            children: [
-              PDTopSection(),
-              Container(
-                height: 16,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: cloudWhite, // Replace with your color
-                      width: 2.0, // Adjust the border width as needed
+                        context.read<ProductOptionBloc>().updateStepOneVariables(
+                              groupValueRadio: "",
+                              price: 0,
+                              indexSelect: 0,
+                            );
+                        context.read<ProductOptionBloc>().updateStepTwoVariables(
+                              groupValueRadio: "",
+                              price: 0,
+                              indexSelect: 0,
+                            );
+                        context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
+                        context.read<ProductOptionBloc>().updateLastOption(0);
+                      },
+                      style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
+                      child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),
                     ),
                   ),
-                ),
-              ),
-              PDBottomSection(),
-              DisclaimerSection()
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+          // child: ProductDetailBody(),
+          child: Container(
+            padding: const EdgeInsets.only(bottom: 96),
+            color: backgroundNo2,
+            child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  children: [
+                    PDTopSection(),
+                    Container(
+                      height: 16,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: cloudWhite, // Replace with your color
+                            width: 2.0, // Adjust the border width as needed
+                          ),
+                        ),
+                      ),
+                    ),
+                    PDBottomSection(),
+                    DisclaimerSection()
+                  ],
+                )),
+          ),
+        ));
   }
 
   Widget viewImagePage(
