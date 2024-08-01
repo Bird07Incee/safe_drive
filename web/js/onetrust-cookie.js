@@ -40,3 +40,12 @@ function showOneTrustCookieScript() {
         console.log("onetrust show error");
     }
 }
+
+function getOnetrustActiveGroups(){
+    try {
+        let onetrustActiveGroupsList = [...OnetrustActiveGroups.split(",")].filter(n => n);
+        return onetrustActiveGroupsList;
+    } catch {
+        return []
+    }
+}

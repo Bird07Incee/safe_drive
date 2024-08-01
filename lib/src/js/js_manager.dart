@@ -14,3 +14,4 @@ external void hideOneTrustCookieScript();
 external void showOneTrustCookieScript();
 external void setHistoryToInitialPage();
 external void setStrictlyNecessaryCookie(cookieName, cookieValue, expirationDays);
+external List<String> getOnetrustActiveGroups();
