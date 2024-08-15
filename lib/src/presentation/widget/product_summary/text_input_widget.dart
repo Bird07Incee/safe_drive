@@ -1,7 +1,5 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
@@ -136,7 +134,6 @@ class TextInputWidgetState extends State<TextInputWidget> {
   @override
   void initState() {
     super.initState();
-    final keyboardVisibilityController = KeyboardVisibilityController();
 
     focusNode = FocusNode();
     if (widget.focusNode != null) focusNode = widget.focusNode;
@@ -157,12 +154,6 @@ class TextInputWidgetState extends State<TextInputWidget> {
         });
       }
     }
-
-    keyboardVisibilityController.onChange.listen((bool visible) {
-      if (!visible) {
-        focusNode!.unfocus();
-      }
-    });
   }
 
   @override
@@ -176,8 +167,7 @@ class TextInputWidgetState extends State<TextInputWidget> {
   );
 
   String? _validateEmail(String value) {
-    bool isValid = EmailValidator.validate(value);
-    if (!_emailRegExp.hasMatch(value) || !isValid) {
+    if (!_emailRegExp.hasMatch(value)) {
       return 'Invalid email format';
     }
     return null;

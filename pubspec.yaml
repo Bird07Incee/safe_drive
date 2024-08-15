@@ -48,8 +48,6 @@ dependencies:
   flutter_widget_from_html_core: ^0.14.7
   sticky_headers: "^0.3.0"
   shared_preferences: ^2.2.1
-  flutter_keyboard_visibility: ^5.4.1
-  email_validator: ^2.1.17
   url_launcher: ^6.1.11
   amplitude_flutter: ^3.16.2
   html: ^0.15.4
