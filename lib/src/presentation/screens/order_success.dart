@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/main.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
@@ -62,11 +63,15 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
   //   return result;
   // }
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    String env = Environment().getValue("ENVIRONMENT_NAME");
+    loadOneTrustCookieScript(env);
+    Future.delayed(Duration(milliseconds: 500)).then((value) => hideOneTrustCookieScript());
+  }
 
   @override
   void didChangeDependencies() {

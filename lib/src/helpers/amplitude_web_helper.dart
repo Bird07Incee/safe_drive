@@ -31,7 +31,12 @@ class AmplitudeWebHelper {
     return userId;
   }
 
-  void logEvent({required String eventType, required String screenName, required String eventName, Map<String, dynamic>? eventProperties}) async {
+  void logEvent(
+      {required String eventType,
+      required String screenName,
+      required String eventName,
+      Map<String, dynamic>? eventProperties,
+      bool skipOnetrust = false}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     Map<String, dynamic> defaultEventProperties = {
@@ -44,7 +49,9 @@ class AmplitudeWebHelper {
       if (eventProperties != null) {
         defaultEventProperties.addAll(eventProperties);
       }
-      if (getOnetrustActiveGroups().length == 5){
+      if (getOnetrustActiveGroups().length == 5) {
+        _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
+      } else if (skipOnetrust) {
         _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
       }
     } catch (e) {
@@ -102,7 +109,8 @@ class AmplitudeWebHelper {
         eventType: "Enter term&condition page",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: "AutoStation_eMarketplace_term&condition",
-        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID});
+        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID},
+        skipOnetrust: true);
   }
 
   void logTapOnOkButtonTermAndConPage() async {
@@ -113,7 +121,8 @@ class AmplitudeWebHelper {
         eventType: "Tap on ok button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: tcVersion,
-        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID});
+        eventProperties: {"event_name": tcVersion, "line_uuid": lineUUID},
+        skipOnetrust: true);
   }
 
   void logTapOnCancelButtonTermAndConPage() async {
@@ -123,7 +132,8 @@ class AmplitudeWebHelper {
         eventType: "Tap on cancel button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: "AutoStation_eMarketplace_term&condition",
-        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID});
+        eventProperties: {"event_name": "AutoStation_eMarketplace_term&condition", "line_uuid": lineUUID},
+        skipOnetrust: true);
   }
 
   void logTapOnPrivacyButtonTermAndConPage() async {
@@ -133,7 +143,8 @@ class AmplitudeWebHelper {
         eventType: "Tap on privacy policy button",
         screenName: "AutoStation_eMarketplace_term&condition_page",
         eventName: "AutoStation_eMarketplace_privacypolicy",
-        eventProperties: {"event_name": "AutoStation_eMarketplace_privacypolicy", "line_uuid": lineUUID});
+        eventProperties: {"event_name": "AutoStation_eMarketplace_privacypolicy", "line_uuid": lineUUID},
+        skipOnetrust: true);
   }
 
   void logeMarketplaceHomePageHomeScreen() {
