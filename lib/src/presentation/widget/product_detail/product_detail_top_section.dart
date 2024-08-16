@@ -93,13 +93,30 @@ class _PDTopSectionState extends State<PDTopSection> {
         final RegExp regExp = RegExp(r'<thead[^>]*>.*?<\/thead>', multiLine: true, caseSensitive: true, dotAll: true);
         tagline = tagline.replaceAll(regExp, '');
 
+        tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
+
         for (var replacement in [
           {"<table>": "<p>", "</table>": "</p>"},
+          {"<code>": "", "</code>": ""},
+          {"<pre>": "<p>", "</pre>": "</p>"},
+          {"<del>": "", "</del>": ""},
           {"<thead>": "", "</thead>": ""},
           {"<tr>": "", "</tr>": ""},
           {"<th>": "", "</th>": ""},
           {"<tbody>": "", "</tbody>": ""},
           {"<td>": "", "</td>": ""},
+          {"<strong>": "<b>", "</strong>": "</b>"},
+          {"<span>": "", "</span>": ""},
+          {"<em>": "", "</em>": ""},
+          // {"<b>": "", "</b>": ""},
+          {"<i>": "", "</i>": ""},
+          // {"<u>": "", "</u>": ""},
+          {"<s>": "", "</s>": ""},
+          {"<strike>": "", "</strike>": ""},
+          {"<sub>": "", "</sub>": ""},
+          {"<sup>": "", "</sup>": ""},
+          {"<a>": "", "</a>": ""},
+          {"<mark>": "", "</mark>": ""}
         ]) {
           replacement.forEach((key, value) {
             tagline = tagline.replaceAll(key, value);

@@ -185,7 +185,7 @@ class TruncatedHtmlText {
 
   String fixIncompleteHtmlTags(String input) {
     // Split the input string into characters
-    input = input.replaceAllMapped(RegExp(r'(?<!<)b>'), (match) => '<b>');
+    input = input.replaceAllMapped(RegExp(r'(?<!<)b>'), (match) => '</b>');
 
     List<String> characters = input.split('');
 
@@ -444,9 +444,8 @@ class TruncatedHtmlText {
                 }
                 truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, 73)].take(maxLines).join('</'))}";
               } else {
-                truncatedHtmlContent = "$truncatedHtmlContent${fixIncompleteHtmlTags([
-                  lines[1].substring(0, (lines[1].length * 0.9).round())
-                ].take(maxLines).join('</'))}";
+                truncatedHtmlContent =
+                    "$truncatedHtmlContent${fixIncompleteHtmlTags([lines[1].substring(0, lines[1].length.round())].take(maxLines).join('</'))}";
                 //log("maxLines 2 step 2");
               }
             }

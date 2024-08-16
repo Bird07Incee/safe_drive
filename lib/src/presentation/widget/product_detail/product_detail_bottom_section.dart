@@ -632,6 +632,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
 
           Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data.trim() : AppStrings().noDataFromSeller,
               buildAsync: false,
+              textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
               customStylesBuilder: (element) {
                 if (element.localName == "table") {
                   return {'width': '100%'};
@@ -709,6 +710,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                           : truncatedHtmlContent
                       : AppStrings().noDataFromSeller,
               buildAsync: false,
+              textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
               customStylesBuilder: (element) {
                 if (element.localName == "table") {
                   return {'width': '100%'};
@@ -781,6 +783,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             child: HtmlWidget(
               data.isNotEmpty ? data : AppStrings().noDataFromSeller,
               buildAsync: false,
+              textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
               customStylesBuilder: (element) {
                 if (element.localName == "table") {
                   return {'width': '100%'};
@@ -872,6 +875,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                                 : truncatedHtmlContent
                             : AppStrings().noDataFromSeller,
                     buildAsync: false,
+                    textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
                     customStylesBuilder: (element) {
                       if (element.localName == "table") {
                         return {'width': '100%'};
@@ -1023,16 +1027,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                   }
                 },
                 child: Container(
-                    padding: EdgeInsets.only(
-                        left: 16,
-                        right: 16,
-                        bottom: _tabController.index == 0
-                            ? product.technicalSpec.isEmpty
-                                ? 0
-                                : 16
-                            : truncatedHtmlContent.length > 285
-                                ? 16
-                                : 0),
+                    padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
                     child: checkProductDetailTab(product, noDataFromSeller, technicalSpecMaxWidget, technicalSpecHaveReadMoreWidget,
                         descriptionMaxWidget, descriptionHaveReadMoreWidget)),
               ),

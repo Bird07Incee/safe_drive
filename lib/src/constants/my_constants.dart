@@ -79,6 +79,9 @@ class ProductDetailConst {
   // The list of tags can be displayed as text and can be replaced with <p>.
   List<Map<String, String>> replacements = [
     {"<strong>": "<b>", "</strong>": "</b>"},
+    {"<code>": "", "</code>": ""},
+    {"<del>": "", "</del>": ""},
+    {"<pre>": "<p>", "</pre>": "</p>"},
     {"<span>": "", "</span>": ""},
     {"<em>": "", "</em>": ""},
     // {"<b>": "", "</b>": ""},
