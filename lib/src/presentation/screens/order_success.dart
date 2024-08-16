@@ -87,6 +87,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     return RootPageCondition(
         child: WillPopScope(
       onWillPop: () async {
+        showOneTrustCookieScript();
         String pid = context.read<OrderSuccessBloc>().state.orderSuccessData.productId ?? "";
         if (pid.isNotEmpty) {
           refreshRoute(context: context, currentRoute: "orderSuccess", queryParams: "", listOption: []);
