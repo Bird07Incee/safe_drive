@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
+import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
@@ -19,6 +21,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_i
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
+import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -33,6 +36,8 @@ class ProductCardWidget extends StatelessWidget {
     temp = temp.replaceAll("<p>", "");
     temp = temp.replaceAll("</p>", "<br>");
 
+    temp = temp.replaceAll("<em>", "");
+
     temp = temp.replaceAll("<h1>", "<b>");
     temp = temp.replaceAll("<h2>", "<b>");
     temp = temp.replaceAll("<h3>", "<b>");
@@ -42,8 +47,9 @@ class ProductCardWidget extends StatelessWidget {
     temp = temp.replaceAll("</h2>", "</b><br><p>");
     temp = temp.replaceAll("</h3>", "</b><br><p>");
     temp = temp.replaceAll("</h4>", "</b><br><p>");
+    temp = temp.replaceAll("</em>", "");
 
-    temp += "</p>";
+  //  temp += "</p>";
 
     return temp;
   }
@@ -86,6 +92,12 @@ class ProductCardWidget extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: productList.products?.length,
                 itemBuilder: (BuildContext context, int index) {
+                  String tagline = "<p><body>${cleanHtml(products![index].tagline)}</body></p>";
+                  TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
+                  if (tagline.contains("<table")) {
+                    tagline = truncatedHtmlText.minifyHtml(tagline);
+                  }
+
                   late final PageController pageViewController = PageController(initialPage: 0);
                   return RumUserActionAnnotation(
                     description: "Tap product card",
@@ -305,7 +317,9 @@ class ProductCardWidget extends StatelessWidget {
                                       Visibility(
                                         visible: products[index].tagline == "" ? false : true,
                                         child: HtmlWidget(
-                                          "<p>${cleanHtml(products[index].tagline)}</p>",
+                                         // "<p>${cleanHtml(products[index].tagline)}</p>",
+                                          tagline,
+                                          textStyle: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12),
                                           customStylesBuilder: (element) {
                                             if (element.localName == "p") {
                                               return {
@@ -338,7 +352,12 @@ class ProductCardWidget extends StatelessWidget {
                                               };
                                             }
                                           },
-                                        ),
+                                           factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                                            onErrorBuilder: (context, el, e) {
+                                              debugPrint(e.toString());
+                                              return Container();
+                                            }
+                                            ),
                                       ),
                                       Visibility(
                                         visible: products[index].tagline == "" ? false : true,
@@ -429,5 +448,34 @@ class ProductCardWidget extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class _MyFactory extends WidgetFactory {
+  _MyFactory({this.title = ""});
+
+  String title;
+
+  @override
+  void parse(BuildTree meta) {
+    final e = meta.element;
+    if (title == AppStrings().productDetailProductDescription) {
+      if (e.localName == 'tr') {
+        for (int i = 0; i < e.nodes.length; i++) {
+          if (i == 0) {
+            meta.element.nodes[i].nodes[0].attributes = {
+              "style":
+              "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+            } as LinkedHashMap<Object, String>;
+          } else {
+            meta.element.nodes[i].nodes[0].attributes = {
+              "style": "color:#2c2626;  font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;",
+            } as LinkedHashMap<Object, String>;
+          }
+        }
+        return;
+      }
+    }
+    return super.parse(meta);
   }
 }

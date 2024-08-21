@@ -574,7 +574,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             } else {
               // This string contains html tags.
               // List of tags that you want to delete the entire line of tags and do not want to show
-
               data = truncatedHtmlText.removeTags(data, ['img', 'nav']);
 
               // logic for replacing variables for replacements
@@ -619,9 +618,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (data.contains("<table")) {
             data = truncatedHtmlText.minifyHtml(data);
           }
-
           int count = 0;
-
           Widget noDataFromSeller = Container(
             padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
             child: Text(
@@ -630,7 +627,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             ),
           );
 
-          Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data.trim() : AppStrings().noDataFromSeller,
+          Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data: AppStrings().noDataFromSeller,
               buildAsync: false,
               textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
               customStylesBuilder: (element) {

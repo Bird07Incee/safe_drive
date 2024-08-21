@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -90,21 +92,21 @@ class _PDTopSectionState extends State<PDTopSection> {
         tagline = tagline.replaceAll(emojiRegex, "");
 
         tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
-        final RegExp regExp = RegExp(r'<thead[^>]*>.*?<\/thead>', multiLine: true, caseSensitive: true, dotAll: true);
-        tagline = tagline.replaceAll(regExp, '');
+     //   final RegExp regExp = RegExp(r'<thead[^>]*>.*?<\/thead>', multiLine: true, caseSensitive: true, dotAll: true);
+     //   tagline = tagline.replaceAll(regExp, '');
 
         tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
 
         for (var replacement in [
-          {"<table>": "<p>", "</table>": "</p>"},
+    //      {"<table>": "<p>", "</table>": "</p>"},
           {"<code>": "", "</code>": ""},
           {"<pre>": "<p>", "</pre>": "</p>"},
           {"<del>": "", "</del>": ""},
-          {"<thead>": "", "</thead>": ""},
-          {"<tr>": "", "</tr>": ""},
-          {"<th>": "", "</th>": ""},
-          {"<tbody>": "", "</tbody>": ""},
-          {"<td>": "", "</td>": ""},
+    //      {"<thead>": "", "</thead>": ""},
+    //      {"<tr>": "", "</tr>": ""},
+    //      {"<th>": "", "</th>": ""},
+    //      {"<tbody>": "", "</tbody>": ""},
+    //      {"<td>": "", "</td>": ""},
           {"<strong>": "<b>", "</strong>": "</b>"},
           {"<span>": "", "</span>": ""},
           {"<em>": "", "</em>": ""},
@@ -136,6 +138,19 @@ class _PDTopSectionState extends State<PDTopSection> {
           textString = listResult[2];
           truncatedHtmlContent = listResult[3];
         }
+
+        if (!truncatedHtmlContent.startsWith("<p>") || !truncatedHtmlContent.endsWith("</p>")) {
+          truncatedHtmlContent = "<p>$truncatedHtmlContent</p>";
+        }
+        if (!tagline.startsWith("<p>") || !tagline.endsWith("</p>")) {
+          tagline = "<p>$tagline</p>";
+        }
+        if (tagline.contains("<table")) {
+          tagline = truncatedHtmlText.minifyHtml(tagline);
+          truncatedHtmlContent = tagline;
+        }
+
+        int count = 0;
 
         return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
           builder: (context, zoomarguments) {
@@ -324,9 +339,10 @@ class _PDTopSectionState extends State<PDTopSection> {
                                         child: Container(
                                           padding: EdgeInsets.only(right: 0),
                                           child: HtmlWidget(
+                                              tagline.contains("<table") ? tagline :
                                               descriptionState.toggleDescription ||
                                                       (lineFinal <= maxLines && truncatedHtmlText.containsHtmlTags(tagline))
-                                                  ? "$tagline${lineFinal <= maxLines ? "" : " "}" //<p1>ซ่อนรายละเอียด<p1>
+                                                  ? "$tagline${lineFinal <= maxLines ? "" : " "}"//<p1>ซ่อนรายละเอียด<p1>
                                                   : !truncatedHtmlText.containsHtmlTags(tagline)
                                                       ? tagline != ""
                                                           ? "$textString..." //<p1>อ่านต่อ</p1>
@@ -334,46 +350,73 @@ class _PDTopSectionState extends State<PDTopSection> {
                                                       : "$truncatedHtmlContent...", //${"<p1>อ่านต่อ</p1>"}
                                               buildAsync: false,
                                               textStyle: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 24 / 16),
-                                              customStylesBuilder: (element) {
-                                            if (element.attributes['style'] != null && element.attributes['style'].toString().contains('color')) {
-                                              if (element.attributes['style'].toString().contains('9c9c9c')) {
-                                                element.attributes['style'] = 'color:#9c9c9c';
-                                              } else {
-                                                element.attributes['style'] = 'color:#6699ff';
+                                            customStylesBuilder: (element) {
+                                              if (element.localName == "table") {
+                                                return {'width': '100%'};
                                               }
-                                            } else {
-                                              element.attributes['style'] = '';
-                                            }
-                                            if (element.localName == "p1") {
-                                              return {
-                                                'font-weight': '700',
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '14px',
-                                                'line-height': '24px',
-                                                'color': '#40A9FC'
-                                              };
-                                            }
-                                            if (element.localName == "p" || element.localName == "li") {
-                                              return {
-                                                'font-weight': '500',
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '12px',
-                                                'line-height': '20px',
-                                                'color': '#5A5A5A'
-                                              };
-                                            }
-                                            if (element.localName == "table") {
-                                              return {'width': '100%'};
-                                            } else if (element.localName == "td") {
-                                              return {'width': '50%'};
-                                            }
-                                            return null;
-                                          }),
+                                              if (element.localName == "td") {
+                                                count += 1;
+                                                if (count.isOdd) {
+                                                  return {
+                                                    'font-family': "'Krungsri Condensed'",
+                                                    'width': '50%',
+                                                    'vertical-align': 'top;',
+                                                    'font-size': '14px',
+                                                    'line-height': '22px',
+                                                    'font-weight': '400',
+                                                    'color': '#5a5a5a'
+                                                  };
+                                                } else {
+                                                  return {
+                                                    'font-family': "'Krungsri Condensed'",
+                                                    'width': '50%',
+                                                    'vertical-align': 'top;',
+                                                    'font-size': '14px',
+                                                    'line-height': '22px',
+                                                    'font-weight': '400',
+                                                    'color': '#2c2626'
+                                                  };
+                                                }
+                                              }
+                                              if (element.localName == "th" || element.localName == "thead") {
+                                                return null;
+                                              }
+                                              if (element.localName == "p1") {
+                                                return {
+                                                  'font-weight': '700',
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '14px',
+                                                  'line-height': '24px',
+                                                  'color': '#40A9FC'
+                                                };
+                                              }
+                                              if (element.localName == "p" || element.localName == "li") {
+                                                return {
+                                                  'font-weight': '500',
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '12px',
+                                                  'line-height': '20px',
+                                                  'color': '#5A5A5A'
+                                                };
+                                              }
+                                              return null;
+                                            },
+                                              customWidgetBuilder: (element) {
+                                                if (element.localName == "th" || element.localName == "thead") {
+                                                  return SizedBox.shrink();
+                                                }
+                                                return null;
+                                              },
+                                              factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                                              onErrorBuilder: (context, el, e) {
+                                                debugPrint("Errorrr Test111");
+                                                return Container();
+                                              }),
                                         ),
                                       ),
                                       tagline != ""
                                           ? Visibility(
-                                              visible: !descriptionState.textNotMoreThan, //lineFinal <= maxLines && containsHtmlTags(tagline),
+                                              visible: !descriptionState.textNotMoreThan && !tagline.contains("<table"), //lineFinal <= maxLines && containsHtmlTags(tagline),
                                               child: Container(
                                                   padding: EdgeInsets.only(top: 8),
                                                   child: Row(
@@ -510,5 +553,34 @@ class _PDTopSectionState extends State<PDTopSection> {
         );
       },
     );
+  }
+}
+class _MyFactory extends WidgetFactory {
+  _MyFactory({this.title = ""});
+
+  String title;
+
+  @override
+  void parse(BuildTree meta) {
+    final e = meta.element;
+    if (title == AppStrings().productDetailProductDescription) {
+      if (e.localName == 'tr') {
+        for (int i = 0; i < e.nodes.length; i++) {
+          if (i == 0) {
+            meta.element.nodes[i].nodes[0].attributes = {
+              "style":
+              "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+            } as LinkedHashMap<Object, String>;
+          } else {
+            meta.element.nodes[i].nodes[0].attributes = {
+              "style": "color:#2c2626;  font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;",
+            } as LinkedHashMap<Object, String>;
+          }
+        }
+        return;
+      }
+    }
+
+    return super.parse(meta);
   }
 }
