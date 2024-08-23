@@ -5,6 +5,68 @@ import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline
 enum Section { tagLine, description }
 
 class TruncatedHtmlText {
+  removeForbiddenTagline(String tagline) {
+    RegExp emojiRegex = RegExp(
+        r'[\u{1F600}-\u{1F64F}' // Emoticons
+        r'\u{1F300}-\u{1F5FF}' // Misc Symbols and Pictographs
+        r'\u{1F680}-\u{1F6FF}' // Transport and Map
+        r'\u{1F700}-\u{1F77F}' // Alchemical Symbols
+        r'\u{1F780}-\u{1F7FF}' // Geometric Shapes Extended
+        r'\u{1F800}-\u{1F8FF}' // Supplemental Arrows-C
+        r'\u{1F900}-\u{1F9FF}' // Supplemental Symbols and Pictographs
+        r'\u{1FA00}-\u{1FA6F}' // Chess Symbols
+        r'\u{1FA70}-\u{1FAFF}' // Symbols and Pictographs Extended-A
+        r'\u{2600}-\u{26FF}' // Miscellaneous Symbols
+        r'\u{2700}-\u{27BF}' // Dingbats
+        r'\u{2B50}' // Stars
+        r'\u{2B55}' // Circles
+        r'\u{23F0}' // Alarm Clock
+        r'\u{23F3}' // Hourglass
+        r'\u{231A}-\u{231B}' // Watches
+        r'\u{1F004}' // Mahjong Tile Red Dragon
+        r'\u{1F0CF}]' // Playing Card Black Joker
+        r'|[\u{2702}-\u{27B0}]', // Additional Dingbats
+        unicode: true,
+        dotAll: true);
+
+    TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
+    tagline = truncatedHtmlText.decodeHtmlEntities(tagline);
+    tagline = tagline.replaceAll(emojiRegex, "");
+
+    tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
+    //   final RegExp regExp = RegExp(r'<thead[^>]*>.*?<\/thead>', multiLine: true, caseSensitive: true, dotAll: true);
+    //   tagline = tagline.replaceAll(regExp, '');
+
+    for (var replacement in [
+      //      {"<table>": "<p>", "</table>": "</p>"},
+      {"<code>": "", "</code>": ""},
+      {"<pre>": "<p>", "</pre>": "</p>"},
+      {"<del>": "", "</del>": ""},
+      //      {"<thead>": "", "</thead>": ""},
+      //      {"<tr>": "", "</tr>": ""},
+      //      {"<th>": "", "</th>": ""},
+      //      {"<tbody>": "", "</tbody>": ""},
+      //      {"<td>": "", "</td>": ""},
+      {"<strong>": "<b>", "</strong>": "</b>"},
+      {"<span>": "", "</span>": ""},
+      {"<em>": "", "</em>": ""},
+      // {"<b>": "", "</b>": ""},
+      {"<i>": "", "</i>": ""},
+      // {"<u>": "", "</u>": ""},
+      {"<s>": "", "</s>": ""},
+      {"<strike>": "", "</strike>": ""},
+      {"<sub>": "", "</sub>": ""},
+      {"<sup>": "", "</sup>": ""},
+      {"<a>": "", "</a>": ""},
+      {"<mark>": "", "</mark>": ""}
+    ]) {
+      replacement.forEach((key, value) {
+        tagline = tagline.replaceAll(key, value);
+      });
+    }
+    return tagline;
+  }
+
   formatSubStringHtml(String tagline, ProductDetailDescriptionCubit myBloc, {int getMaxLines = 2}) {
     String? truncatedHtmlContent;
     int maxLines = getMaxLines;

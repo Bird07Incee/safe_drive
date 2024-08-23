@@ -63,67 +63,8 @@ class _PDTopSectionState extends State<PDTopSection> {
         final replaceInnerTagP = state.product.tagline.isNotEmpty ? state.product.tagline : "";
         var tagline = state.product.tagline.isNotEmpty ? replaceInnerTagP : "";
 
-        // -----------process for unSupport emoji,icon in text-------------------
-        RegExp emojiRegex = RegExp(
-            r'[\u{1F600}-\u{1F64F}' // Emoticons
-            r'\u{1F300}-\u{1F5FF}' // Misc Symbols and Pictographs
-            r'\u{1F680}-\u{1F6FF}' // Transport and Map
-            r'\u{1F700}-\u{1F77F}' // Alchemical Symbols
-            r'\u{1F780}-\u{1F7FF}' // Geometric Shapes Extended
-            r'\u{1F800}-\u{1F8FF}' // Supplemental Arrows-C
-            r'\u{1F900}-\u{1F9FF}' // Supplemental Symbols and Pictographs
-            r'\u{1FA00}-\u{1FA6F}' // Chess Symbols
-            r'\u{1FA70}-\u{1FAFF}' // Symbols and Pictographs Extended-A
-            r'\u{2600}-\u{26FF}' // Miscellaneous Symbols
-            r'\u{2700}-\u{27BF}' // Dingbats
-            r'\u{2B50}' // Stars
-            r'\u{2B55}' // Circles
-            r'\u{23F0}' // Alarm Clock
-            r'\u{23F3}' // Hourglass
-            r'\u{231A}-\u{231B}' // Watches
-            r'\u{1F004}' // Mahjong Tile Red Dragon
-            r'\u{1F0CF}]' // Playing Card Black Joker
-            r'|[\u{2702}-\u{27B0}]', // Additional Dingbats
-            unicode: true,
-            dotAll: true);
-
         TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
-        tagline = truncatedHtmlText.decodeHtmlEntities(tagline);
-        tagline = tagline.replaceAll(emojiRegex, "");
-
-        tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
-     //   final RegExp regExp = RegExp(r'<thead[^>]*>.*?<\/thead>', multiLine: true, caseSensitive: true, dotAll: true);
-     //   tagline = tagline.replaceAll(regExp, '');
-
-        tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
-
-        for (var replacement in [
-    //      {"<table>": "<p>", "</table>": "</p>"},
-          {"<code>": "", "</code>": ""},
-          {"<pre>": "<p>", "</pre>": "</p>"},
-          {"<del>": "", "</del>": ""},
-    //      {"<thead>": "", "</thead>": ""},
-    //      {"<tr>": "", "</tr>": ""},
-    //      {"<th>": "", "</th>": ""},
-    //      {"<tbody>": "", "</tbody>": ""},
-    //      {"<td>": "", "</td>": ""},
-          {"<strong>": "<b>", "</strong>": "</b>"},
-          {"<span>": "", "</span>": ""},
-          {"<em>": "", "</em>": ""},
-          // {"<b>": "", "</b>": ""},
-          {"<i>": "", "</i>": ""},
-          // {"<u>": "", "</u>": ""},
-          {"<s>": "", "</s>": ""},
-          {"<strike>": "", "</strike>": ""},
-          {"<sub>": "", "</sub>": ""},
-          {"<sup>": "", "</sup>": ""},
-          {"<a>": "", "</a>": ""},
-          {"<mark>": "", "</mark>": ""}
-        ]) {
-          replacement.forEach((key, value) {
-            tagline = tagline.replaceAll(key, value);
-          });
-        }
+        tagline = truncatedHtmlText.removeForbiddenTagline(tagline);
 
         List<dynamic> listResult = truncatedHtmlText.formatSubStringHtml(tagline, myBloc) ?? [];
 
@@ -339,68 +280,69 @@ class _PDTopSectionState extends State<PDTopSection> {
                                         child: Container(
                                           padding: EdgeInsets.only(right: 0),
                                           child: HtmlWidget(
-                                              tagline.contains("<table") ? tagline :
-                                              descriptionState.toggleDescription ||
-                                                      (lineFinal <= maxLines && truncatedHtmlText.containsHtmlTags(tagline))
-                                                  ? "$tagline${lineFinal <= maxLines ? "" : " "}"//<p1>ซ่อนรายละเอียด<p1>
-                                                  : !truncatedHtmlText.containsHtmlTags(tagline)
-                                                      ? tagline != ""
-                                                          ? "$textString..." //<p1>อ่านต่อ</p1>
-                                                          : ""
-                                                      : "$truncatedHtmlContent...", //${"<p1>อ่านต่อ</p1>"}
+                                              tagline.contains("<table")
+                                                  ? tagline
+                                                  : descriptionState.toggleDescription ||
+                                                          (lineFinal <= maxLines && truncatedHtmlText.containsHtmlTags(tagline))
+                                                      ? "$tagline${lineFinal <= maxLines ? "" : " "}" //<p1>ซ่อนรายละเอียด<p1>
+                                                      : !truncatedHtmlText.containsHtmlTags(tagline)
+                                                          ? tagline != ""
+                                                              ? "$textString..." //<p1>อ่านต่อ</p1>
+                                                              : ""
+                                                          : "$truncatedHtmlContent...", //${"<p1>อ่านต่อ</p1>"}
                                               buildAsync: false,
                                               textStyle: AlvaStyles().headingSize12w500(blackGoMunTo).copyWith(height: 24 / 16),
-                                            customStylesBuilder: (element) {
-                                              if (element.localName == "table") {
-                                                return {'width': '100%'};
-                                              }
-                                              if (element.localName == "td") {
-                                                count += 1;
-                                                if (count.isOdd) {
+                                              customStylesBuilder: (element) {
+                                                if (element.localName == "table") {
+                                                  return {'width': '100%'};
+                                                }
+                                                if (element.localName == "td") {
+                                                  count += 1;
+                                                  if (count.isOdd) {
+                                                    return {
+                                                      'font-family': "'Krungsri Condensed'",
+                                                      'width': '50%',
+                                                      'vertical-align': 'top;',
+                                                      'font-size': '14px',
+                                                      'line-height': '22px',
+                                                      'font-weight': '400',
+                                                      'color': '#5a5a5a'
+                                                    };
+                                                  } else {
+                                                    return {
+                                                      'font-family': "'Krungsri Condensed'",
+                                                      'width': '50%',
+                                                      'vertical-align': 'top;',
+                                                      'font-size': '14px',
+                                                      'line-height': '22px',
+                                                      'font-weight': '400',
+                                                      'color': '#2c2626'
+                                                    };
+                                                  }
+                                                }
+                                                if (element.localName == "th" || element.localName == "thead") {
+                                                  return null;
+                                                }
+                                                if (element.localName == "p1") {
                                                   return {
+                                                    'font-weight': '700',
                                                     'font-family': "'Krungsri Condensed'",
-                                                    'width': '50%',
-                                                    'vertical-align': 'top;',
                                                     'font-size': '14px',
-                                                    'line-height': '22px',
-                                                    'font-weight': '400',
-                                                    'color': '#5a5a5a'
-                                                  };
-                                                } else {
-                                                  return {
-                                                    'font-family': "'Krungsri Condensed'",
-                                                    'width': '50%',
-                                                    'vertical-align': 'top;',
-                                                    'font-size': '14px',
-                                                    'line-height': '22px',
-                                                    'font-weight': '400',
-                                                    'color': '#2c2626'
+                                                    'line-height': '24px',
+                                                    'color': '#40A9FC'
                                                   };
                                                 }
-                                              }
-                                              if (element.localName == "th" || element.localName == "thead") {
+                                                if (element.localName == "p" || element.localName == "li") {
+                                                  return {
+                                                    'font-weight': '500',
+                                                    'font-family': "'Krungsri Condensed'",
+                                                    'font-size': '12px',
+                                                    'line-height': '20px',
+                                                    'color': '#5A5A5A'
+                                                  };
+                                                }
                                                 return null;
-                                              }
-                                              if (element.localName == "p1") {
-                                                return {
-                                                  'font-weight': '700',
-                                                  'font-family': "'Krungsri Condensed'",
-                                                  'font-size': '14px',
-                                                  'line-height': '24px',
-                                                  'color': '#40A9FC'
-                                                };
-                                              }
-                                              if (element.localName == "p" || element.localName == "li") {
-                                                return {
-                                                  'font-weight': '500',
-                                                  'font-family': "'Krungsri Condensed'",
-                                                  'font-size': '12px',
-                                                  'line-height': '20px',
-                                                  'color': '#5A5A5A'
-                                                };
-                                              }
-                                              return null;
-                                            },
+                                              },
                                               customWidgetBuilder: (element) {
                                                 if (element.localName == "th" || element.localName == "thead") {
                                                   return SizedBox.shrink();
@@ -416,7 +358,8 @@ class _PDTopSectionState extends State<PDTopSection> {
                                       ),
                                       tagline != ""
                                           ? Visibility(
-                                              visible: !descriptionState.textNotMoreThan && !tagline.contains("<table"), //lineFinal <= maxLines && containsHtmlTags(tagline),
+                                              visible: !descriptionState.textNotMoreThan &&
+                                                  !tagline.contains("<table"), //lineFinal <= maxLines && containsHtmlTags(tagline),
                                               child: Container(
                                                   padding: EdgeInsets.only(top: 8),
                                                   child: Row(
@@ -555,6 +498,7 @@ class _PDTopSectionState extends State<PDTopSection> {
     );
   }
 }
+
 class _MyFactory extends WidgetFactory {
   _MyFactory({this.title = ""});
 
@@ -569,7 +513,7 @@ class _MyFactory extends WidgetFactory {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
               "style":
-              "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+                  "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {

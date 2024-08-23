@@ -49,7 +49,8 @@ class ProductCardWidget extends StatelessWidget {
     temp = temp.replaceAll("</h4>", "</b><br><p>");
     temp = temp.replaceAll("</em>", "");
 
-  //  temp += "</p>";
+    TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
+    temp = truncatedHtmlText.removeForbiddenTagline(temp);
 
     return temp;
   }
@@ -317,47 +318,46 @@ class ProductCardWidget extends StatelessWidget {
                                       Visibility(
                                         visible: products[index].tagline == "" ? false : true,
                                         child: HtmlWidget(
-                                         // "<p>${cleanHtml(products[index].tagline)}</p>",
-                                          tagline,
-                                          textStyle: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12),
-                                          customStylesBuilder: (element) {
-                                            if (element.localName == "p") {
-                                              return {
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '12px',
-                                                'line-height': '20px',
-                                                'font-weight': '500',
-                                                'color': '#5A5A5A',
-                                                'max-lines': '3',
-                                                'text-overflow': 'ellipsis'
-                                              };
-                                            } else if (element.localName == "b") {
-                                              return {
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '16px',
-                                                'font-weight': '600',
-                                                'line-height': '24px',
-                                                'max-lines': '1',
-                                                'color': '#2C2626'
-                                              };
-                                            } else {
-                                              return {
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '12px',
-                                                'line-height': '20px',
-                                                'font-weight': '500',
-                                                'color': '#5A5A5A',
-                                                'max-lines': '3',
-                                                'text-overflow': 'ellipsis'
-                                              };
-                                            }
-                                          },
-                                           factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                                            // "<p>${cleanHtml(products[index].tagline)}</p>",
+                                            tagline,
+                                            textStyle: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12),
+                                            customStylesBuilder: (element) {
+                                              if (element.localName == "p") {
+                                                return {
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '12px',
+                                                  'line-height': '20px',
+                                                  'font-weight': '500',
+                                                  'color': '#5A5A5A',
+                                                  'max-lines': '3',
+                                                  'text-overflow': 'ellipsis'
+                                                };
+                                              } else if (element.localName == "b") {
+                                                return {
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '16px',
+                                                  'font-weight': '600',
+                                                  'line-height': '24px',
+                                                  'max-lines': '1',
+                                                  'color': '#2C2626'
+                                                };
+                                              } else {
+                                                return {
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '12px',
+                                                  'line-height': '20px',
+                                                  'font-weight': '500',
+                                                  'color': '#5A5A5A',
+                                                  'max-lines': '3',
+                                                  'text-overflow': 'ellipsis'
+                                                };
+                                              }
+                                            },
+                                            factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                                             onErrorBuilder: (context, el, e) {
                                               debugPrint(e.toString());
                                               return Container();
-                                            }
-                                            ),
+                                            }),
                                       ),
                                       Visibility(
                                         visible: products[index].tagline == "" ? false : true,
@@ -465,7 +465,7 @@ class _MyFactory extends WidgetFactory {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
               "style":
-              "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+                  "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {
