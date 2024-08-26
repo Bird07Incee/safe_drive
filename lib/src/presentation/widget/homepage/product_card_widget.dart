@@ -32,63 +32,8 @@ class ProductCardWidget extends StatelessWidget {
 
   String cleanHtml(String text) {
     String temp = text;
-
-  //  temp = temp.replaceAll("<p>", "");
-  //  temp = temp.replaceAll("</p>", "<br>");
-
-    temp = temp.replaceAll("<em>", "");
-    temp = temp.replaceAll("<strong>", "<b>");
-    temp = temp.replaceAll("<code>", "");
-    temp = temp.replaceAll("<del>", "");
-    temp = temp.replaceAll("<pre>", "<p>");
-    temp = temp.replaceAll("<span>", "");
-    temp = temp.replaceAll("<i>", "");
-    temp = temp.replaceAll("<s>", "");
-    temp = temp.replaceAll("<strike>", "");
-    temp = temp.replaceAll("<sub>", "");
-    temp = temp.replaceAll("<sup>", "");
-    temp = temp.replaceAll("<a>", "");
-    temp = temp.replaceAll("<mark>", "");
-
-     // temp = temp.replaceAll("<h1>", "<b>");
-     // temp = temp.replaceAll("<h2>", "<b>");
-     // temp = temp.replaceAll("<h3>", "<b>");
-     // temp = temp.replaceAll("<h4>", "<p>");
-     // temp = temp.replaceAll("<h5>", "<p>");
-     // temp = temp.replaceAll("<h6>", "<p>");
-    // temp = temp.replaceAll("<h3>", "");
-    // temp = temp.replaceAll("<h4>", "");
-    // temp = temp.replaceAll("<h5>", "");
-    // temp = temp.replaceAll("<h6>", "");
-
-     // temp = temp.replaceAll("</h1>", "</b><br><p>");
-     // temp = temp.replaceAll("</h2>", "</b><br><p>");
-     // temp = temp.replaceAll("</h3>", "</b><br><p>");
-
-     // temp = temp.replaceAll("</h4>", "</b><br><p>");
-     // temp = temp.replaceAll("</h5>", "</b><br><p>");
-     // temp = temp.replaceAll("</h6>", "</b><br><p>");
-    // temp = temp.replaceAll("</h4>", "</p><br>");
-    // temp = temp.replaceAll("</h5>", "</p><br>");
-    // temp = temp.replaceAll("</h6>", "</p><br>");
-
-    temp = temp.replaceAll("</em>", "");
-    temp = temp.replaceAll("</strong>", "</b>");
-    temp = temp.replaceAll("</code>", "");
-    temp = temp.replaceAll("</del>", "");
-    temp = temp.replaceAll("</pre>", "</p>");
-    temp = temp.replaceAll("</span>", "");
-    temp = temp.replaceAll("</i>", "");
-    temp = temp.replaceAll("</s>", "");
-    temp = temp.replaceAll("</strike>", "");
-    temp = temp.replaceAll("</sub>", "");
-    temp = temp.replaceAll("</sup>", "");
-    temp = temp.replaceAll("</a>", "");
-    temp = temp.replaceAll("</mark>", "");
-
     TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
     temp = truncatedHtmlText.removeForbiddenTagline(temp);
-
     return temp;
   }
 
@@ -130,39 +75,13 @@ class ProductCardWidget extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: productList.products?.length,
                 itemBuilder: (BuildContext context, int index) {
-
-                  RegExp emojiRegex = RegExp(
-                      r'[\u{1F600}-\u{1F64F}' // Emoticons
-                      r'\u{1F300}-\u{1F5FF}' // Misc Symbols and Pictographs
-                      r'\u{1F680}-\u{1F6FF}' // Transport and Map
-                      r'\u{1F700}-\u{1F77F}' // Alchemical Symbols
-                      r'\u{1F780}-\u{1F7FF}' // Geometric Shapes Extended
-                      r'\u{1F800}-\u{1F8FF}' // Supplemental Arrows-C
-                      r'\u{1F900}-\u{1F9FF}' // Supplemental Symbols and Pictographs
-                      r'\u{1FA00}-\u{1FA6F}' // Chess Symbols
-                      r'\u{1FA70}-\u{1FAFF}' // Symbols and Pictographs Extended-A
-                      r'\u{2600}-\u{26FF}' // Miscellaneous Symbols
-                      r'\u{2700}-\u{27BF}' // Dingbats
-                      r'\u{2B50}' // Stars
-                      r'\u{2B55}' // Circles
-                      r'\u{23F0}' // Alarm Clock
-                      r'\u{23F3}' // Hourglass
-                      r'\u{231A}-\u{231B}' // Watches
-                      r'\u{1F004}' // Mahjong Tile Red Dragon
-                      r'\u{1F0CF}]' // Playing Card Black Joker
-                      r'|[\u{2702}-\u{27B0}]', // Additional Dingbats
-                      unicode: true,
-                      dotAll: true);
-
                   String tagline = "<p><body>${cleanHtml(products![index].tagline)}</body></p>";
                   TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
-                  tagline = truncatedHtmlText.decodeHtmlEntities(tagline);
-                  tagline = truncatedHtmlText.removeTags(tagline, ['img', 'nav']);
-                  tagline = truncatedHtmlText.removeHtmlForbiddenTagsTags(tagline);
-                  tagline = tagline.replaceAll(emojiRegex, "");
                   if (tagline.contains("<table")) {
-                    tagline = truncatedHtmlText.minifyHtml(tagline);
+                    tagline = truncatedHtmlText.minifyHtml(cleanHtml(products[index].tagline));
                   }
+
+                  int count = 0;
 
                   late final PageController pageViewController = PageController(initialPage: 0);
                   return RumUserActionAnnotation(
@@ -230,9 +149,9 @@ class ProductCardWidget extends StatelessWidget {
                                       child: ClipRRect(
                                         borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                                         child: PageView.builder(
-                                            itemCount: products?[index].productionAssets.length == 1
-                                                ? products![index].productionAssets.length
-                                                : products![index].productionAssets.length + 1,
+                                            itemCount: products[index].productionAssets.length == 1
+                                                ? products[index].productionAssets.length
+                                                : products[index].productionAssets.length + 1,
                                             controller: pageViewController,
                                             onPageChanged: (val) {
                                               context.read<ActiveImagesIndexCubit>().update(index, val + 1);
@@ -383,56 +302,94 @@ class ProductCardWidget extends StatelessWidget {
                                       Visibility(
                                         visible: products[index].tagline == "" ? false : true,
                                         child: HtmlWidget(
-                                         // "<p>${cleanHtml(products[index].tagline)}</p>",
-                                          tagline,
-                                          textStyle: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12),
-                                          customStylesBuilder: (element) {
-                                            if (element.localName == "p") {
-                                              return {
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '12px',
-                                                'line-height': '20px',
-                                                'font-weight': '500',
-                                                'color': '#5A5A5A',
-                                                'max-lines': '3',
-                                                'text-overflow': 'ellipsis'
-                                              };
-                                            } else if (element.localName == "b") {
-                                              return {
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '14px',
-                                                'line-height': '22px',
-                                                'font-weight': '600',
-                                                'color': '#2c2626',
-                                              };
-                                         //   return null;
-                                            } else if (element.localName == "h1" || element.localName == "h2"
-                                                || element.localName == "h3" || element.localName == "h4" || element.localName == "h5"
-                                                || element.localName == "h6"){
-                                              return {
-                                                'font-family': "'Krungsri Condensed'",
-                                                'color': '#2c2626',
-                                                'max-lines': '3',
-                                                'text-overflow': 'ellipsis'
-                                              };
-                                            } else {
-                                              return {
-                                                'font-family': "'Krungsri Condensed'",
-                                                'font-size': '12px',
-                                                'line-height': '20px',
-                                                'font-weight': '500',
-                                                'color': '#5A5A5A',
-                                                'max-lines': '3',
-                                                'text-overflow': 'ellipsis'
-                                              };
-                                            }
-                                          },
-                                           factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+                                            // "<p>${cleanHtml(products[index].tagline)}</p>",
+                                            tagline,
+                                            textStyle: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12),
+                                            customStylesBuilder: (element) {
+                                              if (element.localName == "table") {
+                                                return {'width': '100%'};
+                                              }
+                                              if (element.localName == "td") {
+                                                count += 1;
+                                                if (count.isOdd) {
+                                                  return {
+                                                    'font-family': "'Krungsri Condensed'",
+                                                    'width': '50%',
+                                                    'vertical-align': 'top;',
+                                                    'font-size': '12px',
+                                                    'line-height': '20px',
+                                                    'font-weight': '500',
+                                                    'color': '#5a5a5a'
+                                                  };
+                                                } else {
+                                                  return {
+                                                    'font-family': "'Krungsri Condensed'",
+                                                    'width': '50%',
+                                                    'vertical-align': 'top;',
+                                                    'font-size': '12px',
+                                                    'line-height': '20px',
+                                                    'font-weight': '500',
+                                                    'color': '#5a5a5a'
+                                                  };
+                                                }
+                                              }
+                                              if (element.localName == "th" || element.localName == "thead") {
+                                                return null;
+                                              }
+                                              if (element.localName == "p") {
+                                                return {
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '12px',
+                                                  'line-height': '20px',
+                                                  'font-weight': '500',
+                                                  'color': '#5A5A5A',
+                                                  'max-lines': '3',
+                                                  'text-overflow': 'ellipsis'
+                                                };
+                                              } else if (element.localName == "b") {
+                                                return {
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '14px',
+                                                  'line-height': '22px',
+                                                  'font-weight': '600',
+                                                  'color': '#2c2626',
+                                                };
+                                                //   return null;
+                                              } else if (element.localName == "h1" ||
+                                                  element.localName == "h2" ||
+                                                  element.localName == "h3" ||
+                                                  element.localName == "h4" ||
+                                                  element.localName == "h5" ||
+                                                  element.localName == "h6") {
+                                                return {
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'color': '#2c2626',
+                                                  'max-lines': '3',
+                                                  'text-overflow': 'ellipsis'
+                                                };
+                                              } else {
+                                                return {
+                                                  'font-family': "'Krungsri Condensed'",
+                                                  'font-size': '12px',
+                                                  'line-height': '20px',
+                                                  'font-weight': '500',
+                                                  'color': '#5A5A5A',
+                                                  'max-lines': '3',
+                                                  'text-overflow': 'ellipsis'
+                                                };
+                                              }
+                                            },
+                                            customWidgetBuilder: (element) {
+                                              if (element.localName == "th" || element.localName == "thead") {
+                                                return SizedBox.shrink();
+                                              }
+                                              return null;
+                                            },
+                                            factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                                             onErrorBuilder: (context, el, e) {
                                               debugPrint(e.toString());
                                               return Container();
-                                            }
-                                            ),
+                                            }),
                                       ),
                                       Visibility(
                                         visible: products[index].tagline == "" ? false : true,
