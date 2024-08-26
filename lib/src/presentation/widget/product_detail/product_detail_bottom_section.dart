@@ -618,7 +618,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (data.contains("<table")) {
             data = truncatedHtmlText.minifyHtml(data);
           }
+
           int count = 0;
+
           Widget noDataFromSeller = Container(
             padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
             child: Text(
