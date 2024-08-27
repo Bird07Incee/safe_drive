@@ -319,7 +319,7 @@ class ProductCardWidget extends StatelessWidget {
                                                     'font-size': '12px',
                                                     'line-height': '20px',
                                                     'font-weight': '500',
-                                                    'color': '#5a5a5a'
+                                                    'color': '#858282'
                                                   };
                                                 } else {
                                                   return {
@@ -329,7 +329,7 @@ class ProductCardWidget extends StatelessWidget {
                                                     'font-size': '12px',
                                                     'line-height': '20px',
                                                     'font-weight': '500',
-                                                    'color': '#5a5a5a'
+                                                    'color': '#292828'
                                                   };
                                                 }
                                               }
@@ -342,7 +342,7 @@ class ProductCardWidget extends StatelessWidget {
                                                   'font-size': '12px',
                                                   'line-height': '20px',
                                                   'font-weight': '500',
-                                                  'color': '#5A5A5A',
+                                                  'color': '#292828',
                                                   'max-lines': '3',
                                                   'text-overflow': 'ellipsis'
                                                 };
@@ -352,7 +352,7 @@ class ProductCardWidget extends StatelessWidget {
                                                   'font-size': '14px',
                                                   'line-height': '22px',
                                                   'font-weight': '600',
-                                                  'color': '#2c2626',
+                                                  'color': '#292828',
                                                 };
                                                 //   return null;
                                               } else if (element.localName == "h1" ||
@@ -363,7 +363,7 @@ class ProductCardWidget extends StatelessWidget {
                                                   element.localName == "h6") {
                                                 return {
                                                   'font-family': "'Krungsri Condensed'",
-                                                  'color': '#2c2626',
+                                                  'color': '#292828',
                                                   'max-lines': '3',
                                                   'text-overflow': 'ellipsis'
                                                 };
@@ -373,7 +373,7 @@ class ProductCardWidget extends StatelessWidget {
                                                   'font-size': '12px',
                                                   'line-height': '20px',
                                                   'font-weight': '500',
-                                                  'color': '#5A5A5A',
+                                                  'color': '#292828',
                                                   'max-lines': '3',
                                                   'text-overflow': 'ellipsis'
                                                 };
@@ -387,7 +387,6 @@ class ProductCardWidget extends StatelessWidget {
                                             },
                                             factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                                             onErrorBuilder: (context, el, e) {
-                                              debugPrint(e.toString());
                                               return Container();
                                             }),
                                       ),
@@ -497,11 +496,11 @@ class _MyFactory extends WidgetFactory {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
               "style":
-                  "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+                  "color:#858282; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {
-              "style": "color:#2c2626;  font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;",
+              "style": "color:#292828;  font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;",
             } as LinkedHashMap<Object, String>;
           }
         }

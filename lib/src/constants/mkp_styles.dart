@@ -21,6 +21,8 @@ const mintGreen = Color(0xff00A693);
 const blackInBlack = Color(0xff000000);
 const blackGoMunTo = Color(0xff2C2626);
 
+const blackNewForTaglinePromptBuy = Color(0xff292828);
+
 const smockGrey = Color(0xffbdbdbd);
 
 const sugarRed = Color(0xff6F5F5E);

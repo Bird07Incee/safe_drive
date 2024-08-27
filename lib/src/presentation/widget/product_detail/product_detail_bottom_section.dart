@@ -629,7 +629,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             ),
           );
 
-          Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data: AppStrings().noDataFromSeller,
+          Widget technicalSpecMaxWidget = HtmlWidget(data.isNotEmpty ? data : AppStrings().noDataFromSeller,
               buildAsync: false,
               textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
               customStylesBuilder: (element) {
@@ -646,7 +646,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       'font-size': '14px',
                       'line-height': '22px',
                       'font-weight': '400',
-                      'color': '#5a5a5a'
+                      'color': '#858282'
                     };
                   } else {
                     return {
@@ -656,7 +656,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       'font-size': '14px',
                       'line-height': '22px',
                       'font-weight': '400',
-                      'color': '#2c2626'
+                      'color': '#292828'
                     };
                   }
                 }
@@ -696,7 +696,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               },
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
-                debugPrint(e.toString());
                 return noDataFromSeller;
               });
 
@@ -724,7 +723,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       'font-size': '14px',
                       'line-height': '22px',
                       'font-weight': '400',
-                      'color': '#5a5a5a'
+                      'color': '#858282'
                     };
                   } else {
                     return {
@@ -734,7 +733,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       'font-size': '14px',
                       'line-height': '22px',
                       'font-weight': '400',
-                      'color': '#2c2626'
+                      'color': '#292828'
                     };
                   }
                 }
@@ -774,7 +773,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               },
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
-                debugPrint(e.toString());
                 return noDataFromSeller;
               });
 
@@ -806,7 +804,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       'font-size': '14px',
                       'line-height': '22px',
                       'font-weight': '400',
-                      'color': '#5a5a5a'
+                      'color': '#858282'
                     };
                   } else {
                     return {
@@ -816,7 +814,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       'font-size': '14px',
                       'line-height': '22px',
                       'font-weight': '400',
-                      'color': '#2c2626'
+                      'color': '#292828'
                     };
                   }
                 }
@@ -856,7 +854,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               },
               factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
               onErrorBuilder: (context, el, e) {
-                debugPrint(e.toString());
                 return noDataFromSeller;
               },
             ),
@@ -898,7 +895,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                             'font-size': '14px',
                             'line-height': '22px',
                             'font-weight': '400',
-                            'color': '#5a5a5a'
+                            'color': '#858282'
                           };
                         } else {
                           return {
@@ -908,7 +905,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                             'font-size': '14px',
                             'line-height': '22px',
                             'font-weight': '400',
-                            'color': '#2c2626'
+                            'color': '#292828'
                           };
                         }
                       }
@@ -948,7 +945,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     },
                     factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
                     onErrorBuilder: (context, el, e) {
-                      debugPrint(e.toString());
                       return noDataFromSeller;
                     },
                   )));
