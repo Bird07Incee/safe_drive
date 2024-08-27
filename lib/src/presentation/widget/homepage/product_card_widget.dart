@@ -59,6 +59,14 @@ class ProductCardWidget extends StatelessWidget {
     );
   }
 
+  safeListAccess(List temp, int index) {
+    try {
+      return temp[index];
+    } on RangeError {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductListBloc, ProductListState>(
@@ -198,7 +206,7 @@ class ProductCardWidget extends StatelessWidget {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              "${activeIndex[index]} / ${products[index].productionAssets.length}",
+                                              "${safeListAccess(activeIndex, index)} / ${products[index].productionAssets.length}",
                                               style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                             ),
                                           ),
