@@ -312,7 +312,7 @@ class ProductCardWidget extends StatelessWidget {
                                         child: HtmlWidget(
                                             // "<p>${cleanHtml(products[index].tagline)}</p>",
                                             tagline,
-                                            textStyle: AlvaStyles().headingSize12w500(spaceGrey).copyWith(height: 20 / 12),
+                                            textStyle: AlvaStyles().headingSize12w500(blackNewForTaglinePromptBuy).copyWith(height: 20 / 12),
                                             customStylesBuilder: (element) {
                                               if (element.localName == "table") {
                                                 return {'width': '100%'};
