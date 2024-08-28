@@ -10,6 +10,10 @@ SONAR_SCANNER_CLI_DOCKER_IMAGE="sonarsource/sonar-scanner-cli:5.0.1"
 
 ECR_URL="688318228301.dkr.ecr.ap-southeast-1.amazonaws.com"
 FLUTTER_IMAGE="${ECR_URL}/marketplace/flutter:3.13.4"
+#OWASP_IMAGE="${ECR_URL}/marketplace/owasp-dependencies-check"
+OWASP_IMAGE="owasp/dependency-check:10.0.3"
+ENDPOINT_BUCKET="mkp-line-mini"
+OWASP_API_KEY="30954ee4-e985-4ea4-9e5a-84f59406165b"
 
 COVERAGE_TARGET=0
 VERSION=1.0
@@ -96,8 +100,8 @@ task_build_web() {
       flutter_app flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
     fi
   else
-    flutter pub get
-    flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
+    fvm flutter pub get
+    fvm flutter build web --web-renderer canvaskit --dart-define=SET_ENV=$1
   fi
 }
 
@@ -222,11 +226,47 @@ task_fmt() {
   fi
 }
 
-help__dependency_check="Run dependency check from sonarqube"
-task_dependency_check() {
-  flutter_app flutter pub get
-  flutter_app flutter pub run dependency_validator
+#help__dependency_check="Run dependency check from sonarqube"
+#task_dependency_check() {
+#  flutter_app flutter pub get
+#  flutter_app flutter pub run dependency_validator
+#}
+
+owasp() {
+  if runs_inside_gocd; then
+    local docker_user_args="-u $(id -u)"
+  else
+    local docker_user_args=""
+  fi
+
+  DOCKER_IMAGE="${OWASP_DOCKER_IMAGE}"
+  DOCKER_ARGS="${DOCKER_ARGS} ${docker_user_args}"
+
+  docker_run "$@"
 }
+
+
+owasp_app() {
+  docker_ensure_volume owasp_app
+  owasp "$@"
+  local exit=$?
+  return $exit
+}
+
+
+help__dependency_check="Run Dependency Check"
+task_dependency_check() {
+  local project_name=$ENDPOINT_BUCKET
+  owasp_app --nvdApiKey "$OWASP_API_KEY" --project $project_name --scan . --format JSON --format HTML --out ./
+  local exit_code=$?
+  if [ $exit_code -eq 0 ]; then
+    echo "[go-platform] Dependency check OK"
+  else
+    echo "[go-platform] Dependency check Failed, exit-code: $exit_code"
+    exit $exit_code
+  fi
+}
+
 
 help__publish="Create new tag on git withb gocd counter ver"
 task_publish() {
