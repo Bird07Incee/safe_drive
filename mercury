@@ -239,7 +239,7 @@ owasp() {
     local docker_user_args=""
   fi
 
-  DOCKER_IMAGE="${OWASP_DOCKER_IMAGE}"
+  DOCKER_IMAGE="${OWASP_IMAGE}"
   DOCKER_ARGS="${DOCKER_ARGS} ${docker_user_args}"
 
   docker_run "$@"
