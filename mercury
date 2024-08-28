@@ -257,7 +257,7 @@ owasp_app() {
 help__dependency_check="Run Dependency Check"
 task_dependency_check() {
   local project_name=$ENDPOINT_BUCKET
-  owasp_app --nvdApiKey "$OWASP_API_KEY" --project $project_name --scan . --format JSON --format HTML --out ./
+  owasp_app --nvdApiKey "$OWASP_API_KEY" --project $project_name --scan . --format ALL --out /report
   local exit_code=$?
   if [ $exit_code -eq 0 ]; then
     echo "[go-platform] Dependency check OK"
