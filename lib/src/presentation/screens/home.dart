@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return RootPageCondition(
         child: WillPopScope(
             onWillPop: () async {
-              setHistoryToInitialPage();
+              // setHistoryToInitialPage();
               return false;
             },
             child: AlvaRootWidget(
@@ -103,11 +103,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: BlocConsumer<ProductListBloc, ProductListState>(
                   listener: (context, state) {
                     if (state.productListStatus == GetProductListStatus.success) {
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return AlertDialog(title: Text(state.toString()));
-                          });
                       _checkTermAndConAcceptedVersion(context);
                     }
                   },
@@ -251,13 +246,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       child: GestureDetector(
                                         key: const Key("load_more_button"),
                                         onTap: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (_) {
-                                                return AlertDialog(
-                                                  title: Text(state.toString()),
-                                                );
-                                              });
                                           if (state.selectedTabIndex == 0) {
                                             context
                                                 .read<ProductListBloc>()
