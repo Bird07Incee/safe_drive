@@ -1,12 +1,9 @@
-import 'dart:collection';
 import 'dart:developer';
 
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:marketplace_line_oa/src/constants/alva_styles.dart';
-import 'package:marketplace_line_oa/src/constants/app_strings.dart';
 import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
@@ -84,9 +81,9 @@ class ProductCardWidget extends StatelessWidget {
                     tagline = truncatedHtmlText.minifyHtml(cleanHtml(products[index].tagline));
                   }
 
-                  int count = 0;
+                  // int count = 0;
 
-                  late final PageController pageViewController = PageController(initialPage: 0);
+                  // late final PageController pageViewController = PageController(initialPage: 0);
                   return RumUserActionAnnotation(
                     description: "Tap product card",
                     child: GestureDetector(
@@ -485,31 +482,31 @@ class ProductCardWidget extends StatelessWidget {
   }
 }
 
-class _MyFactory extends WidgetFactory {
-  _MyFactory({this.title = ""});
-
-  String title;
-
-  @override
-  void parse(BuildTree meta) {
-    final e = meta.element;
-    if (title == AppStrings().productDetailProductDescription) {
-      if (e.localName == 'tr') {
-        for (int i = 0; i < e.nodes.length; i++) {
-          if (i == 0) {
-            meta.element.nodes[i].nodes[0].attributes = {
-              "style":
-                  "color:#858282; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
-            } as LinkedHashMap<Object, String>;
-          } else {
-            meta.element.nodes[i].nodes[0].attributes = {
-              "style": "color:#292828;  font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;",
-            } as LinkedHashMap<Object, String>;
-          }
-        }
-        return;
-      }
-    }
-    return super.parse(meta);
-  }
-}
+// class _MyFactory extends WidgetFactory {
+//   _MyFactory({this.title = ""});
+//
+//   String title;
+//
+//   @override
+//   void parse(BuildTree meta) {
+//     final e = meta.element;
+//     if (title == AppStrings().productDetailProductDescription) {
+//       if (e.localName == 'tr') {
+//         for (int i = 0; i < e.nodes.length; i++) {
+//           if (i == 0) {
+//             meta.element.nodes[i].nodes[0].attributes = {
+//               "style":
+//                   "color:#858282; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+//             } as LinkedHashMap<Object, String>;
+//           } else {
+//             meta.element.nodes[i].nodes[0].attributes = {
+//               "style": "color:#292828;  font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;",
+//             } as LinkedHashMap<Object, String>;
+//           }
+//         }
+//         return;
+//       }
+//     }
+//     return super.parse(meta);
+//   }
+// }
