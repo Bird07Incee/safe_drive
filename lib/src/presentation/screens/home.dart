@@ -25,6 +25,7 @@ import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_b
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -101,18 +102,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: AlvaRootWidget(
                 titlePage: titleWebPage,
                 child: BlocConsumer<ProductListBloc, ProductListState>(
-                  listener: (context, state) {
+                  listener: (ctx, state) {
                     if (state.productListStatus == GetProductListStatus.success) {
                       _checkTermAndConAcceptedVersion(context);
                     }
                   },
-                  builder: (context, state) {
+                  builder: (ctx, state) {
                     scrollController ??= ScrollController(initialScrollOffset: state.scrollPosition);
                     return BlocConsumer<AuthBloc, AuthState>(listener: (context, stateAuth) {
                       if (stateAuth.authStatus == AuthStatus.success && state.productListStatus == GetProductListStatus.initial) {
                         context.read<ProductListBloc>().add(const GetProductList());
                       }
-                    }, builder: (context, stateAuth) {
+                    }, builder: (ctx, stateAuth) {
                       if (stateAuth.authStatus == AuthStatus.initial && isNotLogin) {
                         isNotLogin = false;
                         context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
@@ -246,6 +247,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       child: GestureDetector(
                                         key: const Key("load_more_button"),
                                         onTap: () {
+                                          ScaffoldMessenger.of(context).showSnackBar(getMkpToast(context.toString()));
                                           if (state.selectedTabIndex == 0) {
                                             context
                                                 .read<ProductListBloc>()
