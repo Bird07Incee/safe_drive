@@ -102,12 +102,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: AlvaRootWidget(
                 titlePage: titleWebPage,
                 child: BlocConsumer<ProductListBloc, ProductListState>(
-                  listener: (ctx, state) {
+                  listener: (context, state) {
                     if (state.productListStatus == GetProductListStatus.success) {
                       _checkTermAndConAcceptedVersion(context);
                     }
                   },
-                  builder: (ctx, state) {
+                  builder: (context, state) {
                     scrollController ??= ScrollController(initialScrollOffset: state.scrollPosition);
                     return BlocConsumer<AuthBloc, AuthState>(listener: (context, stateAuth) {
                       if (stateAuth.authStatus == AuthStatus.success && state.productListStatus == GetProductListStatus.initial) {
@@ -247,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       child: GestureDetector(
                                         key: const Key("load_more_button"),
                                         onTap: () {
-                                          ScaffoldMessenger.of(context).showSnackBar(getMkpToast(context.toString()));
+                                          ScaffoldMessenger.of(context).showSnackBar(getMkpToast(state.toString()));
                                           if (state.selectedTabIndex == 0) {
                                             context
                                                 .read<ProductListBloc>()

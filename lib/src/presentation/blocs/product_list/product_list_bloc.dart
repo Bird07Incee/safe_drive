@@ -128,7 +128,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
     if (event.bypassContext == false) {
       // ignore: use_build_context_synchronously
-      GeneralDialog().showLoadingDialog(context: event.context);
+      // await GeneralDialog().showLoadingDialog(context: event.context);
     }
 
     try {
@@ -149,7 +149,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
-        Navigator.pop(event.context);
+        // Navigator.pop(event.context);
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 503) {
