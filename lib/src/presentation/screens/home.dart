@@ -103,6 +103,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: BlocConsumer<ProductListBloc, ProductListState>(
                   listener: (context, state) {
                     if (state.productListStatus == GetProductListStatus.success) {
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(title: Text(state.toString()));
+                          });
                       _checkTermAndConAcceptedVersion(context);
                     }
                   },

@@ -150,11 +150,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       if (event.bypassContext == false) {
         // ignore: use_build_context_synchronously
         Navigator.pop(event.context);
-        showDialog(
-            context: event.context,
-            builder: (_) {
-              return AlertDialog(title: Text(state.toString()));
-            });
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 503) {
