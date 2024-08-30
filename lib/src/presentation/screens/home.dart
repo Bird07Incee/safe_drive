@@ -25,7 +25,6 @@ import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_b
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/home_page_top_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/homepage/product_card_widget.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
-import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -247,7 +246,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       child: GestureDetector(
                                         key: const Key("load_more_button"),
                                         onTap: () {
-                                          ScaffoldMessenger.of(context).showSnackBar(getMkpToast(state.toString()));
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) {
+                                                return AlertDialog(
+                                                  title: Text(state.toString()),
+                                                );
+                                              });
                                           if (state.selectedTabIndex == 0) {
                                             context
                                                 .read<ProductListBloc>()
