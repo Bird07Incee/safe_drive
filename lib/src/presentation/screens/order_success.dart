@@ -32,7 +32,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
   late RouteSettings? settings;
   String invoiceNo = "";
   late double maxWidth, maxHeight;
-
+  bool logLaeo = false;
   void loadInvoice() {
     settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
     if (settings != null) {
@@ -103,15 +103,18 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
           builder: (context, state) {
             var orderSuccessData = state.orderSuccessData;
             if (state.orderSuccessStatus == GetOrderSuccessDataStatus.success) {
-              AmplitudeWebHelper.getInstance().logEnterOrderSuccessPage(
-                  selectedType: orderSuccessData.installmentPeriod.toString(),
-                  invoiceNumber: orderSuccessData.invoiceNo.toString(),
-                  productName: orderSuccessData.productName.toString(),
-                  optionName: orderSuccessData.productOption!,
-                  contentId: orderSuccessData.productId.toString(),
-                  merchantName: orderSuccessData.merchantFullName.toString(),
-                  price: orderSuccessData.amount.toString(),
-                  paymentType: orderSuccessData.paymentChannelText.toString());
+              if (!logLaeo) {
+                AmplitudeWebHelper.getInstance().logEnterOrderSuccessPage(
+                    selectedType: orderSuccessData.installmentPeriod.toString(),
+                    invoiceNumber: orderSuccessData.invoiceNo.toString(),
+                    productName: orderSuccessData.productName.toString(),
+                    optionName: orderSuccessData.productOption!,
+                    contentId: orderSuccessData.productId.toString(),
+                    merchantName: orderSuccessData.merchantFullName.toString(),
+                    price: orderSuccessData.amount.toString(),
+                    paymentType: orderSuccessData.paymentChannelText.toString());
+                logLaeo = true;
+              }
               return Column(
                 children: [
                   Container(
