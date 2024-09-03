@@ -138,7 +138,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "ชำระเงินสำเร็จ",
+                                    "ชำระเงินสำเร็จ ${ModalRoute.of(context)!.settings.name} && ${Routes.orderSuccess.toString()}",
                                     style: AlvaStyles().headingSize14w700(blackGoMunTo),
                                   ),
                                   Text(
