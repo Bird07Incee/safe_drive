@@ -152,45 +152,45 @@ class ProductCardWidget extends StatelessWidget {
                                 },
                                 child: Stack(
                                   children: [
-                                    //         AspectRatio(
-                                    //           aspectRatio: 16.0 / 9.0,
-                                    //           child: ClipRRect(
-                                    //             borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                                    //             child: PageView.builder(
-                                    //                 itemCount: products[index].productionAssets.length == 1
-                                    //                     ? products[index].productionAssets.length
-                                    //                     : products[index].productionAssets.length + 1,
-                                    //                 controller: pageViewController,
-                                    //                 onPageChanged: (val) {
-                                    //                   context.read<ActiveImagesIndexCubit>().update(index, val + 1);
-                                    //                   if (val == products[index].productionAssets.length && val != 1) {
-                                    //                     pageViewController.jumpToPage(0);
-                                    //                   }
-                                    //                 },
-                                    //                 itemBuilder: (ctx, i) {
-                                    //                   return Stack(
-                                    //                     children: [
-                                    //                       SizedBox(
-                                    //                         width: maxWidth,
-                                    //                         height: 576,
-                                    //                         child: FadeInImage(
-                                    //                           placeholder: const AssetImage('assets/homepage/img_default.png'),
-                                    //                           // Replace with your placeholder image path
-                                    //                           image: NetworkImage(
-                                    //                             i == products[index].productionAssets.length
-                                    //                                 ? products[index].productionAssets[0]
-                                    //                                 : products[index].productionAssets[i],
-                                    //                           ),
-                                    //                           fit: BoxFit.fitWidth,
-                                    //                           imageErrorBuilder: (context, error, stackTrace) =>
-                                    //                               Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
-                                    //                         ),
-                                    //                       )
-                                    //                     ],
-                                    //                   );
-                                    //                 }),
-                                    //           ),
-                                    //         ),
+                                    AspectRatio(
+                                      aspectRatio: 16.0 / 9.0,
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+                                        child: PageView.builder(
+                                            itemCount: products[index].productionAssets.length == 1
+                                                ? products[index].productionAssets.length
+                                                : products[index].productionAssets.length + 1,
+                                            controller: pageViewController,
+                                            onPageChanged: (val) {
+                                              context.read<ActiveImagesIndexCubit>().update(index, val + 1);
+                                              if (val == products[index].productionAssets.length && val != 1) {
+                                                pageViewController.jumpToPage(0);
+                                              }
+                                            },
+                                            itemBuilder: (ctx, i) {
+                                              return Stack(
+                                                children: [
+                                                  SizedBox(
+                                                    width: maxWidth,
+                                                    height: 576,
+                                                    child: FadeInImage(
+                                                      placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                                      // Replace with your placeholder image path
+                                                      image: NetworkImage(
+                                                        i == products[index].productionAssets.length
+                                                            ? products[index].productionAssets[0]
+                                                            : products[index].productionAssets[i],
+                                                      ),
+                                                      fit: BoxFit.fitWidth,
+                                                      imageErrorBuilder: (context, error, stackTrace) =>
+                                                          Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
+                                                    ),
+                                                  )
+                                                ],
+                                              );
+                                            }),
+                                      ),
+                                    ),
                                     Positioned.fill(
                                         child: Align(
                                       alignment: Alignment.bottomLeft,
