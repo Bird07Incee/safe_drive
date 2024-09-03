@@ -103,7 +103,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
           builder: (context, state) {
             var orderSuccessData = state.orderSuccessData;
             if (state.orderSuccessStatus == GetOrderSuccessDataStatus.success) {
-              if (!logLaeo) {
+              if (!logLaeo && ModalRoute.of(context)!.settings.name == Routes.orderSuccess.toString()) {
                 AmplitudeWebHelper.getInstance().logEnterOrderSuccessPage(
                     selectedType: orderSuccessData.installmentPeriod.toString(),
                     invoiceNumber: orderSuccessData.invoiceNo.toString(),
