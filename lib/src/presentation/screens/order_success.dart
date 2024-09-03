@@ -103,7 +103,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
           builder: (context, state) {
             var orderSuccessData = state.orderSuccessData;
             if (state.orderSuccessStatus == GetOrderSuccessDataStatus.success) {
-              if (!logLaeo && ModalRoute.of(context)!.settings.name == Routes.orderSuccess.toString()) {
+              if (!logLaeo && ModalRoute.of(context)!.settings.name!.contains("orderSuccess")) {
                 AmplitudeWebHelper.getInstance().logEnterOrderSuccessPage(
                     selectedType: orderSuccessData.installmentPeriod.toString(),
                     invoiceNumber: orderSuccessData.invoiceNo.toString(),
@@ -138,7 +138,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "ชำระเงินสำเร็จ ${ModalRoute.of(context)!.settings.name} && ${Routes.orderSuccess.toString()}",
+                                    "ชำระเงินสำเร็จ",
                                     style: AlvaStyles().headingSize14w700(blackGoMunTo),
                                   ),
                                   Text(
