@@ -168,26 +168,27 @@ class ProductCardWidget extends StatelessWidget {
                                               }
                                             },
                                             itemBuilder: (ctx, i) {
-                                              return Stack(
-                                                children: [
-                                                  SizedBox(
-                                                    width: maxWidth,
-                                                    height: 576,
-                                                    child: FadeInImage(
-                                                      placeholder: const AssetImage('assets/homepage/img_default.png'),
-                                                      // Replace with your placeholder image path
-                                                      image: NetworkImage(
-                                                        i == products[index].productionAssets.length
-                                                            ? products[index].productionAssets[0]
-                                                            : products[index].productionAssets[i],
-                                                      ),
-                                                      fit: BoxFit.fitWidth,
-                                                      imageErrorBuilder: (context, error, stackTrace) =>
-                                                          Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
-                                                    ),
-                                                  )
-                                                ],
-                                              );
+                                              return Container();
+                                              // return Stack(
+                                              //   children: [
+                                              //     SizedBox(
+                                              //       width: maxWidth,
+                                              //       height: 576,
+                                              //       child: FadeInImage(
+                                              //           placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                              //           // Replace with your placeholder image path
+                                              //           image: NetworkImage(
+                                              //             i == products[index].productionAssets.length
+                                              //                 ? products[index].productionAssets[0]
+                                              //                 : products[index].productionAssets[i],
+                                              //           ),
+                                              //           fit: BoxFit.fitWidth,
+                                              //           imageErrorBuilder: (context, error, stackTrace) {
+                                              //             return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
+                                              //           }),
+                                              //     )
+                                              //   ],
+                                              // );
                                             }),
                                       ),
                                     ),
