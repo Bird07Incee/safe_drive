@@ -33,6 +33,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
   late RouteSettings? settings;
   String orderNo = "";
   late double maxWidth, maxHeight;
+  bool logAmplitudeSuccess = false;
 
   void clearState() {
     context.read<RefundSuccessBloc>().add(OnClearState());
@@ -88,13 +89,16 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
         child: BlocBuilder<RefundSuccessBloc, RefundSuccessState>(
           builder: (context, state) {
             if (state.refundSuccessStatus == GetRefundSuccessDataStatus.success) {
-              AmplitudeWebHelper.getInstance().logTapOnConfirmRefundButtonInSuccessCancel(
-                  state.refundSuccessData.productName!,
-                  state.refundSuccessData.invoiceNo!,
-                  state.refundSuccessData.merchantFullName!,
-                  "${state.refundSuccessData.reason!}${state.refundSuccessData.remark!.isNotEmpty ? "_${state.refundSuccessData.remark!}" : ""}",
-                  state.refundSuccessData.productId!,
-                  state.refundSuccessData.productOption!);
+              if (!logAmplitudeSuccess && ModalRoute.of(context)!.settings.name!.contains("refundSuccess")) {
+                AmplitudeWebHelper.getInstance().logTapOnConfirmRefundButtonInSuccessCancel(
+                    state.refundSuccessData.productName!,
+                    state.refundSuccessData.invoiceNo!,
+                    state.refundSuccessData.merchantFullName!,
+                    "${state.refundSuccessData.reason!}${state.refundSuccessData.remark!.isNotEmpty ? "_${state.refundSuccessData.remark!}" : ""}",
+                    state.refundSuccessData.productId!,
+                    state.refundSuccessData.productOption!);
+                logAmplitudeSuccess = true;
+              }
               return Column(
                 children: [
                   Container(
