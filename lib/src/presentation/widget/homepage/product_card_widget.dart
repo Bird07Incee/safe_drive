@@ -20,6 +20,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/widget/snackbar/mkp_toast.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -168,27 +169,26 @@ class ProductCardWidget extends StatelessWidget {
                                               }
                                             },
                                             itemBuilder: (ctx, i) {
-                                              return Container();
-                                              // return Stack(
-                                              //   children: [
-                                              //     SizedBox(
-                                              //       width: maxWidth,
-                                              //       height: 576,
-                                              //       child: FadeInImage(
-                                              //           placeholder: const AssetImage('assets/homepage/img_default.png'),
-                                              //           // Replace with your placeholder image path
-                                              //           image: NetworkImage(
-                                              //             i == products[index].productionAssets.length
-                                              //                 ? products[index].productionAssets[0]
-                                              //                 : products[index].productionAssets[i],
-                                              //           ),
-                                              //           fit: BoxFit.fitWidth,
-                                              //           imageErrorBuilder: (context, error, stackTrace) {
-                                              //             return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
-                                              //           }),
-                                              //     )
-                                              //   ],
-                                              // );
+                                              String urlImage = i == products[index].productionAssets.length
+                                                  ? products[index].productionAssets[0]
+                                                  : products[index].productionAssets[i];
+                                              return Stack(
+                                                children: [
+                                                  SizedBox(
+                                                    width: maxWidth,
+                                                    height: 576,
+                                                    child: FadeInImage(
+                                                        placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                                        // Replace with your placeholder image path
+                                                        image: NetworkImage(urlImage),
+                                                        fit: BoxFit.fitWidth,
+                                                        imageErrorBuilder: (context, error, stackTrace) {
+                                                          ScaffoldMessenger.of(context).showSnackBar(getMkpToast(error.toString()));
+                                                          return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
+                                                        }),
+                                                  )
+                                                ],
+                                              );
                                             }),
                                       ),
                                     ),
