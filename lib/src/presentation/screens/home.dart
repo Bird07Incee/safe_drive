@@ -77,11 +77,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Future<void> _checkTermAndConAcceptedVersion(BuildContext context) async {
     final nav = Navigator.of(context);
+    final route = ModalRoute.of(context);
     bool tc = await TermAndConHelper().isTermAndConAccepted();
+
     if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
-      nav.pushNamed(Routes.termAndCon.toStringPath());
+      nav.pushNamed(Routes.termAndCon.toStringPath()).then((value) {
+        loglaew = false;
+      });
     } else {
-      if (!loglaew) {
+      if (!loglaew && route!.settings.name! == Routes.initial.name) {
         amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
         loglaew = true;
       }
@@ -205,22 +209,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             // Replace with your placeholder image path
                                                             image: NetworkImage(state.productList.category![i]["img_active"]),
                                                             fit: BoxFit.fitWidth,
-                                                            imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                'assets/images/category/icon_active_cate_other2.png',
-                                                                fit: BoxFit.fitWidth),
-                                                          ),
-                                                        )
+                                                            imageErrorBuilder: (context, error, stackTrace) {
+                                                              return Image.asset('assets/images/category/icon_cate_other2.png', fit: BoxFit.fitWidth);
+                                                            },
+                                                          ))
                                                       : SizedBox(
                                                           width: 24,
                                                           height: 24,
                                                           child: FadeInImage(
-                                                            placeholder: const AssetImage('assets/images/category/icon_cate_other2.png'),
-                                                            // Replace with your placeholder image path
-                                                            image: NetworkImage(state.productList.category![i]["img_inactive"]),
-                                                            fit: BoxFit.fitWidth,
-                                                            imageErrorBuilder: (context, error, stackTrace) =>
-                                                                Image.asset('assets/images/category/icon_cate_other2.png', fit: BoxFit.fitWidth),
-                                                          ),
+                                                              placeholder: const AssetImage('assets/images/category/icon_cate_other2.png'),
+                                                              // Replace with your placeholder image path
+                                                              image: NetworkImage(state.productList.category![i]["img_inactive"]),
+                                                              fit: BoxFit.fitWidth,
+                                                              imageErrorBuilder: (context, error, stackTrace) {
+                                                                return Image.asset('assets/images/category/icon_cate_other2.png',
+                                                                    fit: BoxFit.fitWidth);
+                                                              }),
                                                         )),
                                             ),
                                         ]),
@@ -329,7 +333,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             onTapfunction: () {
                                               amplitudeWebHelper.logTapOnTermAndConditionButton();
                                               context.read<ProductListBloc>().add(SetScrollPosition(scrollController!.offset));
-                                              Navigator.pushNamed(context, '/readTermAndCon');
+                                              Navigator.pushNamed(context, '/readTermAndCon').then((value) {
+                                                loglaew = false;
+                                              });
                                             }),
                                         Container(
                                           margin: const EdgeInsets.symmetric(horizontal: 8),

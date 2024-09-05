@@ -18,7 +18,10 @@ function replacePageHistory() {
 }
 
 function setHistoryToInitialPage() {
-    window.location.replace('/');
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    }
 }
 
 function setStrictlyNecessaryCookie(cookieName, cookieValue, expirationDays) {
