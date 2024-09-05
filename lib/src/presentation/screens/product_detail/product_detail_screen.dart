@@ -55,6 +55,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   String pid = '';
   GlobalKey stickyKey = GlobalKey();
   bool isLoaded = false;
+  bool logAmplitudeSuccess = false;
 
   @override
   void dispose() {
@@ -104,8 +105,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, pdState) {
           if (pdState.status.isSuccess) {
-            AmplitudeWebHelper.getInstance().logEnterProductDetails(
-                productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
+            if (!logAmplitudeSuccess && ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.name)) {
+              AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                  productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
+            }
             return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
               builder: (context, zoomState) {
                 return BlocBuilder<PreviousScaleBloc, double>(
