@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -177,12 +178,12 @@ class ProductCardWidget extends StatelessWidget {
                                                   SizedBox(
                                                     width: maxWidth,
                                                     height: 576,
-                                                    child: FadeInImage(
-                                                        placeholder: const AssetImage('assets/homepage/img_default.png'),
-                                                        // Replace with your placeholder image path
-                                                        image: NetworkImage(urlImage),
+                                                    child: CachedNetworkImage(
+                                                        placeholder: (context, url) =>
+                                                            Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
+                                                        imageUrl: urlImage,
                                                         fit: BoxFit.fitWidth,
-                                                        imageErrorBuilder: (context, error, stackTrace) {
+                                                        errorWidget: (context, error, stackTrace) {
                                                           ScaffoldMessenger.of(context).showSnackBar(getMkpToast(error.toString()));
                                                           return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
                                                         }),
@@ -286,10 +287,10 @@ class ProductCardWidget extends StatelessWidget {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      // Visibility(
-                                      //   visible: products[index].productionAssets.length == 1 ? true : false,
-                                      //   child: SizedBox(height: 16),
-                                      // ),
+                                      Visibility(
+                                        visible: products[index].productionAssets.length == 1 ? true : false,
+                                        child: SizedBox(height: 16),
+                                      ),
                                       Text(
                                         products[index].productName,
                                         style: AlvaStyles().headingSize22Height32(),
