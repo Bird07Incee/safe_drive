@@ -23,15 +23,16 @@ UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
 void main() async {
   setUrlStrategy(urlStrategyPromptBuy);
   WidgetsFlutterBinding.ensureInitialized();
-  _configureApp();
+  // _configureApp();
+  _setUpAmplitude();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    // runApp(MyApp());
-    DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
-      return runApp(const MyApp());
-    });
+    runApp(MyApp());
+    // DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
+    //   return runApp(const MyApp());
+    // });
   });
 }
 

@@ -436,7 +436,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                           );
                           setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
                           context.read<OrderSuccessBloc>().add(SetIsFromOrderSuccess(true));
-                          Navigator.pushNamed(context, '/trackingList');
+                          Navigator.pushNamedAndRemoveUntil(context, Routes.trackingList.toStringPath(), (route) => false);
                         },
                         child: Container(
                           height: 48,

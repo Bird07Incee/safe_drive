@@ -44,20 +44,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TextEditingController tc = TextEditingController();
   TabController? tabController;
 
-  bool loglaew = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Timer(const Duration(seconds: 1), () {
-    //   final checkBrowserState = context.read<CheckBrowserBloc>().state;
-    //   final env = Environment().getValue("ENVIRONMENT_NAME");
-    //   if (checkBrowserState is BrowserIsLineLiff || (env != 'uat' && env != 'prod')) {
-    //     context.read<AuthBloc>().add(UserAuthEventLogin(context: context));
-    //   }
-    // });
-  }
-
   Future<void> openLine() async {
     final Uri deepLink = Uri.parse(HomeConst().lineOAURL);
     if (!await launchUrl(deepLink)) {
@@ -81,13 +67,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     bool tc = await TermAndConHelper().isTermAndConAccepted();
 
     if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
-      nav.pushNamed(Routes.termAndCon.toStringPath()).then((value) {
-        loglaew = false;
-      });
+      nav.pushNamed(Routes.termAndCon.toStringPath());
     } else {
-      if (!loglaew && route!.settings.name! == Routes.initial.name) {
+      if (route!.settings.name! == Routes.initial.toStringPath()) {
         amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
-        loglaew = true;
       }
     }
   }
@@ -99,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return RootPageCondition(
         child: WillPopScope(
             onWillPop: () async {
-              setHistoryToInitialPage();
               return false;
             },
             child: AlvaRootWidget(
@@ -333,9 +315,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             onTapfunction: () {
                                               amplitudeWebHelper.logTapOnTermAndConditionButton();
                                               context.read<ProductListBloc>().add(SetScrollPosition(scrollController!.offset));
-                                              Navigator.pushNamed(context, '/readTermAndCon').then((value) {
-                                                loglaew = false;
-                                              });
+                                              Navigator.pushNamed(context, '/readTermAndCon');
                                             }),
                                         Container(
                                           margin: const EdgeInsets.symmetric(horizontal: 8),

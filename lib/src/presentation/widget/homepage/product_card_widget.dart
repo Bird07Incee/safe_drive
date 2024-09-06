@@ -71,6 +71,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
     return BlocBuilder<ProductListBloc, ProductListState>(
       builder: (context, state) {
         var productList = state.productList;
@@ -110,7 +111,11 @@ class ProductCardWidget extends StatelessWidget {
                         context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                         context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
                         context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
-                        await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
+                        await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}').then((value) {
+                          if (ModalRoute.of(context)!.settings.name! == Routes.initial.toStringPath()) {
+                            amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
+                          }
+                        });
                         showOneTrustCookieScript();
                       },
                       child: Container(
@@ -146,7 +151,12 @@ class ProductCardWidget extends StatelessWidget {
                                   context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
                                   context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                                   final ctx = context.read<ProductDetailCarouselScrollControllerBloc>();
-                                  await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
+                                  await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}')
+                                      .then((value) {
+                                    if (ModalRoute.of(context)!.settings.name! == Routes.initial.toStringPath()) {
+                                      amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
+                                    }
+                                  });
 
                                   showOneTrustCookieScript();
                                   int detailPage = ctx.state.page as int;

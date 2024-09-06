@@ -49,9 +49,7 @@ class AmplitudeWebHelper {
       if (eventProperties != null) {
         defaultEventProperties.addAll(eventProperties);
       }
-      if (getOnetrustActiveGroups().length == 5) {
-        _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
-      } else if (skipOnetrust) {
+      if (getOnetrustActiveGroups().length == 5 || skipOnetrust) {
         _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
       }
     } catch (e) {
