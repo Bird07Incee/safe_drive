@@ -700,7 +700,11 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                         }
                                                         if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
                                                           Navigator.pushNamed(context,
-                                                              '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=$thaiStatus&merchantName=$merchantName');
+                                                                  '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=$thaiStatus&merchantName=$merchantName')
+                                                              .then((value) {
+                                                            AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(productName,
+                                                                state.tracking.orderRef, status, state.tracking.merchantName, optionName);
+                                                          });
                                                         }
                                                       },
                                                       child: Container(

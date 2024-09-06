@@ -117,7 +117,7 @@ class TrackingOrderCard extends StatelessWidget {
                 height: 16,
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
                   AmplitudeWebHelper.getInstance().logTapOnOrderTrackingList(
                     order.products![0].productNameTh!.toString(),
                     order.orderNo.toString(),
@@ -125,8 +125,14 @@ class TrackingOrderCard extends StatelessWidget {
                     order.products![0].productDescription!,
                   );
 
-                  Navigator.pushNamed(context,
-                      '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}&productName=${order.products![0].productNameTh!.toString()}&optionName=${order.products![0].productDescription}&status=${order.shippingStatusMessage}');
+                  await Navigator.pushNamed(context,
+                          '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}&productName=${order.products![0].productNameTh!.toString()}&optionName=${order.products![0].productDescription}&status=${order.shippingStatusMessage}')
+                      .then((value) {
+                    final route = ModalRoute.of(context);
+                    if (route!.settings.name!.contains(Routes.trackingList.toStringPath())) {
+                      AmplitudeWebHelper.getInstance().logEnterOrderTrackingPage();
+                    }
+                  });
                 },
                 child: Container(
                   height: 40,

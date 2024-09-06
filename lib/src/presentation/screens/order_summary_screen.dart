@@ -365,7 +365,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                           onTap: () {
                                                             AmplitudeWebHelper.getInstance().logTapOnManageShippingAddressButton();
                                                             Navigator.pushNamed(context,
-                                                                '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}');
+                                                                    '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}')
+                                                                .then((value) {
+                                                              AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
+                                                            });
                                                           },
                                                           child: Container(
                                                             width: maxWidth - 32,
@@ -444,8 +447,11 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                   AmplitudeWebHelper.getInstance().logTapOnManageShippingAddressButton();
                                                                   FocusManager.instance.primaryFocus?.unfocus();
                                                                   Navigator.pushNamed(context,
-                                                                      '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}',
-                                                                      arguments: ShippingAddressArgs(isFromEditing: true));
+                                                                          '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}',
+                                                                          arguments: ShippingAddressArgs(isFromEditing: true))
+                                                                      .then((value) {
+                                                                    AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
+                                                                  });
                                                                 },
                                                                 child: Container(
                                                                   width: 24,

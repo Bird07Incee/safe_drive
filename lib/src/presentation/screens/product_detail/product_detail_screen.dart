@@ -105,7 +105,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, pdState) {
           if (pdState.status.isSuccess) {
-            if (!logAmplitudeSuccess && ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.name)) {
+            if (!logAmplitudeSuccess && ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.toStringPath())) {
               AmplitudeWebHelper.getInstance().logEnterProductDetails(
                   productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
             }
@@ -258,9 +258,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             discountPrice: pdState.product.discountPrice.toDecimalFormat().toString());
                         if (pdState.product.productionOptionals.isNotEmpty) {
                           Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
-                              arguments: ProductDetailArgs(product: pdState.product));
+                                  arguments: ProductDetailArgs(product: pdState.product))
+                              .then((value) {
+                            if (ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.toStringPath())) {
+                              AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                                  productName: pdState.product.productName,
+                                  contentId: pdState.product.productId,
+                                  merchantName: pdState.product.merchantFullName);
+                            }
+                          });
                         } else {
-                          Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
+                          Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}').then((value) {
+                            if (ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.toStringPath())) {
+                              AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                                  productName: pdState.product.productName,
+                                  contentId: pdState.product.productId,
+                                  merchantName: pdState.product.merchantFullName);
+                            }
+                          });
                         }
 
                         context.read<ProductOptionBloc>().updateStepOneVariables(

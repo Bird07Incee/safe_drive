@@ -7,6 +7,7 @@ import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
+import 'package:marketplace_line_oa/src/routes/routes.dart';
 
 class HomepageTopSection extends StatelessWidget {
   const HomepageTopSection({super.key, required this.maxWidth, required this.scrollController});
@@ -40,7 +41,12 @@ class HomepageTopSection extends StatelessWidget {
                       AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButton();
                       hideOneTrustCookieScript();
                       context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
-                      Navigator.pushNamed(context, '/trackingList');
+                      Navigator.pushNamed(context, '/trackingList').then((value) {
+                        final route = ModalRoute.of(context);
+                        if (route!.settings.name! == Routes.initial.toStringPath()) {
+                          AmplitudeWebHelper.getInstance().logeMarketplaceHomePageHomeScreen();
+                        }
+                      });
                     },
                     child: Container(
                       height: 40,
