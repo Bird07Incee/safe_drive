@@ -23,7 +23,7 @@ UrlStrategy urlStrategyPromptBuy = ChangeHistoryUrlStrategy();
 void main() async {
   setUrlStrategy(urlStrategyPromptBuy);
   WidgetsFlutterBinding.ensureInitialized();
-  // _configureApp();
+  _configureApp();
   _setUpAmplitude();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
