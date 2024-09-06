@@ -42,10 +42,7 @@ class HomepageTopSection extends StatelessWidget {
                       hideOneTrustCookieScript();
                       context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
                       Navigator.pushNamed(context, '/trackingList').then((value) {
-                        final route = ModalRoute.of(context);
-                        if (route!.settings.name! == Routes.initial.toStringPath()) {
-                          AmplitudeWebHelper.getInstance().logeMarketplaceHomePageHomeScreen();
-                        }
+                        AmplitudeWebHelper.getInstance().logeMarketplaceHomePageHomeScreen();
                       });
                     },
                     child: Container(
