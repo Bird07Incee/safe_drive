@@ -34,9 +34,3 @@ class SetSelectTabIndex extends ProductListEvent {
 
   final int selectedTabIndex;
 }
-
-class SetScrollPosition extends ProductListEvent {
-  const SetScrollPosition(this.scrollPosition);
-
-  final double scrollPosition;
-}

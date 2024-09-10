@@ -5,7 +5,7 @@ import 'package:marketplace_line_oa/src/constants/mkp_styles.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 
 class HomepageTopSection extends StatelessWidget {
@@ -38,8 +38,8 @@ class HomepageTopSection extends StatelessWidget {
                   GestureDetector(
                     onTap: () async {
                       AmplitudeWebHelper.getInstance().logTapOnOrderTrackingButton();
+                      context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
                       hideOneTrustCookieScript();
-                      context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
                       await Navigator.pushNamed(context, '/trackingList');
                     },
                     child: Container(

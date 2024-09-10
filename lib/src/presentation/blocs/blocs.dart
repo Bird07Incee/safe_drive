@@ -12,6 +12,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/refund_request/refund_request_bloc.dart';
@@ -31,6 +32,7 @@ final List<BlocProvider> blocs = [
   BlocProvider<PreviousScaleBloc>(create: (_) => PreviousScaleBloc()),
   BlocProvider<ViewImgDetailPageSwitchBloc>(create: (_) => ViewImgDetailPageSwitchBloc()),
   BlocProvider<ProductListBloc>(create: (_) => ProductListBloc(utilityRepository: _.read<DioUtilityRepository>())),
+  BlocProvider<HomeScrollControllerCubit>(create: (_) => HomeScrollControllerCubit()),
   BlocProvider<ProductOptionBloc>(create: (_) => ProductOptionBloc()),
   BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<ActiveImagesIndexCubit>(create: (_) => ActiveImagesIndexCubit()),

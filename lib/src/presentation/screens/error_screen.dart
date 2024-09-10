@@ -23,31 +23,33 @@ class ErrorScreen extends StatelessWidget {
           titlePage: titleWebPage,
           child: Column(
             children: [
-              Container(
-                color: whitePure,
-                width: maxWidth,
-                height: maxHeight - 96,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.warning_amber_rounded,
-                      color: cloudSoftDeepWhite,
-                      size: 125,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Text(title!, style: AlvaStyles().headingSize18w500(BTN_SELECTED_TEXT_COLOR_NEW)),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(subTitle!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW)),
-                    subTitleSec!.isNotEmpty ? Text(subTitleSec!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW)) : Container(),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                  ],
+              Expanded(
+                child: Container(
+                  color: whitePure,
+                  width: maxWidth,
+                  height: maxHeight - 96,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.warning_amber_rounded,
+                        color: cloudSoftDeepWhite,
+                        size: 125,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Text(title!, style: AlvaStyles().headingSize18w500(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(subTitle!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      subTitleSec!.isNotEmpty ? Text(subTitleSec!, style: AlvaStyles().headingSize14w400(BTN_SELECTED_TEXT_COLOR_NEW)) : Container(),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(
