@@ -105,6 +105,8 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
         return RootPageCondition(
           child: WillPopScope(
             onWillPop: () async {
+              AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                  productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
               resetAllState();
               Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
               return true;
@@ -186,6 +188,10 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                       leading: IconButton(
                           key: Key(ProductSelectOptionsConst().backButtonKey),
                           onPressed: () {
+                            AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                                productName: pdState.product.productName,
+                                contentId: pdState.product.productId,
+                                merchantName: pdState.product.merchantFullName);
                             resetAllState();
                             Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
                           },
