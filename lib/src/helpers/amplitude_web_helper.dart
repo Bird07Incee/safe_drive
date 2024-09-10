@@ -49,7 +49,7 @@ class AmplitudeWebHelper {
       if (eventProperties != null) {
         defaultEventProperties.addAll(eventProperties);
       }
-      print("eventType $eventType");
+
       if (getOnetrustActiveGroups().length == 5 || skipOnetrust) {
         await _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
       }
