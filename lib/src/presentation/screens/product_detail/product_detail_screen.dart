@@ -102,13 +102,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
-      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-        builder: (context, pdState) {
+      child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
+        listener: (context, pdState) {
           if (pdState.status.isSuccess) {
             if (!logAmplitudeSuccess && ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.toStringPath())) {
               AmplitudeWebHelper.getInstance().logEnterProductDetails(
                   productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
             }
+          }
+        },
+        builder: (context, pdState) {
+          if (pdState.status.isSuccess) {
             return BlocBuilder<ImgGalleryZoomBloc, TransformationController>(
               builder: (context, zoomState) {
                 return BlocBuilder<PreviousScaleBloc, double>(
@@ -149,6 +153,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
 
   void onBack() {
     showOneTrustCookieScript();
+    AmplitudeWebHelper.getInstance().logeMarketplaceHomePageHomeScreen();
     var stack = CurrentRouteObserver.instance.stack;
     if (stack.contains(Routes.initial.toStringPath())) {
       Navigator.pop(context);
@@ -256,28 +261,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             merchantName: pdState.product.merchantFullName,
                             price: pdState.product.price.toDecimalFormat().toString(),
                             discountPrice: pdState.product.discountPrice.toDecimalFormat().toString());
-                        if (pdState.product.productionOptionals.isNotEmpty) {
-                          Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
-                                  arguments: ProductDetailArgs(product: pdState.product))
-                              .then((value) {
-                            if (ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.toStringPath())) {
-                              AmplitudeWebHelper.getInstance().logEnterProductDetails(
-                                  productName: pdState.product.productName,
-                                  contentId: pdState.product.productId,
-                                  merchantName: pdState.product.merchantFullName);
-                            }
-                          });
-                        } else {
-                          Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}').then((value) {
-                            if (ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.toStringPath())) {
-                              AmplitudeWebHelper.getInstance().logEnterProductDetails(
-                                  productName: pdState.product.productName,
-                                  contentId: pdState.product.productId,
-                                  merchantName: pdState.product.merchantFullName);
-                            }
-                          });
-                        }
-
                         context.read<ProductOptionBloc>().updateStepOneVariables(
                               groupValueRadio: "",
                               price: 0,
@@ -290,6 +273,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                             );
                         context.read<ProductOptionBloc>().updateSelectCurrentOption(0);
                         context.read<ProductOptionBloc>().updateLastOption(0);
+                        // context.read<ProductDetailBloc>().add(SetProduct(product: pdState.product));
+                        if (pdState.product.productionOptionals.isNotEmpty) {
+                          Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?pid=${pdState.product.productId}',
+                              arguments: ProductDetailArgs(product: pdState.product));
+                        } else {
+                          Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?pid=${pdState.product.productId}');
+                        }
                       },
                       style: AlvaStyles().outlineNoneBorderButtonStyle(YellowKrungsri, Colors.transparent, isRadius8: true),
                       child: Text("สั่งซื้อสินค้า", style: AlvaStyles().headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)),

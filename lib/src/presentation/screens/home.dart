@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool isNotLogin = true;
   TextEditingController tc = TextEditingController();
   TabController? tabController;
+  bool logAmplitudeSuccess = false;
 
   Future<void> openLine() async {
     final Uri deepLink = Uri.parse(HomeConst().lineOAURL);
@@ -68,8 +69,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
       nav.pushNamed(Routes.termAndCon.toStringPath());
     } else {
-      if (route!.settings.name! == Routes.initial.toStringPath()) {
+      if (!logAmplitudeSuccess && route!.settings.name! == Routes.initial.toStringPath()) {
         amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
+        logAmplitudeSuccess = true;
       }
     }
   }

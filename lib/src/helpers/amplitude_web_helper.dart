@@ -6,7 +6,7 @@ import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 
 class AmplitudeWebHelper {
-  Amplitude? _amplitude;
+  static Amplitude? _amplitude;
 
   AmplitudeWebHelper._() {
     _onInit();
@@ -49,8 +49,9 @@ class AmplitudeWebHelper {
       if (eventProperties != null) {
         defaultEventProperties.addAll(eventProperties);
       }
+      print("eventType $eventType");
       if (getOnetrustActiveGroups().length == 5 || skipOnetrust) {
-        _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
+        await _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
       }
     } catch (e) {
       DatadogSdk.instance.rum?.addError("Amplitude logEvent Error : $e", RumErrorSource.custom, attributes: {"line_uuid": lineUID});

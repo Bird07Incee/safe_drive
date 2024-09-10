@@ -58,6 +58,8 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
           key: const Key("pop_navigator_to_home_page"),
           onPressed: () {
             showOneTrustCookieScript();
+            AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
+            amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
             setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
             Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           },
@@ -67,6 +69,8 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
       child: WillPopScope(
         onWillPop: () async {
           showOneTrustCookieScript();
+          AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
+          amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
           setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           return false;

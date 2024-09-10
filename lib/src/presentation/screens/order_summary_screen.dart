@@ -112,6 +112,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 price: "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
                 paymentType: orderState.paymentType.name,
               );
+              AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                  productName: productState.product.productName,
+                  contentId: productState.product.productId,
+                  merchantName: productState.product.merchantFullName);
               context.read<ShippingAddressBloc>().onClearShippingData();
 
               // context.read<ProductOptionBloc>().updateStepOneVariables(
