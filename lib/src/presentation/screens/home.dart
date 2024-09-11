@@ -68,13 +68,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final route = ModalRoute.of(context);
     bool tc = await TermAndConHelper().isTermAndConAccepted();
     if (!tc && CurrentRouteObserver.instance.last != Routes.termAndCon.toStringPath()) {
-      showDialog(
-          context: context,
-          builder: (_) {
-            return AlertDialog(
-              title: Text("check and go termandcond"),
-            );
-          });
       nav.pushNamed(Routes.termAndCon.toStringPath());
     } else {
       if (!logAmplitudeSuccess && route!.settings.name! == Routes.initial.toStringPath()) {
