@@ -366,9 +366,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                   child: shippingState.addressModel == ShippingAddressModel.empty
                                                       ? GestureDetector(
                                                           behavior: HitTestBehavior.translucent,
-                                                          onTap: () {
+                                                          onTap: () async {
                                                             AmplitudeWebHelper.getInstance().logTapOnManageShippingAddressButton();
-                                                            Navigator.pushNamed(context,
+                                                            await Navigator.pushNamed(context,
                                                                     '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}')
                                                                 .then((value) {
                                                               AmplitudeWebHelper.getInstance().logEnterOrderSummaryPage();
@@ -447,10 +447,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                                 ],
                                                               ),
                                                               GestureDetector(
-                                                                onTap: () {
+                                                                onTap: () async {
                                                                   AmplitudeWebHelper.getInstance().logTapOnManageShippingAddressButton();
                                                                   FocusManager.instance.primaryFocus?.unfocus();
-                                                                  Navigator.pushNamed(context,
+                                                                  await Navigator.pushNamed(context,
                                                                           '${Routes.shippingAddress.toStringPath()}?pid=$pid${productState.product.productionOptionals.isEmpty ? "" : "&opt_lv1=$optLv1"}',
                                                                           arguments: ShippingAddressArgs(isFromEditing: true))
                                                                       .then((value) {

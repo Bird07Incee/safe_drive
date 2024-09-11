@@ -33,7 +33,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   String optionName = "";
   String status = "";
   bool isLoaded = false;
-  bool isAlreadyLogEnterPage = false;
+  bool logAmplitudeSuccess = false;
   late double maxWidth, maxHeight;
   @override
   void didChangeDependencies() {
@@ -416,16 +416,16 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
             final String li2 = "ติดต่อผู้ขาย **$merchantName** โทร. **$merchantNumber** ";
             if (state.status.isSuccess) {
               // hideOneTrustCookieScript();
-              if (!isAlreadyLogEnterPage) {
+              if (!logAmplitudeSuccess) {
                 if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                   AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
                       productName, state.tracking.orderRef, state.tracking.status[0].statusName, state.tracking.merchantName, optionName,
                       statusSecondId: state.tracking.status[1].statusName);
-                  isAlreadyLogEnterPage = true;
+                  logAmplitudeSuccess = true;
                 } else {
                   AmplitudeWebHelper.getInstance()
                       .logEnterOrderTrackingDetail(productName, state.tracking.orderRef, status, state.tracking.merchantName, optionName);
-                  isAlreadyLogEnterPage = true;
+                  logAmplitudeSuccess = true;
                 }
               }
               return ListView(
@@ -672,7 +672,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                             state.tracking.refundable
                                                 ? Expanded(
                                                     child: GestureDetector(
-                                                      onTap: () {
+                                                      onTap: () async {
                                                         String thaiStatus = "";
                                                         if (["RefundRejected"].contains(state.tracking.status[0].statusName)) {
                                                           thaiStatus = AmplitudeWebHelper.getInstance().mapOrderStatusToThai(
@@ -699,11 +699,16 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
                                                               state.tracking.merchantName);
                                                         }
                                                         if (state.tracking.refundDay > 0 && !state.tracking.disableRefundButton) {
-                                                          Navigator.pushNamed(context,
+                                                          await Navigator.pushNamed(context,
                                                                   '${Routes.refundFormTracking.toStringPath()}?orderNo=$orderNo&pid=$productId&refundDay=${state.tracking.refundDay}&orderStatus=$thaiStatus&merchantName=$merchantName')
                                                               .then((value) {
-                                                            AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(productName,
-                                                                state.tracking.orderRef, status, state.tracking.merchantName, optionName);
+                                                            AmplitudeWebHelper.getInstance().logEnterOrderTrackingDetail(
+                                                                productName,
+                                                                state.tracking.orderRef,
+                                                                state.tracking.status[0].statusName,
+                                                                state.tracking.merchantName,
+                                                                optionName,
+                                                                statusSecondId: state.tracking.status[1].statusName);
                                                           });
                                                         }
                                                       },

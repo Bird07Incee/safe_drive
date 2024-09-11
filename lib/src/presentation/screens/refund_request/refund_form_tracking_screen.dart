@@ -116,12 +116,14 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
     return RootPageCondition(
         child: WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+        Navigator.pop(context);
+        context.read<RefundRequestBloc>().textEditingControllerReason!.clear();
+        context.read<RefundRequestBloc>().textEditingControllerRemark!.clear();
         return false;
       },
       child: BlocConsumer<RefundRequestBloc, RefundRequestState>(listener: (context, state) {
         if (state.refundRequestStatus == GetRefundRequestStatus.submitSuccess) {
-          Navigator.pushReplacementNamed(context, '${Routes.refundSuccess.toStringPath()}?orderNo=$orderNo',
+          Navigator.pushReplacementNamed(context, '${Routes.refundSuccess.toStringPath()}?orderNo=${state.inquiryData.invoiceNo}',
               arguments: RefundSuccessArgs(refundResponse: state.refundResponse));
         }
       }, builder: (context, productState) {

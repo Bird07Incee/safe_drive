@@ -29,10 +29,11 @@ class TrackingListScreen extends StatefulWidget {
 }
 
 class _TrackingListScreenState extends State<TrackingListScreen> {
+  bool logAmplitudeSuccess = false;
+
   @override
   void initState() {
     super.initState();
-    AmplitudeWebHelper.getInstance().logEnterOrderTrackingPage();
     context.read<TrackingOrderBloc>().add(GetTrackingOrderListByPage(1, context));
   }
 
@@ -58,8 +59,6 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
           key: const Key("pop_navigator_to_home_page"),
           onPressed: () {
             showOneTrustCookieScript();
-            AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
-            amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
             setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
             Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           },
@@ -69,8 +68,6 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
       child: WillPopScope(
         onWillPop: () async {
           showOneTrustCookieScript();
-          AmplitudeWebHelper amplitudeWebHelper = AmplitudeWebHelper.getInstance();
-          amplitudeWebHelper.logeMarketplaceHomePageHomeScreen();
           setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
           Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
           return false;
@@ -78,6 +75,10 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
         child: BlocBuilder<TrackingOrderBloc, TrackingOrderState>(
           builder: (context, state) {
             if (state.trackingOrderListStatus == GetTrackingOrderListStatus.success) {
+              if (!logAmplitudeSuccess) {
+                AmplitudeWebHelper.getInstance().logEnterOrderTrackingPage();
+                logAmplitudeSuccess = true;
+              }
               return AlvaRootWidget(
                   titlePage: titleWebPage,
                   appBar: appBar,
