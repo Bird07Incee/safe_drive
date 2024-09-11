@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return RootPageCondition(
         child: WillPopScope(
             onWillPop: () async {
+              setHistoryToInitialPage();
               return false;
             },
             child: AlvaRootWidget(
