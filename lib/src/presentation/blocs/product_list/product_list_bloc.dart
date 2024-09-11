@@ -17,6 +17,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
     on<SetSelectTabIndex>(_onSetSelectTabIndex);
+    on<SetScrollPosition>(_onSetScrollPosition);
   }
   final DioUtilityRepository utilityRepository;
 
@@ -163,5 +164,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         Navigator.pop(event.context);
       }
     }
+  }
+
+  _onSetScrollPosition(SetScrollPosition event, Emitter<ProductListState> emit) {
+    emit(state.copyWith(scrollPosition: event.scrollPosition));
   }
 }
