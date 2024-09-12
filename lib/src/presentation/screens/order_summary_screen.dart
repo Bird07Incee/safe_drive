@@ -24,7 +24,6 @@ import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart'
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/disclaimer_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/root_widget.dart';
-import 'package:marketplace_line_oa/src/routes/navigator_helper.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/routes/routing_data.dart';
 import 'package:universal_html/html.dart';
@@ -102,21 +101,21 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       String step1OptionName) {
     GeneralDialog(
             onAccept: () {
-              AmplitudeWebHelper.getInstance().logTapOnBackButton(
-                productName: productState.product.productName,
-                optionName: step1OptionName,
-                contentId: productState.product.productId,
-                merchantName: productState.product.merchantFullName,
-                productCategoryId: productState.product.categoryId.isNotEmpty ? productState.product.categoryId.toString() : "",
-                optionID: productState.product.productionOptionals.isNotEmpty ? productState.product.productionOptionals[optLv1!].subProductId : "",
-                price: "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
-                paymentType: orderState.paymentType.name,
-              );
-              AmplitudeWebHelper.getInstance().logEnterProductDetails(
-                  productName: productState.product.productName,
-                  contentId: productState.product.productId,
-                  merchantName: productState.product.merchantFullName);
-              context.read<ShippingAddressBloc>().onClearShippingData();
+              // AmplitudeWebHelper.getInstance().logTapOnBackButton(
+              //   productName: productState.product.productName,
+              //   optionName: step1OptionName,
+              //   contentId: productState.product.productId,
+              //   merchantName: productState.product.merchantFullName,
+              //   productCategoryId: productState.product.categoryId.isNotEmpty ? productState.product.categoryId.toString() : "",
+              //   optionID: productState.product.productionOptionals.isNotEmpty ? productState.product.productionOptionals[optLv1!].subProductId : "",
+              //   price: "${(productState.product.productionOptionals.isNotEmpty ? step1price : showPrice).toDecimalFormat()} ",
+              //   paymentType: orderState.paymentType.name,
+              // );
+              // AmplitudeWebHelper.getInstance().logEnterProductDetails(
+              //     productName: productState.product.productName,
+              //     contentId: productState.product.productId,
+              //     merchantName: productState.product.merchantFullName);
+              // context.read<ShippingAddressBloc>().onClearShippingData();
 
               // context.read<ProductOptionBloc>().updateStepOneVariables(
               //       groupValueRadio: "",
@@ -132,11 +131,12 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
               // context.read<ProductOptionBloc>().updateLastOption(0);
 
               if (isLoaded) {
-                refreshRoute(
-                    context: context,
-                    currentRoute: "summary",
-                    queryParams: "pid=$pid",
-                    listOption: context.read<ProductDetailBloc>().state.product.productionOptionals);
+                Navigator.pop(context);
+                // refreshRoute(
+                //     context: context,
+                //     currentRoute: "summary",
+                //     queryParams: "pid=$pid",
+                //     listOption: context.read<ProductDetailBloc>().state.product.productionOptionals);
               }
             },
             onCancel: () {})
