@@ -184,7 +184,6 @@ class ProductCardWidget extends StatelessWidget {
                                                         imageUrl: urlImage,
                                                         fit: BoxFit.fitWidth,
                                                         errorWidget: (context, error, stackTrace) {
-                                                          ScaffoldMessenger.of(context).showSnackBar(getMkpToast(error.toString()));
                                                           return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
                                                         }),
                                                   )
