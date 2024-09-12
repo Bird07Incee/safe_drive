@@ -20,6 +20,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
@@ -108,7 +109,7 @@ class ProductCardWidget extends StatelessWidget {
                         hideOneTrustCookieScript();
                         context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                         context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
-                        context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
+                        context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: scrollController.offset);
                         await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
                         showOneTrustCookieScript();
                       },
@@ -142,7 +143,7 @@ class ProductCardWidget extends StatelessWidget {
                                   context.read<ProductDetailCarouselScrollControllerBloc>().add(CarouselScrollAction(index: activeIndex[index] - 1));
                                   context.read<PreviousScaleBloc>().add(const PreviousScaleEvent(previousScale: 0.5));
                                   context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: true));
-                                  context.read<ProductListBloc>().add(SetScrollPosition(scrollController.offset));
+                                  context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: scrollController.offset);
                                   context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                                   final ctx = context.read<ProductDetailCarouselScrollControllerBloc>();
                                   await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
