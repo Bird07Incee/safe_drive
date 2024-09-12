@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final DioUtilityRepository utilityRepository;
 
   _onGetProduct(GetProductByID event, Emitter<ProductDetailState> emit) async {
+    DatadogSdk.instance.rum?.addError("call _onGetProduct", RumErrorSource.network, attributes: {});
     emit(state.copyWith(status: ProductDetailStatus.loading));
+
     final baseUrl = Environment().getValue("BFF_BASE_URL");
     final inventoryApiPath = Environment().getValue("BFF_PRODUCT_MANAGER_BASE_URL");
     Map<String, dynamic> params = {"pid": event.pid};
