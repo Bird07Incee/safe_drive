@@ -261,15 +261,15 @@ class _PDTopSectionState extends State<PDTopSection> {
                         ),
                         BlocBuilder<ProductDetailDescriptionCubit, ProductDetailDescriptionCubitState>(builder: (context, descriptionState) {
                           return GestureDetector(
-                            onTap: () {
-                              if (!descriptionState.textNotMoreThan) {
-                                if (descriptionState.toggleDescription) {
-                                  myBloc.updateToggleTapDescription(toggleDescription: false);
-                                } else {
-                                  myBloc.updateToggleTapDescription(toggleDescription: true);
-                                }
-                              }
-                            },
+                            // onTap: () {
+                            //   if (!descriptionState.textNotMoreThan) {
+                            //     if (descriptionState.toggleDescription) {
+                            //       myBloc.updateToggleTapDescription(toggleDescription: false);
+                            //     } else {
+                            //       myBloc.updateToggleTapDescription(toggleDescription: true);
+                            //     }
+                            //   }
+                            // },
                             child: Column(
                               children: [
                                 GestureDetector(
