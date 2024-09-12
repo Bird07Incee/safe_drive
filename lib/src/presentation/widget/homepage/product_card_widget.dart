@@ -1,7 +1,6 @@
 import 'dart:collection';
 import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -178,12 +177,12 @@ class ProductCardWidget extends StatelessWidget {
                                                   SizedBox(
                                                     width: maxWidth,
                                                     height: 576,
-                                                    child: CachedNetworkImage(
-                                                        placeholder: (context, url) =>
-                                                            Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
-                                                        imageUrl: urlImage,
+                                                    child: FadeInImage(
+                                                        placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                                        // Replace with your placeholder image path
+                                                        image: NetworkImage(urlImage),
                                                         fit: BoxFit.fitWidth,
-                                                        errorWidget: (context, error, stackTrace) {
+                                                        imageErrorBuilder: (context, error, stackTrace) {
                                                           return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
                                                         }),
                                                   )
