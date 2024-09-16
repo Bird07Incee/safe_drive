@@ -20,15 +20,15 @@ refreshRoute(
   CurrentRouteObserver.instance.stack.clear();
   switch (currentRoute) {
     case "summary":
-      Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
+      // Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
       Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
       break;
     case "selectOption":
-      Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
+      // Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
       Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
       break;
     case "address":
-      Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
+      // Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
       Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
       Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?$queryParams');
       Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?$queryParams');

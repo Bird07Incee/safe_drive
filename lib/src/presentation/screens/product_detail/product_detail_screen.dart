@@ -182,7 +182,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     return WillPopScope(
         onWillPop: () async {
           onBack();
-          return true;
+          return false;
         },
         child: AlvaRootWidget(
           titlePage: titleWebPage,

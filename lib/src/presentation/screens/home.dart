@@ -86,6 +86,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin, 
     return RootPageCondition(
         child: WillPopScope(
             onWillPop: () async {
+              context.read<ProductListBloc>().add(GetProductListByCategory("", context));
+              tabController!.animateTo(
+                0,
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+              );
               return false;
             },
             child: AlvaRootWidget(

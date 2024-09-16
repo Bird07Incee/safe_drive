@@ -172,7 +172,7 @@ class ProductCardWidget extends StatelessWidget {
                                         onPageChanged: (val) {
                                           context.read<ActiveImagesIndexCubit>().update(index, val + 1);
                                           if (val == products[index].productionAssets.length && val != 1) {
-                                            pageViewController.animateToPage(0, duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+                                            pageViewController.animateToPage(0, duration: Duration(milliseconds: 100), curve: Curves.easeInOut);
                                           }
                                         },
                                         itemBuilder: (ctx, i) {
