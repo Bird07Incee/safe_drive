@@ -17,7 +17,6 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
@@ -67,14 +66,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   @override
   void initState() {
     super.initState();
-    var product = context.read<ProductListBloc>().state;
-    product.productList.products!.clear();
+    // var product = context.read<ProductListBloc>().state;
+    // product.productList.products!.clear();
     context.read<ProductDetailCarouselScrollControllerBloc>().add(const CarouselScrollAction(index: 0));
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
-    scrollController.addListener(() {
-      var pixelScreen = scrollController.position.pixels;
-      context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(pixelScreen, MediaQuery.of(context).size.width, "0"));
-    });
+    // scrollController.addListener(() {
+    //   var pixelScreen = scrollController.position.pixels;
+    //   context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(pixelScreen, MediaQuery.of(context).size.width, "0"));
+    // });
   }
 
   @override
