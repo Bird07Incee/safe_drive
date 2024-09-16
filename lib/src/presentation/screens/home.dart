@@ -116,7 +116,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin, 
                         tabController ??=
                             TabController(initialIndex: state.selectedTabIndex, length: state.productList.category!.length + 1, vsync: this);
                         double scrollPosition = context.read<HomeScrollControllerCubit>().state.scrollControllerPosition;
-                        print(scrollPosition);
                         scrollController = ScrollController(initialScrollOffset: scrollPosition);
 
                         return Container(

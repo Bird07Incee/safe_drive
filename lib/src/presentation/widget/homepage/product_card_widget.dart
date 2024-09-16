@@ -69,6 +69,14 @@ class ProductCardWidget extends StatelessWidget {
     }
   }
 
+  safeImageIndex(List activeIndex, int index) {
+    try {
+      return PageController(initialPage: activeIndex[index] == 1 ? 0 : activeIndex[index]);
+    } on RangeError {
+      return PageController(initialPage: 0);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var productList = state.productList;
@@ -78,7 +86,6 @@ class ProductCardWidget extends StatelessWidget {
 
     return BlocBuilder<ActiveImagesIndexCubit, List<int>>(
       builder: (context, activeIndex) {
-        print(activeIndex);
         return ListView.builder(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
@@ -93,7 +100,7 @@ class ProductCardWidget extends StatelessWidget {
 
               int htmlTableRowCount = 0;
 
-              PageController pageViewController = PageController(initialPage: activeIndex[index] == 1 ? 0 : activeIndex[index]);
+              PageController pageViewController = safeImageIndex(activeIndex, index);
 
               return RumUserActionAnnotation(
                 description: "Tap product card",
