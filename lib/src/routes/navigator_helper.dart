@@ -17,21 +17,57 @@ refreshRoute(
     List<ProductionOptionals>? listOption,
     bool dontNavigate = false,
     bool fromDialog = false}) {
-  CurrentRouteObserver.instance.stack.clear();
   switch (currentRoute) {
     case "summary":
-      // Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
-      Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
+      if (CurrentRouteObserver.instance.stack.contains('${Routes.productDetail.toStringPath()}?$queryParams')) {
+        Navigator.popUntil(context, (route) {
+          if (CurrentRouteObserver.instance.stack.contains('${Routes.selectOptions.toStringPath()}?$queryParams')) {
+            CurrentRouteObserver.instance.stack.removeRange(
+                CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.selectOptions.toStringPath()}?$queryParams')),
+                CurrentRouteObserver.instance.stack.length);
+          } else {
+            CurrentRouteObserver.instance.stack.removeRange(
+                CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.orderSummary.toStringPath()}?$queryParams')),
+                CurrentRouteObserver.instance.stack.length);
+          }
+          return route.settings.name!.contains('${Routes.productDetail.toStringPath()}?$queryParams');
+        });
+      } else {
+        CurrentRouteObserver.instance.stack.clear();
+        Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
+        Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
+      }
       break;
     case "selectOption":
-      // Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
-      Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
+      if (CurrentRouteObserver.instance.stack.contains('${Routes.productDetail.toStringPath()}?$queryParams')) {
+        Navigator.popUntil(context, (route) {
+          CurrentRouteObserver.instance.stack.removeRange(
+              CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.selectOptions.toStringPath()}?$queryParams')),
+              CurrentRouteObserver.instance.stack.length);
+          return route.settings.name!.contains('${Routes.productDetail.toStringPath()}?$queryParams');
+        });
+      } else {
+        CurrentRouteObserver.instance.stack.clear();
+        Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
+        Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
+      }
       break;
     case "address":
-      // Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
-      Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
-      Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?$queryParams');
-      Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?$queryParams');
+      if (CurrentRouteObserver.instance.stack.contains(Routes.orderSummary.toStringPath())) {
+        Navigator.popUntil(context, (route) {
+          CurrentRouteObserver.instance.stack.removeRange(
+              CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains(Routes.orderSummary.toStringPath())),
+              CurrentRouteObserver.instance.stack.length);
+          return route.settings.name!.contains(Routes.orderSummary.toStringPath());
+        });
+      } else {
+        CurrentRouteObserver.instance.stack.clear();
+        Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
+        Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?$queryParams');
+        Navigator.pushNamed(context, '${Routes.selectOptions.toStringPath()}?$queryParams');
+        Navigator.pushNamed(context, '${Routes.orderSummary.toStringPath()}?$queryParams');
+      }
+
       break;
     case "initial" || "orderSuccess":
       parallelUrlStrategy(context, Routes.initial.name, Routes.initial.toStringPath());

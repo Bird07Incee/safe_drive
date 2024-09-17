@@ -108,7 +108,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
               AmplitudeWebHelper.getInstance().logEnterProductDetails(
                   productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
               resetAllState();
-              Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
+              refreshRoute(
+                  context: context,
+                  currentRoute: "selectOption",
+                  queryParams: "pid=$pid",
+                  listOption: context.read<ProductDetailBloc>().state.product.productionOptionals);
               return true;
             },
             child: maStatus.toLowerCase() == "true"
@@ -193,7 +197,11 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                 contentId: pdState.product.productId,
                                 merchantName: pdState.product.merchantFullName);
                             resetAllState();
-                            Navigator.popUntil(context, (route) => route.settings.name!.contains(Routes.productDetail.toStringPath()));
+                            refreshRoute(
+                                context: context,
+                                currentRoute: "selectOption",
+                                queryParams: "pid=$pid",
+                                listOption: context.read<ProductDetailBloc>().state.product.productionOptionals);
                           },
                           icon: const Icon(Icons.arrow_back_ios)),
                     ),

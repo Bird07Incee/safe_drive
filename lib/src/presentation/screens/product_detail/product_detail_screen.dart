@@ -158,8 +158,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     AmplitudeWebHelper.getInstance().logeMarketplaceHomePageHomeScreen();
     var stack = CurrentRouteObserver.instance.stack;
     if (stack.contains(Routes.initial.toStringPath())) {
+      print("test1");
       Navigator.pop(context);
     } else {
+      print("test2");
       Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
     }
     context.read<ProductOptionBloc>().updateStepOneVariables(
