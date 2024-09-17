@@ -25,10 +25,6 @@ refreshRoute(
             CurrentRouteObserver.instance.stack.removeRange(
                 CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.selectOptions.toStringPath()}?$queryParams')),
                 CurrentRouteObserver.instance.stack.length);
-          } else {
-            CurrentRouteObserver.instance.stack.removeRange(
-                CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.orderSummary.toStringPath()}?$queryParams')),
-                CurrentRouteObserver.instance.stack.length);
           }
           return route.settings.name!.contains('${Routes.productDetail.toStringPath()}?$queryParams');
         });
