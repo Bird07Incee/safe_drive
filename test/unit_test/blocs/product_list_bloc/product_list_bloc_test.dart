@@ -43,11 +43,6 @@ void main() {
       },
     );
 
-    blocTest<ProductListBloc, ProductListState>("SelectTabIndex",
-        build: () => ProductListBloc(utilityRepository: utilityRepository),
-        act: (bloc) => bloc.add(const SetSelectTabIndex(1)),
-        expect: () => <ProductListState>[ProductListState(selectedTabIndex: 1)]);
-
     blocTest<ProductListBloc, ProductListState>("getProductList success",
         setUp: () {
           SharedPreferences.setMockInitialValues({});

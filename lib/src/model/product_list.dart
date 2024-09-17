@@ -15,7 +15,7 @@ class ProductList extends Equatable {
   final int? productCountItems;
   final List<Banner>? banner;
   final List<Map>? category;
-  final List<Product>? products;
+  final List<Product> products;
 
   ProductList.fromJson(Map<String, dynamic> json)
       : banner = json['banner'] != null ? List.from(json['banner']).map((e) => Banner.fromJson(e)).toList() : [],
@@ -26,7 +26,6 @@ class ProductList extends Equatable {
         productCountItems = json['productCountItems'] != null ? json['productCountItems'] as int? : 0;
 
   @override
-  // TODO: implement props
   List<Object?> get props => [productAllItems, productPage, productCountItems, banner, category, products];
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/home/home_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_success/order_success_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/order_summary_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_summary_detail_cubit.dart';
@@ -47,4 +48,5 @@ final List<BlocProvider> blocs = [
   BlocProvider<RefundRequestBloc>(create: (_) => RefundRequestBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<RefundSuccessBloc>(create: (_) => RefundSuccessBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<WebViewBloc>(create: (_) => WebViewBloc()),
+  BlocProvider<HomeCubit>(create: (_) => HomeCubit()),
 ];

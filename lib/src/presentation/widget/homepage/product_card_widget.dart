@@ -14,23 +14,21 @@ import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
-// import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
-import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  const ProductCardWidget({super.key, required this.maxWidth, required this.scrollController, required this.state});
+  const ProductCardWidget({super.key, required this.maxWidth, required this.scrollController, required this.products});
 
   final double maxWidth;
   final ScrollController scrollController;
-  final ProductListState state;
+  final List<Product> products;
 
   String cleanHtml(String text) {
     String temp = text;
@@ -79,9 +77,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var productList = state.productList;
-    var products = state.productList.products;
-    List<int> counters = List.generate(productList.products!.length, (index) => 1);
+    List<int> counters = List.generate(products.length, (index) => 1);
     context.read<ActiveImagesIndexCubit>().initialItems(counters);
 
     return BlocBuilder<ActiveImagesIndexCubit, List<int>>(
@@ -90,9 +86,9 @@ class ProductCardWidget extends StatelessWidget {
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: productList.products?.length,
+            itemCount: products.length,
             itemBuilder: (BuildContext context, int index) {
-              String tagline = "<p><body>${cleanHtml(products![index].tagline)}</body></p>";
+              String tagline = "<p><body>${cleanHtml(products[index].tagline)}</body></p>";
               TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
               if (tagline.contains("<table")) {
                 tagline = truncatedHtmlText.minifyHtml(cleanHtml(products[index].tagline));

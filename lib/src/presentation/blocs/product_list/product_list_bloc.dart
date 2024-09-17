@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
+import 'package:marketplace_line_oa/src/helpers/product_data_helper.dart';
 import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
 
@@ -16,14 +17,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     on<GetProductList>(_onGetProductList);
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
-    on<SetSelectTabIndex>(_onSetSelectTabIndex);
     on<SetScrollPosition>(_onSetScrollPosition);
   }
   final DioUtilityRepository utilityRepository;
-
-  _onSetSelectTabIndex(SetSelectTabIndex event, Emitter<ProductListState> emit) {
-    emit(state.copyWith(selectedTabIndex: event.selectedTabIndex));
-  }
 
   Future<ProductList> _getProductWithNoCategory() async {
     try {
@@ -32,6 +28,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       Map<String, dynamic> params = {};
       Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params);
       final productList = ProductList.fromJson(response.data);
+      ProductDataHelper().clear();
+      ProductDataHelper().addProduct(productList.products);
       return productList;
     } catch (e) {
       rethrow;
@@ -43,10 +41,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
     try {
       ProductList productList = await _getProductWithNoCategory();
-
-      if (productList.products!.length == 1 || productList.category!.isEmpty) {
-        emit(state.copyWith(hideCategory: true));
-      }
 
       // MaintenanceHelper().saveMaintenanceDataToLocalStorage(productList.serviceMA!);
 
@@ -60,9 +54,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       try {
         ProductList productList = await _getProductWithNoCategory();
 
-        if (productList.products!.length == 1 || productList.category!.isEmpty) {
-          emit(state.copyWith(hideCategory: true));
-        }
         emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
       } on DioException catch (e) {
         if (e.response?.statusCode == 503) {
@@ -94,6 +85,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", category);
 
       final productList = ProductList.fromJson(response.data);
+      ProductDataHelper().clear();
+      ProductDataHelper().addProduct(productList.products);
       emit(state.copyWith(productList: productList, productListStatus: GetProductListStatus.success));
 
       if (event.bypassContext == false) {
@@ -135,7 +128,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       Response response = await utilityRepository.getByURL("$baseUrl$inventoryApiPath/ecommerce/v1/products", params);
 
       var currentProductList = ProductList.fromJson(response.data);
-      var oldProducts = state.productList.products;
 
       ProductList nextProduct = ProductList(
           productAllItems: currentProductList.productAllItems,
@@ -143,7 +135,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
           productCountItems: currentProductList.productCountItems,
           banner: currentProductList.banner,
           category: currentProductList.category,
-          products: oldProducts! + currentProductList.products!);
+          products: currentProductList.products);
+
+      ProductDataHelper().addProduct(currentProductList.products);
 
       emit(state.copyWith(productList: nextProduct, productListStatus: GetProductListStatus.success));
 
