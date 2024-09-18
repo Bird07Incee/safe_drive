@@ -172,25 +172,22 @@ class ProductCardWidget extends StatelessWidget {
                                           }
                                         },
                                         itemBuilder: (ctx, i) {
-                                          return Stack(
-                                            children: [
-                                              SizedBox(
-                                                width: maxWidth,
-                                                height: 576,
-                                                child: FadeInImage(
-                                                    placeholder: AssetImage('assets/homepage/img_default.png'),
-                                                    // Replace with your placeholder image path
-                                                    image: NetworkImage(
-                                                      i == products[index].productionAssets.length
-                                                          ? products[index].productionAssets[0]
-                                                          : products[index].productionAssets[i],
-                                                    ),
-                                                    fit: BoxFit.fitWidth,
-                                                    imageErrorBuilder: (context, error, stackTrace) {
-                                                      return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
-                                                    }),
-                                              )
-                                            ],
+                                          return SizedBox(
+                                            width: maxWidth,
+                                            height: 576,
+                                            child: FadeInImage.assetNetwork(
+                                                placeholder: 'assets/homepage/img_default.png',
+                                                // Replace with your placeholder image path
+                                                image: i == products[index].productionAssets.length
+                                                    ? products[index].productionAssets[0]
+                                                    : products[index].productionAssets[i],
+                                                fit: BoxFit.fitWidth,
+                                                placeholderCacheWidth: 360,
+                                                placeholderFit: BoxFit.fitWidth,
+                                                imageCacheWidth: 360,
+                                                imageErrorBuilder: (context, error, stackTrace) {
+                                                  return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
+                                                }),
                                           );
                                         }),
                                   ),
