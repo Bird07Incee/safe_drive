@@ -120,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           tabController ??= TabController(initialIndex: tab, length: state.productList.category!.length + 1, vsync: this);
                           double scrollPosition = context.read<HomeScrollControllerCubit>().state.scrollControllerPosition;
                           scrollController = ScrollController(initialScrollOffset: scrollPosition);
-
                           return Container(
                               color: cloudyWhite,
                               child: ListView(
@@ -136,10 +135,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                   StickyHeader(
                                     header: Visibility(
-                                      visible: (state.productList.category != null) &&
-                                              (state.productList.products.length == 1 || state.productList.category!.isEmpty)
-                                          ? true
-                                          : false,
+                                      visible: (state.productList.products.length == 1 || state.productList.category!.isEmpty) ? false : true,
                                       child: Container(
                                         width: maxWidth,
                                         color: Colors.white,

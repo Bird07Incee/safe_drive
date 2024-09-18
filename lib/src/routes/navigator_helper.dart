@@ -20,14 +20,16 @@ refreshRoute(
   switch (currentRoute) {
     case "summary":
       if (CurrentRouteObserver.instance.stack.contains('${Routes.productDetail.toStringPath()}?$queryParams')) {
-        Navigator.popUntil(context, (route) {
-          if (CurrentRouteObserver.instance.stack.contains('${Routes.selectOptions.toStringPath()}?$queryParams')) {
-            CurrentRouteObserver.instance.stack.removeRange(
-                CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.selectOptions.toStringPath()}?$queryParams')),
-                CurrentRouteObserver.instance.stack.length);
-          }
-          return route.settings.name!.contains('${Routes.productDetail.toStringPath()}?$queryParams');
-        });
+        // Navigator.popUntil(context, (route) {
+        //   print("route $route");
+        //   if (CurrentRouteObserver.instance.stack.contains('${Routes.selectOptions.toStringPath()}?$queryParams')) {
+        //     CurrentRouteObserver.instance.stack.removeRange(
+        //         CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.selectOptions.toStringPath()}?$queryParams')),
+        //         CurrentRouteObserver.instance.stack.length);
+        //   }
+        //   return route.settings.name!.contains('${Routes.productDetail.toStringPath()}?$queryParams');
+        // });
+        Navigator.pop(context);
       } else {
         CurrentRouteObserver.instance.stack.clear();
         Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
@@ -36,12 +38,7 @@ refreshRoute(
       break;
     case "selectOption":
       if (CurrentRouteObserver.instance.stack.contains('${Routes.productDetail.toStringPath()}?$queryParams')) {
-        Navigator.popUntil(context, (route) {
-          CurrentRouteObserver.instance.stack.removeRange(
-              CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains('${Routes.selectOptions.toStringPath()}?$queryParams')),
-              CurrentRouteObserver.instance.stack.length);
-          return route.settings.name!.contains('${Routes.productDetail.toStringPath()}?$queryParams');
-        });
+        Navigator.pop(context);
       } else {
         CurrentRouteObserver.instance.stack.clear();
         Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
@@ -50,12 +47,7 @@ refreshRoute(
       break;
     case "address":
       if (CurrentRouteObserver.instance.stack.contains(Routes.orderSummary.toStringPath())) {
-        Navigator.popUntil(context, (route) {
-          CurrentRouteObserver.instance.stack.removeRange(
-              CurrentRouteObserver.instance.stack.indexWhere((element) => element.contains(Routes.orderSummary.toStringPath())),
-              CurrentRouteObserver.instance.stack.length);
-          return route.settings.name!.contains(Routes.orderSummary.toStringPath());
-        });
+        Navigator.pop(context);
       } else {
         CurrentRouteObserver.instance.stack.clear();
         Navigator.pushNamedAndRemoveUntil(context, '/', (routes) => false);
