@@ -87,6 +87,7 @@ class ProductCardWidget extends StatelessWidget {
     return BlocBuilder<ActiveImagesIndexCubit, List<int>>(
       builder: (context, activeIndex) {
         return ListView.builder(
+            restorationId: "product_list",
             controller: scrollController,
             shrinkWrap: true,
             padding: EdgeInsets.zero,
@@ -118,7 +119,7 @@ class ProductCardWidget extends StatelessWidget {
                     hideOneTrustCookieScript();
                     context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                     context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
-                    context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: scrollController.offset);
+                    // context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: scrollController.offset);
                     await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
                     showOneTrustCookieScript();
                   },
@@ -185,6 +186,7 @@ class ProductCardWidget extends StatelessWidget {
                                                     ? products[index].productionAssets[0]
                                                     : products[index].productionAssets[i],
                                                 fit: BoxFit.fitWidth,
+                                                cacheWidth: 1000,
                                                 headers: const {
                                                   'Cache-Control': 'public, max-age=604800',
                                                 }, errorBuilder: (context, error, stackTrace) {

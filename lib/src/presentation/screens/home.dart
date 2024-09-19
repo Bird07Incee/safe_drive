@@ -123,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           return Container(
                               color: cloudyWhite,
                               child: SingleChildScrollView(
+                                physics: ClampingScrollPhysics(),
                                 child: Column(
                                   children: [
                                     HomepageTopSection(
