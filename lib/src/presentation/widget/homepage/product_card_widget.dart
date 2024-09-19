@@ -119,7 +119,7 @@ class ProductCardWidget extends StatelessWidget {
                     hideOneTrustCookieScript();
                     context.read<ProductDetailBloc>().add(SetProduct(product: products[index]));
                     context.read<ProductDetailBloc>().add(SetClickFromImage(isClickFromImage: false));
-                    // context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: scrollController.offset);
+                    context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: scrollController.offset);
                     await Navigator.pushNamed(context, '${Routes.productDetail.toStringPath()}?pid=${products[index].productId}');
                     showOneTrustCookieScript();
                   },
