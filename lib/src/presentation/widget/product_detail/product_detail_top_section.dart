@@ -149,6 +149,9 @@ class _PDTopSectionState extends State<PDTopSection> {
                                             i == state.product.productionAssets.length
                                                 ? state.product.productionAssets[0]
                                                 : state.product.productionAssets[i],
+                                            headers: const {
+                                              'Cache-Control': 'public, max-age=604800',
+                                            },
                                           ),
                                           fit: BoxFit.fitWidth,
                                           imageErrorBuilder: (context, error, stackTrace) =>
@@ -191,6 +194,9 @@ class _PDTopSectionState extends State<PDTopSection> {
                           padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
                           child: Image.network(
                             state.product.merchantLogo,
+                            headers: const {
+                              'Cache-Control': 'public, max-age=604800',
+                            },
                             height: 40,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),

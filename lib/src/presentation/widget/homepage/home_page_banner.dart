@@ -60,6 +60,9 @@ class _HomePageBannerState extends State<HomePageBanner> {
                               placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                               image: NetworkImage(
                                 i == itemBannerLength ? widget.banners[0].image : widget.banners[i].image,
+                                headers: const {
+                                  'Cache-Control': 'public, max-age=604800',
+                                },
                               ),
                               fit: BoxFit.fitWidth,
                               imageErrorBuilder: (context, error, stackTrace) =>

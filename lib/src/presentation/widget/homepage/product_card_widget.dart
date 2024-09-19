@@ -75,6 +75,10 @@ class ProductCardWidget extends StatelessWidget {
     }
   }
 
+  void preCacheImageNetwork(BuildContext context, List<String> listImg) {
+    precacheImage(NetworkImage(listImg[0]), context);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<int> counters = List.generate(products.length, (index) => 1);
@@ -83,11 +87,12 @@ class ProductCardWidget extends StatelessWidget {
     return BlocBuilder<ActiveImagesIndexCubit, List<int>>(
       builder: (context, activeIndex) {
         return ListView.builder(
+            controller: scrollController,
             shrinkWrap: true,
             padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
             itemCount: products.length,
             itemBuilder: (BuildContext context, int index) {
+              // preCacheImageNetwork(context, products[index].productionAssets);
               String tagline = "<p><body>${cleanHtml(products[index].tagline)}</body></p>";
               TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
               if (tagline.contains("<table")) {
@@ -175,18 +180,28 @@ class ProductCardWidget extends StatelessWidget {
                                           return SizedBox(
                                             width: maxWidth,
                                             height: 576,
-                                            child: FadeInImage(
-                                                placeholder: AssetImage('assets/homepage/img_default.png'),
-                                                // Replace with your placeholder image path
-                                                image: NetworkImage(
-                                                  i == products[index].productionAssets.length
-                                                      ? products[index].productionAssets[0]
-                                                      : products[index].productionAssets[i],
-                                                ),
+                                            child: Image.network(
+                                                i == products[index].productionAssets.length
+                                                    ? products[index].productionAssets[0]
+                                                    : products[index].productionAssets[i],
                                                 fit: BoxFit.fitWidth,
-                                                imageErrorBuilder: (context, error, stackTrace) {
-                                                  return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
-                                                }),
+                                                headers: const {
+                                                  'Cache-Control': 'public, max-age=604800',
+                                                }, errorBuilder: (context, error, stackTrace) {
+                                              return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
+                                            }),
+                                            // child: FadeInImage(
+                                            //     placeholder: AssetImage('assets/homepage/img_default.png'),
+                                            //     // Replace with your placeholder image path
+                                            //     image: NetworkImage(
+                                            //       i == products[index].productionAssets.length
+                                            //           ? products[index].productionAssets[0]
+                                            //           : products[index].productionAssets[i],
+                                            //     ),
+                                            //     fit: BoxFit.fitWidth,
+                                            //     imageErrorBuilder: (context, error, stackTrace) {
+                                            //       return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
+                                            //     }),
                                           );
                                         }),
                                   ),
@@ -222,6 +237,9 @@ class ProductCardWidget extends StatelessWidget {
                                     padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
                                     child: Image.network(
                                       products[index].merchantLogo,
+                                      headers: const {
+                                        'Cache-Control': 'public, max-age=604800',
+                                      },
                                       height: 40,
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
