@@ -186,7 +186,7 @@ class ProductCardWidget extends StatelessWidget {
                                                     ? products[index].productionAssets[0]
                                                     : products[index].productionAssets[i],
                                                 fit: BoxFit.fitWidth,
-                                                cacheWidth: 1000,
+                                                cacheWidth: 600,
                                                 headers: const {
                                                   'Cache-Control': 'public, max-age=604800',
                                                 }, errorBuilder: (context, error, stackTrace) {
