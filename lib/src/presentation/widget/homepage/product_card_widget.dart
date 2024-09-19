@@ -87,8 +87,8 @@ class ProductCardWidget extends StatelessWidget {
     return BlocBuilder<ActiveImagesIndexCubit, List<int>>(
       builder: (context, activeIndex) {
         return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
             restorationId: "product_list",
-            controller: scrollController,
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             itemCount: products.length,
@@ -181,29 +181,30 @@ class ProductCardWidget extends StatelessWidget {
                                           return SizedBox(
                                             width: maxWidth,
                                             height: 576,
-                                            child: Image.network(
-                                                i == products[index].productionAssets.length
-                                                    ? products[index].productionAssets[0]
-                                                    : products[index].productionAssets[i],
-                                                fit: BoxFit.fitWidth,
-                                                cacheWidth: 600,
-                                                headers: const {
-                                                  'Cache-Control': 'public, max-age=604800',
-                                                }, errorBuilder: (context, error, stackTrace) {
-                                              return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
-                                            }),
-                                            // child: FadeInImage(
-                                            //     placeholder: AssetImage('assets/homepage/img_default.png'),
-                                            //     // Replace with your placeholder image path
-                                            //     image: NetworkImage(
-                                            //       i == products[index].productionAssets.length
-                                            //           ? products[index].productionAssets[0]
-                                            //           : products[index].productionAssets[i],
-                                            //     ),
-                                            //     fit: BoxFit.fitWidth,
-                                            //     imageErrorBuilder: (context, error, stackTrace) {
-                                            //       return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
-                                            //     }),
+                                            child:
+
+                                                // Image.network(
+                                                //     i == products[index].productionAssets.length
+                                                //         ? products[index].productionAssets[0]
+                                                //         : products[index].productionAssets[i],
+                                                //     fit: BoxFit.fitWidth,
+                                                //     cacheWidth: 600,
+                                                //     headers: const {
+                                                //       'Cache-Control': 'public, max-age=604800',
+                                                //     }, errorBuilder: (context, error, stackTrace) {
+                                                //   return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
+                                                // }),
+                                                FadeInImage.assetNetwork(
+                                                    placeholder: 'assets/homepage/img_default.png',
+                                                    // Replace with your placeholder image path
+                                                    image: i == products[index].productionAssets.length
+                                                        ? products[index].productionAssets[0]
+                                                        : products[index].productionAssets[i],
+                                                    fit: BoxFit.fitWidth,
+                                                    imageCacheWidth: 500,
+                                                    imageErrorBuilder: (context, error, stackTrace) {
+                                                      return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
+                                                    }),
                                           );
                                         }),
                                   ),
