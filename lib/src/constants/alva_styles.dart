@@ -181,10 +181,10 @@ class AlvaStyles {
 
 // ---------------------------------ButtonStyle-----------------------------------------------------------------------------------------
   ButtonStyle outlineButtonStyle(Color backgroundColor, Color foregroundColor, double borderRadius, {BorderSide? side}) => ButtonStyle(
-        side: MaterialStateProperty.all(side ?? BorderSide.none),
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
-        foregroundColor: MaterialStateProperty.all(foregroundColor),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        side: WidgetStateProperty.all(side ?? BorderSide.none),
+        backgroundColor: WidgetStateProperty.all(backgroundColor),
+        foregroundColor: WidgetStateProperty.all(foregroundColor),
+        shape: WidgetStateProperty.all(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         )),
       );

@@ -107,7 +107,7 @@ class ProductCardWidget extends StatelessWidget {
               return RumUserActionAnnotation(
                 description: "Tap product card",
                 child: GestureDetector(
-                  key: const Key("product_card"),
+                  key: Key("product_card_$index"),
                   onTap: () async {
                     log("product card");
                     AmplitudeWebHelper.getInstance().logTapOnProduct(
@@ -142,7 +142,7 @@ class ProductCardWidget extends StatelessWidget {
                         RumUserActionAnnotation(
                           description: "Tap see photos",
                           child: GestureDetector(
-                            key: const Key("see_photo"),
+                            key: Key("see_photo_$index"),
                             onTap: () async {
                               AmplitudeWebHelper.getInstance().logTapOnImageGallery(
                                   productName: products[index].productName,

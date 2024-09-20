@@ -13,10 +13,15 @@ class TrackingListNoProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
 
-    return WillPopScope(
-      onWillPop: () async {
-        showOneTrustCookieScript();
-        return false;
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        if (context.mounted) {
+          showOneTrustCookieScript();
+        }
       },
       child: AlvaRootWidget(
         titlePage: titleWebPage,

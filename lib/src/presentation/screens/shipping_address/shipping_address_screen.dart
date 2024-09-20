@@ -36,7 +36,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   bool isLoaded = false;
   @override
   void initState() {
-    // TODO: implement initState
     AmplitudeWebHelper.getInstance().logEnterShippingAddressPage();
     super.initState();
   }
@@ -51,7 +50,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   }
 
   loadProduct() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       uriData = Uri.parse(settings!.name!);
       routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);

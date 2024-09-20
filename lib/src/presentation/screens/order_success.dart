@@ -34,7 +34,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
   late double maxWidth, maxHeight;
   bool logLaeo = false;
   void loadInvoice() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
@@ -85,17 +85,22 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
     maxHeight = MediaQuery.of(context).size.height;
 
     return RootPageCondition(
-        child: WillPopScope(
-      onWillPop: () async {
-        showOneTrustCookieScript();
-        String pid = context.read<OrderSuccessBloc>().state.orderSuccessData.productId ?? "";
-        if (pid.isNotEmpty) {
-          refreshRoute(context: context, currentRoute: "orderSuccess", queryParams: "", listOption: []);
-        } else {
-          CurrentRouteObserver.instance.stack.clear();
-          Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+        child: PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
         }
-        return false;
+        if (context.mounted) {
+          showOneTrustCookieScript();
+          String pid = context.read<OrderSuccessBloc>().state.orderSuccessData.productId ?? "";
+          if (pid.isNotEmpty) {
+            refreshRoute(context: context, currentRoute: "orderSuccess", queryParams: "", listOption: []);
+          } else {
+            CurrentRouteObserver.instance.stack.clear();
+            Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+          }
+        }
       },
       child: AlvaRootWidget(
         titlePage: titleWebPage,

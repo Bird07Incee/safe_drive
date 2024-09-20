@@ -61,8 +61,13 @@ class GeneralDialog {
   }
 
   _showGeneralLoading(BuildContext context, {Key? key, bool? canBack}) {
-    Widget loading = WillPopScope(
-      onWillPop: () async => canBack ?? false,
+    Widget loading = PopScope(
+      canPop: canBack ?? false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+      },
       child: SizedBox(
           width: 64.0,
           height: 64.0,
@@ -90,7 +95,7 @@ class GeneralDialog {
       bool isConfirmPayment = false}) {
     Widget acceptButton = TextButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
+        padding: WidgetStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
       ),
       onPressed: () {
         Navigator.pop(context);
@@ -108,7 +113,7 @@ class GeneralDialog {
 
     Widget cancelButton = TextButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 16, right: 14, top: 8, bottom: 8)),
+        padding: WidgetStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 16, right: 14, top: 8, bottom: 8)),
       ),
       onPressed: () {
         Navigator.pop(context);

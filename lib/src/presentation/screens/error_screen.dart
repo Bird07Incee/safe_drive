@@ -17,8 +17,13 @@ class ErrorScreen extends StatelessWidget {
     var maxWidth = MediaQuery.of(context).size.width;
     var maxHeight = MediaQuery.of(context).size.height;
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+      },
       child: AlvaRootWidget(
           titlePage: titleWebPage,
           child: Column(

@@ -40,7 +40,7 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
   }
 
   void loadRefundData() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
@@ -73,16 +73,21 @@ class _RefundSuccessScreenState extends State<RefundSuccessScreen> {
     maxHeight = MediaQuery.of(context).size.height;
 
     return RootPageCondition(
-        child: WillPopScope(
-      onWillPop: () async {
-        String pid = context.read<RefundSuccessBloc>().state.refundSuccessData.productId ?? "";
-        if (pid.isNotEmpty) {
-          refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
-        } else {
-          CurrentRouteObserver.instance.stack.clear();
-          Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+        child: PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
         }
-        return false;
+        if (context.mounted) {
+          String pid = context.read<RefundSuccessBloc>().state.refundSuccessData.productId ?? "";
+          if (pid.isNotEmpty) {
+            refreshRoute(context: context, currentRoute: "refundSuccess", queryParams: "orderNo=$orderNo&pid=$pid", listOption: []);
+          } else {
+            CurrentRouteObserver.instance.stack.clear();
+            Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+          }
+        }
       },
       child: AlvaRootWidget(
         titlePage: titleWebPage,

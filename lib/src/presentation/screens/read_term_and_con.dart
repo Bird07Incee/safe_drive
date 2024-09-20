@@ -16,10 +16,15 @@ class ReadTermAndConScreen extends StatelessWidget {
     final maxHeight = MediaQuery.of(context).size.height - 56;
 
     return RootPageCondition(
-      child: WillPopScope(
-        onWillPop: () async {
-          Navigator.pushNamed(context, '/');
-          return true;
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (bool didPop, Object? result) async {
+          if (didPop) {
+            return;
+          }
+          if (context.mounted) {
+            Navigator.pushNamed(context, '/');
+          }
         },
         child: AlvaRootWidget(
             titlePage: titleWebPage,

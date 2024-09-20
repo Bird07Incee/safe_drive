@@ -80,16 +80,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final size = MediaQuery.of(context).size;
     final maxWidth = size.width;
     return RootPageCondition(
-        child: WillPopScope(
-            onWillPop: () async {
-              context.read<ProductListBloc>().add(SetSelectTabIndex(0));
-              context.read<ProductListBloc>().add(GetProductListByCategory("", context));
-              tabController!.animateTo(
-                0,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-              );
-              return false;
+        child: PopScope(
+            canPop: false,
+            onPopInvokedWithResult: (bool didPop, Object? result) async {
+              if (didPop) {
+                return;
+              }
+              if (context.mounted) {
+                context.read<ProductListBloc>().add(SetSelectTabIndex(0));
+                context.read<ProductListBloc>().add(GetProductListByCategory("", context));
+                tabController!.animateTo(
+                  0,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              }
             },
             child: AlvaRootWidget(
                 titlePage: titleWebPage,

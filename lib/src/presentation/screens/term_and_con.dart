@@ -120,10 +120,15 @@ class _TermAndConScreenState extends State<TermAndConScreen> {
     final maxHeight = MediaQuery.of(context).size.height;
 
     return RootPageCondition(
-      child: WillPopScope(
-        onWillPop: () async {
-          Navigator.pushNamed(context, '/');
-          return true;
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (bool didPop, Object? result) async {
+          if (didPop) {
+            return;
+          }
+          if (context.mounted) {
+            Navigator.pushNamed(context, '/');
+          }
         },
         child: AlvaRootWidget(
             titlePage: titleWebPage,

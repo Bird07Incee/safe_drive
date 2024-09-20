@@ -64,7 +64,7 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
   }
 
   void loadRefundRequest() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
@@ -114,12 +114,17 @@ class _RefundRequestState extends State<RefundFormTrackingScreen> {
           icon: const Icon(Icons.arrow_back_ios_rounded)),
     );
     return RootPageCondition(
-        child: WillPopScope(
-      onWillPop: () async {
-        Navigator.pop(context);
-        context.read<RefundRequestBloc>().textEditingControllerReason!.clear();
-        context.read<RefundRequestBloc>().textEditingControllerRemark!.clear();
-        return false;
+        child: PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        if (context.mounted) {
+          Navigator.pop(context);
+          context.read<RefundRequestBloc>().textEditingControllerReason!.clear();
+          context.read<RefundRequestBloc>().textEditingControllerRemark!.clear();
+        }
       },
       child: BlocConsumer<RefundRequestBloc, RefundRequestState>(listener: (context, state) {
         if (state.refundRequestStatus == GetRefundRequestStatus.submitSuccess) {

@@ -65,12 +65,17 @@ class _TrackingListScreenState extends State<TrackingListScreen> {
           icon: const Icon(Icons.arrow_back_ios_rounded)),
     );
     return RootPageCondition(
-      child: WillPopScope(
-        onWillPop: () async {
-          showOneTrustCookieScript();
-          setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
-          Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
-          return false;
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (bool didPop, Object? result) async {
+          if (didPop) {
+            return;
+          }
+          if (context.mounted) {
+            showOneTrustCookieScript();
+            setUrlStrategyListener(ChangeHistoryUrlStrategy(title: Routes.initial.name, urlPromptBuy: Routes.initial.toStringPath()));
+            Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+          }
         },
         child: BlocBuilder<TrackingOrderBloc, TrackingOrderState>(
           builder: (context, state) {

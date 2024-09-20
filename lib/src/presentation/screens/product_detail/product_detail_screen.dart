@@ -87,7 +87,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   }
 
   loadProduct() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
@@ -178,11 +178,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     context.read<ScrollProductDetailBloc>().add(ProductDetailScrollAction(0, MediaQuery.of(context).size.width, "1"));
   }
 
-  WillPopScope productDetailPage(PageController pageController, BuildContext context, ProductDetailState pdState) {
-    return WillPopScope(
-        onWillPop: () async {
-          onBack();
-          return false;
+  PopScope productDetailPage(PageController pageController, BuildContext context, ProductDetailState pdState) {
+    return PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (bool didPop, Object? result) async {
+          if (didPop) {
+            return;
+          }
+          if (context.mounted) {
+            onBack();
+          }
         },
         child: AlvaRootWidget(
           titlePage: titleWebPage,
@@ -337,10 +342,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     }
 
     int imageLen = pdState.product.productionAssets.length;
-    return WillPopScope(
-      onWillPop: () async {
-        backButtontoDetail();
-        return false;
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        if (context.mounted) {
+          backButtontoDetail();
+        }
       },
       child: Scaffold(
         backgroundColor: Colors.black,

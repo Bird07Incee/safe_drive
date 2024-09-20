@@ -128,9 +128,11 @@ class TrackingOrderCard extends StatelessWidget {
                   await Navigator.pushNamed(context,
                           '${Routes.tracking.toStringPath()}?orderNo=${order.orderNo!}&pid=${order.products![0].productId!}&productName=${order.products![0].productNameTh!.toString()}&optionName=${order.products![0].productDescription}&status=${order.shippingStatusMessage}')
                       .then((value) {
-                    final route = ModalRoute.of(context);
-                    if (route!.settings.name!.contains(Routes.trackingList.toStringPath())) {
-                      AmplitudeWebHelper.getInstance().logEnterOrderTrackingPage();
+                    if (context.mounted) {
+                      final route = ModalRoute.of(context);
+                      if (route!.settings.name!.contains(Routes.trackingList.toStringPath())) {
+                        AmplitudeWebHelper.getInstance().logEnterOrderTrackingPage();
+                      }
                     }
                   });
                 },

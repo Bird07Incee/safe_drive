@@ -35,7 +35,7 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
   }
 
   loadProduct() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
@@ -103,12 +103,17 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
     return BlocBuilder<ProductOptionBloc, ProductOptionState>(
       builder: (context, prodOptState) {
         return RootPageCondition(
-          child: WillPopScope(
-            onWillPop: () async {
-              AmplitudeWebHelper.getInstance().logEnterProductDetails(
-                  productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
-              resetAllState();
-              return true;
+          child: PopScope(
+            canPop: false,
+            onPopInvokedWithResult: (bool didPop, Object? result) async {
+              if (didPop) {
+                return;
+              }
+              if (context.mounted) {
+                AmplitudeWebHelper.getInstance().logEnterProductDetails(
+                    productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
+                resetAllState();
+              }
             },
             child: maStatus.toLowerCase() == "true"
                 ? AlvaRootWidget(

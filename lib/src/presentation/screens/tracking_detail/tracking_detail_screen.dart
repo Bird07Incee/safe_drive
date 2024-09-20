@@ -45,7 +45,7 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
   }
 
   void loadTracking() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       var uriData = Uri.parse(settings!.name!);
       var routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
@@ -297,7 +297,6 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     );
   }
 
-  ///TODO: return and refund status_detail json???
   Widget statusReturn(Status s) {
     List<Widget> l = [];
     for (var col in s.details) {
@@ -385,10 +384,15 @@ class _TrackingDetailState extends State<TrackingDetailScreen> {
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
-        child: WillPopScope(
-      onWillPop: () async {
-        onBack(context);
-        return false;
+        child: PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        if (context.mounted) {
+          onBack(context);
+        }
       },
       child: AlvaRootWidget(
         titlePage: titleWebPage,

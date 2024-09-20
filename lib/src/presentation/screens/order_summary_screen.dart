@@ -74,7 +74,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   }
 
   loadProduct() {
-    settings = ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings : null;
+    settings = ModalRoute.of(context)?.settings;
     if (settings != null) {
       uriData = Uri.parse(settings!.name!);
       routingData = RoutingData(route: uriData.path, queryParameters: uriData.queryParameters);
@@ -154,15 +154,20 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return RootPageCondition(
-        child: WillPopScope(
-      onWillPop: () async {
-        ProductDetailState productState = context.read<ProductDetailBloc>().state;
-        OrderSummaryState orderState = context.read<OrderSummaryBloc>().state;
-        ProductOptionState productOptionState = context.read<ProductOptionBloc>().state;
-        String optionName = productOptionState.stepOneGroupValueRadio;
-        double showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
-        onBack(context, productState, orderState, step1price, showPrice, optionName);
-        return false;
+        child: PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        if (context.mounted) {
+          ProductDetailState productState = context.read<ProductDetailBloc>().state;
+          OrderSummaryState orderState = context.read<OrderSummaryBloc>().state;
+          ProductOptionState productOptionState = context.read<ProductOptionBloc>().state;
+          String optionName = productOptionState.stepOneGroupValueRadio;
+          double showPrice = productState.product.discountPrice > 0 ? productState.product.discountPrice : productState.product.price;
+          onBack(context, productState, orderState, step1price, showPrice, optionName);
+        }
       },
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
