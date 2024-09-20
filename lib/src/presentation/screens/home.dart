@@ -147,6 +147,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       color: Colors.white,
                                       child: TabBar(
                                           controller: tabController,
+                                          tabAlignment: TabAlignment.start,
                                           labelColor: Colors.black,
                                           indicatorColor: mintGreen,
                                           labelPadding: EdgeInsets.symmetric(horizontal: 30),
@@ -266,7 +267,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 height: 16,
                                               ),
                                               Container(
-                                                width: 100,
                                                 height: 32,
                                                 margin: EdgeInsets.symmetric(vertical: 4),
                                                 decoration: BoxDecoration(
@@ -281,6 +281,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       ),
                                                     ]),
                                                 child: Row(
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     const SizedBox(
                                                       width: 16,

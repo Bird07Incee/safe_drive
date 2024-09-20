@@ -24,6 +24,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
   @override
   Widget build(BuildContext context) {
     int itemBannerLength = widget.banners.length;
+    final maxWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         AspectRatio(
@@ -55,15 +56,11 @@ class _HomePageBannerState extends State<HomePageBanner> {
                     aspectRatio: 16 / 9,
                     child: SizedBox(
                       child: itemBannerLength == 0
-                          ? Image.asset(ProductDetailConst().imgHeroBannerPath, fit: BoxFit.fitWidth)
-                          : FadeInImage(
-                              placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
-                              image: NetworkImage(
-                                i == itemBannerLength ? widget.banners[0].image : widget.banners[i].image,
-                                headers: const {
-                                  'Cache-Control': 'public, max-age=604800',
-                                },
-                              ),
+                          ? Image.asset(ProductDetailConst().imgHeroBannerPath, fit: BoxFit.fitWidth, cacheWidth: maxWidth.toInt() - 32)
+                          : FadeInImage.assetNetwork(
+                              imageCacheWidth: maxWidth.toInt() - 32,
+                              placeholder: ProductDetailConst().imgDefaultPath,
+                              image: i == itemBannerLength ? widget.banners[0].image : widget.banners[i].image,
                               fit: BoxFit.fitWidth,
                               imageErrorBuilder: (context, error, stackTrace) =>
                                   Image.asset(ProductDetailConst().imgDefaultPath, fit: BoxFit.fitWidth),
