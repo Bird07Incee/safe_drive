@@ -19,6 +19,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/NonCacheImageNetwork.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -181,17 +182,20 @@ class ProductCardWidget extends StatelessWidget {
                                           return SizedBox(
                                             width: maxWidth,
                                             height: 576,
-                                            child: Image.network(
-                                                i == products[index].productionAssets.length
-                                                    ? products[index].productionAssets[0]
-                                                    : products[index].productionAssets[i],
-                                                fit: BoxFit.fitWidth,
-                                                cacheWidth: 600,
-                                                headers: const {
-                                                  'Cache-Control': 'public, max-age=604800',
-                                                }, errorBuilder: (context, error, stackTrace) {
-                                              return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
-                                            }),
+                                            child: NonCacheNetworkImage(
+                                              i == products[index].productionAssets.length
+                                                  ? products[index].productionAssets[0]
+                                                  : products[index].productionAssets[i],
+                                            ),
+                                            // child: Image.network(
+                                            //     i == products[index].productionAssets.length
+                                            //         ? products[index].productionAssets[0]
+                                            //         : products[index].productionAssets[i],
+                                            //     fit: BoxFit.fitWidth,
+                                            //     cacheWidth: 600,
+                                            //     headers: const {
+                                            //       'Cache-Control': 'public, max-age=604800',
+                                            //     }, errorBuilder: (context, error, stackTrace) { return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);}),
                                             // FadeInImage.assetNetwork(
                                             //     placeholder: 'assets/homepage/img_default.png',
                                             //     // Replace with your placeholder image path
