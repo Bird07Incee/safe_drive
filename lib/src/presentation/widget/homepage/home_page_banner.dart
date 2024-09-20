@@ -25,6 +25,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
   Widget build(BuildContext context) {
     int itemBannerLength = widget.banners.length;
     final maxWidth = MediaQuery.of(context).size.width;
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio.toInt();
     return Stack(
       children: [
         AspectRatio(
@@ -58,7 +59,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                       child: itemBannerLength == 0
                           ? Image.asset(ProductDetailConst().imgHeroBannerPath, fit: BoxFit.fitWidth, cacheWidth: maxWidth.toInt() - 32)
                           : FadeInImage.assetNetwork(
-                              imageCacheWidth: maxWidth.toInt() - 32,
+                              imageCacheWidth: (maxWidth.toInt() - 32) * devicePixelRatio,
                               placeholder: ProductDetailConst().imgDefaultPath,
                               image: i == itemBannerLength ? widget.banners[0].image : widget.banners[i].image,
                               fit: BoxFit.fitWidth,

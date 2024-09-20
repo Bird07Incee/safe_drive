@@ -19,7 +19,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
-import 'package:marketplace_line_oa/src/presentation/shared/NonCacheImageNetwork.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/noncache_image_network.dart';
 import 'package:marketplace_line_oa/src/routes/routes.dart';
 import 'package:marketplace_line_oa/src/utils/truncated_html_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -84,6 +84,7 @@ class ProductCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<int> counters = List.generate(products.length, (index) => 1);
     context.read<ActiveImagesIndexCubit>().initialItems(counters);
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio.toInt();
 
     return BlocBuilder<ActiveImagesIndexCubit, List<int>>(
       builder: (context, activeIndex) {
@@ -244,7 +245,7 @@ class ProductCardWidget extends StatelessWidget {
                                                   headers: const {
                                                     'Cache-Control': 'public, max-age=604800',
                                                   },
-                                                  cacheHeight: 40,
+                                                  cacheHeight: 40 * devicePixelRatio,
                                                   height: 40,
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
