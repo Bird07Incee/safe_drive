@@ -252,6 +252,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         child: GestureDetector(
                                           key: const Key("load_more_button"),
                                           onTap: () {
+                                            PaintingBinding.instance.imageCache.clear();  // Clear the cache
+                                            PaintingBinding.instance.imageCache.maximumSize = 50;  // Set a small cache size
                                             if (tab == 0) {
                                               context
                                                   .read<ProductListBloc>()

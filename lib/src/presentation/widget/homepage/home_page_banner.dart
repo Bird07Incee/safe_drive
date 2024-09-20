@@ -59,7 +59,7 @@ class _HomePageBannerState extends State<HomePageBanner> {
                       child: itemBannerLength == 0
                           ? Image.asset(ProductDetailConst().imgHeroBannerPath, fit: BoxFit.fitWidth, cacheWidth: maxWidth.toInt() - 32)
                           : FadeInImage.assetNetwork(
-                              imageCacheWidth: (maxWidth.toInt() - 32) * devicePixelRatio,
+                              imageCacheWidth: maxWidth.toInt() * devicePixelRatio,
                               placeholder: ProductDetailConst().imgDefaultPath,
                               image: i == itemBannerLength ? widget.banners[0].image : widget.banners[i].image,
                               fit: BoxFit.fitWidth,
