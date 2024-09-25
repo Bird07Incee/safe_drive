@@ -27,9 +27,13 @@ class AlvaRootWidget extends StatelessWidget {
           color: Colors.black,
           title: titlePage,
           child: Scaffold(
-            body: child,
+            body: Stack(
+              children: [
+                child,
+                bottomSheet == null ? Container() : Positioned(bottom: 0, left: 0, child: bottomSheet!),
+              ],
+            ),
             appBar: appBarCustom,
-            bottomSheet: bottomSheet,
             backgroundColor: Colors.white,
           )),
     );
