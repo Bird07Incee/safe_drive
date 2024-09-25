@@ -83,7 +83,6 @@ class ProductCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<int> counters = List.generate(products.length, (index) => 1);
     context.read<ActiveImagesIndexCubit>().initialItems(counters);
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio.toInt();
 
     return BlocBuilder<ActiveImagesIndexCubit, List<int>>(
       builder: (context, activeIndex) {
@@ -104,6 +103,16 @@ class ProductCardWidget extends StatelessWidget {
               int htmlTableRowCount = 0;
 
               PageController pageViewController = safeImageIndex(activeIndex, index);
+
+              double aspectRatio = 16 / 9;
+
+              // Dynamically calculated cacheWidth
+              double cacheWidth = (MediaQuery.of(context).size.width * MediaQuery.of(context).devicePixelRatio.toInt());
+              // Calculate cacheHeight based on aspect ratio
+              double cacheHeight = (cacheWidth / aspectRatio);
+
+              if (cacheWidth > 1194) cacheWidth = 1194;
+              if (cacheHeight > 671) cacheHeight = 671;
 
               return RumUserActionAnnotation(
                 description: "Tap product card",
@@ -181,16 +190,24 @@ class ProductCardWidget extends StatelessWidget {
                                         itemBuilder: (ctx, i) {
                                           return FadeInImage.assetNetwork(
                                               placeholder: 'assets/homepage/img_default.png',
+                                              placeholderCacheWidth: cacheWidth.round(),
+                                              placeholderCacheHeight: cacheHeight.round(),
                                               image: i == products[index].productionAssets.length
                                                   ? products[index].productionAssets[0]
                                                   : products[index].productionAssets[i],
-                                              fit: BoxFit.fitWidth,
-                                              imageCacheWidth: (maxWidth * devicePixelRatio).round(),
+                                              fit: BoxFit.cover,
+                                              width: cacheWidth,
+                                              height: cacheHeight,
+                                              imageCacheWidth: cacheWidth.round(),
+                                              imageCacheHeight: cacheHeight.round(),
                                               imageErrorBuilder: (context, error, stackTrace) {
                                                 return Image.asset(
                                                   'assets/homepage/img_default.png',
-                                                  fit: BoxFit.fitWidth,
-                                                  cacheWidth: (maxWidth * devicePixelRatio).round(),
+                                                  fit: BoxFit.cover,
+                                                  width: cacheWidth,
+                                                  height: cacheHeight,
+                                                  cacheWidth: cacheWidth.round(),
+                                                  cacheHeight: cacheHeight.round(),
                                                 );
                                               });
                                         }),
@@ -227,7 +244,7 @@ class ProductCardWidget extends StatelessWidget {
                                     padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
                                     child: Image.network(
                                       products[index].merchantLogo,
-                                      cacheHeight: 40 * devicePixelRatio,
+                                      cacheHeight: 40 * MediaQuery.of(context).devicePixelRatio.toInt(),
                                       height: 40,
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
