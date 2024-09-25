@@ -70,6 +70,9 @@ class ErrorScreen extends StatelessWidget {
                     },
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.all(0),
+                      side: BorderSide(
+                        color: Colors.transparent,
+                      ),
                     ),
                     child: Container(
                       height: 48,
