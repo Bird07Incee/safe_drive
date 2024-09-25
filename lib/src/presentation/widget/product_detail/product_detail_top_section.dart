@@ -149,9 +149,6 @@ class _PDTopSectionState extends State<PDTopSection> {
                                             i == state.product.productionAssets.length
                                                 ? state.product.productionAssets[0]
                                                 : state.product.productionAssets[i],
-                                            headers: const {
-                                              'Cache-Control': 'public, max-age=604800',
-                                            },
                                           ),
                                           fit: BoxFit.fitWidth,
                                           imageErrorBuilder: (context, error, stackTrace) =>

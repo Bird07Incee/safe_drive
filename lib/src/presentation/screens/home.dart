@@ -194,37 +194,36 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                         ? SizedBox(
                                                             width: 24,
                                                             height: 24,
-                                                            child: FadeInImage(
-                                                              placeholder: const AssetImage('assets/images/category/icon_active_cate_other2.png'),
+                                                            child: FadeInImage.assetNetwork(
+                                                              placeholder: 'assets/images/category/icon_active_cate_other2.png',
                                                               // Replace with your placeholder image path
-                                                              image: NetworkImage(
-                                                                state.productList.category![i]["img_active"],
-                                                                headers: const {
-                                                                  'Cache-Control': 'public, max-age=604800',
-                                                                },
-                                                              ),
+                                                              image: state.productList.category![i]["img_active"],
+
                                                               fit: BoxFit.fitWidth,
+                                                              imageCacheWidth: 72,
                                                               imageErrorBuilder: (context, error, stackTrace) {
-                                                                return Image.asset('assets/images/category/icon_cate_other2.png',
-                                                                    fit: BoxFit.fitWidth);
+                                                                return Image.asset(
+                                                                  'assets/images/category/icon_cate_other2.png',
+                                                                  fit: BoxFit.fitWidth,
+                                                                  cacheWidth: 72,
+                                                                );
                                                               },
                                                             ))
                                                         : SizedBox(
                                                             width: 24,
                                                             height: 24,
-                                                            child: FadeInImage(
-                                                                placeholder: const AssetImage('assets/images/category/icon_cate_other2.png'),
+                                                            child: FadeInImage.assetNetwork(
+                                                                placeholder: 'assets/images/category/icon_cate_other2.png',
                                                                 // Replace with your placeholder image path
-                                                                image: NetworkImage(
-                                                                  state.productList.category![i]["img_inactive"],
-                                                                  headers: const {
-                                                                    'Cache-Control': 'public, max-age=604800',
-                                                                  },
-                                                                ),
+                                                                image: state.productList.category![i]["img_inactive"],
                                                                 fit: BoxFit.fitWidth,
+                                                                imageCacheWidth: 72,
                                                                 imageErrorBuilder: (context, error, stackTrace) {
-                                                                  return Image.asset('assets/images/category/icon_cate_other2.png',
-                                                                      fit: BoxFit.fitWidth);
+                                                                  return Image.asset(
+                                                                    'assets/images/category/icon_cate_other2.png',
+                                                                    fit: BoxFit.fitWidth,
+                                                                    cacheWidth: 72,
+                                                                  );
                                                                 }),
                                                           )),
                                               ),
@@ -252,8 +251,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         child: GestureDetector(
                                           key: const Key("load_more_button"),
                                           onTap: () {
-                                            PaintingBinding.instance.imageCache.clear();  // Clear the cache
-                                            PaintingBinding.instance.imageCache.maximumSize = 50;  // Set a small cache size
+                                            PaintingBinding.instance.imageCache.clear(); // Clear the cache
+                                            PaintingBinding.instance.imageCache.maximumSize = 50; // Set a small cache size
                                             if (tab == 0) {
                                               context
                                                   .read<ProductListBloc>()

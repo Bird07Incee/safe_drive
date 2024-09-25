@@ -407,9 +407,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                                     placeholder: AssetImage(ProductDetailConst().imgDefaultPath),
                                     image: NetworkImage(
                                       i == imageLen ? pdState.product.productionAssets[0] : pdState.product.productionAssets[i],
-                                      headers: const {
-                                        'Cache-Control': 'public, max-age=604800',
-                                      },
                                     ),
                                     // image: NetworkImage(
                                     //   i == imageDataLength

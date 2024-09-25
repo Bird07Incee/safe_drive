@@ -179,58 +179,61 @@ class ProductCardWidget extends StatelessWidget {
                                           }
                                         },
                                         itemBuilder: (ctx, i) {
-                                          return Image.network(
-                                              i == products[index].productionAssets.length
+                                          return FadeInImage.assetNetwork(
+                                              placeholder: 'assets/homepage/img_default.png',
+                                              image: i == products[index].productionAssets.length
                                                   ? products[index].productionAssets[0]
                                                   : products[index].productionAssets[i],
                                               fit: BoxFit.fitWidth,
-                                              cacheWidth: (maxWidth * devicePixelRatio).round(),
-                                              errorBuilder: (context, error, stackTrace) { return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);}
-                                          );
+                                              imageCacheWidth: (maxWidth * devicePixelRatio).round(),
+                                              imageErrorBuilder: (context, error, stackTrace) {
+                                                return Image.asset(
+                                                  'assets/homepage/img_default.png',
+                                                  fit: BoxFit.fitWidth,
+                                                  cacheWidth: (maxWidth * devicePixelRatio).round(),
+                                                );
+                                              });
                                         }),
                                   ),
                                 ),
                                 Positioned.fill(
                                     child: Align(
-                                      alignment: Alignment.bottomLeft,
-                                      child: Visibility(
-                                        visible: products[index].productionAssets.length == 1 ? false : true,
-                                        child: Container(
-                                          margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
-                                          width: 41,
-                                          height: 24,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(16),
-                                            color: cloudyWhite.withOpacity(0.5),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              "${safeListAccess(activeIndex, index)} / ${products[index].productionAssets.length}",
-                                              style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
-                                            ),
-                                          ),
+                                  alignment: Alignment.bottomLeft,
+                                  child: Visibility(
+                                    visible: products[index].productionAssets.length == 1 ? false : true,
+                                    child: Container(
+                                      margin: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                                      width: 41,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        color: cloudyWhite.withOpacity(0.5),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "${safeListAccess(activeIndex, index)} / ${products[index].productionAssets.length}",
+                                          style: AlvaStyles().headingSize10w500(BTN_SELECTED_TEXT_COLOR_NEW),
                                         ),
                                       ),
-                                    )),
+                                    ),
+                                  ),
+                                )),
                                 Positioned.fill(
                                     child: Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: Container(
-                                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
-                                        margin: EdgeInsets.all(8),
-                                        padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
-                                        child: Image.network(
-                                          products[index].merchantLogo,
-                                          headers: const {
-                                            'Cache-Control': 'public, max-age=604800',
-                                          },
-                                          cacheHeight: 40 * devicePixelRatio,
-                                          height: 40,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
-                                        ),
-                                      ),
-                                    )),
+                                  alignment: Alignment.bottomRight,
+                                  child: Container(
+                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
+                                    margin: EdgeInsets.all(8),
+                                    padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
+                                    child: Image.network(
+                                      products[index].merchantLogo,
+                                      cacheHeight: 40 * devicePixelRatio,
+                                      height: 40,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                                    ),
+                                  ),
+                                )),
                                 Visibility(
                                   visible: products[index].percentDiscountPrice != 0 && products[index].productionOptionals.isEmpty,
                                   child: Container(
@@ -313,7 +316,7 @@ class ProductCardWidget extends StatelessWidget {
                                   Visibility(
                                     visible: products[index].tagline == "" ? false : true,
                                     child: HtmlWidget(
-                                      // "<p>${cleanHtml(products[index].tagline)}</p>",
+                                        // "<p>${cleanHtml(products[index].tagline)}</p>",
                                         tagline,
                                         textStyle: AlvaStyles().headingSize12w500(blackNewForTaglinePromptBuy).copyWith(height: 20 / 12),
                                         customStylesBuilder: (element) {
