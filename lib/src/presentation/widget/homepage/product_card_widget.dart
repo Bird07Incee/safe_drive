@@ -111,8 +111,8 @@ class ProductCardWidget extends StatelessWidget {
               // Calculate cacheHeight based on aspect ratio
               double cacheHeight = (cacheWidth / aspectRatio);
 
-              if (cacheWidth > 1194) cacheWidth = 1194;
-              if (cacheHeight > 671) cacheHeight = 671;
+              if (cacheWidth > 1194) cacheWidth = 800;
+              if (cacheHeight > 671) cacheHeight = 450;
 
               return RumUserActionAnnotation(
                 description: "Tap product card",
