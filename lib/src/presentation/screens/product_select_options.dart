@@ -203,6 +203,16 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                     child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
                       builder: (context, state) {
                         if (state.status.isSuccess) {
+                          double aspectRatio = 16 / 9;
+
+                          // Dynamically calculated cacheWidth
+                          double cacheWidth = (MediaQuery.of(context).size.width * MediaQuery.of(context).devicePixelRatio.toInt());
+                          // Calculate cacheHeight based on aspect ratio
+                          double cacheHeight = (cacheWidth / aspectRatio);
+
+                          if (cacheWidth > 1194) cacheWidth = 1194;
+                          if (cacheHeight > 671) cacheHeight = 671;
+
                           return Container(
                             color: whitePure,
                             child: Theme(
@@ -424,20 +434,30 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                                                   aspectRatio: 16 / 9,
                                                                   child: ClipRRect(
                                                                     borderRadius: BorderRadius.circular(4),
-                                                                    child: FadeInImage(
-                                                                      placeholder: AssetImage(ProductSelectOptionsConst().imgDefaultPath),
-                                                                      image: NetworkImage(state.product.productionOptionals[index].image == ""
+                                                                    child: FadeInImage.assetNetwork(
+                                                                      placeholder: ProductSelectOptionsConst().imgDefaultPath,
+                                                                      image: state.product.productionOptionals[index].image == ""
                                                                           ? state.product.productionAssets.first
-                                                                          : state.product.productionOptionals[index].image),
+                                                                          : state.product.productionOptionals[index].image,
                                                                       fit: BoxFit.cover,
+                                                                      width: cacheWidth,
+                                                                      height: cacheHeight,
+                                                                      imageCacheWidth: cacheWidth.round(),
+                                                                      imageCacheHeight: cacheHeight.round(),
                                                                       imageErrorBuilder: (context, error, stackTrace) => Container(
                                                                         height: 40,
                                                                         width: 72,
                                                                         decoration: BoxDecoration(
                                                                           borderRadius: BorderRadius.circular(4),
                                                                         ),
-                                                                        child:
-                                                                            Image.asset(ProductSelectOptionsConst().imgDefaultPath, fit: BoxFit.fill),
+                                                                        child: Image.asset(
+                                                                          ProductSelectOptionsConst().imgDefaultPath,
+                                                                          fit: BoxFit.fill,
+                                                                          width: cacheWidth,
+                                                                          height: cacheHeight,
+                                                                          cacheWidth: cacheWidth.round(),
+                                                                          cacheHeight: cacheHeight.round(),
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),

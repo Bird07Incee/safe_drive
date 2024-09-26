@@ -117,6 +117,16 @@ class _PDTopSectionState extends State<PDTopSection> {
                               }
                             },
                             itemBuilder: (ctx, i) {
+                              double aspectRatio = 16 / 9;
+
+                              // Dynamically calculated cacheWidth
+                              double cacheWidth = (MediaQuery.of(context).size.width * MediaQuery.of(context).devicePixelRatio.toInt());
+                              // Calculate cacheHeight based on aspect ratio
+                              double cacheHeight = (cacheWidth / aspectRatio);
+
+                              if (cacheWidth > 1194) cacheWidth = 1194;
+                              if (cacheHeight > 671) cacheHeight = 671;
+
                               return Stack(
                                 children: [
                                   GestureDetector(
@@ -142,17 +152,25 @@ class _PDTopSectionState extends State<PDTopSection> {
                                       child: SizedBox(
                                         width: maxWidth,
                                         height: 576,
-                                        child: FadeInImage(
-                                          placeholder: const AssetImage('assets/homepage/img_default.png'),
+                                        child: FadeInImage.assetNetwork(
+                                          placeholder: 'assets/homepage/img_default.png',
                                           // Replace with your placeholder image path
-                                          image: NetworkImage(
-                                            i == state.product.productionAssets.length
-                                                ? state.product.productionAssets[0]
-                                                : state.product.productionAssets[i],
-                                          ),
+                                          image: i == state.product.productionAssets.length
+                                              ? state.product.productionAssets[0]
+                                              : state.product.productionAssets[i],
+                                          width: cacheWidth,
+                                          height: cacheHeight,
+                                          imageCacheWidth: cacheWidth.round(),
+                                          imageCacheHeight: cacheHeight.round(),
                                           fit: BoxFit.fitWidth,
-                                          imageErrorBuilder: (context, error, stackTrace) =>
-                                              Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth),
+                                          imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                                            'assets/homepage/img_default.png',
+                                            fit: BoxFit.fitWidth,
+                                            width: cacheWidth,
+                                            height: cacheHeight,
+                                            cacheWidth: cacheWidth.round(),
+                                            cacheHeight: cacheHeight.round(),
+                                          ),
                                         ),
                                       ),
                                     ),

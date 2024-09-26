@@ -195,7 +195,7 @@ class ProductCardWidget extends StatelessWidget {
                                               image: i == products[index].productionAssets.length
                                                   ? products[index].productionAssets[0]
                                                   : products[index].productionAssets[i],
-                                              fit: BoxFit.cover,
+                                              fit: BoxFit.fitWidth,
                                               width: cacheWidth,
                                               height: cacheHeight,
                                               imageCacheWidth: cacheWidth.round(),
@@ -203,7 +203,7 @@ class ProductCardWidget extends StatelessWidget {
                                               imageErrorBuilder: (context, error, stackTrace) {
                                                 return Image.asset(
                                                   'assets/homepage/img_default.png',
-                                                  fit: BoxFit.cover,
+                                                  fit: BoxFit.fitWidth,
                                                   width: cacheWidth,
                                                   height: cacheHeight,
                                                   cacheWidth: cacheWidth.round(),
