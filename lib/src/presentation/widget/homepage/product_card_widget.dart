@@ -107,7 +107,7 @@ class ProductCardWidget extends StatelessWidget {
               double aspectRatio = 16 / 9;
 
               // Dynamically calculated cacheWidth
-              double cacheWidth = (MediaQuery.of(context).size.width * MediaQuery.of(context).devicePixelRatio.toInt());
+              double cacheWidth = ((MediaQuery.of(context).size.width) * MediaQuery.of(context).devicePixelRatio.toInt());
               // Calculate cacheHeight based on aspect ratio
               double cacheHeight = (cacheWidth / aspectRatio);
 
