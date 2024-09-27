@@ -2,7 +2,7 @@ part of 'order_summary_bloc.dart';
 
 enum PaymentType { fullPayment, installment, none }
 
-enum OrderStatus { initial, loading, success, error }
+enum OrderStatus { initial, loading, success, error, noStock }
 
 extension PaymentTypeX on PaymentType {
   bool get isFullPayment => this == PaymentType.fullPayment;
@@ -15,6 +15,7 @@ extension OrderStatusX on OrderStatus {
   bool get isLoading => this == OrderStatus.loading;
   bool get isSuccess => this == OrderStatus.success;
   bool get isError => this == OrderStatus.error;
+  bool get isNoStock => this == OrderStatus.noStock;
 }
 
 class OrderSummaryState extends Equatable {

@@ -93,7 +93,6 @@ class ProductCardWidget extends StatelessWidget {
             padding: EdgeInsets.zero,
             itemCount: products.length,
             itemBuilder: (BuildContext context, int index) {
-              // preCacheImageNetwork(context, products[index].productionAssets);
               String tagline = "<p><body>${cleanHtml(products[index].tagline)}</body></p>";
               TruncatedHtmlText truncatedHtmlText = TruncatedHtmlText();
               if (tagline.contains("<table")) {
@@ -107,12 +106,12 @@ class ProductCardWidget extends StatelessWidget {
               double aspectRatio = 16 / 9;
 
               // Dynamically calculated cacheWidth
-              double cacheWidth = ((MediaQuery.of(context).size.width) * MediaQuery.of(context).devicePixelRatio.toInt());
+              double cacheWidth = ((MediaQuery.of(context).size.width - 32) * MediaQuery.of(context).devicePixelRatio.toInt());
               // Calculate cacheHeight based on aspect ratio
               double cacheHeight = (cacheWidth / aspectRatio);
 
-              if (cacheWidth > 1194) cacheWidth = 800;
-              if (cacheHeight > 671) cacheHeight = 450;
+              if (cacheWidth > 1125) cacheWidth = 1125;
+              if (cacheHeight > 846) cacheHeight = 846;
 
               return RumUserActionAnnotation(
                 description: "Tap product card",
@@ -179,7 +178,9 @@ class ProductCardWidget extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                                     child: PageView.builder(
-                                        itemCount: products[index].productionAssets.length + 1,
+                                        itemCount: products[index].productionAssets.length == 1
+                                            ? products[index].productionAssets.length
+                                            : products[index].productionAssets.length + 1,
                                         controller: pageViewController,
                                         onPageChanged: (val) {
                                           context.read<ActiveImagesIndexCubit>().update(index, val + 1);

@@ -21,6 +21,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_options/produ
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/loading_screen.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/root_page_condition.dart';
+import 'package:marketplace_line_oa/src/presentation/shared/general_dialog.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/alva_text.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/disclaimer_bottom_section.dart';
 import 'package:marketplace_line_oa/src/presentation/widget/product_detail/product_detail_bottom_section.dart';
@@ -111,6 +112,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
               AmplitudeWebHelper.getInstance().logEnterProductDetails(
                   productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
             }
+            if (pdState.product.quantity == 0) {
+              GeneralDialog(onAccept: () async {
+                onBack(shouldRefresh: true);
+              }).showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName);
+            }
           }
         },
         builder: (context, pdState) {
@@ -153,11 +159,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
     );
   }
 
-  void onBack() {
+  void onBack({bool shouldRefresh = false}) {
     showOneTrustCookieScript();
     AmplitudeWebHelper.getInstance().logeMarketplaceHomePageHomeScreen();
     var stack = CurrentRouteObserver.instance.stack;
-    if (stack.contains(Routes.initial.toStringPath())) {
+    if (stack.contains(Routes.initial.toStringPath()) && !shouldRefresh) {
       Navigator.pop(context);
     } else {
       Navigator.popAndPushNamed(context, Routes.initial.toStringPath());

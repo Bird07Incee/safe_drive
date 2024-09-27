@@ -124,8 +124,8 @@ class _PDTopSectionState extends State<PDTopSection> {
                               // Calculate cacheHeight based on aspect ratio
                               double cacheHeight = (cacheWidth / aspectRatio);
 
-                              if (cacheWidth > 1194) cacheWidth = 1194;
-                              if (cacheHeight > 671) cacheHeight = 671;
+                              if (cacheWidth > 1125) cacheWidth = 1125;
+                              if (cacheHeight > 846) cacheHeight = 846;
 
                               return Stack(
                                 children: [
@@ -209,10 +209,8 @@ class _PDTopSectionState extends State<PDTopSection> {
                           padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
                           child: Image.network(
                             state.product.merchantLogo,
-                            headers: const {
-                              'Cache-Control': 'public, max-age=604800',
-                            },
                             height: 40,
+                            cacheWidth: 40 * MediaQuery.of(context).devicePixelRatio.toInt(),
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
                           ),

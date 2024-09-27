@@ -18,6 +18,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     on<GetProductListByCategory>(_onGetProductListByCategory);
     on<GetProductListByPage>(_onGetProductListByPage);
     on<SetScrollPosition>(_onSetScrollPosition);
+    on<SetSelectTabIndex>(_onSetSelectTabIndex);
   }
   final DioUtilityRepository utilityRepository;
 
@@ -162,5 +163,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
   _onSetScrollPosition(SetScrollPosition event, Emitter<ProductListState> emit) {
     emit(state.copyWith(scrollPosition: event.scrollPosition));
+  }
+
+  _onSetSelectTabIndex(SetSelectTabIndex event, Emitter<ProductListState> emit) {
+    emit(state.copyWith(selectedTabIndex: event.selectedTabIndex));
   }
 }

@@ -32,8 +32,12 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
 
       final o = OrderResponseModel.fromJson(response.data);
       emit(state.copyWith(orderStatus: OrderStatus.success, orderResponseModel: o));
-    } catch (e) {
-      emit(state.copyWith(orderStatus: OrderStatus.error));
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        emit(state.copyWith(orderStatus: OrderStatus.noStock));
+      } else {
+        emit(state.copyWith(orderStatus: OrderStatus.error));
+      }
     }
   }
 }
