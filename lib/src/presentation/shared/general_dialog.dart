@@ -60,6 +60,28 @@ class GeneralDialog {
         isConfirmPayment: isConfirmPayment);
   }
 
+  showOutOfStockDialog({Key? key, required BuildContext context, bool? canBack, String productNameTitle = ""}) {
+    _showGeneralAlert(
+        context,
+        Container(
+          constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
+          child: Text('ถูกลบ หรือ ขายหมดแล้ว \nกรุณากด “ยืนยัน” เพื่อทำรายการอีกครั้ง',
+              style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
+          //   textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
+        ),
+        title: Text(productNameTitle,
+            style: AlvaStyles()
+                .headingSize18(Colors.black)
+                .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
+                .copyWith(height: 24 / 14)),
+        //  textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
+        key: key ?? const Key("back_from_out_of_stock_dialog"),
+        // contentPadding: const EdgeInsets.all(24),
+        contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
+        actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        isConfirmPayment: true);
+  }
+
   _showGeneralLoading(BuildContext context, {Key? key, bool? canBack}) {
     Widget loading = PopScope(
       canPop: canBack ?? false,
@@ -86,13 +108,16 @@ class GeneralDialog {
     );
   }
 
-  _showGeneralAlert(BuildContext context, Widget body,
-      {Key? key,
-      Widget? title,
-      EdgeInsetsGeometry? contentPadding,
-      EdgeInsetsGeometry? actionPadding,
-      bool platformSpecific = false,
-      bool isConfirmPayment = false}) {
+  _showGeneralAlert(
+    BuildContext context,
+    Widget body, {
+    Key? key,
+    Widget? title,
+    EdgeInsetsGeometry? contentPadding,
+    EdgeInsetsGeometry? actionPadding,
+    bool platformSpecific = false,
+    bool isConfirmPayment = false,
+  }) {
     Widget acceptButton = TextButton(
       style: ButtonStyle(
         padding: WidgetStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
