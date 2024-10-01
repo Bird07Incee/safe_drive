@@ -61,10 +61,19 @@ class DioUtilityService {
         throw Exception("Posting service error with response ${response.statusCode}");
       }
     } on DioException catch (e) {
-      var uid = LineDataHelper().getLineUid();
-      DatadogSdk.instance.rum?.addError("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network,
-          attributes: {"uuid": uid});
-      rethrow;
+      if (e.response?.statusCode == 404) {
+        throw DioException(
+          requestOptions: e.requestOptions,
+          response: e.response,
+          error: e.error,
+          type: DioExceptionType.badResponse,
+        );
+      } else {
+        var uid = LineDataHelper().getLineUid();
+        DatadogSdk.instance.rum?.addError("POST $path error with response: ${e.response?.statusCode} ,message: ${e.message}", RumErrorSource.network,
+            attributes: {"uuid": uid});
+        rethrow;
+      }
     }
   }
 }
