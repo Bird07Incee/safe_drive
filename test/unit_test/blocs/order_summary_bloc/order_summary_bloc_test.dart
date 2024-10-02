@@ -241,6 +241,35 @@ void main() {
           expect: () => <OrderSummaryState>[OrderSummaryState(orderStatus: OrderStatus.loading), OrderSummaryState(orderStatus: OrderStatus.error)]);
     });
 
+    blocTest<OrderSummaryBloc, OrderSummaryState>("create order case fail with 404 OutOfStock",
+        setUp: () {
+          SharedPreferences.setMockInitialValues({});
+          final baseUrl = Environment().getValue("BFF_BASE_URL");
+          final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
+          String path = "/v1/create";
+          when(() => utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson())).thenThrow(
+            DioError(
+              requestOptions: RequestOptions(
+                path: "$baseUrl$transactionApiPath$path",
+                method: "POST",
+                data: CreateOrderRequestModel.empty.toJson(),
+              ),
+              response: Response(
+                requestOptions: RequestOptions(
+                  path: "$baseUrl$transactionApiPath$path",
+                ),
+                data: {"code": 404, "error": "1001", "message": "Product ID : PV_UVR95EKJA6PJ quantity not enough."},
+                statusCode: 404,
+                statusMessage: "Bad Request",
+              ),
+              type: DioErrorType.badResponse,
+            ),
+          );
+        },
+        build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
+        act: (bloc) => bloc.add(const CreateOrder(requestModel: CreateOrderRequestModel.empty)),
+        expect: () => <OrderSummaryState>[OrderSummaryState(orderStatus: OrderStatus.loading), OrderSummaryState(orderStatus: OrderStatus.noStock)]);
+
     group("ProductDetailBloc SelectPaymentType", () {
       blocTest<OrderSummaryBloc, OrderSummaryState>("set SelectPaymentType success case",
           build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
