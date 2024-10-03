@@ -185,12 +185,15 @@ class GeneralDialog {
         List<Widget> actions = onCancel != null ? [CupertinoDialogAction(child: cancelButton)] : [];
         actions.add(CupertinoDialogAction(child: acceptButton));
 
-        alert = WillPopScope(
-          onWillPop: () async {
-            if (isHaveFunctionWhenBackPressed) {
-              onAccept!();
+        alert = PopScope(
+          canPop: canBack,
+          onPopInvokedWithResult: (bool didPop, Object? result) async {
+            if (didPop) {
+              if (isHaveFunctionWhenBackPressed) {
+                onAccept!();
+              }
+              return;
             }
-            return false;
           },
           child: CupertinoAlertDialog(
             key: key,
