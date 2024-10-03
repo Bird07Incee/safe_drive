@@ -79,6 +79,7 @@ class GeneralDialog {
         // contentPadding: const EdgeInsets.all(24),
         contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
         actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        isHaveFunctionWhenBackPressed: true,
         isConfirmPayment: true);
   }
 
@@ -108,16 +109,14 @@ class GeneralDialog {
     );
   }
 
-  _showGeneralAlert(
-    BuildContext context,
-    Widget body, {
-    Key? key,
-    Widget? title,
-    EdgeInsetsGeometry? contentPadding,
-    EdgeInsetsGeometry? actionPadding,
-    bool platformSpecific = false,
-    bool isConfirmPayment = false,
-  }) {
+  _showGeneralAlert(BuildContext context, Widget body,
+      {Key? key,
+      Widget? title,
+      EdgeInsetsGeometry? contentPadding,
+      EdgeInsetsGeometry? actionPadding,
+      bool platformSpecific = false,
+      bool isConfirmPayment = false,
+      bool isHaveFunctionWhenBackPressed = false}) {
     Widget acceptButton = TextButton(
       style: ButtonStyle(
         padding: WidgetStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
@@ -154,18 +153,26 @@ class GeneralDialog {
       ),
     );
 
-    Widget alert = AlertDialog(
-      contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(24, 24, 24, 8),
-      actionsPadding: actionPadding ?? const EdgeInsets.symmetric(horizontal: 8),
-      key: key,
-      title: title,
-      content: body,
-      actions: [
-        onCancel != null ? cancelButton : const SizedBox(),
-        acceptButton,
-      ],
-      shadowColor: const Color.fromARGB(26, 44, 38, 38),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+    Widget alert = WillPopScope(
+      onWillPop: () async {
+        if (isHaveFunctionWhenBackPressed) {
+          onAccept!();
+        }
+        return false;
+      },
+      child: AlertDialog(
+        contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(24, 24, 24, 8),
+        actionsPadding: actionPadding ?? const EdgeInsets.symmetric(horizontal: 8),
+        key: key,
+        title: title,
+        content: body,
+        actions: [
+          onCancel != null ? cancelButton : const SizedBox(),
+          acceptButton,
+        ],
+        shadowColor: const Color.fromARGB(26, 44, 38, 38),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+      ),
     );
 
     if (platformSpecific) {
@@ -173,10 +180,18 @@ class GeneralDialog {
         List<Widget> actions = onCancel != null ? [CupertinoDialogAction(child: cancelButton)] : [];
         actions.add(CupertinoDialogAction(child: acceptButton));
 
-        alert = CupertinoAlertDialog(
-          key: key,
-          content: body,
-          actions: actions,
+        alert = WillPopScope(
+          onWillPop: () async {
+            if (isHaveFunctionWhenBackPressed) {
+              onAccept!();
+            }
+            return false;
+          },
+          child: CupertinoAlertDialog(
+            key: key,
+            content: body,
+            actions: actions,
+          ),
         );
       }
     }
