@@ -80,7 +80,8 @@ class GeneralDialog {
         contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
         actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
         isHaveFunctionWhenBackPressed: true,
-        isConfirmPayment: true);
+        isConfirmPayment: true,
+        canBack: true);
   }
 
   _showGeneralLoading(BuildContext context, {Key? key, bool? canBack}) {
@@ -116,7 +117,8 @@ class GeneralDialog {
       EdgeInsetsGeometry? actionPadding,
       bool platformSpecific = false,
       bool isConfirmPayment = false,
-      bool isHaveFunctionWhenBackPressed = false}) {
+      bool isHaveFunctionWhenBackPressed = false,
+      bool canBack = false}) {
     Widget acceptButton = TextButton(
       style: ButtonStyle(
         padding: WidgetStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
@@ -153,12 +155,15 @@ class GeneralDialog {
       ),
     );
 
-    Widget alert = WillPopScope(
-      onWillPop: () async {
-        if (isHaveFunctionWhenBackPressed) {
-          onAccept!();
+    Widget alert = PopScope(
+      canPop: canBack,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          if (isHaveFunctionWhenBackPressed) {
+            onAccept!();
+          }
+          return;
         }
-        return false;
       },
       child: AlertDialog(
         contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(24, 24, 24, 8),
