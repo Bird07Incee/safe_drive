@@ -232,7 +232,7 @@ void main() {
                     method: "POST",
                     data: CreateOrderRequestModel.empty.toJson(),
                     headers: {"Authorization": "Bearer "});
-                return Response(requestOptions: option, data: {}, statusCode: 400, statusMessage: "Bad Request");
+                return Response(requestOptions: option, data: {} as Map<String, dynamic>, statusCode: 400, statusMessage: "Bad Request");
               },
             );
           },
@@ -247,6 +247,7 @@ void main() {
           final baseUrl = Environment().getValue("BFF_BASE_URL");
           final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
           String path = "/v1/create";
+          Map<String, dynamic> errorResponse = {"code": 404, "error": "1001", "message": "Product ID : PV_UVR95EKJA6PJ quantity not enough."};
           when(() => utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson())).thenThrow(
             DioError(
               requestOptions: RequestOptions(
@@ -258,7 +259,7 @@ void main() {
                 requestOptions: RequestOptions(
                   path: "$baseUrl$transactionApiPath$path",
                 ),
-                data: {"code": 404, "error": "1001", "message": "Product ID : PV_UVR95EKJA6PJ quantity not enough."},
+                data: errorResponse,
                 statusCode: 404,
                 statusMessage: "Bad Request",
               ),
