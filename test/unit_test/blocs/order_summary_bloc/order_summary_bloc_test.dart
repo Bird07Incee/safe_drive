@@ -225,18 +225,21 @@ void main() {
             String path = "/v1/create";
             when(() {
               return utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson());
-            }).thenThrow(
-              (_) async {
-                RequestOptions option = RequestOptions(
+            }).thenThrow(DioException(
+                requestOptions: RequestOptions(
                     baseUrl: "$baseUrl$transactionApiPath$path",
                     method: "POST",
                     data: CreateOrderRequestModel.empty.toJson(),
-                    headers: {"Authorization": "Bearer "});
-                return DioException(
-                    requestOptions: option,
-                    response: Response(requestOptions: option, data: <String, dynamic>{}, statusCode: 400, statusMessage: "Bad Request"));
-              },
-            );
+                    headers: {"Authorization": "Bearer "}),
+                response: Response(
+                    requestOptions: RequestOptions(
+                        baseUrl: "$baseUrl$transactionApiPath$path",
+                        method: "POST",
+                        data: CreateOrderRequestModel.empty.toJson(),
+                        headers: {"Authorization": "Bearer "}),
+                    data: <String, dynamic>{},
+                    statusCode: 400,
+                    statusMessage: "Bad Request")));
           },
           build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
           act: (bloc) => bloc.add(const CreateOrder(requestModel: CreateOrderRequestModel.empty)),
@@ -250,22 +253,20 @@ void main() {
           final transactionApiPath = Environment().getValue("BFF_TRANSACTION_CREATE_BASE_URL");
           String path = "/v1/create";
           Map<String, dynamic> errorResponse = {"code": 404, "error": "1001", "message": "Product ID : PV_UVR95EKJA6PJ quantity not enough."};
-          when(() => utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson())).thenThrow((_) async {
-            return DioException(
+          when(() => utilityRepository.postByURL("$baseUrl$transactionApiPath$path", CreateOrderRequestModel.empty.toJson())).thenThrow(DioException(
+            requestOptions: RequestOptions(
+              path: "$baseUrl$transactionApiPath$path",
+              method: "POST",
+              data: CreateOrderRequestModel.empty.toJson(),
+            ),
+            response: Response(
                 requestOptions: RequestOptions(
                   path: "$baseUrl$transactionApiPath$path",
-                  method: "POST",
-                  data: CreateOrderRequestModel.empty.toJson(),
                 ),
-                response: Response(
-                    requestOptions: RequestOptions(
-                      path: "$baseUrl$transactionApiPath$path",
-                    ),
-                    data: errorResponse,
-                    statusCode: 404,
-                    statusMessage: "Bad Request"),
-                type: DioExceptionType.badResponse);
-          });
+                data: errorResponse,
+                statusCode: 404,
+                statusMessage: "Bad Request"),
+          ));
         },
         build: () => OrderSummaryBloc(utilityRepository: utilityRepository),
         act: (bloc) => bloc.add(const CreateOrder(requestModel: CreateOrderRequestModel.empty)),
