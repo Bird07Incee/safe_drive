@@ -10,13 +10,11 @@ import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 part 'log_activity_event.dart';
 part 'log_activity_state.dart';
 
-final LogActivityBloc logActivityBloc = LogActivityBloc(
-  utilityRepository: DioUtilityRepository(service: DioUtilityService(dio: DioClient.client)),
-);
+final LogActivityBloc logActivityBloc = LogActivityBloc(Dio());
 
 class LogActivityBloc extends Bloc<LogActivityEvent, LogActivityState> {
-  final DioUtilityRepository utilityRepository;
-  LogActivityBloc({required this.utilityRepository}) : super(LogActivityInitial()) {
+  final Dio dio;
+  LogActivityBloc(this.dio) : super(LogActivityInitial()) {
     on<SendLogEvent>(_onLogActivityEvent);
   }
 
@@ -24,7 +22,16 @@ class LogActivityBloc extends Bloc<LogActivityEvent, LogActivityState> {
     emit(LogActivityLoading());
     final logActivityBaseURL = Environment().getValue("LOG_ACTIVITY_BASE_URL");
     try {
-      Response response = await utilityRepository.postByURL("$logActivityBaseURL/activities", event.payload);
+      final response = await dio.post(
+        '$logActivityBaseURL/activities',
+        data: event.payload,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
+        ),
+      );
       final ActivityLogResponseModel responseData = ActivityLogResponseModel.fromJson(response.data);
       DatadogSdk.instance.rum?.addAction(RumActionType.custom, "activity log Bloc : ${response.data}");
       emit(LogActivitySuccess(responseData));

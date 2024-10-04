@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/check_browser/check_browser_bloc.dart';
@@ -50,5 +51,5 @@ final List<BlocProvider> blocs = [
   BlocProvider<RefundSuccessBloc>(create: (_) => RefundSuccessBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<WebViewBloc>(create: (_) => WebViewBloc()),
   BlocProvider<HomeCubit>(create: (_) => HomeCubit()),
-  BlocProvider<LogActivityBloc>(create: (_) => LogActivityBloc(utilityRepository: _.read<DioUtilityRepository>())),
+  BlocProvider<LogActivityBloc>(create: (_) => LogActivityBloc(Dio())),
 ];
