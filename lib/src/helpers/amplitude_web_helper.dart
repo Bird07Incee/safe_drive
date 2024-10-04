@@ -78,7 +78,8 @@ class AmplitudeWebHelper {
             "location_lng": "",
             "umUserId": "",
             "user_level": "",
-          }
+          },
+          "PartitionKey": "1"
         };
         await _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
       } else {
@@ -95,7 +96,8 @@ class AmplitudeWebHelper {
             "location_lng": "",
             "umUserId": "",
             "user_level": "",
-          }
+          },
+          "PartitionKey": "1"
         };
       }
       payload["Data"].addAll(defaultEventProperties);
