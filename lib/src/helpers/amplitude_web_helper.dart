@@ -98,8 +98,9 @@ class AmplitudeWebHelper {
           }
         };
       }
-      payload["Data"] = defaultEventProperties;
+      payload["Data"].addAll(defaultEventProperties);
       DatadogSdk.instance.rum?.addAction(RumActionType.custom, "activity log payload : $payload");
+
       logActivityBloc.add(SendLogEvent(payload: payload));
     } catch (e) {
       DatadogSdk.instance.rum?.addError("Amplitude logEvent Error : $e", RumErrorSource.custom, attributes: {"line_uuid": lineUID});
