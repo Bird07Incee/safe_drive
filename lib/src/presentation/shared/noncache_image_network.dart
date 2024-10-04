@@ -21,7 +21,8 @@ class NonCacheNetworkImage extends StatelessWidget {
       future: getImageBytes(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Image.memory(snapshot.data!, fit: BoxFit.fitWidth, cacheWidth: (maxWidth.toInt() - 32) * devicePixelRatio, errorBuilder: (context, error, stackTrace) {
+          return Image.memory(snapshot.data!, fit: BoxFit.fitWidth, cacheWidth: (maxWidth.toInt() - 32) * devicePixelRatio,
+              errorBuilder: (context, error, stackTrace) {
             return Image.asset('assets/homepage/img_default.png', fit: BoxFit.fitWidth);
           });
         }

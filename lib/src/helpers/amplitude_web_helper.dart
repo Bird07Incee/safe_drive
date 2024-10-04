@@ -4,6 +4,8 @@ import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/constants/my_constants.dart';
 import 'package:marketplace_line_oa/src/helpers/line_data_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/log_activity_bloc/log_activity_bloc.dart';
+import 'package:universal_html/html.dart';
 
 class AmplitudeWebHelper {
   static Amplitude? _amplitude;
@@ -31,6 +33,17 @@ class AmplitudeWebHelper {
     return userId;
   }
 
+  void combineDefaultPropertiesIntoPayload(Map<String, dynamic> defaultProperties, Map<String, dynamic> payload) {
+    // Get the existing "Data" map from the payload
+    Map<String, dynamic> data = payload["Data"] ?? {};
+
+    // Combine defaultEventProperties into "Data" map
+    data.addAll(defaultProperties);
+
+    // Update the payload with the modified "Data"
+    payload["Data"] = data;
+  }
+
   void logEvent(
       {required String eventType,
       required String screenName,
@@ -49,10 +62,45 @@ class AmplitudeWebHelper {
       if (eventProperties != null) {
         defaultEventProperties.addAll(eventProperties);
       }
+      Map<String, dynamic> payload;
 
       if (getOnetrustActiveGroups().length == 5 || skipOnetrust) {
+        payload = {
+          "Data": {
+            "app": "promptBuyWEB",
+            "device_model": window.navigator.userAgent,
+            "device_id": window.navigator.userAgent,
+            "device_family": window.navigator.userAgent,
+            "device_carrier": window.navigator.userAgent,
+            "device_manufacturer": window.navigator.userAgent,
+            "device_brand": window.navigator.userAgent,
+            "location_lat": "",
+            "location_lng": "",
+            "umUserId": "",
+            "user_level": "",
+          }
+        };
         await _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
+      } else {
+        payload = {
+          "Data": {
+            "app": "promptBuyWEB",
+            "device_model": "",
+            "device_id": "",
+            "device_family": "",
+            "device_carrier": "",
+            "device_manufacturer": "",
+            "device_brand": "",
+            "location_lat": "",
+            "location_lng": "",
+            "umUserId": "",
+            "user_level": "",
+          }
+        };
       }
+      payload["Data"] = defaultEventProperties;
+      DatadogSdk.instance.rum?.addAction(RumActionType.custom, "activity log payload : $payload");
+      logActivityBloc.add(SendLogEvent(payload: payload));
     } catch (e) {
       DatadogSdk.instance.rum?.addError("Amplitude logEvent Error : $e", RumErrorSource.custom, attributes: {"line_uuid": lineUID});
     }
