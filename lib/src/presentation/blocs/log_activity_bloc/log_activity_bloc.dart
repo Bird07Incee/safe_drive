@@ -4,8 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace_line_oa/configs/enivironment_config.dart';
 import 'package:marketplace_line_oa/src/model/activity_model/activity_model.dart';
-import 'package:marketplace_line_oa/src/repositories/dio_utility_repository.dart';
-import 'package:marketplace_line_oa/src/services/dio_utility_services.dart';
 
 part 'log_activity_event.dart';
 part 'log_activity_state.dart';
