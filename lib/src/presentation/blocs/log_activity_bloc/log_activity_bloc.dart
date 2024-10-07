@@ -25,6 +25,7 @@ class LogActivityBloc extends Bloc<LogActivityEvent, LogActivityState> {
         data: event.payload,
         options: Options(
           headers: {
+            'x-api-key': 'ibSLgO9f979aCuwjmRnUW6hTHevdXDTN67N4xdFa',
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
           },
