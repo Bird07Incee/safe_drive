@@ -70,6 +70,8 @@ class GeneralDialog {
           //   textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         ),
         title: Text(productNameTitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: AlvaStyles()
                 .headingSize18(Colors.black)
                 .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
