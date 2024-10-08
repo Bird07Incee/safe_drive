@@ -19,13 +19,14 @@ class LogActivityBloc extends Bloc<LogActivityEvent, LogActivityState> {
   void _onLogActivityEvent(SendLogEvent event, Emitter<LogActivityState> emit) async {
     emit(LogActivityLoading());
     final logActivityBaseURL = Environment().getValue("LOG_ACTIVITY_BASE_URL");
+    final logActivityXApiKey = Environment().getValue("LOG_ACTIVITY_X_API_KEY");
     try {
       final response = await dio.post(
         '$logActivityBaseURL/activities',
         data: event.payload,
         options: Options(
           headers: {
-            'x-api-key': 'ibSLgO9f979aCuwjmRnUW6hTHevdXDTN67N4xdFa',
+            'x-api-key': logActivityXApiKey,
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
           },
