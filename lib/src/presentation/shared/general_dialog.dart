@@ -60,8 +60,8 @@ class GeneralDialog {
         isConfirmPayment: isConfirmPayment);
   }
 
-  showOutOfStockDialog({Key? key, required BuildContext context, bool? canBack, String productNameTitle = ""}) {
-    _showGeneralAlert(
+  Future<dynamic> showOutOfStockDialog({Key? key, required BuildContext context, bool? canBack, String productNameTitle = ""}) async {
+    await _showGeneralAlert(
         context,
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
@@ -112,7 +112,7 @@ class GeneralDialog {
     );
   }
 
-  _showGeneralAlert(BuildContext context, Widget body,
+  Future<dynamic> _showGeneralAlert(BuildContext context, Widget body,
       {Key? key,
       Widget? title,
       EdgeInsetsGeometry? contentPadding,

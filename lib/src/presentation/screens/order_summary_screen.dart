@@ -144,6 +144,22 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
         .showSummaryDialog(context: context);
   }
 
+  showOutOfStockDialog(ProductDetailState pdState) async {
+    await GeneralDialog(onAccept: () async {})
+        .showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName)
+        .then((_) {
+      if (mounted) {
+        var stack = CurrentRouteObserver.instance.stack;
+        if (stack.contains(Routes.initial.toStringPath())) {
+          context.read<ProductListBloc>().add(GetProductList());
+          Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
+        } else {
+          Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     String step1 = "";
@@ -203,15 +219,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                   Navigator.pop(context);
                 } else if (state.orderStatus.isNoStock) {
                   Navigator.pop(context);
-                  GeneralDialog(onAccept: () async {
-                    var stack = CurrentRouteObserver.instance.stack;
-                    if (stack.contains(Routes.initial.toStringPath())) {
-                      context.read<ProductListBloc>().add(GetProductList());
-                      Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
-                    } else {
-                      Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
-                    }
-                  }).showOutOfStockDialog(context: context, canBack: true, productNameTitle: productState.product.productName);
+                  showOutOfStockDialog(productState);
                 }
               }
             },
