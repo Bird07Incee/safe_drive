@@ -13,6 +13,7 @@ import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/home/home_cubit.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/active_images_index.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -89,6 +90,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               if (context.mounted) {
                 context.read<ProductListBloc>().add(SetSelectTabIndex(0));
                 context.read<ProductListBloc>().add(GetProductListByCategory("", context));
+                List<int> counters = List.generate(context.read<ProductListBloc>().state.productList.products.length, (index) => 1);
+                context.read<ActiveImagesIndexCubit>().initialItems(counters);
                 tabController!.animateTo(
                   0,
                   duration: Duration(milliseconds: 500),
@@ -152,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           indicatorColor: mintGreen,
                                           labelPadding: EdgeInsets.symmetric(horizontal: 30),
                                           isScrollable: true,
+                                          indicatorSize: TabBarIndicatorSize.tab,
                                           labelStyle: AlvaStyles().headingSize10w600(BTN_SELECTED_TEXT_COLOR_NEW),
                                           unselectedLabelColor: const Color(0xffC2C1C1),
                                           onTap: (int index) {
@@ -197,7 +201,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             child: FadeInImage.assetNetwork(
                                                               placeholder: 'assets/images/category/icon_active_cate_other2.png',
                                                               // Replace with your placeholder image path
-                                                              image: state.productList.category![i]["img_active"],
+                                                              image: state.productList.category![i]["img_active"] ??
+                                                                  'assets/images/category/icon_active_cate_other2.png',
 
                                                               fit: BoxFit.fitWidth,
                                                               imageCacheWidth: 72,
@@ -215,7 +220,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             child: FadeInImage.assetNetwork(
                                                                 placeholder: 'assets/images/category/icon_cate_other2.png',
                                                                 // Replace with your placeholder image path
-                                                                image: state.productList.category![i]["img_inactive"],
+                                                                image: state.productList.category![i]["img_inactive"] ??
+                                                                    'assets/images/category/icon_active_cate_other2.png',
                                                                 fit: BoxFit.fitWidth,
                                                                 imageCacheWidth: 72,
                                                                 imageErrorBuilder: (context, error, stackTrace) {
