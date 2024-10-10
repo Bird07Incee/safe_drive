@@ -46,10 +46,10 @@ class AmplitudeWebHelper {
 
   void logEvent(
       {required String eventType,
-      required String screenName,
-      required String eventName,
-      Map<String, dynamic>? eventProperties,
-      bool skipOnetrust = false}) async {
+        required String screenName,
+        required String eventName,
+        Map<String, dynamic>? eventProperties,
+        bool skipOnetrust = false}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     Map<String, dynamic> defaultEventProperties = {
@@ -73,7 +73,7 @@ class AmplitudeWebHelper {
             "device_family": "",
             "device_manufacturer": "",
             "device_brand": "",
-            "device_id": "${_amplitude!.getDeviceId()}", // Generate a random UUID
+            "device_id": "",
           };
 
           if (userAgent.contains('iphone')) {
@@ -84,10 +84,9 @@ class AmplitudeWebHelper {
           } else if (userAgent.contains('android')) {
             deviceInfo["device_model"] = "Android";
             deviceInfo["device_family"] = "Android Phone";
-            deviceInfo["device_manufacturer"] = "Google"; // This can be further refined
-            deviceInfo["device_brand"] = "Google"; // Replace with actual manufacturer based on more detailed parsing
+            deviceInfo["device_manufacturer"] = "Google";
+            deviceInfo["device_brand"] = "Google";
           }
-          // Add more conditions here for macOS, Windows, or other platforms if needed.
 
           return deviceInfo;
         }
@@ -101,13 +100,13 @@ class AmplitudeWebHelper {
               "device_model": deviceInfo["device_model"],
               "device_id": deviceInfo["device_id"],
               "device_family": deviceInfo["device_family"],
-              "device_carrier": "", // You can add logic to get the carrier info
+              "device_carrier": "",
               "device_manufacturer": deviceInfo["device_manufacturer"],
               "device_brand": deviceInfo["device_brand"],
-              "location_lat": "", // Add logic for lat/lng if needed
+              "location_lat": "",
               "location_lng": "",
-              "umUserId": "", // Add logic to populate user ID if available
-              "user_level": "", // Add logic for user level
+              "umUserId": "",
+              "user_level": "",
             },
             "PartitionKey": "1"
           };
@@ -368,10 +367,10 @@ class AmplitudeWebHelper {
 
   Future<void> logTapOnPurchaseButton(
       {required String productName,
-      required String contentId,
-      required String merchantName,
-      required String price,
-      required String discountPrice}) async {
+        required String contentId,
+        required String merchantName,
+        required String price,
+        required String discountPrice}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(eventType: "Tap on purchase button", screenName: "AutoStation_eMarketplace_product_details", eventName: productName, eventProperties: {
@@ -403,10 +402,10 @@ class AmplitudeWebHelper {
 
   Future<void> logTapOnNextButton(
       {required String productName,
-      required String contentId,
-      required String merchantName,
-      required String optionId,
-      required String productOptionPrice}) async {
+        required String contentId,
+        required String merchantName,
+        required String optionId,
+        required String productOptionPrice}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     logEvent(eventType: "Tap on next button", screenName: "AutoStation_eMarketplace_productoption_page", eventName: productName, eventProperties: {
@@ -480,12 +479,12 @@ class AmplitudeWebHelper {
 
   Future<void> logTapOnConfirmOrderButton(
       {required String productName,
-      required String optionName,
-      required String contentId,
-      required String optionID,
-      required String merchantName,
-      required String price,
-      required String paymentType}) async {
+        required String optionName,
+        required String contentId,
+        required String optionID,
+        required String merchantName,
+        required String price,
+        required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     Map<String, dynamic> eventProperties = {
@@ -514,13 +513,13 @@ class AmplitudeWebHelper {
 
   Future<void> logTapOnBackButton(
       {required String productName,
-      required String optionName,
-      required String contentId,
-      required String optionID,
-      required String merchantName,
-      required String productCategoryId,
-      required String price,
-      required String paymentType}) async {
+        required String optionName,
+        required String contentId,
+        required String optionID,
+        required String merchantName,
+        required String productCategoryId,
+        required String price,
+        required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
@@ -545,13 +544,13 @@ class AmplitudeWebHelper {
   // Marketplace ac success order
   Future<void> logEnterOrderSuccessPage(
       {required String selectedType,
-      required String invoiceNumber,
-      required String productName,
-      required String optionName,
-      required String contentId,
-      required String merchantName,
-      required String price,
-      required String paymentType}) async {
+        required String invoiceNumber,
+        required String productName,
+        required String optionName,
+        required String contentId,
+        required String merchantName,
+        required String price,
+        required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
@@ -634,13 +633,13 @@ class AmplitudeWebHelper {
 
   Future<void> logEnterPaymentFailPage(
       {required String invoiceNumber,
-      required String productName,
-      required String optionName,
-      required String contentId,
-      required String subCategoryName,
-      required String merchantName,
-      required String price,
-      required String paymentType}) async {
+        required String productName,
+        required String optionName,
+        required String contentId,
+        required String subCategoryName,
+        required String merchantName,
+        required String price,
+        required String paymentType}) async {
     LineDataHelper lineDataHelper = LineDataHelper();
     var lineUID = await lineDataHelper.getLineUid();
     if (optionName.contains(":")) {
