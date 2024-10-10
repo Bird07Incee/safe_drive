@@ -65,23 +65,57 @@ class AmplitudeWebHelper {
       Map<String, dynamic> payload;
 
       if (getOnetrustActiveGroups().length == 5 || skipOnetrust) {
-        payload = {
-          "Data": {
-            "app": "promptBuyWEB",
-            "device_model": window.navigator.userAgent,
-            "device_id": window.navigator.userAgent,
-            "device_family": window.navigator.userAgent,
-            "device_carrier": window.navigator.userAgent,
-            "device_manufacturer": window.navigator.userAgent,
-            "device_brand": window.navigator.userAgent,
-            "location_lat": "",
-            "location_lng": "",
-            "umUserId": "",
-            "user_level": "",
-          },
-          "PartitionKey": "1"
-        };
         await _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
+        Map<String, dynamic> getDeviceInfoFromUserAgent() {
+          final userAgent = window.navigator.userAgent.toLowerCase();
+          Map<String, dynamic> deviceInfo = {
+            "device_model": "",
+            "device_family": "",
+            "device_manufacturer": "",
+            "device_brand": "",
+            "device_id": "${_amplitude!.getDeviceId()}", // Generate a random UUID
+          };
+
+          if (userAgent.contains('iphone')) {
+            deviceInfo["device_model"] = "iPhone";
+            deviceInfo["device_family"] = "Apple iPhone";
+            deviceInfo["device_manufacturer"] = "Apple";
+            deviceInfo["device_brand"] = "Apple";
+          } else if (userAgent.contains('android')) {
+            deviceInfo["device_model"] = "Android";
+            deviceInfo["device_family"] = "Android Phone";
+            deviceInfo["device_manufacturer"] = "Google"; // This can be further refined
+            deviceInfo["device_brand"] = "Google"; // Replace with actual manufacturer based on more detailed parsing
+          }
+          // Add more conditions here for macOS, Windows, or other platforms if needed.
+
+          return deviceInfo;
+        }
+
+        Map<String, dynamic> createPayload() {
+          Map<String, dynamic> deviceInfo = getDeviceInfoFromUserAgent();
+
+          Map<String, dynamic> payload = {
+            "Data": {
+              "app": "promptBuyWEB",
+              "device_model": deviceInfo["device_model"],
+              "device_id": deviceInfo["device_id"],
+              "device_family": deviceInfo["device_family"],
+              "device_carrier": "", // You can add logic to get the carrier info
+              "device_manufacturer": deviceInfo["device_manufacturer"],
+              "device_brand": deviceInfo["device_brand"],
+              "location_lat": "", // Add logic for lat/lng if needed
+              "location_lng": "",
+              "umUserId": "", // Add logic to populate user ID if available
+              "user_level": "", // Add logic for user level
+            },
+            "PartitionKey": "1"
+          };
+
+          return payload;
+        }
+
+        payload = createPayload();
       } else {
         payload = {
           "Data": {
@@ -102,7 +136,6 @@ class AmplitudeWebHelper {
       }
       payload["Data"].addAll(defaultEventProperties);
       DatadogSdk.instance.rum?.addAction(RumActionType.custom, "activity log payload : $payload");
-
       logActivityBloc.add(SendLogEvent(payload: payload));
     } catch (e) {
       DatadogSdk.instance.rum?.addError("Amplitude logEvent Error : $e", RumErrorSource.custom, attributes: {"line_uuid": lineUID});
