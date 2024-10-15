@@ -96,7 +96,6 @@ class AmplitudeWebHelper {
 
           Map<String, dynamic> payload = {
             "Data": {
-              "app": "promptBuyWEB",
               "device_model": deviceInfo["device_model"],
               "device_id": deviceInfo["device_id"],
               "device_family": deviceInfo["device_family"],
@@ -118,7 +117,6 @@ class AmplitudeWebHelper {
       } else {
         payload = {
           "Data": {
-            "app": "promptBuyWEB",
             "device_model": "",
             "device_id": "",
             "device_family": "",
