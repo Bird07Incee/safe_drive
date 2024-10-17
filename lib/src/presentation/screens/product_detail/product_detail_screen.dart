@@ -10,6 +10,7 @@ import 'package:marketplace_line_oa/src/extension/number_converter.dart';
 import 'package:marketplace_line_oa/src/helpers/amplitude_web_helper.dart';
 import 'package:marketplace_line_oa/src/js/js_manager.dart';
 import 'package:marketplace_line_oa/src/model/product_detail/product_detail_args.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/home/home_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/produc_detail_tagline_toggle/product_detail_description_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/img_gallery_zoom/img_gallery_zoom_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/previous_scale/previous_scale_bloc.dart';
@@ -108,6 +109,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       if (mounted) {
         var stack = CurrentRouteObserver.instance.stack;
         if (stack.contains(Routes.initial.toStringPath())) {
+          context.read<HomeCubit>().updateTab(selectedTab: 0);
           context.read<ProductListBloc>().add(const GetProductList());
           Navigator.pop(context);
         } else {
@@ -129,7 +131,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
               AmplitudeWebHelper.getInstance().logEnterProductDetails(
                   productName: pdState.product.productName, contentId: pdState.product.productId, merchantName: pdState.product.merchantFullName);
             }
-            if (pdState.product.quantity == 0) {
+            if (pdState.product.quantity == 0 && ModalRoute.of(context)!.settings.name!.contains(Routes.productDetail.toStringPath())) {
               showOutOfStockDialog(pdState);
             }
           }
