@@ -126,6 +126,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       } else if (state.productListStatus == GetProductListStatus.success) {
                         return BlocBuilder<HomeCubit, int>(builder: (context, tab) {
                           tabController ??= TabController(initialIndex: tab, length: state.productList.category!.length + 1, vsync: this);
+                          tabController!.animateTo(tab, duration: const Duration(milliseconds: 500), curve: Curves.ease);
                           double scrollPosition = context.read<HomeScrollControllerCubit>().state.scrollControllerPosition;
                           scrollController = ScrollController(initialScrollOffset: scrollPosition);
                           return Container(
@@ -160,6 +161,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           unselectedLabelColor: const Color(0xffC2C1C1),
                                           onTap: (int index) {
                                             context.read<ProductListBloc>().add(SetSelectTabIndex(index));
+                                            context.read<HomeCubit>().updateTab(selectedTab: index);
                                             if (index == 0) {
                                               amplitudeWebHelper.logTapOnCategory(categoryId: "ALL");
                                               context.read<ProductListBloc>().add(GetProductListByCategory("", context));

@@ -18,6 +18,7 @@ import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/produc
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_carousel_scroll_controller/product_detail_carousel_scroll_controller_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/scroll_product_detail/scroll_product_detail_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/view_img_detail_page_switch/view_img_detail_page_switch_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -110,6 +111,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
         var stack = CurrentRouteObserver.instance.stack;
         if (stack.contains(Routes.initial.toStringPath())) {
           context.read<HomeCubit>().updateTab(selectedTab: 0);
+          context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
           context.read<ProductListBloc>().add(const GetProductList());
           Navigator.pop(context);
         } else {
@@ -123,6 +125,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
   Widget build(BuildContext context) {
     maxWidth = MediaQuery.of(context).size.width;
     maxHeight = MediaQuery.of(context).size.height;
+
     return RootPageCondition(
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, pdState) {
