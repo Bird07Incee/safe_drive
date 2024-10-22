@@ -65,7 +65,7 @@ class GeneralDialog {
         context,
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
-          child: Text('ถูกลบ หรือ ขายหมดแล้ว \nกรุณากด “ยืนยัน” เพื่อทำรายการอีกครั้ง',
+          child: Text('ถูกลบหรือขายหมดแล้ว \nกรุณากด “ยืนยัน” เพื่อทำรายการอีกครั้ง',
               style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
           //   textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         ),
