@@ -1,29 +1,19 @@
 class ActivityLogResponseModel {
-  final String encryptionType;
-  final String sequenceNumber;
-  final String shardId;
+  final String status;
 
-  ActivityLogResponseModel({
-    required this.encryptionType,
-    required this.sequenceNumber,
-    required this.shardId,
-  });
+  ActivityLogResponseModel({required this.status});
 
-  // Create a factory constructor to parse the JSON
+  // Factory method to create an instance from JSON
   factory ActivityLogResponseModel.fromJson(Map<String, dynamic> json) {
     return ActivityLogResponseModel(
-      encryptionType: json['EncryptionType'] as String,
-      sequenceNumber: json['SequenceNumber'] as String,
-      shardId: json['ShardId'] as String,
+      status: json['status'],
     );
   }
 
-  // You can also add a method to convert the model back to JSON if needed
+  // Method to convert an instance to JSON
   Map<String, dynamic> toJson() {
     return {
-      'EncryptionType': encryptionType,
-      'SequenceNumber': sequenceNumber,
-      'ShardId': shardId,
+      'status': status,
     };
   }
 }

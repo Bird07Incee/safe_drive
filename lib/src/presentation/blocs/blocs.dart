@@ -51,5 +51,5 @@ final List<BlocProvider> blocs = [
   BlocProvider<RefundSuccessBloc>(create: (_) => RefundSuccessBloc(utilityRepository: _.read<DioUtilityRepository>())),
   BlocProvider<WebViewBloc>(create: (_) => WebViewBloc()),
   BlocProvider<HomeCubit>(create: (_) => HomeCubit()),
-  BlocProvider<LogActivityBloc>(create: (_) => LogActivityBloc(Dio())),
+  BlocProvider<LogActivityBloc>(create: (_) => LogActivityBloc(utilityRepository: _.read<DioUtilityRepository>())),
 ];
