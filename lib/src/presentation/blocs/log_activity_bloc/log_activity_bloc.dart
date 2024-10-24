@@ -25,10 +25,9 @@ class LogActivityBloc extends Bloc<LogActivityEvent, LogActivityState> {
     final socialPath = Environment().getValue("BFF_SOCIAL_BASE_URL");
     final logActivityPath = Environment().getValue("LOG_ACTIVITY_PATH");
     try {
-      Response response = await utilityRepository.getByURL("$baseUrl$socialPath$logActivityPath", event.payload);
+      Response response = await utilityRepository.postByURL("$baseUrl$socialPath$logActivityPath", event.payload);
       if (response.statusCode == 200) {
         final ActivityLogResponseModel responseData = ActivityLogResponseModel.fromJson(response.data);
-        DatadogSdk.instance.rum?.addAction(RumActionType.custom, "activity log Bloc Status Response: ${responseData.status}");
         emit(LogActivitySuccess(responseData));
       } else {
         final ActivityLogResponseModel responseData = ActivityLogResponseModel.fromJson({
