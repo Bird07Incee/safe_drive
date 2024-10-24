@@ -12,9 +12,12 @@ import 'package:marketplace_line_oa/src/model/product_list.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/arguments/shipping_address_args.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/create_order_request_model.dart';
 import 'package:marketplace_line_oa/src/model/product_summary/shipping_address_model.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/home/home_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/order_summary_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/order_summary/show_summary_detail_cubit.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_detail/product_detail_bloc/product_detail_bloc.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/home_scroll_controller_cubit.dart';
+import 'package:marketplace_line_oa/src/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/product_options/product_options_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/blocs/shipping_address/shipping_address_bloc.dart';
 import 'package:marketplace_line_oa/src/presentation/screens/error_screen.dart';
@@ -148,7 +151,15 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
         .showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName)
         .then((_) {
       if (mounted) {
-        Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
+        var stack = CurrentRouteObserver.instance.stack;
+        if (stack.contains(Routes.initial.toStringPath())) {
+          context.read<HomeCubit>().updateTab(selectedTab: 0);
+          context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
+          context.read<ProductListBloc>().add(const GetProductList());
+          Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
+        } else {
+          Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
+        }
       }
     });
   }
