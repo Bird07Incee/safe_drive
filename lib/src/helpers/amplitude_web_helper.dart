@@ -66,42 +66,16 @@ class AmplitudeWebHelper {
 
       if (getOnetrustActiveGroups().length == 5 || skipOnetrust) {
         await _amplitude!.logEvent(eventType, eventProperties: defaultEventProperties);
-        Map<String, dynamic> getDeviceInfoFromUserAgent() {
-          final userAgent = window.navigator.userAgent.toLowerCase();
-          Map<String, dynamic> deviceInfo = {
-            "device_model": "",
-            "device_family": "",
-            "device_manufacturer": "",
-            "device_brand": "",
-            "device_id": "",
-          };
-
-          if (userAgent.contains('iphone')) {
-            deviceInfo["device_model"] = "iPhone";
-            deviceInfo["device_family"] = "Apple iPhone";
-            deviceInfo["device_manufacturer"] = "Apple";
-            deviceInfo["device_brand"] = "Apple";
-          } else if (userAgent.contains('android')) {
-            deviceInfo["device_model"] = "Android";
-            deviceInfo["device_family"] = "Android Phone";
-            deviceInfo["device_manufacturer"] = "Google";
-            deviceInfo["device_brand"] = "Google";
-          }
-
-          return deviceInfo;
-        }
 
         Map<String, dynamic> createPayload() {
-          Map<String, dynamic> deviceInfo = getDeviceInfoFromUserAgent();
-
           Map<String, dynamic> payload = {
             "Data": {
-              "device_model": deviceInfo["device_model"],
-              "device_id": deviceInfo["device_id"],
-              "device_family": deviceInfo["device_family"],
+              "device_model": window.navigator.userAgent,
+              "device_id": "",
+              "device_family": "",
               "device_carrier": "",
-              "device_manufacturer": deviceInfo["device_manufacturer"],
-              "device_brand": deviceInfo["device_brand"],
+              "device_manufacturer": "",
+              "device_brand": "",
               "location_lat": "",
               "location_lng": "",
               "umUserId": "",
