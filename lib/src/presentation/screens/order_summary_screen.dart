@@ -147,15 +147,19 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   }
 
   showOutOfStockDialog(ProductDetailState pdState, BuildContext context) async {
-    GeneralDialog(onAccept: () {}).showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName).then((v) {
-      var stack = CurrentRouteObserver.instance.stack;
-      if (stack.contains(Routes.initial.toStringPath())) {
-        context.read<HomeCubit>().updateTab(selectedTab: 0);
-        context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
-        context.read<ProductListBloc>().add(const GetProductList());
-        Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
-      } else {
-        Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
+    await GeneralDialog(onAccept: () {})
+        .showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName)
+        .then((v) {
+      if (context.mounted) {
+        var stack = CurrentRouteObserver.instance.stack;
+        if (stack.contains(Routes.initial.toStringPath())) {
+          context.read<HomeCubit>().updateTab(selectedTab: 0);
+          context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
+          context.read<ProductListBloc>().add(const GetProductList());
+          Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
+        } else {
+          Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
+        }
       }
     });
   }
