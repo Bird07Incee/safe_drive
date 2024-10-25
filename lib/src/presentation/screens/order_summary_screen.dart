@@ -146,20 +146,18 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
         .showSummaryDialog(context: context);
   }
 
-  showOutOfStockDialog(ProductDetailState pdState) async {
-    await GeneralDialog(onAccept: () async {})
-        .showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName)
-        .then((_) {
-      if (mounted) {
-        var stack = CurrentRouteObserver.instance.stack;
-        if (stack.contains(Routes.initial.toStringPath())) {
-          context.read<HomeCubit>().updateTab(selectedTab: 0);
-          context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
-          context.read<ProductListBloc>().add(const GetProductList());
-          Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
-        } else {
-          Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
-        }
+  showOutOfStockDialog(ProductDetailState pdState, BuildContext context) async {
+    await GeneralDialog(onAccept: () async {
+      Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
+    }).showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName).then((v) {
+      var stack = CurrentRouteObserver.instance.stack;
+      if (stack.contains(Routes.initial.toStringPath())) {
+        context.read<HomeCubit>().updateTab(selectedTab: 0);
+        context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
+        context.read<ProductListBloc>().add(const GetProductList());
+        Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
+      } else {
+        Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
       }
     });
   }
@@ -222,8 +220,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 } else if (state.orderStatus.isError) {
                   Navigator.pop(context);
                 } else if (state.orderStatus.isNoStock) {
-                  Navigator.pop(context);
-                  showOutOfStockDialog(productState);
+                  showOutOfStockDialog(productState, context);
                 }
               }
             },
@@ -286,8 +283,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                       titlePage: titleWebPage,
                                       appBar: AppBar(
                                         title: AlvaText(
-                                            title: "สรุปรายการสั่งซื้อ",
-                                            textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18)),
+                                          title: "สรุปรายการสั่งซื้อ",
+                                          textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW).copyWith(height: 24 / 18),
+                                        ),
                                         titleSpacing: 0,
                                         elevation: 0.4,
                                         leadingWidth: 60,
