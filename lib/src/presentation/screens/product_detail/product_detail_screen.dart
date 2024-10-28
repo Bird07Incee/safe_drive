@@ -262,17 +262,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     centerTitle: false,
                   )
                 : AppBar(
-                    title: GestureDetector(
-                        onTap: () {
-                          print(CurrentRouteObserver.instance.stack);
-                        },
-                        child: AlvaText(
-                          title: "ข้อมูลสินค้า",
-                          textStyle: AlvaStyles().headingSize18w700(
-                            BTN_SELECTED_TEXT_COLOR_NEW,
-                          ),
-                          disableSelectableText: true,
-                        )),
+                    title: AlvaText(
+                      title: "ข้อมูลสินค้า",
+                      textStyle: AlvaStyles().headingSize18w700(
+                        BTN_SELECTED_TEXT_COLOR_NEW,
+                      ),
+                    ),
                     titleSpacing: 0,
                     leadingWidth: 48,
                     centerTitle: false,
