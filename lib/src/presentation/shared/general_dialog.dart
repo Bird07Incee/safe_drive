@@ -27,14 +27,11 @@ class GeneralDialog {
               style: AlvaStyles().headingSize14w400(Colors.black).copyWith(color: Colors.black, fontSize: 14).copyWith(height: 24 / 14)),
         ),
         title: Text(isConfirmPayment ? "ชำระเงิน" : "คุณต้องการออกจากหน้านี้ใช่หรือไม่",
-            style: AlvaStyles()
-                .headingSize18(Colors.black)
-                .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
-                .copyWith(height: 24 / 14)),
+            style: AlvaStyles().headingSize18(Colors.black).copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)),
         key: key ?? const Key("back_from_summary_dialog"),
         // contentPadding: const EdgeInsets.all(24),
         contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
-        actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        actionPadding: const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 8),
         isConfirmPayment: isConfirmPayment);
   }
 
@@ -48,21 +45,20 @@ class GeneralDialog {
           //   textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         ),
         title: Text("คุณต้องการคืนสินค้า/คืนเงิน?",
-            style: AlvaStyles()
-                .headingSize18(Colors.black)
-                .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
-                .copyWith(height: 24 / 14)),
+            style: AlvaStyles().headingSize18(Colors.black).copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)),
         //  textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         key: key ?? const Key("back_from_summary_dialog"),
         // contentPadding: const EdgeInsets.all(24),
         contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
-        actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        actionPadding: const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 8),
         isConfirmPayment: isConfirmPayment);
   }
 
-  Future<dynamic> showOutOfStockDialog({Key? key, required BuildContext context, bool? canBack, String productNameTitle = ""}) async {
+  Future<dynamic> showOutOfStockDialog(
+      {Key? key, required BuildContext context, bool? canBack, bool fromSummaryPage = false, String productNameTitle = ""}) async {
     await _showGeneralAlert(
         context,
+        barrierColor: fromSummaryPage ? Colors.black.withOpacity(0.1) : n,
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
           child: Text('ถูกลบหรือขายหมดแล้ว \nกรุณากด “ยืนยัน” เพื่อทำรายการอีกครั้ง',
@@ -72,17 +68,15 @@ class GeneralDialog {
         title: Text(productNameTitle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AlvaStyles()
-                .headingSize18(Colors.black)
-                .copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)
-                .copyWith(height: 24 / 14)),
+            style: AlvaStyles().headingSize18(Colors.black).copyWith(fontWeight: FontWeight.w600, color: Colors.black, height: 24 / 18)),
         //  textAlign: Platform.isIOS ? TextAlign.center: TextAlign.start),
         key: key ?? const Key("back_from_out_of_stock_dialog"),
         // contentPadding: const EdgeInsets.all(24),
         contentPadding: const EdgeInsets.only(left: 24, top: 8, right: 24, bottom: 16),
-        actionPadding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+        actionPadding: const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 8),
         isHaveFunctionWhenBackPressed: true,
         isConfirmPayment: true,
+        isFromOutOfStockDialog: true,
         canBack: true);
   }
 
@@ -117,13 +111,15 @@ class GeneralDialog {
       Widget? title,
       EdgeInsetsGeometry? contentPadding,
       EdgeInsetsGeometry? actionPadding,
+      Color? barrierColor,
       bool platformSpecific = false,
       bool isConfirmPayment = false,
       bool isHaveFunctionWhenBackPressed = false,
+      bool isFromOutOfStockDialog = false,
       bool canBack = false}) {
     Widget acceptButton = TextButton(
       style: ButtonStyle(
-        padding: WidgetStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8)),
+        padding: WidgetStateProperty.all<EdgeInsets>(EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8)),
       ),
       onPressed: () {
         Navigator.pop(context);
@@ -163,6 +159,8 @@ class GeneralDialog {
         if (didPop) {
           if (isHaveFunctionWhenBackPressed) {
             onAccept!();
+          } else if (isFromOutOfStockDialog) {
+            Navigator.pop(context);
           }
           return;
         }
@@ -193,6 +191,8 @@ class GeneralDialog {
             if (didPop) {
               if (isHaveFunctionWhenBackPressed) {
                 onAccept!();
+              } else if (isFromOutOfStockDialog) {
+                Navigator.pop(context);
               }
               return;
             }
@@ -209,6 +209,7 @@ class GeneralDialog {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
+      barrierColor: barrierColor,
       builder: (BuildContext context) => alert,
     );
   }

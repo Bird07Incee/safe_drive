@@ -148,7 +148,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
 
   showOutOfStockDialog(ProductDetailState pdState, BuildContext context) async {
     await GeneralDialog(onAccept: () {})
-        .showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName)
+        .showOutOfStockDialog(context: context, canBack: true, fromSummaryPage: true, productNameTitle: pdState.product.productName)
         .then((v) {
       if (context.mounted) {
         var stack = CurrentRouteObserver.instance.stack;
