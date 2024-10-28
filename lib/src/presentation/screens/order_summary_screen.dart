@@ -156,11 +156,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
           context.read<HomeCubit>().updateTab(selectedTab: 0);
           context.read<HomeScrollControllerCubit>().updateScrollController(scrollControllerPosition: 0);
           context.read<ProductListBloc>().add(const GetProductList());
-          Navigator.popUntil(context, (route) => route.settings.name == Routes.initial.toStringPath());
-          Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
-        } else {
-          Navigator.popAndPushNamed(context, Routes.initial.toStringPath());
         }
+        CurrentRouteObserver.instance.stack.clear();
+        Navigator.pushNamedAndRemoveUntil(context, Routes.initial.toStringPath(), (route) => false);
       }
     });
   }

@@ -108,6 +108,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
       onBack(isFromOutOfStockDialog: true);
     }).showOutOfStockDialog(context: context, canBack: true, productNameTitle: pdState.product.productName).then((_) {
       if (mounted) {
+        context.read<ViewImgDetailPageSwitchBloc>().add(SwitchPageAction(statePage: false));
         var stack = CurrentRouteObserver.instance.stack;
         if (stack.contains(Routes.initial.toStringPath())) {
           context.read<HomeCubit>().updateTab(selectedTab: 0);
@@ -261,7 +262,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> with TickerPr
                     centerTitle: false,
                   )
                 : AppBar(
-                    title: AlvaText(title: "ข้อมูลสินค้า", textStyle: AlvaStyles().headingSize18w700(BTN_SELECTED_TEXT_COLOR_NEW)),
+                    title: GestureDetector(
+                        onTap: () {
+                          print(CurrentRouteObserver.instance.stack);
+                        },
+                        child: AlvaText(
+                          title: "ข้อมูลสินค้า",
+                          textStyle: AlvaStyles().headingSize18w700(
+                            BTN_SELECTED_TEXT_COLOR_NEW,
+                          ),
+                          disableSelectableText: true,
+                        )),
                     titleSpacing: 0,
                     leadingWidth: 48,
                     centerTitle: false,
