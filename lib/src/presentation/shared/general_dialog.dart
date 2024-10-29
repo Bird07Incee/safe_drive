@@ -58,7 +58,7 @@ class GeneralDialog {
       {Key? key, required BuildContext context, bool? canBack, bool fromSummaryPage = false, String productNameTitle = ""}) async {
     await _showGeneralAlert(
         context,
-        barrierColor: fromSummaryPage ? Colors.black.withOpacity(0.1) : n,
+        barrierColor: fromSummaryPage ? Colors.black.withOpacity(0.1) : null,
         Container(
           constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * .722),
           child: Text('ถูกลบหรือขายหมดแล้ว \nกรุณากด “ยืนยัน” เพื่อทำรายการอีกครั้ง',
