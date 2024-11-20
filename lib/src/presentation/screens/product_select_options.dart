@@ -245,240 +245,237 @@ class _ProductSelectOptionsState extends State<ProductSelectOptions> {
                                               physics: NeverScrollableScrollPhysics(),
                                               itemCount: state.product.productionOptionals.length,
                                               itemBuilder: (BuildContext context, int index) {
-                                                return state.product.productionOptionals[index].quantity > 0
-                                                    ? GestureDetector(
-                                                        key: Key("product_option_button_$index"),
-                                                        onTap: () {
-                                                          if (prodOptState.stepOneGroupValueRadio == state.product.productionOptionals[index].label) {
-                                                            myBloc.updateStepOneVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepOneIndexSelect,
-                                                            );
-                                                            myBloc.updateStepTwoVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepTwoIndexSelect,
-                                                            );
-                                                            myBloc.updateStepTreeVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepTreeIndexSelect,
-                                                            );
-                                                            myBloc.updateStepFourVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepFourIndexSelect,
-                                                            );
-                                                            myBloc.updateStepFiveVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepFiveIndexSelect,
-                                                            );
-                                                            myBloc.updateSelectCurrentOption(0);
-                                                            myBloc.updateLastOption(0);
-                                                          } else {
-                                                            myBloc.updateStepOneVariables(
-                                                              groupValueRadio: state.product.productionOptionals[index].label,
-                                                              price: state.product.productionOptionals[index].price,
-                                                              indexSelect: index,
-                                                            );
-                                                            myBloc.updateStepTwoVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepTwoIndexSelect,
-                                                            );
-                                                            myBloc.updateStepTreeVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepTreeIndexSelect,
-                                                            );
-                                                            myBloc.updateStepFourVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepFourIndexSelect,
-                                                            );
-                                                            myBloc.updateStepFiveVariables(
-                                                              groupValueRadio: "",
-                                                              price: 0,
-                                                              indexSelect: myBloc.state.stepFiveIndexSelect,
-                                                            );
-                                                            myBloc.updateSelectCurrentOption(1);
-                                                            if (state.product.productionOptionals[index].level2.isNotEmpty) {
-                                                              myBloc.updateLastOption(2);
-                                                            } else {
-                                                              myBloc.updateLastOption(1);
-                                                            }
-                                                          }
-                                                        },
-                                                        child: AbsorbPointer(
-                                                          child: Column(
+                                                return GestureDetector(
+                                                  key: Key("product_option_button_$index"),
+                                                  onTap: () {
+                                                    if (prodOptState.stepOneGroupValueRadio == state.product.productionOptionals[index].label) {
+                                                      myBloc.updateStepOneVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepOneIndexSelect,
+                                                      );
+                                                      myBloc.updateStepTwoVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepTwoIndexSelect,
+                                                      );
+                                                      myBloc.updateStepTreeVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepTreeIndexSelect,
+                                                      );
+                                                      myBloc.updateStepFourVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepFourIndexSelect,
+                                                      );
+                                                      myBloc.updateStepFiveVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepFiveIndexSelect,
+                                                      );
+                                                      myBloc.updateSelectCurrentOption(0);
+                                                      myBloc.updateLastOption(0);
+                                                    } else {
+                                                      myBloc.updateStepOneVariables(
+                                                        groupValueRadio: state.product.productionOptionals[index].label,
+                                                        price: state.product.productionOptionals[index].price,
+                                                        indexSelect: index,
+                                                      );
+                                                      myBloc.updateStepTwoVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepTwoIndexSelect,
+                                                      );
+                                                      myBloc.updateStepTreeVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepTreeIndexSelect,
+                                                      );
+                                                      myBloc.updateStepFourVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepFourIndexSelect,
+                                                      );
+                                                      myBloc.updateStepFiveVariables(
+                                                        groupValueRadio: "",
+                                                        price: 0,
+                                                        indexSelect: myBloc.state.stepFiveIndexSelect,
+                                                      );
+                                                      myBloc.updateSelectCurrentOption(1);
+                                                      if (state.product.productionOptionals[index].level2.isNotEmpty) {
+                                                        myBloc.updateLastOption(2);
+                                                      } else {
+                                                        myBloc.updateLastOption(1);
+                                                      }
+                                                    }
+                                                  },
+                                                  child: AbsorbPointer(
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               Container(
-                                                                margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                                                                child: Row(
-                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                width: 24,
+                                                                height: 24,
+                                                                margin: const EdgeInsets.only(right: 16),
+                                                                child: Radio(
+                                                                  value: state.product.productionOptionals[index].label,
+                                                                  groupValue: prodOptState.stepOneGroupValueRadio,
+                                                                  toggleable: true,
+                                                                  activeColor: Colors.blue,
+                                                                  onChanged: (value) {
+                                                                    if (value == null) {
+                                                                      myBloc.updateStepOneVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepOneIndexSelect,
+                                                                      );
+                                                                      myBloc.updateStepTwoVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepTwoIndexSelect,
+                                                                      );
+                                                                      myBloc.updateStepTreeVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepTreeIndexSelect,
+                                                                      );
+                                                                      myBloc.updateStepFourVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepFourIndexSelect,
+                                                                      );
+                                                                      myBloc.updateStepFiveVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepFiveIndexSelect,
+                                                                      );
+                                                                      myBloc.updateSelectCurrentOption(0);
+                                                                      myBloc.updateLastOption(0);
+                                                                    } else {
+                                                                      myBloc.updateStepOneVariables(
+                                                                        groupValueRadio: value.toString(),
+                                                                        price: state.product.productionOptionals[index].price,
+                                                                        indexSelect: index,
+                                                                      );
+                                                                      myBloc.updateStepTwoVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepTwoIndexSelect,
+                                                                      );
+                                                                      myBloc.updateStepTreeVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepTreeIndexSelect,
+                                                                      );
+                                                                      myBloc.updateStepFourVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepFourIndexSelect,
+                                                                      );
+                                                                      myBloc.updateStepFiveVariables(
+                                                                        groupValueRadio: "",
+                                                                        price: 0,
+                                                                        indexSelect: myBloc.state.stepFiveIndexSelect,
+                                                                      );
+                                                                      myBloc.updateSelectCurrentOption(1);
+                                                                      if (state.product.productionOptionals[index].level2.isNotEmpty) {
+                                                                        myBloc.updateLastOption(2);
+                                                                      } else {
+                                                                        myBloc.updateLastOption(1);
+                                                                      }
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              ),
+                                                              Flexible(
+                                                                child: Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                   children: [
-                                                                    Container(
-                                                                      width: 24,
-                                                                      height: 24,
-                                                                      margin: const EdgeInsets.only(right: 16),
-                                                                      child: Radio(
-                                                                        value: state.product.productionOptionals[index].label,
-                                                                        groupValue: prodOptState.stepOneGroupValueRadio,
-                                                                        toggleable: true,
-                                                                        onChanged: (value) {
-                                                                          if (value == null) {
-                                                                            myBloc.updateStepOneVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepOneIndexSelect,
-                                                                            );
-                                                                            myBloc.updateStepTwoVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepTwoIndexSelect,
-                                                                            );
-                                                                            myBloc.updateStepTreeVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepTreeIndexSelect,
-                                                                            );
-                                                                            myBloc.updateStepFourVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepFourIndexSelect,
-                                                                            );
-                                                                            myBloc.updateStepFiveVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepFiveIndexSelect,
-                                                                            );
-                                                                            myBloc.updateSelectCurrentOption(0);
-                                                                            myBloc.updateLastOption(0);
-                                                                          } else {
-                                                                            myBloc.updateStepOneVariables(
-                                                                              groupValueRadio: value.toString(),
-                                                                              price: state.product.productionOptionals[index].price,
-                                                                              indexSelect: index,
-                                                                            );
-                                                                            myBloc.updateStepTwoVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepTwoIndexSelect,
-                                                                            );
-                                                                            myBloc.updateStepTreeVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepTreeIndexSelect,
-                                                                            );
-                                                                            myBloc.updateStepFourVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepFourIndexSelect,
-                                                                            );
-                                                                            myBloc.updateStepFiveVariables(
-                                                                              groupValueRadio: "",
-                                                                              price: 0,
-                                                                              indexSelect: myBloc.state.stepFiveIndexSelect,
-                                                                            );
-                                                                            myBloc.updateSelectCurrentOption(1);
-                                                                            if (state.product.productionOptionals[index].level2.isNotEmpty) {
-                                                                              myBloc.updateLastOption(2);
-                                                                            } else {
-                                                                              myBloc.updateLastOption(1);
-                                                                            }
-                                                                          }
-                                                                        },
+                                                                    Padding(
+                                                                      padding: const EdgeInsets.only(bottom: 4),
+                                                                      child: SizedBox(
+                                                                        width: maxWidth - 32 - 24 - 72,
+                                                                        child: Text(state.product.productionOptionals[index].label,
+                                                                            style: AlvaStyles()
+                                                                                .bodySize14W500(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                                .copyWith(height: 22 / 14)),
                                                                       ),
                                                                     ),
-                                                                    Flexible(
-                                                                      child: Column(
-                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding: const EdgeInsets.only(bottom: 4),
-                                                                            child: SizedBox(
-                                                                              width: maxWidth - 32 - 24 - 72,
-                                                                              child: Text(state.product.productionOptionals[index].label,
-                                                                                  style: AlvaStyles()
-                                                                                      .bodySize14W500(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                                      .copyWith(height: 22 / 14)),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: const EdgeInsets.only(bottom: 4),
-                                                                            child: SizedBox(
-                                                                              width: maxWidth - 32 - 24 - 72,
-                                                                              child: Text(state.product.productName,
-                                                                                  style: AlvaStyles()
-                                                                                      .headingSize10w400(spaceGrey)
-                                                                                      .copyWith(height: 1.6)),
-                                                                            ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width: maxWidth - 32 - 24 - 72,
-                                                                            child: Text(
-                                                                                "${(state.product.productionOptionals[index].price).toDecimalFormat()} บาท",
-                                                                                style: AlvaStyles()
-                                                                                    .headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)
-                                                                                    .copyWith(height: 24 / 16)),
-                                                                          ),
-                                                                        ],
+                                                                    Padding(
+                                                                      padding: const EdgeInsets.only(bottom: 4),
+                                                                      child: SizedBox(
+                                                                        width: maxWidth - 32 - 24 - 72,
+                                                                        child: Text(state.product.productName,
+                                                                            style: AlvaStyles().headingSize10w400(spaceGrey).copyWith(height: 1.6)),
                                                                       ),
                                                                     ),
-                                                                    Container(
-                                                                      height: 40,
-                                                                      width: 72,
-                                                                      padding: const EdgeInsets.only(left: 16),
-                                                                      child: AspectRatio(
-                                                                        aspectRatio: 16 / 9,
-                                                                        child: ClipRRect(
-                                                                          borderRadius: BorderRadius.circular(4),
-                                                                          child: FadeInImage.assetNetwork(
-                                                                            placeholder: ProductSelectOptionsConst().imgDefaultPath,
-                                                                            image: state.product.productionOptionals[index].image == ""
-                                                                                ? state.product.productionAssets.first
-                                                                                : state.product.productionOptionals[index].image,
-                                                                            fit: BoxFit.cover,
-                                                                            width: cacheWidth,
-                                                                            height: cacheHeight,
-                                                                            imageCacheWidth: cacheWidth.round(),
-                                                                            imageCacheHeight: cacheHeight.round(),
-                                                                            imageErrorBuilder: (context, error, stackTrace) => Container(
-                                                                              height: 40,
-                                                                              width: 72,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: BorderRadius.circular(4),
-                                                                              ),
-                                                                              child: Image.asset(
-                                                                                ProductSelectOptionsConst().imgDefaultPath,
-                                                                                fit: BoxFit.fill,
-                                                                                width: cacheWidth,
-                                                                                height: cacheHeight,
-                                                                                cacheWidth: cacheWidth.round(),
-                                                                                cacheHeight: cacheHeight.round(),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
+                                                                    SizedBox(
+                                                                      width: maxWidth - 32 - 24 - 72,
+                                                                      child: Text(
+                                                                          "${(state.product.productionOptionals[index].price).toDecimalFormat()} บาท",
+                                                                          style: AlvaStyles()
+                                                                              .headingSize16w700(BTN_SELECTED_TEXT_COLOR_NEW)
+                                                                              .copyWith(height: 24 / 16)),
                                                                     ),
                                                                   ],
                                                                 ),
                                                               ),
                                                               Container(
-                                                                color: cloudSoftDeepWhite,
-                                                                width: maxWidth,
-                                                                height: 1,
-                                                              )
+                                                                height: 40,
+                                                                width: 72,
+                                                                padding: const EdgeInsets.only(left: 16),
+                                                                child: AspectRatio(
+                                                                  aspectRatio: 16 / 9,
+                                                                  child: ClipRRect(
+                                                                    borderRadius: BorderRadius.circular(4),
+                                                                    child: FadeInImage.assetNetwork(
+                                                                      placeholder: ProductSelectOptionsConst().imgDefaultPath,
+                                                                      image: state.product.productionOptionals[index].image == ""
+                                                                          ? state.product.productionAssets.first
+                                                                          : state.product.productionOptionals[index].image,
+                                                                      fit: BoxFit.cover,
+                                                                      width: cacheWidth,
+                                                                      height: cacheHeight,
+                                                                      imageCacheWidth: cacheWidth.round(),
+                                                                      imageCacheHeight: cacheHeight.round(),
+                                                                      imageErrorBuilder: (context, error, stackTrace) => Container(
+                                                                        height: 40,
+                                                                        width: 72,
+                                                                        decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(4),
+                                                                        ),
+                                                                        child: Image.asset(
+                                                                          ProductSelectOptionsConst().imgDefaultPath,
+                                                                          fit: BoxFit.fill,
+                                                                          width: cacheWidth,
+                                                                          height: cacheHeight,
+                                                                          cacheWidth: cacheWidth.round(),
+                                                                          cacheHeight: cacheHeight.round(),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             ],
                                                           ),
                                                         ),
-                                                      )
-                                                    : SizedBox.shrink();
+                                                        Container(
+                                                          color: cloudSoftDeepWhite,
+                                                          width: maxWidth,
+                                                          height: 1,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
                                               }),
                                         ],
                                       ),

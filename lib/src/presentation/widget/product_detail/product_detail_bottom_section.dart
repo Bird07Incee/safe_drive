@@ -30,8 +30,6 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   bool isReadMoreSpecVisible = false;
   bool isReadMoreDescVisible = false;
   bool isBuildFinish = false;
-  double descriptionHeight = 0;
-  final GlobalKey _descriptionGetHeightKey = GlobalKey();
   String? truncatedHtmlContent;
 
   @override
@@ -43,17 +41,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
   @override
   void initState() {
     _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _getDescriptionHeight();
-    });
     super.initState();
-  }
-
-  void _getDescriptionHeight() {
-    final RenderBox renderBox = _descriptionGetHeightKey.currentContext!.findRenderObject() as RenderBox;
-    if (renderBox.size.height != 0) {
-      descriptionHeight = renderBox.size.height;
-    }
   }
 
   checkProductDetailTab(Product product, Widget noDataFromSeller, Widget technicalSpecWidget, Widget technicalSpecHaveMoreWidget,
@@ -212,200 +200,144 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
         var dataDescription = state.product.description.isNotEmpty ? "<p>$replaceInnerTagP<p/>" : "";
         dataDescription = dataDescription.replaceAll("<<", "<").replaceAll(">>", ">");
 
-        return Stack(
+        return Column(
           children: [
-            Opacity(
-              opacity: 0,
-              child: HtmlWidget(
-                dataDescription.isNotEmpty ? dataDescription : AppStrings().noDataFromSeller,
-                key: _descriptionGetHeightKey,
-                buildAsync: false,
-                customStylesBuilder: (element) {
-                  if (element.localName == "table") {
-                    return {'width': '100%'};
-                  }
-                  if (element.localName == "td") {
-                    return {
-                      'width': '50%',
-                      'font-family': "'Krungsri Condensed'",
-                      'vertical-align': 'top;',
-                      'padding-top': '8px;',
-                      'padding-bottom': '8px;',
-                      'font-size': '14px',
-                      'line-height': '24px',
-                      'color': '#2c2626'
-                    };
-                  }
-                  if (element.localName == "th" || element.localName == "thead") {
-                    return null;
-                  }
-                  if (element.localName == "p") {
-                    return {
-                      'font-family': "'Krungsri Condensed'",
-                      'font-size': '14px',
-                      'line-height': '24px',
-                      'color': '#2c2626',
-                    };
-                  }
-                  return {
-                    'font-family': "'Krungsri Condensed'",
-                    'font-size': '14px',
-                    'line-height': '24px',
-                    'color': '#2c2626',
-                  };
-                },
-                customWidgetBuilder: (element) {
-                  if (element.localName == "th" || element.localName == "thead") {
-                    return SizedBox.shrink();
-                  }
-                  return null;
-                },
-                factoryBuilder: () => _MyFactory(title: AppStrings().productDetailProductDescription),
+            buildProductDescriptionWidget(state.product),
+            Container(
+              height: 16,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: cloudWhite, // Replace with your color
+                    width: 2.0, // Adjust the border width as needed
+                  ),
+                ),
               ),
             ),
-            Column(
-              children: [
-                buildProductDescriptionWidget(state.product),
-                Container(
-                  height: 16,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        color: cloudWhite, // Replace with your color
-                        width: 2.0, // Adjust the border width as needed
+            buildDetailCardWidget(context, state.product,
+                titleKey: AppKeys().productDetailAboutSellerTitleKey,
+                title: AppStrings().aboutSellerTitle,
+                bodyPage: Column(
+                  children: [
+                    Row(
+                      children: [Expanded(child: AlvaText(title: state.product.merchantFullName, textStyle: AlvaStyles().headingSize14Height22()))],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: AlvaText(
+                                title: state.product.merchantAddress, textStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12)))
+                      ],
+                    ),
+                  ],
+                )),
+            Visibility(
+              visible: state.product.promotionTag.isNotEmpty,
+              child: Column(
+                children: [
+                  Container(
+                    height: 16,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: cloudWhite, // Replace with your color
+                          width: 2.0, // Adjust the border width as needed
+                        ),
                       ),
                     ),
                   ),
-                ),
-                buildDetailCardWidget(context, state.product,
-                    titleKey: AppKeys().productDetailAboutSellerTitleKey,
-                    title: AppStrings().aboutSellerTitle,
-                    bodyPage: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(child: AlvaText(title: state.product.merchantFullName, textStyle: AlvaStyles().headingSize14Height22()))
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: AlvaText(
-                                    title: state.product.merchantAddress,
-                                    textStyle: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 20 / 12)))
-                          ],
-                        ),
-                      ],
-                    )),
-                Visibility(
-                  visible: state.product.promotionTag.isNotEmpty,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 16,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              color: cloudWhite, // Replace with your color
-                              width: 2.0, // Adjust the border width as needed
-                            ),
-                          ),
-                        ),
-                      ),
-                      buildDetailCardWidget(context, state.product,
-                          titleKey: AppKeys().productDetailPromotionDetailTitleKey,
-                          title: AppStrings().promotionDetailTitle,
-                          bodyPage: Padding(
-                            padding: EdgeInsets.only(top: 8),
-                            child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: state.product.promotionTag.length > 3 ? 3 : state.product.promotionTag.length,
-                                itemBuilder: ((context, index) {
-                                  return Padding(
-                                      padding: EdgeInsets.only(top: index == 0 ? 0 : 8, bottom: 8),
-                                      child: Wrap(
-                                        crossAxisAlignment: WrapCrossAlignment.start,
+                  buildDetailCardWidget(context, state.product,
+                      titleKey: AppKeys().productDetailPromotionDetailTitleKey,
+                      title: AppStrings().promotionDetailTitle,
+                      bodyPage: Padding(
+                        padding: EdgeInsets.only(top: 8),
+                        child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: state.product.promotionTag.length > 3 ? 3 : state.product.promotionTag.length,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                  padding: EdgeInsets.only(top: index == 0 ? 0 : 8, bottom: 8),
+                                  child: Wrap(
+                                    crossAxisAlignment: WrapCrossAlignment.start,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              const Icon(
-                                                Icons.bookmark,
-                                                size: 16,
-                                                color: cloudSoftDeepWhite,
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Flexible(
-                                                  child: AlvaText(
-                                                      title: state.product.promotionTag[index],
-                                                      textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
-                                            ],
-                                          )
+                                          const Icon(
+                                            Icons.bookmark,
+                                            size: 16,
+                                            color: cloudSoftDeepWhite,
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Flexible(
+                                              child: AlvaText(
+                                                  title: state.product.promotionTag[index],
+                                                  textStyle: AlvaStyles().headingSize12w500WithHeightFixed(spaceGrey)))
                                         ],
-                                      ));
-                                })),
-                          )),
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: state.product.remark.isNotEmpty,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 16,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              color: cloudWhite, // Replace with your color
-                              width: 2.0, // Adjust the border width as needed
-                            ),
-                          ),
+                                      )
+                                    ],
+                                  ));
+                            })),
+                      )),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: state.product.remark.isNotEmpty,
+              child: Column(
+                children: [
+                  Container(
+                    height: 16,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: cloudWhite, // Replace with your color
+                          width: 2.0, // Adjust the border width as needed
                         ),
                       ),
-                      buildDetailCardWidget(context, state.product,
-                          titleKey: AppKeys().productDetailRemarkTitleKey,
-                          title: AppStrings().remarkTitle,
-                          bodyPage: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: listRemark,
-                            // remarkHtmlString ?? "",
-                            // buildAsync: false,
-                            // customStylesBuilder: (element) {
-                            //   if (element.localName == 'b') {
-                            //     return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
-                            //   }
-                            //   return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
-                            // },
-                            // textStyle: TextStyle(fontWeight: FontWeight.w400),
-                            // customWidgetBuilder: (element) {
-                            // if (element.localName == 'b') {
-                            //   String text = element.text;
-                            //   return SizedBox(
-                            //     child: OutlinedButton(
-                            //       onPressed: () {
-                            //         String phoneNumber = text.replaceAll("-", "");
-                            //         callPhone(phoneNumber);
-                            //       },
-                            //       style: AlvaStyles().outlineButtonStyle(Colors.transparent, whitePure, 0),
-                            //       child: Text(text, style: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)),
-                            //     ),
-                            //   );
-                            // }
-                            // },
-                          )),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            )
+                  buildDetailCardWidget(context, state.product,
+                      titleKey: AppKeys().productDetailRemarkTitleKey,
+                      title: AppStrings().remarkTitle,
+                      bodyPage: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: listRemark,
+                        // remarkHtmlString ?? "",
+                        // buildAsync: false,
+                        // customStylesBuilder: (element) {
+                        //   if (element.localName == 'b') {
+                        //     return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px', 'font-weight': 'Bold'};
+                        //   }
+                        //   return {'font-family': 'Krungsri Condensed', 'font-size': '12px', 'line-height': '24px'};
+                        // },
+                        // textStyle: TextStyle(fontWeight: FontWeight.w400),
+                        // customWidgetBuilder: (element) {
+                        // if (element.localName == 'b') {
+                        //   String text = element.text;
+                        //   return SizedBox(
+                        //     child: OutlinedButton(
+                        //       onPressed: () {
+                        //         String phoneNumber = text.replaceAll("-", "");
+                        //         callPhone(phoneNumber);
+                        //       },
+                        //       style: AlvaStyles().outlineButtonStyle(Colors.transparent, whitePure, 0),
+                        //       child: Text(text, style: AlvaStyles().headingSize12w600(BTN_SELECTED_TEXT_COLOR_NEW)),
+                        //     ),
+                        //   );
+                        // }
+                        // },
+                      )),
+                ],
+              ),
+            ),
           ],
         );
       },
@@ -977,6 +909,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                       labelColor: BTN_SELECTED_TEXT_COLOR_NEW,
                       indicatorColor: mintGreen,
                       unselectedLabelColor: whiteGray,
+                      indicatorSize: TabBarIndicatorSize.tab,
                       //  unselectedLabelColor: cloudSoftDeepWhite,
                       labelStyle: const TextStyle(
                         fontFamily: fontFamily,
