@@ -86,7 +86,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             if (phone.replaceAll("-", "").length == 9) {
               text.replaceAllMapped(
                 RegExp(r'(\d{2}-\d{3}-\d{4})'),
-                (match) {
+                    (match) {
                   mobileNo = '${match.group(0)}';
                   text = text.replaceAll(mobileNo, "");
                   list.last = list.last.replaceAll(mobileNo, "");
@@ -96,7 +96,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             } else if (phone.replaceAll("-", "").length == 10) {
               text.replaceAllMapped(
                 RegExp(r'(\d{3}-\d{3}-\d{4})'),
-                (match) {
+                    (match) {
                   mobileNo = '${match.group(0)}';
                   text = text.replaceAll(mobileNo, "");
                   list.last = list.last.replaceAll(mobileNo, "");
@@ -115,9 +115,9 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     children: [
                       RichText(
                           text: TextSpan(
-                        text: list.first,
-                        style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2.4),
-                      )),
+                            text: list.first,
+                            style: AlvaStyles().headingSize12w400(spaceGrey).copyWith(height: 2.4),
+                          )),
                       Wrap(
                         children: [
                           Text(state.product.merchantFullName, style: AlvaStyles().headingSize12w600(spaceGrey).copyWith(height: 2.4)),
@@ -139,7 +139,7 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           } else {
             text.replaceAllMapped(
               RegExp(r'(\d{2}-\d{3}-\d{4})'),
-              (match) {
+                  (match) {
                 homeNo = '${match.group(0)}';
                 text = text.replaceAll(homeNo, "");
                 listRemark.add(Row(
@@ -399,18 +399,18 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
           if (_tabController.index == 0) {
             data = originalSpec.isNotEmpty
                 ? originalSpec.contains("<table")
-                    ? originalSpec
-                    : !originalSpec.contains("<p>")
-                        ? "<p>$originalSpec</p>"
-                        : originalSpec
+                ? originalSpec
+                : !originalSpec.contains("<p>")
+                ? "<p>$originalSpec</p>"
+                : originalSpec
                 : "";
           } else if (_tabController.index == 1) {
             data = originalDescription.isNotEmpty
                 ? originalDescription.contains("<table")
-                    ? originalDescription
-                    : !originalDescription.contains("<p>")
-                        ? "<p>$originalDescription</p>"
-                        : originalDescription
+                ? originalDescription
+                : !originalDescription.contains("<p>")
+                ? "<p>$originalDescription</p>"
+                : originalDescription
                 : "";
           }
 
@@ -635,10 +635,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               data.contains("<table")
                   ? data.trim()
                   : truncatedHtmlContent.isNotEmpty
-                      ? isReadMoreSpecVisible
-                          ? "$truncatedHtmlContent..."
-                          : truncatedHtmlContent
-                      : AppStrings().noDataFromSeller,
+                  ? isReadMoreSpecVisible
+                  ? "$truncatedHtmlContent..."
+                  : truncatedHtmlContent
+                  : AppStrings().noDataFromSeller,
               buildAsync: false,
               textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
               customStylesBuilder: (element) {
@@ -798,10 +798,10 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
                     data.contains("<table")
                         ? data
                         : truncatedHtmlContent.isNotEmpty
-                            ? isReadMoreDescVisible
-                                ? "$truncatedHtmlContent..."
-                                : truncatedHtmlContent
-                            : AppStrings().noDataFromSeller,
+                        ? isReadMoreDescVisible
+                        ? "$truncatedHtmlContent..."
+                        : truncatedHtmlContent
+                        : AppStrings().noDataFromSeller,
                     buildAsync: false,
                     textStyle: AlvaStyles().headingSize14w400(blackGoMunTo).copyWith(height: 22 / 14),
                     customStylesBuilder: (element) {
@@ -961,58 +961,58 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
               ),
               truncatedHtmlContent.isNotEmpty
                   ? Container(
-                      padding: truncatedHtmlContent.length > 150 ? null : EdgeInsets.only(top: 0),
-                      child: Visibility(
-                          visible: (_tabController.index == 0 && isReadMoreSpecVisible && !data.contains("<table")) ||
-                              (_tabController.index == 1 && isReadMoreDescVisible && !data.contains("<table")),
-                          child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                                      height: 24,
-                                      child: OutlinedButton(
-                                          onPressed: () async {
-                                            setState(() {
-                                              if (_tabController.index == 0) {
-                                                isPressedSpecReadMore = !isPressedSpecReadMore;
-                                              } else if (_tabController.index == 1) {
-                                                isPressedDescReadMore = !isPressedDescReadMore;
-                                              }
-                                            });
-                                          },
-                                          style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy),
-                                          child: _tabController.index == 0
-                                              ? AlvaText(
-                                                  title: _tabController.index == 0
-                                                      ? isPressedSpecReadMore
-                                                          ? AppStrings().btnHideDescription
-                                                          : AppStrings().btnReadMore
-                                                      : isPressedDescReadMore
-                                                          ? AppStrings().btnHideDescription //||isPressedInfoReadMore
-                                                          : AppStrings().btnReadMore,
-                                                  textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
-                                                  // AlvaStyles().headingSize14Height24(BlueFantasy),
-                                                  disableSelectableText: true,
-                                                )
-                                              : AlvaText(
-                                                  title: _tabController.index == 1
-                                                      ? isPressedDescReadMore
-                                                          ? AppStrings().btnHideDescription
-                                                          : AppStrings().btnReadMore
-                                                      : isPressedSpecReadMore
-                                                          ? AppStrings().btnHideDescription //||isPressedInfoReadMore
-                                                          : AppStrings().btnReadMore,
-                                                  textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
-                                                  disableSelectableText: true,
-                                                )),
-                                    ),
-                                  )
-                                ],
-                              ))))
+                  padding: truncatedHtmlContent.length > 150 ? null : EdgeInsets.only(top: 0),
+                  child: Visibility(
+                      visible: (_tabController.index == 0 && isReadMoreSpecVisible && !data.contains("<table")) ||
+                          (_tabController.index == 1 && isReadMoreDescVisible && !data.contains("<table")),
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  height: 24,
+                                  child: OutlinedButton(
+                                      onPressed: () async {
+                                        setState(() {
+                                          if (_tabController.index == 0) {
+                                            isPressedSpecReadMore = !isPressedSpecReadMore;
+                                          } else if (_tabController.index == 1) {
+                                            isPressedDescReadMore = !isPressedDescReadMore;
+                                          }
+                                        });
+                                      },
+                                      style: AlvaStyles().outlineNoneBorderButtonStyle(Colors.transparent, BlueFantasy),
+                                      child: _tabController.index == 0
+                                          ? AlvaText(
+                                        title: _tabController.index == 0
+                                            ? isPressedSpecReadMore
+                                            ? AppStrings().btnHideDescription
+                                            : AppStrings().btnReadMore
+                                            : isPressedDescReadMore
+                                            ? AppStrings().btnHideDescription //||isPressedInfoReadMore
+                                            : AppStrings().btnReadMore,
+                                        textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
+                                        // AlvaStyles().headingSize14Height24(BlueFantasy),
+                                        disableSelectableText: true,
+                                      )
+                                          : AlvaText(
+                                        title: _tabController.index == 1
+                                            ? isPressedDescReadMore
+                                            ? AppStrings().btnHideDescription
+                                            : AppStrings().btnReadMore
+                                            : isPressedSpecReadMore
+                                            ? AppStrings().btnHideDescription //||isPressedInfoReadMore
+                                            : AppStrings().btnReadMore,
+                                        textStyle: AlvaStyles().headingSize14Height24(BlueFantasy),
+                                        disableSelectableText: true,
+                                      )),
+                                ),
+                              )
+                            ],
+                          ))))
                   : Container()
             ],
           );
@@ -1040,42 +1040,42 @@ class _PDBottomSectionState extends State<PDBottomSection> with TickerProviderSt
             Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: bodyPage),
             title == AppStrings().aboutSellerTitle
                 ? Column(
-                    children: [
-                      SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        height: 48,
-                        child: OutlinedButton(
-                          onPressed: () async {
-                            AmplitudeWebHelper.getInstance().logTapOnCallMerchantButton(
-                                productName: product.productName, contentId: product.productId, merchantName: product.merchantFullName);
-                            String mobile = product.merchantMobile.replaceAll('-', '');
-                            callPhone(mobile);
-                          },
-                          style: AlvaStyles().outlineButtonStyle(
-                              side: const BorderSide(
-                                color: YellowKrungsri,
-                                width: 2,
-                              ),
-                              Colors.transparent,
-                              Colors.transparent,
-                              8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.phone_in_talk_sharp,
-                                color: BTN_SELECTED_TEXT_COLOR_NEW,
-                                size: 16,
-                              ),
-                              const SizedBox(width: 8),
-                              Text("ติดต่อ ${product.merchantMobile}", style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
-                            ],
-                          ),
+              children: [
+                SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  height: 48,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      AmplitudeWebHelper.getInstance().logTapOnCallMerchantButton(
+                          productName: product.productName, contentId: product.productId, merchantName: product.merchantFullName);
+                      String mobile = product.merchantMobile.replaceAll('-', '');
+                      callPhone(mobile);
+                    },
+                    style: AlvaStyles().outlineButtonStyle(
+                        side: const BorderSide(
+                          color: YellowKrungsri,
+                          width: 2,
                         ),
-                      ),
-                    ],
-                  )
+                        Colors.transparent,
+                        Colors.transparent,
+                        8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.phone_in_talk_sharp,
+                          color: BTN_SELECTED_TEXT_COLOR_NEW,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Text("ติดต่อ ${product.merchantMobile}", style: AlvaStyles().heading2(BTN_SELECTED_TEXT_COLOR_NEW)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
                 : Container(),
             const SizedBox(
               height: 16,
@@ -1099,7 +1099,7 @@ class _MyFactory extends WidgetFactory {
           if (i == 0) {
             meta.element.nodes[i].nodes[0].attributes = {
               "style":
-                  "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
+              "color:#5a5a5a; font-size:14px; font-family:'Krungsri Condensed'; line-height:22px; font-weight: 400;", //padding-top: 8px; padding-bottom: 8px;
             } as LinkedHashMap<Object, String>;
           } else {
             meta.element.nodes[i].nodes[0].attributes = {
